@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.UpsPackageDetails" table="upspackagedetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="packageNumber" type="string">
+            <column length="255" name="packagenumber"/>
+        </property>
+        <property name="packagingType" type="string">
+            <column length="10" name="packagingtype"/>
+        </property>
+        <property name="packageWeight" type="double">
+            <column name="packageweight"/>
+        </property>
+        <property name="packageDimensions" type="string">
+            <column length="30" name="packagedimensions"/>
+        </property>
+        <property name="declaredValue" type="double">
+            <column name="declaredvalue"/>
+        </property>
+        <property name="deliveryConfirmationType" type="string">
+            <column length="10" name="deliveryconfirmationtype"/>
+        </property>
+        <property name="additionalHandling" type="string">
+            <column length="1" name="additionalhandling"/>
+        </property>
+        <property name="trackingNumber" type="string">
+            <column length="30" name="trackingnumber"/>
+        </property>
+        <property name="shippingLabel" type="string">
+            <column name="shippingLabel"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Packing" name="packing" column="packing"/>        
+    </class>
+</hibernate-mapping>

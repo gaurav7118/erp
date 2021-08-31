@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+  - Application context definition for "springapp" DispatcherServlet.
+  -->
+
+<beans>
+    <bean name="jsonView" class="com.krawler.spring.crm.views.JsonView">
+  		<property name="contentType">
+  			<value>text/html; charset=ISO-8859-1</value>
+		</property>
+	</bean>
+    <bean name="jsonView_ex" class="com.krawler.spring.crm.views.JsonView_ex">
+  		<property name="contentType">
+  			<value>text/html; charset=ISO-8859-1</value>
+		</property>
+	</bean>
+    <bean name="jsonView-empty" class="com.krawler.spring.crm.views.JsonView_Empty">
+  		<property name="contentType">
+  			<value>text/html; charset=ISO-8859-1</value>
+		</property>
+	</bean>
+</beans>

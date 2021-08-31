@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.BankReconciliationDetailHistory" table="brdetailhistory">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="reconciledate" type="date">
+            <column name="reconciledate" />
+        </property>
+        <property name="date" type="date">
+            <column name="date" />
+        </property>
+        <property name="accountname" type="string">
+            <column length="255" name="accountname"/>
+        </property>
+        <property name="paidto" type="string">
+            <column length="255" name="paidto"/>
+        </property>
+        <property name="chequeno" type="string">
+            <column length="255" name="chequeno"/>
+        </property>
+        <property name="chequedate" type="date">
+            <column name="chequedate" />
+        </property>
+        <property name="description" type="string">
+            <column length="255" name="description"/>
+        </property>
+        <property name="entryno" type="string">
+            <column length="255" name="entryno"/>
+        </property>
+        <property name="jeid" type="string">
+            <column length="255" name="jeid"/>
+        </property>
+        <property name="transactionid" type="string">
+            <column length="255" name="transactionid"/>
+        </property>
+        <property name="transactionNumber" type="string">
+            <column length="255" name="transactionnumber"/>
+        </property>
+        <property name="transcurrsymbol" type="string">
+            <column length="255" name="transcurrsymbol"/>
+        </property>
+        <property name="amountintransactioncurrency" type="double">
+            <column name="amountintransactioncurrency"/>
+        </property>
+        <property name="accountcurrencysymbol" type="string">
+            <column length="255" name="accountcurrencysymbol"/>
+        </property>
+        <property name="amountinacc" type="double">
+            <column name="amountinacc"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount"/>
+        </property>
+        <property name="debit" type="true_false">
+            <column name="debit" not-null="false"/>
+        </property>
+        <property name="isopeningtransaction" type="true_false">
+            <column name="isopeningtransaction" default="false"/>
+        </property>
+        <property name="moduleid" type="integer">
+            <column name="moduleid"/>
+        </property>
+        <property name="clearedstatus" type="integer">
+            <column name="clearedstatus"/>
+        </property>
+        <property name="reportname" type="string">
+            <column length="255" name="reportname"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.BankReconciliation" name="bankReconciliation"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

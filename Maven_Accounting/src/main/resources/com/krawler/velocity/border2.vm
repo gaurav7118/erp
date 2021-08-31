@@ -1,0 +1,52 @@
+<tr><td>
+    <TABLE id = "idLineitemTabel" bordertype="border2" border="0" class ="lineitemtablewrap" style="width:$tablewidth%; margin:$margin;">  
+ <thead>   
+        <TR>  
+        #foreach( $header1 in $tableHeader )  
+            <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style">$header1.data</TH>  
+        #end  
+        </TR> 
+</thead>  
+
+        #if ( $isFirstRowPresent) 
+            $lineItemFirstRowHTML
+        #end
+<tbody>
+        #foreach( $prod in $prodList )  
+          <TR style="padding: 4px;">  
+            #foreach( $CustomDesignLineItemProp in $prod )  
+                <TD style="padding: 0 4px;border-color:$tablebordercolor;vertical-align:$CustomDesignLineItemProp.valign;" class="onlybottomborderofcell" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+            #end  
+          </TR>  
+
+           
+
+        #end 
+</tbody>
+
+        #if ($isLastRowPresent)
+         $lineItemLastRowHTML
+        #end
+
+        #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            <TR style="padding: 4px;" id="totalrow">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    #if($CustomDesignLineItemProp.data)
+                        <TD style="padding: 4px;border-color:$tablebordercolor;font-weight: bold " class="onlybottomborderofcell" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #end
+                #end  
+            </TR>  
+            #end 
+       #end
+       #if ( $issummarytable ) 
+            #foreach( $prod in $summaryTable )  
+            <TR style="padding: 4px">  
+                #foreach( $SummaryTableCellProperty in $prod )  
+                    <TD style="$SummaryTableCellProperty.style" rowspan="$SummaryTableCellProperty.rowspan" colspan="$SummaryTableCellProperty.colspan" >$SummaryTableCellProperty.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end
+    </TABLE> 
+</td></tr>

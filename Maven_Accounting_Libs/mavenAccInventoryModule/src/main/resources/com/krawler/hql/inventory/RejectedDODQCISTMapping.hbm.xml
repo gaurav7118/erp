@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.ist.RejectedDODQCISTMapping" table="rejectdodistmapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        
+        <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="repairistrequest" name="repairInterStoreTransferRequest"/>
+        <many-to-one class="com.krawler.inventory.model.ist.DODQCISTMapping" column="dodqcistmapping" name="dodqcistmapping"/>
+        
+        <property name = "pickedQty" type="double" column="pickedquantity"/>
+        <property name = "repairedQty" type="double" column="repairedquantity"/>
+        <property name = "rejectedQty" type="double" column="rejectedquantity"/>
+        <property name = "quantity" type="double" column="quantity"/>
+        <property name = "quantityDue" type="double" column="quantitydue"/>
+        
+        <set cascade="all" inverse="true" name="approvedStockOuts">
+            <key column="rejectedapproveddodqcistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.stockout.StockAdjustment"/>
+        </set>
+        
+        <set cascade="all" inverse="true" name="rejectedStockOuts">
+            <key column="rejecteddodqcistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.stockout.StockAdjustment"/>
+        </set>
+        
+        <set cascade="all" inverse="true" name="pickedMappings">
+            <key column="pickrejecteddodqcistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.ist.DeliveryDetailInterStoreLocationMapping"/>
+        </set>
+        
+    </class>
+</hibernate-mapping>

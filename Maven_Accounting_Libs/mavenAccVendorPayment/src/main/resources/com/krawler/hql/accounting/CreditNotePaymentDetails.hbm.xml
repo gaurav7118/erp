@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.CreditNotePaymentDetails" table="creditnotpayment">
+    <id column="id" name="ID">
+      <generator class="assigned"/>
+    </id>
+    <property name="srno" type="integer">
+      <column name="srnoforrow" default="0"/>
+    </property>
+    <property name="amountDue" type="double">
+      <column name="amountdue" default="0"/>
+    </property>
+    <property name="amountPaid" type="double">
+      <column name="amountpaid" default="0"/>
+    </property>
+    <property name="exchangeRateForTransaction" type="double">
+      <column name="exchangeratefortransaction" default="1"/>
+    </property>
+    <property name="amountInPaymentCurrency" type="double">
+      <column name="amountinpaymentcurrency" default="0"/>
+    </property>
+    <property name="paidAmountInPaymentCurrency" type="double">
+      <column name="paidamountinpaymentcurrency" default="0"/>
+    </property>
+    <property name="amountInBaseCurrency" type="double">
+      <column name="amountinbasecurrency" default="0"/>
+    </property>
+    <property name="paidAmountDueInBaseCurrency" type="double">
+      <column name="paidamountdueinbasecurrency" default="0"/>
+    </property>
+    <property name="exchangeRateCurrencyToBase" type="double">
+      <column name="exchangeratecurrencytobase" default="1"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="gstCurrencyRate" type="double">
+      <column  name="gstcurrencyrate" default="0"/>
+    </property>
+    <property name="tdsamount" type="double">
+      <column name="tdsamount" default="0"/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Payment" column="paymentid" name="payment" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.CreditNote" column="cnid" name="creditnote" not-null="false"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="fromcurrency" name="fromCurrency"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="tocurrency" name="toCurrency"/>
+    <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="totaljedid" name="totalJED"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accUomController" class="com.krawler.spring.accounting.uom.accUomController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accUomDAO">
+            <ref bean="accUomDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="accUomService">
+            <ref bean="accUomService"/>
+        </property>
+    </bean>
+    <bean id="accUomDao" class="com.krawler.spring.accounting.uom.accUomImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="accUomService" class="com.krawler.spring.accounting.uom.service.AccUomServiceImpl">
+        <property name="accUomDAO">
+            <ref bean="accUomDao"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.krawler.common.admin.ConsignmentRequestApprovalRule" table="consignreqapprovalrules">
+      
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        
+        <property name="ruleName" type="string">
+            <column length="255" name="rulename"/>
+        </property>
+        
+        <property name="createdon" type="long">
+            <column name="createdon"/>
+        </property>
+        
+        <property name="updatedon" type="long">
+            <column name="modifiedon"/>
+        </property> 
+        <set cascade="save-update" name="inventoryLocationsSet" table="consignreqlocmapping">
+            <key column="consignmentrequest"/>
+            <many-to-many class="com.krawler.common.admin.InventoryLocation" column="inventorylocation"/>
+        </set>
+<!--        <set cascade="all" inverse="true" lazy="true" fetch="select" name="approverSet" table="consignreqapprovermapping">
+            <key column="consignmentrequest"/>
+            <many-to-many class="com.krawler.common.admin.User" column="approver"/>
+        </set>-->
+        <property column="approvaltype" name="approvalType">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.admin.ApprovalType</param>
+            </type>
+        </property>
+        <many-to-one class="com.krawler.common.admin.InventoryWarehouse" column="warehouse" name="inventoryWarehouse"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>    
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+        <many-to-one class="com.krawler.common.admin.User" column="requester" name="requester"/>
+<!--        <many-to-one class="com.krawler.common.admin.User" column="approver" name="approver"/>-->
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+        
+    </class>
+  
+
+</hibernate-mapping>
+

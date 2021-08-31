@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aged_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<field name="customerCode" class="java.lang.String"/>
+	<field name="customerName" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="creditlimit" class="java.lang.String"/>
+	<field name="creditdays" class="java.lang.String"/>
+	<field name="documentAmount" class="java.lang.Double"/>
+	<field name="entryType" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.Double"/>
+	<field name="amountDue2" class="java.lang.Double"/>
+	<field name="amountDue3" class="java.lang.Double"/>
+	<field name="totalinbase" class="java.lang.Double"/>
+	<field name="basecurr" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinbase}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="4" width="397" height="20"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="4" width="60" height="20"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customerCode}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="0" y="24" width="555" height="36" isPrintWhenDetailOverflows="true"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="10" y="0" width="138" height="19"/>
+					<textElement markup="none">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{credit}+" Limit : "+$F{creditlimit}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="###0.000;-###0.000">
+					<reportElement x="212" y="14" width="68" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="###0.000;-###0.000">
+					<reportElement x="348" y="14" width="68" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="###0.000;-###0.000">
+					<reportElement x="416" y="14" width="69" height="19"/>
+					<textElement textAlignment="Right" markup="none">
+						<font isBold="false"/>
+					</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="70" y="14" width="143" height="20"/>
+					<textElement textAlignment="Left" markup="html"/>
+					<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="###0.000;-###0.000">
+					<reportElement x="280" y="14" width="68" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="###0.000;-###0.000">
+					<reportElement x="484" y="14" width="69" height="19"/>
+					<textElement textAlignment="Right" markup="none">
+						<font isBold="true"/>
+					</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalinbase}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="128" y="0" width="134" height="19"/>
+					<textElement markup="none">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{credit}+" Days : "+$F{creditdays}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="67">
+			<line>
+				<reportElement x="0" y="1" width="565" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="19" width="565" height="1"/>
+			</line>
+			<textField pattern="###0.000;-###0.000" isBlankWhenNull="true">
+				<reportElement x="451" y="0" width="102" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="2" width="270" height="20"/>
+				<textElement textAlignment="Left">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTALS  in "+$F{basecurr}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="23" width="457" height="13"/>
+				<textElement/>
+				<text><![CDATA[** The (-) minus sign denotes Credit Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="35" width="457" height="13"/>
+				<textElement/>
+				<text><![CDATA[** Amounts appearing here, are as a result of Unadjusted Documents]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="47" width="457" height="13"/>
+				<textElement/>
+				<text><![CDATA[** For detailed breakdown please take the same report in Detailed Format]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

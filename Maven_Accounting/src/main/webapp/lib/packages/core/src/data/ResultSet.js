@@ -1,0 +1,1 @@
+Ext.define("Ext.data.ResultSet",{isResultSet:true,$configPrefixed:false,config:{loaded:true,count:null,total:null,success:false,records:null,message:null},constructor:function(A){this.initConfig(A)},getCount:function(){var B=this.callParent(),A;if(!B){A=this.getRecords();if(A){B=A.length}}return B}})

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="companyname" class="java.lang.String"/>
+	<parameter name="companyaddress" class="java.lang.String"/>
+	<parameter name="companyphone" class="java.lang.String"/>
+	<parameter name="companyfax" class="java.lang.String"/>
+	<parameter name="companyemail" class="java.lang.String"/>
+	<parameter name="startPeriod" class="java.lang.String"/>
+	<parameter name="endPeriod" class="java.lang.String"/>
+	<parameter name="rangeType" class="java.lang.String"/>
+	<parameter name="fromDate" class="java.lang.String"/>
+	<parameter name="toDate" class="java.lang.String"/>
+	<parameter name="currencyDescription" class="java.lang.String"/>
+	<parameter name="SubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="TransactionDetails" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="currencyCode" class="java.lang.String"/>
+	<parameter name="creditnoteFlag" class="java.lang.Boolean"/>
+	<parameter name="title" class="java.lang.String"/>
+	<pageHeader>
+		<band height="98" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="204" height="12"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="16" width="185" height="12"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyaddress}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="31" width="34" height="14"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Phone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="34" y="31" width="7" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="44" width="34" height="14"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fax]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="34" y="44" width="7" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="57" width="34" height="14"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="34" y="57" width="7" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="332" y="36" width="90" height="11"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Accounting Period]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="36" width="7" height="11"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="428" y="35" width="60" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{startPeriod}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="487" y="35" width="7" height="11"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="494" y="35" width="60" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{endPeriod}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="507" y="70" width="7" height="11"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="481" y="70" width="25" height="11"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Page]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="519" y="70" width="11" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="529" y="70" width="7" height="11"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="535" y="70" width="11" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="43" y="31" width="265" height="14"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyphone}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="43" y="44" width="265" height="14"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyfax}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="43" y="57" width="265" height="14"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyemail}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="404" y="84" width="142" height="11"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{currencyDescription}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="0" y="31" width="317" height="40"/>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="70" width="553" height="25"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="0" y="14" width="393" height="11">
+						<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="9" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Date Range : "+$P{rangeType}+", From Date : "+$P{fromDate}+" , To Date : "+$P{toDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="243" y="3" width="312" height="25"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="20" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+				</reportElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-2" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="1" y="3" width="553" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Credit Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="3" width="98" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Account / Party]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Credit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Debit]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="3" width="553" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[GL Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="3" width="98" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="412" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Debit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="3" width="69" height="15">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Credit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="-20" y="0" width="553" height="0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TransactionDetails}.getData())]]></dataSourceExpression>
+                <subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport}]]></subreportExpression>
+			</subreport>
+			<line>
+				<reportElement positionType="Float" x="0" y="1" width="555" height="1">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="3" y="2" width="41" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="17" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="502" y="4" width="51" height="11">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="430" y="4" width="51" height="11">
+					<printWhenExpression><![CDATA[$P{creditnoteFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{currencyCode}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="0" y="2" width="555" height="16"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="257" y="2" width="51" height="11">
+						<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{currencyCode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="502" y="2" width="51" height="11">
+						<printWhenExpression><![CDATA[$P{creditnoteFlag}==false]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" size="8" isBold="true" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

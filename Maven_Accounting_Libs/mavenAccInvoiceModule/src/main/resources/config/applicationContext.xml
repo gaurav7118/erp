@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accInvoiceModuleService" class="com.krawler.hql.accounting.invoice.service.AccInvoiceModuleServiceImpl"> 
+        <property name= "integrationCommonService" ref="integrationCommonService"/>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="accInvoiceDAO">
+            <ref bean="accInvoiceDao"/>
+        </property>
+        <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accDiscountDAO">
+            <ref bean="accDiscountDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+       <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>       
+        </property>
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="accCustomerDAO">
+            <ref bean="accCustomerDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+        <property name="accSalesOrderDAO">
+            <ref bean="accSalesOrderDao"/>
+        </property>
+        <property name="locationService">
+            <ref bean="locationService"/>
+        </property>  
+        <property name="accTaxDAO">
+            <ref bean="accTaxDao"/>
+        </property>
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name="accPaymentDAO">
+            <ref bean="accPaymentDao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name= "stockDAO">
+            <ref bean="stockDAO"/>
+        </property>
+        <property name= "stockService" ref="stockService" />
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name="accSalesOrderServiceobj">
+            <ref bean="accSalesOrderService"/>
+        </property>
+        <property name="accBankReconciliationDAO">
+            <ref bean="accBankReconciliationDao"/>
+        </property>
+         <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name = "commonFnControllerService">
+            <ref bean="commonFnControllerService"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name= "istService" ref="interStoreTransferService" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService" />
+        
+    </bean> 
+    
+    <bean id = "importInvoices" class = "com.krawler.hql.accounting.invoice.service.ImportInvoiceThread">
+         
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>        
+        <property name="importHandler">
+             <ref bean="importHandler"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>              
+        <property name="accSalesOrderServiceobj">
+            <ref bean="accSalesOrderService"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>   
+        <property name="accCustomerDAO">
+            <ref bean="accCustomerDao"/>
+        </property>        
+        <property name="accAccountDAO">
+           <ref bean="accAccountDao"/>
+        </property> 
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property> 
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>                   
+        </property>       
+         <property name="accInvoiceModuleService">
+            <ref bean="accInvoiceModuleService"/>
+        </property>        
+        <property name="accInvoiceDAO">
+            <ref bean="accInvoiceDao"/>
+        </property>        
+      <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>    
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>        
+       <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>     
+    </bean>
+    <bean id="accLoanDao" class="com.krawler.spring.accounting.loan.accLoanImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="accInvoiceDao" class="com.krawler.spring.accounting.invoice.accInvoiceImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="accInvoiceController" class="com.krawler.spring.accounting.invoice.accInvoiceController">
+        <property name= "integrationCommonService" ref="integrationCommonService"/>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+        <property name="accInvoiceDAO">
+            <ref bean="accInvoiceDao"/>
+        </property>
+        <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accDiscountDAO">
+            <ref bean="accDiscountDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>       
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="accCustomerDAO">
+            <ref bean="accCustomerDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="accSalesOrderDAO">
+            <ref bean="accSalesOrderDao"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "stockService" ref="stockService" />
+        <property name="accInvoiceModuleService">
+            <ref bean="accInvoiceModuleService"/>
+        </property>   
+        <property name="accTaxDAO">
+            <ref bean="accTaxDao"/>
+        </property>
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name = "commonFnControllerService">
+            <ref bean="commonFnControllerService"/>
+        </property>  
+        <property name= "istService" ref="interStoreTransferService" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+         <property name= "exportDAO" ref="exportMPXdao" />
+         <property name= "importInvoiceThread" ref="importInvoices" />
+         <property name= "seqService" ref="seqService" />
+    </bean>
+
+</beans>

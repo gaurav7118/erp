@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.TaxPeriod" table="taxperiod">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="periodName" type="string">
+            <column length="255" name="periodname"/>
+        </property>
+        <property name="startDate" type="date">
+            <column length="50" name="startdate" />
+        </property>
+        <property name="endDate" type="date">
+            <column length="50" name="enddate" />
+        </property>
+        <property name="periodType" type="integer">
+            <column length="2" name="periodtype" default='1'/>
+        </property>
+        <property name="periodFormat" type="integer">
+            <column name="periodformat" />
+        </property>
+        <property name="yearInPeriodName" type="integer">
+            <column name="yearinperiodname" />
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.TaxPeriod" name="subPeriodOf" column="subperiodof"/>
+    </class>
+</hibernate-mapping>

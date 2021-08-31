@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.GroupCompanyProcessMapping" table="groupcompany_processmapping">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="sourceCompany" type="string">
+      <column length="50" name="sourcecompany" not-null="true"/>
+    </property>
+    <property name="sourceCompanyId" type="string">
+      <column length="50" name="sourcecompanyid" not-null="true"/>
+    </property>
+    <property name="destinationCompany" type="string">
+      <column length="50" name="destinationcompany" not-null="true"/>
+    </property>
+    <property name="destinationCompanyId" type="string">
+      <column length="50" name="destinationcompanyid" not-null="true"/>
+    </property>
+    <property name="sourceModule" type="string">
+      <column length="50" name="sourcemodule" not-null="true"/>
+    </property>
+    <property name="destinationModule" type="string">
+      <column length="50" name="destinationmodule" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

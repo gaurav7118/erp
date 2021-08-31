@@ -1,0 +1,97 @@
+<tr><td>
+    #if ($isroundborder)
+        <TABLE id = "idLineitemTabel" bordertype="border3" border="0" class ="lineitembordereffect3 tableroundborder lineitemtablewrap" style="border-collapse:collapse;width:$tablewidth%; margin:$margin;" >  
+    #else
+        <TABLE id = "idLineitemTabel" bordertype="border3" border="0" class ="lineitemtablewrap" style="border-collapse:collapse;width:$tablewidth%; margin:$margin;" >  
+    #end
+         <thead> 
+<TR>
+        #set($hCount = 0)
+        #foreach( $header1 in $tableHeader )
+            #if($isroundborder)
+                #if($hCount == 0 )   
+                    <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style " class="removeverticalborder">$header1.data</TH>  
+                #elseif($hCount == $headerCount )   
+                    <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style " class="removeverticalborder">$header1.data</TH>  
+                #else
+                    <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style " class="removeverticalborder">$header1.data</TH>  
+                #end
+            #else
+                #if($hCount == 0 )   
+                    <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style border-left:1px solid;border-top:1px solid;" class="removeverticalborder">$header1.data</TH>  
+                #elseif($hCount == $headerCount )   
+                    <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style border-right:1px solid;border-top:1px solid;" class="removeverticalborder">$header1.data</TH>  
+                #else
+                    <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style border-top:1px solid;" class="removeverticalborder">$header1.data</TH>  
+                #end
+            #end
+            #set($hCount = $hCount+1)
+        #end  
+        </TR>
+</thead>    
+<tbody>        
+        #if ( $isFirstRowPresent) 
+            $lineItemFirstRowHTML
+        #end
+        #foreach( $prod in $prodList )  
+
+          <TR style="padding: 4px;">
+            #set($columnCount=0)
+            #foreach( $CustomDesignLineItemProp in $prod )
+                    #if ($isroundborder) 
+                        #if($columnCount==0)
+                            <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important; " class="removeverticalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #elseif($columnCount==$headerCount)
+                            <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important; " class="removeverticalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #else
+                            <TD style="padding: 0 4px;;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important; " class="removeverticalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #end  
+                    #else
+                        #if($columnCount==0)
+                            <TD style="border-left:1px solid;padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important; " class="removeverticalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #elseif($columnCount==$headerCount)
+                            <TD style="border-right:1px solid;padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important; " class="removeverticalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #else
+                            <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important; " class="removeverticalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #end  
+                    #end
+                #set($columnCount=$columnCount+1)
+            #end  
+          </TR> 
+ 
+        #end
+
+        #if ($isLastRowPresent)
+         $lineItemLastRowHTML
+        #end
+        #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            #set($columnCount=0)
+            <TR style="padding: 4px;" id="totalrow">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    #if($CustomDesignLineItemProp.data)
+                        #if($columnCount==0)
+                            <TD style="border-left:1px solid;padding: 4px;font-weight: bold;border-color:$tablebordercolor; " class="removeverticalborder"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #elseif($columnCount==$headerCount)
+                            <TD style="border-right:1px solid;padding: 4px;font-weight: bold;border-color:$tablebordercolor; " class="removeverticalborder"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #else
+                            <TD style="padding: 4px;font-weight: bold;border-color:$tablebordercolor; " class="removeverticalborder"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #end
+                    #end
+                #set($columnCount=$columnCount+1)
+                #end  
+            </TR>  
+            #end
+       #end
+       #if ( $issummarytable ) 
+            #foreach( $prod in $summaryTable )  
+            <TR style="padding: 4px">  
+                #foreach( $SummaryTableCellProperty in $prod )  
+                    <TD style="$SummaryTableCellProperty.style" rowspan="$SummaryTableCellProperty.rowspan" colspan="$SummaryTableCellProperty.colspan" >$SummaryTableCellProperty.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end
+</tbody>
+    </TABLE> 
+</td></tr>

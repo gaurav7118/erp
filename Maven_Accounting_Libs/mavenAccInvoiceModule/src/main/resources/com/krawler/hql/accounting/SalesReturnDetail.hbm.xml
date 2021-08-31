@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.SalesReturnDetail" table="srdetails">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">inventory</param>
+            </generator>    
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" default="0"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+        <property name="actualQuantity" type="double">
+            <column name="actualquantity" not-null="true"/>
+        </property>
+        <property name="returnQuantity" type="double">
+            <column name="returnquantity" not-null="true"/>
+        </property>
+        <property name="rowtermamount" type="double">
+            <column name="rowtermamount" not-null="true"/>
+        </property>
+        <property name="OtherTermNonTaxableAmount" type="double">
+            <column name="otherrowtermamount" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+        <property name="baseuomquantity" type="double">
+            <column name="baseuomquantity" default="0" />
+        </property>
+        <property name="baseuomreturnquantity" type="double">
+            <column name="baseuomreturnquantity" default="0" />
+        </property>
+        <property name="baseuomrate" type="double">
+            <column name="baseuomrate" default="1" />
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="partno" type="string">
+            <column length="255" name="partno"/>
+        </property>
+        <property name="invstoreid" type="string">
+            <column  name="invstoreid" default="" length="255"/>
+        </property>
+        <property name="rateincludegst" type="double">
+            <column name="rateincludegst"  default="0"/>
+        </property>
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount"/>
+        </property>
+             <property name="previousIssueCount" type="double">
+        <column name="perviousissuecount" default='0'/>
+    </property>
+        <property name="discountispercent" type="integer">
+            <column name="discountispercent"/>
+        </property>
+        <property name="discount" type="double">
+            <column name="discount"/>
+        </property>
+        <property name="invlocid" type="string">
+            <column  name="invlocid" default="" length="255"/>
+        </property>
+        <property name="priceSource" type="string">
+            <column  name="pricesource" default="" length="255"/>
+        </property>
+        <property name="discountJson" type="string">
+            <column name="discountjson"/>
+        </property>
+        <property name="pricingBandMasterid" type="string">
+            <column  name="pricingbandmasterid" length="255"/>
+        </property>
+        <property name="isUserModifiedTaxAmount" type="boolean">
+            <column name="isusermodifiedtaxamount" not-null="false"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.DeliveryOrderDetail" column="dodetails" name="dodetails"/>
+        <many-to-one class="com.krawler.common.admin.ProductBatch" name="batch"/>
+        <many-to-one class="com.krawler.hql.accounting.InvoiceDetail" column="cidetails" name="cidetails"/>
+        <one-to-one class="com.krawler.hql.accounting.Inventory" constrained="true" name="inventory"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.SalesReturn" column="salesreturn" name="salesReturn" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="reason" column="reason"/>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one class="com.krawler.hql.accounting.SalesReturnDetailCustomData" column="accsrdetailsscustomdataref" name="salesReturnDetailCustomData"/>
+        <many-to-one class="com.krawler.hql.accounting.SalesReturnDetailProductCustomData" column="srdetailproductcustomdataref" name="salesReturnDetailProductCustomData"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="inventoryjedetail" name="inventoryJEdetail"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="costofgoodssoldjedetail" name="costOfGoodsSoldJEdetail"/>
+    </class>
+</hibernate-mapping>

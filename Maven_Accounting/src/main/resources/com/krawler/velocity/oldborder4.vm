@@ -1,0 +1,30 @@
+<tr><td><div class='middlediv' style="position:relative; width:900px;padding-top:$tabletoppadding;padding-left:$left;">
+    <TABLE width="$width" border="0" style="font-family:$fontfamily;vertical-align:top" cellspacing="0" cellpadding="4">  
+<thead>   
+        <TR>  
+        #foreach( $header1 in $tableHeader )  
+            <TH width="$header1.width" bgcolor="$header1.bgcolor" align="$header1.align" style="padding: 0.5em;border-bottom:1px solid $tablebordercolor;border-top:1px solid $tablebordercolor;">$header1.data</TH>  
+        #end  
+        </TR> 
+</thead>   
+ <tbody> 
+        #foreach( $prod in $prodList )  
+          <TR style="padding: 0.5em;">  
+            #foreach( $CustomDesignLineItemProp in $prod )  
+                <TD style="padding: 0.5em;border-bottom: 0px solid $tablebordercolor;border-left: 0px none;border-right:0px none;border-top: 0px none;vertical-align:top;padding-top: 0; " align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+            #end  
+          </TR>  
+        #end 
+        #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            <TR style="padding: 0.5em;">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    <TD style="padding: 0.5em; border-bottom: 0px solid $tablebordercolor;border-left: 0px none;border-right:0px none;border-top:0px none;font-weight: bold "  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end 
+</tbody>
+    </TABLE> 
+</div></td></tr>
+

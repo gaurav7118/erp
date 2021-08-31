@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.EntitybasedLineLevelTermRate" table="entitybasedlineleveltermsrate">
+        <id column="id" name="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.LineLevelTerms"  column="linelevelterms" name="lineLevelTerms"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData"  column="entity" name="entity"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData"  column="shippedloc1" name="shippedLoc1"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData"  column="shippedloc2" name="shippedLoc2"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData"  column="shippedloc3" name="shippedLoc3"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData"  column="shippedloc4" name="shippedLoc4"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData"  column="shippedloc5" name="shippedLoc5"/>
+        <many-to-one class="com.krawler.hql.accounting.GSTCessRuleType"  column="cesstype" name="cessType" />
+        <property name="valuationAmount" type="double">
+            <column default="0" name="valuationamount"/>
+        </property>
+        <property name="appliedDate" type="date">
+            <column name="applieddate" not-null="true"/>
+        </property>
+        <property name="percentage" type="double">
+            <column default="0" name="percentage"/>
+        </property>
+        <property name="termAmount" type="double">
+            <column default="0" name="termamount"/>
+        </property>
+        <property name="taxType" type="int">
+            <column default="1" name="taxtype"/>
+        </property>
+        <property name="isMerchantExporter" type="true_false">
+            <column name="ismerchantexporter" default="'F'" />
+        </property>
+    </class>
+</hibernate-mapping>

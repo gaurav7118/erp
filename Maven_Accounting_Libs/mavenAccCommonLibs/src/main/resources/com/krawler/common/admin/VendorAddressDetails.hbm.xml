@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.VendorAddressDetails" table="vendoraddressdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>    
+        <property name="aliasName" type="string">
+            <column length="255" name="aliasname"/>
+        </property>
+        <property name="address" type="string">
+            <column length="500" name="address"/>
+        </property>
+        <property name="county" type="string">
+            <column length="50" name="county"/>
+        </property>
+        <property name="city" type="string">
+            <column length="255" name="city"/>
+        </property>
+        <property name="state" type="string">
+            <column length="255" name="state"/>
+        </property>
+        <property name="stateCode" type="string">
+            <column length="5" name="statecode"/>
+        </property>
+        <property name="country" type="string">
+            <column length="255" name="country"/>
+        </property>
+        <property name="postalCode" type="string">
+            <column length="255" name="postalcode"/>
+        </property>
+        <property name="phone" type="string">
+            <column length="255" name="phone"/>
+        </property>
+        <property name="mobileNumber" type="string">
+            <column length="255" name="mobilenumber"/>
+        </property>
+        <property name="fax" type="string">
+            <column length="255" name="fax"/>
+        </property>
+        <property name="emailID" type="string">
+            <column length="255" name="emailid"/>
+        </property>
+        <property name="recipientName" type="string">
+            <column length="255" name="recipientname"/>
+        </property>
+        <property name="contactPerson" type="string">
+            <column length="255" name="contactperson"/>
+        </property>
+        <property name="contactPersonNumber" type="string">
+            <column length="255" name="contactpersonnumber"/>
+        </property>
+        <property name="contactPersonDesignation" type="string">
+            <column length="255" name="contactpersondesignation"/>
+        </property>
+        <property name="website" type="string">
+            <column length="255" name="website"/>
+        </property>
+        <property name="isBillingAddress" type="true_false">
+            <column name="isbillingaddress" />
+        </property>
+        <property name="isDefaultAddress" type="true_false">
+            <column name="isdefaultaddress" />
+        </property>
+        <property name="vendorID" type="string">
+            <column length="255" name="vendorid"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>        
+    </class>
+</hibernate-mapping>

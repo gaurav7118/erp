@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-2.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-2.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"> 
+    <!--<tx:annotation-driven transaction-manager="txManager"/>-->
+
+<!--<beans>-->
+    <bean id="accMachineManagementController" class="com.krawler.spring.mrp.machinemanagement.accMachineManagementController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accMachineManagementServiceDAOObj">
+            <ref bean="accMachineManagementServiceDAO"/>
+        </property>
+        <property name="accCompanyPreferencesObj">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="machineManagementHandler">
+            <ref bean="machineManagementHandler"/>
+        </property>
+        <property name="auditTrailDaoObj">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    
+    <bean id="machineManagementHandler" class="com.krawler.spring.mrp.machinemanagement.MachineManagementHandler">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean>
+    
+    <bean id="accMachineManagementServiceDAO" class="com.krawler.spring.mrp.machinemanagement.AccMachineManagementServiceImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="accMachineManagementDAOObj">
+            <ref bean="accMachineManagementDAOImpl"/>
+        </property>
+    
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+    
+        <property name="workOrderDAO">
+            <ref bean="WorkOrderDAO"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+    
+    </bean>
+    <bean id="accMachineManagementDAOImpl" class="com.krawler.spring.mrp.machinemanagement.AccMachineManagementDAOImpl">
+         <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    
+    </bean>
+    
+    <bean id="accTaskProgressManagementControllerCMN" class="com.krawler.spring.mrp.taskProgressManagement.AccTaskProgressManagementControllerCMN">
+        <property name="accTaskProgressManagementServiceDAOObj">
+            <ref bean="accTaskProgressManagementServiceDAO"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    
+    <bean id="accTaskProgressManagementServiceDAO" class="com.krawler.spring.mrp.taskProgressManagement.AccTaskProgressManagementServiceImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    
+    </bean>
+   
+   
+    <bean id="accContractManagementController" class="com.krawler.spring.mrp.contractmanagement.AccContractManagementController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accContractManagementServiceDAOObj">
+            <ref bean="accContractManagementServiceDAO"/>
+        </property>
+        
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property> 
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accContractManagementDAOObj">
+            <ref bean="accContractManagementDAO"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+   
+    <bean id="accContractManagementServiceDAO" class="com.krawler.spring.mrp.contractmanagement.AccContractManagementServiceImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="accContractManagementDAOObj">
+            <ref bean="accContractManagementDAO"/>
+        </property>
+        <property name="accCompanyPreferencesObj">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property> 
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+    </bean>
+    
+    <bean id="accContractManagementDAO" class="com.krawler.spring.mrp.contractmanagement.AccContractManagementDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    
+    <bean id = "accLabourControllerCMN" class = "com.krawler.spring.mrp.labormanagement.AccLabourControllerCMN">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accLabourDAO">
+            <ref bean="acclabourDAO"/>
+        </property>
+        <property name="accLabourServiceDAO">
+            <ref bean="AccLabourServiceDAO"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property> 
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+    </bean>
+     <bean id ="WorkOrderDAO" class="com.krawler.spring.mrp.WorkOrder.WorkOrderDAOImpl">
+         <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+     <bean id ="AccWorkOrderServiceDAO" class="com.krawler.spring.mrp.WorkOrder.AccWorkOrderServiceImpl">
+         <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="accRoutingManagementService">
+            <ref bean="accRoutingManagementServiceImpl"/>
+        </property>
+        <property name="workOrderDAOObj">
+            <ref bean="WorkOrderDAO"/>
+        </property>
+        <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="accProductDaoObj">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="accCompanyPreferencesObj">
+            <ref bean="accCompanyPreferencesDao" />
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="kwlCommonTablesDAOObj">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+         <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+         <property name="accCommonTablesDAOObj">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+         <property name="accMasterItemsDAOObj">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+         <property name="accSalesOrderServiceObj">
+            <ref bean="accSalesOrderService"/>
+        </property>
+         <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accInvoiceDAOobj">
+         <ref bean="accInvoiceDao" />
+        </property>
+          <property name="accLabourDAOObj">
+            <ref bean="acclabourDAO"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>  
+        <property name= "stockMovementService">
+            <ref bean="stockMovementService" />
+        </property>
+        <property name="stockService">
+            <ref bean="stockService" />
+        </property>
+        <property name="accMachineManagementDAOObj">
+            <ref bean="accMachineManagementDAOImpl"/>
+        </property>
+    </bean>
+    <bean id="AccWorkOrderController" class="com.krawler.spring.mrp.WorkOrder.AccWorkOrderController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accWorkOrderServiceDAOObj">
+            <ref bean="AccWorkOrderServiceDAO"/>
+        </property>
+        <property name="routingManagementServiceObj">
+            <ref bean="accRoutingManagementServiceImpl" />
+        </property>
+        <property name="workOrderDAOObj">
+            <ref bean="WorkOrderDAO"/>
+        </property>
+         <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+           <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+     <bean id ="WorkCentreDAO" class="com.krawler.spring.mrp.workcentremanagement.WorkCentreDAOImpl">
+         <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+     <bean id ="AccWorkCentreServiceDAO" class="com.krawler.spring.mrp.workcentremanagement.AccWorkCentreServiceImpl">
+         <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="workCentreDAOObj">
+            <ref bean="WorkCentreDAO"/>
+        </property>
+        <property name="accCompanyPreferencesDAOObj">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+    </bean>
+    <bean id="AccWorkCentreControllerCMN" class="com.krawler.spring.mrp.workcentremanagement.AccWorkCentreControllerCMN">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accWorkCentreServiceDAOObj">
+            <ref bean="AccWorkCentreServiceDAO"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id ="acclabourDAO" class="com.krawler.spring.mrp.labormanagement.accLabourDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id ="AccLabourServiceDAO" class="com.krawler.spring.mrp.labormanagement.AccLabourServiceImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="accLabourDAO">
+            <ref bean="acclabourDAO"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property> 
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="accProductDAOObj">
+            <ref bean="accProductDao"/>
+        </property>
+    </bean>
+      <bean id="accJobWorkController" class="com.krawler.spring.mrp.jobwork.AccJobWorkController">
+        <property name="txnManager">
+            <ref bean="txManager" />
+        </property>
+        <property name="accJobWorkServiceObj">
+            <ref bean="AccJobWorkService" />
+        </property>
+        <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="accCompanyPreferencesObj">
+            <ref bean="accCompanyPreferencesDao" />
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>       
+      </bean>
+    
+     <bean id="AccJobWorkDao" class="com.krawler.spring.mrp.jobwork.AccJobWorkDaoImpl">
+         <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean> 
+    
+    <bean id="AccJobWorkService" class="com.krawler.spring.mrp.jobwork.AccJobWorkServiceImpl">
+       <property name="accJobWorkDaoObj">
+           <ref bean="AccJobWorkDao" />
+           </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>  
+        <property name="workOrderDAOObj">
+            <ref bean="WorkOrderDAO"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property> 
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="stockService">
+            <ref bean="stockService"/>
+        </property>
+    </bean>
+    <bean id ="accRoutingManagementServiceImpl" class="com.krawler.spring.mrp.routingmanagement.AccRoutingManagementServiceImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+         <property name="accRoutingManagementDaoObj">
+            <ref bean="accRoutingManagementDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+    </bean>
+    <bean id="accRoutingManagementController" class="com.krawler.spring.mrp.routingmanagement.AccRoutingManagementController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="exportDaoObj">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="accRoutingManagementService">
+            <ref bean="accRoutingManagementServiceImpl"/>
+        </property>
+        <property name="accCompanyPreferencesObj">
+            <ref bean="accCompanyPreferencesDao" />
+        </property>
+         <property name="accWorkOrderServiceDAOObj">
+            <ref bean="AccWorkOrderServiceDAO"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+         <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="accRoutingManagementDaoObj">
+            <ref bean="accRoutingManagementDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+    </bean>
+     <bean id="accRoutingManagementDao" class="com.krawler.spring.mrp.routingmanagement.AccRoutingManagementDaoImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean> 
+</beans>

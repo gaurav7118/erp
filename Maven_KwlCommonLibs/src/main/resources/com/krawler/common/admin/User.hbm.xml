@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.User" table="users">
+    <id column="userid" name="userID">
+      <generator class="assigned"/>
+    </id>
+    <property name="image" type="string">
+      <column length="255" name="image"/>
+    </property>
+    <property name="firstName" type="string">
+      <column length="50" name="fname" not-null="true"/>
+    </property>
+    <property name="lastName" type="string">
+      <column length="50" name="lname"/>
+    </property>
+    <property name="roleID" type="string">
+      <column name="roleid"/>
+    </property>
+    <property name="emailID" type="string">
+      <column length="50" name="emailid"/>
+    </property>
+    <property name="address" type="string">
+      <column length="255" name="address"/>
+    </property>
+    <property name="designation" type="string">
+      <column length="128" name="designation"/>
+    </property>
+    <property name="contactNumber" type="string">
+      <column length="20" name="contactno"/>
+    </property>
+    <property name="aboutUser" type="string">
+      <column length="1024" name="aboutuser"/>
+    </property>
+    <property name="userStatus" type="string">
+      <column length="1024" name="userstatus"/>
+    </property>
+    <property name="fax" type="string">
+      <column length="20" name="fax"/>
+    </property>
+    <property name="alternateContactNumber" type="string">
+      <column length="20" name="altcontactno"/>
+    </property>
+    <property name="phpBBID" type="integer">
+      <column name="phpbbid"/>
+    </property>
+    <property name="panNumber" type="string">
+      <column length="30" name="panno"/>
+    </property>
+    <property name="ssnNumber" type="string">
+      <column length="50" name="ssnno"/>
+    </property>
+    <property name="createdon" type="date">
+      <column length="50" name="createdon"/>
+    </property>
+    <property name="updatedon" type="date">
+      <column length="50" name="updatedon" />
+    </property>
+    <property name="deleteflag" type="integer">
+      <column length="2" name="deleteflag" default='0'/>
+    </property>
+    <property name="callwith" type="integer">
+      <column length="2" name="callwith" default='1'/>
+    </property>
+    <property name="timeformat" type="integer">
+      <column length="2" name="timeformat" default='2'/>
+    </property>
+    <property name="user_hash" type="string">
+      <column length="50" name="user_hash"/>
+    </property>
+    <property name="department" type="string">
+      <column name="department"/>
+    </property>
+     <property name="employeeId" type="string">
+      <column name="employeeid"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.KWLTimeZone" name="timeZone"/>
+    <many-to-one class="com.krawler.common.admin.KWLDateFormat" name="dateFormat"/>
+    <one-to-one cascade="all" class="com.krawler.common.admin.UserLogin" name="userLogin"/>
+  </class>
+</hibernate-mapping>

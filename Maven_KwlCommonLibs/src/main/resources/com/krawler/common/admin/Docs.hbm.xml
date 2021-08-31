@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="false" default-lazy="false">
+    <class name="com.krawler.common.admin.Docs" table="docs">
+        <id name="id" type="string">
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="com.krawler.common.admin.User" name="user"/>
+        <property name="moduleId" type="string">
+            <column default="" name="moduleid"/>
+        </property>
+        <property name="recordId" type="string">
+            <column default="" name="recordid"/>
+        </property>
+        <property name="docname" type="string"/>
+        <property name="docsize" type="string"/>
+        <property name="doctype" type="string"/>
+        <property name="uploadedon" type="timestamp"/>
+        <property name="storename" type="string"/>
+        <property name="storageindex" type="java.lang.Integer"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <property name="deleteflag" type="integer">
+            <column default="0" name="deleteflag"/>
+        </property>
+        <property name="isshared" type="integer">
+            <column default="0" name="isshared"/>
+        </property>
+        <property name="tags" type="string"/>
+        <property name="comments" type="string"/>
+    </class>
+</hibernate-mapping>

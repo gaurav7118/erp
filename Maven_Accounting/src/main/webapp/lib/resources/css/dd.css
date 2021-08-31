@@ -1,0 +1,69 @@
+.x-dd-drag-proxy {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 15000;
+	visibility: hidden;
+}
+.x-dd-drag-ghost {
+	padding: 3px;
+	padding-left: 20px;
+	border-top: 1px solid #dddddd;
+	border-right: 1px solid #bbbbbb;
+	border-bottom: 1px solid #bbbbbb;
+	border-left: 1px solid #dddddd;
+	background-color: white;
+	color: black;
+	white-space: nowrap;
+	font: normal 11px arial, helvetica, sans-serif;
+	opacity: .85;
+	filter: alpha(opacity=85);
+
+	-moz-opacity: 0.85;
+}
+.x-dd-drag-repair .x-dd-drag-ghost {
+	padding: 0;
+	border: 0 none;
+	background-color: transparent;
+	opacity: .4;
+	filter: alpha(opacity=40);
+
+	-moz-opacity: 0.4;
+}
+.x-dd-drag-repair .x-dd-drop-icon {
+	visibility: hidden;
+}
+.x-dd-drop-icon {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	z-index: 1;
+	display: block;
+	width: 16px;
+	height: 16px;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.x-dd-drop-nodrop .x-dd-drop-icon {
+	background-image: url(../images/default/dd/drop-no.gif);
+}
+.x-dd-drop-ok .x-dd-drop-icon {
+	background-image: url(../images/default/dd/drop-yes.gif);
+}
+.x-dd-drop-ok-add .x-dd-drop-icon {
+	background-image: url(../images/default/dd/drop-add.gif);
+}
+.x-view-selector {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	border: 1px dotted #3399bb;
+	background: #c3daf9;
+	opacity: .5;
+	filter: alpha(opacity=50);
+	zoom: 1;
+
+	-moz-opacity: .5;
+}

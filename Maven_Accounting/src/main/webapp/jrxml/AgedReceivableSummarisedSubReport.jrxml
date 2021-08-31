@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aged_subreport1" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.4641000000000401"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1">
+		<field name="currency" class="java.lang.String"/>
+		<!--<field name="documentAmount" class="java.lang.Double"/>-->
+		<field name="totalinbase" class="java.lang.Double"/>
+		<field name="amountDue1" class="java.lang.Double"/>
+		<field name="amountDue2" class="java.lang.Double"/>
+		<field name="amountDue3" class="java.lang.Double"/>
+	</subDataset>
+	<field name="customerCode" class="java.lang.String"/>
+	<field name="customerName" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="creditdaystitle" class="java.lang.String"/>
+	<field name="creditlimit" class="java.lang.String"/>
+	<field name="creditdays" class="java.lang.String"/>
+	<!--<field name="documentAmount" class="java.lang.Double"/>-->
+	<field name="entryType" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.Double"/>
+	<field name="amountDue2" class="java.lang.Double"/>
+	<field name="amountDue3" class="java.lang.Double"/>
+	<field name="totalinbase" class="java.lang.Double"/>
+	<field name="customerId" class="java.lang.String"/>
+	<field name="agedReceivableSubReportCurrencyWiseAgeings" class="java.util.List"/>
+	<group name="customer">
+		<groupExpression><![CDATA[$F{customerId}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="70" y="0" width="397" height="15"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="10" y="0" width="60" height="15"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customerCode}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement positionType="Float" x="0" y="17" width="555" height="13" isPrintWhenDetailOverflows="true"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement x="10" y="0" width="138" height="13"/>
+						<textElement markup="html">
+							<font size="8" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{credit}+$F{creditlimit}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+						<reportElement x="128" y="0" width="175" height="13"/>
+						<textElement markup="html">
+							<font size="8" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{creditdaystitle}+$F{creditdays}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<componentElement>
+					<reportElement key="table" x="70" y="0" width="492" height="3">
+						<printWhenExpression><![CDATA[$F{agedReceivableSubReportCurrencyWiseAgeings}.size()<0?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="Table Dataset 1">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{agedReceivableSubReportCurrencyWiseAgeings})]]></dataSourceExpression>
+						</datasetRun>
+						<jr:column width="144">
+							<jr:tableHeader height="12" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="144" height="12"/>
+									<textElement>
+										<font size="7" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Amount With all Currency Details:]]></text>
+								</staticText>
+							</jr:tableHeader>
+							<jr:detailCell height="11" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="144" height="11"/>
+									<textElement>
+										<font size="7"/>
+									</textElement>
+                                                                <textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="76">
+							<jr:detailCell height="11" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+									<reportElement x="0" y="0" width="76" height="11"/>
+									<box leftPadding="0"/>
+									<textElement textAlignment="Right">
+										<font size="7"/>
+									</textElement>
+                                                                        <textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue1}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell height="11" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+									<reportElement x="0" y="0" width="71" height="11"/>
+									<box leftPadding="0"/>
+									<textElement textAlignment="Right">
+										<font size="7"/>
+									</textElement>
+                                                                        <textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue2}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="66">
+							<jr:detailCell height="11" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+									<reportElement x="0" y="0" width="66" height="11"/>
+									<box leftPadding="0"/>
+									<textElement textAlignment="Right">
+										<font size="7"/>
+									</textElement>
+                                                                        <textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue3}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+<!--						<jr:column width="67">
+							<jr:detailCell height="11" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+									<reportElement x="0" y="0" width="67" height="11"/>
+									<box leftPadding="0"/>
+									<textElement textAlignment="Right">
+										<font size="7"/>
+									</textElement>
+                                                                        <textFieldExpression class="java.lang.Double"><![CDATA[$F{documentAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>-->
+<!--						<jr:column width="71">
+							<jr:detailCell height="11" rowSpan="1">
+								<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+									<reportElement x="0" y="0" width="71" height="11"/>
+									<box leftPadding="0"/>
+									<textElement textAlignment="Right">
+										<font size="7"/>
+									</textElement>
+                                                                        <textFieldExpression class="java.lang.Double"><![CDATA[$F{totalinbase}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>-->
+					</jr:table>
+				</componentElement>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="223" y="0" width="68" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="359" y="0" width="68" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue3}]]></textFieldExpression>
+			</textField>
+<!--			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="426" y="0" width="69" height="11"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{documentAmount}]]></textFieldExpression>
+			</textField>-->
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="0" width="143" height="12"/>
+				<textElement textAlignment="Left" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="292" y="0" width="68" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amountDue2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="496" y="0" width="69" height="11"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{totalinbase}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

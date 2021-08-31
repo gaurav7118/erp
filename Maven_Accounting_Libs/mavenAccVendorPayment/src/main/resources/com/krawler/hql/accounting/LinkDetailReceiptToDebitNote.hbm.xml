@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.LinkDetailReceiptToDebitNote" table="linkdetailreceipttodebitnote">
+    <id column="id" name="ID">
+      <generator class="assigned"/>
+    </id>
+    <property name="srno" type="integer">
+      <column name="srno" default="0"/>
+    </property>
+    <property name="amount" type="double">
+      <column name="amount" not-null="true"/>
+    </property>
+    <property name="exchangeRateForTransaction" type="double">
+      <column name="exchangeratefortransaction" not-null="true"/>
+    </property>
+    <property name="amountInDNCurrency" type="double">
+      <column name="amountindncurrency" not-null="true"/>
+    </property>
+    <property name="linkedGainLossJE" type="string">
+      <column name="linkedgainlossje"/>
+    </property>
+    <property name="receiptLinkDate" type="date">
+      <column name="receiptlinkdate" default="1970-01-01"/>
+    </property>
+    <property name="revalJeId" type="string">
+        <column name="revaljeid"/> 
+    </property>
+     <property name="revalJeIdReceipt" type="string">
+        <column name="revaljeidreceipt"/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Receipt" column="receipt" name="receipt" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.DebitNote" name="debitnote" column = "debitnote" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" column = "company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="fromcurrency" name="fromCurrency"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="tocurrency" name="toCurrency"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.inspection.InspectionFormDetails" table="in_inspection_form_details">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="inspectionAreaValue" type="string">
+      <column length="255" name="inspectionareavalue"/>
+    </property>
+    <property name="inspectionStatus" type="string">                    
+      <column length="255" name="inspectionstatus"/>
+    </property>
+    <property name="faults" type="string">
+      <column name="faults"/>
+    </property>
+    <property name="passingValue" type="string">
+      <column name="passingvalue"/>
+    </property>
+    <property name="actualValue" type="string">
+      <column name="actualvalue"/>
+    </property>
+    <many-to-one class="com.krawler.inventory.model.inspection.InspectionForm" column="inspectionformid" name="inspectionForm"/>
+    <many-to-one class="com.krawler.inventory.model.inspection.InspectionArea" column="inspectionareaid" name="inspectionArea"/>
+  </class>
+</hibernate-mapping>

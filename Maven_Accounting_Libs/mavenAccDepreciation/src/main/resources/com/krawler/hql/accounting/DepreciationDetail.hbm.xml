@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DepreciationDetail" table="depriciationdetail">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="period" type="int">
+            <column name="period" not-null="true"/>
+        </property>
+        <property name="periodAmount" type="double">
+            <column name="pamount" not-null="true"/>
+        </property>
+        <property name="accumulatedAmount" type="double">
+            <column name="accvalue" not-null="true"/>
+        </property>
+        <property name="netBookValue" type="double">
+            <column name="nbvalue" not-null="true"/>
+        </property>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.JournalEntry" column="journalentry" name="journalEntry" not-null="true" unique="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ReceiptDetailTermsMap" table="receiptdetailtermsmap">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="percentage" type="double">
+            <column name="percentage" default="0"/>
+        </property>
+        <property name="assessablevalue" type="double">
+            <column name="assessablevalue" default="0"/>
+        </property>
+        <property name="termamount" type="double">
+            <column name="termamount" not-null="true"/>
+        </property>
+        <property name="deleted" type="integer">
+            <column name="deleted"/>
+        </property>
+        <property name="createdOn" type="long">
+            <column name="createdon"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" name="creator" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptDetail" column="goodsreceiptdetail" name="goodsreceiptdetail" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.LineLevelTerms" column="term" name="term" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.EntitybasedLineLevelTermRate" column="entityterm" name="entitybasedLineLevelTermRate"/>
+        <property name="purchaseValueOrSaleValue" type="double">
+            <column name="purchasevalueorsalevalue" default='0'/>
+        </property>
+        <property name="deductionOrAbatementPercent" type="double">
+            <column name="deductionorabatementpercent" default='0'/>
+        </property>
+        <property name="taxType" type="int">
+            <column name="taxtype" default="1"/>
+        </property>
+        <property name="taxPaidFlag" type="integer">
+            <column name="taxpaidflag" default="0"/>
+        </property>
+        <property name="creditAvailedFlag" type="integer">
+            <column name="creditavailedflag" default="0"/>
+        </property>
+        <property name="creditAvailedFlagServiceTax" type="integer">
+            <column name="creditavailedflagservicetax" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="taxpaymentje" name="taxPaymentJE"/>
+        <property name="taxMakePayment" type="string">
+            <column name="taxmakepayment"/>
+        </property>
+        <property name="isGSTApplied" type="true_false" >
+            <column name="isgstapplied" default="F"/>
+        </property>
+    </class>
+</hibernate-mapping>

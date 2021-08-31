@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccountsSubReport" pageWidth="595" pageHeight="802" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FEFEFE">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.75" lineColor="#000000"/>
+			<topPen lineWidth="0.75"/>
+			<leftPen lineWidth="0.75"/>
+			<bottomPen lineWidth="0.75"/>
+			<rightPen lineWidth="0.75"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="balance" class="java.lang.String"/>
+		<field name="baseCurrency" class="java.lang.String"/>
+	</subDataset>
+	<field name="customer" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<field name="jeId" class="java.lang.String"/>
+	<field name="debit" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="balance" class="java.lang.String"/>
+	<field name="invoicAmountDue" class="java.lang.Double"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="amountDueCurrent" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.String"/>
+	<field name="amountDue2" class="java.lang.String"/>
+	<field name="amountDue3" class="java.lang.String"/>
+	<field name="amountDue4" class="java.lang.String"/>
+	<field name="amountDue5" class="java.lang.String"/>
+	<field name="amount1Header" class="java.lang.String"/>
+	<field name="amount2Header" class="java.lang.String"/>
+	<field name="amount3Header" class="java.lang.String"/>
+	<field name="amount4Header" class="java.lang.String"/>
+	<field name="ageingCurrency" class="java.lang.String"/>
+	<field name="baseCurrency" class="java.lang.String"/>
+	<field name="customerAddress" class="java.lang.String"/>
+	<field name="outstandingBalance" class="java.lang.String"/>
+	<field name="pageBreak" class="java.lang.Boolean"/>
+	<field name="sOABalanceOutstandingPojos" class="java.util.List"/>
+	<field name="outstandingFlag" class="java.lang.Boolean"/>
+	<field name="basecurrencysymbol" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="headerdate" class="java.lang.String"/>
+	<field name="imagepath" class="java.lang.String"/>
+	<field name="customercode" class="java.lang.String"/>
+	<field name="attn" class="java.lang.String"/>
+	<field name="tutiondeposite" class="java.lang.String"/>
+	<field name="boardingdeposite" class="java.lang.String"/>
+	<field name="companyPhone" class="java.lang.String"/>
+	<field name="companyFax" class="java.lang.String"/>
+	<field name="companyEmail" class="java.lang.String"/>
+	<field name="daysOutstanding" class="java.lang.String"/>
+	<field name="registrationNo" class="java.lang.String"/>
+	<variable name="outstandingBalance" class="java.lang.String"/>
+	<variable name="balanceamount_1" class="java.lang.Double" resetType="Group" resetGroup="Customer" calculation="Sum">
+		<variableExpression><![CDATA[$F{invoicAmountDue}]]></variableExpression>
+	</variable>
+	<group name="Customer" isStartNewPage="true" isReprintHeaderOnEachPage="true" footerPosition="CollateAtBottom">
+		<groupExpression><![CDATA[$F{customer}]]></groupExpression>
+		<groupHeader>
+			<band height="78">
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="-1" width="595" height="79" forecolor="#FEFEFE"/>
+				</rectangle>
+				<rectangle radius="10">
+					<reportElement stretchType="RelativeToTallestObject" x="1" y="0" width="283" height="71"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true">
+					<reportElement mode="Opaque" x="9" y="6" width="265" height="61"/>
+					<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement markup="html">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customer}+"<br>"+$F{customerAddress}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="306" y="11" width="111" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[STATEMENT DATE]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="417" y="11" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{headerdate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="417" y="31" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{customercode}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="306" y="31" width="111" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[FILE REF.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="306" y="51" width="111" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[PAGE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="407" y="11" width="10" height="20"/>
+					<textElement/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="407" y="31" width="10" height="20"/>
+					<textElement/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="407" y="51" width="10" height="20"/>
+					<textElement/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="417" y="51" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="65">
+				<rectangle>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="591" height="64" forecolor="#FEFEFE"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="192" y="0" width="203" height="20"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[STATEMENT OF ACCOUNT
+]]></text>
+				</staticText>
+				<frame>
+					<reportElement positionType="Float" x="-7" y="25" width="571" height="39" isPrintWhenDetailOverflows="true"/>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="326" y="3" width="95" height="36"/>
+						<box rightPadding="4">
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Balance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="153" y="3" width="78" height="36"/>
+						<box rightPadding="4">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Invoice
+Amount
+(Debit)]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="84" y="3" width="69" height="36"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Invoice No.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="9" y="3" width="75" height="36"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Invoice Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="421" y="3" width="81" height="36"/>
+						<box rightPadding="4">
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Days
+Outstanding]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="231" y="3" width="95" height="36"/>
+						<box rightPadding="4">
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Amount Paid (Credit)]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="502" y="3" width="65" height="36"/>
+						<box rightPadding="4">
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Transaction Currency]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="85">
+				<rectangle>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="591" height="85" forecolor="#FEFEFE"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="2" y="21" width="321" height="22"/>
+					<textElement markup="html">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Payments received after the above date is not included in the statement.<br/>We would appreciate your prompt settlement of the above account.]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="Customer" pattern="#,##0.00;-#,##0.00">
+					<reportElement x="461" y="1" width="103" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{balanceamount_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="2" y="0" width="562" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="204" y="1" width="257" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Amount Due ("+$F{baseCurrency}+"):"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="3" y="49" width="351" height="19"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{registrationNo})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="68" width="350" height="12"/>
+					<textElement markup="html">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[An independent member of Baker Tilly International.]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="802"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="4" y="2" width="70" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="81" y="2" width="62" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{transactionId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="225" y="2" width="92" height="12"/>
+				<box leftPadding="2" rightPadding="4">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="323" y="2" width="88" height="13"/>
+				<box rightPadding="4">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="421" y="1" width="63" height="13"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{daysOutstanding}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="148" y="0" width="74" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="499" y="1" width="55" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

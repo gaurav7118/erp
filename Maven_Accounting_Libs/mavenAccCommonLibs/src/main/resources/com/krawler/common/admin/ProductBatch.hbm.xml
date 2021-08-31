@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.ProductBatch" table="productbatch">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="name" type="string">
+            <column name="name"/>
+        </property>
+        <property name="mfgdate" type="timestamp">
+            <column name="mfgdate"/>
+        </property>
+        <property name="expdate" type="timestamp">
+            <column name="expdate"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="balance" type="double">
+            <column name="balance"/>
+        </property>
+        <property name="isopening" type="true_false">
+            <column default="true" name="isopening" not-null="true"/>
+        </property>
+        <property name="ispurchase" type="true_false">
+            <column default="true" name="ispurchase" not-null="true"/>
+        </property>
+        <property name="transactiontype" type="integer"> <!-- This is Type we can identify where batch can added  1- Product form ,2-GRN ,3 -Delivery Order, 4 - Sales Return ,5 Purchase Return -->
+            <column name="transactiontype"/>
+        </property>
+        <property name="product" type="string">
+            <column name="product"/>
+        </property>
+        <property name="asset" type="string">
+            <column name="asset"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.InventoryLocation" name="location"/>
+        <many-to-one class="com.krawler.common.admin.InventoryWarehouse" name="warehouse"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.GoodsReceiptDetailPaymentMapping" table="goodsreceiptdetailpaymentmapping" >
+      <id name="ID" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="payment" type="string">
+            <column name="payment" default=""/>
+        </property>
+        <property name="advanceAdjustedAmount" type="double">
+            <column  name="advanceadjustedamount" default="0"/>
+        </property>
+        <property name="PaymentAmount" type="double">
+            <column  name="paymentamount" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptDetail" column="grdetails" name="grdetails"/>
+        <many-to-one class="com.krawler.hql.accounting.ExpenseGRDetail" column="erdetails" name="erdetails"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

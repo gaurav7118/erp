@@ -1,0 +1,230 @@
+#Prathamesh Sheth 19th Feb 2014
+#Set Inventory URL in web.xml for integration with accounting and inventory system.
+
+<context-param>        
+    <param-name>inventoryURL</param-name>
+    <param-value>http://localhost:8080/inventory-management/</param-value>				
+</context-param>   
+
+# Sagar M 20th May 2014
+# Missing servlet mapping 
+
+    <servlet>
+            <servlet-name>video</servlet-name>
+            <servlet-class>com.krawler.esp.servlets.StreamVideo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>video</servlet-name>
+        <url-pattern>/video.jsp</url-pattern>
+    </servlet-mapping>
+
+# 28th May 2014 Anup Kale
+
+<servlet>
+        <servlet-name>iphone</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>iphone</servlet-name>
+        <url-pattern>/deskeraAccounting.jsp</url-pattern>
+    </servlet-mapping>
+
+<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContextList.xml</param-value>
+</context-param>
+
+# Atul Sachan 10 June 2014// added PM URL
+
+<context-param>
+        <param-name>pmURL</param-name>
+        <param-value>http://192.168.0.208:8080/stagingpm/</param-value>
+ </context-param>
+
+# Vaibhav Patil 19th Sept 2014 //Added URL for Eclaim_Travel
+
+    <context-param>        
+        <param-name>eclaimURL</param-name>
+        <param-value>http://192.168.0.201:8080/eClaim_Travel/</param-value>				
+    </context-param>
+
+# Vivek Pakmode 30th Sept 2014
+
+        <servlet>
+  		<servlet-name>productimage</servlet-name>
+  		<servlet-class>com.krawler.spring.accounting.product.ProductImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+  		<servlet-name>productimage</servlet-name>
+  		<url-pattern>/productimage</url-pattern>
+ 	</servlet-mapping>
+
+# Vivek Pakmode 22nd Oct 2014
+
+   <servlet>
+        <servlet-name>FileDownloadServlet</servlet-name>
+        <servlet-class>com.krawler.esp.servlets.FileDownloadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FileDownloadServlet</servlet-name>
+        <url-pattern>/fdownload.jsp</url-pattern>
+    </servlet-mapping>
+
+# Suhas Chaware 22nd Nov 2014
+        <servlet>
+        <servlet-name>RemoteAPI</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoteAPI</servlet-name>
+        <url-pattern>/deskeraAccountingAPI.jsp</url-pattern>
+    </servlet-mapping>
+
+# Anand Nimbalkar 7th Jan 2015 // Added URL for POS
+
+    <context-param>
+        <param-name>posURL</param-name>
+        <param-value>http://192.168.0.208:8080/POS/</param-value>
+    </context-param>
+
+
+# Raj Shah 24th March 2015
+   
+    <servlet>
+        <servlet-name>FileDownload</servlet-name>
+        <servlet-class>com.krawler.esp.servlets.FileDownloadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileDownload</servlet-name>
+        <url-pattern>/fdownload.jsp</url-pattern>
+    </servlet-mapping>
+    
+# Sagar M 14th Aug 2015
+# Add servlet mapping to load company specific image for default document designer templates 
+    
+    <servlet>
+            <servlet-name>dddefaulttemplateimageload</servlet-name>
+            <servlet-class>com.krawler.esp.servlets.DefaultTemplateImageLoad</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dddefaulttemplateimageload</servlet-name>
+        <url-pattern>/defaulttemplateimageload.jsp</url-pattern>
+    </servlet-mapping>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint44 created on 28th Oct 2015 11:30AM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint47 created on 19th Nov 2015 10:30AM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint49 created on 08th Dec 2015 11:30AM ---------------------------------------------- 
+
+#Kottamidde Naresh - 11th Dec., 2015
+#Sync cost centers : ERP to/from eClaim, refer ticket ERP-17187
+    <context-param>
+        <param-name>eclaimURL</param-name>
+        <param-value>http://192.168.0.21:8080/stagingeclaims/</param-value>
+    </context-param>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt2 created on 5th Jan 2016 8:00AM ---------------------------------------------- =======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt3 created on 14th Jan 2016 9:00AM ---------------------------------------------- =======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt5 created on 28th Jan 2016 11:00AM ---------------------------------------------- =======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt12 created on 15th Mar 2016 11:15AM ---------------------------------------------- =======
+
+# Kapil Gupta - 04th May 2016
+
+<servlet>
+    <servlet-name>jersey-serlvet</servlet-name>
+    <servlet-class>
+        com.sun.jersey.spi.spring.container.servlet.SpringServlet
+    </servlet-class>
+    <init-param>
+        <param-name>com.sun.jersey.config.property.packages</param-name>
+        <param-value>com.krawler.spring.accounting.ws.rest</param-value>
+    </init-param>        
+    <init-param>
+        <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+        <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name>jersey-serlvet</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
+</servlet-mapping>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt20 created on 09th May 2016 08:00PM ---------------------------------------------- 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt24 created on 06th June 2016 07:30PM ----------------------------------------------=======
+
+#------------------------------------------- Changes for routing and supporting multiple datasources------------------------------
+#ADD THIS LINE
+    <listener>
+        <listener-class>com.krawler.common.filters.RequestListenerForDB</listener-class>
+    </listener>
+
+# REPLACE jersey-servlet WITH BELOW CODE
+<servlet>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-class>
+            com.sun.jersey.spi.spring.container.servlet.SpringServlet
+        </servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.krawler.spring.accounting.ws.rest</param-value>
+        </init-param>        
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+        <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+        <param-value>com.krawler.common.filters.RestServiceFilter</param-value>
+    </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+#-----------PLEASE REFER NEW erp-deskera-config-properties FILE AS NEW DATA SOURCES ARE MADE---------------------------------
+#------------------------------------------- Changes ended for routing and supporting multiple datasources------------------------------
+
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt30 created on 20th July 2016 09:45AM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt38 created on 22nd Sept 2016 10:00AM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt47 created on 22nd Nov 2016 08:00PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu8 created on 24th Feb 2017 07:06PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu21 created on 22nd May 2017 08:45PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu27 created on 4th July 2017 12:15PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu43 created on 25th Oct 2017 8:00PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu49 created on 18th Dec 2017 7:10PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv4 created on 24th Jan 2018 7:35PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv10 created on 9 March 2018 7:10PM ----------------------------------------------
+
+
+
+#Amol Edewar 24 May 2018
+<context-param>
+                <param-name>platformURLProtocolNeutral</param-name>
+		<param-value>server context url</param-value>
+</context-param>
+   
+
+Note-Please consider same value as that of platformURL parameter and only remove http:  
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv21 created on 24rd May 2018 4:55PM ----------------------------------------------
+

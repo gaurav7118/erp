@@ -1,0 +1,29 @@
+<tr><td><div class='middlediv' style="position:relative; width:800px;padding-top:$tabletoppadding;padding-left:$left;">
+    <TABLE width="$width" style="top: 0px; left: $left;border:1px solid black;font-family:$fontfamily;" cellpadding="4">  
+ <thead>      
+   <TR>  
+        #foreach( $header1 in $tableHeader )  
+            <TH width="$header1.width" bgcolor="#DDDDDD" align="$header1.align" style="padding: 0.5em;">$header1.data</TH>  
+        #end  
+        </TR> 
+ </thead>    
+<tbody>   
+        #foreach( $prod in $prodList )  
+          <TR style="padding: 0.5em">  
+            #foreach( $CustomDesignLineItemProp in $prod )  
+                <TD style="padding: 0.5em;vertical-align:top;padding-top: 0;" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+            #end  
+          </TR>  
+        #end 
+       #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            <TR style="padding: 0.5em">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    <TD style="padding: 0.5em ; font-weight: bold "  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end 
+</tbody>
+    </TABLE> 
+</div></td></tr>

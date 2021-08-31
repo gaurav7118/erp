@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.OCBCReceivingDetails" table="ocbcreceivingdetails">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="bankCode" type="string">
+            <column name="bankcode"/>
+        </property>
+        <property name="accountNumber" type="string">
+            <column name="accountnumber"/>
+        </property>
+        <property name="ultimateCreditorName" type="string">
+            <column name="ultimatecreditorname"/>
+        </property>
+        <property name="ultimateDebtorName" type="string">
+            <column name="ultimatedebtorname"/>
+        </property>
+        <property name="remittanceAdviceVia" type="string">
+            <column name="remittanceadvicevia"/>
+        </property>
+        <property name="remittanceAdviceSendDetails" type="string">
+            <column name="remittanceadvicesenddetails"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Vendor" name="vendor"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="paidTo" column="paidto"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

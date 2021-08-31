@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.MRPCompanyPreferences" table="mrpcompanypreferences">
+        <id column="id" name="id">
+            <generator class="foreign">
+                <param name="property">company</param>
+            </generator>
+        </id>
+        <property name="autoGenPurchaseType" type="int">
+            <column name="autogenpurchasetype" default="0"/>   
+        </property>    
+        <property name="woInventoryUpdateType" type="int">
+            <column name="woinventoryupdatetype" default="0"/>   
+        </property>   
+         <property name="mrpProductComponentType" type="int">
+            <column name="mrpproductcomponenttype" default="0"/>   
+        </property> 
+       
+    <one-to-one class="com.krawler.common.admin.Company" constrained="true" name="company"/>
+     
+    </class>
+</hibernate-mapping>

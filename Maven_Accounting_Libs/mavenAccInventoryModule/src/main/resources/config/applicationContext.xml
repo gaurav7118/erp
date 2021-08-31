@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- Consignment   START -->
+    <bean id="consignmentDAO" class="com.krawler.inventory.model.approval.consignmentimpl.ConsignmentDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="consignmentService" class="com.krawler.inventory.model.approval.consignmentimpl.ConsignmentServiceImpl">
+        <property name ="consignmentDAO" ref = "consignmentDAO"/>
+        <property name= "stockService" ref="stockService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "accCommonTablesDAO" ref="accCommonTablesDAO" />
+        <property name="accSalesOrderDAO" ref="accSalesOrderDao"/>
+        <property name="accMasterItemsDAO" ref="accMasterItemsDao"/>
+        <property name= "storeService" ref="storeService" />
+    </bean>
+    <bean id="stockService" class="com.krawler.inventory.model.stock.impl.StockServiceImpl">
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name ="stockDAO" ref = "stockDAO"/>
+        <property name ="invConfigService" ref = "inventoryConfigService"/>
+        <property name ="accProductDAO" ref = "accProductDao"/>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name= "storeService" ref="storeService" />
+        <property name="accCurrencyDAOobj">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accAccountDAOobj">
+            <ref bean="accAccountDao"/>
+        </property>
+         <property name= "locationService" ref="locationService" />
+         <property name ="stockMovementDAO" ref = "stockMovementDAO"/>
+    </bean>
+    <bean id="stockMovementService" class="com.krawler.inventory.model.stockmovement.impl.StockMovementServiceImpl">
+        <property name ="stockMovementDAO" ref = "stockMovementDAO"/>
+        <property name ="stockService" ref = "stockService"/>
+        <property name ="storeService" ref = "storeService"/>
+        <property name ="locationService" ref = "locationService"/>
+    </bean>
+
+
+
+    <bean id="stockDAO" class="com.krawler.inventory.model.stock.impl.StockDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="inventoryConfigDAO" class="com.krawler.inventory.model.configuration.impl.InventoryConfigDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="inventoryConfigService" class="com.krawler.inventory.model.configuration.impl.InventoryConfigServiceImpl">
+        <property name ="configDAO" ref = "inventoryConfigDAO"/>
+    </bean>
+
+
+    <bean id="stockMovementDAO" class="com.krawler.inventory.model.stockmovement.impl.StockMovementDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+
+
+    <!-- Consignment   END -->    
+    <!-- SA   START -->
+    <!-- Inventory beans -->
+
+    <bean id="saApprovalDAO" class="com.krawler.inventory.model.approval.sa.impl.SAApprovalDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="saApprovalService" class="com.krawler.inventory.model.approval.sa.impl.SAApprovalServiceImpl">
+        <property name ="saApprovalDAO" ref = "saApprovalDAO"/>
+        <property name ="stockAdjustmentService" ref = "stockAdjustmentService"/>
+        <property name= "stockService" ref="stockService" />
+        <property name= "stockMovementService">
+            <ref bean="stockMovementService" />
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="kwlCommonTablesDAOObj">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+    </bean>
+    <bean id="stockAdjustmentService" class="com.krawler.inventory.model.stockout.impl.StockAdjustmentServiceImpl">
+        <property name ="stockAdjustmentDAO" ref = "stockAdjustmentDAO"/>
+        <property name ="invConfigService" ref = "inventoryConfigService"/>
+        <property name= "stockService" ref="stockService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "packagingService" ref="packagingService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "approvalService" ref="saApprovalService" />
+        <property name ="stockMovementDAO" ref = "stockMovementDAO"/>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accProductDaoObj">
+            <ref bean="accProductDao"/></property>
+    </bean>
+    <bean id="stockAdjustmentDAO" class="com.krawler.inventory.model.stockout.impl.StockAdjustmentDAOimpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+
+    <bean id="stockTransferApprovalDAO" class="com.krawler.inventory.model.approval.stocktransfer.impl.StockTransferApprovalDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="stockTransferApprovalService" class="com.krawler.inventory.model.approval.stocktransfer.impl.StockTransferApprovalServiceImpl">
+        <property name ="stockTransferApprovalDAO" ref = "stockTransferApprovalDAO"/>
+        <property name ="istService" ref = "interStoreTransferService"/>
+        <property name ="stockService" ref = "stockService"/>
+        <property name ="stockMovementService" ref = "stockMovementService"/>
+        <property name= "stockRequestService" ref="stockRequestService" />
+        <property name= "seqService" ref="seqService" />
+        <property name="accCompanyPreferencesDAO" ref="accCompanyPreferencesDao"/>
+        <property name="accJournalEntryDAO" ref="accJournalEntryDao"/>
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService"/>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao"/>
+        <property name= "storeService" ref="storeService" />        
+        <property name="messageSource" ref = "messageSource"/>
+        <property name= "auditTrailObj" ref="auditTraildao" />
+    </bean>
+    <bean id="interStoreTransferService" class="com.krawler.inventory.model.ist.impl.InterStoreTransferServiceImpl">
+        <property name ="istDAO" ref = "interStoreTransferDAO"/>
+        <property name ="invConfigService" ref = "inventoryConfigService"/>
+        <property name= "stockService" ref="stockService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "txnManager" ref="txManager" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name= "consignmentService" ref="consignmentService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "packagingService" ref="packagingService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "approvalService" ref="stockTransferApprovalService" />
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+         <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+         <property name="stockMovementDAO">
+            <ref bean="stockMovementDAO"/>
+        </property>
+         <property name="accProductObj">
+            <ref bean="accProductDao"/>
+        </property>
+    </bean>
+    <bean id="stockRequestService" class="com.krawler.inventory.model.stockrequest.impl.StockRequestServiceImpl">
+        <property name ="stockRequestDAO" ref = "stockRequestDAO"/>
+        <property name ="invConfigService" ref = "inventoryConfigService"/>
+        <property name= "stockService" ref="stockService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "packagingService" ref="packagingService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "approvalService" ref="stockTransferApprovalService" />
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+         <property name ="stockMovementDAO" ref = "stockMovementDAO"/>
+    </bean>
+    <bean id="interStoreTransferDAO" class="com.krawler.inventory.model.ist.impl.InterStoreTransferDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="stockRequestDAO" class="com.krawler.inventory.model.stockrequest.impl.StockRequestDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <!-- SA   END -->
+    <!-- Booking START -->
+    <bean id="bookingDAO" class="com.krawler.inventory.model.booking.impl.BookingDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="bookingService" class="com.krawler.inventory.model.booking.impl.BookingServiceImpl">
+        <property name ="bookingDAO" ref = "bookingDAO"/>
+    </bean>
+    <!-- Booking END -->
+    
+    <bean id="cycleCountDAO" class="com.krawler.inventory.model.cyclecount.impl.CycleCountDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="cycleCountService" class="com.krawler.inventory.model.cyclecount.impl.CycleCountServiceImpl">
+        <property name ="cycleCountDAO" ref = "cycleCountDAO"/>
+        <property name= "stockService" ref="stockService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "saService" ref="stockAdjustmentService" />
+        <property name= "saApprovalService" ref="saApprovalService" />
+        <property name= "stApprovalService" ref="stockTransferApprovalService" />
+        <property name= "consignmentService" ref="consignmentService" />
+        <property name= "storeService" ref="storeService" />
+        <property name ="locationService" ref = "locationService"/>
+        <property name ="srService" ref = "stockRequestService"/>
+        <property name ="istService" ref = "interStoreTransferService"/>
+        <property name ="velocityEngine" ref="velocityEngine" />
+        <property name="accJournalEntryDAO" ref="accJournalEntryDao"/>
+        <property name="accCompanyPreferencesDAO" ref="accCompanyPreferencesDao"/>
+        <property name= "txnManager" ref="txManager" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property> 
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+    </bean>
+    <bean id="cycleCountBlankSheet" class="com.krawler.inventory.model.cyclecount.impl.CycleCountBlankSheet">
+        <property name ="cycleCountService" ref = "cycleCountService"/>
+        <property name= "stockService" ref="stockService" />
+    </bean>
+    <bean id="invDocumentDAO" class="com.krawler.inventory.model.fileuploaddownlaod.impl.InvDocumentDAOImpl" parent="baseDAO"/>
+
+    <bean id="invDocumentService" class="com.krawler.inventory.model.fileuploaddownlaod.impl.InvDocumentServiceImpl">
+        <property name ="documentDAO" ref = "invDocumentDAO"/>
+    </bean>
+    <bean id="seqDAO" class="com.krawler.inventory.model.sequence.impl.SeqDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="seqService" class="com.krawler.inventory.model.sequence.impl.SeqServiceImpl">
+        <property name ="seqDAO" ref = "seqDAO"/>
+    </bean>    
+    <bean id="thresholdDAO" class="com.krawler.inventory.model.threshold.impl.ThresholdDAOImpl">
+        <property name = "sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="thresholdService" class="com.krawler.inventory.model.threshold.impl.ThresholdServiceImpl">
+        <property name ="thresholdDAO" ref = "thresholdDAO"/>
+    </bean>
+    
+    
+    
+    
+    
+    <!-- VIEW-->
+    
+    <bean id="packagingController" class="com.krawler.inventory.view.PackagingController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name ="packagingService" ref = "packagingService"/>
+        <!--        <property name ="packagingDAO" ref = "packagingDAO"/>-->
+        <property name="accProductObj">
+            <ref bean="accProductDao"/>
+        </property>
+    </bean>
+    <bean id="bookingController" class="com.krawler.inventory.view.BookingController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "bookingService" ref="bookingService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+    </bean>
+    <bean id="goodsTransferController" class="com.krawler.inventory.view.GoodsTransferController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "stockRequestService" ref="stockRequestService" />
+        <property name= "istService" ref="interStoreTransferService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "stockService" ref="stockService" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "consignmentService" ref="consignmentService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService" />
+        <property name= "exportDAO" ref="exportMPXdao" />
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name="packagingService">  
+            <ref bean="packagingService"/>
+        </property>
+         <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+         <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+            <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+         <property name="importInvData">
+            <ref bean="importInvData"/>
+        </property>
+    </bean>
+    <bean id="importDataController" class="com.krawler.inventory.view.ImportDataController" >
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name= "stockService" ref="stockService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name ="stockDAO" ref = "stockDAO"/>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         <property name= "storeService" ref="storeService" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService" />
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService" />
+        </property>
+        <property name="locationService">
+            <ref bean="locationService"/>
+        </property>  
+         <property name="accCompanyPreferencesDAO" ref="accCompanyPreferencesDao"/>
+        <property name="accJournalEntryDAO" ref="accJournalEntryDao"/>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id="stockAdjustmentController" class="com.krawler.inventory.view.StockAdjustmentController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name ="invConfigService" ref = "inventoryConfigService"/>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "consignmentService" ref="consignmentService" />
+        <property name= "exportDAO" ref="exportMPXdao" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name= "stockService" ref="stockService" />
+        <property name="accCompanyPreferencesDAO" ref="accCompanyPreferencesDao"/>
+        <property name="accJournalEntryDAO" ref="accJournalEntryDao"/>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    
+     <bean id="importInvData" class="com.krawler.inventory.view.ImportInvData" >
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDao">
+            <ref bean="importDao"/>
+        </property>
+        <property name= "stockService" ref="stockService" />
+        <property name= "stockMovementService" ref="stockMovementService" />
+        <property name ="stockDAO" ref = "stockDAO"/>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         <property name= "storeService" ref="storeService" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService" />
+         <property name= "istService" ref="interStoreTransferService" />
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService" />
+        </property>
+        <property name="locationService">
+            <ref bean="locationService"/>
+        </property>  
+        <property name="accAccountDAOobj">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="accMasterItemsDAOobj">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+         <property name="accCostCenterObj">
+            <ref bean="accCostCenterDAO"/>
+        </property>
+         <property name="accCompanyPreferencesDAO" ref="accCompanyPreferencesDao"/>
+        <property name="accJournalEntryDAO" ref="accJournalEntryDao"/>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    
+    <bean id="stockController" class="com.krawler.inventory.view.StockController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "stockService" ref="stockService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="productDAOObj">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="accMasterItemsDAOobj">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+         <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+         <property name="importInvData">
+            <ref bean="importInvData"/>
+        </property>
+          
+        <property name= "exportDAO" ref="exportMPXdao" />
+    </bean>
+    <bean id="inventoryConfigController" class="com.krawler.inventory.view.InventoryConfigController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "configService" ref="inventoryConfigService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+    </bean>
+    <bean id="invCommonController" class="com.krawler.inventory.view.InvCommonController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "documentService" ref="invDocumentService"/>
+    </bean>
+    <bean id="cycleCountController" class="com.krawler.inventory.view.CycleCountController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "stockService" ref="stockService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "cycleCountService" ref="cycleCountService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name= "exportDAO" ref="exportMPXdao" />
+        <property name= "ccbs" ref="cycleCountBlankSheet" />
+         
+    </bean>
+    <bean id="seqController" class="com.krawler.inventory.view.SeqController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "seqService" ref="seqService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+    </bean>
+    <bean id="thresholdController" class="com.krawler.inventory.view.ThresholdController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "thresholdService" ref="thresholdService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <bean id="approvalController" class="com.krawler.inventory.view.ApprovalController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "saApprovalService" ref="saApprovalService" />
+        <property name= "consignmentService" ref="consignmentService" />
+        <property name= "interStoreTransferService" ref="interStoreTransferService" />
+        <property name= "stockAdjustmentService" ref="stockAdjustmentService" />
+        <property name= "stockTransferApprovalService" ref="stockTransferApprovalService" />
+        <property name= "stockRequestService" ref="stockRequestService" />
+        <property name="velocityEngine" ref="velocityEngine" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name= "exportDAO" ref="exportMPXdao" />
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name= "stockService" ref="stockService" />
+        <property name= "stockMovementService">
+            <ref bean="stockMovementService" />
+        </property>
+        <property name="authHandlerDAOObj">
+            <ref bean="authHandlerdao"/>
+        </property>
+         <property name="accProductObj">
+            <ref bean="accProductDao"/>
+        </property>
+         <property name="kwlCommonTablesDAOObj">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+          <property name="fieldDataManagercntrl">
+            <ref bean="fieldDatamanager"/>
+        </property>
+        <property name= "seqService" ref="seqService" />
+        <property name="accCompanyPreferencesDAO" ref="accCompanyPreferencesDao"/>
+        <property name="journalEntryDAO" ref="accJournalEntryDao"/>
+        <property name="accMasterItemsDAO" ref="accMasterItemsDao"/>
+        <property name="stockDAOObj" ref="stockDAO"/>
+    </bean>
+</beans>

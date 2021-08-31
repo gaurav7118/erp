@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PaymentVoucherSubReport" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="accountName" class="java.lang.String"/>
+	<field name="accountCode" class="java.lang.String"/>
+	<field name="amount" class="java.lang.String"/>
+	<field name="gstTaxable" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="dimensionValue" class="java.lang.String"/>
+	<field name="totalAmount" class="java.lang.String"/>
+	<field name="dimentionName" class="java.lang.String"/>
+	<field name="tax" class="java.lang.String"/>
+	<field name="paymentId" class="java.lang.String"/>
+	<field name="amountInWords" class="java.lang.String"/>
+	<field name="invoiceNumber" class="java.lang.String"/>
+	<field name="invoiceDate" class="java.lang.String"/>
+	<field name="invCurrency" class="java.lang.String"/>
+	<field name="memo" class="java.lang.String"/>
+	<group name="Payment">
+		<groupExpression><![CDATA[$F{paymentId}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="411" y="7" width="73" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="7" width="53" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Invoice#]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="76" y="7" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{invoiceNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="176" y="7" width="33" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[dated]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="209" y="7" width="87" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{invoiceDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="7" width="44" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$F{invCurrency}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="19" y="40" width="56" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Narration  :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="78" y="40" width="306" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{memo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,84 @@
+<tr id= "lineitemtr" ><td>
+    #if ($isroundborder)
+        <TABLE bordertype="border10"  id = "idLineitemTabel" border="0" class ="lineitembordereffect10 tableroundborder lineitemtablewrap" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #else 
+        <TABLE  bordertype="border10" id = "idLineitemTabel" border="0" class ="lineitemtablewrap" style="margin:$margin; width:$tablewidth%;border-collapse:separate;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #end
+ <thead>    
+<TR>
+        #foreach( $header1 in $tableHeader )  
+            <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style">$header1.data</TH>  
+        #end  
+        </TR>
+ </thead>
+<tbody>
+        #set($rowCount=0)     
+       #if ( $isFirstRowPresent) 
+            $lineItemFirstRowHTML
+        #end
+        #foreach( $prod in $prodList )  
+
+            #set($colCount=0)
+          <TR style="padding: 4px;">
+            #foreach( $CustomDesignLineItemProp in $prod )
+                #if ($isroundborder)
+                    #if($rowCount==$numberOfRows && !$isExtendLineItem)
+                        <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #else
+                        <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;" class="removehorizontalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #end
+                #else
+                    #if($rowCount==$numberOfRows && !$isLastRowPresent && !$isExtendLineItem)
+                        #if($colCount+1 == $tableHeader.size())
+                            <TD style="border-bottom:1px solid; border-left:1px solid;border-right:1px solid;padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #else
+                            <TD style="border-bottom:1px solid; border-left:1px solid;border-right:0px none;padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #end
+                    #else
+                        #if($colCount+1 == $tableHeader.size())
+                             <TD style="border-left:1px solid;border-right:1px solid;padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;" class="removehorizontalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #else
+                             <TD style="border-left:1px solid;padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;" class="removehorizontalborder" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #end
+                    #end
+                #end
+                #set($colCount=$colCount+1)
+            #end  
+          </TR>
+          #set($rowCount=$rowCount+1)
+
+        #end 
+       #if ($isLastRowPresent)
+         $lineItemLastRowHTML
+        #end
+        #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            #set($columnCount=0)
+            <TR style="padding: 4px;" id="totalrow">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    #if($CustomDesignLineItemProp.data)
+                        #if($columnCount==0)
+                            <TD style="border-left:1px solid;border-top:none;border-right:none;border-bottom:1px solid;padding: 4px;font-weight: bold;border-color:$tablebordercolor; " class=""  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #elseif($columnCount==$headerCount)
+                            <TD style="border-left:1px solid;border-top:none;border-right:1px solid;border-bottom:1px solid;padding: 4px;font-weight: bold;border-color:$tablebordercolor; " class=""  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #else
+                            <TD style="border-left:1px solid;border-top:none;border-right:none;border-bottom:1px solid;padding: 4px;font-weight: bold;border-color:$tablebordercolor; " class=""  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                        #end
+                    #end
+                #set($columnCount=$columnCount+1)
+                #end  
+            </TR>  
+            #end
+       #end
+       #if ( $issummarytable ) 
+            #foreach( $prod in $summaryTable )  
+            <TR style="padding: 4px">  
+                #foreach( $SummaryTableCellProperty in $prod )  
+                    <TD style="$SummaryTableCellProperty.style" rowspan="$SummaryTableCellProperty.rowspan" colspan="$SummaryTableCellProperty.colspan" >$SummaryTableCellProperty.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end
+</tbody> 
+    </TABLE> 
+</td></tr>

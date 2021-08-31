@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.GstDocumentHistory" table="gstdocumenthistory">
+        <id column="id" name="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="custvenTypeId" type="string">
+            <column name="custventypeid"/>
+        </property>
+        <property name="gstrType" type="string">
+            <column name="gstrtype"/>
+        </property>
+        <property name="gstin" type="string">
+            <column name="gstin"/>
+        </property>
+        <property name="refDocId" type="string">
+            <column name="refdocid" not-null="true"/>
+        </property>
+        <property name="moduleId" type="int">
+            <column default="0" name="moduleid"/>
+        </property>
+    </class>
+</hibernate-mapping>

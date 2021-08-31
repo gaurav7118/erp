@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.RepaymentDetails" table="repaymentdetails">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="srno" type="integer">
+        <column name="srno" default="0"/>
+    </property>
+    <property name="startDate" type="timestamp">
+      <column name="startdate" not-null="true"/>
+    </property>
+    <property name="endDate" type="timestamp">
+      <column name="enddate"/>
+    </property>
+    <property name="endingbalance" type="double">
+      <column default="0" name="endingbalance"/>
+    </property>
+    <property name="principle" type="double">
+      <column default="0" name="principle"/>
+    </property>
+    <property name="amountdue" type="double">
+      <column default="0" name="amountdue"/>
+    </property>
+    <property name="amount" type="double">
+      <column default="0" name="amount"/>
+    </property>
+    <property name="interest" type="double">
+      <column default="0" name="interest"/>
+    </property>
+    <property name="startingbalance" type="double">
+      <column default="0" name="startingbalance"/>
+    </property>
+    <property name="monthlyInstalment" type="double">
+      <column default="0" name="monthlyinstalment"/>
+    </property>
+    <property column="paymentstatus" name="paymentStatus">
+        <type name="org.hibernate.type.EnumType">
+            <param name="enumClass">com.krawler.common.admin.PaymentStatus</param>
+        </type>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Disbursement" column="disbursement" name="disbursement" not-null="true"/>
+    
+  </class>
+</hibernate-mapping>

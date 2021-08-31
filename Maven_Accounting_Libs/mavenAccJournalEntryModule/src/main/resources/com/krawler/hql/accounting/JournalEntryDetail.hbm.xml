@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.JournalEntryDetail" table="jedetail">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column default="0" name="srno"/>
+        </property>
+        <property name="debit" type="true_false">
+            <column name="debit" not-null="true"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column  name="description"/>
+        </property>
+        <property name="customerVendorId" type="string">
+            <column length="255" name="customerVendorId"/>
+        </property>
+        <property name="accountpersontype" type="integer">
+            <column default="99" name="accountpersontype"/>
+        </property>
+        <property name="gstCurrencyRate" type="double">
+            <column  name="gstcurrencyrate" default="0"/>
+        </property>
+        <property name="forexGainLoss" type="double">
+            <column  name="forexgainloss" default="0"/>
+        </property>
+        <property name="exchangeRateForTransaction" type="double">
+            <column  name="exchangeratefortransaction" default="1"/>
+        </property>
+        <property name="paymentType" type="integer">
+            <column name="paymenttype" default='0'/>
+        </property>
+        <property name="bankcharge" type="boolean">
+            <column name="isbankcharge" />
+        </property>                
+        <property name="amountinbase" type="double">
+            <column name="amountinbase"/>
+        </property>
+        <property name="roundingDifferenceDetail" type="true_false">
+            <column name="roundingdifferencedetail" not-null="true" default="false"/>
+        </property>
+        <property name="isSeparated" type="true_false">
+            <column name="isseparated" not-null="true" default="false"/>
+        </property>
+        <property name="mainjedid" type="string">
+            <column name="mainjedid"/>
+        </property>
+        <many-to-one column="accjedetailcustomdataref" class="com.krawler.hql.accounting.AccJEDetailCustomData"  name="accJEDetailCustomData" />
+        <many-to-one column="accjedetailproductcustomdataref" class="com.krawler.hql.accounting.AccJEDetailsProductCustomData"  name="accJEDetailsProductCustomData" />
+    <!--table="accjedetailcustomdata"-->
+<!--    <set name="accJEDetailCustomData" cascade="save-update,delete" table="accjedetailcustomdata">
+      <key>
+            <column name="jedetailId"/>
+      </key>
+      <one-to-many class="com.krawler.hql.accounting.AccJEDetailCustomData" />
+    </set>-->
+  
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" name="journalEntry" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="gstapplied" name="gstapplied"/>
+    </class>
+</hibernate-mapping>

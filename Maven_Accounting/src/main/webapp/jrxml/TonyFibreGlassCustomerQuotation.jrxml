@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TonyFibreGlassCustomerQuotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="35"/>
+	<parameter name="CustomerName" class="java.lang.String"/>
+	<parameter name="CUSTOMER_TEL" class="java.lang.String"/>
+	<parameter name="CUSTOMER_FAX" class="java.lang.String"/>
+	<parameter name="ATTENTION" class="java.lang.String"/>
+	<parameter name="RE" class="java.lang.String"/>
+	<parameter name="JOB_SCOP" class="java.lang.String"/>
+	<parameter name="SubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="Delivery_Time" class="java.lang.String"/>
+	<parameter name="Validity" class="java.lang.String"/>
+	<parameter name="Payment_Term" class="java.lang.String"/>
+	<parameter name="Document_NO" class="java.lang.String"/>
+	<parameter name="Footrer_Image" class="java.lang.String"/>
+	<parameter name="SalesPersonName" class="java.lang.String"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<parameter name="companyAddress" class="java.lang.String"/>
+	<parameter name="companyTel" class="java.lang.String"/>
+	<parameter name="companyFax" class="java.lang.String"/>
+	<parameter name="companyWebsite" class="java.lang.String"/>
+	<parameter name="Material" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="150" splitType="Stretch">
+			<staticText>
+				<reportElement x="38" y="132" width="72" height="17"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Our Ref.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="132" width="265" height="17"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Document_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="132" width="100" height="17"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="132" width="44" height="17"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="38" y="13" width="511" height="20"/>
+				<textElement markup="html">
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CustomerName}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="108">
+			<staticText>
+				<reportElement x="38" y="0" width="38" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="0" width="40" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fax :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="20" width="75" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Attention :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="76" y="0" width="115" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_TEL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="0" width="186" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_FAX}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="20" width="439" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ATTENTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="44" width="511" height="20"/>
+				<textElement markup="html">
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<u>Re :  "+$P{RE}+"</u>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="68" width="511" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[We hereby have great pleasure in quoting you the followings:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="87" width="72" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[Job scope :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="110" y="88" width="445" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{JOB_SCOP}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="21">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="110" y="1" width="445" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Material}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="0" width="72" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[Material :]]></text>
+			</staticText>
+		</band>
+		<band height="20">
+			<subreport>
+				<reportElement x="38" y="3" width="507" height="17"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{SubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="21">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="130" y="0" width="415" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Delivery_Time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="0" width="92" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[Delivery time :]]></text>
+			</staticText>
+		</band>
+		<band height="24">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="98" y="2" width="448" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Validity}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="2" width="60" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[Validity :]]></text>
+			</staticText>
+		</band>
+		<band height="22">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="138" y="0" width="403" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Payment_Term}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="0" width="100" height="20"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[Payment term :]]></text>
+			</staticText>
+		</band>
+		<band height="225">
+			<elementGroup>
+				<frame>
+					<reportElement x="0" y="14" width="555" height="210"/>
+					<staticText>
+						<reportElement x="34" y="0" width="484" height="38"/>
+						<textElement>
+							<font fontName="DejaVu Serif" size="10"/>
+						</textElement>
+						<text><![CDATA[We trust that the rates and terms offered will be favorable consider by your company and we anticipate a positive reply from you.]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true">
+						<reportElement x="34" y="70" width="296" height="25" forecolor="#1F497D"/>
+						<textElement markup="html">
+							<font fontName="DejaVu Serif" isBold="true" isItalic="true" isUnderline="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA["Best Regards,<br>"+$P{SalesPersonName}]]></textFieldExpression>
+					</textField>
+					<frame>
+						<reportElement positionType="Float" x="30" y="95" width="525" height="115"/>
+						<textField isBlankWhenNull="true">
+							<reportElement x="4" y="49" width="415" height="13" forecolor="#1F497D"/>
+							<textElement>
+								<font fontName="DejaVu Serif" size="10" isBold="true" isItalic="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$P{companyName}]]></textFieldExpression>
+						</textField>
+						<frame>
+							<reportElement positionType="Float" x="4" y="76" width="454" height="29"/>
+							<staticText>
+								<reportElement x="1" y="11" width="52" height="14" forecolor="#00B0F0"/>
+								<textElement>
+									<font fontName="DejaVu Serif" size="10" isBold="true" isItalic="true"/>
+								</textElement>
+								<text><![CDATA[Website:]]></text>
+							</staticText>
+							<textField isBlankWhenNull="true">
+								<reportElement x="1" y="0" width="340" height="12" forecolor="#FF0000"/>
+								<textElement>
+									<font fontName="DejaVu Serif" size="10" isBold="true" isItalic="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Tel: "+$P{companyTel}+"  Fax: "+$P{companyFax}]]></textFieldExpression>
+							</textField>
+							<textField isBlankWhenNull="true">
+								<reportElement x="54" y="11" width="290" height="14" forecolor="#0000FF"/>
+								<textElement markup="html">
+									<font fontName="DejaVu Serif" size="10" isBold="true" isItalic="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["<u>"+$P{companyWebsite}+"</u>"]]></textFieldExpression>
+							</textField>
+						</frame>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="4" y="62" width="341" height="14" forecolor="#1F497D"/>
+							<textElement>
+								<font fontName="DejaVu Serif" size="10" isBold="true" isItalic="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$P{companyAddress}]]></textFieldExpression>
+						</textField>
+						<image scaleImage="FillFrame" onErrorType="Blank">
+							<reportElement x="1" y="0" width="170" height="50"/>
+							<imageExpression><![CDATA[$P{Footrer_Image}]]></imageExpression>
+						</image>
+					</frame>
+				</frame>
+			</elementGroup>
+		</band>
+	</detail>
+</jasperReport>

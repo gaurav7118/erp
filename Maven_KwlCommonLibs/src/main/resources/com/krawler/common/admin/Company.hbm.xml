@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.Company" table="company">
+    <id column="companyid" name="companyID">
+      <generator class="assigned"/>
+    </id>
+    <property name="companyLogo" type="string">
+      <column length="100" name="logo"/>
+    </property>
+    <property name="companyName" type="string">
+      <column length="50" name="companyname" not-null="true"/>
+    </property>
+    <property name="subDomain" type="string">
+      <column length="50" name="subdomain" not-null="true" />
+    </property>
+    <property name="address" type="string">
+      <column length="100" name="address" not-null="true"/>
+    </property>
+    <property name="city" type="string">
+      <column length="30" name="city" />
+    </property>
+    <property name="zipCode" type="string">
+      <column length="15" name="zipcode" />
+    </property>
+    <property name="phoneNumber" type="string">
+      <column length="25" name="phoneno"/>
+    </property>
+    <property name="faxNumber" type="string">
+      <column length="25" name="faxno"/>
+    </property>
+    <property name="website" type="string">
+      <column length="50" name="website"/>
+    </property>
+    <property name="emailID" type="string">
+      <column length="50" name="emailid"/>
+    </property>
+    <property name="createdOn" type="date">
+      <column name="createdon"/>
+    </property>
+    <property name="modifiedOn" type="date">
+      <column name="modifiedon"/>
+    </property>
+    <property name="deleted" type="integer">
+      <column name="deleteflag" default='0'/>
+    </property>
+    <property name="optimizedflag" type="true_false">
+      <column name="optimizedflag" not-null="false" default='false'/>
+    </property>
+    <property name="activated" type="true_false">
+      <column name="activated" default='true'/>
+    </property>
+    <property name="emailFromCompanyCreator" type="true_false">
+      <column name="emailFromCompanyCreator" default='false'/>
+    </property>
+    <property name="switchpref" type="integer">
+      <column default="1" name="switchpref"/>
+    </property>
+    <property name="templateflag" type="integer">
+      <column default="0" name="templateflag"/>
+    </property>
+    <property name="referralkey" type="integer">
+      <column name="referralkey" default='0'/>
+    </property>
+    <property name="smtpflow" type="integer">
+      <column name="smtpflow" default='0'/>
+    </property>
+    <property name="smtppassword" type="string">
+      <column name="smtppassword"/>
+    </property>
+    <property name="mailserveraddress" type="string">
+      <column name="mailserveraddress"/>
+    </property>
+    <property name="mailserverport" type="string">
+      <column name="mailserverport"/>
+    </property>
+    <property name="isSelfService" type="integer">
+     <column default="0" name="isselfservice"/>
+    </property>
+    <property name="storeinvoiceamountdue" type="true_false">
+        <column default='true' name="storeinvoiceamountdue"/>
+    </property>
+    <property name="replytoemail" type="string">
+      <column length="1024" name="replytoemail"/>
+    </property>
+    <set cascade="all-delete-orphan" inverse="true" name="holidays">
+      <key column="company"/>
+      <one-to-many class="com.krawler.common.admin.CompanyHoliday"/>
+    </set>
+    <many-to-one class="com.krawler.common.admin.User" name="creator"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" name="currency"/>
+    <many-to-one class="com.krawler.common.admin.KWLTimeZone" name="timeZone"/>
+    <many-to-one class="com.krawler.common.admin.Country" name="country" />
+    <many-to-one class="com.krawler.common.admin.State" name="state" />
+    <many-to-one class="com.krawler.common.admin.Language" name="language"/>
+   </class>
+</hibernate-mapping>

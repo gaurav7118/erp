@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.DefaultFieldComboValues" table="defaultfieldcombovalues">
+      <id column="id" name="ID">  
+      <generator class="uuid"/>    
+    </id>
+    <property name="fieldComboValue" type="string">
+      <column length="200" name="fieldcombovalue" />
+    </property>   
+      <many-to-one class="com.krawler.common.admin.DefaultCustomFields" column="defaultcustomfields" name="customFields" not-null="true"/>
+  </class>
+</hibernate-mapping>

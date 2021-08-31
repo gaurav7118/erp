@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.InvoiceContractMapping" table="invoicecontractmapping">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one name="company" column="company" class="com.krawler.common.admin.Company"/>
+        <many-to-one name="contract" column="contract" class="com.krawler.hql.accounting.Contract"/>
+        <many-to-one name="deliveryOrder" column="deliveryorder" class="com.krawler.hql.accounting.DeliveryOrder"/>
+        <many-to-one name="invoice" column="invoice" class="com.krawler.hql.accounting.Invoice"/>
+    </class>
+</hibernate-mapping>

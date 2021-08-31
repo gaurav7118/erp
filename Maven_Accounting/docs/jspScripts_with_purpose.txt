@@ -1,0 +1,1906 @@
+
+# Anand Nimbalkar 15th April 2014
+
+1.Added script of 'addCustomerCategoryForOldRecords.jsp'
+  URL: <context url>/jspfiles/addCustomerCategoryForOldRecords.jsp
+  Purpose: To update the customer category of old records.
+  Required: Change 'serverip' and 'dbName' information in the 'addCustomerCategoryForOldRecords.jsp' file.
+
+2.Added script of 'addVendorCategoryForOldRecords.jsp'
+  URL: <context url>/jspfiles/addVendorCategoryForOldRecords.jsp
+  Purpose: To update the vendor category of old records.
+  Required: Change 'serverip' and 'dbName' information in the 'addVendorCategoryForOldRecords.jsp' file.
+
+3.Added script of 'UpdateCashtransactionFlagForOldRecords.jsp'
+  URL:  <context url>/jspfiles/UpdateCashtransactionFlagForOldRecords.jsp
+  Purpose: To update 'Cash transaction' flag for old records.
+  Required: Change 'serverip' and 'dbName' information in the 'UpdateCashtransactionFlagForOldRecords.jsp' file.
+
+# Anand Nimbalkar 24th May 2014
+
+1 URL: <context url>/UpdateCurrencyAndRateOfExistingRecordsForGR.jsp
+  Purpose: To update the Currency and Rate of old records of GR.
+  Required: Change 'serverip' and 'dbName' information in the 'UpdateCurrencyAndRateOfExistingRecordsForGR.jsp' file.
+
+2 URL: <context url>/UpdateCurrencyAndRateOfExistingRecordsForPR.jsp
+  Purpose: To update the Currency and Rate of old records of PR.
+  Required: Change 'serverip' and 'dbName' information in the 'UpdateCurrencyAndRateOfExistingRecordsForPR.jsp' file.
+
+3 URL: <context url>/UpdateCurrencyAndRateOfExistingRecordsForDO.jsp
+  Purpose: To update the Currency and Rate of old records of DO.
+  Required: Change 'serverip' and 'dbName' information in the 'UpdateCurrencyAndRateOfExistingRecordsForDO.jsp' file.
+
+4 URL: <context url>/UpdateCurrencyAndRateOfExistingRecordsForSR.jsp
+  Purpose: To update the Currency and Rate of old records of SR.
+  Required: Change 'serverip' and 'dbName' information in the 'UpdateCurrencyAndRateOfExistingRecordsForSR.jsp' file.
+
+#Ravesh Pathak 2nd June 2014
+
+URL: http://192.168.0.225:9080/Accounting/addressMergedScript.jsp?subdomain=accredesign5
+Purpose: merging address in those transactions (VI,CI,SO,PO) where address is missing
+Required Setting: change subdomain namein URL and DB Information in addressMergedScript.jsp  
+
+#Raveesh Pathak 28th July 2014
+URL: http://192.168.0.255:9080/Accounting/UpdateOldJESequeceNumber.jsp
+Purpose: updating old JE number those were generated with hard coded format JE000000
+Required Setting: Change DB Information in UpdateOldJESequeceNumber.jsp  
+  
+#Rushikesh Mandage 4th August 2014
+ URL:http://192.168.0.28:8084/Accounting/UpdateCustomerAndVendorTitles.jsp
+ Purpose: To update the vendor and customer title 
+ Parameters to be sent: 1) serverip 
+                        2) port
+                        3) dbname
+                        4) username
+                        5) password
+                        6) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+Required Setting: change subdomain namein URL and DB Information in addressMergedScript.jsp  
+
+#Rushikesh Mandage 21st August 2014
+
+URL : http://192.168.0.28:8084/Accounting/UpdateCustomerAndVendorTitles.jsp
+Purpose : Changing the 'Titles' of Customer and Vendor in db from their value to their id.
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+  if subdomain is not sent, changes will be applied to all companies.
+
+# Sagar M - 1st Oct 2014
+
+1. URL : http://localhost:8084/Accounting/CommonFunctions/reCalculateInvoiceAmountDue.do?cid=0f167439-fcb2-47e7-a584-fa98694f1e47&sendmail=false&module=0
+Purpose : Update invoice level overdue amount at record level for particular company.
+Parameters to be sent:  1) cid - Companyid 
+                        2) sendmail - true/false if want to send mail to users if amountdue is not matched with one calculated from runtime
+                        3) module - 0 = Customer Invoice, 1 = Vendor Invoice
+
+2. URL : http://localhost:8084/Accounting/UpdateCIAmoutDue.jsp
+Purpose : Update invoice level overdue amount at record level for all companies.
+Need to set variable values before use. 
+
+# Sagar M - 7th November 2014
+
+1. URL : http://localhost:8084/Accounting/UpdateOpeningBalanceBaseAmnt.jsp
+Purpose : Store both original amount and amountdue in base currency for opening balance related transactions.
+Need to set variable values before use. 
+
+#Hitesh Suryawanshi 17th Nov 2014
+1. URL : http://localhost:8080/Accounting/missingsql.jsp
+#Please execute this script missingsql.jsp before executing following db changes.
+#missingsql.jsp: This script is for inserting term NET -1 in creditterm table for different companies.
+#Also Please change serverip, dbname, username and password in script
+
+#Set termid to NET -1 for cash type invoices
+update invoice b set  b.termid=(select max(a.termid)  from creditterm a where a.termdays=-1 and a.company=b.company) where b.cashtransaction=1 and b.termid is NULL;
+update goodsreceipt b set  b.termid=(select max(a.termid)  from creditterm a where a.termdays=-1 and a.company=b.company) where b.cashtransaction=1 and b.termid is NULL;
+
+#Raveesh Pathak 8th January 2015
+http://localhost:9080/Accounting/updateCashPayment.jsp?dbname=21server&username=krawlersqladmin&password=krawler&subdomain=swt
+Purpose:Updating Cash Sales/Purchase transaction's payment detail for older transactions
+Required Setting: need to set some parameters in above script dbname,username,password,subdomain
+                  subdomain is optional if it is given, script will be executed on that company otherwise it will execute for all company 
+                  
+
+# Atul sachan 13th Jan 2015
+
+URL : http://192.168.0.28:8084/Accounting/AddDefaultCNDNSequenceFormat.jsp
+Purpose : For creating CN/DN default sequence formats.
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+  if subdomain is not sent, changes will be applied to all companies.
+
+# Anup 15th Jan 2015
+#1.CNDN Receipt
+http://103.6.151.91/accountingsenwanlive/DataMigrationToCNDetailsReceipt.jsp?serverip=localhost&dbname=accountingsenwanlive&username=krawlersqladmin&password=Krawler[X]&subdomain=swt
+#2.Receipt Advance
+http://103.6.151.91/accountingsenwanlive/DataMigrationToAdvancedetailsReceipt.jsp?serverip=localhost&dbname=accountingsenwanlive&username=krawlersqladmin&password=Krawler[X]&subdomain=company2
+#3.CNDN Payment
+http://103.6.151.91/accountingsenwanlive/DataMigrationToCNDetails.jsp?serverip=localhost&dbname=accountingsenwanlive&username=krawlersqladmin&password=Krawler[X]&subdomain=company2
+#4.Payment Advance
+http://103.6.151.91/accountingsenwanlive/DataMigrationToAdvancedetails.jsp?serverip=localhost&dbname=accountingsenwanlive&username=krawlersqladmin&password=Krawler[X]&subdomain=company2
+Purpose : For converting old payment module records to suit newly created payment module
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+
+# Anand Nimbalkar 23rd Jan 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+1. download_sample_price_list_band_price.csv
+2. download_sample_price_list_volume_discount.csv
+
+# Atul sachan 3rd Feb 2015
+
+URL : http://192.168.0.28:8084/Accounting/UpdateMalaysianGSTCodes.jsp
+Purpose : For Updating Malaysian Companies GST Tax Codes and Names and Account Names of related GST Codes
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+# Atul sachan 6th Feb 2015
+
+URL : http://192.168.0.28:8084/Accounting/MalaysianCompaniesUpdateScript.jsp
+Purpose : Setting GST Effective Date for Malaysian Companies
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+URL : http://192.168.0.28:8084/Accounting/CreateMalaysianTaxAdjustmentGST.jsp
+Purpose : Creating Input/Output Tax Adjustment Accounts and GST Codes for Malaysian Companies
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+# Amol Dhokale 23rd Feb 2015
+URL     : localhost:8080/Accounting/AddRequisitionRulesInMultiLevelRules.jsp?serverip=192.168.0.225&port=3306&dbname=sustenir19022015&username=krawlersqladmin&password=krawler
+Purpose : Add all records of "Requisition Rules" to "Multi level approval Rules" table.
+Parameters to be sent:  1) serverip 
+                        2) port
+                        3) dbname
+                        4) username
+                        5) password
+
+# Suhas Chaware 13th March 2015
+URL     : localhost:8080/Accounting/DataMigrationForReceiptWithBankCharges.jsp
+Purpose : Posting Seperate Journal Entry For Receipt With Bank Charges(old records for which seperate JE was not post)
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+# Suhas Chaware 18th March 2015
+URL     : localhost:8080/Accounting/DataMigrationForReceiptWithBankInterest.jsp
+Purpose : Posting Seperate Journal Entry For Receipt With Bank Interest(old records for which seperate JE was not post)
+Parameters to be sent: 1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+#Mayur Pawar for gaung chong specific script
+URL     : localhost:8080/Accounting/jspfiles/importproductslocationWiseForCompany.jsp?serverip=192.168.0.225&port=3306&dbname=guanchong09032015&username=krawlersqladmin&password=krawler&subdomain=deskera
+Purpose : update product details
+Parameters to be sent:  1) serverip 
+                        2) port
+                        3) dbname
+                        4) username
+                        5) password
+
+# Anand Nimbalkar 25rd March 2015
+Add following sample file in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-3747.
+
+1. download_sample_sales_invoice_list.csv
+
+
+#Deepak Pingale 26th March 2015
+localhost:8080/Accounting/AddDefaultBadDebtClaimRecoverSeqFormat.jsp?serverip=192.168.0.28&port=3306&dbname=staginginvacc&username=krawlersqladmin&password=krawler&subdomain=accountingtest2
+Purpose : Set the Sequence format for malaysian company for the fields added in company preferences namely(Only for the companies for whom following fields are not set)
+1) Sales Bad Debt Claim
+2) Sales Bad Debt Recover
+3) Purchase Bad Debt Claim
+4) Purchase Bad Debt Recover
+
+#Rushikesh Mandage 3rd April 2015
+
+#Note : this script is already included by Sagar M. sir. but need to re-execute as some records for some companies are having wrong values
+
+1. URL : http://localhost:8084/Accounting/CommonFunctions/reCalculateInvoiceAmountDue.do?cid=0f167439-fcb2-47e7-a584-fa98694f1e47&sendmail=false&module=0
+Purpose : Update invoice level overdue amount at record level for particular company.
+Parameters to be sent:  1) cid - Companyid 
+                        2) sendmail - true/false if want to send mail to users if amountdue is not matched with one calculated from runtime
+                        3) module - 0 = Customer Invoice, 1 = Vendor Invoice
+
+2. URL : http://localhost:8084/Accounting/UpdateCIAmoutDue.jsp
+Purpose : Update invoice level overdue amount at record level for all companies.
+#Need to set variable values in UpdateCIAmountDue.jsp before use. 
+
+# Amol Dhokale 17th April 2015
+JSP     : AddExistingSORulesToMultiLevelApproval.jsp
+Purpose : Add all records of Two level "Sales Order" rules to "Multi level approval Rules" table.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain [If want to execute on specific subdomain]  
+
+JSP     : SetApprovalLevelsFromExistingApprovalLevels.jsp
+Purpose : Update sales order approvalLevels with existing approvalLevels.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain [If want to execute on specific subdomain]    
+
+#Rushikesh Mandage 21st April 2015
+
+URL : http://localhost:8084/Accounting/UpdatePaymentCurrencyToPaymentMethodCurrencyRate.jsp
+Parameters to be sent: 1) serverip                        
+                       2) dbname
+                       3) username
+                       4) password
+                       5) subdomain
+ If subdomain not sent, script will be executed for all subdomains
+Purpose : To set paymentcurrencytopaymentmethodcurrencyrate according to payment/receipt date in table 'payment' ,'receipt' and 'journalentry' for those records which are multicurrency payment but paymentcurrencytopaymentmethodcurrencyrate=1
+
+#Malhari 5th May 2015
+
+URL : http://<app-url>/updatecustomfieldvalue.jsp
+Parameters to be sent: 1) serverip                        
+                       2) dbname
+                       3) username
+                       4) password
+ 
+Purpose : This is used to set values for custom field "null" which column having values "defval"
+
+# Anand Nimbalkar 6th May 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-5673.
+1. download_sample_journal_entry.xls
+
+# Amol Dhokale 6th May,2015
+JSP     : AddExistingSORulesToMultiLevelApproval.jsp
+Purpose : Add all records of Two level "Sales Order" rules to "Multi level approval Rules" table.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain   [If want to execute on specific subdomain]
+                        6) typeid=1    [It indicates that what type of Rule. In this case it is 'Purchase Order'.]
+                        7) moduleid=18 [For Purchase Order]
+
+JSP     : SetApprovalLevelsFromExistingApprovalLevels.jsp
+Purpose : Update sales order approvalLevels with existing approvalLevels.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain    [If want to execute on specific subdomain] 
+                        6) moduleid=18  [For Purchase Order]
+
+# Anand Nimbalkar 8th May 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-7456.
+1. download_sample_refund_journal_entry.xls
+
+# Suhas Chaware gaung chong specific script 22nd May 2015
+
+Only for subdomain = GCBSC
+URL     : localhost:8084/Accounting/AddLocationWarehouseDetailsForProducts.jsp?
+Purpose : Inserting record for location and warehouse in productbatch,locationbatchdocumentmapping and in_stock tables
+Parameters to be sent: 1) serverip 
+                       2) port=3306
+                       3) dbname
+                       4) username
+                       5) password
+                       6)subdomain=GCBSC
+
+#Deepak Pingale 22th May 2015
+JSP     : AddExistingSORulesToMultiLevelApproval.jsp
+Purpose : Add all records of Two level "Customer Invoice" rules to "Multi level approval Rules" table.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain   [If want to execute on specific subdomain]
+                        6) typeid=4    [It indicates that what type of Rule. In this case it is 'Invoice'.]
+                        7) moduleid=2 [For Invoice]
+
+JSP     : SetApprovalLevelsFromExistingApprovalLevels.jsp
+Purpose : Update sales order approvalLevels with existing approvalLevels.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain    [If want to execute on specific subdomain] 
+                        6) moduleid=2  [For Invoice]
+
+JSP     : AddExistingSORulesToMultiLevelApproval.jsp
+Purpose : Add all records of Two level "Vendor Invoice" rules to "Multi level approval Rules" table.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain   [If want to execute on specific subdomain]
+                        6) typeid=3    [It indicates that what type of Rule. In this case it is 'Purchase Invoice'.]
+                        7) moduleid=6 [For Vendor Invoice]
+
+JSP     : SetApprovalLevelsFromExistingApprovalLevels.jsp
+Purpose : Update sales order approvalLevels with existing approvalLevels.
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain    [If want to execute on specific subdomain] 
+                        6) moduleid=6  [For Vendor Invoice]
+
+# Vaibhav Patil 23th May 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-4941.
+1. download_sample_assembly_product.csv
+
+
+# Vaibhav Patil 25th May 2015
+http://<app-url>/PurchaseInvoiceDescUpdate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent: 1) serverip      2) dbname
+                       3) username      4) password     5) subdomain (Optional)
+
+Purpose : This is used to decode product level description column values of Purchase Invoice.
+Need to execute twice, so we get result in browser.  
+
+# Vaibhav Patil 27th May 2015
+1] http://<app-url>/CustomerInvoiceDescUpdate.jsp.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent: 1) serverip      2) dbname
+                       3) username      4) password     5) subdomain (Optional)
+
+Purpose : This is used to decode product level description column values of Customer Invoice.
+Need to execute twice, so we get result in browser.  
+
+2] http://<app-url>/PurchaseREQDescUpdate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent: 1) serverip      2) dbname
+                       3) username      4) password     5) subdomain (Optional)
+
+Purpose : This is used to decode product level description column values of Purchase Requisition.
+Need to execute twice, so we get result in browser.  
+
+3] http://<app-url>/PurchaseOrderDescUpdate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent: 1) serverip      2) dbname
+                       3) username      4) password     5) subdomain (Optional)
+
+Purpose : This is used to decode product level description column values of Purchase Order.
+Need to execute twice, so we get result in browser. 
+
+4] http://<app-url>/VendorQuotationDescUpdate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent: 1) serverip      2) dbname
+                       3) username      4) password     5) subdomain (Optional)
+
+Purpose : This is used to decode product level description column values of Purchase Order.
+Need to execute twice, so we get result in browser.
+ 
+# Amol Dhokale 27th May,2015   
+Purpose     : This is used to decode JE Details description column values.
+URL         : http://<app-url>/JEDetailsDescriptionUpdateRecursive.jsp
+Parameters to be sent:  1) serverip      
+                        2) dbname
+                        3) username      
+                        4) password     
+                        5) subdomain (Optional)
+
+# Amol Dhokale 28th May,2015   
+Purpose     : Used to update Tax name and code with percentage.
+URL         : http://<app-url>/UpdateTaxCodesWithPercent.jsp
+Parameters to be sent:  1) serverip      
+                        2) dbname
+                        3) username      
+                        4) password  
+Only executed for "gccm" subdomain so no need to provide subdomain.  
+
+#Raveesh Pathak 28th May 2015
+URL    :  http:///<app-url>/updatePaymentLinkingDate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose:  A new column paymentlinkdate added in table linkdetailpayment. So this script Updating column paymentlinkdate 
+Parameters to be sent:  1) serverip      
+                        2) dbname
+                        3) username      
+                        4) password     
+                        5) subdomain (Optional) 
+
+#Raveesh Pathak 18th June 2015
+URL    :  http:///<app-url>/AddressMergeOldTableToNewTable.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose:  Merging addresses of customer and vendor from old table to new table  
+Parameters to be sent:  1) serverip      
+                        2) dbname
+                        3) username      
+                        4) password     
+                        5) subdomain (Optional) 
+
+# Anand Nimbalkar 3rd July, 2015
+URL    :  http://<app-url>/createJEForOldBOMRecords.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose: [Sustenir] Create the JE for old BOM records.
+Parameters to be sent:  1) serverip
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+
+# Amol Dhokale 1st Aug,2015
+Purpose     : To update aggreedservices value of Contracts.
+URL         : http://<app-url>/UpdateAgreedServicesForContract.jsp
+Parameters to be sent:  1) serverip      
+                        2) dbname
+                        3) username      
+                        4) password  
+
+#Neeraj Dwivedi 6th August 2015
+Purpose : To insert default templates for Sales Invoice [Document Designer].
+Steps to take:
+
+1) Take the backup of production database
+2) Source the file  DefaultTemplate_SalesInvoice.sql on database from Deskera_Default Templates folder- 
+       Path: /Financials/Maven_Accounting/docs/Deskera_Default Templates
+3) Execute the query on production database
+   insert into customdesigntemplate(select * from customdesigntemplate13);
+
+# Anand Nimbalkar 10th August 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-12844.
+1. download_sample_journal_entry.csv
+
+#Deepak Singh 10 Aug 2015 
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-12785.
+1. download_sample_Custom Fields data.csv
+2. download_sample_Default Fields data.csv
+
+#Shashi Nandan Kumar 13th Aug 2015
+URL    :  http:///<app-url>/updateuserpermission.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose:  Update user permission For New Set For make Payment and Receive Payment Module From Exiting purchase management and sales&billing management.
+Please find file in Jira ticket ERP-12176
+Parameters to be sent:  1) serverip    
+                        2) port=3306
+                        3) dbname
+                        4) username      
+                        5) password     
+                        6) subdomain (Optional) 
+
+#Sumit Jain 18 Aug 2015 
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-13280 & ERP-13282.
+1. download_sample_product_price_import.csv
+2. download_sample_product_opening_stock.csv
+
+#Sumit Jain 18 Aug 2015 
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-13281.
+1. download_sample_product.csv
+
+
+Add following sample files in directory '<DocStorePath0>/xlsfiles/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-13281
+1. download_sample_product.xls
+
+# Anand Nimbalkar 1st Sept 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-5259.
+1. download_sample_uom_schema.csv
+
+# Sumit Jain 4st Sept 2015
+1.Added script of (Controller) 'updateVQScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCPurchaseOrder/updateVQScript.do
+  Ticket NO:ERP-13731.
+  Purpose: To update the isopen flag for VendorQuotation Linked with Purchase Order.
+  
+
+1.Added script of (Controller) 'updateVQScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateVQScript.do
+  Ticket NO:ERP-13731.  
+  Purpose: To update the isopen flag for VendorQuotation Linked with Purchase Invoice.
+
+# Swapnil Pandhare 4 Sept 2015
+1.Added script of (Controller) 'updateCQScriptForSO.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCSalesOrder/updateCQScriptForSO.do
+  Ticket NO:ERP-13730.
+  Purpose: To update the isopen flag for CustomerQuotation Linked with Sales Order.
+  
+
+2.Added script of (Controller) 'updateCQScriptForSI.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateCQScriptForSI.do
+  Ticket NO:ERP-13730.  
+  Purpose: To update the isopen flag for CustomerQuotation Linked with Sales Invoice.
+  
+
+#Deepak Singh 4th Sept 2015
+1.Added script of (Controller) 'updateOpenStatusFlagOfPOInGRScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateOpenStatusFlagOfPOInGRScript.do
+  Ticket NO:ERP-14124.
+  Purpose: To update the isopen flag for PurchaseOrder Linked with Good Receipt.
+  
+
+2.Added script of (Controller) 'updateOpenStatusFlagOfPOInVIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateOpenStatusFlagOfPOInVIScript.do
+  Ticket NO:ERP-14123.  
+  Purpose: To update the isopen flag for PurchaseOrder Linked with Vendor Invoice.
+ 
+#Ravees Pathak 10th September 2015
+URL    :  http:///<app-url>/ConsignmentDOAndGRAddressUpdateScript.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose:  Update address of those Consignment DO/GR for which address option was not available in UI. 
+Please find file in Jira ticket ERP-14558
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password     
+                        5) subdomain (Optional)  
+
+# Anand Nimbalkar 11th September 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-14451.
+1. download_sample_price_list_band_price.csv
+
+# Anand Nimbalkar 16th September 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-14576.
+1. download_sample_account_groups.csv
+2. download_sample_coa.csv
+3. download_sample_customer.csv
+4. download_sample_product_category.csv
+5. download_sample_uom.csv
+6. download_sample_vendor.csv
+
+# Anand Nimbalkar 16th September 2015
+Add following sample files in directory '<DocStorePath0>/xlsfiles/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-14576.
+1. download_sample_coa.xls
+2. download_sample_customer.xls
+3. download_sample_vendor.xls
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint38 created on 16th Sept 2015 7:25PM ---------------------------------------------- 
+
+
+#Ajit Ankalle 16th September 2015
+URL    :  http:///<app-url>/UpdateSpotRateOfExistingRecordsForGRAndDO.jsp?serverip=?&dbname=?&username=?&password=?
+Purpose:  Update Spot Rate of existing records for GR/DO/PR/SR. 
+Please find file in Jira ticket ERP-13903, ERP-13904, ERP-14548,ERP-14549
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+
+#Swapnil D. Khandre 15th September, 2015
+
+1. Update Goods Receipt(Purchase Invoice And Cash Purchase) Transaction ID and Module ID in JournalEntry table
+http://<context url>/ACCGoodsReceiptCMN/updateGoodsReceiptTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCGoodsReceiptCMN/updateGoodsReceiptTransactionDetailsInJE.do?subdomain=gccm
+
+2. Update Invoice(Customer Invoice and Cash Sales) Transaction ID and Module ID in JournalEntry table
+http://<context url>/ACCInvoiceCMN/updateInvoiceTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCInvoiceCMN/updateInvoiceTransactionDetailsInJE.do?subdomain=gccm
+
+3. Update CN Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCCreditNote/updateCreditNoteTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCCreditNote/updateCreditNoteTransactionDetailsInJE.do?subdomain=gccm
+
+4. Update DN Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCDebitNote/updateDebitNoteTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCDebitNote/updateDebitNoteTransactionDetailsInJE.do?subdomain=gccm
+
+5. Update Payment Receipt Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCReceipt/updatePaymentReceiptTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCReceipt/updatePaymentReceiptTransactionDetailsInJE.do?subdomain=gccm
+
+6. Update Payment Made Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCVendorPayment/updatePaymentMadeTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCVendorPayment/updatePaymentMadeTransactionDetailsInJE.do?subdomain=gccm
+
+# Anand Nimbalkar 21st September 2015
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-14693.
+1. download_sample_assembly_product.csv
+
+# Vivek Pakmode 24th Sept 2015
+URL    :  http:///<app-url>/updateControlAccountsToPostManualJe.jsp?serverip=?&port=?&dbname=?&username=?&password=?&subdomain=?
+Purpose:  Update Accounts Which are set as Control Accounts 
+Parameters to be sent:  1) serverip   
+                        2) port
+                        3) dbname
+                        4) username      
+                        5) password     
+                        6) subdomain
+
+
+#Deepak Singh 24th Sept 2015
+1.Added script of (Controller) 'updateDOStatusWhilelinkingWithSRScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCSalesReturnCMN/updateDOStatusWhilelinkingWithSRScript.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCSalesReturnCMN/updateDOStatusWhilelinkingWithSRScript.do?subdomain=fastenhardware
+  Ticket NO:ERP-14592.
+  Purpose: To update the isopeninsr flag for DeliveryOrder Linked with Sales Return.
+  
+
+2.Added script of (Controller) 'updateDOStatusWithSIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateDOStatusWithSIScript.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCInvoice/updateDOStatusWithSIScript.do?subdomain=fastenhardware
+  Ticket NO:ERP-14591.  
+  Purpose: To update the isopeninsi flag for DeliveryOrder Linked with Sales Invoice.
+ 
+3.Added script of (Controller) 'updateSOisOpenAndLinkingWithCIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateSOisOpenAndLinkingWithCIScript.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCInvoice/updateSOisOpenAndLinkingWithCIScript.do?subdomain=fastenhardware
+  Ticket NO:ERP-14589.  
+  Purpose: To update the isopen flag for SalesOrder Linked with Sales Invoice.
+
+#Deepak Singh 25th Sept 2015
+1.Added script of (Controller) 'updateGRStatusWhileLinkingWithPRScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCSalesReturnCMN/updateGRStatusWhileLinkingWithPRScript.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCSalesReturnCMN/updateGRStatusWhileLinkingWithPRScript.do?subdomain=fastenhardware
+  Ticket NO:ERP-14913.
+  Purpose: To update the isopeninpr flag for Goods Receipt Linked with Purchase Return.
+  
+
+2.Added script of (Controller) 'updateVIStatusWhileLinkingWithPRScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCSalesReturnCMN/updateVIStatusWhileLinkingWithPRScript.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCSalesReturnCMN/updateVIStatusWhileLinkingWithPRScript.do?subdomain=fastenhardware
+  Ticket NO:ERP-14914.  
+  Purpose: To update the isopeninpr flag for Purchase Invoice Linked with Purchase Return.
+
+#Sumit Jain 25th Sept 2015
+1.Added script of (Controller) 'updateSOScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateSOScript.do
+  Ticket NO:ERP-14855.
+  Purpose: To update the isopen flag for Sales order Linked with Delivery Order.
+  
+
+2.Added script of (Controller) 'updateSIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateSIScript.do
+  Ticket NO:ERP-14855.  
+  Purpose: To update the isopendo flag for Sales Invoice Linked with Delivery Order.
+
+#Raveesh Pathak 29th September 2015
+URL    :  http:///<app-url>/CompanyAddressMergedScript.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose:  Merging billaddress and shipaddress from table compaccpreferences to companyaddressdetails
+Please find in Jira ticket ERP-12891
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password     
+                        5) subdomain (Optional)  
+ 
+#Sumit Jain 01 Oct 2015
+1.Added script of (Controller) 'updateGRScript.do'
+How to execute : First logged in in system then execute URL in browser
+Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. Else all subdomain data will be updated)
+URL: <context url>/ACCGoodsReceipt/updateGRScript.do?subdomain=%domain name%
+Ticket NO:ERP-14910.
+Purpose: To update the isopenpi flag for GR Linked with PI.
+
+2.Added script of (Controller) 'updateOpenStatusFlagOfPIInGRScript.do'
+How to execute : First logged in in system then execute URL in browser
+Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. Else all subdomain data will be updated)
+URL: <context url>/ACCGoodsReceipt/updateOpenStatusFlagOfPIInGRScript.do?subdomain=%domain name%
+Ticket NO:ERP-14912.
+Purpose: To update the isopengr flag for PI Linked with GR.
+
+#Santosh Belote 5th Oct 2015 
+Purpose: Added script to increase maximum limit to add custom column such as Text Field, Text Area, Number Field, Date Field etc.
+URL:  <context url>/CustomColumnDataMigrationScript.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password     
+#Sumit Jain 08 Oct 2015 
+2.Added script of (Controller) 'updateSIStatusWhilelinkingWithSRScript.do'
+How to execute : First logged in in system then execute URL in browser
+Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. Else all subdomain data will be updated)
+URL: <context url>/ACCSalesReturnCMN/updateSIStatusWhilelinkingWithSRScript.do?subdomain=%domain name%
+Ticket NO: ERP-14593.
+Purpose: To update the isopensr flag for SI Linked with SR.
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint40 created on 7th Oct 2015 02:30PM ---------------------------------------------- 
+
+#Shashi Nandan Kumar 12th Oct 2015
+Purpose:Script will recalculate all permission based on new permission to be added.
+URL: <context url>/missingpermissioninmiddle.jsp?serverip=?&dbname=?&username=?&password=?&port=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+                        5) port
+                        6) subdomain (Optional)  
+
+#Deepak Singh 14th October 2015 
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-15767.
+1. download_sample_Custom Field.csv
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint41 created on 15th Oct 2015 11:15AM ---------------------------------------------- 
+
+#Deepak Singh 20th October 2015 
+Add following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find file in Jira ticket ERP-15911.
+1.download_sample_Custom Field.csv
+
+
+#Swapnil D. Khandre 21st October
+Note: Please first execute the DB Queries (Already added in dbchanges file)
+
+# Store invoice amount and invoice amount in base currency in invoice table
+
+ALTER TABLE invoice ADD COLUMN invoiceamount  double DEFAULT 0.0;
+ALTER TABLE invoice ADD COLUMN invoiceamountinbase  double DEFAULT 0.0;
+
+update invoice join jedetail cn on invoice.centry = cn.id set invoiceamount= cn.amount where isnormalinvoice=true;
+
+# Store invoice amount and invoice amount in base currency in goodsreceipt table
+
+ALTER TABLE goodsreceipt ADD COLUMN invoiceamount  double DEFAULT 0.0;
+ALTER TABLE goodsreceipt ADD COLUMN invoiceamountinbase  double DEFAULT 0.0;
+
+update goodsreceipt join jedetail jed on goodsreceipt.centry = jed.id set invoiceamount=jed.amount where isnormalinvoice=true;
+1. Update invoice amount and invoice amount in base in invoice table
+http://<context url>/ACCInvoiceCMN/updateInvoiceAmountInBase.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/fastenhardware/ACCInvoiceCMN/updateInvoiceAmountInBase.do?subdomain=fastenhardware
+
+
+1. Update Goods Receipt amount and goods receipt amount in base in goodsreceipt table
+http://<context url>/ACCGoodsReceiptCMN/updateGoodsReceiptAmountInBase.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/fastenhardware/ACCGoodsReceiptCMN/updateGoodsReceiptAmountInBase.do?subdomain=fastenhardware
+
+#Rushikesh Mandage 28th Oct 2015
+Purpose : Script is written to find out the corrupted payments and receipts
+URL : <context_path>/GetCorruptedPaymentsAndReceipts.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent : 1. serverip
+                        2. dbname
+                        3. username
+                        4. password
+                        5. subdomain (Optional)
+
+#Swapnil D. Khandre 29th October, 2015
+
+1. Update Goods Receipt(Purchase Invoice And Cash Purchase) Transaction ID and Module ID in JournalEntry table
+http://<context url>/ACCGoodsReceiptCMN/updateGoodsReceiptTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCGoodsReceiptCMN/updateGoodsReceiptTransactionDetailsInJE.do?subdomain=gccm
+
+2. Update Invoice(Customer Invoice and Cash Sales) Transaction ID and Module ID in JournalEntry table
+http://<context url>/ACCInvoiceCMN/updateInvoiceTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCInvoiceCMN/updateInvoiceTransactionDetailsInJE.do?subdomain=gccm
+
+3. Update CN Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCCreditNote/updateCreditNoteTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCCreditNote/updateCreditNoteTransactionDetailsInJE.do?subdomain=gccm
+
+4. Update DN Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCDebitNote/updateDebitNoteTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCDebitNote/updateDebitNoteTransactionDetailsInJE.do?subdomain=gccm
+
+5. Update Payment Receipt Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCReceipt/updatePaymentReceiptTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCReceipt/updatePaymentReceiptTransactionDetailsInJE.do?subdomain=gccm
+
+6. Update Payment Made Transaction ID and Module ID in JournalEntry table 
+http://<context url>/ACCVendorPayment/updatePaymentMadeTransactionDetailsInJE.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8084/Accounting/a/gccm/ACCVendorPayment/updatePaymentMadeTransactionDetailsInJE.do?subdomain=gccm
+
+
+
+# Swapnil D. Khandre  3rd November, 2015
+
+URL : http://<context url>/updateAmountInBase.jsp
+Purpose : For updating amount in base at transaction level in CN/DN/MP/RP
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+
+#Santosh Belote 3rd Nov 2015
+Note: Please first execute the DB Queries (Already added in dbchanges file)
+Purpose: Update quotation amount and quotation amount in base in quotation table (For All Companies.)
+
+URL : http://<context url>/updateQuotationAmount.jsp?serverip=?&dbname=?&username=?&password=?
+
+Parameter:  1) serverip
+            2) dbname
+            3) username
+            4) password
+
+
+# Vaibhav Patil  4th November, 2015
+URL : http://<app-context>/UpdateDuplicateBankReconEntries.jsp
+Purpose : To remove duplicate entries from Bank Reconciliation & insert single new record for old entries.
+Parameters to be sent:  1) serverip     2) dbname       3) username     4) password
+                        5) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+
+#Santosh Belote 4th Nov 2015
+Note: Please first execute the DB Queries (Already added in dbchanges file)
+Purpose: Update Vendor Quotation amount and Vendor Quotation amount in base in vendorquotation table (For All Companies.)
+
+URL : http://<context url>/updateQuotationAmount.jsp?serverip=?&dbname=?&username=?&password=?&module=vendorquotation
+
+Parameter:  1) serverip
+            2) dbname
+            3) username
+            4) password
+
+Please Note : Pass module as it is given in URL.
+
+#Santosh Belote 5th Nov 2015
+Note: Please first execute the DB Queries (Already added in dbchanges file)
+Purpose: Update total amount and total amount in base in SO and PO (For All Companies.)
+
+URL : http://<context url>/updateQuotationAmount.jsp?serverip=?&dbname=?&username=?&password=?&module=salesandpurchaseorder
+
+Parameter:  1) serverip
+            2) dbname
+            3) username
+            4) password
+
+Please Note : Pass module as it is given in URL.
+
+#Swapnil D. Khandre 7th November, 2015
+Purpose: Update amount due in base currency,discount amount and discount amount in base currency for Customer invoice and vendor invoice
+
+URL : http://<context url>/updateAmountDueAndDiscount.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+Parameter:  1) serverip
+            2) dbname
+            3) username
+            4) password
+            5) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+
+#Deepak singh 9th November, 2015
+Purpose: Update Total amount and discount amount in Document currency as well as Base currency for Purchase Return and Sales Return
+
+URL : http://<context url>/updateAmountInPRandSR.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+Parameter:  1) serverip
+            2) dbname
+            3) username
+            4) password
+            5) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+
+# Suhas Chaware 17 Nov 2015
+Note: Please first execute the DB Queries (Already added in dbchanges file)
+Purpose: Update Delivery Order and GRO amount in base (For All Companies.)
+
+URL : http://<context url>/updateAmountInOrders.jsp?serverip=?&dbname=?&username=?&password=?&module=deliveryorder
+
+Parameter:  1) serverip
+            2) dbname
+            3) username
+            4) password
+            5) subdomain=Optional
+            6) module= deliveryorder , goodsreceiptorder
+
+Please Note : Pass module as it is given above.            
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint47 created on 19th Nov 2015 10:30AM ---------------------------------------------- 
+
+#Shashi Nandan Kumar 27th Nov 2015
+Purpose:Script will recalculate all permission based on new permission to be added new button margin.
+URL: <context url>/addpermissionformarginbutton.jsp?serverip=?&dbname=?&username=?&password=?&port=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+                        5) port
+                        6) subdomain (Optional)  
+
+#Raveesh Pathak 3rd Dec 2015
+Purpose:Script will update old CN/DN linking date with Invoice
+URL:  http://<context url>/updateNoteLinkingDate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+                        5) port
+                        6) subdomain (Optional)  
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint49 created on 08th Dec 2015 11:30AM ---------------------------------------------- 
+#Raveesh Pathak 3rd Dec 2015
+Purpose:Adding Default Sequence Format for Build Assembly
+URL:  http://<context url>/AddDefaultBuildAssemblySequenceFormat.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+                        5) subdomain (Optional)  
+
+
+#Deepak Singh 31st Dec 2015
+
+  Ticket NO:ERP-17695.
+  Purpose: To update Linking Information in linking table for Purchase side.
+
+1.Added script of (Controller) 'updateLinkingPOScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateLinkingPOScript.do?subdomain=?
+ 
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+2.Added script of (Controller) 'updateLinkingPIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateLinkingPIScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+3.Added script of (Controller) 'updateLinkingGRScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateLinkingGRScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+4.Added script of (Controller) 'updateLinkingVQScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateLinkingVQScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+5.Ticket NO:ERP-18234.
+  Purpose: To update Linking Information in linking table for Customer Quotation linked with SI/SO.
+
+  Added script of (Controller) 'updateLinkingCQScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateLinkingCQScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+ 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt2 created on 5th Jan 2016 8:00AM ---------------------------------------------- =======
+
+#Deepak Singh 31st Dec 2015
+
+  Ticket NO:ERP-18484.
+  Purpose: To update Linking Information in linking table for Sales side.
+
+1.Added script of (Controller) 'updateLinkingSOScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateLinkingSOScript.do?subdomain=?
+
+
+2.Added script of (Controller) 'updateLinkingSIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateLinkingSIScript.do?subdomain=?
+
+3.Added script of (Controller) 'updateLinkingDOScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateLinkingDOScript.do?subdomain=? 
+
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company. 
+
+# Swapnil Pandhare 15th Jan 2016
+Replace following sample files in directory '<DocStorePath0>/importplans/'
+Please check DocStorePath0 in Krawler-web-app.xml.
+Please find below file in Jira ticket ERP-18703.
+download_sample_product.csv
+
+#Deepak Singh 20th Jan 2016
+
+  Ticket NO:ERP-18935.
+
+ 1. Purpose: To update Linking Information in linking table for Debit Note & Purchase Invoice.
+
+   Added script of (Controller) 'updatePILinkingInformationWithDNScript.do'
+   How to execute :   How to execute : First logged in in system then execute URL in browser
+   URL: <context url>/ACCDebitNote/updatePILinkingInformationWithDNScript.do?subdomain=?
+
+
+
+ 2. Purpose: To update Linking Information in linking table for Credit Note & Sales Invoice.
+
+    Added script of (Controller) 'updateSILinkingInformationWithCNScript.do'
+    How to execute :  How to execute : First logged in in system then execute URL in browser
+    URL: <context url>/ACCCreditNote/updateSILinkingInformationWithCNScript.do?subdomain=?
+
+
+   Ticket NO:-ERP-18804
+
+  1.Purpose: To update Linking Information in linking table for Vendor Quotation & Purchase Requisition.
+
+    Added script of (Controller) 'updatePurchaseRequisitionLinkingScript.do'
+    How to execute :  How to execute : First logged in in system then execute URL in browser
+    URL: <context url>/ACCPurchaseOrder/updatePurchaseRequisitionLinkingScript.do?subdomain=?
+
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will be executed for all company. 
+
+#Vaibhav Patil 22nd Jan.2016
+Ticket NO:ERP-18735
+Purpose:Script will update hidden field as by default true for all existing company.
+URL:  http://<context url>/UpdateHiddenFieldForOldCompany.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+                        5) port
+                        6) subdomain (Optional)  
+
+# Vivek Pakmode 27th Jan 2016
+
+Purpose : Update Rounding Difference in Journal Entries
+URL : http://<context url>/AdjustRoundingDifference.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+
+URL:  http://<context url>/AdjustRoundingDifference.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt5 created on 28th Jan 2016 11:00AM ---------------------------------------------- =======
+
+#Deepak Singh 28th Jan 2016
+
+ 1. Ticket NO:ERP-19004.
+
+  Purpose: To update Linking Information in linking table for Purchase Order & Sales Order.
+
+   Added script of (Controller) 'updatePOLinkingWithSOScript.do'
+   How to execute :   How to execute : First logged in in system then execute URL in browser
+   URL: <context url>/ACCPurchaseOrder/updatePOLinkingWithSOScript.do?subdomain=?
+
+
+ 2. Ticket NO:ERP-19003.
+
+    Purpose: To update Linking Information in linking table for Sales Order & Purchase Order.
+
+    Added script of (Controller) 'updateSOLinkingWithPOScript.do'
+    How to execute :  How to execute : First logged in in system then execute URL in browser
+    URL: <context url>/ACCInvoice/updateSOLinkingWithPOScript.do?subdomain=?
+
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will be executed for all company.  
+
+# Anand Nimbalkar 2nd Feb 2016
+Purpose: Adding Default Master Item Entry of 'Wastage' for 'Stock Adjustement'.
+URL:  http://<context url>/AddDefaultMasterItemEntryForWastage.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password
+
+
+#Rushikesh Mandage 2nd Feb 2016
+# Note: This script is already executed and provide by Swapnil Khandare on 3rd Nov 2015. Need to re-executed for tickets  ERP-19049,ERP-19050,ERP-19052
+URL : http://<context url>/updateAmountInBase.jsp
+Purpose : For updating amount in base at transaction level in CN/DN/MP/RP
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+if subdomain is not sent, changes will be applied to all companies.
+
+#Deepak Singh 4th Feb 2016
+
+ 1. Ticket NO:ERP-19503.
+
+  Purpose: To update Linking Information in linking table for Vendor Quotation & Customer Quotation.
+
+   Added script of (Controller) 'updateVQLinkingWithCQScript.do'
+   How to execute :   How to execute : First logged in in system then execute URL in browser
+   URL: <context url>/ACCPurchaseOrder/updateVQLinkingWithCQScript.do?subdomain=?
+
+
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will be executed for all company.
+
+#Neeraj Dwivedi 5th Feb2016
+Ticket NO:ERP-19526
+Purpose:To copy the Product images to new Location 
+URL:  http://<context url>/CopyProductImages.jsp
+
+
+# Swapnil D. Khandre 10th Feb,2016
+Purpose : Update Rounding Difference in Journal Entries & amount in base in Journal Entry Details
+URL : http://<context url>/AdjustRoundingDifference.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+
+URL:  http://<context url>/AdjustRoundingDifference.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+#Deepak Singh 16th Feb 2016
+
+  Ticket NO:ERP-19678 & ERP-19679
+
+  Purpose: To update Linking Information in linking table for CN/DN while linked with SR/PR.
+
+1.Added script of (Controller) 'updateCNDNScriptWithPRSR.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCSalesReturnCMN/updateCNDNScriptWithPRSR.do?subdomain=?
+
+ Purpose: To update Linking Information in linking table for MP/RP while linked with CN/DN.
+
+2.Added script of (Controller) 'updateMPRPScriptWithCNDN.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCSalesReturnCMN/updateMPRPScriptWithCNDN.do?subdomain=?
+
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+#Deepak Singh 20th Feb 2016
+
+   Ticket NO:-ERP-20069
+  1.Purpose: To Delete entry from invoicelinking table if it is not linked with any document.
+
+    Added script of (Controller) 'updateInvoiceLinkingTableScript.do'
+    How to execute :  How to execute : First logged in in system then execute URL in browser
+    URL: <context url>/ACCInvoice/updateInvoiceLinkingTableScript.do?subdomain=?
+
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will be executed for all company. 
+
+# Vivek Pakmode 2nd March 2016
+
+Purpose : Update Rounding Difference in Journal Entries
+URL : http://<context url>/updateRoundingDifferenceAccount.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+URL:  http://<context url>/updateRoundingDifferenceAccount.jsp?serverip=?&dbname=?&username=?&password=?
+
+#Deepak Singh 3rd March 2016
+
+   Ticket NO:ERP-20103 & ERP-20104
+
+  Purpose: To update Linking Information table of PI/SI & MP/RP while linking with each other.
+
+1.Added script of (Controller) 'updateMPRPScriptWithPISI.do'
+  How to execute : First login the system then execute URL in browser
+  URL: <context url>/ACCSalesReturnCMN/updateMPRPScriptWithPISI.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+#Deepak Singh 10th March 2016
+
+ Ticket NO:ERP-20613
+Purpose: To update Linking Information table of Consignment Goods Receipt & Consignment Purchase Return while linking with each other.
+Added script of (Controller) 'updateLinkingGRScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCGoodsReceipt/updateLinkingGRScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+#Pandharinath Vaghole 11th March 2016
+  Ticket NO:-ERP-20604 Save entry in linking table while linking Asset PR with Asset VQ & Asset VQ with Asset PO.
+
+  Purpose: To update Linking Information in linking table for Vendor Quotation & Purchase Requisition.
+
+    Added script of (Controller) 'updatePurchaseRequisitionLinkingScript.do'
+    How to execute :  How to execute : First logged in in system then execute URL in browser
+    URL: <context url>/ACCPurchaseOrder/updatePurchaseRequisitionLinkingScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.  
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt12 created on 15th Mar 2016 11:15AM ---------------------------------------------- =======
+
+# Suhas Chaware 30 March 2016
+Purpose : Update Accjecustomdata Table i.e. Replace Master Dimension data with Modules data
+URL : http://<context url>/UpdatePaymentDimensionData.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#Raveesh Pathak 30th March 2016
+Purpose : Updating datePrefixValue and dateSuffixValue for previous document number
+URL : http://<context url>/updateDatePrefixSuffix.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#Amol Edewar 4th April 2016
+URL : http://<context url>/CnDnAddressUpdateScript.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#Deepak Singh 5th April 2016
+
+  Ticket NO:ERP-21618
+  1.Purpose: To update Linking Information in linking table for RFQ & Purchase Requisition.
+
+    Added script of (Controller) 'updatePurchaseRequisitionLinkingScript.do'
+    How to execute :  How to execute : First logged in in system then execute URL in browser
+    URL: <context url>/ACCPurchaseOrder/updatePurchaseRequisitionLinkingScript.do?subdomain=?
+
+Parameters to be sent:  1) subdomain(Optional).   
+                          In case of no subdomain then it will execute for all company.
+                        5) subdomain (Optional)
+
+#Swapnil D. Khandre 8th April, 2016
+Purpose:
+To update "cost of goods sold group" flag for "Cost of Goods Sold" account group and its childs
+http://<context url>/CommonFunctions/updateCostOfGoodsSoldGroup.do?subdomain=%subdomain%
+Parameter: subdomain
+Example:http://localhost:8080/Accounting/CommonFunctions/updateCostOfGoodsSoldGroup.do?subdomain=
+
+
+#Raj Shah 13th April 2016
+Purpose: Add modulerefDetail id in in_stockmovement table (ERP-20269)
+URL : http://<context url>/UpdateModuleRefDetailIdInStockMovement.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+
+#Vaibhav Patil 15th April 2016
+URL: http://<context-path>/DeleteDuplicatePriceListRecordFoSameDate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (optional)
+
+#Swapnil D. Khandre 26th April, 2016
+Purpose: Add default BOM detail for assembly type product 
+URL : http://<context url>/AddDefaultBOMDetail.jsp?serverip=?&dbname=?&username=?&password=?&port=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) port
+                        6) subdomain (optional)
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt20 created on 09th May 2016 08:00PM ---------------------------------------------- 
+
+#Deepak Singh 12th May 2016
+Added script of (Controller) 'updateSOisOpenAndLinkingWithCIScript.do'
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/updateSOisOpenAndLinkingWithCIScript.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain. 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCInvoice/updateSOisOpenAndLinkingWithCIScript.do?subdomain=fastenhardware
+  Ticket NO:ERP-14589.  
+  Purpose: To update the isopen flag for SalesOrder Linked with Sales Invoice.
+
+#Shashi Nandan Kumar  20th May 2016
+Purpose : Updating PO balance quantity when PO link to Vendor invoice and Vendor invoice link to goods receipt
+URL : http://<context url>/UpdatePoBalanceQtyPolinktoInvtoGrn.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+Purpose : Updating PO balance quantity when PO link to goods receipt
+URL : http://<context url>/UpdatePoBalanceQty.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt24 created on 06th June 2016 07:30PM ----------------------------------------------=======
+#Raveesh Pathak 9th June 2016
+Purpose : Copying Product Sequence Format to Asset Group Sequence Format for Old Asset which are created with Product Seq. format.
+URL : http://<context url>/mergeProductSequenceFormatToAssetGroup.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+
+# Vivek Pakmode 15th July 2016
+
+Purpose : Update Rounding Difference in Journal Entries
+URL : http://<context url>/AdjustRoundingDifference.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+
+URL:  http://<context url>/AdjustRoundingDifference.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt30 created on 20th July 2016 09:45AM ----------------------------------------------=======
+# Rahul A. Bahwar 20 July 2016
+
+Purpose : Copy default master items for Tax/Terms types for existing INDIA subdomain only
+URL : http://<context url>/DataMigrationForLineLeveTermsINDIA.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+example URL : http://localhost:8084/DataMigrationForLineLeveTermsINDIA.jsp?serverip=?&dbname=?&username=?&password=?
+
+# Sumit Jain 26th July 2016
+Added script of (Controller) 'insertServiceTaxAccount.do' 
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/insertServiceTaxAccount.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain(Indian Company). 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCInvoice/insertServiceTaxAccount.do?subdomain=india03
+  Ticket NO:ERP-25347.  
+  Purpose: To  Creation of 'Cenvat Credit on Service Tax' Account for existing Indian company.
+
+
+
+#Vaibhav Patil 28th July 2016
+
+Purpose : Update External Currency Rate, if it '0' in Journal Entry & Payment Table
+URL : http://<context url>/UpdateExternalCurrencyRate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (optional)
+
+URL:  http://<context url>/UpdateExternalCurrencyRate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt38 created on 22nd Sept 2016 10:00AM ----------------------------------------------
+
+# Sumit Jain 12th Oct 2016
+Added script of (Controller) 'insertNOPInMasterItems.do' 
+  How to execute : First logged in in system then execute URL in browser
+  URL: <context url>/ACCInvoice/insertNOPInMasterItems.do
+  Parameters : subdomain='%domain name%'.(Optional - if specified, script will be executed only for provided subdomain(Indian Company). 
+  Else all subdomain data will be updated).
+
+  Example :   <context url>/ACCInvoice/insertNOPInMasterItems.do?subdomain=india03
+  Ticket NO:ERP-27909.  
+  Purpose: To  Creation of 'Cenvat Credit on Service Tax' Account for existing Indian company.
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+#Kapil Gupta 24th Nov 2016  
+Purpose  : To populate newly added columns in invoice, invoicedetails, goodsreceipt, grdetail. Please note that this URl can be modified to pass specific subdomain or for all companies
+URL1 : http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?module=0
+URL2: http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?module=1
+
+
+
+In case you need to run for specific subdomain then pass:
+URL1:http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?subdomain=amcoweldtest&module=0
+URL2:http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?subdomain=amcoweldtest&module=0
+
+
+Parameters :  1. subdomain (optional)
+              2. module              
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+
+
+#---------------------Please discuss before adding following script into the deployment mail.---------------
+#Rushikesh Mandage 17th Nov 2016  
+Purpose  : To add a new tax TX-CG for malaysian company. Please note that this URl can be modified according to requirement whenever a new tax is to be added
+URL : http://<context url>/CommonFunctions/addNewTax.do?taxcode=GST(TX-CG)&taxname=GST(TX-CG)&taxDescription=Purchase with GST incurred for capital goods acquisition&country=137&taxtypeid=1&taxPercent=6
+Parameters :  1. taxcode
+              2. taxname
+              3. taxDescription
+              4. country
+              5. taxtypeid
+              6. taxPercent
+              7. subdomain
+
+taxcode,taxname,country,taxtypeid,taxPercent are mandatory. taxDescription,subdomain are optional.
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt47 created on 22nd Nov 2016 08:00PM ----------------------------------------------
+
+
+#Kapil Gupta 24th Nov 2016  
+Purpose  : To populate newly added columns in invoice, invoicedetails, goodsreceipt, grdetail. Please note that this URl can be modified to pass specific subdomain or for all companies
+URL1 : http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?module=0
+URL2: http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?module=1
+
+
+
+In case you need to run for specific subdomain then pass:
+URL1:http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?subdomain=amcoweldtest&module=0
+URL2:http://<context url>/CommonFunctions/updateInvoiceTaxAmountandTaxAmountInBase.do?subdomain=amcoweldtest&module=0
+
+
+Parameters :  1. subdomain (optional)
+              2. module              
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+
+#Raveesh Pathak 2nd Dec 2016
+Purpose : Creating default sequence format for cheque Sequence format so that exiting chequen number does not get effected
+URL : http://<context url>/updateChequeSequenceFormatForOldData.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+
+# Amol Dhokale 15th Dec 2016
+Source the below 3 .sql files on Database attached below.
+1. custom_data_dd_insertproc.sql
+2. custom_data_insertproc.sql
+3. acclist_func.sql
+
+# Amol Dhokale 16th Dec 2016
+Please get added below properties in my.cnf:
+
+group_concat_max_len=999999999
+transaction-isolation = READ-COMMITTED
+
+Then restart the mysql.
+
+# Amol Dhokale 27 Dec 2016
+Source the below 3 .sql files on Database attached below.
+1. custom_data_dd_insertproc.sql
+2. custom_data_insertproc.sql
+3. acclist_func.sql
+
+# Kapil Gupta 10 Jan 2017
+Source the below 3 .sql files on Database attached below. Location: Maven_Accounting/docs/procedures
+1. custom_data_dd_insertproc.sql
+2. custom_data_insertproc.sql
+3. acclist_func.sql
+
+#Rushikesh Mandage 11th Jan 2017
+URL : http://<context url>/CommonFunctions/updateGSTCurrencyRate.do
+Purpose : Updating GST Currency rate for invoices,credit notes and debit notes where they are set to zero
+
+# Suhas Chaware 13th Jan 2017
+URL : http://<context url>/ACCScript/copyDataFromMasterToDimension.do
+Purpose : Copy data from master item brand to Field Combo data SDP-4772
+
+Note : 
+Step 1 : Excecute follwoing query before script:
+ALTER TABLE productbranddiscountdetails DROP FOREIGN KEY productbranddiscountdetails_ibfk_4;
+Step 2 : Excecute follwoing query before script :
+SET FOREIGN_KEY_CHECKS=0;
+ALTER TABLE productbranddiscountdetails ADD FOREIGN KEY (`productbrand`) REFERENCES `fieldcombodata` (`id`);
+SET FOREIGN_KEY_CHECKS=1;
+
+
+# Kapil Gupta 20 Jan 2017
+Source the below 3 .sql files on Database. Location for procedure /Maven_Accounting/docs/procedures
+1. custom_data_dd_insertproc.sql
+2. custom_data_insertproc.sql
+3. acclist_func.sql
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu8 created on 24th Feb 2017 07:06PM ----------------------------------------------
+
+#Amol Edewar 1st March 2017
+Purpose : To Add Gst Je details custom column for Sales Invoice module
+URL : http://<context url>/ScriptToAddGSTJedCustomFieldsEntryForExpinv.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+Purpose : To Add Gst Je details custom column for Purchase Invoice module
+URL : http://<context url>/ScriptToAddGSTJedCustomFieldsEntryForPurchaseInv.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+Purpose : To Add Gst Je details custom column for Expense Invoice module
+URL : http://<context url>/ScriptToAddGSTJedCustomFieldsEntryForSalesInv.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#Raveesh Pathak 2nd march 2016
+Purpose : Updating amountduedate column of Invoice and GoodsReceipt to mamimum knocked off date
+URL : http://<context url>/UpdateIncoiceAmountDueDate.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+
+#Kapil Gupta 14th March 2017
+Execute sql file through source command:
+1. Maven_Accounting/docs/procedures/custom_data_dd_func.sql;
+2. Maven_Accounting/docs/procedures/acclist_func.sql
+
+#Pandharinath Vaghole 29th March 2017
+Purpose : To delete corrupted linking data of SI-> Advance Receipt
+URL : http://<context url>/CommonFunctions/deleteAdvancePaymentAndReceiptLinking.do?type=2&subdomain=?
+Parameters to be sent:  1) subdomain (Optional)
+
+Purpose : To delete corrupted linking data of PI->Advance Payment
+URL : http://<context url>/CommonFunctions/deleteAdvancePaymentAndReceiptLinking.do?type=6&subdomain=?
+Parameters to be sent:  1) subdomain (Optional)
+
+#Vaibhav Patil 24th April, 2017
+Purpose : To migrate the old long value dates into Date object.
+URL : http://<app-url>/DatesMigrationForLinkingDates.jsp?serverip=?&dbname=?&username=?&password=?
+
+#Mangesh Kadam 4th May 2017
+Purpose : To migrate withoutBOM column data into columnpref column and delete withoutBOM column
+URL : http://<app-url>/AddWithoutBOMJsonColumn.jsp?port=?&serverip=?&dbname=?&username=?&password=?
+
+#Vinod Gharge  10th May 2017
+Purpose : To Migrate Custom Date Field Long Values into Date.
+URL : http://<app-url>/DatesMigrationFromLongToDate.jsp?serverip=?&dbname=?&username=?&password=?
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu21 created on 22nd May 2017 08:45PM ----------------------------------------------
+
+#Ganesh Karale  29th May 2017
+Purpose : To migrate user and role permission of Add Master Item from Master Configuration to Custom Field/Dimension
+URL : http://<app-url>/CustomFieldDimensionPermissionsConfigureScript.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+# Amol Dhokale 7th June,2017
+Purpose : Update default account group to company specific default group.
+URL : http://<app-url>/UpdateDefaultAccountGroup.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain
+
+#Santosh Belote 30th June 2017
+Purpose: to tag Product Tax Class values to products
+It reads data from .xls file. 
+Input file format .xls
+URL:  <context url>/updateGSTproductcustomdata.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password   
+                        5) subdomain
+
+#Santosh Belote 02th July 2017
+URL:  <context url>/addMasterItemToProductTaxClass.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password   
+                        5) subdomain
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu27 created on 4th July 2017 12:15PM ----------------------------------------------
+
+
+#Mangesh Kadam 04th July 2017
+Purpose : To append Json data to columnpref column
+URL : http://<app-url>/AppendToColumnpref.jsp?port=?&serverip=?&dbname=?&username=?&password=?
+
+#Pandharinath Vaghole 5th July 2017
+# To add New Taxes For Existing Companies.
+http://<app-url>/CommonFunctions/addNewTaxes.do?taxname=GST(ZDA),GST(RP),GST(TX-FRS),GST(TX-NC),GST(NP),GST(SR-MS),GST(SR-JWS),GST(OS-TXM),GST(NTX),GST(NS)&country=137
+Parameters to be sent:  1. taxname
+                        2. country
+
+#Swapnil D. Khandre 11th July, 2017
+Purpose : To update JournalEntryDetail ID in Build Assembly record
+
+http://<app-url>/UpdateBuildAssemblyJE.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&isBuild=true
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password   
+                        5) subdomain (Optional)
+                        6) isBuild
+
+#Swapnil D. Khandre 11th July, 2017
+Purpose : To update JournalEntryDetail ID in UnBuild Assembly record
+
+http://<app-url>/UpdateBuildAssemblyJE.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&isBuild=false
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password   
+                        5) subdomain (Optional)
+                        6) isBuild
+
+#Bhushan Chitte 18th July 2017
+Purpose: Update cheque End number of cheque sequence format whose cheque end number equals to zero.
+URL : http://<app-url>/updateEndNumberForExistingChequeSequenceFormat.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain(optional)
+
+#Vinod Gharge 20th July 2017
+Purpose : To remove duplicate Entries for "GST Registration Type" and "Customer/Vendor Type" and also to create "Other" for "Customer/Vendor Type".
+URL : http://<app-url>/CreateValueForCustomerVendorType.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+ 
+Purpose : To handled failed cases of Report Builder in execution of "DatesMigrationFromLongToDate.jsp"
+URL : http://<app-url>/DatesMigrationFromLongToDateRecovery.jsp?serverip=?&dbname=?&username=?&password=?
+**Note :- these both scripts already executed on production servers(IN) **
+
+# Tohid Maner 2nd August 2017
+
+Please execute below file to delete tdspayableaccount column from vendor table
+1. Maven_Accounting/docs/procedures/drop_tdspayableaccount_from_vendor.sql
+
+Purpose : To copy new TDS payable account from default account and map all TDS payable account to Nature of payment (master item) for India country only
+URL : http://<app-url>/CommonFunctions/copyTDSPayableAccountAndMapToMasterItemsNOP.do?subdomain=?
+
+#Vinod Gharge 3rd August 2017
+Purpose : To create values for GST Registration Type and GST Customer/ Vendor Type.
+URL : http://<app-url>/insertItemsInMasterItemFromDefaultMasterItemTable.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+**Imp Note :- This should be executed on IN1,IN2,IN3 Servers only..**
+
+#Ganesh Karale 10th August 2017
+Purpose : To update Custom Report column configuration for all Custom Report which uses given column.
+URL : http://<app-url>/CustomReportBuilderUpdateColumnConfigurationScript.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+
+
+#Swapnil D. Khandre 22nd August, 2017
+Purpose : Post JournalEntryDetail for Inventory Non-Sale Product type
+
+http://<app-url>/PostInventoryJEForNonSaleItem.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip                            
+                        2) dbname
+                        3) username      
+                        4) password   
+                        5) subdomain (Optional)
+
+#Deepak Singh 31st August 2017
+
+Purpose : To Update PR balance quantity while PR is linking to  PO
+URL : http://<context url>/UpdatePRBalanceQtyLinkToPO.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+
+#Kapil Gupta 14th September 2017
+source Maven_Accounting/docs/procedures/echangerate_calc_func.sql
+Purpose - Create new function for exchange rate calculation
+
+#Arshad 26th September 2017
+source Maven_Accounting/docs/procedures/userpermissionTrigger.sql
+Purpose - Adding a trigger to avoid duplicate entries in userpermission table
+
+
+#Kapil Gupta 9th October 2017
+source Maven_Accounting/docs/procedures/echangerate_calc_func.sql
+Purpose - Updated function for exchange rate calculation
+
+#Arshad  17th October 2017
+Please follow below process in the given order only
+Process:
+1) source Maven_Accounting/docs/procedures/userpermissionOptimization.sql
+2) source Maven_Accounting/docs/procedures/callUserpermissionOptimization.sql
+Purpose - Optimizing userpermission table, to be executed after dbchanges when build will be deployed
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu43 created on 25th Oct 2017 8:00PM ----------------------------------------------
+
+#Rahul Sawale 06 Nov 2017
+Purpose : updating Existing Expense PO balance amount.
+URL : http://<context url>/UpdateBalanceAmountForExpensePO.jsp?serverip=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+
+#------------------
+
+# Suhas Chaware 8 Dec 2017
+
+NOTE : ONLY FOR INDIA SUBDOMAIN
+Purpose : Insert GST Fields related to customer/vendor and Product Custom field data to maintain history
+http://localhost:8084/Accounting/ACCScript/insertGSTFieldsData.do?subdomain=accounttest
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu49 created on 18th Dec 2017 7:10PM ----------------------------------------------
+
+#Rahul Sawale 21 Dec 2017
+Purpose : JSP Script for Update Amount Due Column of Advanced Receipt/Payment to 0.0 whose Amount due is less than 0.000001
+URL : http://<context url>/updateAmountDueForAdvancedReceiptAndPayment.jsp?serverip=?&dbname=?&username=?&password=?subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Mandatory, particular for 'konghwachantrading')
+
+
+
+#kapil Gupta 3rd Jan 2018
+Purpose : Exchange rate function modification to skip when from and to currency are same
+MySQL function source
+path: Maven_Accounting/src/main/resources/sqlscript/echangerate_calc_func.sql
+
+#Vinod Gharge
+Purpose : Modifying Script to update newly created columns.
+URL : - http://<context url>/addMasterItemToProductTaxClass.jsp?serverip=?&dbname=?&username=?&subdomain=?&password=?
+Note :- Script Need to be executed on Indian i.e. (IN) servers only.
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv4 created on 24th Jan 2018 7:35PM ----------------------------------------------
+
+#Rahul Sawale 5 feb 2017
+Purpose : To Update Sequence Number for Batch and Serial Number.
+URL : http://<context url>/UpdateSequenceForBatchAndSerial.jsp?serverip=?&dbname=?&username=?&password=?subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#Ajay Motwani 08 Feb 2018
+Purpose : To delete records which are mapped to null uomid in pricelist table which have duplicate entires mapped to products stock uomid in pricelist table
+URL : http://<context url>/DeleteDuplicatePriceListRowWhoseUOMisNULL.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#Kapil bhusari 06 March 2018
+Purpose : add invoiceterm for corrupted purchase invoices
+URL : http://<context url>/addinvoicetermforcorruptedinvoices.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Parameters to be sent:  1) serverip 
+                        2) dbname
+                        3) username
+                        4) password
+                        5) subdomain (Optional)
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv10 created on 9 March 2018 7:10PM ----------------------------------------------
+
+#Swapnil D. Khandre 12th March 2018
+Purpose: To add initial purchase price entry in pricelist table for existing client. If initial purchase price for product is already present then it will not be added.
+
+URL : http://<context url>/CommonFunctions/insertInitialPurchasePrice.do
+
+
+#Pandharinath Vaghole 06th April 2018
+# To add New Taxes For Existing Companies.
+http://<app-url>/CommonFunctions/addNewTaxes.do?taxname=GST(IM-CG),GST(OP)&country=137
+Parameters to be sent:  1. taxname
+                        2. country
+
+#Pratik Joshi 11th May 2018
+# To Update all landed Cost JEs for a single or all companies
+http://<context-url>/CommonFunctions/UpdateLandedCostJEs.do?subdomain=?
+Parameters to be sent:  1. subdomain(optional)
+
+#Pandharinath Vaghole 24th May 2018
+# To Add Following tax Code.
+GST(TX)@0%
+GST(TX-CG)@0%
+GST(TX-ES)@0%
+GST(TX-IES)@0%
+GST(TX-RE)@0%
+GST(IM)@0%
+GST(IM-CG)@0%
+GST(BL)@0%
+GST(AJP)@0%
+GST(TX-FRS)@0%
+GST(TX-NC)@0%
+GST(SR)@0%
+GST(DS)@0%
+GST(AJS)@0%
+GST(SR-MS)@0%
+
+Above tax name decoded in URL as -
+@ = %40
+% = %25
+( = %28
+) = %29
+
+http://<app-url>/CommonFunctions/addNewTaxes.do?taxname=GST%28TX%29%400%25,GST%28TX-CG%29%400%25,GST%28TX-ES%29%400%25,GST%28TX-IES%29%400%25,GST%28TX-RE%29%400%25,GST%28IM%29%400%25,GST%28IM-CG%29%400%25,GST%28BL%29%400%25,GST%28TX-NC%29%400%25,GST%28AJP%29%400%25,GST%28TX-FRS%29%400%25,GST%28SR%29%400%25,GST%28DS%29%400%25,GST%28AJS%29%400%25,GST%28SR-MS%29%400%25&country=137
+Parameters to be sent:  1. taxname
+                        2. country
+
+#Aman Shah 7th June 2018
+# To Update/append parameter in columnpref json for paging product combo.
+<context url>/AppendToColumnPrefForProductCombo.jsp?serverip=localhost&port=3306&dbname=accounting&username=root&password=krawler
+Parameters to be sent:  1. serverip
+                        2. port
+                        3. dbname
+                        4. username
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv21 created on 24rd May 2018 4:55PM ----------------------------------------------
+
+

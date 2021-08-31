@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.krawler.common.admin.ApprovalRules" table="approvalrules">
+      
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="typeid" type="string">
+            <column length="255" name="typeid"/>
+        </property>    
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+        <property name="value" type="string">
+            <column length="255" name="value"/>
+        </property>
+        <property name="fieldType" type="string">
+            <column length="255" name="fieldtype"/>
+        </property>
+        <property name="ruleName" type="string">
+            <column length="255" name="rulename"/>
+        </property>
+        <property name="discountamount" type="double">
+            <column name="discountamount" not-null="true"/>
+        </property>
+        <property name="approvallevel" type="integer">
+            <column default="1" name="approvallevel" not-null="true"/>
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

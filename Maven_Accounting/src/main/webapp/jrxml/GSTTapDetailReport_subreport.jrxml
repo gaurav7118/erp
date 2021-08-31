@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GSTTapDetailReport_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="taxamount" class="java.lang.Double"/>
+	<field name="mergedCategoryData" class="java.lang.String"/>
+	<field name="taxname" class="java.lang.String"/>
+	<field name="journalentry" class="java.lang.String"/>
+	<field name="transactionid" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="GroupType" class="java.lang.String"/>
+	<field name="box" class="java.lang.String"/>
+	<field name="jedate" class="java.lang.String"/>
+	<field name="memo" class="java.lang.String"/>
+	<variable name="taxamount_1" class="java.lang.Double" resetType="Group" resetGroup="Merged Category Data" calculation="Sum">
+		<variableExpression><![CDATA[$F{taxamount}]]></variableExpression>
+	</variable>
+	<group name="TaxGroupType">
+		<groupExpression><![CDATA[$F{GroupType}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="0" y="0" width="267" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GroupType}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Merged Category Data">
+		<groupExpression><![CDATA[$F{mergedCategoryData}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField>
+					<reportElement x="8" y="0" width="433" height="25"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{mergedCategoryData}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="525" y="0" width="30" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{box}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField pattern="#,##0.00;(#,##0.00)">
+					<reportElement x="441" y="0" width="84" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{taxamount_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="8" y="0" width="68" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{taxname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="79" y="0" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transactionid}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="190" y="0" width="82" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{journalentry}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="340" y="0" width="91" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement x="431" y="0" width="94" height="20">
+					<printWhenExpression><![CDATA[!$F{taxname}.equals("")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression  class="java.lang.Double"><![CDATA[$F{taxamount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="267" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jedate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

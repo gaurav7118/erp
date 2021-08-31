@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accDiscountDao" class="com.krawler.spring.accounting.discount.accDiscountImpl" parent="baseDAO" >
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean>
+    <bean id="accDiscountController" class="com.krawler.spring.accounting.discount.accDiscountController">
+        <property name="accDiscountServiceObj">
+            <ref bean="accDiscountService"/>
+        </property>
+         <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <bean id="accDiscountService" class="com.krawler.spring.accounting.discount.accDiscountServiceImpl">
+        <property name="accDiscountDAOObj">
+            <ref bean="accDiscountDao"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="auditTrailObj">
+            <ref bean="auditTraildao"/>
+        </property>
+    </bean>
+</beans>

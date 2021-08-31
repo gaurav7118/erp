@@ -1,0 +1,245 @@
+#Client - fastenhardware
+#Vaibhav Patil 25th Aug 2015 
+URL : http://<app-url>/PurchaseToSalesAccountMapping.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose: It is to re-map Sales Account from Purchase Account in Existing journalEntry to match the figures of Sales By Customer Report & Trail Balance.
+Here, all parameters are mandatory.ERP-13531. Till date this is applicable only for Subdomain = 'fastenhardware'.
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain='fastenhardware'.
+
+#Client - diamondaviation
+#Mayur Bhokase 3rd September 2015 
+URL : http://<app-url>/RemoveFontFamilyTagFromPostText.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+Purpose: This script is used to update the PostText by removing the style tag used in it. It is written for Quotation and Purchase Order module only because
+this module will print repair details in template. This is applicable only for Subdomain = 'fastenhardware'.
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain='diamondaviation'.
+
+#Client - AKLC
+#Santosh Belote 8th Sept 2015
+URL : http://<app-url>/DeleteBlankValuesFromCombo.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&fieldlabel=?&module=?
+Purpose: This script is used to delete all the blank values from combo box. It is specifically written for AKLC because they were having blank entries for some dimensions.
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain='aklc'   6) fieldlabel   7) moduleId
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint39 created on 24th Sept 2015 10:30AM ---------------------------------------------- 
+
+#Client - monzone
+#Santosh Belote 26th Sept 2015
+URL : http://<app-url>/DataMigrationScript.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&fieldlabel=?&module=?
+Purpose: This script is used to migrate master data item of Custom field/Dimension if there are some missing values in module it is made true for.
+         Because for any Custom field/Dimension of type drop down there should be equal number of entries for every module in fieldcombodata table.
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain='monzoneac'   6) fieldlabel   7) moduleId[can pass comma separated array of moduleId]
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint40 created on 7th Oct 2015 02:30PM ---------------------------------------------- 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint41 created on 15th Oct 2015 11:15AM ---------------------------------------------- 
+
+#Client - Diamond Aviation
+#Santosh Belote 19 Oct 2015
+<app-url>/ChangefieldTypeofCustomField.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&fieldlabel=?
+Purpose:  This script was written for Client Diamond Aviation to change fieldtype of custom field from drop down to Multi-select combo box. 
+
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain=diamondaviation   6) fieldlabel
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint47 created on 19th Nov 2015 10:30AM ---------------------------------------------- 
+
+# Shah Raj 27 November, 2015
+#Client - Ednovation
+Purpose : This script has been written  for opening quantity related issues.It empties stock and stockmovement table and make new entries according to ERP stock.
+         Here no transaction is made so we can empty table.But,if product is used in any Inventory side transactions then make code for checking that too.
+URL : http://<app-url>/fastenProductOpeningQtyIssueOnInventorySideScript.jsp?serverip=?&dbname=?&username=?&password=?&port=?
+Parameters to be sent:  1) dbname    2) port    3) username    4) password     5) serverip
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint49 created on 08th Dec 2015 11:30AM ---------------------------------------------- 
+
+#Vipin Gupta 31 December, 2015
+#Client - SGC (.com server)
+Purpose : This script has been written for inserting row rack bin data into old inventory currupted data which have null row rack bin.
+URL : http://<app-url>/FillRowRackBinDataForSGC.jsp?serverip=?&port=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip    2) port    3) dbname    4) username 5) password 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt2 created on 5th Jan 2016 8:00AM ---------------------------------------------- =======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt3 created on 14th Jan 2016 9:00AM ---------------------------------------------- =======
+
+#Client - Alfatech
+#Santosh Belote 27th Jan 2016
+URL : http://<app-url>/MakeCustomFieldFromGlobalToLine.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&fieldlabel=?
+Purpose: This script is used to make custom field from global level to line level
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain='alfatech'   6) fieldlabel
+
+
+
+#Client - Alfatech
+#Santosh Belote 27th Jan 2016
+URL : http://<app-url>/MoveCustomDataFromProductLevelToLineLevel.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&fieldlabel=?
+Purpose: This script is used to make custom field from Product level to line level
+Parameters to be sent:  1) serverip    2) dbname    3) username    4) password     5) subdomain='alfatech'   6) fieldlabel
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt5 created on 28th Jan 2016 11:00AM ---------------------------------------------- =======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt12 created on 15th Mar 2016 11:15AM ---------------------------------------------- =======
+
+#Client - Sustenir
+#Vijay Jawale 29th Mar 2016
+URL: <context url>/CommonFunctions/assemblyProductsJEUpdate.do?companyid=84c8cd96-c010-4ff1-ae0d-de5f449d5cd2
+Purpose: Update Buid Assembly JE details.
+Parameters: 1) companyid
+
+Raj Shah 15th April, 2016
+#Client - Sustenir
+Purpose : SDP-1910 (to correct data of build assembly)
+URL : http://<app-url>/ScriptToUpdateBuildAssemblyCostForOldData.jsp?serverip=?&port=?&dbname=?&username=?&password=?
+Parameters to be sent:  1) serverip    2) port    3) dbname    4) username 5) password 
+
+
+#Dipak Dorkar 22nd April 2016
+#Client -Fasten and CSK BIO
+URL:http://<app-url>/ACCAudit/reloadLuceneIndex.do?subdomain=?
+Parameters :1) For CSK BIO  : subdomain=cskbio
+            2) For Fasten Hardware subdomain=fastenhardware
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt20 created on 09th May 2016 08:00PM ---------------------------------------------- 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt24 created on 06th June 2016 07:30PM ----------------------------------------------=======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt30 created on 20th July 2016 09:45AM ----------------------------------------------=======
+# Deepak Dorkar 30 August 2016
+http://localhost:8080/Accounting/UpdateDisposalAssetJEDimension.jsp?subdomain=edno&dbname=dotcom2908&username=krawlersqladmin&password=krawler&serverip=192.168.0.108
+
+1) serverip
+2) dbname
+3) username
+4) password
+5) subdomain
+6) port
+
+# Vaibhav Patil 21 Sept.2016
+Purpose : To Update Assembly Product Details (Pasta-Fresca)
+http://<context-path/UpdateAssemblyProduct.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&filepath=?
+
+Parameters to be sent: 
+1) serverip
+2) dbname
+3) username
+4) password
+5) subdomain
+6) filepath
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt38 created on 22nd Sept 2016 10:00AM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt47 created on 22nd Nov 2016 08:00PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu8 created on 24th Feb 2017 07:06PM ----------------------------------------------
+
+
+#Santosh Belote 19th April 2017
+Purpose : To Update Assembly Product Total Bill Of Materials Cost to Custom Field for Assembly products. (lagunsari1 - DotCom)
+URL : http://<context-path>/updateAssembly.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=lagunsari1
+
+Parameters to be sent: 
+1) serverip
+2) dbname
+3) username
+4) password
+5) subdomain - lagunsari1
+
+
+#Mohammed Uzair Momin 20th April 2017
+Purpose : To Update Distributed Opening Balance for accounts (For CHKL, this has been already executed) 
+URL : http://<context-path/ImportDistributedOpeningBalance.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&filepath=?&type=1
+
+Parameters to be sent: -
+1) serverip
+2) dbname
+3) username
+4) password
+5) subdomain
+6) filepath = Path where "JSP_Source_xls-v4.xls" is copied.
+7) type = 1(for updating distributed opening balances from TB format file), =0(for updating distributed opening balances from COA format file)
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu21 created on 22nd May 2017 08:45PM ----------------------------------------------
+
+#Vaibhav Patil 06th June, 2017
+Purpose : To map the Landed Cost Category with Product (Client : Genaxy, India)
+Note : Already mapped product with Landed Cost Category will not be update.
+URL : http://<app-url>/UpdateLandedCostCategory.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&landcostcategory=?&productcode=?
+Parameters to be sent: -
+1) serverip     2) dbname      3) username     4) password      5) subdomain    (These 5 fields are mandatory.)
+6) landcostcategory     7)productcode   (These 2 fields are optional.)
+
+
+#Shrinath Shinde 21st June 2017
+# ERP-34066 :- Purpose : To migrate knock of dimension data from global level to line level in Make payment and in Receive Payment
+#Client : il-lido
+URL:http://<context-path>/DataMigrationForForwordDimension.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&dimension=?
+Parameters :1) subdomain = illido
+            2) dimension = outlet
+
+
+#Shrinath Shinde 23rd June 2017
+# ERP-34066 :- Purpose : To distribute payment method amount against linked documents in Make Payment and Receive Payment.
+Client : il-lido
+URL: http://<context-path>/DistributePaymentMethodForForwordDimension.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&dimension=?
+Parameters : 1) subdomain = illido
+             2) dimension = outlet
+Note : All parameters are mandatory.
+
+
+#Shrinath Shinde 28th June 2017
+# ERP-34066 :- CndnDataMigrationForForwordDimension.jsp
+Purpose : To migrate Invoice dimension value to CN DN dimension value.
+Client : il-lido
+URL: http://<context-path>/CndnDataMigrationForForwordDimension.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&dimension=?
+Parameters : 1) subdomain = illido
+             2) dimension = outlet
+Note : All parameters are mandatory.
+
+
+#Shrinath Shinde 28th June 2017
+# ERP-34066 :- DistributePaymentMethodAmountForMissedEntries.jsp
+Purpose : To distribute payment method amount for missing entries of receipt ,tax and normal journal entries.
+Client : il-lido
+URL: http://<context-path>/DistributePaymentMethodAmountForMissedEntries.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&dimension=?
+Parameters : 1) subdomain = illido
+             2) dimension = outlet
+Note : Please execute this script only once. If executed on more that one time it will create duplicate records.
+
+
+#Shrinath Shinde 28th June 2017
+# ERP-34066 :- CorrectFieldComboDataForwordDimension
+Purpose : To give correct fieldcombodata id to custom column in accjedetailcustomdata table as per module id.
+Client : il-lido
+URL: http://<context-path>/CorrectFieldComboDataForwordDimension.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?&dimension=?
+Parameters : 1) subdomain = illido
+             2) dimension = outlet
+Note : All parameters are mandatory.
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu27 created on 4th July 2017 12:15PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu43 created on 25th Oct 2017 8:00PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu49 created on 18th Dec 2017 7:10PM ----------------------------------------------
+
+#Vinod Gharge 19th Dec 2017
+SDP-12948 : Define Dimension at Global level for all modules
+ERP-37779 : Define Dimension at Global level for all modules
+Purpose:- To create Global Level Dimension i.e "Main Cost Center" Against existing one at Line Level i.e. "Cost Center" and also assign values to that dimension in transaction.
+URL: http://<context-path>/DefiningGlobalDimensionAgainstLineLevelDimension.jsp?serverip=?&dbname=?&username=?&fieldlabel=?&newfieldlabel=?&password=?
+Note :-  This Script is client specific i.e for CHKL. 
+
+#Bhushan Chitte 3rd Jan 2018
+SDP-13363 : JE not passed Uniformly for GRN : where "Perpetual Inventory" method is selected.
+Purpose:- To Post JE and JE details for GRNs when perpetual is activated.
+URL: http://<context-path>/PostInventoryJEForNonSaleItem.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=589100100644
+Note :-  This Script is client specific i.e for 589100100644 (IN1 server)and can be used for other also if needed.
+
+#Kapil Bhusari 05th April 2018
+ERP-39717 SDP-15149[Killiney] - Error when editing a product
+Purpose :- To Add entries in locationbatchdocumentmapping (batch_details) for corrupted product's
+Note :-  This Script is client specific i.e for Killiney 

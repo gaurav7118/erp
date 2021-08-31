@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aged_subreport1" pageWidth="572" pageHeight="802" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<field name="acccode" class="java.lang.String"/>
+	<field name="accname" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="voucherno" class="java.lang.String"/>
+	<field name="desc" class="java.lang.String"/>
+	<field name="docamount" class="java.lang.Double"/>
+	<field name="debit" class="java.lang.Double"/>
+	<field name="credit" class="java.lang.Double"/>
+	<field name="opening" class="java.lang.Double"/>
+	<field name="closing" class="java.lang.Double"/>
+	<field name="period" class="java.lang.Double"/>
+	<field name="erate" class="java.lang.String"/>
+	<field name="aliascode" class="java.lang.String"/>
+	<field name="decimalCount" class="java.lang.String"/>
+	<field name="openingAmount" class="java.lang.String"/>
+	<field name="openingAmountInBase" class="java.lang.String"/>
+	<field name="periodAmountInBase" class="java.lang.String"/>
+	<field name="endingAmountInBase" class="java.lang.String"/>
+	<field name="accgroup" class="java.lang.String"/>
+	<field name="openingBalanceType" class="java.lang.String"/>
+	<group name="product">
+		<groupExpression><![CDATA[$F{accname}]]></groupExpression>
+		<groupHeader>
+			<band height="62">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="5" y="37" width="113" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{openingAmount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="234" y="4" width="92" height="18"/>
+					<textElement textAlignment="Left" markup="html">
+						<font size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{accname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="30" y="4" width="82" height="18"/>
+					<textElement textAlignment="Left" markup="html">
+						<font size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{acccode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="144" y="4" width="71" height="18"/>
+					<textElement textAlignment="Left" markup="html">
+						<font size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{aliascode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="339" y="4" width="82" height="18"/>
+					<textElement textAlignment="Left" markup="html">
+						<font size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{accgroup}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="440" y="4" width="121" height="18"/>
+					<textElement textAlignment="Left" markup="html">
+						<font size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{openingBalanceType}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="122" y="37" width="141" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{openingAmountInBase}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="274" y="37" width="134" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{periodAmountInBase}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="413" y="38" width="134" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{endingAmountInBase}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band>
+				<line>
+					<reportElement x="0" y="-4" width="572" height="1"/>
+					<graphicElement>
+						<pen lineColor="#010101"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="38">
+			<rectangle>
+				<reportElement x="0" y="0" width="561" height="38" backcolor="#F2F2F2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="0" width="71" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Code
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="-2" width="71" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Name
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="-2" width="71" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alias Code
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="1" width="71" height="15"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Group
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="-1" width="121" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Balance type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-4" y="22" width="122" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Amount of Account]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="22" width="159" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Amount in Base Currency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="22" width="152" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Period Amount in Base Currency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="22" width="153" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ending Amount in Base Currency]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+</jasperReport>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.spring.accounting.customreports.AccCustomReportsMeasuresFields" table="customreportsmeasuresfields">
+    <id name="measurefieldid" type="string">
+      <column name="measurefieldid"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="measurefieldname" type="string">
+      <column name="measurefieldname"/>
+    </property>
+    <property name="measurefielddisplayname" type="string">
+      <column name="measurefielddisplayname"/>
+    </property>
+    <property name="createdon" type="java.lang.Long">
+      <column name="createdon"/>
+    </property>
+    <property name="updatedon" type="java.lang.Long">
+      <column name="updatedon"/>
+    </property>
+    <property name="xtype" type="string">
+      <column name="xtype"/>
+    </property>
+    <property name="iscustomreport" type="true_false">
+      <column default="false" name="iscustomreport"/>
+    </property>
+    <property name="isreadonly" type="boolean">
+      <column name="isreadonly"/>
+    </property>
+    <property name="allowinotherapplication" type="true_false">
+      <column default="false" name="allowinotherapplication"/>
+    </property>
+    <property name="dataIndex" type="string">
+      <column name="dataindex"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.ModuleCategory" fetch="select" name="measurefieldmodulecategory">
+      <column name="measurefieldmodulecategory"/>
+    </many-to-one>
+    <many-to-one class="com.krawler.common.admin.Modules" fetch="select" name="measurefieldmodule">
+      <column name="measurefieldmodule"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

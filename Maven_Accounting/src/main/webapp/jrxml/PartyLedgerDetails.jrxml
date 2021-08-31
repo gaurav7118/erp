@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrailBalance" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="AgedReceivableSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="AgedReceivableSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="person" class="java.lang.String"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="companyaddress" class="java.lang.String"/>
+	<parameter name="basecurr" class="java.lang.String"/>
+	<parameter name="closing" class="java.lang.Double"/>
+	<parameter name="debit" class="java.lang.Double"/>
+	<parameter name="credit" class="java.lang.Double"/>
+	<field name="startDate" class="java.lang.String"/>
+        <field name="amountDue1Header" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="dateRange" class="java.lang.String"/>
+	<field name="currencyinword" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="40" width="575" height="28"/>
+				<textField isStretchWithOverflow="true" evaluationTime="Report">
+					<reportElement positionType="Float" x="554" y="2" width="14" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="27" width="572" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement positionType="Float" x="528" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[#]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="508" y="2" width="25" height="11"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Page]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="546" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[/]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="533" y="2" width="16" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="2" y="12" width="332" height="11"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dateRange}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="354" y="12" width="214" height="11"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Amount in "+$F{currencyinword}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="2" y="3" width="222" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="2" y="14" width="222" height="30"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyaddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="330" y="23" width="238" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Accounting Period    : "+$F{startDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="201" y="3" width="368" height="18"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{person}+" Party Ledger - Detailed"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="572" height="29"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="572" height="29" backcolor="#E6E6E6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="2" width="38" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="3" width="59" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="15" width="69" height="14"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Document#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="3" width="68" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Debit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="3" width="68" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Credit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="3" width="68" height="26"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="2" width="100" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{person}+" Name"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="15" width="69" height="14"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="3" width="67" height="26"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="3" width="99" height="26"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue1Header}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="156" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="572" height="156"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{AgedReceivableSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{AgedReceivableSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<line>
+				<reportElement x="0" y="24" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="42" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="482" y="23" width="68" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{closing}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="25" width="270" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GRAND TOTALS  in "+$P{basecurr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="418" y="25" width="68" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{credit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="350" y="24" width="68" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{debit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

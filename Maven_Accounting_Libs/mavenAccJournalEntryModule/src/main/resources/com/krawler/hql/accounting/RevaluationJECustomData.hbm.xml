@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.RevaluationJECustomData" table="revaluationjecustomdata">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="customfield" type="string">
+            <column name="customfield" />
+        </property>
+        <property name="lineleveldimensions" type="string">
+            <column name="lineleveldimensions" />
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" fetch="select" name="userid">
+            <column name="userid"/>
+        </many-to-one>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+  
+
+</hibernate-mapping>

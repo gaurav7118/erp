@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Form 45" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="213"/>
+	<parameter name="namely" class="java.lang.String"/>
+	<parameter name="finacialYear" class="java.lang.String"/>
+	<parameter name="specifiedPurpose" class="java.lang.String"/>
+	<parameter name="premises" class="java.lang.String"/>
+	<parameter name="rupees1" class="java.lang.String"/>
+	<parameter name="rupees2" class="java.lang.String"/>
+	<parameter name="subjectGoods" class="java.lang.String"/>
+	<parameter name="subjectGoodsPurpose" class="java.lang.String"/>
+	<parameter name="division" class="java.lang.String"/>
+	<detail>
+		<band height="768" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="555" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[See Rule 3 of the Central Excise (Removal of Goods at Concessional Rate of Duty ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="28" width="438" height="18"/>
+				<textElement>
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[for Manufacture of Excisable Goods) Rules, 2001]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="75" width="438" height="18"/>
+				<textElement>
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[for Manufacture of Excisable Goods) Rules, 2001]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="555" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Application under Central Excise (Removal of Goods at Concessional Rate of Duty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="99" width="555" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[Original with 3 copies to be submitted through the Range Superintendent]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="138" width="78" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[To,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="165" width="435" height="17"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[The Assistant Commissioner or Deputy Commissioner of Central Excise,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="193" width="103" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Division]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="251" width="525" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[provisions of the Central Excise Act, 1944 (1 of 1944) and the Central Excise Tariff Act,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="265" width="493" height="18"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1985 ( 5 of 1986) and other laws for the time being in force the goods, namely "+$P{namely}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="290" width="525" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[rates): Basic excise duty/Special excise duty /Additional duty (ies)/Other Duty (ies).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="332" width="493" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[We undertake to follow the Central Excise (Removal of Goods at Concessional Rate of Duty for ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="346" width="525" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Manufacture of Excisable Goods) Rules, 2001 as required by the above notification. The quantity]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="360" width="525" height="16"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["and value of subject goods, we wish to obtain during the financial year "+$P{finacialYear}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="374" width="525" height="16"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["For the aforesaid specified purpose is "+$P{specifiedPurpose}+" (Specify quantity and value) and"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="28" y="387" width="525" height="16"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["we intend to procure the subject goods for use in our premises at "+$P{premises}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="52" y="419" width="493" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[The estimated duty leviable on the subject goods but for the exemption under the]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="433" width="525" height="16"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["above notification is rupees "+$P{rupees1}+" only (attach calculation sheet) and the estimated"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="446" width="525" height="18"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[total duty on the subject goods payable at the time of removal under the above]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="460" width="525" height="16"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["notification is rupees "+$P{rupees2}+" only (attach calculation sheet)."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="490" width="219" height="17"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[We also hereby undertake:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="51" y="508" width="502" height="16"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(a) To use the subject goods "+$P{subjectGoods}+"  for the purpose of "+$P{subjectGoodsPurpose}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="520" width="493" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[and to follow any other condition that the said notification imposes on us; and]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="546" width="505" height="42"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[      (b) To pay on demand, in the event of failure to comply with (a) above, an amount equal to the difference between the duty leviable on such quantity of the subject goods but for the exemption under the aforesaid notification and that paid at the time of removal. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="610" width="219" height="17"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[your acceptance.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="649" width="78" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="679" width="78" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Place :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="710" width="524" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Signature and stamp of authorized signatory, with name and address of the premise]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="227" width="96" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Vide S. No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="102" y="237" width="76" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="179" y="227" width="116" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[of Notification No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="227" width="96" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[14/2009]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="314" y="227" width="155" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Central Excise, dated the]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="83" y="239" width="400" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[issued under Section 5A(1) of the Central Excise Act, 1944 read with the relevant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="239" width="96" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[June 2009]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="227" width="96" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[10th]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="72" y="193" width="449" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{division}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="278" width="219" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[used for the specified purpose of]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="277" width="274" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[attract the following excise duty (ies) (specify]]></text>
+			</staticText>
+			<line>
+				<reportElement x="185" y="288" width="66" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="27" y="598" width="219" height="17"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[We have also executed the necessary bond dated ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="598" width="219" height="17"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(Enclose the bond executed) for]]></text>
+			</staticText>
+			<line>
+				<reportElement x="226" y="609" width="76" height="1"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

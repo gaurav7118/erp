@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccountsSubReport" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="balance" class="java.lang.String"/>
+		<field name="baseCurrency" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Table Dataset 2">
+		<field name="ageingCurrency" class="java.lang.String"/>
+		<field name="amountDueCurrent" class="java.lang.String"/>
+		<field name="amountDue1" class="java.lang.String"/>
+		<field name="amountDue2" class="java.lang.String"/>
+		<field name="amountDue3" class="java.lang.String"/>
+		<field name="amountDue4" class="java.lang.String"/>
+		<field name="amountDue5" class="java.lang.String"/>
+	</subDataset>
+	<field name="customer" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<field name="jeId" class="java.lang.String"/>
+	<field name="debit" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="balance" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="amountDueCurrent" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.String"/>
+	<field name="amountDue2" class="java.lang.String"/>
+	<field name="amountDue3" class="java.lang.String"/>
+	<field name="amountDue4" class="java.lang.String"/>
+	<field name="amountDue5" class="java.lang.String"/>
+	<field name="amount1Header" class="java.lang.String"/>
+	<field name="amount2Header" class="java.lang.String"/>
+	<field name="amount3Header" class="java.lang.String"/>
+	<field name="amount4Header" class="java.lang.String"/>
+	<field name="amountCurrHeader" class="java.lang.String"/>
+	<field name="ageingCurrency" class="java.lang.String"/>
+	<field name="baseCurrency" class="java.lang.String"/>
+	<field name="customerAddress" class="java.lang.String"/>
+	<field name="outstandingBalance" class="java.lang.String"/>
+	<field name="pageBreak" class="java.lang.Boolean"/>
+	<field name="sOABalanceOutstandingPojos" class="java.util.List"/>
+	<field name="outstandingFlag" class="java.lang.Boolean"/>
+	<field name="customercode" class="java.lang.String"/>
+	<field name="ageingTableData" class="java.util.List"/>
+	<variable name="outstandingBalance" class="java.lang.String"/>
+	<group name="Customer" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{customer}]]></groupExpression>
+		<groupHeader>
+			<band height="129">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="131" y="10" width="269" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customer}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="8" y="10" width="113" height="20"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customercode}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="4" width="535" height="33"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="8" y="40" width="312" height="49"/>
+					<textElement markup="html"/>
+					<textFieldExpression><![CDATA[$F{customerAddress}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="463" y="10" width="32" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Page:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="495" y="10" width="33" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement positionType="Float" x="0" y="92" width="535" height="30" isPrintWhenDetailOverflows="true"/>
+					<staticText>
+						<reportElement x="320" y="6" width="65" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[CREDIT]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="389" y="6" width="74" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[BALANCE]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="167" y="6" width="88" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[PARTICULARS]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="95" y="5" width="72" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[DOCUMENT]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="8" y="5" width="87" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[DATE]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="255" y="6" width="65" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[DEBIT]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="463" y="6" width="65" height="20"/>
+						<textElement textAlignment="Right">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[CURRENCY]]></text>
+					</staticText>
+					<rectangle>
+						<reportElement mode="Transparent" x="0" y="0" width="535" height="30"/>
+					</rectangle>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="91">
+<!--				<break>
+					<reportElement x="0" y="85" width="553" height="1" isRemoveLineWhenBlank="true" printWhenGroupChanges="Customer">
+						<printWhenExpression><![CDATA[$F{pageBreak}]]></printWhenExpression>
+					</reportElement>
+				</break>-->
+				<staticText>
+					<reportElement x="0" y="48" width="89" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[ Ageing Details]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="231" y="48" width="71" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amount2Header}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="160" y="48" width="71" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amount1Header}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="373" y="48" width="71" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amount4Header}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="302" y="48" width="71" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amount3Header}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="444" y="48" width="92" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Total Dues]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement key="table" style="table" x="0" y="68" width="535" height="13"/>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="Table Dataset 2">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{ageingTableData})]]></dataSourceExpression>
+						</datasetRun>
+						<jr:column width="89">
+							<jr:detailCell height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="89" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{ageingCurrency}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell style="table_TD" height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="71" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{amountDueCurrent}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell style="table_TD" height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="71" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{amountDue1}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell style="table_TD" height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="71" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{amountDue2}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell style="table_TD" height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="71" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{amountDue3}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell style="table_TD" height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="71" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{amountDue4}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="92">
+							<jr:detailCell style="table_TD" height="24" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="92" height="23"/>
+									<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+										<topPen lineWidth="1.0"/>
+										<leftPen lineWidth="1.0"/>
+										<bottomPen lineWidth="1.0"/>
+										<rightPen lineWidth="1.0"/>
+									</box>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA[$F{amountDue5}+""]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+				<textField>
+					<reportElement x="89" y="48" width="71" height="20"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{amountCurrHeader}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="5" width="87" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="95" y="5" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transactionId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="167" y="5" width="88" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jeId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="255" y="5" width="65" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="320" y="5" width="65" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="385" y="5" width="78" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="463" y="5" width="65" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band>
+			<componentElement>
+				<reportElement key="" style="table_TD" x="0" y="0" width="535" height="0">
+					<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{sOABalanceOutstandingPojos})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="155">
+						<jr:columnHeader height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="155" height="22"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Balance Outstanding]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="155" height="21"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{baseCurrency}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="168">
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="168" height="21"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{balance}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="212">
+						<jr:detailCell style="table_TD" height="21" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

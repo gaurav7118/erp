@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.AuditAction" table="audit_action">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="actionName" type="string">
+      <column length="50" name="actionname" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.AuditGroup" name="auditGroup"/>
+  </class>
+</hibernate-mapping>

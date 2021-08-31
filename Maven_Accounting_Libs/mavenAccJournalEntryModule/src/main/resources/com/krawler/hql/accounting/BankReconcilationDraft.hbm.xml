@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.BankReconcilationDraft" table="bankreconciliationdraft">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="fromdate" type="date">
+            <column name="fromdate"/>
+        </property>
+        <property name="todate" type="date">
+            <column name="todate"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="newstatementbalance" type="double">
+            <column name="newstatementbalance"/>
+        </property>
+        
+        <property name="clearedChecksAmountinAcc" type="double">
+            <column name="clearedchecksamountinacc"/>
+        </property>
+        
+        <property name="unclearedChecksAmountinAcc" type="double">
+            <column name="unclearedchecksamountinacc"/>
+        </property>
+        <property name="clearedDepositsAmountinAcc" type="double">
+            <column name="cleareddepositsamountinacc"/>
+        </property>
+        <property name="unclearedDepositsAmountinAcc" type="double">
+            <column name="uncleareddepositsamountinacc"/>
+        </property>
+        <property name="bankBookBalanceinAcc" type="double">
+            <column name="bankbookbalanceinacc"/>
+        </property>
+        <property name="bankStmtBalanceinAcc" type="double">
+            <column name="bankstmtbalanceinacc"/>
+        </property>
+        <property name="paymentsReconciled" type="integer">
+            <column name="paymentsreconciled"/>
+        </property>
+        <property name="depositsReconciled" type="integer">
+            <column name="depositsreconciled"/>
+        </property>
+        <property name="clearingAmount" type="double">
+            <column name="clearingamount"/>
+        </property>
+        <property name="createdon" type="long">
+            <column name="createdon" not-null="true"/>
+        </property>
+        <property name="updatedon" type="long">
+            <column name="updatedon" not-null="true"/>
+        </property>
+        
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>    
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+        
+    </class>
+</hibernate-mapping>

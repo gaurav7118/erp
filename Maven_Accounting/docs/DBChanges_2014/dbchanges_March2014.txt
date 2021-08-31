@@ -1,0 +1,906 @@
+# Sagar A 5 March 2014  alias Code Added in Customer Report
+insert into default_header (id, defaultHeader, pojomethodname, maxlength, ismandatory, hbmnotnull, allowimport, allowmapping, module) 
+values ('84458cd8-5731-11e2-bbe1-001e670e1460', 'Alias Code', 'Aliascode', '50', 'F', 'F', 1, 'T', 'e1e72896-bf85-102d-b644-001e58a64cb6');
+
+# Amol Dhokale 5 March 2014 
+alter table customdesigntemplate add column pagelayoutproperty longtext;
+
+#Pandurang 7 March 2014 Account code is mandatory filed instead of Account Name
+UPDATE default_header set ismandatory='T'  WHERE   id="84458cd8-5731-11e2-bbe1-001e670e1459" and defaultHeader="Account Code";
+UPDATE default_header set ismandatory='F'  WHERE   id="2f871572-f73d-102d-9b6d-001e4f3fdc1a" and defaultHeader="Account Name";
+
+#Anand Nimbalkar 12 March 2014
+1. Customer Category Mapping Table
+
+CREATE TABLE `customercategorymapping` (
+`id` varchar(255) NOT NULL,
+`customerid` varchar(255) default NULL,
+`customercategory` varchar(255) default NULL,
+PRIMARY KEY  (`id`),
+FOREIGN KEY (`customerid`) REFERENCES customer(id),
+FOREIGN KEY (`customercategory`) REFERENCES masteritem(id)
+)ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+2. Vendor Category Mapping Table
+CREATE TABLE `vendorcategorymapping` (
+`id` varchar(255) NOT NULL,
+`vendorid` varchar(255) default NULL,
+`vendorcategory` varchar(255) default NULL,
+PRIMARY KEY  (`id`),
+FOREIGN KEY (`vendorid`) REFERENCES vendor(id),
+FOREIGN KEY (`vendorcategory`) REFERENCES masteritem(id)
+)ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+
+
+
+//Changes for Remove Vendor/Customer Accounts dependency Malhari 10 March 2014
+
+ALTER TABLE `customer`
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL AFTER `salespersonmap`;
+
+ALTER TABLE `invoice`
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `invoice` ADD CONSTRAINT `invoice_account_customer` FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `customer` DROP FOREIGN KEY `FK24217FDE6CFC8339`;
+
+ALTER TABLE `customer` ADD CONSTRAINT `account_customer` FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `customer`
+ADD COLUMN `parent`  varchar(255) NULL DEFAULT NULL AFTER `salespersonmap`;
+
+ALTER TABLE `customer` ADD CONSTRAINT `customer_parentfk` FOREIGN KEY (`parent`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `customerdefaultaccount`  varchar(255) NULL DEFAULT NULL AFTER `ishtmlproddesc`,
+ADD COLUMN `vendordefaultaccount`  varchar(255) NULL DEFAULT NULL AFTER `customerdefaultaccount`;
+
+ALTER TABLE `compaccpreferences` ADD CONSTRAINT `FKCustdefaultaccount` FOREIGN KEY (`customerdefaultaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `compaccpreferences` ADD CONSTRAINT `FKvendordefaultaccount` FOREIGN KEY (`vendordefaultaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `vendor`
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `vendor` DROP FOREIGN KEY `FKCF1EA5486CFC8339`;
+
+ALTER TABLE `vendor` ADD CONSTRAINT `vendor_customer` FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `vendor`
+ADD COLUMN `parent`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `vendor` ADD CONSTRAINT `vendor_parentfk` FOREIGN KEY (`parent`) REFERENCES `vendor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+update vendor set account=id;
+update customer set account=id;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `goodsreceipt` ADD CONSTRAINT `goodsreceipt_account_customer` FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+update goodsreceipt set account=vendor;
+update invoice set account=customer;
+
+
+
+CREATE TABLE `vendorcustomdata` (
+  `vendorId` varchar(255) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `moduleId` int(11) DEFAULT '1',
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  `accvendorcustomdataref`  varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`vendorId`),
+  KEY `FKREFFFBA5C557E350557` (`company`),
+  CONSTRAINT `FKREFFFBA5C557E350558` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+CREATE TABLE `customercustomdata` (
+  `customerId` varchar(255) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `moduleId` int(11) DEFAULT '1',
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  `acccustomercustomdataref`  varchar(255) DEFAULT NULL,	
+  PRIMARY KEY (`customerId`),
+  KEY `FKREFFFBA5C557E350557` (`company`),
+  CONSTRAINT `FKREFFFBA5C557E350559` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `vendor`
+ADD COLUMN `accvendorcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `customer`
+ADD COLUMN `acccustomercustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+delete from default_header where id in('2fcd1400-f73d-102d-9b6d-001e4f3fdc1a','2fd324ee-f73d-102d-9b6d-001e4f3fdc1a');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname) VALUES
+(UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Account","Account","ref",0,255,'F','F',1,NULL,'account','customer','Account','name','ID');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname) VALUES
+(UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Account","Account","ref",0,255,'F','F',1,NULL,'account','vendor','Account','name','ID');
+
+
+#Mayur Pawar 12 march 2014
+ALTER TABLE compaccpreferences add editso char(1) DEFAULT 'T';
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'createdby','Created By',20,1);
+
+#Mayur Pawar 13 march 2014
+ALTER TABLE compaccpreferences DROP COLUMN editso;
+ALTER TABLE `compaccpreferences` ADD COLUMN `editso` char(1) default '0';
+
+#Pandurang 18 March- Account Re-evaluation Seprate JE For each invoice
+ALTER TABLE revaluationhistory add COLUMN profitloss double DEFAULT 0;
+ALTER TABLE revaluationhistory add COLUMN accountid CHAR(255) DEFAULT NULL;
+ALTER TABLE journalentry add COLUMN revalinvoiceid  CHAR(255) DEFAULT NULL;
+
+#Neeraj-query for Vendor Invoice-18/3/2014
+
+DELETE from default_header where module=6 and defaultHeader="Shipping Address";
+DELETE from default_header where module=6 and defaultHeader="Billing Address";
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Billing Address","BillTo","string",0,50,'T','T',1,'Billing Address','billto','goodsreceipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Shipping Address","ShipTo","string",0,50,'T','T',1,'Shipping Address','shipto','goodsreceipt');
+
+# Sagar M 18th March- set blank value for newly added column
+update customdesigntemplate set pagelayoutproperty = '';
+			       
+# Amol D 19th March	Insert created/modified by/on fields in all modules - Invoice, GoodsReceipt, Debit Note, Credit Note, Delivery Order, Receipt, Payment, Good Receipt Order
+#			Update all records value of created/modified by/on for all modules			
+#invoice
+
+ALTER TABLE invoice add column createdby varchar(40) default null;
+ALTER TABLE invoice add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE invoice add column modifiedby varchar(40) default null;
+ALTER TABLE invoice add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE invoice add column createdon bigint(20) default null;
+ALTER TABLE invoice add column updatedon bigint(20) default null;
+
+update invoice inv set createdby=(select creator from company c where c.companyid=inv.company );
+update invoice inv set modifiedby=(select creator from company c where c.companyid=inv.company );
+
+update invoice inv set createdon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=inv.journalentry);
+update invoice inv set updatedon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=inv.journalentry);
+
+#goodsreceipt
+
+ALTER TABLE goodsreceipt add column createdby varchar(40) default null;
+ALTER TABLE goodsreceipt add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE goodsreceipt add column modifiedby varchar(40) default null;
+ALTER TABLE goodsreceipt add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE goodsreceipt add column createdon bigint(20) default null;
+ALTER TABLE goodsreceipt add column updatedon bigint(20) default null;
+
+update goodsreceipt gr set createdby=(select creator from company c where c.companyid=gr.company );
+update goodsreceipt gr set modifiedby=(select creator from company c where c.companyid=gr.company );
+
+update goodsreceipt gr set createdon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=gr.journalentry);
+update goodsreceipt gr set updatedon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=gr.journalentry);
+
+#debitnote
+
+ALTER TABLE debitnote add column createdby varchar(40) default null;
+ALTER TABLE debitnote add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE debitnote add column modifiedby varchar(40) default null;
+ALTER TABLE debitnote add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE debitnote add column createdon bigint(20) default null;
+ALTER TABLE debitnote add column updatedon bigint(20) default null;
+
+update debitnote dn set createdby=(select creator from company c where c.companyid=dn.company );
+update debitnote dn set modifiedby=(select creator from company c where c.companyid=dn.company );
+
+update debitnote dn set createdon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=dn.journalentry);
+update debitnote dn set updatedon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=dn.journalentry);
+
+#creditnote
+
+ALTER TABLE creditnote add column createdby varchar(40) default null;
+ALTER TABLE creditnote add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE creditnote add column modifiedby varchar(40) default null;
+ALTER TABLE creditnote add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE creditnote add column createdon bigint(20) default null;
+ALTER TABLE creditnote add column updatedon bigint(20) default null;
+
+update creditnote cn set createdby=(select creator from company c where c.companyid=cn.company );
+update creditnote cn set modifiedby=(select creator from company c where c.companyid=cn.company );
+
+update creditnote cn set createdon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=cn.journalentry);
+update creditnote cn set updatedon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=cn.journalentry);
+
+#deliveryorder
+
+ALTER TABLE deliveryorder add column createdby varchar(40) default null;
+ALTER TABLE deliveryorder add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE deliveryorder add column modifiedby varchar(40) default null;
+ALTER TABLE deliveryorder add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE deliveryorder add column createdon bigint(20) default null;
+ALTER TABLE deliveryorder add column updatedon bigint(20) default null;
+
+update deliveryorder dor set createdby=(select creator from company c where c.companyid=dor.company );
+update deliveryorder dor set modifiedby=(select creator from company c where c.companyid=dor.company );
+
+update deliveryorder set createdon = UNIX_TIMESTAMP(orderdate)*1000, updatedon = UNIX_TIMESTAMP(orderdate)*1000;
+
+#receipt
+
+ALTER TABLE receipt add column createdby varchar(40) default null;
+ALTER TABLE receipt add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE receipt add column modifiedby varchar(40) default null;
+ALTER TABLE receipt add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE receipt add column createdon bigint(20) default null;
+ALTER TABLE receipt add column updatedon bigint(20) default null;
+
+update receipt r set createdby=(select creator from company c where c.companyid=r.company );
+update receipt r set modifiedby=(select creator from company c where c.companyid=r.company );
+
+update receipt r set createdon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=r.journalentry);
+update receipt r set updatedon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=r.journalentry);
+
+#grorder
+
+ALTER TABLE grorder add column createdby varchar(40) default null;
+ALTER TABLE grorder add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE grorder add column modifiedby varchar(40) default null;
+ALTER TABLE grorder add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE grorder add column createdon bigint(20) default null;
+ALTER TABLE grorder add column updatedon bigint(20) default null;
+
+update grorder gro set createdby=(select creator from company c where c.companyid=gro.company );
+update grorder gro set modifiedby=(select creator from company c where c.companyid=gro.company );
+
+update grorder set createdon = UNIX_TIMESTAMP(grorderdate)*1000, updatedon = UNIX_TIMESTAMP(grorderdate)*1000;
+
+#payment
+
+ALTER TABLE payment add column createdby varchar(40) default null;
+ALTER TABLE payment add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE payment add column modifiedby varchar(40) default null;
+ALTER TABLE payment add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE payment add column createdon bigint(20) default null;
+ALTER TABLE payment add column updatedon bigint(20) default null;
+
+update payment p set createdby=(select creator from company c where c.companyid=p.company );
+update payment p set modifiedby=(select creator from company c where c.companyid=p.company );
+
+update payment p set createdon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=p.journalentry);
+update payment p set updatedon = (select UNIX_TIMESTAMP(entrydate)*1000 from journalentry je where je.id=p.journalentry);
+
+# Amol D 19th March 2014 Add missing fields in custom template design
+# salesorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44243c-44bd-05e3-6cd7-eca86baab503','Tax Name','tax','tax','id','name','Tax Name','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44243c-44bd-05e3-6cd7-eca86baab504','Term Name','term','creditterm','termid','termname','Term Name','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44243c-44bd-05e3-6cd7-eca86baab505','Company Name','company','company','companyid','companyname','Company Name','1','20');
+
+
+# purchaseorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44243c-44bd-05e3-6cd7-eca86baab508','Tax Name','tax','tax','id','name','Tax Name','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44243c-44bd-05e3-6cd7-eca86baab509','Term Name','term','creditterm','termid','termname','Term Name','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44243c-44bd-05e3-6cd7-eca86baab510','Company Name','company','company','companyid','companyname','Company Name','1','18');
+
+# creditnote
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9d11143c-14bd-02e3-2cd2-eca86baab401','Company Name','company','company','companyid','companyname','Company Name','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9d11143c-14bd-02e3-2cd2-eca86baab402','CN Amount','cnamount','creditnote','','','CN Amount','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9d11143c-14bd-02e3-2cd2-eca86baab403','CN Amount Due','cnamountdue','creditnote','','','CN Amount Due','1','12');
+
+# debitnote
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9d11143c-14bd-02e3-2cd2-eca86baab405','Company Name','company','company','companyid','companyname','Company Name','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9d11143c-14bd-02e3-2cd2-eca86baab406','DN Amount','dnamount','debitnote','','','DN Amount','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9d11143c-14bd-02e3-2cd2-eca86baab407','DN Amount Due','dnamountdue','debitnote','','','DN Amount Due','1','10');
+
+# payment
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8d34443c-14bd-22e3-2cd2-eca86baab101','Company Name','company','company','companyid','companyname','Company Name','1','14');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8d34443c-14bd-22e3-2cd2-eca86baab102','Paid To','paidto','masteritem','id','value','Paid To','1','14');
+
+# receipt
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8d34443c-14bd-22e3-2cd2-eca86baab105','Company Name','company','company','companyid','companyname','Company Name','1','16');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8d34443c-14bd-22e3-2cd2-eca86baab106','Received From','receivedfrom','masteritem','id','value','Received From','1','16');
+
+# Custom Designer Post Text in remaining modules
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1d44843a-84bd-01e3-8cd7-eca86bfbb906','Post Text','posttext','goodsreceipt','','','Post Text','1','6'); 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2d44843a-84bd-01e3-8cd7-eca86bfbb906','Post Text','posttext','quotation','','','Post Text','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3d44843a-84bd-01e3-8cd7-eca86bfbb906','Post Text','posttext','vendorquotation','','','Post Text','1','23');
+
+#Module:Customer Invoice(invoice)
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4d44843a-84bd-01e3-8cd7-eca86bfbb906','Discount','discount','discount','id','discount','Discount','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5d44843a-84bd-01e3-8cd7-eca86bfbb906','Tax Name','tax','tax','id','name','Tax Name','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('6d44843a-84bd-01e3-8cd7-eca86bfbb906','Inventory Order Id','inventoryorderid','invoice','','','Inventory Order Id','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7d44843a-84bd-01e3-8cd7-eca86bfbb906','Term','termid','creditterm','termid','termname','Term','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8d44843a-84bd-01e3-8cd7-eca86bfbb906','Journal Entry','journalentry','journalentry','id','entryno','Journal Entry','1','2');
+
+
+#Module:Vendor Invoice(goodsreceipt)
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1a4d843a-84bd-81e3-8cd7-eca86bfbb106','Journal Entry','journalentry','journalentry','id','entryno','Journal Entry','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2a4d843a-84bd-81e3-8cd7-eca86bfbb106','Goods Receipt No','grnumber','goodsreceipt','','','Goods Receipt No','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3a4d843a-84bd-81e3-8cd7-eca86bfbb106','Bill From','billfrom','goodsreceipt','','','Bill From','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4a4d843a-84bd-81e3-8cd7-eca86bfbb106','Ship From','shipfrom','goodsreceipt','','','Ship From','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5a4d843a-84bd-81e3-8cd7-eca86bfbb106','Discount','discount','discount','id','discount','Discount','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('6a4d843a-84bd-81e3-8cd7-eca86bfbb106','Tax Name','tax','tax','id','name','Tax Name','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7a4d843a-84bd-81e3-8cd7-eca86bfbb106','Term','termid','creditterm','termid','termname','Term','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8a4d843a-84bd-81e3-8cd7-eca86bfbb106','Pending Approval','pendingapproval','goodsreceipt','','','Pending Approval','1','6');
+
+#Customer Invoice 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','invoice','','','Created On','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','invoice','','','Updated On','1','2');
+
+#Vendor Invoice          goodsreceipt
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','goodsreceipt','','','Created On','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','goodsreceipt','','','Updated On','1','6');
+
+
+#Purchase Order                 purchaseorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','purchaseorder','','','Created On','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','purchaseorder','','','Updated On','1','18');
+
+#Sales Order                     salesorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','salesorder','','','Created On','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','salesorder','','','Updated On','1','20');
+
+
+#vendorquotation
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','vendorquotation','','','Created On','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','vendorquotation','','','Updated On','1','23');
+
+
+#creditnote
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('6e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('6e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','creditnote','','','Created On','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('6e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','creditnote','','','Updated On','1','12');
+
+
+#debitnote
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','debitnote','','','Created On','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','debitnote','','','Updated On','1','10');
+
+
+#deliveryorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','deliveryorder','','','Created On','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','deliveryorder','','','Updated On','1','27');
+
+
+#grorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9e10801a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9e10803a-84bd-01e3-8ab7-cba86bfbb901','Created On','createdon','grorder','','','Created On','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9e10804a-84bd-01e3-8ab7-cba86bfbb901','Updated On','updatedon','grorder','','','Updated On','1','28');
+
+
+#payment
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1b55800a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','14');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1b55800a-84bd-01e3-8ab7-cba86bfbb903','Created On','createdon','payment','','','Created On','1','14');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1b55800a-84bd-01e3-8ab7-cba86bfbb904','Updated On','updatedon','payment','','','Updated On','1','14');
+
+#receipt
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2b55800a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','16');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2b55800a-84bd-01e3-8ab7-cba86bfbb903','Created On','createdon','receipt','','','Created On','1','16');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2b55800a-84bd-01e3-8ab7-cba86bfbb904','Updated On','updatedon','receipt','','','Updated On','1','16');
+
+#quotation
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3b55800a-84bd-01e3-8ab7-cba86bfbb901','Created By','createdby','users','userid','fname','Created By','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3b55800a-84bd-01e3-8ab7-cba86bfbb903','Created On','createdon','quotation','','','Created On','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3b55800a-84bd-01e3-8ab7-cba86bfbb904','Updated On','updatedon','quotation','','','Updated On','1','22');
+
+
+#Hitesh Suryawanshi 19 march 2014
+
+CREATE TABLE `repeatedsalesorders` (
+  `id` varchar(255) NOT NULL,
+  `intervalunit` int(11) DEFAULT '0',
+  `intervaltype` varchar(32) DEFAULT NULL,
+  `startdate` date NOT NULL,
+  `nextdate` date NOT NULL,
+  `expiredate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+alter table salesorder 
+add column `repeateso` varchar(255) DEFAULT NULL;
+
+ALTER TABLE salesorder
+ADD CONSTRAINT uc_repeateso UNIQUE (repeateso);
+
+alter table salesorder 
+add column `parentso` varchar(255) DEFAULT NULL;
+
+ALTER TABLE salesorder
+ADD CONSTRAINT `parentso` FOREIGN KEY (`parentso`) REFERENCES `salesorder` (`id`);
+
+//Added Default accounts
+
+ALTER TABLE `account`
+ADD COLUMN `accounttype`  int(1) NOT NULL DEFAULT 1 AFTER `aliascode`,
+ADD COLUMN `mastertypeid`  int(1) NOT NULL DEFAULT 1 AFTER `accounttype`;
+
+ALTER TABLE `defaultcap`
+ADD COLUMN `customeraccount`  varchar(255) NULL DEFAULT NULL AFTER `roundingDifference`,
+ADD COLUMN `vendoraccount`  varchar(255) NULL DEFAULT NULL AFTER `customeraccount`;
+
+ALTER TABLE `defaultcap` ADD CONSTRAINT `defaultcap_fk_customer` FOREIGN KEY (`customeraccount`) REFERENCES `defaultaccount` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `defaultcap` ADD CONSTRAINT `_fk_vendor` FOREIGN KEY (`vendoraccount`) REFERENCES `defaultaccount` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+update defaultcap set customeraccount='013943b0-ad3f-1030-a0a4-0019d1fca8df' , vendoraccount='013be25a-ad3f-1030-a0a4-0019d1fca8df';
+
+//0 - Asset, 1 - Liability, 2 - Expense, 3 - Income
+//Profit and Loss
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 0 where accgroup.nature in (2, 3);
+//Balance Sheet
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 1 where accgroup.nature in (0, 1);
+
+ALTER TABLE `accgroup`
+ADD COLUMN `grpOldId`  varchar(255) NOT NULL AFTER `isMasterGroup`;
+
+update defaultaccount set companytype=NULL where name like '%Trade%'
+
+// Update Master Type 1 - GL, 2 - Cash, 3 - Bank, 4 - Normal GST
+update account set mastertypeid=1;
+update account inner join accgroup on account.groupname=accgroup.id set mastertypeid=2 where accgroup.name='Cash' or account.groupname in(select id from accgroup where parent=23) or account.name='Cash in hand';
+update account inner join accgroup on account.groupname=accgroup.id set mastertypeid=3 where accgroup.name='Bank' or account.groupname in(select id from accgroup where parent=9);
+update account set mastertypeid=4 where  account.name like '%GST%';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"e1e72896-bf85-102d-b644-001e58a64cb6","Master Type","Mastertypevalue","string",0,50,'T','T',1,'Master Type','mastertypeid','account');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"e1e72896-bf85-102d-b644-001e58a64cb6","Type","Accounttype","string",0,50,'T','T',1,'Type','accounttype','account');
+
+update default_header set defaultHeader='Account Group' where module='e1e72896-bf85-102d-b644-001e58a64cb6' and defaultHeader='Account Type';
+
+
+#Raveesh Pathak 26th March
+
+ alter table vendor add column seqnumber int(11) default '0';
+ alter table vendor add column seqformat varchar(40);
+ alter table vendor add CONSTRAINT  FK_vendor_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+ ALTER TABLE vendor ADD COLUMN autogen CHAR(1) DEFAULT 'F';
+
+ alter table customer add column seqnumber int(11) default '0';
+ alter table customer add column seqformat varchar(40);
+ alter table customer add CONSTRAINT  FK_customer_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+ ALTER TABLE customer ADD COLUMN autogen CHAR(1) DEFAULT 'F';
+
+ ALTER table customervendormapping DROP FOREIGN KEY FK_accountmapping_custaccid;
+ ALTER TABLE customervendormapping ADD CONSTRAINT FK_customeraccountid_customer FOREIGN KEY (customeraccountid) REFERENCES customer(id);
+ ALTER table customervendormapping DROP FOREIGN KEY  FK_accountmapping_venaccid;
+ ALTER TABLE customervendormapping ADD CONSTRAINT FK_vendoraccountid_vendor FOREIGN KEY (vendoraccountid) REFERENCES vendor(id);
+
+
+#Atul sachan 28 March 2014
+
+ALTER TABLE `invoice`
+ADD COLUMN `isopeningbalenceinvoice` int(1) NULL DEFAULT 0,
+ADD COLUMN `originalopeningbalanceamount`  double NULL DEFAULT 0.0,
+ADD COLUMN `openingbalanceamountdue`  double NULL DEFAULT 0.0;
+
+ALTER TABLE `invoice`
+MODIFY COLUMN `journalentry`  varchar(255) NULL,
+MODIFY COLUMN `centry`  varchar(255) NULL;
+
+ALTER TABLE `invoice`
+ADD COLUMN `porefdate`  datetime NULL DEFAULT NULL;
+
+ALTER TABLE `invoice`
+ADD COLUMN `lastmodifieddate`  datetime NULL DEFAULT NULL;
+
+ALTER TABLE `invoice`
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL;
+
+ALTER TABLE `invoice`
+ADD COLUMN `isnormalinvoice`  int(1) NULL DEFAULT 1;
+
+
+ALTER TABLE `receipt`
+ADD COLUMN `isopeningbalencereceipt`  int(1) NULL DEFAULT 0,
+ADD COLUMN `openingbalanceamountdue`  double NULL DEFAULT 0.0,
+ADD COLUMN `isnormalreceipt`  int(1) NULL DEFAULT 1,
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL;
+
+ALTER TABLE `receipt`
+ADD COLUMN `chequedate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `chequenumber`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `drawnon`  text NULL;
+
+ALTER TABLE `receipt`
+ADD COLUMN `customer`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `receipt` ADD FOREIGN KEY (`customer`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `receipt`
+MODIFY COLUMN `journalentry`  varchar(255)  NULL;
+
+ALTER TABLE `invoice`
+ADD COLUMN `exchangerateforopeningtransaction`  double NULL DEFAULT 1;
+
+ALTER TABLE `receipt`
+ADD COLUMN `exchangerateforopeningtransaction`  double NULL DEFAULT 1;
+
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `isopeningbalenceinvoice` int(1) NULL DEFAULT 0,
+ADD COLUMN `isnormalinvoice`  int(1) NULL DEFAULT 1,
+ADD COLUMN `originalopeningbalanceamount`  double NULL DEFAULT 0.0,
+ADD COLUMN `exchangerateforopeningtransaction`  double NULL DEFAULT 1,
+ADD COLUMN `openingbalanceamountdue`  double NULL DEFAULT 0.0,
+ADD COLUMN `partyinvoicedate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `partyinvoicenumber`  text NULL;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `mastersalesperson`  varchar(255) CHARACTER SET utf8 NULL DEFAULT NULL;
+
+ALTER TABLE `goodsreceipt` ADD FOREIGN KEY (`mastersalesperson`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `goodsreceipt`
+MODIFY COLUMN `centry`  varchar(255) NULL,
+MODIFY COLUMN `journalentry`  varchar(255) NULL;
+
+ALTER TABLE `receipt`
+ADD COLUMN `account`  varchar(255) NULL;
+
+ALTER TABLE `receipt` ADD FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `payment`
+ADD COLUMN `isopeningbalencepayment`  int(1) NULL DEFAULT 0,
+ADD COLUMN `openingbalanceamountdue`  double NULL DEFAULT 0,
+ADD COLUMN `isnormalpayment`  int(1) NULL DEFAULT 1,
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `chequedate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `chequenumber`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `drawnon`  text NULL,
+ADD COLUMN `vendor`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `exchangerateforopeningtransaction`  double NULL DEFAULT 1,
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `payment` ADD FOREIGN KEY (`vendor`) REFERENCES `vendor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `payment` ADD FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `payment`
+MODIFY COLUMN `journalentry`  varchar(255) NULL;
+
+
+# Amol Dhokale  20th March 2014
+# Added missing fields in following modules for Custom Template Design
+
+# deliveryorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb301','Company Name','company','company','companyid','companyname','Company Name','1','27');
+
+# grorder
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb305','Company Name','company','company','companyid','companyname','Company Name','1','28');
+
+# quotation
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb411','Company Name','company','company','companyid','companyname','Company Name','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb412','Tax Name','tax','tax','id','name','Tax Name','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb414','Sales Person','salesperson','masteritem','id','value','Sales Person','1','22');
+
+
+# vendorquotation
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb415','Company Name','company','company','companyid','companyname','Company Name','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d800a-848d-01a3-8ab7-cba76bfbb416','Tax Name','tax','tax','id','name','Tax Name','1','23');
+
+
+# Company Name field in Customer/Vendor Invoice
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d857a-848d-01a3-8ab1-cba76bfbb465','Company Name','company','company','companyid','companyname','Company Name','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('385d876a-848d-01a3-8ab2-cba76bfbb408','Company Name','company','company','companyid','companyname','Company Name','1','6');
+
+#Anand Nimbalkar 24 March 2014
+insert into mastergroup values (19, 'Product Category');
+
+CREATE TABLE `productcategorymapping` (
+    `id` varchar(255) NOT NULL,
+    `productid` varchar(255) default NULL,
+    `productcategory` varchar(255) default NULL,
+    PRIMARY KEY  (`id`),
+    FOREIGN KEY (`productid`) REFERENCES product(id),
+    FOREIGN KEY (`productcategory`) REFERENCES masteritem(id)
+    )ENGINE=InnoDB
+    DEFAULT CHARACTER SET=utf8;
+
+#Pandurang 24 March 2014 -quantity and price restriction
+ALTER TABLE compaccpreferences add COLUMN  editLinkedTransaction char(1) DEFAULT 'F' after editTransaction ;
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ProductAssembly" table="productassembly">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="quantity" type="double">
+      <column name="quantity" not-null="true"/>
+    </property>
+    <property name="percentage" type="double">
+      <column name="percentage" />
+    </property>
+    <property name="actualQuantity" type="double">
+      <column name="actualquantity" />
+    </property>
+    <property name="inventoryQuantity" type="double">
+      <column name="inventoryquantity" />
+    </property>
+    <property name="remainingQuantity" type="double">
+      <column name="remainingquantity" />
+    </property>
+    <property name="recycleQuantity" type="double">
+      <column name="recyclequantity" />
+    </property>
+    <property name="wastageInventoryQuantity" type="double">
+        <column name="wastageinventoryquantity" default="0"/>
+    </property>
+    <property name="wastageQuantityType" type="integer">
+        <column name="wastagequantitytype" default="0"/>
+    </property>
+    <property name="wastageQuantity" type="double">
+        <column name="wastagequantity" default="0"/>
+    </property>
+    <property name="crate" type="double">
+        <column name="crate" default="0"/>
+    </property>
+    <property name="componentType" type="integer">
+        <column name="componenttype" default="0"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.BOMDetail" name="bomdetail"/>
+    <many-to-one class="com.krawler.hql.accounting.BOMDetail" name="subbom"/>
+    <many-to-one class="com.krawler.hql.accounting.Product" name="subproducts" not-null="true"/>
+  </class>
+</hibernate-mapping>

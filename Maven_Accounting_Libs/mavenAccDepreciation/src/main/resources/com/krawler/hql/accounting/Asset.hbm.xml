@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Asset" table="asset">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">account</param>
+            </generator>
+        </id>
+        <property name="isSale" type="true_false">
+            <column name="issale" not-null="true"/>
+        </property>
+        <property name="isWriteOff" type="true_false">
+            <column name="iswriteoff" not-null="true"/>
+        </property>
+        <property name="depreciationMethod" type="integer">
+            <column name="depreciationmethod"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" name="deleteJe" lazy="false"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" name="purchaseJe" lazy="false"/>
+        <one-to-one class="com.krawler.hql.accounting.Account" constrained="true" name="account"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

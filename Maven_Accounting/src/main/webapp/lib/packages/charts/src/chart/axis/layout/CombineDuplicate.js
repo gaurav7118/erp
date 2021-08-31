@@ -1,0 +1,1 @@
+Ext.define("Ext.chart.axis.layout.CombineDuplicate",{extend:"Ext.chart.axis.layout.Discrete",alias:"axisLayout.combineDuplicate",getCoordFor:function(D,E,B,C){if(!(D in this.labelMap)){var A=this.labelMap[D]=this.labels.length;this.labels.push(D);return A}return this.labelMap[D]}})

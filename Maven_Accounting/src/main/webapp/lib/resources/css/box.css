@@ -1,0 +1,93 @@
+/*
+ Creates rounded, raised boxes like on the Wtf website - the markup isn't pretty:
+	<div class="x-box-blue">
+		<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+		<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+			<h3>YOUR TITLE HERE (optional)</h3>
+			<div>YOUR CONTENT HERE</div>
+		</div></div></div>
+		<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+	</div>
+ */
+
+.x-box-tl {
+	background: transparent url(../images/default/box/corners.gif) no-repeat 0 0;
+	zoom: 1;
+}
+.x-box-tc {
+	overflow: hidden;
+	height: 8px;
+	background: transparent url(../images/default/box/tb.gif) repeat-x 0 0;
+}
+.x-box-tr {
+	background: transparent url(../images/default/box/corners.gif) no-repeat right -8px;
+}
+.x-box-ml {
+	overflow: hidden;
+	padding-left: 4px;
+	background: transparent url(../images/default/box/l.gif) repeat-y 0;
+	zoom: 1;
+}
+.x-box-mc {
+	padding: 4px 10px;
+	background: #eee url(../images/default/box/tb.gif) repeat-x 0 -16px;
+	color: #393939;
+	font-size: 12px;
+	font-family: "Myriad Pro", "Myriad Web", "Tahoma", "Helvetica", "Arial", sans-serif;
+}
+.x-box-mc h3 {
+	margin: 0 0 4px 0;
+	font-weight: bold;
+	font-size: 14px;
+	zoom: 1;
+}
+.x-box-mr {
+	overflow: hidden;
+	padding-right: 4px;
+	background: transparent url(../images/default/box/r.gif) repeat-y right;
+}
+.x-box-bl {
+	background: transparent url(../images/default/box/corners.gif) no-repeat 0 -16px;
+	zoom: 1;
+}
+.x-box-bc {
+	overflow: hidden;
+	height: 8px;
+	background: transparent url(../images/default/box/tb.gif) repeat-x 0 -8px;
+}
+.x-box-br {
+	background: transparent url(../images/default/box/corners.gif) no-repeat right -24px;
+}
+.x-box-tl,
+.x-box-bl {
+	overflow: hidden;
+	padding-left: 8px;
+}
+.x-box-tr,
+.x-box-br {
+	overflow: hidden;
+	padding-right: 8px;
+}
+.x-box-blue .x-box-bl,
+.x-box-blue .x-box-br,
+.x-box-blue .x-box-tl,
+.x-box-blue .x-box-tr {
+	background-image: url(../images/default/box/corners-blue.gif);
+}
+.x-box-blue .x-box-bc,
+.x-box-blue .x-box-mc,
+.x-box-blue .x-box-tc {
+	background-image: url(../images/default/box/tb-blue.gif);
+}
+.x-box-blue .x-box-mc {
+	background-color: #c3daf9;
+}
+.x-box-blue .x-box-mc h3 {
+	color: #17385b;
+}
+.x-box-blue .x-box-ml {
+	background-image: url(../images/default/box/l-blue.gif);
+}
+.x-box-blue .x-box-mr {
+	background-image: url(../images/default/box/r-blue.gif);
+}

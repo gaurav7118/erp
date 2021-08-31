@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2009 11:17:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.ContractFiles" table="contractfile">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="name" type="string">
+      <column name="name" length="255" />
+    </property>
+    <property name="extn" type="string">
+      <column name="description" />
+    </property>
+    <property name="type" type="int">
+      <column name="type"/>
+    </property>
+    <!--property name="createdon" type="timestamp">
+      <column length="50" name="createdon"/>
+    </property-->
+    <property name="createdOn" type="long">
+      <column name="createdon"/>
+    </property>
+    <property name="deleted" type="integer">
+      <column default="0" length="2" name="deleted"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.User" name="creator" not-null="true"/>
+      <property name="contractid" type="string">
+      <column name="contractid" length="255"/>
+    </property>
+  </class>
+</hibernate-mapping>

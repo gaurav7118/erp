@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccountsSubReport" pageWidth="595" pageHeight="802" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="balance" class="java.lang.String"/>
+		<field name="baseCurrency" class="java.lang.String"/>
+	</subDataset>
+	<field name="customer" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<field name="jeId" class="java.lang.String"/>
+	<field name="debit" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="balance" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.String"/>
+	<field name="amountDue2" class="java.lang.String"/>
+	<field name="amountDue3" class="java.lang.String"/>
+	<field name="amountDue4" class="java.lang.String"/>
+	<field name="amountDue5" class="java.lang.String"/>
+	<field name="amount1Header" class="java.lang.String"/>
+	<field name="amount2Header" class="java.lang.String"/>
+	<field name="amount3Header" class="java.lang.String"/>
+	<field name="amount4Header" class="java.lang.String"/>
+	<field name="ageingCurrency" class="java.lang.String"/>
+	<field name="baseCurrency" class="java.lang.String"/>
+	<field name="customerAddress" class="java.lang.String"/>
+	<field name="outstandingBalance" class="java.lang.String"/>
+	<field name="pageBreak" class="java.lang.Boolean"/>
+	<field name="sOABalanceOutstandingPojos" class="java.util.List"/>
+	<field name="outstandingFlag" class="java.lang.Boolean"/>
+	<field name="basecurrencysymbol" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="headerdate" class="java.lang.String"/>
+	<field name="imagepath" class="java.lang.String"/>
+	<field name="customercode" class="java.lang.String"/>
+	<field name="attn" class="java.lang.String"/>
+	<field name="terms" class="java.lang.String"/>
+	<variable name="outstandingBalance" class="java.lang.String"/>
+	<group name="Customer" isStartNewPage="true" isReprintHeaderOnEachPage="true" footerPosition="CollateAtBottom">
+		<groupExpression><![CDATA[$F{customer}]]></groupExpression>
+		<groupHeader>
+			<band height="120">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="9" y="7" width="274" height="20"/>
+					<textElement markup="html">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customer}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="435" y="7" width="118" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{headerdate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="435" y="39" width="118" height="20"/>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="425" y="6" width="1" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="361" y="24" width="64" height="18"/>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<text><![CDATA[A/C Code]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="425" y="22" width="1" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="425" y="38" width="1" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="361" y="39" width="64" height="20"/>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Currency]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="435" y="24" width="118" height="20"/>
+					<textElement>
+						<font fontName="SansSerif" size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customercode}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="361" y="7" width="64" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Date]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="435" y="55" width="118" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="425" y="55" width="1" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="361" y="55" width="64" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Page No.]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="9" y="27" width="274" height="48"/>
+					<textElement markup="html">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customerAddress}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement positionType="Float" x="-1" y="96" width="554" height="18" isPrintWhenDetailOverflows="true"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<staticText>
+						<reportElement positionType="Float" x="382" y="0" width="65" height="16"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font isBold="false"/>
+						</textElement>
+						<text><![CDATA[Settled]]></text>
+					</staticText>
+					<staticText>
+						<reportElement positionType="Float" x="184" y="0" width="88" height="16"/>
+						<textElement verticalAlignment="Top">
+							<font isBold="false"/>
+						</textElement>
+						<text><![CDATA[Your Ref.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement positionType="Float" x="463" y="0" width="78" height="16"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font isBold="false"/>
+						</textElement>
+						<text><![CDATA[Balance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement positionType="Float" x="300" y="0" width="65" height="16"/>
+						<textElement textAlignment="Right" verticalAlignment="Top">
+							<font isBold="false"/>
+						</textElement>
+						<text><![CDATA[Amount]]></text>
+					</staticText>
+					<staticText>
+						<reportElement positionType="Float" x="102" y="0" width="75" height="16"/>
+						<textElement verticalAlignment="Top">
+							<font isBold="false"/>
+						</textElement>
+						<text><![CDATA[Our Ref.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement positionType="Float" x="10" y="0" width="87" height="16"/>
+						<textElement verticalAlignment="Top">
+							<font isBold="false"/>
+						</textElement>
+						<text><![CDATA[Date]]></text>
+					</staticText>
+				</frame>
+				<textField>
+					<reportElement x="435" y="72" width="118" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="361" y="72" width="64" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Term]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="425" y="72" width="1" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="77">
+				<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+				<componentElement>
+					<reportElement key="" style="table_TD" x="8" y="11" width="535" height="0">
+						<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="Table Dataset 1">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($F{sOABalanceOutstandingPojos})]]></dataSourceExpression>
+						</datasetRun>
+						<jr:column width="110">
+							<jr:columnHeader height="22" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="108" height="22"/>
+									<textElement verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Balance Outstanding]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table_TD" height="21" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="0" y="0" width="108" height="21"/>
+									<box rightPadding="10"/>
+									<textElement verticalAlignment="Middle"/>
+                                                                        <textFieldExpression><![CDATA[$F{baseCurrency}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="71">
+							<jr:detailCell style="table_TD" height="21" rowSpan="1">
+								<textField isStretchWithOverflow="true">
+									<reportElement x="4" y="0" width="67" height="21"/>
+									<box rightPadding="10"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle"/>
+                                                                        <textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="212">
+							<jr:detailCell style="table_TD" height="21" rowSpan="1"/>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+				<line>
+					<reportElement x="0" y="4" width="553" height="1">
+						<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<frame>
+					<reportElement positionType="FixRelativeToBottom" x="1" y="23" width="562" height="54"/>
+					<textField>
+						<reportElement positionType="Float" x="270" y="0" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amount3Header}]]></textFieldExpression>
+					</textField>
+					<line>
+						<reportElement x="0" y="44" width="553" height="1"/>
+						<graphicElement>
+							<pen lineWidth="4.0" lineStyle="Double"/>
+						</graphicElement>
+					</line>
+					<textField>
+						<reportElement positionType="Float" x="90" y="20" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amountDue1}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="6" y="20" width="84" height="20"/>
+						<textElement textAlignment="Center"/>
+						<textFieldExpression><![CDATA[$F{ageingCurrency}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="180" y="20" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amountDue2}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="270" y="20" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amountDue3}]]></textFieldExpression>
+					</textField>
+					<line>
+						<reportElement x="285" y="17" width="75" height="1">
+							<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+						</reportElement>
+					</line>
+					<line>
+						<reportElement x="375" y="18" width="75" height="1">
+							<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+						</reportElement>
+					</line>
+					<staticText>
+						<reportElement positionType="Float" x="6" y="0" width="84" height="20"/>
+						<textElement textAlignment="Left">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Ageing Details]]></text>
+					</staticText>
+					<line>
+						<reportElement x="105" y="17" width="75" height="1">
+							<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+						</reportElement>
+					</line>
+					<textField>
+						<reportElement positionType="Float" x="360" y="0" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amount4Header}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="180" y="0" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amount2Header}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="460" y="20" width="81" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amountDue5}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="360" y="20" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amountDue4}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="90" y="0" width="90" height="20"/>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[$F{amount1Header}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement positionType="Float" x="460" y="0" width="81" height="20"/>
+						<textElement textAlignment="Right"/>
+						<text><![CDATA[Total Dues]]></text>
+					</staticText>
+					<line>
+						<reportElement x="195" y="17" width="75" height="1">
+							<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+						</reportElement>
+					</line>
+					<line>
+						<reportElement x="466" y="17" width="75" height="1">
+							<printWhenExpression><![CDATA[$F{outstandingFlag}]]></printWhenExpression>
+						</reportElement>
+					</line>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83">
+			<staticText>
+				<reportElement x="0" y="3" width="553" height="35"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Buildmate (S) Pte Ltd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="542" height="16"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3 Eunos Ave 8A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="539" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Singapore 409458]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="53" width="533" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Tel   :  6589 5388-5390]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="68" width="533" height="15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Fax  :  6589 5399-5398]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32">
+			<staticText>
+				<reportElement x="0" y="9" width="553" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATEMENT OF ACCOUNT]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="2" width="87" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="2" width="72" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{transactionId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="2" width="88" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jeId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="285" y="2" width="78" height="17"/>
+				<textElement textAlignment="Right" markup="html"/>
+				<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="2" width="76" height="17"/>
+				<textElement textAlignment="Right" markup="html"/>
+				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="2" width="86" height="17"/>
+				<textElement textAlignment="Right" markup="html"/>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

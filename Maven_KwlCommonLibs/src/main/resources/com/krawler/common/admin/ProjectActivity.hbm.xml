@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.ProjectActivity" table="activitylist">
+    <id column="activityid" name="activityID">
+      <generator class="uuid"/>
+    </id>
+    <property name="activityName" type="string">
+      <column length="50" name="activityname" not-null="true" unique-key="activityFeature"/>
+    </property>
+    <property name="displayActivityName" type="string">
+      <column length="50" name="displayactivityname" not-null="true"/>
+    </property>
+    <property name="orderNo" type="int">
+      <column name="orderno" not-null="true" default='0'  unique-key="parentOrder"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.ProjectFeature" name="feature" not-null="true" unique-key="activityFeature"/>
+   <many-to-one class="com.krawler.common.admin.ProjectActivity" name="parent"   unique-key="parentOrder"/>
+ 
+  </class>
+</hibernate-mapping>

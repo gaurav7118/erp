@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.GRODetailsStockOutISTMapping" table="grodstockoutistmapping">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="outQty" type="double">
+            <column name="outqty" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="interstoretransfer" name="interStoreTransferRequest" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.stockout.StockAdjustment" column="stockadjustment" name="stockAdjustment" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptOrderDetails" column="grodetails" name="goodsReceiptOrderDetails" not-null="true"/>
+    </class>
+</hibernate-mapping>

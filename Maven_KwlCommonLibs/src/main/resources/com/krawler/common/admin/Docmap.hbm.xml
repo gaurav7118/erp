@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="false" default-lazy="false">
+  <class name="com.krawler.common.admin.Docmap" table="crm_docsmap">
+    <id name="id" type="java.lang.String">
+      <generator class="uuid"/>
+    </id>
+    <many-to-one cascade="delete" class="com.krawler.common.admin.Docs" column="docid" name="docid"/>
+    <property name="recid" type="java.lang.String"/>
+    <property name="relatedto" type="java.lang.String"/>
+  </class>
+</hibernate-mapping>

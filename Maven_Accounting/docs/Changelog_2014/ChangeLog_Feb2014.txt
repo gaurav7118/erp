@@ -1,0 +1,408 @@
+Hitesh Suryawanshi 5th Feb 2014 
+1. Add link 'Report List' in 'Reports' to show all reports in one panel 
+2. Admin can give permissions  to users by using this tabpanel.
+
+
+Anup K Feb 3rd, 2014
+1. Pdf template in MP/RP against vendor. 
+2. Pdf template in MP/RP otherwise. 
+3. Pdf template in MP/RP GL Code. 
+4. Pdf template in MP/RP GL Contra Payment Voucher Funds transfer through JE.
+5. Pdf template in statement of accounts Customer.
+
+Anup K Feb 4th, 2014
+1. Pdf template in Customer Invoice Report. 
+4. Pdf template in statement of accounts Vendor.
+
+Amol Dhokale    Feb 4, 2014
+Changes:
+1. Balance Quantity shown in PO row expander
+2. Duplicate check on Sequence Format
+3. Shown all Custom designed templates in single export record menu.
+4. Rename Tab name to "Initiate RFQ" and "RFQ List" for "RFQ" and "Request for Quotation" 
+
+//Raveesh Pathak 4th Feb 2014
+All account type are displayed instead of Bank type in Bank Book
+ 
+Anand N Feb 6, 2014
+1. Added 'Paid To' as default field in Payment module
+
+Anup K Feb 6th, 2014
+1. Issues related to SMS templates.
+    1.unable to export CI if line level discount and tax are given.
+    2.Account statement are showing wrong values, its adding foreign amount in base amount. refer 1.png, 2.png.
+    3.In export of MP against vendor invoice, currency symbol are missing from amount. refer 3.png-
+    4.In export of MP against vendor invoice,remove #36 from amount in words. refer 4.png-
+    5.In export of MP against otherwise,unable to export MP when it have taxes-
+    6.In export of MP against invoice, Class Narration are not displaying.
+    7.In export of MP against otherwise/GL, Class, Narration and amount in words are not displaying. refer 5.png-
+    8.In export of MP against otherwise/GL, value of paid fields are missing. refer 6.png-
+    9.Fund Transfer JE, export single record button are getting disabled after editing JE.-
+    10.Fund Transfer JE, Class and Narration are not showing. refer 7.png-
+
+2. Issue related to NUll VAlue while saving advance in make payment. 
+
+//Raveesh Pathak 6th Feb 2014
+1.JE sequence number generation issue
+2.Email Notification related issues
+
+//Hitesh Suryawanshi 7th Feb 2014
+1.Added 'Advance Search' Fuctionality in Unpaid Invoices.
+
+//Vivekanand Swami 7th Feb 2014
+1.Solved issues in Cycle count flow in product and services.
+2.Resolved All Issues from Issue ID : 31879	
+Summary  :Cycle Count DataGrid contents are not desplaying when update is made and design issues
+
+//Amol Dhokale    Feb 7th, 2014
+1. Add Balance quantity Column and Calculate Balance quantity in Purchase Order Report
+
+
+#Atul sachan DATE 7-Feb -2014
+1. to make editable tax field. 
+
+
+Mayur Bhokase 7th feb 2014
+Credit note report for export record of otherwise condition
+
+
+Mayur Pawar 7th feb 2014
+Debit note report for export record for otherwise condition
+
+Mayur Pawar 7th feb 2014
+
+1.Data not loaded properly into user combo box.
+2.Changing the name of group name to roll name in set privilleges
+3. Adding the functionality to select all the users for particular role
+
+Malhari Pawar 10 Feb 2014
+1.Max allowed discount to be tied to each product,In case, more discount is given on any product invoice shall be routed for approval.
+
+Pandurang Mukhekar 10 feb 2014
+1.Account Reevalatuion task   
+
+Hitesh Suryawanshi 10 Feb 2014
+'Credit term ' filter in 'Customer Invoice and cash sales report'  and 'Vendor Invoice and Cash purchase Report
+
+#Anand Nimbalkar 10 Feb 2014
+1.Issue ID : 31012
+Summary  : [purchase/Sales Tax Report]change the grid column name to Payable in Purchase Tax tab and Receivable in sales Tax tab. refer screen shots.
+
+2.Issue ID : 30666
+Summary  : [My Account]: 'System failure' is displayed while uploading 'User Picture' of resolution '2448x3264'
+
+3.Issue ID : 30684
+Summary  : Option to delete/ remove Custom Reports is not available
+
+4.Issue ID : 31611
+Summary  : [MP/RP against CN/DN otherwise]unable to MP/RP again if i have delete previous MP/RP report which was created against CN/DN. 
+
+5.Issue ID : 31799
+Summary  : [Discount in Quotation]Discount in vendor/customer quotation are not coming if we copy vendor/customer quotation.  
+
+6.Issue ID : 30701
+Summary  : Unable to open Master Configuration tab when duplicate Master item is created though any other tab
+
+7.Issue ID : 31858
+Summary  : [Create CI/VI in billing]if we link multiple PO/SO while creating an invoice, the jobs in invoice are not getting loaded.
+
+8.Summary  : Implement Edit Dimension functionality here you are allowed to change only Field name field rest of fields are disable
+
+9.Summary  : Solve reload  problem of master configuration grid when add Dimension or Custom fields.
+
+10.Summary  : Provide option to set trading / non trading if inventory type is selected in startup wizard. Disable same option from account preferences tab.
+
+#Mayur Bhokase 10 Feb 2014
+Jasper Report for Trail Balance . 
+
+#Mayur Bhokase 11 Feb 2014
+Jasper Report for Trail Balance Header Issue. 
+
+Hitesh Suryawanshi 11 Feb 2014
+Issue Resolved "User unable to see report from report list even when he have privileges".
+
+Hitesh Suryawanshi 12 Feb 2014
+Issue solved Put a check for Cash Sale Invoices and Cash Purchase Invoices so that it should not get filter on the basis of Term because there is no pending payment for these two. Hence term are not applicable for these two.
+
+
+
+#Vivekanand L. Swami 12 Feb 2014
+Summary : Filter in Cyclecount to check status of Cyclecount as Pending, Re-count, Approval and All.
+Summary : In cycle count, quantity are not taking in double, i input 40.25 during initial count but system are showing just 40 while recount.
+Summary : Unable to update the recount, product are still showing in the grid.
+Summary : Data are not showing in cycle count worksheet for initial count.
+Summary : -ve Value is not displaying in Worksheet and Cyclecount Report
+Summary : show only 2 decimal value in varience field of Cyclecount
+
+# Anand Nimbalkar 13 Feb 2014
+1. Issue ID : 32364
+   Summery  : [Accounts Preferences]while making editing and deleting transaction option true, mode of application are getting changed.
+2. Please give deskera logo on pop up window where we are creating master items.
+3. Master item field text should be best fit in the pop up window.
+
+
+#Hitesh Suryawanshi 13th Feb 2014
+Solve issue : User Group combo in Report List display wrong Groups.
+
+#Atul sachan  13 Feb 2014
+
+1. Added GST Form 5 Detailed View Report.
+
+#Raveesh Pathak 14 Feb 2014
+Solved Issues
+1.Show help for delete sequence format and remove default value from no. of digit column.
+2.Make Payment against GL - Don't restrict on duplicate accounts
+3.Cheque date field should have the same date which is given while making/Receiving payment
+4.Unable to save Receive payment.
+
+#Pandurang Mukhekar
+1.Page Fit Issue of VRnet
+2. sales person name in customer quotation
+3.part no column adjustment in product description
+4.make and receive payment amount filed hidden issue.
+
+#Vivekanand L. Swami 15 Feb 2014
+1.Added multi select feature to Ledger report, on existing single select combo box.
+
+# Anand Nimbalkar 14 Feb 2014
+1. Added 'Received From' as default field in Receive Payment module
+
+
+#Dipak Mundhe 15 Feb 2014
+A. Custom field functionality (CURD)
+   1. Merge field by type.
+   1. CURD operation on merged field.
+   1. Script file (Update existing data in fieldcombodata table )
+
+# Malhari Pawar 15 Feb 2014
+1. CN/DN Otherwise - Should allow user to select multiple accounts.
+
+# Anup Kale 15 Feb 2014
+1.  dimensions under "Class" label in Petty Cash Voucher, Payment Voucher for GL, Contra Voucher.
+2.  dimensions after Remark in Credit and Debit Note.
+3.  'Paid To' value in Contra Voucher,  Payment Voucher for GL, Petty Cash Voucher.
+4.  Cheque/DD no and Bank charges for Payment Voucher for AR & AP.
+5. Out Standing balance in Statement of Accounts.
+
+#Mayur Bhokase 15 Feb 2014
+1.Issues of Trial Balance in Custom Layouts.
+
+#Vivekanand L. Swami 15 Feb 2014
+1.Bank Interest not saved in make and receive payment tabs.
+
+#Raveesh Pathak 15th Feb 2014
+1.Entry Form and Reports - Quantity should display in 4 decimals
+
+#mayur Bhokase 15th Feb 2014
+
+Purchase Order Report in jasper- For SMS.(Committed in only SMS Checkout) 
+
+# Anand Nimbalkar 17 Feb 2014
+1. Button are hiding behind combo options in 'Set Privilege' option of Report List.
+2. Master value created from + button given in RP/MP form are not showing in Received From/ Paid To combo in mean time. 
+
+#Mayur Bhokase 18 Feb 2014
+1.trading profit and loss account grouping problem.
+2.jasper report for trail balance(in custom layout) issues.
+3.Tax Invoice client changes like footer/header logo etc  
+
+#Anup Kale 18 Feb 2014
+1.Contra Voucher Changes as per client sample PDF
+
+#Dipak Mundhe 
+   1. Advance Search with multiple combo data on every report 
+      (No DB changes)
+
+# Sagar M 18th Feb 2014
+1. Line level custom data save logic - set record id to fetch data 
+
+#Prathamesh Sheth 19th Feb 2014
+
+    QA Approval Flow with normal and include QA Approval Check.
+    Product Custom Field History feature.(Check by shifting dates).
+    Shelf Location Feature.
+    Custom Field in PO as well as Line level in PO.
+    Update Inventory In case of all transaction etc. CI,VI,GRN,DO,CN,DN,SR,PR.
+    Check Supplier part number feature. 
+    Stop Purchase and obosolute field feature.
+    Reorder Analysis Report.
+    Permit Number Feature.
+    Supplier Part Number.    
+    Check add new row function change.
+    check UOM related changes while sync product.
+    Discount in PO and SO.
+
+#Hitesh Suryawanshi 18th Feb 2014
+Solve issue :CN report are getting generated for one CN otherwise.
+      (No DB changes)
+
+# Sagar M 18th Feb 2014
+
+Issue - Not possible to save multiple rows of line level custom data for Customer and Vendor Invoices
+
+#Hitesh Suryawanshi 19th Feb 2014
+Solve issue :Sorting for Customer/Vendor in sales/purchase order report.
+      (No DB changes)
+Solve issue :Add attachment option in sales/purchase order report.
+      (No DB changes)
+Solve issue :Remove column selection from General Ledger Report
+      (No DB changes)
+
+#Atul sachan 19 feb 2014
+
+1 - Creation of CP/WIP Accounts while syncing with PM.
+2 - Advance search in all modules on behalf of Parent and Child dimensions/custom fields.
+
+
+#Mayur Bhokase 21 feb 2014
+
+Jasper Reort for Tax Invoice PDF Issues.
+1.Alignment Issues.
+2.Added Chinies Character at header. 
+2 - Advance search in all modules on behalf of Parent and Child dimensions/custom fields.
+
+# Malhari Pawar 19 Feb 2014
+1.Allow HTML content for Product Description
+2.Added show HTML product description in Export PDF
+3.Added functionality to print more one than page in single export PDF
+4.Added show product header on each page when product table does more than one page
+5.Added page fit product table for VRNET Company
+
+# Anup Kale 20 Feb 2014
+1.Added currency filter in Trading and Profit/Loss statement(In normal as well as split mode) which shows all the amount in the selected currency according to the rate present on the end date.
+2.Made changes in respective pdf to show normal,compare(with last year) and compare to selected currency compare.
+3.Made changes in respective csv to show normal,compare(with last year) and compare to selected currency compare.
+4.Made changes in respective print to show normal,compare(with last year) and compare to selected currency compare.
+5.Removed special characters From description while saving MP,RP.
+6.Added special characters like (@$%#()^&*) while saving Paid To MP,RP.
+
+#Neeraj Dwivedi-19 Feb 2014
+Solve issue :Select option for custom design template at list level is not working in other modules except Custom Invoice
+
+ The template name can be seen for all the modules 
+
+#Neeraj Dwivedi-20 Feb 2014
+Adding delete option in custom design module
+
+# Raveesh Pathak 21th Feb 2014
+1. making Quantity field of 4 digit after decimal point.
+2. Issue 32398 - [Create CN/DN/JE]next sequence format are not displaying in form after saving DN/CN/JE. 
+3. [Issue 32385] New: [Pdf Export Single record]unable to export DO, GR, PR, SR.
+4. Copy old posttext values in new module wise post text table.
+5. Email notification setup - Option to include emails of selected users 
+
+# Anup Kale 21 Feb 2014
+1.Added a default group named Cash.
+2.Changed the group type for Cash in hand from Current Asset to Cash.
+3.Added a drop down in cash book named Cash Account Name.
+
+#Mayur Pawar 21 Feb 2014
+Adding the button in SO/PO report to show the link information of where particular order has been used.
+Issue 30734 - [Build Assembly]: Icon for 'Cancel' is not proper as it looks like the 'Save' icon. Make it similar as other 'Cancel' icon are present in the application
+Issue 31349 - [Customize PDF Template]link name in master configuration should be "Customize PDF Template"
+
+#Mayur Bhokase 23 Feb 2014
+Tax Invoice Jasper Report Alignment Issues.
+1. The terms date is not accurate. 
+2. Fax no is missing.
+3. add UEN and GST#
+4. Add E.& O.E above the Amount in Words.
+
+#Atul sachan 24 Feb - 2014
+
+1. Fixed optimatic client issue - Data was not coming in Income Portion in Monthly Trading profit & loss report.
+
+
+# Raveesh Pathak 24 th Feb 2014
+1. Optimize creating Sequence format number for JE after saving JE.
+2. Issue-Creating group type in Liability and Asset. 
+
+#Pandurang 24 Feb 2014
+1. Optimization for Product combo in VI/CI/CS/CP/PO/SO
+2.Product Search based on Product Name and Product ID in VI/CI/CS/CP/PO/SO at the time of product Selection.
+3.Paging for the Customer Invoice Report. 
+
+#Anup Kale 24 Feb 2014
+Enhancement
+1.Added a check box named Generate CN/DN which when enabled generats CN and DN along with Party Journal Entry.
+
+#Anand Nimbalkar 26 Feb 2014
+Enhancement 1. Active date range functionality in All transactions listed below:
+1.Create Cash Purchase
+2.Create Purchase Order
+3.Create Purchase Requisition
+4.Create Vendor Quotation
+5.Create Goods Receipt
+6.Create Vendor Invoice
+7.Create Purchase Return
+8.Create Debit Note
+9.Make Payment
+10.Create Cash Sales
+11.Create Sales Order
+12.Create Customer Quotation
+13.Create Delivery Order
+14.Create Customer Invoice
+15.Create Sales Return
+16.Create Credit Note
+17.Receive Payment
+18.Make a Journal Entry
+
+#Anup 26 Feb 2014
+Issue : 
+1.Solved combo(vendor & petty cash) data load issues regarding newly added Cash,BillsPayable account type.
+2.Issue of special character in Bank from Name of payment made. 
+
+#pandurang 26 Feb 2014
+1. Issue unable to create customer.
+
+#Atul sachan
+ 1. - PM-Accounting Integration changes for BCHL Demo task.
+
+#Hitesh 26 Feb 2014
+1.Invoice List - Sorting the invoice list by invoice date. Set it as a default
+2.Implement sorting on column vendor invoice no.,JE no.,Vendor Invoice Date,Due date in Vendor invoices/cash purchase Reports.
+3.Implement sorting on column invoice no.,JE no.,Customer Invoice Date,Due date in Customer invoices/cash Sales Reports.
+
+#Hitesh 26 Feb 2014
+1.Implement sorting on column Purchase Order no.,Purchase Order Date,Due date in Purchase Order Reports.
+2.Implement sorting on column Sales Order no.,Sales Order Date,Due date in Sales Order Reports.
+
+#pandurang 27 feb 2014
+Locally Done Items  in Financial Details report 
+1. Currency Tab should be added in the report.
+2. Show original currency and amount of the Party Journal. 
+3. Link to open the document. 
+4. Customer and Currency filter option 
+5. Change naming conversion of JE Number column to TR Number.
+
+#Atul sachan 27 feb 2014
+
+ 1. - PM-Accounting Integration changes for BCHL Demo task - Fixed currency issue.
+
+#Pandurang 27 feb 2014
+1. Issue that Normal Journal Entry cannot be Saved.
+
+#Anand Nimbalkar 28 feb 2014
+1.Printed many reports (eg: Trial balance, Vendor invoice report etc), all of them do not show the date range for which the data are extracted from.
+
+#Hitesh 28 feb 2014
+solve issue : Term related issue in invoice tab and PDF
+
+#Pandurang 28 feb 2014
+1.VRnet column alignment issue for Tax Invoice
+
+#Anup 26 Feb 2014
+Enhancement : 
+1.Added Payment Receivables while Auto Generating CN/DN from Party Journal Entry. 
+Issue:
+1.Solved an issue regarding Sub Groups not showing in the accounts combo for CN/DN Otherwise Accounts Combo.
+2.Ledger report now does not show anything unless externally selected.
+
+#mayur pawar 28 Feb 2014
+Enhancement : 
+1.Added functionality to delete customer invoice permanetly
+
+#Pandurang 28 feb 2014
+1.Lowercase Issue -Invoice Cannot be Saved.
+
+

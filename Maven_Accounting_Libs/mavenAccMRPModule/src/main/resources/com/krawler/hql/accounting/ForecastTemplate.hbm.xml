@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.mrp.jobwork.ForecastTemplate" table="forecasttemplate">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="title" type="string">
+            <column length="255" name="title"/>
+        </property>
+        <property name="forecastId" type="string">
+            <column length="255" name="forecastid" not-null="true"/>
+        </property>
+        <property name="forecastType" type="string">
+            <column length="255" name="forecasttype" not-null="true"/>
+        </property>
+        <property name="forecastMethod" type="string">
+            <column length="255" name="forecastmethod"/>
+        </property>
+        <property name="forecastYear" type="date">
+            <column length="255" name="forecastyear"/>
+        </property>
+        <property name="createdOn" type="date">
+            <column name="createdon"/>
+        </property>
+        <property name="modifiedOn" type="date">
+            <column name="modifiedon"/>
+        </property>
+        <property name="forecastYearHistory" type="string">
+            <column length="255" name="forecastyearhistory"/>
+        </property>
+       
+        <set name="forecastProductMappings" cascade="all" inverse="true">
+            <key column="forecasttemplate"/>
+            <one-to-many class="com.krawler.spring.mrp.jobwork.ForecastProductMapping"/>
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+    </class>
+</hibernate-mapping>

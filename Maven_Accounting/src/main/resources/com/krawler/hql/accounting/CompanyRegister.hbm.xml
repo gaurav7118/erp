@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.pos.CompanyRegister" table="companyregister">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="locationid" type="string">
+            <column length="50" name="locationid" not-null="true"/>
+        </property>
+        <property name="isopen" type="int">
+            <column default="0" name="isopen"/>
+        </property>
+        <property name="currencydenominationsjson" type="string">
+            <column length="1024" name="currencydenominationsjson"/>
+        </property>
+        <property name="previousclosedbalance" type="double">
+            <column name="previousclosedbalance"/>
+        </property>
+        <property name="openingamount" type="double">
+            <column name="openingamount"/>
+        </property>
+        <property name="finalopeningamount" type="double">
+            <column name="finalopeningamount"/>
+        </property>
+        <property name="addedamount" type="double">
+            <column name="addedamount"/>
+        </property>
+        <property name="byCash" type="double">
+            <column name="bycash"/>
+        </property>
+        <property name="byCheque" type="double">
+            <column name="bycheque"/>
+        </property>
+        <property name="byCard" type="double">
+            <column name="bycard"/>
+        </property>
+        <property name="byGiftCard" type="double">
+            <column name="bygiftcard"/>
+        </property>
+        <property name="transactionDate" type="date">
+            <column name="transactiondate"/>
+        </property>
+        <property name="transactionDateinLong" type="long">
+            <column name="transactiondateinlong"/>
+        </property>
+        <property name="variance" type="double">
+            <column name="variance"/>
+        </property>
+        <property name="closingamount" type="double">
+            <column name="closingamount"/>
+        </property>
+        <property name="depositedamount" type="double">
+            <column name="depositedamount"/>
+        </property>
+        <property name="finalamount" type="double">
+            <column name="finalamount"/>
+        </property>
+        <property name="cashoutamount" type="double">
+            <column name="cashoutamount"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="userid"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

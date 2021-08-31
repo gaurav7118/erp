@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccountsSubReport" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.3579476910000916"/>
+	<property name="ireport.x" value="517"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="balance" class="java.lang.String"/>
+		<field name="baseCurrency" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Table Dataset 2">
+		<field name="ageingCurrency" class="java.lang.String"/>
+		<field name="amountDue1" class="java.lang.String"/>
+		<field name="amountDue2" class="java.lang.String"/>
+		<field name="amountDue3" class="java.lang.String"/>
+		<field name="amountDue4" class="java.lang.String"/>
+		<field name="amountDue5" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="isImageOnLeft" class="java.lang.Boolean"/>
+	<parameter name="SOAdate" class="java.lang.String"/>
+	<field name="customer" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<field name="jeId" class="java.lang.String"/>
+	<field name="debit" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="balance" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.String"/>
+	<field name="amountDue2" class="java.lang.String"/>
+	<field name="amountDue3" class="java.lang.String"/>
+	<field name="amountDue4" class="java.lang.String"/>
+	<field name="amountDue5" class="java.lang.String"/>
+	<field name="amount1Header" class="java.lang.String"/>
+	<field name="amount2Header" class="java.lang.String"/>
+	<field name="amount3Header" class="java.lang.String"/>
+	<field name="amount4Header" class="java.lang.String"/>
+	<field name="amount5Header" class="java.lang.String"/>
+	<field name="ageingCurrency" class="java.lang.String"/>
+	<field name="baseCurrency" class="java.lang.String"/>
+	<field name="customerAddress" class="java.lang.String"/>
+	<field name="outstandingBalance" class="java.lang.String"/>
+	<field name="pageBreak" class="java.lang.Boolean"/>
+	<field name="sOABalanceOutstandingPojos" class="java.util.List"/>
+	<field name="outstandingFlag" class="java.lang.Boolean"/>
+	<field name="customercode" class="java.lang.String"/>
+	<field name="ageingTableData" class="java.util.List"/>
+	<field name="memo" class="java.lang.String"/>
+	<field name="duration" class="java.lang.Double"/>
+	<field name="amountDueCurrent" class="java.lang.String"/>
+	<field name="headerdate" class="java.lang.String"/>
+	<variable name="outstandingBalance" class="java.lang.String"/>
+	<group name="Customer" isStartNewPage="true" isReprintHeaderOnEachPage="true" footerPosition="CollateAtBottom" keepTogether="true">
+		<groupExpression><![CDATA[$F{customer}]]></groupExpression>
+		<groupHeader>
+			<band height="138">
+				<rectangle radius="0">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="545" height="121" forecolor="#FFFFFF"/>
+				</rectangle>
+				<rectangle radius="4">
+					<reportElement x="392" y="0" width="143" height="20" forecolor="#000000" backcolor="#808080">
+						<printWhenExpression><![CDATA[$P{isImageOnLeft}]]></printWhenExpression>
+					</reportElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="432" y="40" width="32" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Page:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="464" y="40" width="33" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement positionType="FixRelativeToBottom" x="2" y="73" width="545" height="58" isPrintWhenDetailOverflows="true"/>
+					<rectangle radius="7">
+						<reportElement mode="Opaque" x="5" y="37" width="530" height="20" backcolor="#808080"/>
+					</rectangle>
+					<rectangle radius="0">
+						<reportElement mode="Opaque" x="5" y="48" width="530" height="9" forecolor="#808080" backcolor="#808080"/>
+					</rectangle>
+					<staticText>
+						<reportElement style="table" x="392" y="37" width="67" height="20" forecolor="#FFFFFF"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Credit]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table" x="459" y="37" width="76" height="20" forecolor="#FFFFFF"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Net Amount]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table" x="167" y="37" width="160" height="20" forecolor="#FFFFFF"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Description]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table" x="93" y="37" width="74" height="20" forecolor="#FFFFFF"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Document No]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table" x="5" y="37" width="88" height="20" forecolor="#FFFFFF" backcolor="#808080"/>
+						<box>
+							<topPen lineWidth="0.0"/>
+							<leftPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Transaction Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table" x="327" y="37" width="65" height="20" forecolor="#FFFFFF"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Debit]]></text>
+					</staticText>
+					<rectangle radius="4">
+						<reportElement x="6" y="0" width="529" height="20"/>
+					</rectangle>
+					<textField>
+						<reportElement x="105" y="0" width="195" height="20"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{customercode}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="392" y="0" width="143" height="20"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{SOAdate}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement mode="Opaque" x="300" y="0" width="95" height="20" forecolor="#FFFFFF" backcolor="#808080"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Statement Date]]></text>
+					</staticText>
+					<rectangle radius="4">
+						<reportElement x="6" y="0" width="10" height="20" forecolor="#404040" backcolor="#808080"/>
+					</rectangle>
+					<staticText>
+						<reportElement mode="Opaque" x="10" y="0" width="95" height="20" forecolor="#FFFFFF" backcolor="#808080"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Customer Code]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement x="8" y="0" width="280" height="66"/>
+					<rectangle radius="10">
+						<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="280" height="66" backcolor="#FFFFFF"/>
+					</rectangle>
+					<textField isStretchWithOverflow="true">
+						<reportElement x="7" y="9" width="265" height="51"/>
+						<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+						<textElement markup="html"/>
+						<textFieldExpression><![CDATA["<b>"+$F{customer}+"</b><br>"+$F{customerAddress}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="392" y="0" width="143" height="20" forecolor="#FFFFFF">
+						<printWhenExpression><![CDATA[$P{isImageOnLeft}]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[STATEMENT OF ACCOUNT]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="108">
+				<rectangle radius="0">
+					<reportElement stretchType="RelativeToBandHeight" x="2" y="0" width="545" height="107" forecolor="#FFFFFF"/>
+				</rectangle>
+				<rectangle radius="10">
+					<reportElement stretchType="RelativeToTallestObject" x="7" y="14" width="530" height="31"/>
+				</rectangle>
+				<elementGroup>
+					<elementGroup>
+						<textField isStretchWithOverflow="true">
+							<reportElement stretchType="RelativeToTallestObject" x="443" y="25" width="94" height="20"/>
+							<box rightPadding="5">
+								<topPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{amountDue5}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement stretchType="RelativeToTallestObject" x="88" y="25" width="85" height="20"/>
+							<box rightPadding="5">
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{amountDue3}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement stretchType="RelativeToTallestObject" x="173" y="25" width="90" height="20"/>
+							<box rightPadding="5">
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{amountDue2}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement stretchType="RelativeToTallestObject" x="263" y="25" width="90" height="20"/>
+							<box rightPadding="5">
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{amountDue1}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement stretchType="RelativeToTallestObject" x="353" y="25" width="90" height="20"/>
+							<box rightPadding="5">
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{amountDueCurrent}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true">
+							<reportElement stretchType="RelativeToTallestObject" x="7" y="25" width="81" height="20"/>
+							<box rightPadding="5">
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textElement textAlignment="Right" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{amountDue4}]]></textFieldExpression>
+						</textField>
+					</elementGroup>
+				</elementGroup>
+				<rectangle radius="0">
+					<reportElement mode="Opaque" x="7" y="0" width="530" height="25" forecolor="#404040" backcolor="#808080"/>
+				</rectangle>
+				<staticText>
+					<reportElement style="table" mode="Transparent" x="443" y="1" width="94" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0" lineColor="#070202"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Amount
+Outstanding
+]]></text>
+				</staticText>
+				<textField>
+					<reportElement style="table" mode="Transparent" x="88" y="1" width="85" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0" lineColor="#070202"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(($F{duration}.intValue()*3)+1)+"-"+(($F{duration}.intValue())*4)+" Days"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table" mode="Transparent" x="7" y="1" width="81" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0" lineColor="#070202"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Over "+(($F{duration}.intValue()*4))+" Days"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table" mode="Transparent" x="263" y="1" width="90" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0" lineColor="#070202"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{duration}.intValue()+1)+"-"+(($F{duration}.intValue())*2)+" Days"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table" mode="Transparent" x="173" y="1" width="90" height="24" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0" lineColor="#070202"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[(($F{duration}.intValue()*2)+1)+"-"+(($F{duration}.intValue())*3)+" Days"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="table" mode="Opaque" x="353" y="1" width="90" height="24" forecolor="#FFFFFF" backcolor="#808080"/>
+					<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2">
+						<topPen lineWidth="1.0" lineColor="#070202"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Current]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="15" y="64" width="311" height="20"/>
+					<textElement>
+						<font size="7"/>
+					</textElement>
+					<text><![CDATA[Please arrange to settle the outstanding amount. Thank You.
+This is a computer generated invoice which requires no signature.
+]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="12" y="1" width="83" height="20"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="95" y="1" width="72" height="20"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="167" y="1" width="160" height="20"/>
+				<box leftPadding="3" rightPadding="1"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{memo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="329" y="1" width="65" height="20"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="394" y="1" width="67" height="20"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;#,##0.00-">
+				<reportElement x="461" y="1" width="71" height="20"/>
+				<box leftPadding="1" rightPadding="1"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

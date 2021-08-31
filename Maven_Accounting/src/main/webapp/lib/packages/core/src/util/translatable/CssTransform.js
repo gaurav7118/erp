@@ -1,0 +1,1 @@
+Ext.define("Ext.util.translatable.CssTransform",{extend:"Ext.util.translatable.Dom",doTranslate:function(A,C){var B=this.getElement();if(!this.destroyed&&!B.destroyed){B.translate(A,C)}},destroy:function(){var A=this.getElement();if(A&&!A.destroyed){A.dom.style.webkitTransform=null}this.callParent()}})

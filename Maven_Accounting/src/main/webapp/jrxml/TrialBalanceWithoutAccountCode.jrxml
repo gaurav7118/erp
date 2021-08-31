@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bankbook_subreport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000044"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FEFEFE">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="code" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="debit" class="java.lang.String"/>
+		<field name="credit" class="java.lang.String"/>
+		<field name="dopening" class="java.lang.String"/>
+		<field name="copening" class="java.lang.String"/>
+		<field name="dending" class="java.lang.String"/>
+		<field name="cending" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="TrialBalanceTableData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="CompanyAccountingPeriod" class="java.lang.String"/>
+	<parameter name="CompanyName" class="java.lang.String"/>
+	<parameter name="CompanyAddress" class="java.lang.String"/>
+	<parameter name="CompanyCurrency" class="java.lang.String"/>
+	<parameter name="CompanyCurrencySymbol" class="java.lang.String"/>
+	<parameter name="BankBookDateRange" class="java.lang.String"/>
+	<parameter name="debitTotal" class="java.lang.String"/>
+	<parameter name="creditTotal" class="java.lang.String"/>
+	<parameter name="dopeningTotal" class="java.lang.String"/>
+	<parameter name="copeningTotal" class="java.lang.String"/>
+	<parameter name="dendingTotal" class="java.lang.String"/>
+	<parameter name="cendingTotal" class="java.lang.String"/>
+	<pageHeader>
+		<band height="71">
+			<staticText>
+				<reportElement x="244" y="8" width="132" height="24" forecolor="#010101"/>
+				<textElement>
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TRIAL  BALANCE
+                ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="5" width="556" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="309" y="20" width="243" height="16" forecolor="#000000"/>
+				<textElement textAlignment="Right" markup="html">
+					<font size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyAccountingPeriod}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="4" y="10" width="228" height="14" forecolor="#000000"/>
+				<textElement markup="none">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyName}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="556" height="31" isPrintWhenDetailOverflows="true" forecolor="#000000"/>
+				<textField>
+					<reportElement x="444" y="0" width="93" height="18" forecolor="#000000"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page No. "+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="4" y="14" width="288" height="15" forecolor="#000000"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{BankBookDateRange}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="352" y="13" width="199" height="15" forecolor="#000000"/>
+					<textElement textAlignment="Right" markup="html">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Amount in "+$P{CompanyCurrency}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="29" width="556" height="1"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+				<textField evaluationTime="Report">
+					<reportElement x="537" y="0" width="18" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" "+$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<staticText>
+				<reportElement x="394" y="10" width="157" height="15" forecolor="#010101"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Accounting Period
+                ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="4" y="23" width="228" height="12" forecolor="#000000"/>
+				<textElement markup="none">
+					<font size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyAddress}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="15">
+			<componentElement>
+				<reportElement key="table" x="0" y="0" width="555" height="13"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TrialBalanceTableData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="105">
+						<jr:columnHeader style="table_TH" height="26" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="104" height="22"/>
+								<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+								<textElement verticalAlignment="Top">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Account Description
+                                ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="13" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="104" height="12"/>
+								<box topPadding="0" leftPadding="2" bottomPadding="0" rightPadding="2"/>
+								<textElement verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150">
+						<jr:columnHeader style="table_TH" height="26" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="149" height="22"/>
+								<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[O P E N I N G ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="11" width="75" height="14"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Debit
+                                ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="75" y="11" width="75" height="14"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Credit
+                                ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="13" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="75" height="12"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{dopening}]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="75" y="0" width="75" height="12"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{copening}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="149">
+						<jr:columnHeader style="table_TH" height="26" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="149" height="22"/>
+								<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[P E R I O D]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="11" width="75" height="14"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Debit
+                                ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="74" y="11" width="75" height="14"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Credit
+                                ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="13" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="75" height="12"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{debit}]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="74" y="0" width="75" height="12"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150">
+						<jr:columnHeader style="table_TH" height="26" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="149" height="22"/>
+								<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="20"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[C L O S I N G]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="0" y="11" width="75" height="14"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Debit
+                                ]]></text>
+							</staticText>
+							<staticText>
+								<reportElement x="75" y="11" width="75" height="14"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<text><![CDATA[Credit
+                                ]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="13" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="75" height="12"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{dending}]]></textFieldExpression>
+							</textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="75" y="0" width="75" height="12"/>
+								<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{cending}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="21">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="330" y="6" width="75" height="14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{creditTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="478" y="6" width="75" height="14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cendingTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="108" y="6" width="75" height="14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dopeningTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="256" y="6" width="75" height="14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{debitTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="404" y="6" width="75" height="14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dendingTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="181" y="6" width="75" height="14"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{copeningTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="17" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="10" y="3" width="37" height="14" forecolor="#010101"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="3" width="61" height="14" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyCurrencySymbol}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

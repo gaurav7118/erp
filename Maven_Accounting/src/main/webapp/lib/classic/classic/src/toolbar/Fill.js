@@ -1,0 +1,1 @@
+Ext.define("Ext.toolbar.Fill",{extend:"Ext.Component",requires:["Ext.toolbar.Toolbar"],alias:"widget.tbfill",alternateClassName:"Ext.Toolbar.Fill",ariaRole:"presentation",isFill:true,flex:1})

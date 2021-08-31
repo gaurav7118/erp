@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.AccountingPeriod" table="accounitng_period_lock_info">
+        <id name="id" column="id">
+            <generator class="uuid" />   
+        </id>
+        <property name="periodName" type="string">
+            <column name="periodname" />
+        </property>
+        <property name="startDate" type="date">
+            <column name="startdate" />
+        </property>   
+        <property name="endDate" type="date">
+            <column name="enddate"  />
+        </property> 
+        <property name="periodType" type="integer">
+            <column name="periodtype" />  
+        </property>        
+        <property name="peridClosed" type="true_false">
+            <column name="peridclosed" />
+        </property>
+        <property name="arTransactionClosed" type="true_false">
+            <column name="artransactionclosed" />
+        </property>
+        <property name="apTransactionClosed" type="true_false">
+            <column name="aptransactionclosed" />
+        </property>        
+        <property name="allGLTransactionClosed" type="true_false">
+            <column name="allgltransactionclosed" />
+        </property>
+       <property name="periodFormat" type="integer">
+           <column name="periodformat" />
+       </property>
+       <property name="yearInPeriodName" type="integer">
+           <column name="yearinperiodname" />
+       </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true" />   
+        <many-to-one class="com.krawler.common.admin.AccountingPeriod" name="subPeriodOf" column="subperiodof" /> 
+        <many-to-one class="com.krawler.common.admin.User" name="user" column="userid" />
+    </class>
+</hibernate-mapping>

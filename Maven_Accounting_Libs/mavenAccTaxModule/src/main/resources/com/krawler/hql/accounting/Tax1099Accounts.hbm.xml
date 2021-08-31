@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Tax1099Accounts" table="tax1099accounts">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>   
+    <property name="deleted" type="true_false">
+      <column name="deleteflag" not-null="true" default="false"/>
+    </property>
+     <many-to-one class="com.krawler.hql.accounting.Tax1099Category" name="tax1099Category" not-null="true" />
+    <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true" />
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

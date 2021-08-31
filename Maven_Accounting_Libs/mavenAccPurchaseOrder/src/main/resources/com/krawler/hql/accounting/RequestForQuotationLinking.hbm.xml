@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class  name="com.krawler.hql.accounting.RequestForQuotationLinking" table="requestforquotationlinking">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="ModuleID" type="integer">
+            <column name="moduleid"/>
+        </property>
+        <property name="LinkedDocNo" type="string">
+            <column length="50" name="linkeddocno"/>
+        </property>
+        <property name="LinkedDocID" type="string">
+            <column length="50" name="linkeddocid" />
+        </property>
+        <property name="SourceFlag" type="integer">
+            <column name="sourceflag"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.RequestForQuotation" name="DocID" column="docid" />
+    </class>
+</hibernate-mapping>

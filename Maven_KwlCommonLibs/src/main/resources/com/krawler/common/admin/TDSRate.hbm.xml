@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.krawler.common.admin.TDSRate" table="tds_rate">
+        <id column="id" name="id" type="int">
+            <generator class="increment"/>
+        </id>
+        <property name="natureofpayment" type="string">
+            <column name="natureofpayment"/>
+        </property>
+        <property name="deducteetype" type="string">
+            <column  name="deducteetype"/>
+        </property>
+        <property name="residentialstatus" type="string">
+            <column  name="residentialstatus"/>
+        </property>
+        <property name="fromdate" type="date">
+            <column  name="fromdate"/>
+        </property>
+        <property name="todate" type="date">
+            <column  name="todate"/>
+        </property>
+        <property name="rate" type="string">
+            <column name="rate"/>
+        </property>
+        <property name="fromamount" type="double">
+            <column name="fromamount"/>
+        </property>
+        <property name="toamount" type="double">
+            <column name="toamount"/>
+        </property>
+        <property name="basicexemptionpertransaction" type="double">
+            <column name="basicexemptionpertransaction"/>
+        </property>
+        <property name="basicexemptionperannum" type="double">
+            <column name="basicexemptionperannum"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        <property name="tdsrateifpannotavailable" type="double">
+            <column name="tdsrateifpannotavailable"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" />
+    </class>
+</hibernate-mapping>
+

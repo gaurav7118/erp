@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.ModuleTemplate" table="moduletemplate">
+        <id name="templateId" column="templateid" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="moduleId" type="integer">
+            <column name="moduleid"/>
+        </property>
+        <property name="moduleRecordId" type="string">
+            <column name="modulerecordid"/>
+        </property>
+        <property name="templateName" type="string">
+            <column name="templatename"/>
+        </property>
+        <property name="companyUnitid" type="string">
+            <column name="companyunitid"/>
+        </property>
+        <property name="populateproductintemp" type="true_false">
+            <column name="populateproductintemp" default="true"/>   
+        </property>
+        <property name="isdefaulttemplate" type="true_false">
+            <column name="isdefaulttemplate" default="false"/>   
+        </property>
+                <property name="populatecustomerintemp" type="true_false">
+            <column name="populatecustomerintemp" default="true"/>   
+        </property>
+        <property name="populateautodointemp" type="true_false">
+            <column name="populateautodointemp" default="false"/>   
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true" cascade="delete,save-update"/>
+    </class>
+</hibernate-mapping>

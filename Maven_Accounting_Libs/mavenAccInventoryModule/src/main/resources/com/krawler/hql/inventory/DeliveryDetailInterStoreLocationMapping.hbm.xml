@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.ist.DeliveryDetailInterStoreLocationMapping" table="dodistmapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="deliveryOrderDetail" type="string">
+            <column length="255" name="dod"/>
+        </property>
+        <property name="pickedQty" type="double">
+            <column name="pickedQty" default="0" />
+        </property>
+        <property name="packedQty" type="double">
+            <column name="packedQty" default="0" />
+        </property>
+        <property name="shippedQty" type="double">
+            <column name="shippedQty" default="0" />
+        </property>
+        <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="ist" name="interStoreTransferRequest"/>
+        <many-to-one class="com.krawler.inventory.model.stockout.StockAdjustment" column="stockadjustment" name="stockAdjustment"/>
+        <many-to-one class="com.krawler.inventory.model.ist.DODQCISTMapping" column="dodqcistmapping" name="dodqcistmapping"/>
+        <many-to-one class="com.krawler.inventory.model.ist.RejectedDODQCISTMapping" column="pickrejecteddodqcistmapping" name="pickRejectedDODQCISTMapping"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.ist.WOCDetailISTMapping" table="wocdetailistmapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="wocDetail" type="string">
+            <column length="255" name="wocdetail"/>
+        </property>
+        <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="istrequest" name="interStoreTransferRequest"/>
+        <set cascade="all" inverse="true" name="approvedInterStoreTransferRequests">
+            <key column="wocdistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.ist.InterStoreTransferRequest"/>
+        </set>
+        <set cascade="all" inverse="true" name="rejectedInterStoreTransferRequests">
+            <key column="wocdistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.ist.RepairWOCDISTMapping"/>
+        </set>
+        <property name = "actualQty" type="double" column="actualquantity"/>
+        <property name = "quantityDue" type="double" column="quantitydue"/>
+        <property name = "approvedQty" type="double" column="approvedquantity"/>
+        <property name = "rejectedQty" type="double" column="rejectedquantity"/>
+        <property name="approvedSerials" type="string">
+            <column length="100" name="approvedserials"/>
+        </property>
+        <property name="rejectedSerials" type="string">
+            <column length="100" name="rejectedserials"/>
+        </property>
+    </class>
+</hibernate-mapping>

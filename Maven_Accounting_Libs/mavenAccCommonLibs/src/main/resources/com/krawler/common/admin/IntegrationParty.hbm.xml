@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.krawler.common.admin.IntegrationParty" table="integrationparty">
+        <id column="id" name="ID" type="integer">
+            <generator class="increment"/>
+        </id>
+        <property name="integrationPartyName" type="string">
+            <column length="255" name="integrationpartyname"/>
+        </property>
+        <property name="integrationPartyHiddenName" type="string">
+            <column length="255" name="integrationpartyhiddenname"/>
+        </property>
+        <property name="integrationConfig" type="string">
+            <column length="65535" name="integrationconfig"/>
+        </property>
+        <property name="integrationGlobalSettings" type="string">
+            <column length="65535" name="integrationglobalsettings"/>
+        </property>
+    </class>
+
+</hibernate-mapping>

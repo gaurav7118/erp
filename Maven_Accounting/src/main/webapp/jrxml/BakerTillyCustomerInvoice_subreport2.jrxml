@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BakerTillyCustomerInvoice_subreport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="GST_NAME" class="java.lang.String"/>
+	<parameter name="LINE_TOTAl" class="java.lang.String"/>
+	<field name="desc" class="java.lang.String"/>
+	<field name="productCategory" class="java.lang.String"/>
+	<field name="totalWithoutTax" class="java.lang.Double"/>
+	<field name="totalinDouble" class="java.lang.Double"/>
+	<field name="rowTaxAmount" class="java.lang.Double"/>
+	<field name="custom1" class="java.lang.String"/>
+	<field name="productCategoryID" class="java.lang.Integer"/>
+	<variable name="totalWithoutTax_3" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalWithoutTax}]]></variableExpression>
+	</variable>
+	<variable name="rowTaxAmount_1" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{rowTaxAmount}]]></variableExpression>
+	</variable>
+	<variable name="totalinDouble_1" class="java.lang.Double" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinDouble}]]></variableExpression>
+	</variable>
+	<variable name="totalWithoutTax_1" class="java.lang.Double" resetType="Group" resetGroup="Main" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalWithoutTax}]]></variableExpression>
+	</variable>
+	<variable name="rowTaxAmount_2" class="java.lang.Double" resetType="Group" resetGroup="Main" calculation="Sum">
+		<variableExpression><![CDATA[$F{rowTaxAmount}]]></variableExpression>
+	</variable>
+	<variable name="totalinDouble_2" class="java.lang.Double" resetType="Group" resetGroup="Main" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinDouble}]]></variableExpression>
+	</variable>
+	<group name="Main">
+		<groupExpression><![CDATA[$F{custom1}]]></groupExpression>
+		<groupFooter>
+			<band height="48">
+				<textField>
+					<reportElement x="242" y="15" width="97" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{GST_NAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="242" y="31" width="97" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{LINE_TOTAl}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Main" pattern="#,##0.00;-#,##0.00">
+					<reportElement x="359" y="1" width="96" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression  class="java.lang.Double"><![CDATA[$V{totalWithoutTax_1}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Main" pattern="#,##0.00;-#,##0.00">
+					<reportElement x="359" y="15" width="96" height="15"/>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression  class="java.lang.Double"><![CDATA[$V{rowTaxAmount_2}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Main" pattern="#,##0.00;-#,##0.00">
+					<reportElement x="359" y="31" width="96" height="15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+					<textFieldExpression  class="java.lang.Double"><![CDATA[$V{totalinDouble_2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="242" y="0" width="97" height="16"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub-Total]]></text>
+				</staticText>
+                                <line>
+					<reportElement positionType="FixRelativeToBottom" x="359" y="47" width="96" height="1">
+						<printWhenExpression><![CDATA[$P{LINE_TOTAl}.equals("Total")]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Category">
+		<groupExpression><![CDATA[$F{productCategoryID}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement  x="6" y="5" width="414" height="15"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{productCategory}+":"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="6" y="-2" width="300" height="10"/>
+				<textElement verticalAlignment="Bottom" markup="html"/>
+				<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement positionType="FixRelativeToBottom" x="359" y="-2" width="96" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression  class="java.lang.Double"><![CDATA[$F{totalWithoutTax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

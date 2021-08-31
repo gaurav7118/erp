@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetPurchaseRequisitionDetailMapping" table="assetdetailspurchaserequisitiondetailmapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        
+        <property name="purchaseRequisitionDetailID" type="string">
+            <column name="purchaserequisitiondetailid"/>
+        </property>
+        
+        <property name="moduleId" type="integer">
+            <column name="moduleid"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.PurchaseRequisitionAssetDetails" column="purchaserequisitionassetdetails" name="purchaseRequisitionAssetDetails"/>
+    </class>
+</hibernate-mapping>

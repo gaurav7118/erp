@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany</groupId>
+  <artifactId>Accounting</artifactId>
+  <packaging>war</packaging>
+  <version>1.1</version>
+  <name>Accounting</name>
+  <repositories>
+    <repository>
+      <id>test</id>
+      <url>${mvn-repo-url}</url>
+    </repository>
+  </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.udojava</groupId>
+            <artifactId>EvalEx</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mvel</groupId>
+            <artifactId>mvel2</artifactId>
+            <version>2.0.19</version>
+        </dependency>
+  <dependency>
+	<groupId>org.codehaus.jackson</groupId>
+	<artifactId>jackson-core-asl</artifactId>
+	<version>1.9.2</version>
+  </dependency>
+  <dependency>
+	<groupId>org.codehaus.jackson</groupId>
+	<artifactId>jackson-jaxrs</artifactId>
+	<version>1.9.2</version>
+  </dependency>
+  <dependency>
+	<groupId>org.codehaus.jackson</groupId>
+	<artifactId>jackson-mapper-asl</artifactId>
+	<version>1.9.2</version>
+  </dependency>
+  <dependency>
+	<groupId>org.codehaus.jackson</groupId>
+	<artifactId>jackson-xc</artifactId>
+	<version>1.9.2</version>
+  </dependency>
+  <dependency>
+        <groupId>com.sun.jersey</groupId>
+        <artifactId>jersey-server</artifactId>
+        <version>1.8</version>
+  </dependency>
+  <dependency>
+      <groupId>com.sun.jersey.contribs</groupId>
+      <artifactId>jersey-multipart</artifactId>
+      <version>1.8</version>
+  </dependency>
+  <dependency>
+        <groupId>com.sun.jersey.contribs</groupId>
+        <artifactId>jersey-spring</artifactId>
+        <version>1.8</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+            </exclusion>
+        </exclusions>
+  </dependency> 
+  <dependency>
+	<groupId>joda-time</groupId>
+	<artifactId>joda-time</artifactId>
+	<version>2.4</version>
+  </dependency>  
+   
+  <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>mysql</artifactId>
+      <version>1.0</version>
+  </dependency>
+  
+  <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>backport-util-concurrent</artifactId>
+      <version>1.0</version>
+  </dependency>
+
+<dependency>
+    <groupId>com.mchange</groupId>
+    <artifactId>c3p0</artifactId>
+    <version>0.9.5.1</version>
+</dependency>
+
+<!-- <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>cglib-full</artifactId>
+      <version>2.0.2</version>
+ </dependency>-->
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>cleanimports</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.6.1</version>
+ </dependency>
+
+ <dependency>
+     <groupId>org.apache.directory.studio</groupId>
+     <artifactId>org.apache.commons.codec</artifactId>
+     <version>1.8</version>
+ </dependency>        
+
+ <dependency>
+     <groupId>java3d</groupId>
+     <artifactId>j3d-core-utils</artifactId>
+     <version>1.3.1</version>
+ </dependency>
+
+ <dependency>
+        <groupId>com.mycompany</groupId>
+        <artifactId>commons-font</artifactId>
+        <version>3.0</version>
+ </dependency>
+ 
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.1</version>
+ </dependency>
+ 
+ <dependency>
+     <groupId>org.apache.pdfbox</groupId>
+     <artifactId>pdfbox</artifactId>
+     <version>2.0.7</version>
+ </dependency>
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.2.1</version>
+ </dependency-->
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.0</version>
+ </dependency-->
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>1.4</version>
+ </dependency>
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+ </dependency-->
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-logging-api</artifactId>
+      <version>1.0.4</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>1.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>concurrent</artifactId>
+      <version>1.3.2</version>
+ </dependency>
+ 
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>connector</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.6.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>1.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jaas</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jacc</artifactId>
+      <version>1_0-fr</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.4.GA</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jaxen</artifactId>
+      <version>1.1-beta-4</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jdbc2_0</artifactId>
+      <version>stdext</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jetty</artifactId>
+      <version>6.1.6</version>
+ </dependency>
+ 
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>6.1.6</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jgroups</artifactId>
+      <version>2.2.7</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jhighlight</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>jta</artifactId>
+      <version>1.1</version>
+ </dependency>
+
+<dependency>
+       <groupId>com.google.visualization</groupId>
+       <artifactId>visualization-datasource</artifactId>
+       <version>1.1.1</version>
+</dependency>
+<dependency>
+     <groupId>com.ibm.icu</groupId>
+     <artifactId>icu4j</artifactId>
+     <version>4.0.1</version>
+   </dependency>
+<dependency>
+       <groupId>com.google.guava</groupId>
+       <artifactId>guava</artifactId>
+       <version>18.0</version>
+    <type>jar</type>
+</dependency>
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+ </dependency-->
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>KrawlerJsonLib</artifactId>
+      <version>1.0</version>
+ </dependency-->
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>krawlersso</artifactId>
+      <version>1.2</version>
+ </dependency>
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.9</version>
+ </dependency-->
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>1.9.1</version>
+ </dependency-->
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.0</version>
+ </dependency-->
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>oscache</artifactId>
+      <version>2.1</version>
+ </dependency>
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>PDFBox</artifactId>
+      <version>0.7.2-log4j</version>
+ </dependency-->
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.0.1-FINAL-20070705</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>poi-contrib</artifactId>
+      <version>3.0.1-FINAL-20070705</version>
+ </dependency-->
+
+ <!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>3.0.1-FINAL-20070705</version>
+ </dependency-->
+
+<!--<dependency>
+    <groupId>com.mycompany</groupId>
+    <artifactId>poi-3.5-beta6</artifactId>
+    <version>20090622</version>
+</dependency>-->
+
+<!--<dependency>
+    <groupId>com.mycompany</groupId>
+    <artifactId>poi-contrib-3.5-beta6</artifactId>
+    <version>20090622</version>
+</dependency>-->
+
+<!--<dependency>
+    <groupId>com.mycompany</groupId>
+    <artifactId>poi-ooxml-3.5-beta6</artifactId>
+    <version>20090622</version>
+</dependency>-->
+<dependency>
+    <groupId>com.mycompany</groupId>
+    <artifactId>proxool</artifactId>
+    <version>0.8.3</version>
+</dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.5.2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>slf4j-jcl</artifactId>
+      <version>1.5.2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.5.2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.5.2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.5.2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>svncommons</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>svnkit</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>swarmcache</artifactId>
+      <version>1.0rc2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>urlrewrite</artifactId>
+      <version>3.2.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>versioncheck</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>xerces</artifactId>
+      <version>2.6.2</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>xml-apis</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+<!-- commons -->
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>mavenAccCommonLibs</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+<!--dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.2.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.4</version>
+ </dependency>
+
+<dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>hibernate3</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>hibernate-annotations</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>hibernate-cglib-repack</artifactId>
+      <version>2.1_3</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>hibernate-commons-annotations</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>KrawlerJsonLib</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.9</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>lucene-core</artifactId>
+      <version>1.9.1</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>PDFBox</artifactId>
+      <version>0.7.2-log4j</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.0.1-FINAL-20070705</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>3.0.1-FINAL-20070705</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>spring</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>1.0</version>
+ </dependency>
+
+ <dependency>
+      <groupId>com.mycompany</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+ </dependency>
+
+        <dependency>
+             <groupId>com.mycompany</groupId>
+             <artifactId>antlr</artifactId>
+             <version>2.7.6</version>
+        </dependency-->
+
+        <!-- End Commons-->
+
+
+
+        <!-- Accounting Module Libs -->
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccAccountModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccCustomerModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccVendorModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccDiscountModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccTaxModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccCompanyPreferences</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccCurrencyExchange</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccJournalEntryModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccPaymentMethods</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccProductModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccSalesOrder</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccInventoryModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccMRPModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccInvoiceModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccCreditNote</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccReceiptModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccPurchaseOrder</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccGoodsReceipt</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccVendorPayment</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccDebitNote</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccBankReconciliation</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccDepreciation</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccMasterItems</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- End Accounting Module Libs -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.0.4.RELEASE</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>standard</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-mock</artifactId>
+            <version>2.0.8</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenKwlCommonLibs</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccTermModule</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.barcode4j</groupId>
+            <artifactId>barcode4j-light</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.55</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.55</version>
+        </dependency>
+<!--         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>2.5.6</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.4.3</version>
+            <type>jar</type>
+        </dependency>-->
+
+  </dependencies>
+    <build>
+        <finalName>Accounting</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+<!--                    <parallel>methods</parallel>
+                    <threadCount>10</threadCount>                    <parallel>classes</parallel>
+                    
+                    <forkCount>10</forkCount>
+                    <reuseForks>true</reuseForks>-->
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.19.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+    </properties>
+</project>

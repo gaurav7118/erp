@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Connection",{singleton:true,requires:["Ext.device.Communicator","Ext.device.connection.Cordova","Ext.device.connection.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView){if(A.Cordova){return Ext.create("Ext.device.connection.Cordova")}}return Ext.create("Ext.device.connection.Simulator")}})

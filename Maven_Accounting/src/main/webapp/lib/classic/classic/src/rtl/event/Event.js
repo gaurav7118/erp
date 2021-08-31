@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.event.Event",{override:"Ext.event.Event",getXY:function(){var A=this,B=A.xy;if(!B){B=A.callParent();if(Ext.rootInheritedState.rtl){B[0]=Ext.Element.getViewportWidth()-B[0]}}return B}})

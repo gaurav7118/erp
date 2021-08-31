@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Accelerometer",{singleton:true,requires:["Ext.device.accelerometer.Cordova","Ext.device.accelerometer.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView&&A.Cordova){return Ext.create("Ext.device.accelerometer.Cordova")}return Ext.create("Ext.device.accelerometer.Simulator")}})

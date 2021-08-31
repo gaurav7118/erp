@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.sequence.SeqFormat" table="in_seqformat" >
+        <id column="id" name="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="prefix" type="string">
+            <column name="prefix"/>
+        </property>
+        <property name="suffix" type="string">
+            <column name="suffix"/>
+        </property>
+        <property name="separator" type="string">
+            <column name="sep"/>
+        </property>
+        <property name="numberOfDigits" type="integer">
+            <column name="no_of_digits"/>
+        </property>
+        <property name="startFrom" type="long">
+            <column name="startfrom"/>
+        </property>
+        <property name="defaultFormat" type="boolean">
+            <column name="isdefault" />
+        </property>
+        <property name="active" type="boolean">
+            <column name="isactive" />
+        </property>
+        <property column="prefix_dateformat" name="prefixDateFormat">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.sequence.SeqDateFormat</param>
+            </type>
+        </property>
+        <property column="suffix_dateformat" name="suffixDateFormat">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.sequence.SeqDateFormat</param>
+            </type>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.sequence.SeqModule" column="seqmodule" name="seqModule" not-null="true"/>
+    </class>
+</hibernate-mapping>

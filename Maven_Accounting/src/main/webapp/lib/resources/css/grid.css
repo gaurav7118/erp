@@ -1,0 +1,533 @@
+/* Grid3 styles */
+
+.x-grid3 {
+	position: relative;
+	overflow: hidden;
+	background-color: #fff;
+}
+.x-grid-panel .x-panel-body {
+	overflow: hidden !important;
+}
+.x-grid-panel .x-panel-mc .x-panel-body {
+	border: 1px solid #99bbe8;
+}
+.wtf-ie .x-grid3 table,
+.wtf-safari .x-grid3 table {
+	table-layout: fixed;
+}
+.x-grid3-viewport {
+	overflow: hidden;
+}
+.x-grid3-hd-row td,
+.x-grid3-row td,
+.x-grid3-summary-row td {
+	font: normal 11px arial, tahoma, helvetica, sans-serif;
+
+	-moz-outline: none;
+	-moz-user-focus: normal;
+}
+.x-grid3-row td,
+.x-grid3-summary-row td {
+	padding-right: 1px;
+	padding-left: 1px;
+	vertical-align: top;
+	line-height: 13px;
+
+	-moz-user-select: none;
+}
+.x-grid3-hd-row td {
+	border-right: 1px solid #d0d0d0;
+	border-left: 1px solid #eee;
+	vertical-align: middle;
+	line-height: 15px;
+}
+.x-grid3-hd-row .x-grid3-marker-hd {
+	padding: 3px;
+}
+.x-grid3-row .x-grid3-marker {
+	padding: 3px;
+}
+.x-grid3-cell-inner,
+.x-grid3-hd-inner {
+	overflow: hidden;
+	padding: 3px 3px 3px 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	-o-text-overflow: ellipsis;
+}
+.x-grid3-hd-inner {
+	position: relative;
+	padding: 4px 3px 4px 5px;
+	cursor: inherit;
+}
+.x-grid3-row-body {
+	white-space: normal;
+}
+.x-grid3-body-cell {
+	outline: 0 none;
+
+	-moz-outline: 0 none;
+}
+/* IE Quirks to clip */
+
+.wtf-ie .x-grid3-cell-inner,
+.wtf-ie .x-grid3-hd-inner {
+	width: 100%;
+}
+/* reverse above in strict mode */
+
+.wtf-strict .x-grid3-cell-inner,
+.wtf-strict .x-grid3-hd-inner {
+	width: auto;
+}
+.x-grid3-col {} .x-grid-row-loading {
+	background: #fff url(../images/default/shared/loading-balls.gif) no-repeat center center;
+}
+.x-grid-page {
+	overflow: hidden;
+}
+.x-grid3-row {
+	/*border-bottom: 1px solid #ededed;*/
+	width: 100%;
+	border: 1px solid #ededed;
+	border-top-color: #fff;
+	cursor: default;
+}
+.x-grid3-row-alt {
+	background-color: #fafafa;
+}
+.x-grid3-row-over {
+	border: 1px solid #dddddd;
+	background: #efefef url(../images/default/grid/row-over.gif) repeat-x left top;
+}
+.x-grid3-resize-proxy {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 7;
+	visibility: hidden;
+	overflow: hidden;
+	width: 1px;
+	height: 100px;
+	border: 0 none;
+	background-color: #777;
+	cursor: e-resize;
+	cursor: col-resize;
+}
+.x-grid3-resize-marker {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 7;
+	visibility: hidden;
+	overflow: hidden;
+	width: 1px;
+	height: 100px;
+	border: 0 none;
+	background-color: #777;
+}
+.x-grid3-focus {
+	position: absolute;
+	top: 0;
+	outline: 0 none;
+
+	-moz-outline: 0 none;
+	-moz-user-select: normal;
+	-khtml-user-select: normal;
+}
+/* header styles */
+
+.x-grid3-header {
+	padding: 1px 0 0 0;
+	background: #f9f9f9 url(../images/default/grid/grid3-hrow.gif) repeat-x 0 bottom;
+	cursor: default;
+	zoom: 1;
+}
+.x-grid3-header-pop {
+	float: right;
+	clear: none;
+	border-left: 1px solid #d0d0d0;
+}
+.x-grid3-header-pop-inner {
+	width: 14px;
+	height: 19px;
+	border-left: 1px solid #eee;
+	background: transparent url(../images/default/grid/hd-pop.gif) no-repeat center center;
+}
+.wtf-ie .x-grid3-header-pop-inner {
+	width: 15px;
+}
+.wtf-strict .x-grid3-header-pop-inner {
+	width: 14px;
+}
+.x-grid3-header-inner {
+	float: left;
+	overflow: hidden;
+	zoom: 1;
+}
+.x-grid3-header-offset {
+	padding-left: 1px;
+	width: 10000px;
+}
+td.x-grid3-hd-over,
+td.sort-desc,
+td.sort-asc,
+td.x-grid3-hd-menu-open {
+	border-right: 1px solid #aaccf6;
+	border-left: 1px solid #aaccf6;
+}
+td.x-grid3-hd-over .x-grid3-hd-inner,
+td.sort-desc .x-grid3-hd-inner,
+td.sort-asc .x-grid3-hd-inner,
+td.x-grid3-hd-menu-open .x-grid3-hd-inner {
+	background: #ebf3fd url(../images/default/grid/grid3-hrow-over.gif) repeat-x left bottom;
+}
+.x-grid3-sort-icon {
+	display: none;
+	margin-left: 3px;
+	width: 13px;
+	height: 4px;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+}
+.sort-asc .x-grid3-sort-icon {
+	display: inline;
+	background-image: url(../images/default/grid/sort_asc.gif);
+}
+.sort-desc .x-grid3-sort-icon {
+	display: inline;
+	background-image: url(../images/default/grid/sort_desc.gif);
+}
+/* Header position fixes for IE strict mode */
+
+.wtf-strict .wtf-ie .x-grid3-header-inner {
+	position: relative;
+}
+.wtf-strict .wtf-ie6 .x-grid3-hd {
+	position: relative;
+}
+.wtf-strict .wtf-ie6 .x-grid3-hd-inner {
+	position: static;
+}
+/* Body Styles */
+
+.x-grid3-body {
+	zoom: 1;
+}
+.x-grid3-scroller {
+	position: relative;
+	overflow: auto;
+	zoom: 1;
+}
+.x-grid3-cell-text,
+.x-grid3-hd-text {
+	display: block;
+	padding: 3px 5px 3px 5px;
+	color: black;
+
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+.x-grid3-split {
+	position: absolute;
+	top: 2px;
+	z-index: 3;
+	display: block;
+	overflow: hidden;
+	width: 6px;
+	height: 16px;
+	background-image: url(../images/default/grid/grid-split.gif);
+	background-position: center;
+	background-repeat: no-repeat;
+	font-size: 1px;
+	cursor: e-resize;
+	cursor: col-resize;
+}
+.x-grid3-hd-text {
+	color: #15428b;
+}
+/* Column Reorder DD */
+
+.x-dd-drag-proxy .x-grid3-hd-inner {
+	overflow: hidden;
+	padding: 3px;
+	width: 120px;
+	border: 1px solid #aaccf6;
+	background: #ebf3fd url(../images/default/grid/grid3-hrow-over.gif) repeat-x left bottom;
+}
+.col-move-top,
+.col-move-bottom {
+	position: absolute;
+	top: 0;
+	z-index: 20000;
+	visibility: hidden;
+	overflow: hidden;
+	width: 9px;
+	height: 9px;
+	font-size: 1px;
+	line-height: 1px;
+}
+.col-move-top {
+	background: transparent url(../images/default/grid/col-move-top.gif) no-repeat left top;
+}
+.col-move-bottom {
+	background: transparent url(../images/default/grid/col-move-bottom.gif) no-repeat left top;
+}
+/* Selection Styles */
+
+.x-grid3-row-selected {
+	border: 1px dotted #a3bae9;
+	background: #dfe8f6 !important;
+}
+.x-grid3-cell-selected {
+	background-color: #b8cfee !important;
+	color: black;
+}
+.x-grid3-cell-selected span {
+	color: black !important;
+}
+.x-grid3-cell-selected .x-grid3-cell-text {
+	color: black;
+}
+.x-grid3-locked td.x-grid3-row-marker,
+.x-grid3-locked .x-grid3-row-selected td.x-grid3-row-marker {
+	padding: 0;
+	border-top: 1px solid white;
+	border-right: 1px solid #6fa0df !important;
+	border-bottom: none !important;
+	background: #ebeadb url(../images/default/grid/grid-hrow.gif) repeat-x 0 bottom !important;
+	color: black;
+	vertical-align: middle !important;
+	text-align: center;
+}
+.x-grid3-locked td.x-grid3-row-marker div,
+.x-grid3-locked .x-grid3-row-selected td.x-grid3-row-marker div {
+	padding: 0 4px;
+	color: #15428b !important;
+	text-align: center;
+}
+/* dirty cells */
+
+.x-grid3-dirty-cell {
+	background: transparent url(../images/default/grid/dirty.gif) no-repeat 0 0;
+}
+/* Grid Toolbars */
+
+.x-grid3-topbar,
+.x-grid3-bottombar {
+	position: relative;
+	display: none;
+	overflow: hidden;
+	font: normal 11px arial, tahoma, helvetica, sans-serif;
+	zoom: 1;
+}
+.x-grid3-topbar .x-toolbar {
+	border-right: 0 none;
+}
+.x-grid3-bottombar .x-toolbar {
+	border-top: 1px solid #a9bfd3;
+	border-right: 0 none;
+	border-bottom: 0 none;
+}
+/* Props Grid Styles */
+
+.x-props-grid .x-grid3-cell {
+	padding: 1px;
+}
+.x-props-grid .x-grid3-td-name .x-grid3-cell-inner {
+	padding-left: 12px;
+	background: transparent url(../images/default/grid/grid3-special-col-bg.gif) repeat-y -16px !important;
+	color: black !important;
+}
+.x-props-grid .x-grid3-body .x-grid3-td-name {
+	padding: 1px;
+	padding-right: 0;
+	border: 0 none;
+	border-right: 1px solid #eeeeee;
+	background: white !important;
+}
+/* header menu */
+
+.xg-hmenu-sort-asc .x-menu-item-icon {
+	background-image: url(../images/default/grid/hmenu-asc.gif);
+}
+.xg-hmenu-sort-desc .x-menu-item-icon {
+	background-image: url(../images/default/grid/hmenu-desc.gif);
+}
+.xg-hmenu-lock .x-menu-item-icon {
+	background-image: url(../images/default/grid/hmenu-lock.gif);
+}
+.xg-hmenu-unlock .x-menu-item-icon {
+	background-image: url(../images/default/grid/hmenu-unlock.gif);
+}
+/* dd */
+
+.x-grid3-col-dd {
+	padding: 0;
+	border: 0 none;
+	background: transparent;
+}
+.x-dd-drag-ghost .x-grid3-dd-wrap {
+	padding: 1px 3px 3px 1px;
+}
+.x-grid3-hd {
+	-moz-user-select: none;
+}
+.x-grid3-hd-btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 2;
+	display: none;
+	width: 14px;
+	background: #c3daf9 url(../images/default/grid/grid3-hd-btn.gif) no-repeat left center;
+	cursor: pointer;
+}
+.x-grid3-hd-over .x-grid3-hd-btn,
+.x-grid3-hd-menu-open .x-grid3-hd-btn {
+	display: block;
+}
+a.x-grid3-hd-btn:hover {
+	background-position: -14px center;
+}
+/* Expanders */
+
+.x-grid3-body .x-grid3-td-expander {
+	background: transparent url(../images/default/grid/grid3-special-col-bg.gif) repeat-y right;
+}
+.x-grid3-body .x-grid3-td-expander .x-grid3-cell-inner {
+	padding: 0 !important;
+	height: 100%;
+}
+.x-grid3-row-expander {
+	width: 100%;
+	height: 18px;
+	background-color: transparent;
+	background-image: url(../images/default/grid/row-expand-sprite.gif);
+	background-position: 4px 2px;
+	background-repeat: no-repeat;
+}
+.x-grid3-row-collapsed .x-grid3-row-expander {
+	background-position: 4px 2px;
+}
+.x-grid3-row-expanded .x-grid3-row-expander {
+	background-position: -21px 2px;
+}
+.x-grid3-row-collapsed .x-grid3-row-body {
+	display: none !important;
+}
+.x-grid3-row-expanded .x-grid3-row-body {
+	display: block !important;
+}
+/* Checkers */
+
+.x-grid3-body .x-grid3-td-checker {
+	background: transparent url(../images/default/grid/grid3-special-col-bg.gif) repeat-y right;
+}
+.x-grid3-body .x-grid3-td-checker .x-grid3-cell-inner,
+.x-grid3-header .x-grid3-td-checker .x-grid3-hd-inner {
+	padding: 0 !important;
+	height: 100%;
+}
+.x-grid3-row-checker,
+.x-grid3-hd-checker {
+	width: 100%;
+	height: 18px;
+	background-color: transparent;
+	background-image: url(../images/default/grid/row-check-sprite.gif);
+	background-position: 2px 2px;
+	background-repeat: no-repeat;
+}
+.x-grid3-row .x-grid3-row-checker {
+	background-position: 2px 2px;
+}
+.x-grid3-row-selected .x-grid3-row-checker,
+.x-grid3-hd-checker-on .x-grid3-hd-checker {
+	background-position: -23px 2px;
+}
+.x-grid3-hd-checker {
+	background-position: 2px 3px;
+}
+.x-grid3-hd-checker-on .x-grid3-hd-checker {
+	background-position: -23px 3px;
+}
+/* Numberer */
+
+.x-grid3-body .x-grid3-td-numberer {
+	background: transparent url(../images/default/grid/grid3-special-col-bg.gif) repeat-y right;
+}
+.x-grid3-body .x-grid3-td-numberer .x-grid3-cell-inner {
+	padding: 3px 5px 0 0 !important;
+	color: #444;
+	text-align: right;
+}
+/* All specials */
+
+.x-grid3-body .x-grid3-row-selected .x-grid3-td-numberer,
+.x-grid3-body .x-grid3-row-selected .x-grid3-td-checker,
+.x-grid3-body .x-grid3-row-selected .x-grid3-td-expander {
+	background: transparent url(../images/default/grid/grid3-special-col-sel-bg.gif) repeat-y right;
+}
+.x-grid3-body .x-grid3-check-col-td .x-grid3-cell-inner {
+	padding: 1px 0 0 0 !important;
+}
+.x-grid3-check-col {
+	width: 100%;
+	height: 16px;
+	background-color: transparent;
+	background-image: url(../images/default/menu/unchecked.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.x-grid3-check-col-on {
+	width: 100%;
+	height: 16px;
+	background-color: transparent;
+	background-image: url(../images/default/menu/checked.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+/* Grouping classes */
+
+.x-grid-group,
+.x-grid-group-body,
+.x-grid-group-hd {
+	zoom: 1;
+}
+.x-grid-group-hd {
+	padding-top: 6px;
+	border-bottom: 2px solid #99bbe8;
+	cursor: pointer;
+}
+.x-grid-group-hd div {
+	padding: 4px 4px 4px 17px;
+	background: transparent url(../images/default/grid/group-expand-sprite.gif) no-repeat 3px -47px;
+	color: #3764a0;
+	font: bold 11px tahoma, arial, helvetica, sans-serif;
+}
+.x-grid-group-collapsed .x-grid-group-hd div {
+	background-position: 3px 3px;
+}
+.x-grid-group-collapsed .x-grid-group-body {
+	display: none;
+}
+.x-group-by-icon {
+	background-image: url(../images/default/grid/group-by.gif);
+}
+.x-cols-icon {
+	background-image: url(../images/default/grid/columns.gif);
+}
+.x-show-groups-icon {
+	background-image: url(../images/default/grid/group-by.gif);
+}
+.wtf-ie .x-grid3 .x-editor .x-form-text {
+	/* ie  bug */
+	position: relative;
+	top: -1px;
+}
+.x-grid-empty {
+	padding: 10px;
+	color: gray;
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+}

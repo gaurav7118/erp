@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ER-5-1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="srNo" class="java.lang.String"/>
+		<field name="productName" class="java.lang.String"/>
+		<field name="tarrifName" class="java.lang.String"/>
+		<field name="productUOM" class="java.lang.String"/>
+		<field name="assProductName" class="java.lang.String"/>
+		<field name="assTarrifName" class="java.lang.String"/>
+		<field name="assProductUOM" class="java.lang.String"/>
+		<field name="quantityOfPIUsed" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="no1" class="java.lang.String"/>
+	<parameter name="no2" class="java.lang.String"/>
+	<parameter name="no3" class="java.lang.String"/>
+	<parameter name="no4" class="java.lang.String"/>
+	<parameter name="no5" class="java.lang.String"/>
+	<parameter name="no6" class="java.lang.String"/>
+	<parameter name="no7" class="java.lang.String"/>
+	<parameter name="no8" class="java.lang.String"/>
+	<parameter name="no9" class="java.lang.String"/>
+	<parameter name="no10" class="java.lang.String"/>
+	<parameter name="no11" class="java.lang.String"/>
+	<parameter name="no12" class="java.lang.String"/>
+	<parameter name="no13" class="java.lang.String"/>
+	<parameter name="no14" class="java.lang.String"/>
+	<parameter name="no15" class="java.lang.String"/>
+	<parameter name="manufacturerName" class="java.lang.String"/>
+	<parameter name="tableDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="financialYear" class="java.lang.String"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="571" splitType="Stretch">
+			<staticText>
+				<reportElement x="226" y="10" width="118" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORM ER-5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="47" width="426" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[{sub-rule (1) of rule 9A of CENVAT Credit Rules, 2004} ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="90" width="15" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[1.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="130" width="15" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="172" width="15" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="90" width="219" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Name of the manufacturer:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="130" width="248" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[PAN based Registration Number:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="172" width="180" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Annual Declaration]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="114" y="213" width="178" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[New declaration ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="213" width="15" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(i)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="86" y="204" width="17" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="114" y="243" width="280" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Amendments to declaration already filed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="243" width="15" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(ii)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="86" y="234" width="17" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="61" y="284" width="367" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[ (Pl. tick the appropriate box)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="320" width="265" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Declaration for the Financial Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="320" width="15" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="343" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="377" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="326" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="394" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="445" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="462" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="479" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="411" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="275" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="258" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="292" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="309" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="241" y="126" width="17" height="18"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="469" y="363" width="63" height="188"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="472" y="364" width="63" height="188"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Quantity of
+principal
+input
+mentioned
+in column
+(2) required
+for use in
+the
+manufacture
+of unit
+quantity of
+finished
+goods
+mentioned
+in column
+(5) ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="404" y="363" width="65" height="188"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="363" width="65" height="188"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="341" y="363" width="63" height="188"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="85" y="363" width="63" height="188"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="148" y="363" width="65" height="188"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="213" y="363" width="63" height="188"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="20" y="363" width="65" height="188"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="24" y="365" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Sr. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="89" y="364" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Description
+of principal
+inputs ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="364" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Central
+Excise
+Tariff Sub-
+HeadingNo.
+of principal
+inputs  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="364" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Quantity
+code* ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="364" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Description
+of finished
+goods in
+which
+principal
+input
+mentioned
+in column
+(2) is used]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="364" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Central
+Excise
+Tariff Sub-
+Heading
+No. of
+finished
+goods ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="364" width="61" height="187"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Quantity
+code* ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="208" y="90" width="327" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{manufacturerName}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no1}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="258" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no2}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no3}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="292" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no4}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="309" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no5}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no6}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="344" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no7}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no8}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no9}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no10}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="412" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no11}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no12}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="130" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no13}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no14}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="129" width="17" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{no15}+""]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement key="table" style="table" x="20" y="551" width="512" height="20"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{tableDataSource}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="65">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="63" height="34"/>
+								<textElement textAlignment="Center">
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{srNo}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="61" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{productName}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="63" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tarrifName}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="61" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{productUOM}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="63" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{assProductName}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="61" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{assTarrifName}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="63" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{assProductUOM}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63">
+						<jr:detailCell style="table_TD" height="38" rowSpan="1">
+							<textField>
+								<reportElement x="2" y="3" width="61" height="34"/>
+								<textElement>
+									<font fontName="Serif"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{quantityOfPIUsed}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="241" y="320" width="153" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{financialYear}+""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="123">
+			<staticText>
+				<reportElement x="20" y="19" width="512" height="73"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[*NOTE.  -    Please  indicate  the  abbreviation  referred  to  in  Instruction  No.  7  mentioned  in  Form
+E.R.-1 and Form E.R.-3 specified in the Government of India, Ministry of Finance (Department of
+Revenue)  vide  Notification  No.25/2004-Central  Excise  (N.T.),  dated  the  27th  September,  2004
+published vide G.S.R.No.643 (E) dated the 25th  September, 2004. ]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

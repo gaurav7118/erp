@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.store.Store" table="in_storemaster">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="abbreviation" type="string">
+            <column length="50" name="abbrev" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property column="type" name="storeType">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.store.StoreType</param>
+            </type>
+        </property>
+        <property column="lastdayofweek" name="lastDayOfWeek">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.cyclecount.Week</param>
+            </type>
+        </property>
+        <property name="address" type="string">
+            <column length="255" name="address"/>
+        </property>
+        <property name="contactNo" type="string">
+            <column length="50" name="contactno"/>
+        </property>
+        <property name="faxNo" type="string">
+            <column length="50" name="faxno"/>
+        </property>
+        <property name="createdOn" type="date">
+            <column name="createdon"/>
+        </property>
+        <property name="modifiedOn" type="date">
+            <column name="modifiedon"/>
+        </property>
+        <property name="defaultStore" type="boolean">
+            <column name="isdefault"/>
+        </property>
+        <property name="active" type="boolean">
+            <column name="isactive"/>
+        </property>
+        <property name="ccDateAllow" type="boolean">
+            <column name="ccdateallow"/>
+        </property>
+        <property name="smccAllow" type="boolean">
+            <column name="smccallow"/>
+        </property>
+        <property name="parentId" type="string">
+            <column name="parentid"/>
+        </property>
+        <!-- ==================   Only for Indian Company      ========================= -->
+        <property name="VATTINnumber" type="string">
+            <column length="255" name="vattinnumber"/>
+        </property>
+        <property name="CSTTINnumber" type="string">
+            <column length="255" name="csttinnumber"/>
+        </property>
+         <!-- ==================   =========================  ========================= -->
+        <set cascade="save-update" name="locationSet" table="in_store_location">
+            <key column="storeid"/>
+            <many-to-many class="com.krawler.inventory.model.location.Location" column="locationid"/>
+        </set>
+        <set cascade="save-update" name="storeManagerSet" table="in_store_user">
+            <key column="storeid"/>
+            <many-to-many class="com.krawler.common.admin.User" column="userid"/>
+        </set>
+        <set cascade="save-update" name="storeExecutiveSet" table="in_store_executive">
+            <key column="storeid"/>
+            <many-to-many class="com.krawler.common.admin.User" column="userid"/>
+        </set>
+        <set cascade="save-update" name="movementTypeSet" table="in_store_movementtype">
+            <key column="storeid"/>
+            <element column="movementtype" type="string" />
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedBy"/>
+        <many-to-one class="com.krawler.inventory.model.location.Location" column="defaultlocation" name="defaultLocation"/>
+    </class>
+</hibernate-mapping>

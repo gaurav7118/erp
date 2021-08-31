@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="propertyConfiguration"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"></property>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <!--<value>classpath:config/erp-deskera-config.properties</value>-->
+                <value>file:${com.krawler.config.location}/erp-deskera-config.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="mySessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="myDataSource"/>
+        </property>
+        <property name="mappingLocations">
+            <value>classpath*:com/**/*.hbm.xml</value>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">com.krawler.esp.hibernate.impl.ExMySQLInnoDBDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+            </props>
+        </property>
+    </bean>
+    <!--  C3P0 config -->
+    <bean id="parentDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" abstract="true">
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}" />
+        <property name="minPoolSize" value="${jdbc.minPoolSize}" />
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+        <property name="maxIdleTime" value="${jdbc.maxIdleTime}" />
+        <property name="maxIdleTimeExcessConnections" value="${jdbc.maxIdleTimeExcessConnections}" />
+        <!--       <property name="connectionCustomizerClassName" value="com.krawler.esp.handlers.ConnectionPoolLogger"/>-->
+    </bean>
+<!--   <bean id="ds1" parent="parentDataSource">
+        <property name="driverClass" value="${ds1.jdbc.driver}" />
+        <property name="jdbcUrl" value="${ds1.jdbc.url}"/>
+        <property name="user" value="${ds1.jdbc.user}" />
+        <property name="password" value="${ds1.jdbc.password}" />	
+    </bean>-->
+<!--     <bean id="ds2" parent="parentDataSource">
+        <property name="driverClass" value="${ds2.jdbc.driver}" />
+        <property name="jdbcUrl" value="${ds2.jdbc.url}"/>
+        <property name="user" value="${ds2.jdbc.user}" />
+        <property name="password" value="${ds2.jdbc.password}" />	
+    </bean>
+    <bean id="ds3" parent="parentDataSource">
+        <property name="driverClass" value="${ds3.jdbc.driver}" />
+        <property name="jdbcUrl" value="${ds3.jdbc.url}"/>
+        <property name="user" value="${ds3.jdbc.user}" />
+        <property name="password" value="${ds3.jdbc.password}" />	
+    </bean>
+    <bean id="ds4" parent="parentDataSource">
+        <property name="driverClass" value="${ds4.jdbc.driver}" />
+        <property name="jdbcUrl" value="${ds4.jdbc.url}"/>
+        <property name="user" value="${ds4.jdbc.user}" />
+        <property name="password" value="${ds4.jdbc.password}" />	
+    </bean>
+    <bean id="ds5" parent="parentDataSource">
+        <property name="driverClass" value="${ds5.jdbc.driver}" />
+        <property name="jdbcUrl" value="${ds5.jdbc.url}"/>
+        <property name="user" value="${ds5.jdbc.user}" />
+        <property name="password" value="${ds5.jdbc.password}" />	
+    </bean>
+    <bean id="ds6" parent="parentDataSource">
+        <property name="driverClass" value="${ds6.jdbc.driver}" />
+        <property name="jdbcUrl" value="${ds6.jdbc.url}"/>
+        <property name="user" value="${ds6.jdbc.user}" />
+        <property name="password" value="${ds6.jdbc.password}" />	
+    </bean>-->
+    <bean id="defaultDataSource" parent="parentDataSource">
+        <property name="driverClass" value="${jdbc.driver}" />
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.password}" />	
+    </bean>
+    <bean id="myDataSource" class="com.krawler.common.util.CompanyRoutingDataSource">
+        <property name="targetDataSources">
+            <map>
+                <entry key="ds1" value-ref="defaultDataSource"/>
+<!--                <entry key="ds2" value-ref="ds2"/>
+                <entry key="ds3" value-ref="ds3"/>
+                <entry key="ds4" value-ref="ds4"/>
+                <entry key="ds5" value-ref="ds5"/>
+                <entry key="ds6" value-ref="ds6"/>-->
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="defaultDataSource"/>
+    </bean>
+</beans>

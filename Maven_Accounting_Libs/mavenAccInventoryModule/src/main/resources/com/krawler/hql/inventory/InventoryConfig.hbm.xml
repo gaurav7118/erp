@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.configuration.InventoryConfig" table="in_inventoryconfig">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="negativeInventoryCheckType" column="negative_inventory_check">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.util.InventoryCheck</param>
+            </type>       
+        </property>
+        <property name="stockBatchType" column="stock_update_batchtype">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.util.BatchType</param>
+            </type>       
+        </property>
+        <property name="enableStockAdjustmentApprovalFlow" type="boolean">
+            <column name="enable_stockadj_approvalflow"/>
+        </property>
+        <property name="enableStockRequestApprovalFlow" type="boolean">
+            <column name="enable_stockreq_approvalflow"/>
+        </property>
+        <property name="enableStockoutApprovalFlow" type="boolean">
+            <column name="enable_stockout_approvalflow"/>
+        </property>
+        <property name="enableISTReturnApprovalFlow" type="boolean">
+            <column name="enable_ist_return_approvalflow"/>
+        </property>
+        <property name="enableSRReturnApprovalFlow" type="boolean">
+            <column name="enable_sr_return_approvalflow"/>
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="createdon" not-null="true"/>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        
+        
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedBy"/>
+    </class>
+</hibernate-mapping>

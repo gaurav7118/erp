@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetMaintenanceScheduler" table="assetmaintenancescheduler">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="startDate" type="timestamp">
+            <column name="startdate"/>
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="enddate"/>
+        </property>
+        <property name="actualStartDate" type="timestamp">
+            <column name="actualstartdate"/>
+        </property>
+        <property name="actualEndDate" type="timestamp">
+            <column name="actualenddate"/>
+        </property>
+        <property name="adHoc" type="boolean">
+            <column name="isadhoc"/>
+        </property>
+        <property name="isScheduleEdit" type="boolean">
+            <column name="isscheduleedit"/>
+        </property>
+        <property name="frequency">
+            <column name="frequency"/>
+        </property>
+        <property name="frequencyType">
+            <column name="frequencytype"/>
+        </property>
+        <property name="totalEvents">
+            <column name="totalevents"/>
+        </property>
+        <property name="scheduleDuration">
+            <column name="scheduleduration"/>
+        </property>
+        <property name="scheduleType">
+            <column name="scheduletype"/>
+        </property>
+        <property name="maintenanceType" type="integer">
+            <column name="maintenancetype" default="1"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.AssetDetails" name="assetDetails" column="assetdetails"/>
+<!--        <many-to-one class="com.krawler.hql.accounting.AssetMaintenanceWorkOrder" name="assetMaintenanceWorkOrder" column="assetmaintenanceworkorder"/>-->
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="assignedTo" column="assignedto"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="status" column="status"/>
+        <many-to-one class="com.krawler.hql.accounting.AssetMaintenanceSchedulerObject" name="assetMaintenanceSchedulerObject" column="assetmaintenanceschedulerobject"/>
+    </class>
+</hibernate-mapping>

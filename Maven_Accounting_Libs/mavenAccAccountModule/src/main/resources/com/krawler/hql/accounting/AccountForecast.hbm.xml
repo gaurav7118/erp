@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AccountForecast" table="accountforecast">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+        <property name="jan" type="double">
+            <column default="-1" name="jan"/>
+        </property>
+        <property name="feb" type="double">
+            <column default="-1" name="feb"/>
+        </property>
+        <property name="march" type="double">
+            <column default="-1" name="march"/>
+        </property>
+        <property name="april" type="double">
+            <column default="-1" name="april"/>
+        </property>
+        <property name="may" type="double">
+            <column default="-1" name="may"/>
+        </property>
+        <property name="june" type="double">
+            <column default="-1" name="june"/>
+        </property>
+        <property name="july" type="double">
+            <column default="-1" name="july"/>
+        </property>
+        <property name="aug" type="double">
+            <column default="-1" name="aug"/>
+        </property>
+        <property name="sept" type="double">
+            <column default="-1" name="sept"/>
+        </property>
+        <property name="oct" type="double">
+            <column default="-1" name="oct"/>
+        </property>
+        <property name="nov" type="double">
+            <column default="-1" name="nov"/>
+        </property>
+        <property name="december" type="double">
+            <column default="-1" name="december"/>
+        </property>
+    </class>
+</hibernate-mapping>

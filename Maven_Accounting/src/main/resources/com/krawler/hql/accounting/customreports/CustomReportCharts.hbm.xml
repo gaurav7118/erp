@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.spring.accounting.customreports.CustomReportCharts" table="customreportcharts" dynamic-update="true">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="reportID" type="string">
+      <column name="reportid"/>
+    </property>
+    <property name="chartName" type="string">
+      <column name="name"/>
+    </property>
+    <property name="chartType" type="string">
+      <column name="type"/>
+    </property>
+    <property name="titleField" type="string">
+      <column name="titleField"/>
+    </property>
+    <property name="valueField" type="string">
+      <column name="valueField"/>
+    </property>
+    <property name="groupby" type="string">
+      <column name="groupby"/>
+    </property>
+    <property name="properties" type="string">
+      <column name="properties"/>
+    </property>
+    <property name="createdOn" type="long">
+      <column name="createdon"/>
+    </property>
+    <property name="modifiedOn" type="long">
+      <column name="modifiedon"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" column="companyid" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>
+    <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+  </class>
+</hibernate-mapping>

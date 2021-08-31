@@ -1,0 +1,1 @@
+Ext.define("Ext.draw.SurfaceBase",{extend:"Ext.Widget",getOwnerBody:function(){return this.ownerCt.body},destroy:function(){var A=this;if(A.hasListeners.destroy){A.fireEvent("destroy",A)}A.callParent()}})

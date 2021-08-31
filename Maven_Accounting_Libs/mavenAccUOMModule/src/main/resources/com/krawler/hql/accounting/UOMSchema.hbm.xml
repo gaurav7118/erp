@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.UOMSchema" table="uomschema">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>  
+        <property name="baseuomrate" type="double">
+            <column default="1.0" name="baseuomrate" not-null="true"/>
+        </property>
+        <property name="rateperuom" type="double">
+            <column default="0.0" name="rateperuom" not-null="false"/>
+        </property>
+        <property column="uomnature" name="uomnature">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.hql.accounting.UOMNature</param>
+            </type>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="purchaseuom" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="salesuom" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="orderuom" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="transferuom" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="baseuom" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" name="uomschematype" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

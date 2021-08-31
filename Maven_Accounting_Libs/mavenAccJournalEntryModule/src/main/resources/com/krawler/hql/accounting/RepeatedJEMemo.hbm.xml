@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.RepeatedJEMemo" table="repeatedjememo">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.RepeatedJE" column="repeatedje" name="RepeatedJEID"/>
+        <property name="RepeatedInvoiceID" type="string">
+            <column length="1024" name="repeatedinv"/>
+        </property>
+        <property name="RepeatedSOID" type="string">
+            <column length="1024" name="repeatedso"/>
+        </property>
+        <property name="RepeatedPaymentId" type="string">
+            <column length="255" name="repeatedpayment"/>
+        </property>
+        <property name="count" type="integer">
+            <column name="count" default="0"/>
+        </property>
+        <property name="memo" type="string">
+            <column length="1024" name="memo"/>
+        </property>
+    </class>
+</hibernate-mapping>

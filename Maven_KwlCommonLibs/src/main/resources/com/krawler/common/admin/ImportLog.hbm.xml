@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.ImportLog" table="importlog">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="fileName" type="string">
+      <column name="filename"/>
+    </property>
+    <property name="storageName" type="string">
+      <column name="storagename"/>
+    </property>
+    <property name="type" type="string">
+      <column name="type"/>
+    </property>
+    <property name="failureFileType" type="string">
+      <column name="failurefiletype" default=""/>
+    </property>
+    <property name="log" type="string">
+      <column name="log"/>
+    </property>
+    <property name="totalRecs" type="integer">
+      <column name="totalrecs" default='0'/>
+    </property>
+    <!--property name="imported" type="integer">
+      <column name="imported" default='0'/>
+    </property-->
+    <property name="rejected" type="integer">
+      <column name="rejected" default='0'/>
+    </property>
+    <property name="importDate" type="timestamp">
+      <column name="importdate" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Modules" name="module" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.User" name="user" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

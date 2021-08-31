@@ -1,0 +1,1 @@
+Ext.platformTags.modern=!(Ext.platformTags.classic=Ext.isClassic=true)

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.Projreport_Template" table="projreport_template">
+    <id name="tempid" type="string">
+      <column name="tempid"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="tempname" type="string">
+      <column length="40" name="tempname"/>
+    </property>
+    <property name="description" type="string">
+      <column  name="description"/>
+    </property>
+    <property name="configstr" type="string">
+      <column length="2000" name="configstr"/>
+    </property>
+    <property name="preText" type="string">
+      <column  name="pretext"/>
+    </property>
+    <property name="postText" type="string">
+      <column  name="posttext"/>
+    </property>
+    <property name="letterHead" type="string">
+      <column  name="letterhead"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.User" fetch="select" name="userid">
+      <column name="userid"/>
+    </many-to-one>
+    <property name="type" type="integer">
+      <column default="0" name="type"/>
+    </property>
+    <property name="deleteflag" type="integer">
+      <column default="0" name="deleteflag"/>
+    </property>
+  </class>
+</hibernate-mapping>

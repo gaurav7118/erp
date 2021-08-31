@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.415765000000003"/>
+	<property name="ireport.x" value="485"/>
+	<property name="ireport.y" value="109"/>
+	<parameter name="StatementOfAccountsSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="StatementOfAccountsSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="imagePath2" class="java.lang.String"/>
+	<parameter name="imagePath3" class="java.lang.String"/>
+	<parameter name="Companyname" class="java.lang.String"/>
+	<parameter name="Companyaddress" class="java.lang.String"/>
+	<parameter name="Title" class="java.lang.String"/>
+	<parameter name="templateFlag" class="java.lang.String"/>
+	<parameter name="asofDate" class="java.lang.String"/>
+	<parameter name="TO_Date" class="java.lang.String"/>
+	<parameter name="From_Date" class="java.lang.String"/>
+	<parameter name="Aged_On" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="companyRegNo" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<background>
+		<band height="802">
+			<rectangle>
+				<reportElement x="7" y="67" width="87" height="733"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="67" width="188" height="733"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="282" y="67" width="86" height="733"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="368" y="67" width="116" height="733"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="483" y="67" width="64" height="733"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="104">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="2" width="555" height="102" forecolor="#FFFFFF"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="85" y="2" width="284" height="22"/>
+				<box leftPadding="5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Companyname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="85" y="24" width="284" height="20"/>
+				<box leftPadding="5"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Companyaddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="200" y="0" width="330" height="17"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Title}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="371" y="39" width="181" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="69" height="20"/>
+					<box topPadding="2" leftPadding="2" rightPadding="2"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[As of Date]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="70" y="0" width="111" height="20"/>
+					<box topPadding="2" leftPadding="2" rightPadding="2">
+						<leftPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{asofDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="371" y="59" width="181" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="371" y="19" width="181" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="69" height="20"/>
+					<box topPadding="2" leftPadding="2" rightPadding="2"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[From Date]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="70" y="0" width="111" height="20"/>
+					<box topPadding="2" leftPadding="2" rightPadding="2">
+						<leftPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{From_Date}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="0" y="0" width="85" height="96"/>
+				<imageExpression><![CDATA[$P{imagePath}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="372" y="59" width="69" height="20"/>
+				<box topPadding="2" leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[To Date]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="441" y="59" width="111" height="20"/>
+				<box topPadding="2" leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{TO_Date}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="371" y="79" width="181" height="25"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<staticText>
+				<reportElement x="372" y="79" width="69" height="20"/>
+				<box topPadding="2" leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aged On]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="441" y="80" width="111" height="20"/>
+				<box topPadding="2" leftPadding="2" rightPadding="2">
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{Aged_On}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="10">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="0"/>
+				<subreportParameter name="templateFlag">
+					<subreportParameterExpression><![CDATA[$P{templateFlag}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{StatementOfAccountsSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{StatementOfAccountsSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

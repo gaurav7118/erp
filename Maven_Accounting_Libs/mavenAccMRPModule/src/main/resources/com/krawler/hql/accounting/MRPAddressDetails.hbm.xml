@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.mrp.contractmanagement.MRPAddressDetails" table="mrpaddressdetails">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="addresscombo" type="string">
+            <column name="addresscombo"/>
+        </property>
+        <property name="aliasname" type="string">
+            <column name="aliasname"/>
+        </property>
+        <property name="address" type="string">
+            <column name="address"/>
+        </property>
+        <property name="county" type="string">
+            <column name="county"/>
+        </property>
+        <property name="city" type="string">
+            <column name="city"/>
+        </property>
+        <property name="state" type="string">
+            <column name="state"/>
+        </property>
+        <property name="country" type="string">
+            <column name="country"/>
+        </property>
+        <property name="postalcode" type="string">
+            <column name="postalcode"/>
+        </property>
+        <property name="phone" type="string">
+            <column name="phone"/>
+        </property>
+        <property name="mobilenumber" type="string">
+            <column name="mobilenumber"/>
+        </property>
+        <property name="fax" type="string">
+            <column name="fax"/>
+        </property>
+        <property name="emailid" type="string">
+            <column name="emailid"/>
+        </property>
+        <property name="recipientname" type="string">
+            <column name="recipientname"/>
+        </property>
+        <property name="contactperson" type="string">
+            <column name="contactperson"/>
+        </property>
+        <property name="contactpersonnumber" type="string">
+            <column name="contactpersonnumber"/>
+        </property>
+        <property name="contactpersondesignation" type="string">
+            <column name="contactpersondesignation"/>
+        </property>
+        <property name="website" type="string">
+            <column name="website"/>
+        </property>
+        <property name="route" type="string">
+            <column name="route"/>
+        </property>
+        <property name="isbilling" type="true_false">
+            <column name="isbilling" default="true"/>
+        </property>
+        <many-to-one class="com.krawler.spring.mrp.contractmanagement.MRPContract" name="mrpcontract" column="mrpcontract"/>
+        <many-to-one class="com.krawler.spring.mrp.contractmanagement.MRPContractDetails" name="mrpcontractdetails" column="mrpcontractdetails"/>
+    </class>
+</hibernate-mapping>

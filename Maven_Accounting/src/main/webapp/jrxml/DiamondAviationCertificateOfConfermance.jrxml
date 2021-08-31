@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<parameter name="DeliveryOrderTable2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="COFSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="refno" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="donumber" class="java.lang.String"/>
+	<parameter name="sitawirecode" class="java.lang.String"/>
+	<parameter name="dostatus" class="java.lang.String"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="COMPANY_ADDRESS" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<background>
+		<band height="802">
+			<rectangle>
+				<reportElement x="0" y="0" width="556" height="802"/>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="556" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Certificate of Conformance
+]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="50">
+			<staticText>
+				<reportElement x="408" y="5" width="142" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[3. Reference]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="408" y="25" width="144" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{refno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="5" width="142" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[2. Seller's Name]]></text>
+			</staticText>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="399" y="0" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="36" y="25" width="331" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="5" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[4. Organization:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="33" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Address:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="21" width="77" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Phone:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="36" width="77" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Fax:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="21" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[+65 85098603
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="36" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[+65 62341600
+]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="280" y="0" width="1" height="104"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="36" y="19" width="242" height="17"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="36" y="49" width="242" height="53"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_ADDRESS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="32">
+			<staticText>
+				<reportElement x="10" y="6" width="117" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[5A. Seller's Contract:
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="127" y="6" width="151" height="20"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{refno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="299" y="6" width="87" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[5B. Buyer's PO:
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="387" y="6" width="138" height="20"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{donumber}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="280" y="0" width="1" height="32"/>
+			</line>
+		</band>
+		<band>
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="0" y="0" width="555" height="0" isRemoveLineWhenBlank="true"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{DeliveryOrderTable2}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{COFSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="281">
+			<frame>
+				<reportElement x="0" y="4" width="556" height="58"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="10" y="20" width="544" height="34"/>
+					<textElement markup="html">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[
+Seller does not provide any iExpress or Implied warranty on parts and will not be responsible for consequential damages of any form related to<br> and from use of Part on Engine or Aircraft.
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="4" width="105" height="16"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[10. Remarks:
+]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="62" width="556" height="104"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="30" y="26" width="524" height="75"/>
+					<textElement markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[We hereby certify that the items furnished were purchased in accordance with Buyer's Purchase Order. Diamond Aviation<br>
+Pte. Ltd. certifies that attached documents are certified true copies of the Authorised Release Certificates and/or<br>
+Manufacturer's Certificate of Conformance. The original documentation s retained on file at Diamond Aviation Pte. Ltd.<br>
+pursuant to our document rentention standards.<br><br>
+Parts/ Material have been inspected and unless otherwise stated, conform to the contract or Purchase Order. Parts or<br>
+Material have been inspected to conform to ISO9001.2008 and FAA-AC-00-56A requirements. Registration Number: CIS/9202
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="10" width="175" height="16"/>
+					<textElement markup="html">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[<u>11. Material Verification<u>
+]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="0" y="166" width="556" height="37"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="11" y="3" width="105" height="16"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[12. Signature]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement x="11" y="209" width="62" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[13. Name
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="209" width="53" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[14. Date
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="229" width="403" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="209" width="171" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

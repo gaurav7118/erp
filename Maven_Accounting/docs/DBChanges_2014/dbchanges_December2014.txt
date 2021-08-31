@@ -1,0 +1,488 @@
+#Raveesh Pathak 2nd Dec 2014
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `unitpricedigitafterdecimal`  int(3) NULL DEFAULT 2 AFTER `quantitydigitafterdecimal`;
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `uomconversionratedigitafterdecimal`  int(3) NULL DEFAULT 6 AFTER `unitpricedigitafterdecimal`;
+
+update compaccpreferences set unitpricedigitafterdecimal=3 where id in (select companyid from company where subdomain like '%sustenir%'); #use suitable subdomain of sustenir
+update compaccpreferences set unitpricedigitafterdecimal=3 where id in (select companyid from company where subdomain like '%sats%'); #use suitable subdomain of sats
+
+alter table productpricerule modify lowerlimit double default 0;
+alter table productpricerule modify upperlimit double default 0;
+alter table productpricerule modify amount double default 0;
+update company set templateflag=18 where subdomain='sustenirtest';
+
+# Malhari Pawar 2nd Dec 2014
+set foreign_key_checks = 0;
+ALTER TABLE `replacementproductbatchdetailsmapping` DROP FOREIGN KEY `replacementproductbatchdetailsmapping_ibfk_1`;
+ALTER TABLE `replacementproductbatchdetailsmapping` ADD CONSTRAINT `replacementproductbatchdetailsmapping_newbatchserial` FOREIGN KEY (`batchserial`) REFERENCES `newbatchserial` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+set foreign_key_checks = 1;
+
+# Anand Nimbalkar 2nd Dec 2014
+
+ALTER TABLE `extracompanypreferences` ADD COLUMN `deliveryplanner` char(1) DEFAULT 'F';
+
+ALTER TABLE `invoice` ADD COLUMN `deliverytime` varchar(255) DEFAULT NULL;
+
+insert into mastergroup (id, groupname) values (25, "Vehicle");
+insert into mastergroup (id, groupname) values (26, "Driver");
+insert into mastergroup (id, groupname) values (27, "Trip Number");
+
+insert into reportmaster value("Delivery_Planner_Report","Delivery Planner Report","View Delivery Planner Report From here.","getDeliveryPlannerTabView()");
+insert into reportmaster value("Vehicle_Delivery_Summary_Report","Vehicle Delivery Report (Summary for the Month)","View Vehicle Delivery Report (Summary for the Month) From here.","getVehicleDeliverySummaryReportTabView()");
+insert into reportmaster value("Individual_Vehicle_Delivery_Report","Individual Vehicle Delivery Report (Detailed for the Month)","View Individual Vehicle Delivery Report (Detailed for the Month) From here.","getIndividualVehicleDeliveryReportTabView()");
+insert into reportmaster value("Individual_Vehicle_DO_PO_Report","Individual Vehicle Delivery Report (DO/PO for the Day)","View Individual Vehicle Delivery Report (DO/PO for the Day) From here.","getIndividualVehicleDOPOReportTabView()");
+insert into reportmaster value("Driver_Delivery_Summary_Report","Driver Delivery Report (Summary for the Month)","View Driver Delivery Report (Summary for the Month) From here.","getDriverDeliverySummaryReportTabView()");
+insert into reportmaster value("Individual_Driver_Delivery_Report","Individual Driver Delivery Report (Detailed for the Month)","View Individual Driver Delivery Report (Detailed for the Month) From here.","getIndividualDriverDeliveryReportTabView()");
+insert into reportmaster value("Individual_Driver_DO_PO_Report","Individual Driver Delivery Report (DO/PO for the Day)","View Individual Driver Delivery Report (DO/PO for the Day) From here.","getIndividualDriverDOPOReportTabView()");
+
+CREATE TABLE `deliveryplanner` (
+    `id` varchar(255) NOT NULL,
+    `pushtime` datetime NULL DEFAULT NULL,
+    `referencenumber` varchar(255) NULL DEFAULT NULL,
+    `fromuser` varchar(255) NULL DEFAULT NULL,
+    `deliverylocation` varchar(255) NULL DEFAULT NULL,
+    `deliverydate` datetime NULL DEFAULT NULL,
+    `deliverytime` varchar(255) NULL DEFAULT NULL,
+    `remarksbysales` varchar(255) NULL DEFAULT NULL,
+    `printedby` varchar(255) NULL DEFAULT NULL,
+    `remarksbyplanner` varchar(255) NULL DEFAULT NULL,
+    `vehiclenumber` varchar(255) NULL DEFAULT NULL,
+    `driver` varchar(255) NULL DEFAULT NULL,
+    `tripnumber` varchar(255) NULL DEFAULT NULL,
+    `tripdescription` varchar(255) NULL DEFAULT NULL,
+    `company` varchar(255) NULL DEFAULT NULL,
+    PRIMARY KEY  (`id`),
+    FOREIGN KEY (`referencenumber`) REFERENCES `invoice` (`id`),
+    FOREIGN KEY (`fromuser`) REFERENCES `users` (`userid`),
+    FOREIGN KEY (`printedby`) REFERENCES `users` (`userid`),
+    FOREIGN KEY (`vehiclenumber`) REFERENCES `masteritem` (`id`),
+    FOREIGN KEY (`driver`) REFERENCES `masteritem` (`id`),
+    FOREIGN KEY (`tripnumber`) REFERENCES `masteritem` (`id`),
+    FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `deliveryplannerannouncement` (
+    `id` varchar(255) NOT NULL,
+    `announcementtime` datetime NULL DEFAULT NULL,
+    `announcementmsg` varchar(255) NULL DEFAULT NULL,
+    `company` varchar(255) NULL DEFAULT NULL,
+    PRIMARY KEY  (`id`),
+    FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Raveesh Pathak 3rd Dec 2014
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("c6d70a8e-7a0e-11e4-9d47-c03fd5633215","e1e72896-bf85-102d-b644-001e58a64cb6", "Currency", "Currency", 0,0, 'F','F', "KWLCurrency", "name", "currencyID", "ref",null,"currencyname",null);
+
+#Neeraj Dwivedi 3rd dec 2014
+update default_header set reftabledatacolumn="termname" where defaultHeader='Credit Term' ;
+update default_header set reftabledatacolumn="termname" where defaultHeader='Debit Term' ;
+update default_header  set reftabledatacolumn="currencycode" where defaultHeader="Currency"  and pojomethodname="KWLCurrency" and  reftabledatacolumn="name";
+
+#Hitesh Suryawanshi 5th Dec
+delete from accjecustomdata where journalentryId not in (select id from journalentry);
+
+
+# Suhas Chaware 4th Dec 2014
+alter table payment  ADD COLUMN chequeprinted int(1) DEFAULT 0;
+
+# Anand Nimbalkar 10th Dec 2014
+alter table productbuild add column deliveryorder varchar(255) default null;
+
+
+#Anup Kale 11 Dec 2014
+ALTER TABLE `paymentdetail`
+ADD COLUMN `amountingrcurrency`  double NULL DEFAULT 1 AFTER `exchangeratefortransaction`;
+
+
+ALTER TABLE `creditnotpayment`
+ADD COLUMN `fromcurrency` varchar(36) default NULL,
+ADD COLUMN `tocurrency` varchar(36) default NULL,
+ADD COLUMN `exchangeratefortransaction`  double NULL DEFAULT 1,
+ADD COLUMN `amountinpaymentcurrency` double NULL DEFAULT 0,
+ADD COLUMN `paidamountinpaymentcurrency` double NULL DEFAULT 0,
+ADD FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`),
+ADD FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`);
+ 
+CREATE TABLE `advancedetail` (
+  `id` varchar(36) NOT NULL,
+  `company` varchar(36) NOT NULL,
+  `amount` double default 0.0,
+  `amountdue` double default 0.0,
+  `payment` varchar(36) default NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`payment`) REFERENCES `payment` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `linkdetailpayment` (
+  `id` varchar(36) NOT NULL,
+  `paymentid` varchar(50) default NULL,
+  `paymentthrough` varchar(50) default NULL,
+  `description` varchar(50) default NULL,
+  `company` varchar(36) NOT NULL,
+  `amount` double default 0.0,
+  `payment` varchar(36) default NULL,
+  `goodsReceipt` varchar(36) default NULL,
+  `srno` int(11) default '0',
+  `fromcurrency` varchar(36) default NULL,
+  `tocurrency` varchar(36) default NULL,
+  `exchangeratefortransaction` double default '1',
+  `amountingrcurrency`  double NULL DEFAULT 1,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`payment`) REFERENCES `payment` (`id`) ,
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ,
+  FOREIGN KEY (`goodsReceipt`) REFERENCES `goodsreceipt` (`id`) ,
+  FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`) ,
+  FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Suhas Chaware 11th Dec 2014
+alter table journalentry  ADD COLUMN chequeprinted int(1) DEFAULT 0;
+alter table journalentry add column paymentmethod varchar(255) DEFAULT NULL;
+alter table journalentry add column paidto varchar(255) DEFAULT NULL;
+ALTER TABLE `journalentry` ADD FOREIGN KEY (`paymentmethod`) REFERENCES `paymentmethod` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `journalentry` ADD FOREIGN KEY (`paidto`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+#Raveesh Pathak 12th Dec 2014
+alter table extracompanypreferences add column retainexchangerate char(1) default 'T';
+alter table purchaseorder add column externalcurrencyrate double NULL default 0.0;
+alter table salesorder add column externalcurrencyrate double NULL default 0.0;
+alter table quotation add column externalcurrencyrate double NULL default 0.0;
+alter table vendorquotation add column externalcurrencyrate double NULL default 0.0;
+
+# Amol Dhokale 12th Dec,2014
+ALTER TABLE expenseggrdetails ADD COLUMN description VARCHAR(255);
+
+# Nitin Narkhede 12th dec 2014
+
+CREATE TABLE `comment` (
+  `id` varchar(255) NOT NULL,
+  `user` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `moduleid` varchar(255) DEFAULT '',
+  `recordid` varchar(255) DEFAULT '',
+  `comment` text,
+  `oldpostedon` datetime DEFAULT NULL,
+  `relatedto` varchar(255) DEFAULT '',
+  `deleteflag` char(1) DEFAULT '0',
+  `postedon` bigint(20) DEFAULT NULL,
+  `updatedon` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `docs` (
+  `id` varchar(255) NOT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  `docname` varchar(255) DEFAULT NULL,
+  `docsize` varchar(255) DEFAULT NULL,
+  `doctype` varchar(255) DEFAULT NULL,
+  `storename` varchar(255) DEFAULT NULL,
+  `storageindex` tinyint(3) unsigned DEFAULT NULL,
+  `user` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `deleteflag` tinyint(4) DEFAULT '0',
+  `tags` varchar(255) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
+  `uploadedon` bigint(20) DEFAULT NULL,
+  `moduleid` varchar(255) DEFAULT '',
+  `recordid` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+alter table comment modify column updatedon datetime, modify column postedon datetime, modify column oldpostedon datetime;
+alter table docs modify column uploadedon datetime;
+ALTER TABLE `compaccpreferences` ADD COLUMN `viewdetailsperm` char(1) DEFAULT 'F';
+
+# Anand Nimbalkar 12th Dec 2014
+alter table deliveryplanner add column invoiceoccurance int(1) DEFAULT 1;
+
+#Pandurang Mukhekar 13th Dec 2014
+alter table payment add column advanceamounttype int(1) default 0 ;
+alter table receipt add column advanceamounttype int(1) default 0 ;
+
+# Atul sachan 13 December 2014
+
+ALTER TABLE `srdetails`
+ADD COLUMN `reason`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `srdetails` ADD FOREIGN KEY (`reason`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `prdetails`
+ADD COLUMN `reason`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `prdetails` ADD FOREIGN KEY (`reason`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `srdetails`
+ADD COLUMN `tax`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `rowtaxamount`  double NULL DEFAULT 0;
+
+ALTER TABLE `srdetails` ADD FOREIGN KEY (`tax`) REFERENCES `tax` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `prdetails`
+ADD COLUMN `tax`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `rowtaxamount`  double NULL DEFAULT 0;
+
+ALTER TABLE `prdetails` ADD FOREIGN KEY (`tax`) REFERENCES `tax` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+
+# Atul sachan 14 Dec 2014
+insert into mastergroup (id, groupname) values (29, "Reason");
+
+
+ALTER TABLE `creditnote`
+ADD COLUMN `salesreturn`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `creditnote` ADD FOREIGN KEY (`salesreturn`) REFERENCES `salesreturn` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `debitnote`
+ADD COLUMN `purchasereturn`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `debitnote` ADD FOREIGN KEY (`purchasereturn`) REFERENCES `purchasereturn` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `customer`
+ADD COLUMN `companyregistrationnumber`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `gstregistrationnumber`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `vendor`
+ADD COLUMN `companyregistrationnumber`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `gstregistrationnumber`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `rmcdapprovalnumber`  varchar(255) NULL DEFAULT NULL;
+
+# Amol Dhokale 14th Dec,2014
+ALTER TABLE goodsreceipt ADD COLUMN isselfbilledinvoice INT(1) DEFAULT 0;
+ALTER TABLE goodsreceipt ADD COLUMN rmcdapprovalno VARCHAR(255);
+
+# Mayur Pawar 15 Dec 2014
+alter table salesreturn add column isNoteAlso char(1) DEFAULT 'F';
+alter table purchasereturn add column isNoteAlso char(1) DEFAULT 'F';
+
+# Vivek Pakmode 15th Dec 2014
+ALTER TABLE `cndetails` ADD COLUMN `amounttoadjust` double DEFAULT 0;
+ALTER TABLE `cndetails` ADD COLUMN `taxamounttoadjust` double DEFAULT 0;
+ALTER TABLE `cndetails` ADD COLUMN `adjustedamount` double DEFAULT 0;
+
+ALTER TABLE `dndetails` ADD COLUMN `amounttoadjust` double DEFAULT 0;
+ALTER TABLE `dndetails` ADD COLUMN `taxamounttoadjust` double DEFAULT 0;
+ALTER TABLE `dndetails` ADD COLUMN `adjustedamount` double DEFAULT 0;
+
+
+#Anup Kale 15 Dec
+ALTER TABLE `paymentdetail`
+ADD COLUMN `amountdueingrcurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountdueinpaymentcurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountdueinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `exchangeratecurrencytobase` double NULL DEFAULT 1;
+
+ALTER TABLE `creditnotpayment`
+ADD COLUMN `amountinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `paidamountdueinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `exchangeratecurrencytobase` double NULL DEFAULT 1;
+
+ALTER TABLE `payment`
+ADD COLUMN `paymentwindowtype` int NULL DEFAULT 0;
+
+#Anand Thakur 16th Dec 2014
+
+#Insert into Default Header for Vendor Invoice 
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('cbdc58cc-1885-4549-9be3-d73884fc3777','Billing Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e80509a8-39c2-48ab-b856-6cad646839c0','Shipping Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3e192cb8-5db9-4fc6-bc35-25c79f1bdf9f','Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4b7a55fe-39fd-4219-9251-fb48e9bfafae','Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','6');
+
+#mayur Pawar  16 th Dec 2014
+alter table serialdocumentmapping add column isconsignment char(1) DEFAULT 'F';
+alter table locationbatchdocumentmapping add column isconsignment char(1) DEFAULT 'F';
+alter table newproductbatch add column isconsignment char(1) DEFAULT 'F';
+alter table newbatchserial add column isconsignment char(1) DEFAULT 'F';
+
+# Vivek pakmode 16th Dec 2014
+ALTER TABLE `packingdolist` ADD COLUMN `customerid` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN  `dateoflc` datetime NOT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `letterofcn` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `partialshipment` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `transhipment` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `portofloading` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `portofdischarge` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `vessel` varchar(255) DEFAULT NULL;
+ALTER TABLE `packingdolist` ADD COLUMN `incoterms` varchar(255) DEFAULT NULL;
+
+# Amol Dhokale 17th Dec,2014
+ALTER TABLE account ADD COLUMN description VARCHAR(255);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES 
+("22e72896-bf35-102d-b645-005e58b64c30","e1e72896-bf85-102d-b644-001e58a64cb6","Account Description","Description",0,240,'F','F',null,null,null,null,null);
+
+#mayur Pawar 18 dec2014
+alter table newproductbatch add column isForconsignment char(1) DEFAULT 'F';
+alter table newbatchserial add column isForconsignment char(1) DEFAULT 'F';
+
+#DeepakPingale 22 dec2014
+update vendor SET name = REPLACE (name, '"', '') WHERE name LIKE '%"%';
+update customer SET name = REPLACE (name, '"', '') WHERE name LIKE '%"%';
+
+# Vijay Jawale 23rd Dec 2014
+INSERT INTO helpedit VALUES('501','Asset Acquired list','Quick Search', '21','Quick Search',"Search through Invoice easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch21FixedAssetGRListEntry');
+
+INSERT INTO helpedit VALUES('502','Asset Acquired list','Export Reports', '21','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports21FixedAssetGRListEntry');
+
+INSERT INTO helpedit VALUES('503','Asset Disposal invoice list','Quick Search', '16','Quick Search',"Search through Invoice easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch16FixedAssetInvoiceListEntry');
+
+INSERT INTO helpedit VALUES('504','Asset Disposal invoice list','Export Reports', '16','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports16FixedAssetInvoiceListEntry"');
+	
+
+#Anup Kale 24th Dec
+
+ALTER TABLE `receiptdetails`
+ADD COLUMN `amountininvoicecurrency`  double NULL DEFAULT 1 AFTER `exchangeratefortransaction`,
+ADD COLUMN `amountdueininvoicecurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountdueinpaymentcurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountdueinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `exchangeratecurrencytobase` double NULL DEFAULT 1;
+
+ALTER TABLE `debitnotepayment`
+ADD COLUMN `fromcurrency` varchar(36) default NULL,
+ADD COLUMN `tocurrency` varchar(36) default NULL,
+ADD COLUMN `exchangeratefortransaction`  double NULL DEFAULT 1,
+ADD COLUMN `amountinreceiptcurrency` double NULL DEFAULT 0,
+ADD COLUMN `paidamountinreceiptcurrency` double NULL DEFAULT 0,
+ADD COLUMN `amountinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `paidamountdueinbasecurrency` double NULL DEFAULT 0,
+ADD COLUMN `exchangeratecurrencytobase` double NULL DEFAULT 1,
+ADD FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`),
+ADD FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`);
+ 
+CREATE TABLE `receiptadvancedetail` (
+  `id` varchar(36) NOT NULL,
+  `company` varchar(36) NOT NULL,
+  `amount` double default 0.0,
+  `amountdue` double default 0.0,
+  `receipt` varchar(36) default NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`receipt`) REFERENCES `receipt` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `linkdetailreceipt` (
+  `id` varchar(36) NOT NULL,
+  `description` varchar(50) default NULL,
+  `company` varchar(36) NOT NULL,
+  `amount` double default 0.0,
+  `receipt` varchar(36) default NULL,
+  `invoice` varchar(36) default NULL,
+  `srno` int(11) default '0',
+  `fromcurrency` varchar(36) default NULL,
+  `tocurrency` varchar(36) default NULL,
+  `exchangeratefortransaction` double default '1',
+  `amountininvoicecurrency`  double NULL DEFAULT 1,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`receipt`) REFERENCES `receipt` (`id`) ,
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ,
+  FOREIGN KEY (`invoice`) REFERENCES `invoice` (`id`) ,
+  FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`) ,
+  FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `receipt`
+ADD COLUMN `paymentwindowtype` int NULL DEFAULT 0;
+
+# Vivek Pakmode 26th Dec 2014
+alter table extracompanypreferences 
+add column `activateproductcomposition` char(1) default 'F';
+
+CREATE TABLE `productcomposition` (
+  `id` varchar(255) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `srno` int(11) default '0',
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table product 
+add column `activateproductcomposition` char(1) default 'F';
+
+ALTER TABLE `productcomposition` ADD COLUMN `ingredients` varchar(255) DEFAULT NULL;
+ALTER TABLE `productcomposition` ADD COLUMN `strength` varchar(255) DEFAULT NULL;
+
+#Mayur Pawar 26 Dec 2014
+ALTER TABLE `newproductbatch` ADD COLUMN `asset`  varchar(255) NULL DEFAULT NULL; 
+ALTER TABLE newproductbatch ADD FOREIGN KEY (`asset`) REFERENCES `assetdetail` (`id`)  ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `newbatchserial` ADD COLUMN `asset`  varchar(255) NULL DEFAULT NULL; 
+ALTER TABLE newbatchserial ADD FOREIGN KEY (`asset`) REFERENCES `assetdetail` (`id`)  ON DELETE CASCADE ON UPDATE CASCADE;
+
+# Amol Dhokale 29th Dec,2014
+alter table vendorquotation add column `approvestatuslevel` int(11) DEFAULT '11';
+alter table quotation add column `approvestatuslevel` int(11) DEFAULT '11';
+
+# Anand Nimbalkar 30th Dec 2014
+ALTER TABLE `extracompanypreferences` ADD COLUMN `productpricingonbands` char(1) DEFAULT 'F';
+
+CREATE TABLE `pricingbandmaster` (
+    `id` varchar(255) NOT NULL,
+    `name` varchar(255) NULL DEFAULT NULL,
+    `company` varchar(255) NULL DEFAULT NULL,
+    PRIMARY KEY  (`id`),
+    FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `pricingbandmasterdetails` (
+    `id` varchar(255) NOT NULL,
+    `pricingbandmaster` varchar(255) NULL DEFAULT NULL,
+    `product` varchar(255) NULL DEFAULT NULL,
+    `purchaseprice` double NULL DEFAULT 0,
+    `salesprice` double NULL DEFAULT 0,
+    `currency` varchar(255) NULL DEFAULT NULL,
+    `company` varchar(255) NULL DEFAULT NULL,
+    PRIMARY KEY  (`id`),
+    FOREIGN KEY (`pricingbandmaster`) REFERENCES `pricingbandmaster` (`id`),
+    FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`),
+    FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+update currency set name ='Thai baht (THB)' where currencyid = 15;
+
+alter table `customer` add column `pricingbandmaster` varchar(255) NULL DEFAULT NULL, ADD FOREIGN KEY (`pricingbandmaster`) REFERENCES `pricingbandmaster` (`id`);
+alter table `vendor` add column `pricingbandmaster` varchar(255) NULL DEFAULT NULL, ADD FOREIGN KEY (`pricingbandmaster`) REFERENCES `pricingbandmaster` (`id`);
+#Anup Kale 31th Dec 2014
+alter table receiptadvancedetail add column advancetype int(1) default 1 ;
+#shashi nandan kumar 30 dec 2014
+update reportmaster set name='General Ledger' ,description='View General Ledger.'  where id='General_Ledger_Report';
+update reportmaster set name='Cash Flow Statement'  where id='Cash_Flow_WorkSheet';
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f85-102d-b644-001e58a64cb0','pid','Product ID',18,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72896-3f86-102d-b644-001e58a64cb0','pid','Product ID',2,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72897-3f87-102d-b644-001e58a64cb0','pid','Product ID',6,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72898-3f88-102d-b644-001e58a64cb0','pid','Product ID',4,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72899-3f89-102d-b644-001e58a64cb0','pid','Product ID',8,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f85-103d-b644-001e58a64cb0','pid','Product ID',20,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f85-104d-b644-001e58a64cb0','pid','Product ID',23,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f85-105d-b644-001e58a64cb0','pid','Product ID',22,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f8-106d-b644-001e58a64cb0','pid','Product ID',32,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f83-107d-b644-001e58a64cb0','pid','Product ID',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f81-108d-b644-001e58a64cb0','pid','Product ID',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f82-109d-b644-001e58a64cb0','pid','Product ID',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a1e72895-3f82-109d-b644-001e58a84ca0','pid','Product ID',31,1,1,1,0);

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.CompanyAccountPreferences" table="compaccpreferences">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">company</param>
+            </generator>
+        </id>
+        <property name="taxNumber" type="string">
+            <column name="taxnumber"/>
+        </property>
+        <property name="financialYearFrom" type="date">
+            <column name="fyfrom" not-null="true"/>
+        </property>
+        <property name="firstFinancialYearFrom" type="date">
+            <column name="firstfyfrom" />
+        </property>
+        <property name="GSTApplicableDate" type="date">
+            <column name="gstapplicabledate" />
+        </property>
+        <property name="bookBeginningFrom" type="date">
+            <column name="bbfrom" not-null="true"/>
+        </property>
+        <property name="journalEntryNumberFormat" type="string">
+            <column length="2000" name="jenoformat"/>
+        </property>
+        <property name="journalEntryNumberFormatStartFrom" type="integer">
+            <column name="jenoformatstartfrom"/>
+        </property>
+        <property name="amountdigitafterdecimal" type="integer">
+            <column name="amountdigitafterdecimal"/>
+        </property>
+        <property name="quantitydigitafterdecimal" type="integer">
+            <column name="quantitydigitafterdecimal"/>
+        </property>
+        <property name="unitpricedigitafterdecimal" type="integer">
+            <column name="unitpricedigitafterdecimal"/>
+        </property>
+        <property name="uomconversionratedigitafterdecimal" type="integer">
+            <column name="uomconversionratedigitafterdecimal"/>
+        </property>
+        <property name="currencyratedigitafterdecimal" type="integer">
+            <column name="currencyratedigitafterdecimal"/>
+        </property>
+        <property name="invoiceNumberFormat" type="string">
+            <column length="2000" name="invnoformat"/>
+        </property>
+        <property name="invoiceNumberFormatStartFrom" type="integer">
+            <column name="invnoformatstartfrom"/>
+        </property>
+        <property name="creditNoteNumberFormat" type="string">
+            <column length="2000" name="cmnoformat"/>
+        </property>
+        <property name="creditNoteNumberFormatStartFrom" type="integer">
+            <column name="cmnoformatstartfrom"/>
+        </property>
+        <property name="receiptNumberFormat" type="string">
+            <column length="2000" name="receiptnoformat"/>
+        </property>
+        <property name="receiptNumberFormatStartFrom" type="integer">
+            <column name="receiptnoformatstartfrom"/>
+        </property>
+        <property name="goodsReceiptNumberFormat" type="string">
+            <column length="2000" name="grnoformat"/>
+        </property>
+        <property name="goodsReceiptNumberFormatStartFrom" type="integer">
+            <column name="grnoformatstartfrom"/>
+        </property>
+        <property name="purchaseOrderNumberFormat" type="string">
+            <column length="2000" name="ponoformat"/>
+        </property>
+        <property name="purchaseOrderNumberFormatStartFrom" type="integer">
+            <column name="ponoformatstartfrom"/>
+        </property>
+        <property name="salesOrderNumberFormat" type="string">
+            <column length="2000" name="sonoformat"/>
+        </property>
+        <property name="salesOrderNumberFormatStartFrom" type="integer">
+            <column name="sonoformatstartfrom"/>
+        </property>
+        <property name="debitNoteNumberFormat" type="string">
+            <column length="2000" name="dnnoformat"/>
+        </property>
+        <property name="debitNoteNumberFormatStartFrom" type="integer">
+            <column name="dnnoformatstartfrom"/>
+        </property>
+        <property name="paymentNumberFormat" type="string">
+            <column length="2000" name="paymentnoformat"/>
+        </property>
+        <property name="paymentNumberFormatStartFrom" type="integer">
+            <column name="paymentnoformatstartfrom"/>
+        </property>
+        <property name="cashSaleNumberFormat" type="string">
+            <column length="2000" name="csnoformat"/>
+        </property>
+        <property name="cashSaleNumberFormatStartFrom" type="integer">
+            <column name="csnoformatstartfrom"/>
+        </property>
+        <property name="cashPurchaseNumberFormat" type="string">
+            <column length="2000" name="cpnoformat"/>
+        </property>
+        <property name="cashPurchaseNumberFormatStartFrom" type="integer">
+            <column name="cpnoformatstartfrom"/>
+        </property>
+        <property name="billingReceiptNumberFormat" type="string">
+            <column length="2000" name="brnoformat"/>
+        </property>
+        <property name="billingReceiptNumberFormatStartFrom" type="integer">
+            <column name="brnoformatstartfrom"/>
+        </property>
+        <property name="billingCashSaleNumberFormat" type="string">
+            <column length="2000" name="bcsnoformat"/>
+        </property>
+        <property name="billingCashSaleNumberFormatStartFrom" type="integer">
+            <column name="bcsnoformatstartfrom"/>
+        </property>
+        <property name="billingCashPurchaseNumberFormat" type="string">
+            <column length="2000" name="bcpnoformat"/>
+        </property>
+        <property name="billingCashPurchaseNumberFormatStartFrom" type="integer">
+            <column name="bcpnoformatstartfrom"/>
+        </property>
+        <property name="billingInvoiceNumberFormat" type="string">
+            <column length="2000" name="binoformat"/>
+        </property>
+        <property name="billingInvoiceNumberFormatStartFrom" type="integer">
+            <column name="binoformatstartfrom"/>
+        </property>
+        <property name="billingGoodsReceiptNumberFormat" type="string">
+            <column length="2000" name="bgrnoformat"/>
+        </property>
+        <property name="billingGoodsReceiptNumberFormatStartFrom" type="integer">
+            <column name="bgrnoformatstartfrom"/>
+        </property>
+        <property name="billingPaymentNumberFormat" type="string">
+            <column length="2000" name="bpnoformat"/>
+        </property>
+        <property name="billingPaymentNumberFormatStartFrom" type="integer">
+            <column name="bpnoformatstartfrom"/>
+        </property>
+        <property name="billingCreditNoteNumberFormat" type="string">
+            <column length="2000" name="bcnnoformat"/>
+        </property>
+        <property name="billingCreditNoteNumberFormatStartFrom" type="integer">
+            <column name="bcnnoformatstartfrom"/>
+        </property>
+        <property name="billingDebitNoteNumberFormat" type="string">
+            <column length="2000" name="bdnnoformat"/>
+        </property>
+        <property name="billingDebitNoteNumberFormatStartFrom" type="integer">
+            <column name="bdnnoformatstartfrom"/>
+        </property>
+        <property name="billingSalesOrderNumberFormat" type="string">
+            <column length="2000" name="bsonoformat"/>
+        </property>
+        <property name="billingSalesOrderNumberFormatStartFrom" type="integer">
+            <column name="bsonoformatstartfrom"/>
+        </property>
+        <property name="billingPurchaseOrderNumberFormat" type="string">
+            <column length="2000" name="bponoformat"/>
+        </property>
+        <property name="billingPurchaseOrderNumberFormatStartFrom" type="integer">
+            <column name="bponoformatstartfrom"/>
+        </property>
+        <property name="quotationNumberFormat" type="string">
+            <column length="2000" name="qnoformat"/>
+        </property>
+        <property name="quotationNumberFormatStartFrom" type="integer">
+            <column name="qnoformatstartfrom"/>
+        </property>
+        <property name="venQuotationNumberFormat" type="string">
+            <column length="2000" name="vqnoformat"/>
+        </property>
+        <property name="venQuotationNumberFormatStartFrom" type="integer">
+            <column name="vqnoformatstartfrom"/>
+        </property>
+        <property name="requisitionNumberFormat" type="string">
+            <column length="2000" name="rqnoformat"/>
+        </property>
+        <property name="requisitionNumberFormatStartFrom" type="integer">
+            <column name="rqnoformatstartfrom"/>
+        </property>
+        <property name="rfqNumberFormat" type="string">
+            <column length="2000" name="rfqnoformat"/>
+        </property>
+        <property name="rfqNumberFormatStartFrom" type="integer">
+            <column name="rfqnoformatstartfrom"/>
+        </property>
+        <property name="emailInvoice" type="true_false">
+            <column name="eminvoice" not-null="true" default="false"/>
+        </property>
+        <property name="withoutInventory" type="true_false">
+            <column name="withoutinventory" not-null="true" default="false"/>
+        </property>
+        <property name="withInvUpdate" type="true_false">
+            <column name="withinvupdate" not-null="true" default="false"/>
+        </property>
+        <property name="partNumber" type="true_false">
+            <column name="partnumber" not-null="true" default="false"/>
+        </property>
+        <property name="dependentField" type="true_false">
+            <column name="dependentfield" not-null="true" default="false"/>
+        </property>
+        <property name="withoutTax1099" type="true_false">
+            <column name="withouttax1099" not-null="true" default="true"/>
+        </property>
+        <property name="setupDone" type="true_false">
+            <column name="setupdone" not-null="true" default="false"/>
+        </property>
+        <property name="currencyChange" type="true_false">
+            <column name="currencychange" not-null="true" default="false"/>
+        </property>
+        <property name="DOSettings" type="true_false">
+            <column name="DOSetting" default="false"/>
+        </property>
+        <property name="GRSettings" type="true_false">
+            <column name="GRSetting" default="false"/>
+        </property>
+        <property name="countryChange" type="true_false">
+            <column name="countrychange" not-null="true" default="false"/>
+        </property>
+        <property name="productidNumberFormat" type="string">
+            <column length="2000" name="pidformat"/>
+        </property>
+        <property name="productidNumberFormatStartFrom" type="integer">
+            <column name="pidformatstartfrom"/>
+        </property>
+        <property name="gstNumber" type="string">
+            <column length="500" name="gstnumber"/>
+        </property>
+        <property name="companyUEN" type="string">
+            <column length="500" name="companyuen"/>
+        </property>
+        <property name="iafVersion" type="string">
+            <column length="500" name="iafversion"/>
+        </property>
+        <property name="editTransaction" type="true_false">
+            <column name="editTransaction" default="true"/>
+        </property>
+        <property name="editLinkedTransactionQuantity" type="true_false">
+            <column name="editLinkedTransactionQuantity" default="false"/>
+        </property>
+        <property name="editLinkedTransactionPrice" type="true_false">
+            <column name="editLinkedTransactionPrice" default="false"/>
+        </property>
+        <property name="shipDateConfiguration" type="true_false">
+            <column name="shipDateConfiguration" default="false"/>
+        </property>
+        <property name="unitPriceConfiguration" type="true_false">
+            <column name="unitPriceConfiguration" default="false"/>
+        </property>
+        <property name="editso" type="true_false">
+            <column name="editso" default="true"/>
+        </property>
+        <property name="showprodserial" type="true_false">
+            <column name="showprodserial" default="true"/>
+        </property>
+        <property name="isBatchCompulsory" type="true_false">
+            <column name="isBatchCompulsory" default="true"/>
+        </property>
+        <property name="islocationcompulsory" type="true_false">
+            <column name="islocationcompulsory" default="true"/>
+        </property>
+        <property name="iswarehousecompulsory" type="true_false">
+            <column name="iswarehousecompulsory" default="true"/>
+        </property>
+        <property name="isSerialCompulsory" type="true_false">
+            <column name="isSerialCompulsory" default="true"/>
+        </property>
+        <property name="memo" type="true_false">
+            <column name="memo" default="true"/>
+        </property>
+        <property name="deleteTransaction" type="true_false">
+            <column name="deleteTransaction" default="'T'"/>
+        </property>
+        <property name="showchild" type="true_false">
+            <column name="showchild" default="true"/>
+        </property>
+        <property name="deliveryOrderNumberFormat" type="string">
+            <column length="2000" name="donoformat"/>
+        </property>
+        <property name="deliveryOrderNumberFormatStartFrom" type="integer">
+            <column name="donoformatstartfrom"/>
+        </property>
+        <property name="salesReturnNumberFormat" type="string">
+            <column length="2000" name="srnoformat"/>
+        </property>
+        <property name="salesReturnNumberFormatStartFrom" type="integer">
+            <column name="srnoformatstartfrom"/>
+        </property>
+        <property name="purchaseReturnNumberFormat" type="string">
+            <column length="2000" name="prnoformat"/>
+        </property>
+        <property name="purchaseReturnNumberFormatStartFrom" type="integer">
+            <column name="prnoformatstartfrom"/>
+        </property>
+        <property name="goodsReceiptOrderNumberFormat" type="string">
+            <column length="2000" name="gronoformat"/>
+        </property>
+        <property name="goodsReceiptOrderNumberFormatStartFrom" type="integer">
+            <column name="gronoformatstartfrom"/>
+        </property>
+        <property name="descriptionType" type="string">
+            <column length="50" name="descriptiontype" default="Memo"/>
+        </property>
+        <property name="pdffooter" type="string">
+            <column length="1024" name="pdffooter" />
+        </property>
+        <property name="pdfheader" type="string">
+            <column name="pdfheader" length="1024" default="" ></column>
+        </property>
+        <property name="pdfpretext" type="string" >
+            <column name="pdfpretext" default=""></column>
+        </property>
+        <property name="pdfposttext" type="string" >
+            <column name="pdfposttext" default=""></column>
+        </property>
+        <property name="negativestock" type="integer" >
+            <column name="negativestock" ></column>
+        </property>
+        <property name="negativeStockSO" type="integer" >
+            <column name="negativestockso" ></column>
+        </property>
+        <property name="negativeStockSICS" type="integer" >
+            <column name="negativestocksics" ></column>
+        </property>
+        <property name="negativeStockPR" type="integer" >
+            <column name="negativestockpr" ></column>
+        </property>
+        <property name="accountsWithCode" type="boolean">
+            <column name="accountswithcode" default="true"/>
+        </property>
+        <property name="showLeadingZero" type="boolean">
+            <column name="showleadingzero" not-null="true" default="true"/>
+        </property>
+        <property name="custcreditcontrol" type="integer" >
+            <column name="custcreditcontrol" ></column>
+        </property>
+        <property name="chequeNoDuplicate" type="integer" >
+            <column name="chequeNoDuplicate" ></column>
+        </property>
+        <property name="viewDashboard" type="integer" >
+            <column name="viewdashboard" ></column>
+        </property>
+        <property name="custbudgetcontrol" type="integer">
+            <column name="custbudgetcontrol"></column>    
+        </property>
+        <property name="inventoryAccountingIntegration" type="true_false">
+            <column name="inventory_accounting_inte_flag" default="false"/>
+        </property>  
+        <property name="ishtmlproddesc" type="true_false">
+            <column name="ishtmlproddesc" not-null="true" default="false"/>
+        </property>
+        <property name="updateInvLevel" type="true_false">
+            <column name="updateInvLevelCheck" default="false"></column>
+        </property>
+        <property name="doClosedStatus" type="true_false">
+            <column name="doclosedstatus" default="false"></column>
+        </property>
+        <property name="qaApprovalFlow" type="true_false">
+            <column name="qaapprovalflow" default="false"></column>
+        </property>
+        <property name="sendapprovalmail" type="true_false">
+            <column name="sendapprovalmail" default="false"/>
+        </property>
+        <property name="approvalEmails" type="string">
+            <column name="approvalemails" length="255"></column>    
+        </property>
+        <property name="paymentMethod" type="string">
+            <column name="cashoutaccforPOS" length="255"></column>    
+        </property>
+        <property name="quotationindecimalformat" type="integer">
+            <column name="quotationindecimalformat"/>
+        </property>
+         <property name="viewDetailsPerm" type="true_false">
+            <column name="viewdetailsperm" default="false"/>
+        </property>
+         <property name="isrowcompulsory" type="true_false">
+            <column name="isrowcompulsory" default="true"/>
+        </property>
+         <property name="israckcompulsory" type="true_false">
+            <column name="israckcompulsory" default="true"/>
+        </property>
+         <property name="isbincompulsory" type="true_false">
+            <column name="isbincompulsory" default="true"/>
+        </property>
+         <property name="productSortingFlag" type="integer">
+            <column name="productsortingflag" default='1' />
+        </property>
+        
+        <property name="theme" type="string">
+            <column name="theme" length="100"></column>    
+        </property>
+        
+         <property name="filterProductByCustomerCategory" type="true_false">
+            <column name="isfilterproductbycustomercategory" default="false"/>
+        </property>
+        <property name="inventoryValuationType" type="integer">
+            <column name="inventoryvaluationtype"/>
+        </property>
+        <property name="updateStockAdjustmentEntries" type="true_false">
+            <column name="updatestockadjustmententries" default="'T'" />
+        </property>        
+        <property name="showMarginButton" type="true_false">
+            <column name="isshowmarginbutton" default="false"/>
+        </property>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="discountGiven" not-null="true" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="discountReceived" not-null="true" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="shippingCharges" unique="true"/>
+<!--        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="otherCharges" not-null="true" unique="true"/>-->
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="cashAccount" not-null="true" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="foreignexchange" not-null="true" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="unrealisedgainloss"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="depereciationAccount" not-null="true" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="expenseAccount"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="customerdefaultaccount"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="vendordefaultaccount"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="roundingDifferenceAccount"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="liabilityAccount"/>
+         <many-to-one class="com.krawler.hql.accounting.MasterItem" column="industrycode" name="industryCode"/>
+        <many-to-one class="com.krawler.common.admin.CompanyType" name="companyType"/>
+        <one-to-one class="com.krawler.common.admin.Company" constrained="true" name="company"/>
+        
+        <many-to-one class="com.krawler.hql.accounting.Account" name="stockadjustmentaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="inventoryaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="cogsaccount"/>       
+        <property name="qaApprovalFlowInDO" type="true_false">
+            <column name="qaapprovalflowindo" default="false"/>
+        </property>
+<!--        <many-to-one cascade="all" class="com.krawler.hql.accounting.Account" name="cashoutACCForPOS" column="cashoutaccforPOS"/>-->
+    </class>
+</hibernate-mapping>

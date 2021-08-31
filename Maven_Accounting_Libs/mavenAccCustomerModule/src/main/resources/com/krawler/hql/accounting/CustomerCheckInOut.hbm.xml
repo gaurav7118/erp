@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.CustomerCheckInOut" table="customercheckinout">
+    <id column="id" name="Id">
+      <generator class="uuid"/>
+    </id>
+    <property name="checkintime" type="timestamp">
+      <column name="checkintime"/>
+    </property>
+    <property name="checkouttime" type="timestamp">
+      <column name="checkouttime"/>
+    </property>
+    <property name="inLatitude" type="string">
+        <column name="inlatitude"/>
+    </property>
+    <property name="inLongitude" type="string">
+        <column name="inlongitude"/>
+    </property>
+    <property name="outLatitude" type="string">
+        <column name="outlatitude"/>
+    </property>
+    <property name="outLongitude" type="string">
+        <column name="outlongitude"/>
+    </property>
+    <property name="location" type="string">
+      <column name="location"/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Customer" column="customer" name="customer" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.User" column="checkinby" name="checkinby"/>
+    <many-to-one class="com.krawler.common.admin.User" column="checkoutby" name="checkoutby"/>
+  </class>
+</hibernate-mapping>

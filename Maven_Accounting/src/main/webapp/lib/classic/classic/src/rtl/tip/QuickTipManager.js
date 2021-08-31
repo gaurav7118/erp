@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.tip.QuickTipManager",{override:"Ext.tip.QuickTipManager",init:function(){var A=this;if(A.callParent(arguments)!==false){A.tip.on("beforeshow",A.onBeforeFirstShow,A,{single:true})}},onBeforeFirstShow:function(A){A._isOffsetParentRtl=undefined}})

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+    
+<beans>
+    
+    <bean id="accSalesOrderDao" class="com.krawler.spring.accounting.salesorder.accSalesOrderImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+        
+    <bean id="accContractController" class="com.krawler.spring.accounting.salesorder.accContractController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accSalesOrderDAO">
+            <ref bean="accSalesOrderDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accTaxDAO">
+            <ref bean="accTaxDao"/>
+        </property>
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+    </bean>
+    
+    <bean id="accSalesOrderController" class="com.krawler.spring.accounting.salesorder.accSalesOrderController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accSalesOrderDAO">
+            <ref bean="accSalesOrderDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name = "commonFnControllerService">
+            <ref bean="commonFnControllerService"/>
+        </property>
+        <property name="accSalesOrderServiceobj">
+            <ref bean="accSalesOrderService"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="velocityEngine" ref="velocityEngine" />
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+    </bean>
+    
+    <bean id="accSalesOrderService" class="com.krawler.spring.accounting.salesorder.accSalesOrderServiceImpl">
+        <property name= "integrationCommonService" ref="integrationCommonService"/> 
+        <property name="companyDetailsDAO">
+            <ref bean="companyDetailsdao"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accSalesOrderDAO">
+            <ref bean="accSalesOrderDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="accProductDAO">
+            <ref bean="accProductDao"/>
+        </property>
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="velocityEngine" ref="velocityEngine" />
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="accTermDAO">
+            <ref bean="accTermDao"/>
+        </property>
+        <property name="accCustomerDAO">
+            <ref bean="accCustomerDao"/>
+        </property>
+        <property name="accCostCenterDAO">
+            <ref bean="accCostCenterDAO"/>
+        </property>
+        <property name="accTaxDAO">
+            <ref bean="accTaxDao"/>
+        </property>
+        <property name="accVendorDAO">
+            <ref bean="accVendorDao"/>
+        </property>
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name = "commonFnControllerService">
+            <ref bean="commonFnControllerService"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+    </bean>
+</beans>

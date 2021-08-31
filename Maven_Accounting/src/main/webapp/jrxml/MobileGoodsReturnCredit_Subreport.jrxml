@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="GRCash_subreport" pageWidth="103" pageHeight="802" columnWidth="103" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="10.834705943388391"/>
+	<property name="ireport.x" value="5"/>
+	<property name="ireport.y" value="0"/>
+	<field name="sNo" class="java.lang.String"/>
+	<field name="productDescription" class="java.lang.String"/>
+	<field name="qty" class="java.lang.String"/>
+	<field name="uPrice" class="java.lang.String"/>
+	<field name="productAmount" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="dicounttype" class="java.lang.String"/>
+	<field name="unit" class="java.lang.String"/>
+	<field name="discountpercent" class="java.lang.String"/>
+	<field name="discountamount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="7">
+			<line>
+				<reportElement x="0" y="0" width="103" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="6" width="103" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="78" y="1" width="23" height="6"/>
+				<textElement textAlignment="Right">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="60" y="1" width="19" height="6"/>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[U/Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="50" y="1" width="10" height="6"/>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="7" y="1" width="44" height="6"/>
+				<textElement textAlignment="Left">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description/Size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="1" width="8" height="6"/>
+				<textElement textAlignment="Left">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="6">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="8" height="6"/>
+				<textElement>
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="7" y="0" width="44" height="6"/>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productDescription}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="6">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="79" y="0" width="23" height="6"/>
+				<textElement textAlignment="Right">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productAmount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="50" y="0" width="10" height="6"/>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="8" y="0" width="42" height="6"/>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="61" y="0" width="19" height="6"/>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uPrice}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="9">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="24" y="0" width="23" height="6"/>
+				<textElement textAlignment="Left">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dicounttype}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="0" width="15" height="6"/>
+				<textElement textAlignment="Right">
+					<font size="4" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Disc :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="79" y="0" width="22" height="6"/>
+				<textElement textAlignment="Right">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discountamount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="50" y="0" width="10" height="6"/>
+				<textElement textAlignment="Center">
+					<font size="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discountpercent}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

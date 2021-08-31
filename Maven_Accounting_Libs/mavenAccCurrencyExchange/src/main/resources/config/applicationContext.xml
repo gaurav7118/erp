@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accCurrencyExchangeRate" class="com.krawler.hql.accounting.currency.service.AccCurrencyExchangeRateImpl">
+        
+    </bean>
+    <bean id="accCurrencyService" class="com.krawler.hql.accounting.currency.service.AccCurrencyServiceImpl"> 
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>  
+    </bean>
+    <bean id="accCurrencyDao" class="com.krawler.spring.accounting.currency.accCurrencyImpl" parent="baseDAO">
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+    </bean>
+    <bean id="accTaxCurrencyExchangeDao" class="com.krawler.spring.accounting.currency.AccTaxCurrencyExchangeImpl" parent="baseDAO">
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+    </bean>
+    <bean id="accCurrencycontroller" class="com.krawler.spring.accounting.currency.accCurrencyController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="accTaxCurrencyExchangeDAO">
+            <ref bean="accTaxCurrencyExchangeDao"/>
+        </property>
+    </bean>
+    <bean id="accTaxCurrencyExchangeController" class="com.krawler.spring.accounting.currency.accTaxCurrencyExchangeController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accTaxCurrencyExchangeService">
+            <ref bean="accTaxCurrencyExchangeService"/>
+        </property>
+        <property name="accTaxCurrencyExchangeDAO">
+            <ref bean="accTaxCurrencyExchangeDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+    </bean>
+    <bean id="accTaxCurrencyExchangeService" class="com.krawler.hql.accounting.currency.service.AccTaxCurrencyExchangeSerivceImpl"> 
+        <property name="accTaxCurrencyExchangeDAO">
+            <ref bean="accTaxCurrencyExchangeDao"/>
+        </property>
+    </bean>  
+
+</beans>

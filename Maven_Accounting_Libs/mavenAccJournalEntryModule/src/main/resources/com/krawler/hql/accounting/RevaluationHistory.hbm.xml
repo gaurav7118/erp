@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.RevaluationHistory" table="revaluationhistory">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="revalid" type="string">
+            <column length="255" name="revalid" not-null="true"/>
+        </property>
+        <property name="invoiceid" type="string">
+            <column length="255" name="invoiceid" not-null="true"/>
+        </property>
+        <property name="moduleid" type="integer">
+            <column  name="moduleid" not-null="true"/>
+        </property>
+        <property name="evalrate" type="double">
+            <column name="evalrate" not-null="true"/>
+        </property>
+        <property name="currentRate" type="double">
+            <column name="currentrate" not-null="true"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount" not-null="true"/>
+        </property>
+        <property name="evaldate" type="timestamp">
+            <column name="evaldate" not-null="true"/>
+        </property>
+        <property name="isRealised" type="true_false">
+            <column default="F" name="isrealised"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" default="F"/>
+        </property>
+        <property name="profitloss" type="double">
+            <column name="profitloss" default="0" />
+        </property>
+        <property name="accountid" type="string">
+            <column length="255" name="accountid" />
+        </property>
+        <property name="issaveeval" type="integer">
+            <column default="0" name="issaveeval" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" fetch="select" name="userid">
+            <column name="userid"/>
+        </many-to-one>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

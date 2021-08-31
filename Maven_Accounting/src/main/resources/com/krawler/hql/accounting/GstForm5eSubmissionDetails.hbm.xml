@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.GstForm5eSubmissionDetails" table="gstform5esubmissiondetails">
+     <id column="id" name="ID">
+        <generator class="assigned"/>
+     </id>
+     <property name="dtPeriodStart" type="date">
+         <column  name="dtperiodstart" />
+     </property>
+     <property name="dtPeriodEnd" type="date">
+         <column  name="dtperiodend" />
+     </property>
+     <property name="status" type="integer">
+         <column  name="status" default="0"/>
+     </property>
+     <property name="response" type="string">
+         <column  name="response" default="" />
+     </property>
+     <property name="responseCode" type="string">
+         <column  name="responsecode" default=""/>
+     </property>
+     <property name="messageCode" type="string">
+         <column  name="messagecode" default=""/>
+     </property>
+     <property name="eSubmissionDate" type="date">
+         <column  name="esubmissiondate" />
+     </property>
+     <property name="eSubmissionJSON" type="string">
+         <column  name="esubmissionjson" default=""/>
+     </property>
+     <property name="entity" type="string">
+         <column  name="entity" default=""/>
+     </property>
+     <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

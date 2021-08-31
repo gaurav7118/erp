@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Discount" table="discount">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="originalAmount" type="double">
+            <column default="0" name="origamount" not-null="true"/>
+        </property>
+        <property name="discount" type="double">
+            <column name="discount" not-null="true"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        <property name="inPercent" type="true_false">
+            <column name="inpercent" not-null="true"/>
+        </property>
+        <property name="amountinInvCurrency" type="double">
+            <column name="amountinInvCurrency" default="1"/>
+        </property>
+        <property name="typeOfFigure" type="int">
+            <column name="typeoffigure" default="0"/>
+        </property>
+        <property name="typeFigure" type="double">
+            <column name="typefigure" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,122 @@
+.x-tip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20000;
+	visibility: hidden;
+	border: 0 none;
+}
+.x-tip .x-tip-close {
+	display: none;
+	float: right;
+	margin: 0 0 2px 2px;
+	width: 15px;
+	height: 15px;
+	background-image: url(../images/default/qtip/close.gif);
+	cursor: pointer;
+}
+.x-tip .x-tip-tc {
+	overflow: hidden;
+	padding-top: 3px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat 0 -62px;
+	zoom: 1;
+}
+.x-tip .x-tip-tl {
+	overflow: hidden;
+	padding-left: 6px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat 0 0;
+	zoom: 1;
+}
+.x-tip .x-tip-tr {
+	overflow: hidden;
+	padding-right: 6px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat right 0;
+	zoom: 1;
+}
+.x-tip .x-tip-bc {
+	overflow: hidden;
+	height: 3px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat 0 -121px;
+}
+.x-tip .x-tip-bl {
+	padding-left: 6px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat 0 -59px;
+	zoom: 1;
+}
+.x-tip .x-tip-br {
+	padding-right: 6px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat right -59px;
+	zoom: 1;
+}
+.x-tip .x-tip-mc {
+	border: 0 none;
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+}
+.x-tip .x-tip-ml {
+	padding-left: 6px;
+	background: #fff url(../images/default/qtip/tip-sprite.gif) no-repeat 0 -124px;
+	zoom: 1;
+}
+.x-tip .x-tip-mr {
+	padding-right: 6px;
+	background: transparent url(../images/default/qtip/tip-sprite.gif) no-repeat right -124px;
+	zoom: 1;
+}
+.wtf-ie .x-tip .x-tip-header,
+.wtf-ie .x-tip .x-tip-tc {
+	font-size: 0;
+	line-height: 0;
+}
+.x-tip .x-tip-header-text {
+	margin: 0 0 2px 0;
+	padding: 0;
+	color: #444;
+	font: bold 11px tahoma, arial, helvetica, sans-serif;
+}
+.x-tip .x-tip-body {
+	margin: 0 !important;
+	padding: 0;
+	color: #444;
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+	line-height: 14px;
+}
+.x-tip .x-tip-body .loading-indicator {
+	margin: 0;
+}
+.x-tip-draggable .x-tip-header,
+.x-tip-draggable .x-tip-header-text {
+	cursor: move;
+}
+.x-form-invalid-tip {} .x-form-invalid-tip .x-tip-tc {
+	padding-top: 6px;
+	background: url(../images/default/form/error-tip-corners.gif) repeat-x 0 -12px;
+}
+.x-form-invalid-tip .x-tip-tl {
+	background-image: url(../images/default/form/error-tip-corners.gif);
+}
+.x-form-invalid-tip .x-tip-tr {
+	background-image: url(../images/default/form/error-tip-corners.gif);
+}
+.x-form-invalid-tip .x-tip-bc {
+	height: 6px;
+	background: url(../images/default/form/error-tip-corners.gif) repeat-x 0 -18px;
+}
+.x-form-invalid-tip .x-tip-bl {
+	background: url(../images/default/form/error-tip-corners.gif) no-repeat 0 -6px;
+}
+.x-form-invalid-tip .x-tip-br {
+	background: url(../images/default/form/error-tip-corners.gif) no-repeat right -6px;
+}
+.x-form-invalid-tip .x-tip-ml {
+	background-image: url(../images/default/form/error-tip-corners.gif);
+}
+.x-form-invalid-tip .x-tip-mr {
+	background-image: url(../images/default/form/error-tip-corners.gif);
+}
+.x-form-invalid-tip .x-tip-body {
+	padding: 2px;
+}
+.x-form-invalid-tip .x-tip-body {
+	padding-left: 24px;
+	background: transparent url(../images/default/form/exclamation.gif) no-repeat 2px 2px;
+}

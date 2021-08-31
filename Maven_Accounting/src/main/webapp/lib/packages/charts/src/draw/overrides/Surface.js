@@ -1,0 +1,1 @@
+Ext.define("Ext.draw.overrides.Surface",{override:"Ext.draw.Surface",hitTest:function(B,C){var F=this,G=F.getItems(),E,D,A;C=C||Ext.draw.sprite.Sprite.defaultHitTestOptions;for(E=G.length-1;E>=0;E--){D=G[E];if(D.hitTest){A=D.hitTest(B,C);if(A){return A}}}return null},hitTestEvent:function(B,A){var C=this.getEventXY(B);return this.hitTest(C,A)}})

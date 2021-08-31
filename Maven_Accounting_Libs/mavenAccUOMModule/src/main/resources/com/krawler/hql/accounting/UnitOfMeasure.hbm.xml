@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.UnitOfMeasure" table="uom">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="name" type="string">
+      <column length="50" name="name" not-null="true"/>
+    </property>
+    <property name="allowedPrecision" type="integer">
+      <column default="0" name="aprecision" not-null="true"/>
+    </property>
+    <property name="type" type="string">
+      <column length="50" name="type"/>
+    </property>
+    <property name="inventoryReferId" type="string">
+        <column name="inventoryreferid" length="255" default=""></column>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.DefaultUnitOfMeasure" name="defaultunitofmeasure"  />
+  </class>
+</hibernate-mapping>

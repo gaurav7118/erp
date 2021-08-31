@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.LoanRules" table="loanrules">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="createdon" type="long">
+            <column name="createdon"/>
+        </property>
+        <property name="updatedon" type="long">
+            <column name="modifiedon"/>
+        </property> 
+         <property name="minIncome" type="double">
+            <column name="minincome"  default="0"/>
+        </property>
+        <property name="maxIncome" type="double">
+            <column name="maxincome" default="0"/>
+        </property>
+        <property name="eligibility" type="double">
+            <column name="eligibility" default="0"/>
+        </property>
+         <property column="loanruletype" name="loanRuleType">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.admin.LoanRuleType</param>
+            </type>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>    
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>
+

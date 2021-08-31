@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.GSTTransactionListingSubmissionDetails" table="gsttransactionlistingsubmissiondetails">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="identifier" type="string">
+            <column  name="identifier" default="0"/>
+        </property>
+        <property name="totalChunk" type="integer">
+            <column  name="totalchunk" default="0"/>
+        </property>
+        <property name="currentChunk" type="integer">
+            <column  name="currentchunk" default="0"/>
+        </property>
+        <property name="taxRefNo" type="string">
+            <column  name="taxrefno" default=""/>
+        </property>
+        <property name="gstRegNo" type="string">
+            <column  name="gstregno" default=""/>
+        </property>
+        <property name="dtPeriodStart" type="date">
+            <column  name="dtperiodstart" />
+        </property>
+        <property name="dtPeriodEnd" type="date">
+            <column  name="dtperiodend" />
+        </property>
+        <property name="dtIAFCreation" type="date">
+            <column  name="dtiafcreation" />
+        </property>
+        <property name="iafVersion" type="string">
+            <column  name="iafversion" default=""/>
+        </property>
+        <property name="chunkResponseDateTime" type="timestamp">
+            <column name="chunkresponsedatetime"/>
+        </property>
+        <property name="requestPayload" type="string">
+            <column  name="requestpayload" default=""/>
+        </property>
+        <property name="status" type="integer">
+            <column  name="status" default="0"/>
+        </property>
+        <property name="responseCode" type="string">
+            <column  name="responsecode" default=""/>
+        </property>
+        <property name="messageCode" type="string">
+            <column  name="messagecode" default=""/>
+        </property>
+        <property name="responsePayload" type="string">
+            <column  name="responsepayload" default=""/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

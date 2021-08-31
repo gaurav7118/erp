@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="templateDAO" class="com.krawler.inventory.model.inspection.impl.TemplateDAOImpl" parent="baseDAO"/>
+        
+    <bean id="templateService" class="com.krawler.inventory.model.inspection.impl.TemplateServiceImpl">
+        <property name ="templateDAO" ref = "templateDAO"/>
+    </bean>
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean" >
+        <property name="resourceLoaderPath">
+             <value>classpath:com/krawler/velocity</value>
+        </property>
+    </bean>
+    <bean id="locationDAO" class="com.krawler.inventory.model.location.impl.LocationDAOImpl" parent="baseDAO"/>
+    
+    <bean id="locationService" class="com.krawler.inventory.model.location.impl.LocationServiceImpl">
+        <property name ="locationDAO" ref = "locationDAO"/>
+    </bean>
+    
+    <bean id="storeDAO" class="com.krawler.inventory.model.store.impl.StoreDAOImpl" parent="baseDAO"/>
+        
+    <bean id="storeService" class="com.krawler.inventory.model.store.impl.StoreServiceImpl">
+        <property name ="storeDAO" ref = "storeDAO"/>
+        <property name ="locationService" ref = "locationService"/>
+    </bean>
+    
+    <bean id="locationController" class="com.krawler.inventory.view.LocationController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="companyDetailsDAO">
+            <ref bean="companyDetailsdao"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+    </bean>
+    <bean id="storeController" class="com.krawler.inventory.view.StoreController" >
+        <property name= "txnManager" ref="txManager" />
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "storeService" ref="storeService" />
+        <property name= "locationService" ref="locationService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="companyDetailsDAO">
+            <ref bean="companyDetailsdao"/>
+        </property>
+         <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <bean id="templateController" class="com.krawler.inventory.view.TemplateController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "templateService" ref="templateService" />
+        <property name= "auditTrailObj" ref="auditTraildao" />
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <bean id = "accCostCenterController" class = "com.krawler.spring.accounting.costCenter.AccCostCenterController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accCostCenterDAO">
+            <ref bean="accCostCenterDAO"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accCostCenterService">
+            <ref bean="accCostCenterService"/>
+        </property>
+    </bean>
+    <!-- Cost Center -->
+    <bean id = "accCostCenterDAO" class = "com.krawler.spring.accounting.costCenter.AccCostCenterImpl" parent="baseDAO"/>
+        
+    <bean id="accCostCenterService" class="com.krawler.spring.accounting.costCenter.service.AccCostCenterServiceImpl"> 
+        <property name="accCostCenterDAO">
+            <ref bean="accCostCenterDAO"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+    </bean>
+    <!-- Custom Designer -->
+    <bean id = "customDesignDAO" class = "com.krawler.spring.accounting.customDesign.CustomDesignImpl" parent="baseDAO"/>
+
+    <bean id="accMailNotificationController" class="com.krawler.spring.accounting.mailNotification.AccMailNotificationController">
+        <property name="accMailNotificationDAOObj">
+            <ref bean="accMailNotificationDAO"/>    
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean> 
+    <bean id="accMailNotificationDAO" class="com.krawler.spring.accounting.mailNotification.AccMailNotificationDAOimpl" parent="baseDAO"/>
+       
+    <bean id="accountHandlerDao" class="com.krawler.spring.accounting.handler.AccountingHandlerDAOImpl" parent="baseDAO">
+        <property name="profileHandlerDAO">
+            <ref bean="profileHandlerdao"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="velocityEngine" ref="velocityEngine" />
+    </bean>
+        <!--My Account -->
+    <bean id = "accCommonTablesDAO" class = "com.krawler.spring.common.AccCommonTablesDAOImpl" parent="baseDAO">
+          <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    
+    <!-- Multi Level Approval Rule Controller -->
+    <bean id="accMultiLevelApprovalDAO" class="com.krawler.spring.accounting.multiLevelApprovalRule.AccMultiLevelApprovalImpl" parent="baseDAO"/>
+   
+    <bean id="accMultiLevelApprovalController" class="com.krawler.spring.accounting.multiLevelApprovalRule.MultiLevelApprovalController">
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         
+    </bean> 
+    <bean id = "accCommonController" class = "com.krawler.spring.common.CommonFnController">
+        <property name="profileHandlerDAO">
+            <ref bean="profileHandlerdao"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="permissionHandlerDAOObj">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name = "commonFnControllerService">
+            <ref bean="commonFnControllerService"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+    </bean>
+    
+    <bean id = "commonFnControllerService" class = "com.krawler.spring.common.CommonFnControllerServiceImpl">
+        <property name="profileHandlerDAO">
+            <ref bean="profileHandlerdao"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>   
+        </property>
+    </bean>
+    
+    <!-- Export MPX Servlet-->
+    <bean id="exportMPXdao" class="com.krawler.spring.exportFunctionality.exportMPXDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="storageHandlerImpl">
+            <ref bean="storageHandlerdao"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name="accCostCenterDAO">
+            <ref bean="accCostCenterDAO"/>
+        </property>  
+    </bean>
+    
+    <bean id="integrationController" class="com.krawler.accounting.integration.common.IntegrationController" >
+        <property name= "integrationCommonService" ref="integrationCommonService"/>
+        <property name= "messageSource" ref="messageSource"/>
+    </bean>
+    
+    <bean id="integrationCommonService" class="com.krawler.accounting.integration.common.IntegrationCommonServiceImpl" >
+        <property name= "integrationDAO" ref="integrationDAO"/>
+        <property name= "messageSource" ref="messageSource"/>
+        <property name= "accountingHandlerDAO" ref="accountHandlerDao" />
+        <property name= "accCommonTablesDAO" ref="accCommonTablesDAO"/>
+    </bean>
+    
+    <bean id="integrationDAO" class="com.krawler.accounting.integration.common.IntegrationDAOImpl" parent="baseDAO">
+    </bean>
+    
+    <bean id="fieldDatamanagernew" class="com.krawler.spring.common.fieldDataManager"> 
+        <property name="fieldDataManagerDAO">
+            <ref bean="fieldDataManagerDaonew"/>
+        </property> 
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property> 
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+    </bean>
+    <bean id="fieldManagerDaonew" class="com.krawler.spring.common.fieldManagerDAOImpl" parent="baseDAO"/>
+       
+    <bean id="fieldDataManagerDaonew" class="com.krawler.spring.common.fieldDataManagerDAOImpl"> 
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property> 
+    </bean>
+    <bean id="FieldManagerService" class="com.krawler.spring.common.FieldManagerServiceImpl">
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property> 
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean>
+    <bean id="AccountingHandlerService" class="com.krawler.spring.accounting.handler.AccountingHandlerServiceImpl">
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean>
+</beans>

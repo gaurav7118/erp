@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!--<import resource="dispatcher-servlet.xml"/>-->
+    <bean id="accountingRemoteApicontroller" class="com.krawler.spring.accounting.RemoteAPI.remoteAPIController">
+        <property name="authHandlerController">
+            <ref bean="authHandlercontroller"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="accAccountService">
+            <ref bean="accAccountService"/>
+        </property>
+        <property name="accCompanyPreferencesService">
+            <ref bean="accCompanyPreferencesService"/>
+        </property>
+        <property name="accVendorService">
+            <ref bean="accVendorService"/>
+        </property>
+        <property name="accCurrencyService">
+            <ref bean="accCurrencyService"/>
+        </property>
+        <property name="accMasterItemsService">
+            <ref bean="accMasterItemsService"/>
+        </property>
+        <property name="accExportpdfService">
+            <ref bean="accExportpdfService"/>
+        </property>
+        <property name="accMainAccountingService">
+            <ref bean="accMainAccountingService"/>
+        </property>
+        <property name="accTaxService">
+            <ref bean="accTaxService"/>
+        </property>
+        <property name="accCustomerService">
+            <ref bean="accCustomerService"/>
+        </property>
+        <property name="accProductService">
+            <ref bean="accProductService"/>
+        </property>
+        <property name="accSalesOrderAccountingService">
+            <ref bean="accSalesOrderAccountingService"/>
+        </property>
+        <property name="accProductModuleService">
+            <ref bean="accProductModuleService"/>
+        </property>
+        <property name="accTermService">
+            <ref bean="accTermService"/>
+        </property>
+        <property name="accInvoiceService">
+            <ref bean="accInvoiceService"/>
+        </property>
+        <property name="accCostCenterService">
+            <ref bean="accCostCenterService"/>
+        </property>
+        <property name="accInvoiceModuleService">
+            <ref bean="accInvoiceModuleService"/>
+        </property>
+        <property name="accReceiptServiceDAO">
+            <ref bean="accReceiptServiceDAO"/>
+        </property>
+        <property name="accCustomerMainAccountingService">
+            <ref bean="accCustomerMainAccountingService"/>
+        </property>
+        <property name="accDashboardService">
+            <ref bean="accDashboardService"/>
+        </property>
+        <property name="accSalesOrderDAO">
+            <ref bean="accSalesOrderDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accTaxDAO">
+            <ref bean="accTaxDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accInvoiceDAO">
+            <ref bean="accInvoiceDao"/>
+        </property>
+        <property name="accInvoiceServiceDAO">
+            <ref bean="accInvoiceServiceDAO"/>
+        </property>
+        <property name="accUomService">
+            <ref bean="accUomService"/>
+        </property>
+        <property name="accJournalEntryModuleService">
+            <ref bean="accJournalEntryModuleService"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+  </bean>
+
+</beans>

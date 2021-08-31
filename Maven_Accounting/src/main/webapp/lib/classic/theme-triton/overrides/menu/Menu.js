@@ -1,0 +1,1 @@
+Ext.define("Ext.theme.triton.menu.Menu",{override:"Ext.menu.Menu",compatibility:Ext.isIE8,afterShow:function(){var E=this,B,D,C,A;E.callParent(arguments);B=E.items.getRange();for(C=0,A=B.length;C<A;C++){D=B[C];if(D&&D.repaintIcons){D.repaintIcons()}}}})

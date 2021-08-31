@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ARKGovernmentInvoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="INV" class="java.lang.String"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="CUSTOMER_NAME" class="java.lang.String"/>
+	<parameter name="CUSTOMER_BILLTO_ADDRESS" class="java.lang.String"/>
+	<parameter name="CUSTOMER_INVOICENO" class="java.lang.String"/>
+	<parameter name="INVNO" class="java.lang.String"/>
+	<parameter name="SUBTOTAL" class="java.lang.String"/>
+	<parameter name="Name" class="java.lang.String"/>
+	<parameter name="Position" class="java.lang.String"/>
+	<parameter name="ExchangeRate" class="java.lang.String"/>
+	<parameter name="INOVICENO" class="java.lang.String"/>
+	<parameter name="GST_AMOUNT" class="java.lang.String"/>
+	<parameter name="TAXAMOUNTINBASE" class="java.lang.String"/>
+	<parameter name="AMOUNTINBASE" class="java.lang.String"/>
+	<parameter name="COMPANY_ADDRESS" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="68" width="555" height="648"/>
+			</rectangle>
+		</band>
+	</background>
+	<title>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="50" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F A K T U R       P A J A K]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="0" width="207" height="24"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" markup="html">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Lembar Ke-3:Untuk Kantor Pelayanan Pajak<br>Melalui Punout PPN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="16"/>
+				<box leftPadding="6">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kode dan Nomor Seri Faktur Pajak    :  "+$P{INVNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="17" width="555" height="15"/>
+				<box leftPadding="6">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PENGUSAHA KENA PAJAK]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="103" y="32" width="452" height="16"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="32" width="103" height="16"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="48" width="103" height="16"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="103" y="48" width="452" height="16"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_ADDRESS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="73">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="26"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[N.P.W.P                   03.138.731.9-012.000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="555" height="15"/>
+				<box leftPadding="6">
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PEMBELL Barang Kena Pajal/PENERIMA Jasa Kena Pajak]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="41" width="103" height="16"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="103" y="41" width="452" height="16"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="57" width="103" height="16"/>
+				<box leftPadding="6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="103" y="57" width="452" height="16"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_BILLTO_ADDRESS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="255">
+			<staticText>
+				<reportElement x="0" y="0" width="103" height="17"/>
+				<box leftPadding="6">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[N.P.W.P            ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="103" y="0" width="452" height="17"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_INVOICENO}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="0" y="17" width="555" height="43"/>
+				<box>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="38" height="43"/>
+					<box leftPadding="8" rightPadding="8">
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[No. Urut]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="365" y="0" width="190" height="31"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" markup="html">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Haraga Jual / Penggantian / Uang<br>muka / Termijn]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="365" y="31" width="93" height="12"/>
+					<box>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Valas *)]]></text>
+				</staticText>
+			</frame>
+			<staticText>
+				<reportElement x="38" y="17" width="327" height="43"/>
+				<box>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" markup="html">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Name Barang Kena Pajak/<br>Jasa Kena Pajak]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="458" y="48" width="97" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Rp.]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="0" y="60" width="38" height="122"/>
+				<box>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="2" y="1" width="25" height="20"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[1]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="38" y="60" width="327" height="122"/>
+				<box>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="15" y="0" width="176" height="20"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Invoice No :  "+$P{INOVICENO}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="365" y="60" width="93" height="195"/>
+				<box>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="2" y="0" width="91" height="16"/>
+					<box leftPadding="2" rightPadding="2"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{SUBTOTAL}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="121" width="93" height="17"/>
+					<box leftPadding="2" rightPadding="2">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{SUBTOTAL}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="168" width="93" height="13"/>
+					<box leftPadding="2" rightPadding="2">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{SUBTOTAL}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="139" width="93" height="13"/>
+					<box leftPadding="2" rightPadding="2">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[0.00]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="153" width="93" height="15"/>
+					<box leftPadding="2" rightPadding="2">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[0.00]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="182" width="93" height="12"/>
+					<box leftPadding="2" rightPadding="2">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{GST_AMOUNT}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="458" y="60" width="97" height="168" forecolor="#C0C0C0" backcolor="#C0C0C0"/>
+				<box>
+					<pen lineColor="#1D1111"/>
+					<topPen lineColor="#1D1111"/>
+					<leftPen lineWidth="1.0" lineColor="#1D1111"/>
+					<bottomPen lineWidth="1.0" lineColor="#1D1111"/>
+					<rightPen lineWidth="0.0" lineColor="#1D1111"/>
+				</box>
+				<line>
+					<reportElement x="0" y="121" width="97" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="152" width="97" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="138" width="97" height="1"/>
+				</line>
+			</frame>
+			<frame>
+				<reportElement x="0" y="182" width="365" height="73"/>
+				<box>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="365" height="16"/>
+					<box leftPadding="6">
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Harga Jual / Penggatian / Uanh Muka / Termijn *)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="17" width="365" height="13"/>
+					<box leftPadding="6">
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Dikurangi potongan harga]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="33" width="365" height="13"/>
+					<box leftPadding="6">
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Dikurangi uang muka yang telah diterima]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="46" width="365" height="13"/>
+					<box leftPadding="6">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Dasar Pengenaan Pajak]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="59" width="365" height="13"/>
+					<box leftPadding="6">
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[FPN - 10% x Dasar Pengenaam Pajak]]></text>
+				</staticText>
+			</frame>
+			<textField>
+				<reportElement x="458" y="229" width="97" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{AMOUNTINBASE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="241" width="97" height="13"/>
+				<box leftPadding="2" rightPadding="2">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TAXAMOUNTINBASE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="256" splitType="Stretch">
+			<frame>
+				<reportElement x="5" y="35" width="343" height="87"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="101" height="15"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[TARIF]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="0" width="126" height="15"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[DPP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="227" y="0" width="116" height="15"/>
+					<box>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[PPn. BM]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="72" width="227" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Jumlah]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="227" y="72" width="116" height="15"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[   Rp.]]></text>
+				</staticText>
+				<line>
+					<reportElement x="227" y="15" width="1" height="57"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="101" y="15" width="1" height="57"/>
+					<graphicElement>
+						<pen lineWidth="0.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="20" y="15" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[..........  %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="29" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[..........  %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="43" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[..........  %]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="15" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Rp.  ................]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="29" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Rp.  ................]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="43" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Rp.  ................]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="238" y="43" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Rp.  ................]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="238" y="29" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Rp.  ................]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="238" y="15" width="80" height="14"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Rp.  ................]]></text>
+				</staticText>
+			</frame>
+			<textField>
+				<reportElement x="367" y="15" width="176" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="358" y="122" width="42" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="140" width="42" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Jabatan]]></text>
+			</staticText>
+			<line>
+				<reportElement x="356" y="137" width="187" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="395" y="122" width="6" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="140" width="6" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="402" y="122" width="141" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="402" y="140" width="141" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Position}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="153" width="440" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kurs: Rp."+$P{ExchangeRate}+" / 1 USD"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="15" width="362" height="15"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Pajak Penjualan Atas Barang Mewah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="202" width="360" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[*) Dilsi apabila penyerahan menggunkan mata uang asing ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="222" width="359" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[**) Coret yang tidak perlu]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

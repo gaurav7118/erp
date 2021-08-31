@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.KWLTimeZone" table="timezone">
+    <id column="timezoneid" name="timeZoneID">
+      <generator class="uuid"/>
+    </id>
+    <property name="name" type="string">
+      <column length="200" name="name"/>
+    </property>
+    <property name="difference" type="string">
+      <column length="32" name="difference"/>
+    </property>
+    <property name="sname" type="string">
+      <column length="50" name="sname"/>
+    </property>
+    <property name="sortOrder" type="integer">
+      <column length="50" name="sortorder"/>
+    </property>
+    <property name="tzID" type="string">
+      <column length="200" name="tzid"/>
+    </property>
+  </class>
+</hibernate-mapping>

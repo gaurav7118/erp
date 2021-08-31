@@ -1,0 +1,769 @@
+#Arshad 1st June 2017
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowimport,islineitem,isdocumentimport,iscustomreport)
+VALUES ('c9770550-3ee3-11e7-ade6-14dda9792912','Approval Status','id','payment',NULL,NULL,NULL,'Approval Status','1','14',0,'F','F','T');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowimport,islineitem,isdocumentimport,iscustomreport)
+VALUES ('fbd54f71-3ee9-11e7-ade6-14dda9792912','Approval Status','id','receipt',NULL,NULL,NULL,'Approval Status','1','16',0,'F','F','T');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowimport,islineitem,isdocumentimport,iscustomreport)
+VALUES ('a9edeef8-3f90-11e7-9af7-14dda9792912','Is Transaction Linked?','id','payment',NULL,NULL,NULL,'Is Transaction Linked?','1','14',0,'F','F','T');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowimport,islineitem,isdocumentimport,iscustomreport)
+VALUES ('f34c8b51-469a-11e7-bfa2-14dda9792912','Is Transaction Linked?','id','receipt',NULL,NULL,NULL,'Is Transaction Linked?','1','16',0,'F','F','T');
+
+#Ajay Motwani 1st June 2017
+update  invoice inv INNER JOIN company cmp ON inv.company = cmp.companyid INNER JOIN invoicedetails invd on invd.invoice=inv.id and invd.company = cmp.companyid  inner join repeatedinvoices rinv on rinv.id = inv.repeateinvoice set rinv.isactivate='F' WHERE invd.salesjedid not in (SELECT id FROM jedetail) and inv.deleteflag='F'  and inv.isopeningbalenceinvoice=0  and inv.repeateinvoice is NOT null;
+Update repeatedinvoices rept INNER JOIN invoice inv on inv.repeateinvoice=rept.id INNER JOIN company cmp ON inv.company = cmp.companyid INNER JOIN invoicedetails invd on invd.invoice=inv.id and invd.company = cmp.companyid set rept.isactivate = 'F'  WHERE invd.salesjedid is NULL and inv.deleteflag='F'  and inv.isopeningbalenceinvoice='0'  and inv.repeateinvoice is NOT null;
+
+#Ajit Gogawale 1st June 2017
+alter table product modify column additionalfreetext varchar(1048);
+
+# Suhas Chaware 7 June 2017
+alter table extracompanypreferences add column  isnewgst char(1) default 'F';
+
+#Shrinath Shinde 7 June 2017
+ALTER TABLE `jedetail` ADD COLUMN `isseparated` char(1) DEFAULT 'F';
+
+#Pandurang 9th June 2017
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype, formfieldname)
+VALUES ("ad57eebb-4c2f-11e7-b4bb-14dda97926e5","30","Item Reusability","ItemReusability",0,0,'F','F',null,null,null,null,null,"itemreusability",null,"itemreusability");
+
+# Amol Dhokale 9th June 2017
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,isreportfield,ismanadatoryfield,islinefield,isusermanadatoryfield) 
+VALUES ("e226ead8-d652-65e5-ab20-625662850201",'warehouseName','Default Warehouse',34,1,1,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,isreportfield,ismanadatoryfield,islinefield,isusermanadatoryfield) 
+VALUES ("e226ead8-d652-65e5-ab20-625662850202",'locationName','Default Location',34,1,1,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,isreportfield,ismanadatoryfield,islinefield,isusermanadatoryfield) 
+VALUES ("e226ead8-d652-65e5-ab20-625662850203",'productname','Product Name',34,1,1,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,isreportfield,ismanadatoryfield,islinefield,isusermanadatoryfield) 
+VALUES ("e226ead8-d652-65e5-ab20-625662850204",'pid','Product ID',34,1,1,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,isreportfield,ismanadatoryfield,islinefield,isusermanadatoryfield) 
+VALUES ("e226ead8-d652-65e5-ab20-625662850205",'type','Product Type',34,1,1,1,0,1,0);
+
+#Ajay Motwani 12th June 2017
+
+#Clearance Date Column in Make payment
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,
+reftablename,	isdocumentimport,dataindex,validatetype) VALUES ('50f68d77-2cc8-11e7-8d73-708bcdaa138a','14','Clearance Date','ClearanceDate',
+0,0,'F','F',1,'clearancedate','clearancedate','bankreconciliation','T','clearancedate','date');
+
+#Clearance Date Column in Receive payment
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,
+reftablename,	isdocumentimport,dataindex,validatetype) VALUES ('c25e0d27-2cca-11e7-8d73-708bcdaa138a','16','Clearance Date','ClearanceDate',
+0,0,'F','F',1,'clearancedate','clearancedate','bankreconciliation','T','clearancedate','date');
+
+#ReceiptPaymentVendor
+UPDATE `samplefiledata`  set `header_json`= '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Vendor Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"Memo\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"Debit Note\",\"L2\":\"DN000029\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"bank name\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"Description\",\"T13\":\"Memo\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"Refund/Deposit\",\"L2\":\"MP44\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"bank name\",\"T9\":\"01/06/17\",\"T10\":\"Cleared\",\"T11\":\"02/06/17\",\"T12\":\"Description\",\"T13\":\"Memo\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"Refund/Deposit\",\"L2\":\"\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]' where id='ffdb3a3e-dd42-11e6-976c-14dda979275f';
+
+#ReceiptPaymentCustomer
+UPDATE `samplefiledata`  set `header_json` = '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Customer Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L18\":\"Document Type\",\"L19\":\"Document No\",\"L1\":\"Description\",\"L2\":\"Tax\",\"L3\":\"Tax Amount\",\"L4\":\"Transaction Amount\",\"L5\":\"Transaction Amount Due\",\"L6\":\"Exchange Rate\",\"L7\":\"Amount Due\",\"L8\":\"Enter Amount\"},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Cleared\",\"T11\":\"02/06/17\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0012\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":200,\"L5\":200,\"L6\":1,\"L7\":200,\"L8\":200},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":C,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Advance/Deposite\",\"L19\":\"\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0013\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100}]' WHERE id='f231cfc4-dd42-11e6-976c-14dda979275f';
+
+#MakePaymentCustomer
+UPDATE `samplefiledata`  set `header_json` = '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\": \"Payment No\",\"T2\": \"Date\",\"T3\": \"Customer Code\",\"T4\": \"Currency\",\"T5\": \"Payment Method\",\"T6\": \"Document Currency To Payment Method Currency exchange rate\",\"T7\": \"Cashier\'s Cheque\/Cheque Number\",\"T8\": \"Bank Name\",\"T9\": \"Cheque Date\",\"T10\": \"Payment Status\",\"T11\": \"Clearance Date\",\"T12\": \"Reference Number\/Description\",\"T13\": \"Memo\",\"T14\": \"Paid To\",\"T15\": \"Bank Interest Account\",\"T16\": \"Bank Interest\",\"T17\": \"Bank Charges Account\",\"T18\": \"Bank Charges\",\"L1\": \"Document Type\",\"L2\": \"Document No\",\"L3\": \"Description\",\"L4\": \"Tax\",\"L5\": \"Tax Amount\",\"L6\": \"Transaction Amount\",\"L7\": \"Transaction Amount Due\",\"L8\": \"Exchange Rate\",\"L9\": \"Amount Due\",\"L10\": \"Enter Amount\"},{\"T1\": \"MP001\",\"T2\": \"01\/06\/17\",\"T3\": \"C000\",\"T4\": \"SG Dollar (SGD)\",\"T5\": \"Cash\",\"T6\": 1,\"T7\": \"\",\"T8\": \"\",\"T9\": \"\",\"T10\": \"\",\"T11\": \"\",\"T12\": \"\",\"T13\": \"Memo\",\"T14\": \"Paid\",\"T15\": \"Bank\",\"T16\": 100,\"T17\": \"Bank\",\"T18\": 100,\"L1\": \"Credit Note\",\"L2\": \" CN000029\",\"L3\": \"New\",\"L4\": \"\",\"L5\": \"\",\"L6\": 100,\"L7\": 100,\"L8\": 1,\"L9\":100, \"L10\":100  },{\"T1\": \" MP002\",\"T2\": \"01\/06\/17\",\"T3\": \"C001\",\"T4\": \"SG Dollar (SGD)\",\"T5\": \"Bank\",\"T6\": 1,\"T7\": 1,\"T8\": \"Banks Name\",\"T9\": \"01\/06\/17\",\"T10\": \"Uncleared\",\"T11\": \"\",\"T12\": \"BANKREF123\",\"T13\": \"Memo\",\"T14\": \"Paid\",\"T15\": \"Bank\",\"T16\": 100,\"T17\": \"Bank\",\"T18\": 100,\"L1\": \"Refund\/Deposit\",\"L2\": \" RP002\",\"L3\": \"New\",\"L4\": \"\",\"L5\": \"\",\"L6\": 100,\"L7\": 100,\"L8\": 1,\"L9\":100, \"L10\":100  },{\"T1\": \" MP003\",\"T2\": \"01\/06\/17\",\"T3\": \"C002\",\"T4\": \"SG Dollar (SGD)\",\"T5\": \"Bank\",\"T6\": 1,\"T7\": 1,\"T8\": \"Banks Name\",\"T9\": \"01\/06\/17\",\"T10\": \"Cleared\",\"T11\": \"02\/06\/17\",\"T12\": \"BANKREF123\",\"T13\": \"Memo\",\"T14\": \"Paid\",\"T15\": \"Bank\",\"T16\": 100,\"T17\": \"Bank\",\"T18\": 100,\"L1\": \"Refund\/Deposit\",\"L2\": \" \",\"L3\": \"New\",\"L4\": \"\",\"L5\": \"\",\"L6\": 100,\"L7\": 100,\"L8\": 1,\"L9\":100, \"L10\":100  } ]' WHERE id='ae0b5b9e-f83a-11e6-858e-14dda97928d6';
+
+#MakePaymentVendor
+UPDATE `samplefiledata`  set `header_json` = '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]',  
+`filedata_json` =  '[{\"T1\":\"Payment No\",\"T2\":\"Date\",\"T3\":\"Vendor Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque\/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number\/Description\",\"T13\":\"Memo\",\"T14\":\"Paid To\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L18\":\"Document Type\",\"L19\":\"Document No\",\"L1\":\"Description\",\"L2\":\"Tax\",\"L3\":\"Tax Amount\",\"L4\":\"Transaction Amount\",\"L5\":\"Transaction Amount Due\",\"L6\":\"Exchange Rate\",\"L7\":\"Amount Due\",\"L8\":\"Enter Amount\"},{\"T1\":\"MP002\",\"T2\":\"01\/06\/17\",\"T3\":V000,\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"BankRef123\",\"T13\":\"Memo\",\"T14\":\"Paid\",\"T15\":\"A\/P Accrual - Inventory\",\"T16\":200,\"T17\":\"A\/P Accrual - Inventory\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0012\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":200,\"L5\":200,\"L6\":1,\"L7\":200,\"L8\":200},{\"T1\":\"MP003\",\"T2\":\"01\/06\/17\",\"T3\":V001,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"BankRef123\",\"T13\":\"Memo\",\"T14\":\"Paid\",\"T15\":\"A\/P Accrual - Inventory\",\"T16\":200,\"T17\":\"A\/P Accrual - Inventory\",\"T18\":200,\"L18\":\"Advanced\/Deposit\",\"L19\":\"\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"MP004\",\"T2\":\"01\/06\/17\",\"T3\":V002,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"BankRef123\",\"T13\":\"Memo\",\"T14\":\"Paid\",\"T15\":\"A\/P Accrual - Inventory\",\"T16\":200,\"T17\":\"A\/P Accrual - Inventory\",\"T18\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A\/P Accrual - Inventory\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"MP005\",\"T2\":\"01\/06\/17\",\"T3\":V001,\"T4\":\"US Dollars (USD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"Memo\",\"T13\":\"Paid\",\"T14\":\"A\/P Accrual - Inventory\",\"T15\":200,\"T16\":\"A\/P Accrual - Inventory\",\"T17\":200,\"L18\":\"Invoice\",\"L19\":\"INV0013\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100}]' WHERE id='3088eb1c-f75d-11e6-bf48-14dda97928d6';
+
+#MakePaymentGL
+UPDATE `samplefiledata`  set `header_json` = '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\":\"Payment No\",\"T2\":\"Date\",\"T3\":\"Currency\",\"T4\":\"Payment Method\",\"T5\":\"Document Currency To Payment Method Currency exchange rate\",\"T6\":\"Cashier\'s Cheque\/Cheque Number\",\"T7\":\"Bank Name\",\"T8\":\"Cheque Date\",\"T9\":\"Payment Status\",\"T10\":\"Clearance Date\",\"T11\":\"Reference Number\/Description\",\"T12\":\"Memo\",\"T13\":\"Paid To\",\"T14\":\"Bank Interest Account\",\"T15\":\"Bank Interest\",\"T16\":\"Bank Charges Account\",\"T17\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Type\",\"L3\":\"Document No\",\"L4\":\"Description\",\"L5\":\"Tax\",\"L6\":\"Tax Amount\",\"L7\":\"Transaction Amount\",\"L8\":\"Transaction Amount Due\",\"L9\":\"Exchange Rate\",\"L10\":\"Amount Due\",\"L11\":\"Enter Amount\"},{\"T1\":\"MP001\",\"T2\":\"01\/06\/17\",\"T3\":\"SG Dollar (SGD)\",\"T4\":\"Bank\",\"T5\":1,\"T6\":1,\"T7\":\"BankName\",\"T8\":\"01\/06\/17\",\"T9\":\"Uncleared\",\"T10\":\"\",\"T11\":\"description\",\"T12\":\"Memo\",\"T13\":\"Paid\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"General Ledger Code\",\"L2\":\"Debit\",\"L3\":\"Net Profit\/Loss\",\"L4\":\"New\",\"L5\":\"GST(IM)@7.00%\",\"L6\":8,\"L7\":100,\"L8\":100,\"L9\":1,\"L10\":100,\"L11\":100},{\"T1\":\"MP002\",\"T2\":\"01\/06\/17\",\"T3\":\"SG Dollar (SGD)\",\"T4\":\"Cash\",\"T5\":1,\"T6\":\"\",\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"Memo\",\"T13\":\"Paid\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"General Ledger Code\",\"L2\":\"Debit\",\"L3\":\"Net Profit\/Loss\",\"L4\":\"New\",\"L5\":\"\",\"L6\":\"\",\"L7\":100,\"L8\":100,\"L9\":1,\"L10\":100,\"L11\":100},{\"T1\":\"MP003\",\"T2\":\"01\/06\/17\",\"T3\":\"SG Dollar (SGD)\",\"T4\":\"Bank\",\"T5\":1,\"T6\":1,\"T7\":\"Bank Name\",\"T8\":\"01\/06\/17\",\"T9\":\"Cleared\",\"T10\":\"02\/06\/17\",\"T11\":\"description\",\"T12\":\"Memo\",\"T13\":\"Paid\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"General Ledger Code\",\"L2\":\"Debit\",\"L3\":\"Net Profit\/Loss\",\"L4\":\"New\",\"L5\":\"GST(IM)@7.00%\",\"L6\":8,\"L7\":100,\"L8\":100,\"L9\":1,\"L10\":100,\"L11\":100}]' WHERE id='e6092adf-f839-11e6-858e-14dda97928d6';
+
+#ReceiptPaymentGL
+UPDATE `samplefiledata`  set `header_json` = '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Type\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque\/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number\/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01\/06\/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"GST(IM)@7.00%\",\"L5\":8,\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01\/06\/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01\/06\/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Cleared\",\"T11\":\"02\/06\/17\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"GST(IM)@7.00%\",\"L5\":8,\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]' WHERE id='082117a2-dd43-11e6-976c-14dda979275f';
+
+#Setting Validation type to  string for defaultHeader Account Code as it doesnt validate if length is greater than 50 Characters
+UPDATE default_header set validatetype='string' where id='84458cd8-5731-11e2-bbe1-001e670e1459';
+
+#Shubham Pal 13th June 2017
+alter table itemdetail add column upstrackingnumber varchar(31);
+alter table itemdetail add column upsshippinglabel text;
+
+
+# Rahul A. Bhawar 13th June 2017
+# Create unique group index
+#Problem:  While executing copy company procedure Unique ID's have some problem , so adding unique grouping with company column so that accgroup data will be copied in copy company procedure
+alter table accgroup drop index displayorder;
+CREATE UNIQUE INDEX `displayorder1` ON `accgroup`(displayorder, company);
+
+#Pandurang 
+update default_header set ismandatory='F', isconditionalmandetory='T' where id='5df89b06-7e24-11e6-b32b-eca86bfcd415' and module=2;
+
+#Dipak Dorkar 13th June 2017
+update modules set uniquekey_methodname='SalesOrderNumber',uniquekey_hbmname='salesOrderNumber' where modulename='Sales Order' and id='20';
+
+# Amol Dhokale 13th June 2017
+update quotation set approvestatuslevel=11 where istemplate!=0;
+
+#Ajay Motwani 13th June 2017
+delete from samplefiledata where id in ('8bdd90dd-dd39-11e6-8e0d-c03fd5632dc7','8bdb07e7-dd39-11e6-8e0d-c03fd5632dc7','8bdd8957-dd39-11e6-8e0d-c03fd5632dc7');
+
+#ReceiptPaymentCustomer
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ("f231cfc4-dd42-11e6-976c-14dda979275f", '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Customer Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L18\":\"Document Type\",\"L19\":\"Document No\",\"L1\":\"Description\",\"L2\":\"Tax\",\"L3\":\"Tax Amount\",\"L4\":\"Transaction Amount\",\"L5\":\"Transaction Amount Due\",\"L6\":\"Exchange Rate\",\"L7\":\"Amount Due\",\"L8\":\"Enter Amount\"},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Cleared\",\"T11\":\"02/06/17\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0012\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":200,\"L5\":200,\"L6\":1,\"L7\":200,\"L8\":200},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":C,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Advance/Deposite\",\"L19\":\"\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0013\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100}]', 'ReceiptPaymentCustomer', 'sample_receipt_payment_customer', '_v1', 'T');
+
+#ReceiptPaymentVendor
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ("ffdb3a3e-dd42-11e6-976c-14dda979275f",'[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Vendor Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"Memo\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"Debit Note\",\"L2\":\"DN000029\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"bank name\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"Description\",\"T13\":\"Memo\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"Refund/Deposit\",\"L2\":\"MP44\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"bank name\",\"T9\":\"01/06/17\",\"T10\":\"Cleared\",\"T11\":\"02/06/17\",\"T12\":\"Description\",\"T13\":\"Memo\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"Refund/Deposit\",\"L2\":\"\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]', 'ReceiptPaymentVendor', 'sample_receipt_payment_vendor', '_v1', 'T');
+
+#ReceiptPaymentGL
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ("082117a2-dd43-11e6-976c-14dda979275f", '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]','[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Type\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque\/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number\/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01\/06\/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"GST(IM)@7.00%\",\"L5\":8,\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01\/06\/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01\/06\/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01\/06\/17\",\"T10\":\"Cleared\",\"T11\":\"02\/06\/17\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"Bank\",\"T16\":100,\"T17\":\"Bank\",\"T18\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"GST(IM)@7.00%\",\"L5\":8,\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]',  'ReceiptPaymentGL', 'sample_receipt_payment_gl', '_v1', 'T');
+
+#Mangesh Kadam 14th june 2017
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ('9d920314-3626-11e7-8a21-2c4d544cd7fd', '[{\"title\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Initial Quantity,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse\"},{\"header\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Initial Quantity,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"Product ID*\":\"PID000A1\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Initial Quantity\":0,\"Purchase Account*\":\"AAA11\",\"Purchase Return Account*\":\"AAA11\",\"Sales Account*\":\"Demo\",\"Sales Return Account*\":\"Demo\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"},{\"Product ID*\":\"Note:\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"},{\"Product ID*\":\"1. Currency of imported Assembly Product is Company Base Currency.\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"}]', 'Assembly Product', 'sample_assembly_product_withoutBOM', '_v5', 'T');
+
+# Ajit Gogawale 14th June 2017
+alter table product modify column additionalfreetext text;
+
+#Aman Shah 15th June
+
+INSERT INTO defaultmasteritem (id,value,mastergroup,code) VALUES(41,'Person engaged only in the business of operation of call center','34','194J');
+CREATE TABLE `default_tds_rate` (
+  `id` varchar(40) NOT NULL,
+  `natureofpayment` varchar(40) NOT NULL,
+  `defaultMasterdeducteetype` varchar(60) NOT NULL,
+  `residentialstatus` varchar(60) NOT NULL,
+  `fromdate` date NOT NULL,
+  `todate` date NOT NULL,
+  `rate` double DEFAULT '0',
+  `basicexemptionpertransaction` double DEFAULT '0',
+  `basicexemptionperannum` double DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a1', '1', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10, 50000,50000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a2', '2', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 1, 10000, 10000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a3', '5', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 30, 10000,10000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a4', '3', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10, 2500,2500);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a5', '7', 'ed34cb54-015c-11e6-ba66-14dda9792823', '0', '2017-04-01', '2018-03-31', 1, 30000,75000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a6', '7', 'dfc28c54-015c-11e6-ba66-14dda9792823', '0', '2017-04-01', '2018-03-31', 1, 30000,75000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a7', '7', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 2, 30000,75000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a8', '8', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 5, 15000,15000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na97927a9', '9', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 1, 100000,100000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792710', '21', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 20, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792712', '10', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10,2500,2500);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792713', '11', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 20,0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792711', '12', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 5, 15000,15000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792714', '13', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 5, 15000,15000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792715', '15', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10, 180000,180000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792716', '14', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 2, 180000,180000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792717', '18', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10, 250000,250000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792718', '22', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 5, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792719', '20', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792720', '20', '0ee1ce94-faef-11e5-896e-14dda97927ea', '1', '2017-04-01', '2018-03-31', 30, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792721', '38', 'ed34cb54-015c-11e6-ba66-14dda9792823', '0', '2017-04-01', '2018-03-31', 25, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792722', '38', 'dfc28c54-015c-11e6-ba66-14dda9792823', '0', '2017-04-01', '2018-03-31', 25, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792732', '39', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 30, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792723', '25', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 5, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792724', '26', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 5, 0,0);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792725', '17', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 10, 30000,30000);
+INSERT INTO `default_tds_rate` VALUES ('0am1an94-fshf-11a5-896h-14na9792726', '41', '0ee1ce94-faef-11e5-896e-14dda97927ea', '0', '2017-04-01', '2018-03-31', 2, 30000,30000);
+
+#Ajit Gogawale 15th June 2017
+alter table product modify column additionalfreetext varchar(1048);
+
+#Ajay Motwani 14th June 2017
+CREATE TABLE `discountmaster` (
+`id`  varchar(36) NOT NULL ,
+`name`  varchar(255) NULL DEFAULT '' ,
+`description`  varchar(255) NULL DEFAULT '' ,
+`discounttype`  char(1) NULL DEFAULT '0' ,
+`value`  double NULL DEFAULT 0 ,
+`account`  varchar(36) NULL ,
+`company`  varchar(36) NULL ,
+PRIMARY KEY (`ID`),
+FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `productdiscountmapping` (
+`id`  varchar(36) NULL ,
+`productid`  varchar(36) NULL ,
+`pricingbandmasterid`  varchar(36) NULL ,
+`companyid`  varchar(36) NULL ,
+`discountmasterid`  varchar(36) NULL ,
+`applicabledate` date NULL ,
+`currencyid` VARCHAR(36) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`pricingbandmasterid`) REFERENCES `pricingbandmaster` (`id`) ON DELETE RESTRICT,
+FOREIGN KEY (`discountmasterid`) REFERENCES `discountmaster` (`id`) ON DELETE RESTRICT,
+FOREIGN KEY (`productid`) REFERENCES `product` (`id`) ON DELETE RESTRICT,
+FOREIGN KEY (`companyid`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE `invoicedetails` ADD COLUMN `discountjson` longtext NULL;  
+
+#Audit Group and Audit Action entries for Discount Master
+INSERT INTO audit_group VALUES (59,'Discount Master');
+INSERT INTO audit_action VALUES (357,'Discount Master Deleted',59);
+INSERT INTO audit_action VALUES (358,'Discount Master Updated',59);
+INSERT INTO audit_action VALUES (359,'Discount Master Assigned',59);
+
+#User Permission Entries for Discount Master
+INSERT INTO featurelist (featureid, featurename, displayfeaturename, orderno) VALUES ('69cef2f2-5192-11e7-a2b0-708bcdaa138a', 'discountMaster', 'Discount Master', 75);
+INSERT INTO activitylist (activityid, activityname, displayactivityname, orderno, feature, parent, alignRight) VALUES ('9b992658-5192-11e7-a2b0-708bcdaa138a', 'discountMasterMenu', 'Discount Master Menu', 0, '69cef2f2-5192-11e7-a2b0-708bcdaa138a', null, 0);
+INSERT INTO activitylist (activityid, activityname, displayactivityname, orderno, feature, parent, alignRight) VALUES ('bfd87f22-5192-11e7-a2b0-708bcdaa138a', 'addDiscountMaster', 'Add Discount Master', 0, '69cef2f2-5192-11e7-a2b0-708bcdaa138a', '9b992658-5192-11e7-a2b0-708bcdaa138a', 0);
+INSERT INTO userpermission (feature, role, permissioncode, roleUserMapping) VALUES ('69cef2f2-5192-11e7-a2b0-708bcdaa138a', 1, 3, null);
+
+#Vinod Gharge 16th June 2017
+
+DROP TABLE IF EXISTS `multientitydimesioncustomdata`;
+CREATE TABLE `multientitydimesioncustomdata` (
+  `fcdid` varchar(255) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `moduleid` int(11) DEFAULT '1',
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  `col1036` longtext,
+  `col1037` longtext,
+  `col1038` longtext,
+  `col1039` longtext,
+  `col1040` longtext,
+  `col1041` longtext,
+  `col1042` longtext,
+  `col1043` longtext,
+  `col1044` longtext,
+  `col1045` longtext,
+  `col1046` longtext,
+  `col1047` longtext,
+  `col1048` longtext,
+  `col1049` longtext,
+  `col1050` longtext,
+  `col1051` longtext,
+  `col1052` longtext,
+  `col1053` longtext,
+  `col1054` longtext,
+  `col1055` longtext,
+  `col1056` longtext,
+  `col1057` longtext,
+  `col1058` longtext,
+  `col1059` longtext,
+  `col1060` longtext,
+  `col2001` varchar(255) DEFAULT 'false',
+  `col2002` varchar(255) DEFAULT 'false',
+  `col2003` varchar(255) DEFAULT 'false',
+  `col2004` varchar(255) DEFAULT 'false',
+  `col2005` varchar(255) DEFAULT 'false',
+  `col2006` varchar(255) DEFAULT 'false',
+  `col2007` varchar(255) DEFAULT 'false',
+  `col2008` varchar(255) DEFAULT 'false',
+  `col2009` varchar(255) DEFAULT 'false',
+  `col2010` varchar(255) DEFAULT 'false',
+  `col16` varchar(255) DEFAULT NULL,
+  `col17` varchar(255) DEFAULT NULL,
+  `col18` varchar(255) DEFAULT NULL,
+  `col19` varchar(255) DEFAULT NULL,
+  `col20` varchar(255) DEFAULT NULL,
+  `col21` varchar(255) DEFAULT NULL,
+  `col22` varchar(255) DEFAULT NULL,
+  `col23` varchar(255) DEFAULT NULL,
+  `col24` varchar(255) DEFAULT NULL,
+  `col25` varchar(255) DEFAULT NULL,
+  `col26` varchar(255) DEFAULT NULL,
+  `col27` varchar(255) DEFAULT NULL,
+  `col28` varchar(255) DEFAULT NULL,
+  `col29` varchar(255) DEFAULT NULL,
+  `col30` varchar(255) DEFAULT NULL,
+  `col31` varchar(255) DEFAULT NULL,
+  `col32` varchar(255) DEFAULT NULL,
+  `col33` varchar(255) DEFAULT NULL,
+  `col34` varchar(255) DEFAULT NULL,
+  `col35` varchar(255) DEFAULT NULL,
+  `col36` varchar(255) DEFAULT NULL,
+  `col37` varchar(255) DEFAULT NULL,
+  `col38` varchar(255) DEFAULT NULL,
+  `col39` varchar(255) DEFAULT NULL,
+  `col40` varchar(255) DEFAULT NULL,
+  `col41` varchar(255) DEFAULT NULL,
+  `col42` varchar(255) DEFAULT NULL,
+  `col43` varchar(255) DEFAULT NULL,
+  `col44` varchar(255) DEFAULT NULL,
+  `col45` varchar(255) DEFAULT NULL,
+  `col46` varchar(255) DEFAULT NULL,
+  `col47` varchar(255) DEFAULT NULL,
+  `col48` varchar(255) DEFAULT NULL,
+  `col49` varchar(255) DEFAULT NULL,
+  `col50` varchar(255) DEFAULT NULL,
+  `col3001` date DEFAULT NULL,
+  `col3002` date DEFAULT NULL,
+  `col3003` date DEFAULT NULL,
+  `col3004` date DEFAULT NULL,
+  `col3005` date DEFAULT NULL,
+  `col3006` date DEFAULT NULL,
+  `col3007` date DEFAULT NULL,
+  `col3008` date DEFAULT NULL,
+  `col3009` date DEFAULT NULL,
+  `col3010` date DEFAULT NULL,
+  PRIMARY KEY (`fcdid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO defaultcustomfields VALUES ('beb6a756-5253-11e7-b2e8-708bcdaa1403', '105', null, '100', '1', 'GSTIN', '1200', '1', '0', '999', 'F', '0', '1');
+
+INSERT INTO defaultcustomfields VALUES ('c7cf1dc7-5253-11e7-b2e8-708bcdaa1403', '105', null, '100', '1', 'TIN', '1200', '1', '0', '999', 'F', '0', '1');
+
+INSERT INTO defaultcustomfields VALUES ('d054609a-5253-11e7-b2e8-708bcdaa1403', '105', null, '100', '1', 'PAN', '1200', '1', '0', '999', 'F', '0', '1');
+
+INSERT INTO defaultcustomfields VALUES ('e84505b3-5254-11e7-b2e8-708bcdaa1403', '105', null, '100', '4', 'State Code', '1200', '0', '0', '999', 'F', '0', '1');
+
+#Arshad 20th June 2017
+
+#Credit note customer/Vendor in make payment
+
+insert INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) values('4eefe4dd-5588-11e7-9d60-14dda9792912', 'e336b7c2-638e-11e6-9015-c03fd5aad962', 'eff2c0a0-639d-11e6-9015-c03fd5aad962', 0 );
+
+update customreportsdefaultfieldsmapping set isselectdataindex=0 where id='015cb67a-638f-11e6-9015-c03fd5aad962';
+
+update default_header set defaultHeader='Credit Note Customer/Vendor Name' , reftabledatacolumn='COALESCE(customer.NAME,vendor.NAME)' where id='e336b7c2-638e-11e6-9015-c03fd5aad962';
+
+update default_header set iscustomreport='F' where id='dd4e8970-639d-11e6-9015-c03fd5aad962';
+
+#Linked Credit note customer/Vendor in make payment
+
+insert INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) values('f11dadf9-5591-11e7-9d60-14dda9792912', 'd01c1834-6849-11e6-b8c5-c03fd5aad962' , 'eff2c0a0-639d-11e6-9015-c03fd5aad962' , 0);
+
+update customreportsdefaultfieldsmapping set isselectdataindex=0 where id='e43a4232-6849-11e6-b8c5-c03fd5aad963';
+
+update default_header set defaultHeader='Linked Credit Note Customer/Vendor', reftabledatacolumn='COALESCE(customer.NAME, vendor.NAME)' where id ='d01c1834-6849-11e6-b8c5-c03fd5aad962';
+
+update default_header set iscustomreport='F' where id='e8210ef6-6850-11e6-b8c5-c03fd5aad962';
+
+#debit note customer/Vendor in receive payment
+
+insert INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) values('ffc987f4-5597-11e7-9d60-14dda9792912', 'd664269e-69db-11e6-b130-c03fd5aad962' , 'e3879352-7824-11e3-a0ff-080027580062' , 0);
+
+update customreportsdefaultfieldsmapping set isselectdataindex=0 where id='ffb053ec-69db-11e6-b130-c03fd5aad963';
+
+update default_header set defaultHeader='Debit Note Customer/Vendor Name' , reftabledatacolumn='COALESCE(customer.NAME,vendor.NAME)' where id='d664269e-69db-11e6-b130-c03fd5aad962';
+
+update default_header set iscustomreport='F' where id='e2fcd43a-69dd-11e6-b130-c03fd5aad962';
+
+#Linked Debit note customer/Vendor in make payment
+
+insert INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) values('a2826d20-55a3-11e7-9d60-14dda9792912', '288543f0-6a99-11e6-a58f-c03fd5aad962 ' , 'e3879352-7824-11e3-a0ff-080027580062' , 0);
+
+update customreportsdefaultfieldsmapping set isselectdataindex=0 where id='3ac4f150-6a99-11e6-a58f-c03fd5aad963';
+
+update default_header set defaultHeader='Linked Debit Note Customer/Vendor' , reftabledatacolumn='COALESCE(customer.NAME,vendor.NAME)' where id='288543f0-6a99-11e6-a58f-c03fd5aad962';
+
+update default_header set iscustomreport='F' where id='386a86da-6aa4-11e6-a58f-c03fd5aad962';
+
+#Ashish Mohite 21st June 2017
+ALTER TABLE `salesorder` ADD COLUMN `isdraft` int(1) NULL DEFAULT 0;
+
+#Ganesh Karale 21th June 2017
+#Alter table queries
+ALTER TABLE billingshippingaddresses
+ADD COLUMN billingcounty VARCHAR(50),
+ADD COLUMN shippingcounty VARCHAR(50),
+ADD COLUMN vendcustshippingcounty VARCHAR(50),
+ADD COLUMN customershippingcounty VARCHAR(50);
+
+ALTER TABLE companyaddressdetails
+ADD COLUMN county VARCHAR(50);
+
+ALTER TABLE customeraddressdetails
+ADD COLUMN county VARCHAR(50);
+
+ALTER TABLE vendoraddressdetails
+ADD COLUMN county VARCHAR(50);
+
+ALTER TABLE mrpaddressdetails
+ADD COLUMN county VARCHAR(50);
+
+
+#default header queries
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('11bd25a6-f7b7-4d53-8e48-198dd3539d73', 'Transaction Billing County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Transaction Billing County', '1', '10', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('f3ad2bce-0a77-46c9-972d-ebe8cfc37e29', 'Transaction Shipping County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Transaction Shipping County', '1', '10', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('c02d635c-2b8b-4544-8fed-10c63e3d3a21', 'Billing County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing County', '1', '12', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('3d5cb9e1-ecf3-4cdd-8486-0a04ace6858a', 'Shipping County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping County', '1', '12', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('7b4fdbdd-ed59-43f9-a63e-699ce5ad6935', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '18', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('ae78d318-c76e-4edd-b94a-802300a506a1', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '18', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('d00ac56d-b62b-4d75-b4e2-14c188c3cac6', 'Vendor Transactional Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'vendcustshippingcounty', 'Vendor Transactional Shipping Address County', '1', '18', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('a2a48b13-41f1-48a3-a181-6ea969d94179', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '2', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('3658057f-bcd2-45d2-ac53-52915f7fc691', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '2', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('a9bab726-9dd3-4bfa-ba87-dfd3dce1da56', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '20', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('0880e82b-6eda-46c7-a3dc-e0cc21d46ad5', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '20', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('3a7cb06b-6266-4d51-a02b-7c0aa30456cd', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '22', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('fa716bc7-625e-48ef-9ea6-7c2c95549734', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '22', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('adfbe72c-a42e-4582-9de1-10cbe34a5d11', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '23', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('39597081-a187-40f5-8832-f96a2b4e6513', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '23', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('79c9e80f-f34b-4c55-849d-06f70691d4b9', 'Vendor Transactional Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'vendcustshippingcounty', 'Vendor Transactional Shipping Address County', '1', '23', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('7253c176-ea2b-45cb-9c16-b869849b0e6c', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '27', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('5b7213d7-2302-4226-b8de-f7286054432e', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '27', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('79df4782-453e-4b03-8e3d-420ff88bf188', 'Vendor Transactional Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'vendcustshippingcounty', 'Vendor Transactional Shipping Address County', '1', '28', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('7fff78a9-3547-4997-a65b-bb3e4e51c5fd', 'Billing Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'billingcounty', 'Billing Address County', '1', '6', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('15b739dc-5df8-4af1-b28f-1b5782e19aff', 'Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'shippingcounty', 'Shipping Address County', '1', '6', 'T', '244');
+
+INSERT INTO `default_header` (`id`, `defaultHeader`, `dbcolumnname`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `xtype`, `module`, `allowindocumentdesigner`, `countryid`)
+VALUES ('a4081914-f728-4e56-b46f-fb4bf3c02c14', 'Vendor Transactional Shipping Address County', 'billingshippingaddresses', 'billingshippingaddresses', 'id', 'vendcustshippingcounty', 'Vendor Transactional Shipping Address County', '1', '6', 'T', '244');
+
+
+#Import Customer
+INSERT INTO default_header (`id`, `module`, `defaultHeader`, `pojomethodname`, `flag`, `maxlength`, `ismandatory`, `hbmnotnull`, `refmodule_pojoclassname`, `refdatacolumn_hbmname`, `reffetchcolumn_hbmname`, `validatetype`, `defaultvalue`, `countryid`)
+VALUES ('dc7b4e4b-3ec7-4812-a561-6cc50b7a6606', '09508488-c1d2-102d-b048-001e58a64cb6', 'Billing County', 'BillingCounty', 0, 50, 'F', 'F', null,  null,  null, 'string', null, 244);
+
+INSERT INTO default_header (`id`, `module`, `defaultHeader`, `pojomethodname`, `flag`, `maxlength`, `ismandatory`, `hbmnotnull`, `refmodule_pojoclassname`, `refdatacolumn_hbmname`, `reffetchcolumn_hbmname`, `validatetype`, `defaultvalue`, `countryid`)
+VALUES ('5e461787-0625-4763-bbd2-ef3ec3ce1c57', '09508488-c1d2-102d-b048-001e58a64cb6', 'Shipping County', 'ShippingCounty', 0, 50, 'F', 'F', null,  null,  null, 'string', null, 244);
+
+#Import Customer Address
+INSERT INTO default_header(`id`, `module`, `defaultHeader`, `pojomethodname`, `flag`, `maxlength`, `ismandatory`, `hbmnotnull`, `refmodule_pojoclassname`, `refdatacolumn_hbmname`, `reffetchcolumn_hbmname`, `validatetype`, `defaultvalue`, `countryid`)
+VALUES ('df37b933-fe2d-4ecf-9339-09587776f4bc', '1110', 'County', 'County', 0, 50, 'F', 'F', null, null, null, 'string', null, 244);
+
+
+#Import Vendor
+INSERT INTO `default_header` (`id`, `module`, `defaultHeader`, `pojomethodname`, `flag`, `maxlength`, `ismandatory`, `hbmnotnull`, `refmodule_pojoclassname`, `refdatacolumn_hbmname`, `reffetchcolumn_hbmname`, `validatetype`, `defaultvalue`, `countryid`)
+VALUES ('3d768aa4-8bec-46b3-8b73-a078f760fe93', 'b8bd81b0-c500-102d-bb0b-001e58a64cb6', 'Billing County', 'BillingCounty', '0', '50', 'F', 'F', null,  null,  null, 'string', null, 244);
+
+INSERT INTO `default_header` (`id`, `module`, `defaultHeader`, `pojomethodname`, `flag`, `maxlength`, `ismandatory`, `hbmnotnull`, `refmodule_pojoclassname`, `refdatacolumn_hbmname`, `reffetchcolumn_hbmname`, `validatetype`, `defaultvalue`, `countryid`)
+VALUES ('cac4d08e-45f7-4e1d-8785-662a4e29dba4', 'b8bd81b0-c500-102d-bb0b-001e58a64cb6', 'Shipping County', 'ShippingCounty', '0', '50', 'F', 'F', null,  null,  null, 'string', null, 244);
+
+
+#Import Customer Sample File Country Specific
+INSERT INTO `samplefiledata` (`id`,`header_json`,`filedata_json`,`modulename`,`samplefilename`,`version`,`issamplefile`,`countryid`)
+VALUES ('7a579fd2-de27-49b9-b232-d5094cfd6d7d','[{\"title\":\"Account,Billing Address,Credit Term,Currency,Customer Code,Customer Name,Shipping Address,Alias Name,Bank Account No,Billing Alias Name,Billing County,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Vendor,Creation Date,Credit Sales Limit,Customer UEN,Default Sales Person,Other Info(GST Number),Parent Customer,Payment Criteria,Preferred Product(s),Price List - Band,Sales Person,Shipping Alias Name,Shipping County,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping Route,Shipping State,Shipping Website,Tax Code,Title,Vendor Account,Vendor Code\"},{\"header\":\"Account,Billing Address,Credit Term,Currency,Customer Code,Customer Name,Shipping Address,Alias Name,Bank Account No,Billing Alias Name,Billing County,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Vendor,Creation Date,Credit Sales Limit,Customer UEN,Default Sales Person,Other Info(GST Number),Parent Customer,Payment Criteria,Preferred Product(s),Price List - Band,Sales Person,Shipping Alias Name,Shipping County,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping Route,Shipping State,Shipping Website,Tax Code,Title,Vendor Account,Vendor Code\"},{\"align\":\" none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]','[{\"Account\":\" Trade Debtors\",\"Billing Address\":\"Singapore\",\"Credit Term\":\" NET 45\",\"Currency\":\"SG Dollar (SGD)\",\"Customer Code\":\"C001\",\"Customer Name\":\" Ceena\",\"Shipping Address\":\"Singapore\",\"Alias Name\":\"\",\"Bank Account No\":\"\",\"Billing Alias Name\":\"\",\"Billing County\":\"\",\"Billing City\":\"\",\"Billing Contact Person\":\" \",\"Billing Contact Person Designation\":\" \",\"Billing Contact Person Number\":\"\",\"Billing Country\":\" \",\"Billing Email\":\"admin@mailinator.com\",\"Billing Fax\":\" \",\"Billing Mobile\":\"\",\"Billing Phone\":\"\",\"Billing Postal Code\":\"\",\"Billing Recipient Name\":\"\",\"Billing State\":\"\",\"Billing Website\":\"\",\"Category\":\"\",\"Create As Vendor\":\"T\",\"Creation Date\":\"2015-06-14 02:25:15\",\"Credit Sales Limit\":0,\"Customer UEN\":\" \",\"Default Sales Person\":\" \",\"Other Info(GST Number)\":\"\",\"Parent Customer\":\"\",\"Payment Criteria\":\"\",\"Preferred Product(s)\":\"\",\"Price List - Band\":\"\",\"Sales Person\":\"\",\"Shipping Alias Name\":\" \",\"Shipping County\":\" \",\"Shipping City\":\" \",\"Shipping Contact Person\":\" \",\"Shipping Contact Person Designation\":\"\",\"Shipping Contact Person Number\":\" \",\"Shipping Country\":\" \",\"Shipping Email\":\" \",\"Shipping Fax\":\" \",\"Shipping Mobile\":\" \",\"Shipping Phone\":\"\",\"Shipping Postal Code\":\" \",\"Shipping Recipient Name\":\" \",\"Shipping Route\":\" \",\"Shipping State\":\" \",\"Shipping Website\":\"\",\"Tax Code\":\"GST(DS)@7.00%\",\"Title\":\" Mr.\",\"Vendor Account\":\"Trade Creditors\",\"Vendor Code\":\"V001\"},{\"Account\":\" Trade Debtors\",\"Billing Address\":\"Singapore\",\"Credit Term\":\" NET 45\",\"Currency\":\"SG Dollar (SGD)\",\"Customer Code\":\"C002\",\"Customer Name\":\"Peter\",\"Shipping Address\":\"Singapore\",\"Alias Name\":\"\",\"Bank Account No\":\"\",\"Billing Alias Name\":\"\",\"Billing County\":\"\",\"Billing City\":\"\",\"Billing Contact Person\":\" \",\"Billing Contact Person Designation\":\" \",\"Billing Contact Person Number\":\"\",\"Billing Country\":\" \",\"Billing Email\":\"admin@mailinator.com\",\"Billing Fax\":\" \",\"Billing Mobile\":\"\",\"Billing Phone\":\"\",\"Billing Postal Code\":\"\",\"Billing Recipient Name\":\"\",\"Billing State\":\"\",\"Billing Website\":\"\",\"Category\":\"\",\"Create As Vendor\":\"T\",\"Creation Date\":\"2015-06-14 02:25:15\",\"Credit Sales Limit\":0,\"Customer UEN\":\" \",\"Default Sales Person\":\" \",\"Other Info(GST Number)\":\"\",\"Parent Customer\":\"\",\"Payment Criteria\":\"\",\"Preferred Product(s)\":\"\",\"Price List - Band\":\"\",\"Sales Person\":\"\",\"Shipping Alias Name\":\" \",\"Shipping County\":\" \",\"Shipping City\":\" \",\"Shipping Contact Person\":\" \",\"Shipping Contact Person Designation\":\"\",\"Shipping Contact Person Number\":\" \",\"Shipping Country\":\" \",\"Shipping Email\":\" \",\"Shipping Fax\":\" \",\"Shipping Mobile\":\" \",\"Shipping Phone\":\"\",\"Shipping Postal Code\":\" \",\"Shipping Recipient Name\":\" \",\"Shipping Route\":\" \",\"Shipping State\":\" \",\"Shipping Website\":\"\",\"Tax Code\":\"GST(DS)@7.00%\",\"Title\":\" Mr.\",\"Vendor Account\":\"Trade Creditors\",\"Vendor Code\":\"V002\"},{\"Account\":\" Trade Debtors\",\"Billing Address\":\"Singapore\",\"Credit Term\":\" NET 30\",\"Currency\":\"SG Dollar (SGD)\",\"Customer Code\":\"C003\",\"Customer Name\":\"John\",\"Shipping Address\":\"Singapore\",\"Alias Name\":\"\",\"Bank Account No\":\"\",\"Billing Alias Name\":\"\",\"Billing County\":\"\",\"Billing City\":\"\",\"Billing Contact Person\":\"\",\"Billing Contact Person Designation\":\"\",\"Billing Contact Person Number\":\"\",\"Billing Country\":\"\",\"Billing Email\":\"admin@mailinator.com\",\"Billing Fax\":\"\",\"Billing Mobile\":\"\",\"Billing Phone\":\"\",\"Billing Postal Code\":\"\",\"Billing Recipient Name\":\"\",\"Billing State\":\"\",\"Billing Website\":\"\",\"Category\":\"\",\"Create As Vendor\":\"F\",\"Creation Date\":\"2015-06-14 02:25:15\",\"Credit Sales Limit\":0,\"Customer UEN\":\"\",\"Default Sales Person\":\"\",\"Other Info(GST Number)\":\"\",\"Parent Customer\":\"\",\"Payment Criteria\":\"\",\"Preferred Product(s)\":\"\",\"Price List - Band\":\"\",\"Sales Person\":\"\",\"Shipping Alias Name\":\"\",\"Shipping County\":\" \",\"Shipping City\":\"\",\"Shipping Contact Person\":\"\",\"Shipping Contact Person Designation\":\"\",\"Shipping Contact Person Number\":\"\",\"Shipping Country\":\"\",\"Shipping Email\":\"\",\"Shipping Fax\":\"\",\"Shipping Mobile\":\"\",\"Shipping Phone\":\"\",\"Shipping Postal Code\":\"\",\"Shipping Recipient Name\":\"\",\"Shipping Route\":\"\",\"Shipping State\":\"\",\"Shipping Website\":\"\",\"Tax Code\":\"GST(DS)@7.00%\",\"Title\":\" Mr.\",\"Vendor Account\":\"Trade Creditors\",\"Vendor Code\":\"V003\"}]','Customer','sample_customer','_v2','T',244);
+
+
+#Import Vendor Sample File Country Specific
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`)
+VALUES ('2dd95a74-0096-476d-9eaa-9a07a1be10e1', '[{\"title\":\"Account,Billing Address,Currency,Debit Term,Shipping Address,Vendor Code,Vendor Name,Agent,Vendor Alias Name,Bank Account No,Billing Alias Name,Billing County,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Customer,Creation Date,Credit Purchase Limit,Customer Account,Customer Code,Other Info(GST Number),Parent Vendor,Payment Criteria,Preferred Product Code,Price List - Band,Shipping Alias Name,Shipping County,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping State,Shipping Website,Tax Code,Title,Vendor UEN\"},{\"header\":\"Account,Billing Address,Currency,Debit Term,Shipping Address,Vendor Code,Vendor Name,Agent,Alias Name,Bank Account No,Billing Alias Name,Billing County,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Customer,Creation Date,Credit Purchase Limit,Customer Account,Customer Code,Other Info(GST Number),Parent Vendor,Payment Criteria,Preferred Product Code,Price List - Band,Shipping Alias Name,Shipping County,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping State,Shipping Website,Tax Code,Title,Vendor UEN\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]','[{\"Account\":\"Trade Creditors\",\"Billing Address\":\"Singapore\",\"Currency\":\"SG Dollar (SGD)\",\"Debit Term\":\" NET 45\",\"Shipping Address\":\"Singapore\",\"Vendor Code\":\"V001\",\"Vendor Name\":\" Ceena\",\"Agent\":\"\",\"Alias Name\":\"\",\"Bank Account No\":\"\",\"Billing Alias Name\":\"\",\"Billing County\":\"\",\"Billing City\":\"\",\"Billing Contact Person\":\"\",\"Billing Contact Person Designation\":\"\",\"Billing Contact Person Number\":\"\",\"Billing Country\":\"\",\"Billing Email\":\"admin@mailinator.com\",\"Billing Fax\":\"\",\"Billing Mobile\":\"\",\"Billing Phone\":\"\",\"Billing Postal Code\":\"\",\"Billing Recipient Name\":\"\",\"Billing State\":\"\",\"Billing Website\":\"\",\"Category\":\"\",\"Create As Customer\":\"F\",\"Creation Date\":\"2015-06-14 02:25:15\",\"Credit Purchase Limit\":0,\"Customer Account\":\"\",\"Customer Code\":\"\",\"Other Info(GST Number)\":\"\",\"Parent Vendor\":\"\",\"Payment Criteria\":\"\",\"Preferred Product Code\":\"\",\"Price List - Band\":\"\",\"Shipping Alias Name\":\"\",\"Shipping County\":\"\",\"Shipping City\":\"\",\"Shipping Contact Person\":\"\",\"Shipping Contact Person Designation\":\"\",\"Shipping Contact Person Number\":\"\",\"Shipping Country\":\"\",\"Shipping Email\":\"admin@mailinator.com\",\"Shipping Fax\":\"\",\"Shipping Mobile\":\"\",\"Shipping Phone\":\"\",\"Shipping Postal Code\":\"\",\"Shipping Recipient Name\":\"\",\"Shipping State\":\"\",\"Shipping Website\":\"\",\"Tax Code\":\"GST(BL)@7.00%\",\"Title\":\"Mr.\",\"Vendor UEN\":\"\"},{\"Account\":\"Trade Creditors\",\"Billing Address\":\"Singapore\",\"Currency\":\"SG Dollar (SGD)\",\"Debit Term\":\" NET 45\",\"Shipping Address\":\"Singapore\",\"Vendor Code\":\"V002\",\"Vendor Name\":\"Peter\",\"Agent\":\"\",\"Alias Name\":\"\",\"Bank Account No\":\"\",\"Billing Alias Name\":\"\",\"Billing County\":\"\",\"Billing City\":\"\",\"Billing Contact Person\":\"\",\"Billing Contact Person Designation\":\"\",\"Billing Contact Person Number\":\"\",\"Billing Country\":\"\",\"Billing Email\":\"admin@mailinator.com\",\"Billing Fax\":\"\",\"Billing Mobile\":\"\",\"Billing Phone\":\"\",\"Billing Postal Code\":\"\",\"Billing Recipient Name\":\"\",\"Billing State\":\"\",\"Billing Website\":\"\",\"Category\":\"\",\"Create As Customer\":\"F\",\"Creation Date\":\"2015-06-14 02:25:15\",\"Credit Purchase Limit\":0,\"Customer Account\":\"\",\"Customer Code\":\"\",\"Other Info(GST Number)\":\"\",\"Parent Vendor\":\"\",\"Payment Criteria\":\"\",\"Preferred Product Code\":\"\",\"Price List - Band\":\"\",\"Shipping Alias Name\":\"\",\"Shipping County\":\"\",\"Shipping City\":\"\",\"Shipping Contact Person\":\"\",\"Shipping Contact Person Designation\":\"\",\"Shipping Contact Person Number\":\"\",\"Shipping Country\":\"\",\"Shipping Email\":\"admin@mailinator.com\",\"Shipping Fax\":\"\",\"Shipping Mobile\":\"\",\"Shipping Phone\":\"\",\"Shipping Postal Code\":\"\",\"Shipping Recipient Name\":\"\",\"Shipping State\":\"\",\"Shipping Website\":\"\",\"Tax Code\":\"GST(BL)@7.00%\",\"Title\":\"Mr.\",\"Vendor UEN\":\"\"},{\"Account\":\"Trade Creditors\",\"Billing Address\":\"Singapore\",\"Currency\":\"SG Dollar (SGD)\",\"Debit Term\":\" NET 45\",\"Shipping Address\":\"Singapore\",\"Vendor Code\":\"V003\",\"Vendor Name\":\"John\",\"Agent\":\"\",\"Alias Name\":\"\",\"Bank Account No\":\"\",\"Billing Alias Name\":\"\",\"Billing County\":\"\",\"Billing City\":\"\",\"Billing Contact Person\":\"\",\"Billing Contact Person Designation\":\"\",\"Billing Contact Person Number\":\"\",\"Billing Country\":\"\",\"Billing Email\":\"admin@mailinator.com\",\"Billing Fax\":\"\",\"Billing Mobile\":\"\",\"Billing Phone\":\"\",\"Billing Postal Code\":\"\",\"Billing Recipient Name\":\"\",\"Billing State\":\"\",\"Billing Website\":\"\",\"Category\":\"\",\"Create As Customer\":\"F\",\"Creation Date\":\"2015-06-14 02:25:15\",\"Credit Purchase Limit\":0,\"Customer Account\":\"\",\"Customer Code\":\"\",\"Other Info(GST Number)\":\"\",\"Parent Vendor\":\"\",\"Payment Criteria\":\"\",\"Preferred Product Code\":\"\",\"Price List - Band\":\"\",\"Shipping Alias Name\":\"\",\"Shipping County\":\"\",\"Shipping City\":\"\",\"Shipping Contact Person\":\"\",\"Shipping Contact Person Designation\":\"\",\"Shipping Contact Person Number\":\"\",\"Shipping Country\":\"\",\"Shipping Email\":\"admin@mailinator.com\",\"Shipping Fax\":\"\",\"Shipping Mobile\":\"\",\"Shipping Phone\":\"\",\"Shipping Postal Code\":\"\",\"Shipping Recipient Name\":\"\",\"Shipping State\":\"\",\"Shipping Website\":\"\",\"Tax Code\":\"GST(BL)@7.00%\",\"Title\":\"Mr.\",\"Vendor UEN\":\"\"}]', 'Vendor', 'sample_vendor', '_v2', 'T', 244);
+
+
+#Import Customer Address Sample File Country Specific
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) 
+VALUES ('82bd8a9a-37ef-4e05-a1b7-b8cf69d23bd9', '[{\"title\":\"Customer Code,Is Billing Address,Set As Default,Alias Name,Address,County,City,State,Country,Postal Code,Phone,Mobile,Fax,Email,Recipient Name,Contact Person,Contact Person No,Contact Person Designation,Website,Route\"},{\"header\":\"Customer Code,Is Billing Address,Set As Default,Alias Name,Address,County,City,State,Country,Postal Code,Phone,Mobile,Fax,Email,Recipient Name,Contact Person,Contact Person No,Contact Person Designation,Website,Route\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]','[{\"Customer Code\":\"CID00001\",\"Is Billing Address\":\"TRUE\",\"Set As Default\":\"TRUE\",\"Alias Name\":\"Billing Address1\",\"Address\":\"Singapore\",\"County\":\"County\",\"City\":\"\",\"State\":\"\",\"Country\":\"Singapore\",\"Postal Code\":569510,\"Phone\":9876543210,\"Mobile\":898989898989,\"Fax\":898989989,\"Email\":\"admin@krawler.com\",\"Recipient Name\":\"John\",\"Contact Person\":\"Peter\",\"Contact Person No\":9876543210,\"Contact Person Designation\":\"\",\"Website\":\"accouning.deskera.com\",\"Route\":\"\"},{\"Customer Code\":\"CID00001\",\"Is Billing Address\":\"TRUE\",\"Set As Default\":\"FALSE\",\"Alias Name\":\"Billing Address2\",\"Address\":\"Pune\",\"County\":\"County\",\"City\":\"Pune\",\"State\":\"Maharashtra\",\"Country\":\"India\",\"Postal Code\":412207,\"Phone\":9876543210,\"Mobile\":898989898989,\"Fax\":898989989,\"Email\":\"admin@krawler.com\",\"Recipient Name\":\"John\",\"Contact Person\":\"Peter\",\"Contact Person No\":9876543210,\"Contact Person Designation\":\"\",\"Website\":\"accouning.deskera.com\",\"Route\":\"\"},{\"Customer Code\":\"CID00001\",\"Is Billing Address\":\"FALSE\",\"Set As Default\":\"TRUE\",\"Alias Name\":\"Shipping Address1\",\"Address\":\"Pune\",\"County\":\"County\",\"City\":\"Pune\",\"State\":\"Maharashtra\",\"Country\":\"India\",\"Postal Code\":412207,\"Phone\":9876543210,\"Mobile\":898989898989,\"Fax\":898989989,\"Email\":\"admin@krawler.com\",\"Recipient Name\":\"John\",\"Contact Person\":\"Peter\",\"Contact Person No\":9876543210,\"Contact Person Designation\":\"\",\"Website\":\"accouning.deskera.com\",\"Route\":\"Route1\"},{\"Customer Code\":\"\",\"Is Billing Address\":\"\",\"Set As Default\":\"\",\"Alias Name\":\"\",\"Address\":\"\",\"County\":\"\",\"City\":\"\",\"State\":\"\",\"Country\":\"\",\"Postal Code\":\"\",\"Phone\":\"\",\"Mobile\":\"\",\"Fax\":\"\",\"Email\":\"\",\"Recipient Name\":\"\",\"Contact Person\":\"\",\"Contact Person No\":\"\",\"Contact Person Designation\":\"\",\"Website\":\"\",\"Route\":\"\"},{\"Customer Code\":\"\",\"Is Billing Address\":\"\",\"Set As Default\":\"\",\"Alias Name\":\"\",\"Address\":\"\",\"County\":\"\",\"City\":\"\",\"State\":\"\",\"Country\":\"\",\"Postal Code\":\"\",\"Phone\":\"\",\"Mobile\":\"\",\"Fax\":\"\",\"Email\":\"\",\"Recipient Name\":\"\",\"Contact Person\":\"\",\"Contact Person No\":\"\",\"Contact Person Designation\":\"\",\"Website\":\"\",\"Route\":\"\"},{\"Customer Code\":\"Note:\",\"Is Billing Address\":\"\",\"Set As Default\":\"\",\"Alias Name\":\"\",\"Address\":\"\",\"County\":\"\",\"City\":\"\",\"State\":\"\",\"Country\":\"\",\"Postal Code\":\"\",\"Phone\":\"\",\"Mobile\":\"\",\"Fax\":\"\",\"Email\":\"\",\"Recipient Name\":\"\",\"Contact Person\":\"\",\"Contact Person No\":\"\",\"Contact Person Designation\":\"\",\"Website\":\"\",\"Route\":\"\"},{\"Customer Code\":\"1. If \'Is Billing Address\' is \'TRUE\' then that details belongs to Billing Address.\",\"Is Billing Address\":\"\",\"Set As Default\":\"\",\"Alias Name\":\"\",\"Address\":\"\",\"County\":\"\",\"City\":\"\",\"State\":\"\",\"Country\":\"\",\"Postal Code\":\"\",\"Phone\":\"\",\"Mobile\":\"\",\"Fax\":\"\",\"Email\":\"\",\"Recipient Name\":\"\",\"Contact Person\":\"\",\"Contact Person No\":\"\",\"Contact Person Designation\":\"\",\"Website\":\"\",\"Route\":\"\"},{\"Customer Code\":\"2. If \'Is Billing Address\' is \'FALSE\' then that details belongs to Shipping Address.\",\"Is Billing Address\":\"\",\"Set As Default\":\"\",\"Alias Name\":\"\",\"Address\":\"\",\"County\":\"\",\"City\":\"\",\"State\":\"\",\"Country\":\"\",\"Postal Code\":\"\",\"Phone\":\"\",\"Mobile\":\"\",\"Fax\":\"\",\"Email\":\"\",\"Recipient Name\":\"\",\"Contact Person\":\"\",\"Contact Person No\":\"\",\"Contact Person Designation\":\"\",\"Website\":\"\",\"Route\":\"\"}]', 'Customer Address Details', 'sample_customer_address', '_v1', 'T', 244);
+
+# Rahul A. Bhawar 20th June 2017
+#Purpose : Added GST sales tax Liability rpeort for US and India GST
+#ERP-33784
+insert into reportmaster(id,name,description,method_name,countryid) values('804d225b-49b6-11e7-be3c-14dda97927d6',"GST Sales Tax Liability Report","GST Sales Tax Liability Report","callGSTSalesTaxLiabilityReport()",105);
+insert into reportmaster(id,name,description,method_name,countryid) values('804d225b-49b6-11e7-be3c-14dda97927d7',"GST Sales Tax Liability Report","GST Sales Tax Liability Report","callGSTSalesTaxLiabilityReport()",244);
+
+#Prashant Sable 21th June 2017
+CREATE table tempproductcompanyid (productids varchar(255), requestId varchar(255));
+CREATE index idx_productids on tempproductcompanyid(productids);
+CREATE index idx_requestID on tempproductcompanyid(requestId);
+
+# Suhas Chaware 22 June 2017
+INSERT INTO audit_group VALUES (60,'GST Master');
+INSERT INTO audit_action VALUES (360,'GST',60);
+
+#Ajit Gogawale 22th June 2017 
+#To add rounding diffrence reason at company level at the time of company creation
+INSERT INTO defaultmasteritem (`id`, `value`, `masterGroup`) VALUES ('7a74e04f-51c2-11e7-ac6a-2c4d544ce49f', 'Rounding Difference.', '29');
+
+
+#Neeraj Dwivedi 22nd June 2017
+ALTER TABLE extracompanypreferences ADD COLUMN activategroupcompaniesflag  int(1) NULL DEFAULT 0;
+update extracompanypreferences set activategroupcompaniesflag='1' where id =(Select companyid from company where subdomain="hh");
+update extracompanypreferences set activategroupcompaniesflag='1' where id =(Select companyid from company where subdomain="zg");
+update extracompanypreferences set activategroupcompaniesflag='1' where id =(Select companyid from company where subdomain="hf");
+update extracompanypreferences set activategroupcompaniesflag='1' where id =(Select companyid from company where subdomain="sgg");
+
+CREATE TABLE `groupcompany_companylist` (
+  `id` varchar(255) NOT NULL,
+  `subdomain` varchar(255),
+  `company` varchar(255),
+  `contexturl` varchar(255),
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE groupcompany_companylist ADD COLUMN isparent  int(1) NULL DEFAULT 0;
+
+
+CREATE TABLE `groupcompany_processmapping` (
+  `id` varchar(255) NOT NULL,
+  `sourcecompany` varchar(50),
+  `sourcecompanyid` varchar(50),
+  `sourcemodule` varchar(50),
+  `destinationcompany` varchar(50),
+  `destinationcompanyid` varchar(50),
+    `destinationmodule` varchar(50),  
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `groupcompany_customervendormapping` (
+  `id` varchar(255) NOT NULL,
+  `sourcecompany` varchar(50),
+  `destinationcompany` varchar(50),
+  `sourcemastercode` varchar(50),
+  `sourcemasterid` varchar(50),
+  `destinationmastercode` varchar(50),
+  `destinationmasterid` varchar(50),
+  `issourcecustomer` int(1),
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `groupcompany_taxmapping` (
+  `id` varchar(255) NOT NULL,
+  `sourcecompany` varchar(255),
+  `destinationcompany` varchar(255),
+  `sourcetaxcode` varchar(255),
+  `sourcetaxid` varchar(255),
+  `destinationtaxcode` varchar(255),
+  `destinationtaxid` varchar(255),
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `groupcompany_termmapping` (
+ `id` varchar(255) NOT NULL,
+  `sourcecompany` varchar(255),
+  `destinationcompany` varchar(255),
+  `sourcetermname` varchar(255),
+  `sourcetermid` varchar(255),
+  `destinationtermname` varchar(255),
+  `destinationtermid` varchar(255),
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `groupcompany_transactionmapping` (
+  `id` varchar(255) NOT NULL,
+  `sourcemodule` varchar(255),
+  `destinationmodule` varchar(255),
+  `sourcetransactionid` varchar(255),
+  `destinationtransactionid` varchar(255),
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Audit Action
+insert into audit_group (id,groupname) values ('60','Group Company');
+insert into audit_action (id,actionname,auditGroup) values ('361','Group Company Created', '60');
+insert into audit_action (id,actionname,auditGroup) values ('362','Group Company Update ', '60');
+
+#Rahul A. Bhawar  24 June 2017
+#Master Groups
+INSERT INTO mastergroup (id,groupname) VALUE (62,'GST Registration Type');
+INSERT INTO mastergroup (id,groupname) VALUE (63,'GST Customer/ Vendor Type');
+
+#GSTIN Registration Type - Default Master Items
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658531','Regular','62','105');
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658532','Unregistered','62','105');
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658533','Composition','62','105');
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658534','Consumer','62','105');
+
+#Customer/ Vendor Type - Default Master Items
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658535','Export','63','105');
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658536','Import','63','105');
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('ac09adba-58b9-11e7-8ead-c03fd5658537','Deemed Export (SEZ)','63','105');
+
+#Customer Columns
+ALTER TABLE customer ADD COLUMN gstregistrationtype VARCHAR(50) DEFAULT NULL;
+ALTER TABLE customer ADD FOREIGN KEY (`gstregistrationtype`) REFERENCES `masteritem` (`id`);
+ALTER TABLE customer ADD COLUMN gstcustomertype VARCHAR(50) DEFAULT NULL;
+ALTER TABLE customer ADD FOREIGN KEY (`gstcustomertype`) REFERENCES `masteritem` (`id`);
+#Vendor Columns
+ALTER TABLE vendor ADD COLUMN gstregistrationtype VARCHAR(50) DEFAULT NULL;
+ALTER TABLE vendor ADD FOREIGN KEY (`gstregistrationtype`) REFERENCES `masteritem` (`id`);
+ALTER TABLE vendor ADD COLUMN gstvendortype VARCHAR(50) DEFAULT NULL;
+ALTER TABLE vendor ADD FOREIGN KEY (`gstvendortype`) REFERENCES `masteritem` (`id`);
+
+#Kapil Bhusari 25th June 2017
+
+alter table invoicedetails add column `rowtermtaxamountinbase` double DEFAULT '0';
+alter table invoicedetails add column `rowtermtaxamount` double DEFAULT '0';
+
+alter table grdetails add column `rowtermtaxamountinbase` double DEFAULT '0';
+alter table grdetails add column `rowtermtaxamount` double DEFAULT '0';
+
+ALTER TABLE quotation ADD COLUMN `applytaxtoterms` char(1) NOT NULL DEFAULT 'F';
+ALTER TABLE salesorder ADD COLUMN `applytaxtoterms` char(1) NOT NULL DEFAULT 'F';
+
+ALTER TABLE purchaseorder ADD COLUMN `applytaxtoterms` char(1) NOT NULL DEFAULT 'F';
+ALTER TABLE vendorquotation ADD COLUMN `applytaxtoterms` char(1) NOT NULL DEFAULT 'F';
+
+ALTER TABLE invoice ADD COLUMN `applytaxtoterms` char(1) NOT NULL DEFAULT 'F';
+ALTER TABLE goodsreceipt ADD COLUMN `applytaxtoterms` char(1) NOT NULL DEFAULT 'F';
+
+# Suhas Chaware 25 June 2017
+delete from reportmaster where id="Input_VAT_Report_Summary";
+delete from reportmaster where id="Invoice_VAT_Report";
+delete from reportmaster where id="Output_VAT_Calculation_Report";
+delete from reportmaster where id="VAT_And_CST_Calculation";
+delete from reportmaster where id="VAT_Computation_Report";
+delete from reportmaster where id="VAT_Liability_Calculation_Report";
+delete from reportmaster where id="vat_purchase_register";
+delete from reportmaster where id="vat_sales_register";
+delete from favouritereportmaster where report="Excise_Computation_Report";
+delete from reportmaster where id="Excise_Computation_Report";
+delete from reportmaster where id="ServiceTax_Computation_Report";
+delete from reportmaster where id="st_bill_date_wise_report";
+delete from reportmaster where id="st_input_credit_summary_report";
+delete from reportmaster where id="st_realisation_date_wise_report";
+
+#Ajay Motwani 26th June 2017
+ALTER TABLE `sodetails` ADD COLUMN `discountjson`  longtext NULL;
+ALTER TABLE `dodetails` ADD COLUMN `discountjson`  longtext NULL;
+ALTER TABLE `quotationdetails` ADD COLUMN `discountjson`  longtext NULL;
+ALTER TABLE `srdetails` ADD COLUMN `discountjson`  longtext NULL;
+
+#Deleting previous inserted records as UUID was entered with (-) symbol for user permission UUID should not contain (-) symbol
+DELETE from activitylist where activityid='bfd87f22-5192-11e7-a2b0-708bcdaa138a';
+DELETE from activitylist where activityid='9b992658-5192-11e7-a2b0-708bcdaa138a';
+DELETE from userpermission where feature='69cef2f2-5192-11e7-a2b0-708bcdaa138a';
+DELETE from featurelist where featureid='69cef2f2-5192-11e7-a2b0-708bcdaa138a';
+
+INSERT INTO featurelist (featureid, featurename, displayfeaturename, orderno) VALUES ('69cef2f2519211e7a2b0708bcdaa138a', 'discountMaster', 'Discount Master', 75);
+INSERT INTO activitylist (activityid, activityname, displayactivityname, orderno, feature, parent, alignRight) VALUES ('9b992658519211e7a2b0708bcdaa138a', 'discountMasterMenu', 'Discount Master Menu', 0, '69cef2f2519211e7a2b0708bcdaa138a', null, 0);
+INSERT INTO activitylist (activityid, activityname, displayactivityname, orderno, feature, parent, alignRight) VALUES ('bfd87f22519211e7a2b0708bcdaa138a', 'addDiscountMaster', 'Add Discount Master', 0, '69cef2f2519211e7a2b0708bcdaa138a', '9b992658519211e7a2b0708bcdaa138a', 0);
+INSERT INTO userpermission (feature, role, permissioncode, roleUserMapping) VALUES ('69cef2f2519211e7a2b0708bcdaa138a', 1, 3, null);
+
+#Rahul A. Bhawar 27th June 2017
+#Update Product Category To Product Tax class
+update defaultcustomfields set fieldlabel = 'Product Tax Class' where id='05687428-3f9b-11e7-81f4-708bcdaa1403' and countryid='244';
+update defaultcustomfields set fieldlabel = 'Product Tax Class' where id= '223e2ea5-3fc5-11e7-81f4-708bcdaa1403' and countryid='105';
+
+# Suhas Chaware 28 June 2017
+ALTER TABLE `vendor` ADD COLUMN `sezfromdate` date DEFAULT NULL;
+ALTER TABLE `vendor` ADD COLUMN `seztodate` date DEFAULT NULL;
+ALTER TABLE `customer` ADD COLUMN `sezfromdate` date DEFAULT NULL;
+ALTER TABLE `customer` ADD COLUMN `seztodate` date DEFAULT NULL;
+
+# Rahul A. Bhawar 28 June 2017
+#Product Category as a Line Item
+UPDATE defaultcustomfields SET  customcolumn =1  WHERE id in ('05687428-3f9b-11e7-81f4-708bcdaa1403','223e2ea5-3fc5-11e7-81f4-708bcdaa1403');
+
+#Dipak Dorkar 28th June 2017
+update default_header set ismandatory='T' where module='20' and id='a89bd6f4-18b8-11e6-8fe2-eca86bfcd415';
+
+#Vinod Gharge 28th June 2017
+update defaultcustomfields set isessential=0 WHERE fieldlabel = 'Product Tax Class' AND id='05687428-3f9b-11e7-81f4-708bcdaa1403';
+update defaultcustomfields set isessential=0 WHERE fieldlabel = 'Product Tax Class' AND id='223e2ea5-3fc5-11e7-81f4-708bcdaa1403';
+
+#Aman Shah 29th June 2017 - ERM-265 - For Expense Invoice and advance payment
+
+ALTER TABLE expenseggrdetails ADD COLUMN tdsassessableamount double DEFAULT '0';
+UPDATE expenseggrdetails  set tdsassessableamount = amount;
+ALTER TABLE tdsdetails ADD COLUMN tdsassessableamount double DEFAULT '0';
+UPDATE tdsdetails  set tdsassessableamount = enteramount;
+
+# Suhas Chaware 30 June 2017
+CREATE TABLE `receiptadvancedetailstermmap` (
+  `id` varchar(40) NOT NULL,
+  `receiptadvancedetail` varchar(40) NOT NULL,
+  `termamount` double DEFAULT '0',
+  `percentage` double DEFAULT '0',
+  `deleted` tinyint(4) DEFAULT '0',
+  `creator` varchar(40) NOT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  `purchasevalueorsalevalue` double DEFAULT '0',
+  `deductionorabatementpercent` double DEFAULT '0',
+  `taxtype` int(1) DEFAULT '1',
+  `assessablevalue` double DEFAULT '0',
+  `isgstapplied` char(1) DEFAULT 'F',
+  `entityterm` varchar(50) DEFAULT NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`entityterm`) REFERENCES `entitybasedlineleveltermsrate` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE linelevelterms ADD COLUMN payableaccount VARCHAR(50) DEFAULT NULL;
+ALTER TABLE linelevelterms ADD FOREIGN KEY (`payableaccount`) REFERENCES `account` (`id`);
+

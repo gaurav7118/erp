@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.approval.consignment.ConsignmentApprovalDetails" table="in_consignmentdetails">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="serialName" type="string">
+            <column length="50" name="serialName"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="50" name="remark"/>
+        </property>
+        <property name="batchName" type="string">
+            <column length="50" name="batchName"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="retQty" type="double">
+            <column name="returnqty"/>
+        </property>
+        <property name="movementStatus" type="boolean">
+            <column name="movementStatus"/>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        <property name="repairedOn" type="timestamp">
+            <column name="repairedon"/>
+        </property>
+        <property column="approval_status" name="approvalStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.approval.ApprovalStatus</param>
+            </type>
+        </property>
+        <property name="reason" type="string">
+            <column length="50" name="reason"/>
+        </property>
+        <property column="repair_status" name="repairStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.approval.ApprovalStatus</param>
+            </type>
+        </property>
+        <many-to-one class="com.krawler.common.admin.NewBatchSerial" name="purchaseSerialId"/>
+        <many-to-one class="com.krawler.common.admin.NewProductBatch" column ="batch" name="batch"/>
+        <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location"/>
+        <many-to-one class="com.krawler.inventory.model.approval.InspectionDetail" column="inspection_detail" name="inspectionDTL"/>
+        <many-to-one class="com.krawler.inventory.model.approval.consignment.Consignment" column="consignment" name="consignment"/>
+        <many-to-one class="com.krawler.common.admin.User" column="inspector" name="inspector"/>
+        <many-to-one class="com.krawler.inventory.model.inspection.InspectionForm" column="inspectionformid" name="inspectionForm"/>
+    </class>
+</hibernate-mapping>

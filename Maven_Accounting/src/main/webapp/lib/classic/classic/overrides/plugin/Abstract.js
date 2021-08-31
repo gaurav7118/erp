@@ -1,0 +1,1 @@
+Ext.define("Ext.overrides.plugin.Abstract",{override:"Ext.plugin.Abstract",$configStrict:false,$configPrefixed:false,disabled:false,getState:null,applyState:null,enable:function(){this.disabled=false},disable:function(){this.disabled=true}})

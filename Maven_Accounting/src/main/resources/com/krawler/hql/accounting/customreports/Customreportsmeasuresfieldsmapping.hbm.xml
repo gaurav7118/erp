@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.spring.accounting.customreports.AccCustomReportsMeasuresFieldsMapping" table="customreportsmeasuresfieldsmapping">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="measurefieldid" type="string">
+      <column name="measurefieldid"/>
+    </property>
+    <property name="defaultheaderid" type="string">
+      <column name="defaultheaderid"/>
+    </property>
+    <property name="isDataIndex" type="boolean">
+      <column name="isDataIndex" />
+    </property>
+  </class>
+</hibernate-mapping>

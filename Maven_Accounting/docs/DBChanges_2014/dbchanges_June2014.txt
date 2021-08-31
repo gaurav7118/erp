@@ -1,0 +1,1158 @@
+# Anand Nimbalkar 5th June 2014
+insert into reportmaster values("Stock_Ageing","Stock Ageing","View Stock Ageing as per selected Valuation Method","getStockAgeingTabView()");
+
+#Malhari Pawar Serial No changes
+ALTER TABLE `productbatch` ADD COLUMN `transactiontype`  int(11) DEFAULT 1;
+
+CREATE TABLE `returnbatchmapping` (
+`id`  varchar(255) NOT NULL ,
+`batchtomap`  varchar(255) NULL ,
+`batchmap`  varchar(255) NULL ,
+`returntype`  int(11) DEFAULT 1,
+PRIMARY KEY (`id`),
+CONSTRAINT `returnbatchbatchtomap_FK` FOREIGN KEY (`batchtomap`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `returnbatchbatchmap_FK` FOREIGN KEY (`batchmap`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `returnserialmapping` (
+`id`  varchar(255) NOT NULL ,
+`maptoserial`  varchar(255) NULL ,
+`mapserial`  varchar(255) NULL ,
+`returntype`  int(11) DEFAULT 1,
+PRIMARY KEY (`id`),
+CONSTRAINT `maptoserial_FK` FOREIGN KEY (`maptoserial`) REFERENCES `batchserial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `mapserial_FK` FOREIGN KEY (`mapserial`) REFERENCES `batchserial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `srdetails`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `srdetails` ADD CONSTRAINT `FK_srdetailsbatch` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+# Vivek Pakmode 6th June 2014
+#-Added a Currencies Indonesian Rupiah (IDR),New Taiwan dollar(TWD) and Thai baht(THB) into table currency
+#-Update the tables defaultexchangerate, exchangerate and exchangeratedetails for all currencies
+#-Executed the following Queries for above task
+
+insert into currency (currencyid,name,htmlcode,
+symbol,afterdecimalname,currencycode) values ('13','Indonesian Rupiah (IDR)','IDR ','IDR','sen','IDR');
+
+insert into defaultexchangerate values ('122','1','13');
+insert into defaultexchangerate values ('123','2','13');
+insert into defaultexchangerate values ('124','3','13');
+insert into defaultexchangerate values ('125','5','13');
+insert into defaultexchangerate values ('126','6','13');
+insert into defaultexchangerate values ('127','7','13');
+insert into defaultexchangerate values ('128','8','13');
+insert into defaultexchangerate values ('129','9','13');
+insert into defaultexchangerate values ('130','10','13');
+insert into defaultexchangerate values ('131','11','13');
+insert into defaultexchangerate values ('132','12','13');
+
+insert into defaultexchangerate values ('133','13','13');
+insert into defaultexchangerate values ('134','13','1');
+insert into defaultexchangerate values ('135','13','2');
+insert into defaultexchangerate values ('136','13','3');
+insert into defaultexchangerate values ('137','13','5');
+insert into defaultexchangerate values ('138','13','6');
+insert into defaultexchangerate values ('139','13','7');
+insert into defaultexchangerate values ('140','13','8');
+insert into defaultexchangerate values ('141','13','9');
+insert into defaultexchangerate values ('142','13','10');
+insert into defaultexchangerate values ('143','13','11');
+insert into defaultexchangerate values ('144','13','12');
+
+insert into exchangerate values ('122','1','13');
+insert into exchangerate values ('123','2','13');
+insert into exchangerate values ('124','3','13');
+insert into exchangerate values ('125','5','13');
+insert into exchangerate values ('126','6','13');
+insert into exchangerate values ('127','7','13');
+insert into exchangerate values ('128','8','13');
+insert into exchangerate values ('129','9','13');
+insert into exchangerate values ('130','10','13');
+insert into exchangerate values ('131','11','13');
+insert into exchangerate values ('132','12','13');
+
+insert into exchangerate values ('133','13','13');
+insert into exchangerate values ('134','13','1');
+insert into exchangerate values ('135','13','2');
+insert into exchangerate values ('136','13','3');
+insert into exchangerate values ('137','13','5');
+insert into exchangerate values ('138','13','6');
+insert into exchangerate values ('139','13','7');
+insert into exchangerate values ('140','13','8');
+insert into exchangerate values ('141','13','9');
+insert into exchangerate values ('142','13','10');
+insert into exchangerate values ('143','13','11');
+insert into exchangerate values ('144','13','12');
+
+insert into defaultexchangeratedetails values ('122','2014-01-01 00:00:00','11613','122');
+insert into defaultexchangeratedetails values ('123','2014-01-01 00:00:00','19481.3','123');
+insert into defaultexchangeratedetails values ('124','2014-01-01 00:00:00','16058.2','124');
+insert into defaultexchangeratedetails values ('125','2014-01-01 00:00:00','190.44','125');
+insert into defaultexchangeratedetails values ('126','2014-01-01 00:00:00','9246.76','126');
+insert into defaultexchangeratedetails values ('127','2014-01-01 00:00:00','3558.72','127');
+insert into defaultexchangeratedetails values ('128','2014-01-01 00:00:00','21.17','128');
+insert into defaultexchangeratedetails values ('129','2014-01-01 00:00:00','4.6201','129');
+insert into defaultexchangeratedetails values ('130','2014-01-01 00:00:00','10527.6','130');
+insert into defaultexchangeratedetails values ('131','2014-01-01 00:00:00','10794.5','131');
+insert into defaultexchangeratedetails values ('132','2014-01-01 00:00:00','1860.74','132');
+
+insert into defaultexchangeratedetails values ('133','2014-01-01 00:00:00','1','133');
+insert into defaultexchangeratedetails values ('134','2014-01-01 00:00:00','0.000086','134');
+insert into defaultexchangeratedetails values ('135','2014-01-01 00:00:00','0.000051','135');
+insert into defaultexchangeratedetails values ('136','2014-01-01 00:00:00','0.000062','136');
+insert into defaultexchangeratedetails values ('137','2014-01-01 00:00:00','0.0053','137');
+insert into defaultexchangeratedetails values ('138','2014-01-01 00:00:00','0.00011','138');
+insert into defaultexchangeratedetails values ('139','2014-01-01 00:00:00','0.00028','139');
+insert into defaultexchangeratedetails values ('140','2014-01-01 00:00:00','0.047','140');
+insert into defaultexchangeratedetails values ('141','2014-01-01 00:00:00','0.21608','141');
+insert into defaultexchangeratedetails values ('142','2014-01-01 00:00:00','0.000095','142');
+insert into defaultexchangeratedetails values ('143','2014-01-01 00:00:00','0.000093','143');
+insert into defaultexchangeratedetails values ('144','2014-01-01 00:00:00','0.00054','144');
+
+insert into currency (currencyid,name,htmlcode,
+symbol,afterdecimalname,currencycode) values ('14','New Taiwan dollar','TWD ','NT$','jiao','TWD');
+
+insert into defaultexchangerate values ('145','1','14');
+insert into defaultexchangerate values ('146','2','14');
+insert into defaultexchangerate values ('147','3','14');
+insert into defaultexchangerate values ('148','5','14');
+insert into defaultexchangerate values ('149','6','14');
+insert into defaultexchangerate values ('150','7','14');
+insert into defaultexchangerate values ('151','8','14');
+insert into defaultexchangerate values ('152','9','14');
+insert into defaultexchangerate values ('153','10','14');
+insert into defaultexchangerate values ('154','11','14');
+insert into defaultexchangerate values ('155','12','14');
+insert into defaultexchangerate values ('156','13','14');
+
+insert into defaultexchangerate values ('157','14','14');
+insert into defaultexchangerate values ('158','14','13');
+insert into defaultexchangerate values ('159','14','1');
+insert into defaultexchangerate values ('160','14','2');
+insert into defaultexchangerate values ('161','14','3');
+insert into defaultexchangerate values ('162','14','5');
+insert into defaultexchangerate values ('163','14','6');
+insert into defaultexchangerate values ('164','14','7');
+insert into defaultexchangerate values ('165','14','8');
+insert into defaultexchangerate values ('166','14','9');
+insert into defaultexchangerate values ('167','14','10');
+insert into defaultexchangerate values ('168','14','11');
+insert into defaultexchangerate values ('169','14','12');
+
+insert into exchangerate values ('145','1','14');
+insert into exchangerate values ('146','2','14');
+insert into exchangerate values ('147','3','14');
+insert into exchangerate values ('148','5','14');
+insert into exchangerate values ('149','6','14');
+insert into exchangerate values ('150','7','14');
+insert into exchangerate values ('151','8','14');
+insert into exchangerate values ('152','9','14');
+insert into exchangerate values ('153','10','14');
+insert into exchangerate values ('154','11','14');
+insert into exchangerate values ('155','12','14');
+insert into exchangerate values ('156','13','14');
+
+insert into exchangerate values ('157','14','14');
+insert into exchangerate values ('158','14','1');
+insert into exchangerate values ('159','14','2');
+insert into exchangerate values ('160','14','3');
+insert into exchangerate values ('161','14','5');
+insert into exchangerate values ('162','14','6');
+insert into exchangerate values ('163','14','7');
+insert into exchangerate values ('164','14','8');
+insert into exchangerate values ('165','14','9');
+insert into exchangerate values ('166','14','10');
+insert into exchangerate values ('167','14','11');
+insert into exchangerate values ('168','14','12');
+insert into exchangerate values ('169','14','13');
+
+insert into defaultexchangeratedetails values ('145','2014-01-01 00:00:00','30.0260','145');
+insert into defaultexchangeratedetails values ('146','2014-01-01 00:00:00','27.4710','146');
+insert into defaultexchangeratedetails values ('147','2014-01-01 00:00:00','40.9490 ','147');
+insert into defaultexchangeratedetails values ('148','2014-01-01 00:00:00','0.507508','148');
+insert into defaultexchangeratedetails values ('149','2014-01-01 00:00:00','23.9771','149');
+insert into defaultexchangeratedetails values ('150','2014-01-01 00:00:00','9.33976','150');
+insert into defaultexchangeratedetails values ('151','2014-01-01 00:00:00','0.0541570 ','151');
+insert into defaultexchangeratedetails values ('152','2014-01-01 00:00:00','0.0116850','152');
+insert into defaultexchangeratedetails values ('153','2014-01-01 00:00:00','27.4762 ','153');
+insert into defaultexchangeratedetails values ('154','2014-01-01 00:00:00','28.0676','154');
+insert into defaultexchangeratedetails values ('155','2014-01-01 00:00:00','4.80418','155');
+insert into defaultexchangeratedetails values ('156','2014-01-01 00:00:00','0.00254128','156');
+
+insert into defaultexchangeratedetails values ('157','2014-01-01 00:00:00','1.00000','157');
+insert into defaultexchangeratedetails values ('158','2014-01-01 00:00:00','0.0332992','158');
+insert into defaultexchangeratedetails values ('159','2014-01-01 00:00:00','0.0363853','159');
+insert into defaultexchangeratedetails values ('160','2014-01-01 00:00:00','0.0244021','160');
+insert into defaultexchangeratedetails values ('161','2014-01-01 00:00:00','1.96995','161');
+insert into defaultexchangeratedetails values ('162','2014-01-01 00:00:00','0.0417015','162');
+insert into defaultexchangeratedetails values ('163','2014-01-01 00:00:00','0.106962','163');
+insert into defaultexchangeratedetails values ('164','2014-01-01 00:00:00','18.4691','164');
+insert into defaultexchangeratedetails values ('165','2014-01-01 00:00:00','85.5960','165');
+insert into defaultexchangeratedetails values ('166','2014-01-01 00:00:00','0.0363854','166');
+insert into defaultexchangeratedetails values ('167','2014-01-01 00:00:00','0.0356377','167');
+insert into defaultexchangeratedetails values ('168','2014-01-01 00:00:00','0.208205','168');
+insert into defaultexchangeratedetails values ('169','2014-01-01 00:00:00','393.564','169');
+
+insert into currency (currencyid,name,htmlcode,
+symbol,afterdecimalname,currencycode) values ('15','Thai baht','THB ','???','satang','THB');
+
+insert into defaultexchangerate values ('170','1','15');
+insert into defaultexchangerate values ('171','2','15');
+insert into defaultexchangerate values ('172','3','15');
+insert into defaultexchangerate values ('173','5','15');
+insert into defaultexchangerate values ('174','6','15');
+insert into defaultexchangerate values ('175','7','15');
+insert into defaultexchangerate values ('176','8','15');
+insert into defaultexchangerate values ('177','9','15');
+insert into defaultexchangerate values ('178','10','15');
+insert into defaultexchangerate values ('179','11','15');
+insert into defaultexchangerate values ('180','12','15');
+insert into defaultexchangerate values ('181','13','15');
+insert into defaultexchangerate values ('182','14','15');
+
+insert into defaultexchangerate values ('183','15','15');
+insert into defaultexchangerate values ('184','15','14');
+insert into defaultexchangerate values ('185','15','13');
+insert into defaultexchangerate values ('186','15','1');
+insert into defaultexchangerate values ('187','15','2');
+insert into defaultexchangerate values ('188','15','3');
+insert into defaultexchangerate values ('189','15','5');
+insert into defaultexchangerate values ('190','15','6');
+insert into defaultexchangerate values ('191','15','7');
+insert into defaultexchangerate values ('192','15','8');
+insert into defaultexchangerate values ('193','15','9');
+insert into defaultexchangerate values ('194','15','10');
+insert into defaultexchangerate values ('195','15','11');
+insert into defaultexchangerate values ('196','15','12');
+
+insert into exchangerate values ('170','1','15');
+insert into exchangerate values ('171','2','15');
+insert into exchangerate values ('172','3','15');
+insert into exchangerate values ('173','5','15');
+insert into exchangerate values ('174','6','15');
+insert into exchangerate values ('175','7','15');
+insert into exchangerate values ('176','8','15');
+insert into exchangerate values ('177','9','15');
+insert into exchangerate values ('178','10','15');
+insert into exchangerate values ('179','11','15');
+insert into exchangerate values ('180','12','15');
+insert into exchangerate values ('181','13','15');
+insert into exchangerate values ('182','14','15');
+
+insert into exchangerate values ('183','15','15');
+insert into exchangerate values ('184','15','14');
+insert into exchangerate values ('185','15','13');
+insert into exchangerate values ('186','15','1');
+insert into exchangerate values ('187','15','2');
+insert into exchangerate values ('188','15','3');
+insert into exchangerate values ('189','15','5');
+insert into exchangerate values ('190','15','6');
+insert into exchangerate values ('191','15','7');
+insert into exchangerate values ('192','15','8');
+insert into exchangerate values ('193','15','9');
+insert into exchangerate values ('194','15','10');
+insert into exchangerate values ('195','15','11');
+insert into exchangerate values ('196','15','12');
+
+insert into defaultexchangeratedetails values ('170','2014-01-01 00:00:00','32.5551','170');
+insert into defaultexchangeratedetails values ('171','2014-01-01 00:00:00','29.7996','171');
+insert into defaultexchangeratedetails values ('172','2014-01-01 00:00:00','44.4185 ','172');
+insert into defaultexchangeratedetails values ('173','2014-01-01 00:00:00','0.550152 ','173');
+insert into defaultexchangeratedetails values ('174','2014-01-01 00:00:00','25.9918','174');
+insert into defaultexchangeratedetails values ('175','2014-01-01 00:00:00','10.1355','175');
+insert into defaultexchangeratedetails values ('176','2014-01-01 00:00:00','0.0587078','176');
+insert into defaultexchangeratedetails values ('177','2014-01-01 00:00:00','0.0126670','177');
+insert into defaultexchangeratedetails values ('178','2014-01-01 00:00:00','29.8108','178');
+insert into defaultexchangeratedetails values ('179','2014-01-01 00:00:00','30.4294','179');
+insert into defaultexchangeratedetails values ('180','2014-01-01 00:00:00','5.20904','180');
+insert into defaultexchangeratedetails values ('181','2014-01-01 00:00:00','0.00275556','181');
+insert into defaultexchangeratedetails values ('182','2014-01-01 00:00:00','1.08433','182');
+
+insert into defaultexchangeratedetails values ('183','2014-01-01 00:00:00','1.00000','183');
+insert into defaultexchangeratedetails values ('184','2014-01-01 00:00:00','0.922258','184');
+insert into defaultexchangeratedetails values ('185','2014-01-01 00:00:00','362.958','185');
+insert into defaultexchangeratedetails values ('186','2014-01-01 00:00:00','0.0307188','186');
+insert into defaultexchangeratedetails values ('187','2014-01-01 00:00:00','0.0335451','187');
+insert into defaultexchangeratedetails values ('188','2014-01-01 00:00:00','0.0225188','188');
+insert into defaultexchangeratedetails values ('189','2014-01-01 00:00:00','1.81630','189');
+insert into defaultexchangeratedetails values ('190','2014-01-01 00:00:00','0.0384699','190');
+insert into defaultexchangeratedetails values ('191','2014-01-01 00:00:00','0.0986524','191');
+insert into defaultexchangeratedetails values ('192','2014-01-01 00:00:00','17.0318','192');
+insert into defaultexchangeratedetails values ('193','2014-01-01 00:00:00','78.9383','193');
+insert into defaultexchangeratedetails values ('194','2014-01-01 00:00:00','0.0335425','194');
+insert into defaultexchangeratedetails values ('195','2014-01-01 00:00:00','0.0328814','195');
+insert into defaultexchangeratedetails values ('196','2014-01-01 00:00:00','0.192023','196');
+
+
+ALTER TABLE `srdetails` ADD CONSTRAINT `FK_srdetailsbatch` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+#Anup Kale 11 June
+
+alter table product 
+add column `revenuerecognitionprocess` char(1) default 'F';
+
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'1'  from accgroup as acc where acc.id in ('1'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'2'  from accgroup as acc where acc.id in ('2'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'3'  from accgroup as acc where acc.id in ('3'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'4'  from accgroup as acc where acc.id in ('4'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'5'  from accgroup as acc where acc.id in ('5'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'6'  from accgroup as acc where acc.id in ('6'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'7'  from accgroup as acc where acc.id in ('7'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'8'  from accgroup as acc where acc.id in ('8'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'9'  from accgroup as acc where acc.id in ('9'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'10'  from accgroup as acc where acc.id in ('10'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'11'  from accgroup as acc where acc.id in ('11'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'12'  from accgroup as acc where acc.id in ('12'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'13'  from accgroup as acc where acc.id in ('13'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'14'  from accgroup as acc where acc.id in ('14'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'15'  from accgroup as acc where acc.id in ('15'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'16'  from accgroup as acc where acc.id in ('16'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'17'  from accgroup as acc where acc.id in ('17'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'18'  from accgroup as acc where acc.id in ('18'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'19'  from accgroup as acc where acc.id in ('19'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'20'  from accgroup as acc where acc.id in ('20'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'21'  from accgroup as acc where acc.id in ('21'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'23'  from accgroup as acc where acc.id in ('23'));
+insert into accgroup (select UUID(),  acc.name, acc.nature,acc.affectgp,acc.deleteflag, (select companyid from company  where subdomain='sms'),  (SELECT MAX(maxacc.displayorder)+1 FROM  accgroup as maxacc), acc.parent ,acc.isMasterGroup,'24'  from accgroup as acc where acc.id in ('24'));
+
+
+
+update account inner join accgroup on account.groupname = accgroup.grpOldId and account.company=accgroup.company set account.groupname = accgroup.id where account.company = (select c.companyid from company  c where c.subdomain='sms') and accgroup.parent is null;
+update accgroup  inner join accgroup  a1 on accgroup.parent = a1.grpOldId  set accgroup .parent = a1.id where accgroup .company = (select c.companyid from company  c where c.subdomain='sms') and accgroup .parent is not null;
+
+update reportmaster set id="Defaulter_Customer_List",name="Defaulter Customer List", description="View those Customers who has exceeded Credit Sales limit" where id="Default_Customer_List";
+
+# Sagar M 11th June 2014
+# Week wise cash flow statement and cash flow forecast based on unpaid invoices for customers and vendors
+
+insert into reportmaster(id,name,description,method_name) values ('Cash_Flow_Statement','Weekly Cash Flow Statement','Weekly Cash Flow statement based on unpaid invoices for customers and vendors','callWeeklyCashFlowStatement()');
+
+# Hitesh Suryawanshi 12th June 2014
+
+ALTER TABLE `fieldParams`
+ADD COLUMN `parentid`  varchar(255) DEFAULT '';
+
+CREATE TABLE `fieldcombodatamapping` (
+`id`  varchar(255) NOT NULL ,
+`childid`  varchar(255) NOT NULL ,
+`parentid`  varchar(255) NOT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `fieldcombodatamappintchild` FOREIGN KEY (`childid`) REFERENCES `fieldcombodata` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `fieldcombodatamappintparent` FOREIGN KEY (`parentid`) REFERENCES `fieldcombodata` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+alter table fieldParams add column `isfortask` int(2) DEFAULT '0';
+alter table fieldcombodata add column `taskid` varchar(255) DEFAULT NULL;
+
+#Neeraj Dwivedi-11th June 2014
+#Customer Invoice
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Description','tax','tax','id','description','Tax Description','1','2');
+
+# Vendor Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Description','tax','tax','id','description','Tax Description','1','6');
+
+#salesorder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Description','tax','tax','id','description','Tax Description','1','20');
+
+#purchaseorder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Description','tax','tax','id','description','Tax Description','1','18');
+
+#vendorquotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Description','tax','tax','id','description','Tax Description','1','23');
+
+#customerQuotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Description','tax','tax','id','description','Tax Description','1','22');
+
+#Customer Invoice
+DELETE from default_header where module=2 and defaultHeader="Billing Address";
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','2');
+
+#Vendor Invoice
+DELETE from default_header where module=6 and defaultHeader="Billing Address";
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','6');
+
+#Purchase Order
+DELETE from default_header where module=18 and defaultHeader="Billing Address";
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','18');
+
+#SalesOrder
+DELETE from default_header where module=20 and defaultHeader="Billing Address";
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','20');
+
+#Vendor Quotation
+DELETE from default_header where module=23 and defaultHeader="Billing Address";
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','23');
+
+#CustomerQuotation
+DELETE from default_header where module=22 and defaultHeader="Billing Address";
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','22');
+
+
+#Billing Address City
+#Customer Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','2');
+
+#Vendor Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','6');
+
+#Purchase Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','18');
+
+#SalesOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','20');
+
+#Vendor Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','23');
+
+#CustomerQuotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','22');
+
+
+#Billing Address State
+#Customer Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','2');
+
+#Vendor Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','6');
+
+#Purchase Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','18');
+
+#SalesOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','20');
+
+#Vendor Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','23');
+
+#CustomerQuotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','22');
+
+
+
+
+#Billing Address Country
+#Customer Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','2');
+
+#Vendor Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','6');
+
+#Purchase Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','18');
+
+#SalesOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','20');
+
+#Vendor Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','23');
+
+#CustomerQuotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','22');
+
+
+#Billing Address Postal Code
+#Customer Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','2');
+
+#Vendor Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','6');
+
+#Purchase Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','18');
+
+#SalesOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','20');
+
+#Vendor Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','23');
+
+#CustomerQuotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','22');
+
+#Billing Address Email
+#Customer Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','2');
+
+#Vendor Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','6');
+
+#Purchase Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','18');
+
+#SalesOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','20');
+
+#Vendor Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','23');
+
+#CustomerQuotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','22');
+
+
+# Atul sachan 16 June 2014 -- Fixed Asset Enhancement
+
+ALTER TABLE `product`
+ADD COLUMN `isasset`  int(1) NULL DEFAULT 0,
+ADD COLUMN `isdepreciable`  int(1) NULL DEFAULT 1,
+ADD COLUMN `depreciationmethod`  int NULL DEFAULT 1,
+ADD COLUMN `depreciationrate`  int NULL DEFAULT 0,
+ADD COLUMN `depreciationcostlimit`  int NULL DEFAULT 0,
+ADD COLUMN `depreciationglaccount`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `depreciationprovisionglaccount`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `sellassetglaccount`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `product` ADD FOREIGN KEY (`depreciationglaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `product` ADD FOREIGN KEY (`depreciationprovisionglaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `product` ADD FOREIGN KEY (`sellassetglaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE `department` (
+`id`  varchar(255) NOT NULL ,
+`name`  varchar(255) NULL ,
+`company`  varchar(255) NOT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE  TABLE fixedassetopening(
+id VARCHAR(255) NOT NULL ,
+creationdate date NULL,
+documentnumber VARCHAR(255) NULL,
+quantity DOUBLE NULL DEFAULT 0,
+rate DOUBLE NULL DEFAULT 0,
+wdv DOUBLE NULL DEFAULT 0,
+company VARCHAR(255) NULL,
+product VARCHAR(255) NULL,
+inventory VARCHAR(255) NULL,
+PRIMARY KEY(id),
+FOREIGN KEY(company) REFERENCES company(companyid) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY(product) REFERENCES product(id)ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY(inventory) REFERENCES inventory(id)ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `assetdetail` (
+`id`  varchar(255) NOT NULL ,
+`assetid`  varchar(255) NULL ,
+`location`  varchar(255) NULL ,
+`department`  varchar(255) NULL ,
+`assetuser`  varchar(255) NULL ,
+`sellingje`  varchar(255) NULL ,
+`cost`  double NULL DEFAULT 0 ,
+`salvagerate`  double NULL DEFAULT 0 ,
+`salvagevalue`  double NULL DEFAULT 0 ,
+`accumulateddepreciation`  double NULL DEFAULT 0 ,
+`wdv`  double NULL DEFAULT 0 ,
+`assetlife`  double NULL DEFAULT 0 ,
+`sellamount`  double NULL DEFAULT 0 ,
+`elapsedlife`  double NULL DEFAULT 0 ,
+`nominalvalue`  double NULL DEFAULT 0 ,
+`installationdate`  datetime NULL ,
+`invrecord` int(1) DEFAULT 0 ,
+`isused` int(1) DEFAULT 0 ,
+`assetsoldflag` int DEFAULT 0 ,
+`product`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`assetuser`) REFERENCES `users` (`userid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`department`) REFERENCES `department` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`sellingje`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `fixedassetopeningmapping` (
+`id`  varchar(255) NOT NULL ,
+`assetopening`  varchar(255) NULL ,
+`assetdetails`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`assetopening`) REFERENCES `fixedassetopening` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`assetdetails`) REFERENCES `assetdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `assetdepreciationdetail` (
+`id`  varchar(255) NOT NULL ,
+`period`  int NULL ,
+`journalentry`  varchar(255) NOT NULL ,
+`company`  varchar(255) NOT NULL ,
+`depreciationcredittoaccount`  varchar(255) NULL ,
+`depreciationaccount`  varchar(255) NULL ,
+`product`  varchar(255) NULL ,
+`assetdetail`  varchar(255) NULL ,
+`pamount`  double NULL DEFAULT 0 ,
+`accvalue`  double NULL DEFAULT 0 ,
+`nbvalue`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`depreciationcredittoaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`assetdetail`) REFERENCES `assetdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`depreciationaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `assetdetailsinvdetailmapping` (
+`id`  varchar(255) NOT NULL ,
+`assetdetails`  varchar(255) NULL ,
+`moduleid` INT NULL,
+`invoicedetailid`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`assetdetails`) REFERENCES `assetdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE inventory ADD COLUMN isopeninginv INT(1) DEFAULT 0;
+
+
+ALTER TABLE `invoice`
+ADD COLUMN `isfixedassetinvoice`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `isfixedassetinvoice`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `grorder`
+ADD COLUMN `isfixedassetgro`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `deliveryorder`
+ADD COLUMN `isfixedassetdo`  int(1) NULL DEFAULT 0;
+
+#Malhari Pawar 17th June 2014 Added Contract Folw
+insert into mastergroup (id, groupname) values (21, "Contract Status");
+
+# Raveesh Pathak 17th June 2014
+
+ALTER TABLE customer ADD COLUMN `intercompanyflag` char(1) default 'F';
+ALTER TABLE customer ADD COLUMN `intercompanytype`  varchar(255) DEFAULT NULL;
+ALTER TABLE customer ADD FOREIGN KEY (`intercompanytype`) REFERENCES `masteritem` (`id`) ;
+
+
+ALTER TABLE vendor ADD COLUMN `intercompanyflag` char(1) default 'F';
+ALTER TABLE vendor ADD COLUMN `intercompanytype`  varchar(255) DEFAULT NULL;
+ALTER TABLE vendor ADD FOREIGN KEY (`intercompanytype`) REFERENCES `masteritem` (`id`) ;
+
+
+#mayur Pawar  19th June 2014
+
+ALTER TABLE `prdetails`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `prdetails` ADD CONSTRAINT `FK_prdetailsbatch` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+# Amol Dhokale 19th June 2014
+alter table extracompanypreferences 
+add column `noofdaysforvalidtillfield` INT(11) default 0;
+
+# Sagar A.  19th June 2014
+update accgroup set deleteflag = 'F' where deleteflag = 0;
+update account inner join accgroup on account.groupname = accgroup.grpOldId and account.company=accgroup.company set account.groupname = accgroup.id where account.company = (select c.companyid from company  c where c.subdomain='swttest') and accgroup.parent is null;
+update accgroup  inner join accgroup  a1 on accgroup.parent = a1.grpOldId  set accgroup .parent = a1.id where accgroup .company = (select c.companyid from company  c where c.subdomain='swttest') and accgroup .parent is not null;
+update accgroup set parent = null where (grpOldId = '' or grpOldId != '0' ) and accgroup .company = (select c.companyid from company  c where c.subdomain='swttest');
+
+#Pandurang 20 june 2014 -unrealisedgainloss account added to comapny prefrences.
+alter table compaccpreferences add column unrealisedgainloss varchar(255) DEFAULT NULL;
+alter table compaccpreferences add FOREIGN KEY (unrealisedgainloss) REFERENCES account (`id`);
+
+#Hitesh 20th june 2014
+CREATE TABLE `excludedoutstandingrecords` (
+  `id` varchar(255) NOT NULL,
+  `companyid` varchar(250) NOT NULL,
+ `generateddate` DATE DEFAULT NULL,
+  `excludeorgenerate` int(1) DEFAULT '0',
+`invoice` varchar(255)  DEFAULT  NULL,
+  PRIMARY KEY (`id`),
+ KEY `invoice_fk` (`invoice`),
+  KEY `company_fk` (`companyid`),
+  CONSTRAINT `company_fk` FOREIGN KEY (`companyid`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE,
+ CONSTRAINT `invoice_fk` FOREIGN KEY (`invoice`) REFERENCES `invoice` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into reportmaster value("Outstanding_Orders_Report","Outstanding Orders Report","View Outstanding Orders From here.","CallOutstandingOrdersReport()");
+
+ALTER TABLE `repeatedjememo`
+ADD COLUMN `repeatedinv`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `repeatedjememo`
+ADD COLUMN `repeatedso`  varchar(255) NULL DEFAULT NULL;
+
+
+ALTER TABLE repeatedinvoices CONVERT TO CHARACTER SET utf8;
+
+ALTER TABLE repeatedinvoices ENGINE = InnoDB;
+
+ALTER TABLE repeatedjememo
+ADD CONSTRAINT `repeatedinv_memo` FOREIGN KEY (`repeatedinv`) REFERENCES `repeatedinvoices` (`id`);
+
+ALTER TABLE repeatedjememo
+ADD CONSTRAINT `repeatedso_memo` FOREIGN KEY (`repeatedso`) REFERENCES `repeatedsalesorders` (`id`);
+
+
+ALTER TABLE repeatedinvoices 
+ADD COLUMN `noofinvoicespost` int(11) DEFAULT '0';
+
+ALTER TABLE repeatedinvoices 
+ADD COLUMN `noofremaininvoicespost` int(11) DEFAULT '0';
+
+ALTER TABLE repeatedsalesorders 
+ADD COLUMN `noofsopost` int(11) DEFAULT '0';
+
+ALTER TABLE repeatedsalesorders 
+ADD COLUMN `noofremainsopost` int(11) DEFAULT '0';
+
+ALTER TABLE repeatedjememo change repeatedje repeatedje varchar(250) DEFAULT NULL;
+
+
+#Mayur Pawar 22th june 2014
+Alter table sodetails ADD COLUMN `lockquantity`  double NULL DEFAULT 0;
+Alter table salesorder ADD COLUMN `lockquantityflag`  boolean DEFAULT FALSE;
+
+
+ CREATE TABLE `lockassemblyquantitymapping` (
+  `id` varchar(255) NOT NULL,
+  `quantity` double NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `subproducts` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKEEA3ABD5AF620884` (`subproducts`),
+  KEY `FKEEA3ABD58E4485CF` (`product`),
+  CONSTRAINT `product_FK` FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  CONSTRAINT `subproduct_FK` FOREIGN KEY (`subproducts`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `assetdetail` ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `productbatch` ADD COLUMN `asset`  varchar(255) NULL DEFAULT NULL; 
+
+ALTER TABLE productbatch ADD FOREIGN KEY (`asset`) REFERENCES `assetdetail` (`id`)  ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `compaccpreferences` ADD COLUMN `isBatchCompulsory` char(1) default 'T';
+
+
+
+#Pandurang 24th june 2014  Contract form
+
+CREATE TABLE contract (
+id  varchar(255) NOT NULL ,
+sonumber varchar(50) DEFAULT NULL,
+orderdate datetime DEFAULT NULL,
+originalenddate datetime DEFAULT NULL,
+
+fromdate datetime DEFAULT  NULL,
+todate datetime DEFAULT NULL,
+enddate datetime DEFAULT NULL,
+signdate datetime DEFAULT NULL,
+movedate datetime DEFAULT NULL,
+moveoutdate datetime DEFAULT NULL,
+
+memo varchar(2048) DEFAULT NULL,
+customer varchar(255) NOT NULL,
+company varchar(255) NOT NULL,
+contactperson  varchar(255) DEFAULT NULL ,
+
+cstatus varchar(255) DEFAULT NULL,
+createdby varchar(40) DEFAULT NULL,
+modifiedby varchar(40) DEFAULT NULL,
+createdon bigint(20) DEFAULT NULL,
+updatedon bigint(20) DEFAULT NULL,
+seqnumber int(11) DEFAULT '0',
+seqformat varchar(40) DEFAULT NULL,
+billingshippingaddresses varchar(255) DEFAULT NULL,
+
+
+amount double NULL DEFAULT 0 ,
+depositamount  double NULL DEFAULT 0 ,
+
+emailid varchar(50) NOT NULL,
+termtype varchar(50) DEFAULT NULL,
+currency varchar(255) DEFAULT NULL,
+
+
+PRIMARY KEY (id),
+FOREIGN KEY (seqformat) REFERENCES sequenceformat (id),
+FOREIGN KEY (billingshippingaddresses) REFERENCES billingshippingaddresses (id),
+FOREIGN KEY (cstatus) REFERENCES masteritem (id),
+FOREIGN KEY (createdby)  REFERENCES users(userid),
+FOREIGN KEY (modifiedby)  REFERENCES users(userid),
+FOREIGN KEY (currency) REFERENCES currency (currencyid),
+FOREIGN KEY (customer) REFERENCES customer (id),
+FOREIGN KEY (company) REFERENCES company (companyid) 
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+
+alter table contract add column
+parentContract varchar(255) DEFAULT NULL;
+
+alter table contract  add
+FOREIGN KEY (parentContract) REFERENCES contract (id);
+
+alter table contract add column
+contractnumber varchar(50) NOT NULL;
+
+alter table contract add column
+autogen char(1) NOT NULL DEFAULT '0';
+
+alter table contract add column
+agreedservices int(11) DEFAULT '0';
+
+alter table contract add column
+termvalue int(11) DEFAULT '0';
+
+
+
+
+CREATE TABLE contractdetails (
+  id varchar(255) NOT NULL,
+  remark varchar(255) DEFAULT NULL,
+  quantity double NOT NULL,
+  uom varchar(255) DEFAULT NULL,
+  baseuomquantity double DEFAULT '0',
+  baseuomrate double DEFAULT '1',
+  rate double NOT NULL,
+  product varchar(255) NOT NULL,
+  contract varchar(255) NOT NULL,
+  company varchar(255) NOT NULL,
+  srno int(11) DEFAULT '0',
+  tax varchar(255) DEFAULT NULL,
+  description text,
+  discount double DEFAULT '0',
+  discountispercent int(1) DEFAULT '1',
+  rowtaxamount double DEFAULT '0',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  FOREIGN KEY (`contract`) REFERENCES `contract` (`id`),
+  FOREIGN KEY (`uom`) REFERENCES `uom` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE servicedetails (
+  id varchar(255) NOT NULL,
+  servicedate datetime DEFAULT  NULL,
+  contract varchar(255) NOT NULL,
+  company varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`contract`) REFERENCES `contract` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Sagar M - 25th June
+# Added new fields - GST Number/Company UEN
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'GST Number','gstnumber','compaccpreferences','','','Company GST Number','1','43');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company UEN','companyuen','compaccpreferences','','','Company UEN','1','43');
+
+
+#Neeraj Dwivedi-25th June 2014
+
+#DO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','27');
+
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','27');
+
+
+#PO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Debit Term','term','creditterm','termid','termdays','Debit Term','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Due Date','duedate','purchaseorder','','','Due Date','3','18');
+
+#Deliveryorder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Currency','currency','currency','currencyid','name','Currency','1','27');
+
+
+#Customer Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Due Date','duedate','quotation','','','Due Date','3','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Valid Till','validdate','quotation','','','Valid Till','3','22');
+
+#Vendor Quotation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Due Date','duedate','vendorquotation','','','Due Date','3','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Valid Till','validdate','vendorquotation','','','Valid Till','3','23');
+
+# Amol Dhokale - 26th June 2014
+RENAME TABLE templateFieldInfo TO templatefieldinfo;
+
+# Sagar M - 25th June
+# Added new fields - GST Number/Company UEN
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'GST Number','gstnumber','compaccpreferences','','','Company GST Number','1','43');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company UEN','companyuen','compaccpreferences','','','Company UEN','1','43');
+
+# Rushikesh Mandage - 27th June - Updated field "Account Type" to "Account Group"
+ update default_header set defaultHeader= "Account Group" where id= "2f8a92a6-f73d-102d-9b6d-001e4f3fdc1a";
+
+#Sagar A - 27th June 2014 - Deleted inter company ledger report as requirement not clear.
+delete from reportmaster where id = 'Inter_Company_Ledger_Report';
+
+# Sagar A - 27th June 2014 - Affect gross profit flag should be false for asset and liability types of accounts
+update accgroup set affectgp='F' where nature in (0, 1);
+
+# Atul sachan - Fixed Asset Issues 1 July 2014
+
+ALTER TABLE `assetdetail`
+ADD COLUMN `iscreatedfromopeningform`  int(1) NULL DEFAULT 0;
+
+#Vivek Pakmode 1 July 2014 Split the "Invoice with GR/DO" into two option as "VI with GR" and "CI with DO"
+
+ALTER TABLE compaccpreferences ADD DOSetting char(1) DEFAULT 'F';
+ALTER TABLE compaccpreferences ADD GRSetting char(1) DEFAULT 'F';
+
+CREATE TABLE `contractfile` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) default NULL,
+  `description` varchar(15) default NULL,
+  `type` tinyint(3) unsigned default NULL,
+  `deleted` tinyint(4) default '0',
+  `creator` varchar(255) NOT NULL,
+  `createdon` bigint(20) default NULL,
+   `contractid` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FK_AttachmentCreater` (`creator`),
+  CONSTRAINT `FK78591C21260084BA_AttachmentCreater` FOREIGN KEY (`creator`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Rushikesh Mandage - 27th June - Updated field "Account Type" to "Account Group"
+ update default_header set defaultHeader= "Account Group" where id= "2f8a92a6-f73d-102d-9b6d-001e4f3fdc1a";
+
+#Sagar A - 27th June 2014 - Deleted inter company ledger report as requirement not clear.
+delete from reportmaster where id = 'Inter_Company_Ledger_Report';
+
+# Sagar A - 27th June 2014 - Affect gross profit flag should be false for asset and liability types of accounts
+update accgroup set affectgp='F' where nature in (0, 1);
+
+
+# Atul sachan 30 June 2014 - Fixed Asset Leasing
+
+ALTER TABLE assetdetail ADD COLUMN islinkedtoleaseso INT(1) DEFAULT 0;
+
+ALTER TABLE assetdetail ADD COLUMN isleasedocreated INT(1) DEFAULT 0;
+
+ALTER TABLE assetdetail ADD COLUMN isleasecicreated INT(1) DEFAULT 0;
+
+ALTER TABLE salesorder ADD COLUMN leaseormaintenanceso INT(11) DEFAULT 0;
+
+ALTER TABLE deliveryorder ADD COLUMN isleasedo INT(1) DEFAULT 0;
+
+ALTER TABLE invoice ADD COLUMN isfixedassetleaseinvoice INT(1) DEFAULT 0;
+
+
+CREATE TABLE `productreplacement` (
+`id`  varchar(255) NOT NULL ,
+`replacementrequestnumber`  varchar(255) NULL ,
+`isclosed`  INT(1) NULL DEFAULT 0,
+`company`  varchar(255) NULL ,
+`customer`  varchar(255) NULL ,
+`contract`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`customer`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `productreplacementdetail` (
+`id`  varchar(255) NOT NULL ,
+`isasset`  int(1) NULL DEFAULT 0 ,
+`addinventoryflag`  int(1) NULL DEFAULT 0 ,
+`replacementquantity`  double NULL DEFAULT 0 ,
+`replacedquantity`  double NULL DEFAULT 0 ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`product`  varchar(255) NULL DEFAULT NULL ,
+`productreplacement`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `replacementproductbatchdetailsmapping` (
+`id`  varchar(255) NOT NULL ,
+`batchserial`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`productreplacement`  varchar(255) NULL DEFAULT NULL ,
+`productreplacementdetail`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`batchserial`) REFERENCES `batchserial` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE `sodetails`
+ADD COLUMN `productreplacementdetail`  varchar(255) NULL;
+
+ALTER TABLE `sodetails` ADD FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE inventory ADD COLUMN leaseflag INT(1) DEFAULT 0;
+
+ALTER TABLE `salesorder`
+ADD COLUMN `contract`  varchar(255) NULL;
+
+ALTER TABLE `salesorder` ADD FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+CREATE TABLE `invoicecontractmapping` (
+`id`  varchar(255) NOT NULL ,
+`invoice`  varchar(255) NULL DEFAULT NULL ,
+`deliveryorder`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`invoice`) REFERENCES `invoice` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`deliveryorder`) REFERENCES `deliveryorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `docontractmapping` (
+`id`  varchar(255) NOT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+`deliveryorder`  varchar(255) NULL DEFAULT NULL ,
+`salesorder`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`deliveryorder`) REFERENCES `deliveryorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`salesorder`) REFERENCES `salesorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `maintenance` (
+`id`  varchar(255) NOT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+`customer`  varchar(255) NULL DEFAULT NULL ,
+`maintenancenumber`  varchar(255) NULL DEFAULT NULL ,
+`maintenanceamount`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`customer`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE `salesorder`
+ADD COLUMN `maintenance`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `salesorder` ADD FOREIGN KEY (`maintenance`) REFERENCES `maintenance` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE maintenance ADD COLUMN `isclosed`  INT(1) NULL DEFAULT 0;
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'isMaintenanceOrder','Is Maintenance',20,1,1);
+
+#Pandurang 30 june 2014 -autpo populate products
+ALTER TABLE extracompanypreferences add COLUMN  autoPopulateMappedProduct char(1) DEFAULT 'F' ;
+

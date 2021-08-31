@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrailBalance" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="AgedReceivableSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="person" class="java.lang.String"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.Double"/>
+	<parameter name="basecurr" class="java.lang.String"/>
+	<parameter name="AgedReceivableSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="companyaddress" class="java.lang.String"/>
+	<parameter name="isMonzone" class="java.lang.Boolean"/>
+	<field name="startDate" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="dateRange" class="java.lang.String"/>
+	<field name="currencyinword" class="java.lang.String"/>
+	<field name="amountDue1Header" class="java.lang.String"/>
+	<field name="amountDue2Header" class="java.lang.String"/>
+	<field name="amountDue3Header" class="java.lang.String"/>
+	<field name="amountDue1Total" class="java.lang.String"/>
+	<field name="amountDue2Total" class="java.lang.String"/>
+	<field name="amountDue3Total" class="java.lang.String"/>
+	<field name="colTotalHeader" class="java.lang.String"/>
+	<field name="asOnDate" class="java.lang.String"/>
+	<field name="curentAmountDueHeader" class="java.lang.String"/>
+	<field name="amountDue4Header" class="java.lang.String"/>
+	<field name="amountDue5Header" class="java.lang.String"/>
+	<field name="amountDue6Header" class="java.lang.String"/>
+	<field name="amountDue7Header" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="69" splitType="Stretch">
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="40" width="752" height="28"/>
+				<textField isStretchWithOverflow="true" evaluationTime="Report">
+					<reportElement positionType="Float" x="731" y="2" width="14" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="27" width="752" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement positionType="Float" x="705" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[#
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="685" y="2" width="25" height="11"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Page
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="723" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[/
+                ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="710" y="2" width="16" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="2" y="12" width="245" height="11"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dateRange}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="531" y="12" width="214" height="11"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Amount in "+$F{currencyinword}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="317" y="12" width="122" height="11"/>
+					<textElement textAlignment="Center">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{asOnDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="2" y="3" width="222" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="2" y="14" width="222" height="30"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyaddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="507" y="23" width="238" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Accounting Period    : "+$F{startDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="378" y="3" width="368" height="18"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ageing Analysis - "+$P{person}+" - Summarised"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="752" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="157" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="749" height="156"/>
+				<subreportParameter name="currencyinword">
+					<subreportParameterExpression><![CDATA[$F{currencyinword}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="person">
+					<subreportParameterExpression><![CDATA[$P{person}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="curentAmountDueHeader">
+					<subreportParameterExpression><![CDATA[$F{curentAmountDueHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue1Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue1Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue2Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue2Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue3Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue3Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue4Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue4Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue5Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue5Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue6Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue6Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="amountDue7Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue7Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{AgedReceivableSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{AgedReceivableSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="84">
+			<line>
+				<reportElement x="0" y="24" width="752" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="42" width="752" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="494" y="23" width="251" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="25" width="270" height="17"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTALS  in "+$P{basecurr}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="46" width="457" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[** The (-) minus sign denotes Credit Balance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="57" width="457" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[** Amounts appearing here, are as a result of Unadjusted Documents]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="69" width="457" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[** For detailed breakdown please take the same report in Detailed Format]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="4" width="195" height="19">
+					<printWhenExpression><![CDATA[$P{isMonzone}]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{colTotalHeader}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="4" width="68" height="19">
+					<printWhenExpression><![CDATA[$P{isMonzone}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue1Total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="468" y="4" width="68" height="19">
+					<printWhenExpression><![CDATA[$P{isMonzone}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue2Total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="537" y="4" width="68" height="19">
+					<printWhenExpression><![CDATA[$P{isMonzone}]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue3Total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="752" height="1">
+					<printWhenExpression><![CDATA[$P{isMonzone}]]></printWhenExpression>
+				</reportElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

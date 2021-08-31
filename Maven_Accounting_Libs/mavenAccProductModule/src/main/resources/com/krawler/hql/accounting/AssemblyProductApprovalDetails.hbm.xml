@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class  name="com.krawler.spring.accounting.assemblyQA.AssemblyProductApprovalDetails" table="qa_of_buildassemblyproduct" >
+        <id name="id" column="id">
+            <generator class="uuid" />  
+        </id>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        
+         <property column="approval_status" name="approvalStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.spring.accounting.assemblyQA.AssemblyQAStatus</param>
+            </type>
+        </property>
+        
+        <property name="batchname" type="string">
+            <column name="batchname"/>
+        </property>
+           <property name="serialname" type="string">
+            <column name="serialname"/>
+        </property>
+        
+         <property name="expfromdate" type="date">
+            <column name="expfromdate"/>
+        </property>
+        <property name="exptodate" type="date">
+            <column name="exptodate"/>
+        </property> 
+        
+         <property name="mfgdate" type="date">
+            <column name="mfgdate"/>
+        </property>
+        <property name="expdate" type="date">
+            <column name="expdate"/>
+        </property>
+        
+        <property name="remark" type="string">
+            <column name="remark"/>
+        </property>
+        <property name="reason" type="string">
+            <column name="reapirreason"/>
+        </property>
+        
+        <property name="inspectionDate" type="date">
+            <column name="inspectiondate"> </column> 
+        </property>
+        <property name="reapirDate" type="date">
+            <column name="repairdate"> </column> 
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.NewBatchSerial" column="serialid" name="serial" />
+        <many-to-one class="com.krawler.common.admin.NewProductBatch" column ="batchmapid" name="productBatch"/>
+        <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location"/>
+        <many-to-one class="com.krawler.hql.accounting.ProductBuild" column="prbuildid" name="prBuild"/>
+        <many-to-one class="com.krawler.common.admin.InventoryWarehouse" column="warehouse" name="warehouse" />
+         <many-to-one class="com.krawler.common.admin.StoreMaster" name="row"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" name="rack"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" name="bin"/>
+        
+   
+    </class>   
+</hibernate-mapping>

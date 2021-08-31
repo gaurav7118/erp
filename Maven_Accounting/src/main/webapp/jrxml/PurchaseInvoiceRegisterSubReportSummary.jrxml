@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="20">
+	<property name="ireport.zoom" value="2.357947691000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="currencycode" class="java.lang.String"/>
+	<parameter name="gstlabel" class="java.lang.String"/>
+	<field name="invoiceDate" class="java.lang.String"/>
+	<field name="invoiceno" class="java.lang.String"/>
+	<field name="custNo" class="java.lang.String"/>
+	<field name="custName" class="java.lang.String"/>
+	<field name="salesperson" class="java.lang.String"/>
+	<field name="taxName" class="java.lang.String"/>
+	<field name="basicAmount" class="java.lang.String"/>
+	<field name="taxAmount" class="java.lang.String"/>
+	<field name="termAmount" class="java.lang.String"/>
+	<field name="discountAmount" class="java.lang.String"/>
+	<field name="totalAmount" class="java.lang.String"/>
+	<field name="basicAmountVal" class="java.lang.Double"/>
+	<field name="taxAmountVal" class="java.lang.Double"/>
+	<field name="termAmountVal" class="java.lang.Double"/>
+	<field name="discountAmountVal" class="java.lang.Double"/>
+	<field name="totalAmountVal" class="java.lang.Double"/>
+	<variable name="discountAmount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{discountAmountVal}]]></variableExpression>
+	</variable>
+	<variable name="termAmount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{termAmountVal}]]></variableExpression>
+	</variable>
+	<variable name="totalAmount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalAmountVal}]]></variableExpression>
+	</variable>
+	<variable name="taxAmount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{taxAmountVal}]]></variableExpression>
+	</variable>
+	<variable name="basicAmount_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{basicAmountVal}]]></variableExpression>
+	</variable>
+	<group name="InvoiceGROPU">
+		<groupFooter>
+			<band height="91">
+				<textField pattern="#,##0.00">
+					<reportElement x="416" y="26" width="135" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double" ><![CDATA[$V{discountAmount_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="416" y="40" width="135" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double" ><![CDATA[$V{termAmount_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="416" y="13" width="135" height="14"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double" ><![CDATA[$V{taxAmount_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="416" y="0" width="135" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double" ><![CDATA[$V{basicAmount_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="416" y="54" width="135" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double" ><![CDATA[$V{totalAmount_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="258" y="0" width="144" height="13"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{currencycode}+" BASIC"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="258" y="14" width="144" height="13"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{gstlabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="258" y="40" width="144" height="11"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{currencycode}+" TERM AMOUNT"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="258" y="54" width="144" height="11"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{currencycode}+" GROSS AMOUNT"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="50" width="555" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="65" width="555" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="258" y="26" width="144" height="11"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{currencycode}+" DISCOUNT"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="20">
+			<rectangle>
+				<reportElement x="1" y="2" width="553" height="15" backcolor="#F5F5F5"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="159" y="2" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Vendor Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="2" width="90" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Purchase Invoice #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="2" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="2" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Vendor Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="2" width="81" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="1" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Agent]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="1" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoiceDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="1" width="90" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoiceno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="159" y="1" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{custNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="225" y="1" width="65" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{custName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="416" y="1" width="136" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{basicAmount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="416" y="14" width="135" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{taxAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="372" y="1" width="34" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[BASIC]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="331" y="14" width="75" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Monospaced" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{taxName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="416" y="29" width="136" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalAmount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="45" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="291" y="1" width="40" height="15"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salesperson}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

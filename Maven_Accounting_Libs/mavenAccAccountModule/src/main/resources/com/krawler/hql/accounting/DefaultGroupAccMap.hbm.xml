@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DefaultGroupAccMap" table="defaultgroupaccmap">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="accountname" type="string">
+            <column name="accountname"/>
+        </property>
+        <property name="groupname" type="string">
+            <column name="groupname"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.DefaultLayoutGroup" name="defaultlayoutgroup" not-null="true"/>
+    </class>
+</hibernate-mapping>

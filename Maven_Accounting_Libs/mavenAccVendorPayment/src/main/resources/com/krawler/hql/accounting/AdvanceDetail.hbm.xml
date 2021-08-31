@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.AdvanceDetail" table="advancedetail">
+    <id column="id" name="id">
+      <generator class="assigned"/>
+    </id>
+    <property name="amount" type="double">
+      <column name="amount" not-null="true"/>
+    </property> 
+    <property name="amountDue" type="double">
+      <column name="amountdue" not-null="true"/>
+    </property>
+    <property name="description" type="string">
+      <column  name="description"/>
+    </property>
+    <property name="exchangeratefortransaction" type="double">
+      <column name="exchangeratefortransaction" not-null="true"/>
+    </property>
+    <property name="revalJeId" type="string">
+        <column name="revaljeid"/>
+    </property>
+    <property name="istdsamountusedingoodsreceipt" type="true_false">
+            <column name="istdsamountusedingoodsreceipt"  default='F'/>
+    </property>
+    <property name="tdsamount" type="double">
+      <column name="tdsamount" default="0"/>
+    </property>
+    <property name="srNoForRow" type="integer">
+        <column name="srnoforrow" default='0'/>
+    </property>
+    <property name="tdsPaidFlag" type="integer">
+        <column name="tdspaidflag" default="0"/>
+    </property>
+    <property name="tdsPayment" type="string">
+        <column name="tdspayment"/>
+    </property>
+    <property name="tdsInterestPaidFlag" type="integer">
+        <column name="tdsinterestpaidflag" default="0"/>
+    </property>
+    <property name="tdsInterestPayment" type="string">
+        <column name="tdsinterestpayment"/>
+    </property>
+    <property name="productId" type="string">
+        <column name="productid"/>
+    </property>
+    <set cascade="all" inverse="true" name="tdsdetails">
+            <key column="advancedetail"/>
+            <one-to-many class="com.krawler.hql.accounting.TdsDetails"/>
+    </set>
+    <property name="taxamount" type="double" >
+        <column name="taxamount" default ='0'/>
+    </property>
+    <property name="tdsInterestRateAtPaymentTime" type="double">
+        <column name="tdsInterestRateAtPaymentTime" default="0"/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Payment" column="payment" name="payment" not-null="true"/>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.ReceiptAdvanceDetail" column="receiptadvancedetail" name="receiptAdvanceDetails"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="totaljedid" name="totalJED"/>
+  </class>
+</hibernate-mapping>

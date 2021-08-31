@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.pos.CashOut" table="cashouttransaction">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="storeid" type="string">
+            <column length="50" name="storeid" not-null="true"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount"/>
+        </property>
+        <property name="transactionDate" type="date">
+            <column name="transactiondate"/>
+        </property>
+        <property name="transactionDateinLong" type="long">
+            <column name="transactiondateinlong"/>
+        </property>
+        <property name="isdeposit" type="true_false">
+            <column name="isdeposit" default="false"/>   
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="userid"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="reasonid" name="reason"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.data.validator.Email",{extend:"Ext.data.validator.Format",alias:"data.validator.email",type:"email",config:{message:"Is not a valid email address",matcher:/^(")?(?:[^\."])(?:(?:[\.])?(?:[\w\-!#$%&'*+\/=?\^_`{|}~]))*\1@(\w[\-\w]*\.){1,5}([A-Za-z]){2,6}$/}})

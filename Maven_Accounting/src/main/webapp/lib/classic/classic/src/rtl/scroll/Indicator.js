@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.scroll.Indicator",{override:"Ext.scroll.Indicator",privates:{translateX:function(A){if(this.getScroller().getRtl()){A=-A}this.callParent([A])}}})

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ConsolidationExchangeRateDetails" table="consolidationexchangeratedetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="exchangeRate" type="double">
+            <column name="exchangerate" default="0"/>
+        </property>
+        <property name="applyDate" type="date">
+            <column name="applydate"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.ConsolidationData" name="consolidationData" column="consolidationdata" not-null="true"/>
+    </class>
+</hibernate-mapping>

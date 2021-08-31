@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.PurchaseRequisitionDetail" table="purchaserequisitiondetail">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="srno" type="integer">
+      <column name="srno" default="0"/>
+    </property>
+    <property name="remark" type="string">
+      <column length="255" name="remark"/>
+    </property>
+    <property name="approverremark" type="string">
+      <column length="1024" name="approverremark"/>
+    </property>
+    <property name="quantity" type="double">
+      <column name="quantity" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+    <property name="baseuomquantity" type="double">
+      <column name="baseuomquantity" default="0" />
+    </property>
+    <property name="baseuomrate" type="double">
+      <column name="baseuomrate" default="1" />
+    </property>
+    <property name="productdescription" type="string">
+      <column  name="productdescription"/>
+    </property>
+    <property name="rate" type="double">
+      <column name="rate" not-null="true"/>
+    </property>
+    <property name="workorderdetailid" type="string">
+      <column length="255" name="workorderdetailid"/>
+    </property>
+    <property name="discountispercent" type="integer">
+      <column name="discountispercent" not-null="true"/>
+    </property>
+    <property name="discount" type="double">
+      <column name="discount" not-null="false"/>
+    </property>
+        <property name="priceSource" type="string">
+            <column  name="pricesource" default="" length="255"/>
+        </property>
+        <property name="balanceqty" type="double">
+            <column name="balanceqty" not-null="true"/>
+        </property>
+        <property name="pricingBandMasterid" type="string">
+            <column  name="pricingbandmasterid" length="255"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.PurchaseRequisition" column="purchaserequisition" name="purchaserequisition" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.PurchaseRequisitionDetailCustomData" column="accpurchaserequisitiondetailcustomdataref" name="purchaseRequisitionDetailCustomData"/>
+  </class>
+</hibernate-mapping>

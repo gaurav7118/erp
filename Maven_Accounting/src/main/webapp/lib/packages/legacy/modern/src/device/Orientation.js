@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Orientation",{singleton:true,requires:["Ext.device.Communicator","Ext.device.orientation.HTML5"],constructor:function(){return Ext.create("Ext.device.orientation.HTML5")}})

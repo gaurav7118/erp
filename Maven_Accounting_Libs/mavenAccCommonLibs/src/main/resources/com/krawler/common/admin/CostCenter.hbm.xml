@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.CostCenter" table="costcenter">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="ccid" type="string">
+            <column length="100" name="ccid" not-null="true"/>
+        </property>
+        <property name="name" type="string">
+            <column length="100" name="name" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column  name="description"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

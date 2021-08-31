@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.FixedAssetOpeningMappingWithAssetDetail" table="fixedassetopeningmapping">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+    <many-to-one class="com.krawler.hql.accounting.FixedAssetOpening" column="assetopening" name="assetOpening"/>
+    <many-to-one class="com.krawler.hql.accounting.AssetDetails" column="assetdetails" name="assetDetails"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.spring.mrp.machinemanagement.MachineManRatio" table="machinemanratio">
+    <id column="id" name="ID">
+        <generator class="foreign">
+            <param name="property">machine</param>
+        </generator>
+    </id>
+    <property name="dateForRatio" type="date">
+      <column name="dateforratio"/>
+    </property>
+    <property name="fullMachineTime" type="double">
+      <column default="0" name="fullmachinetime"/>
+    </property>
+    <property name="fullManTime" type="double">
+      <column default="1" name="fullmantime"/>
+    </property>
+    <property name="partMachineTime" type="double">
+      <column default="0" name="partmachinetime"/>
+    </property>
+    <property name="partManTime" type="double">
+      <column default="1" name="partmantime"/>
+    </property>
+    <property name="createdon" type="long">
+      <column name="createdon"/>
+    </property>
+    <property name="updatedon" type="long">
+      <column name="modifiedon"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>
+    <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+    <one-to-one name="machine" class="com.krawler.spring.mrp.machinemanagement.Machine" constrained="true" />
+    <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+  </class>
+</hibernate-mapping>

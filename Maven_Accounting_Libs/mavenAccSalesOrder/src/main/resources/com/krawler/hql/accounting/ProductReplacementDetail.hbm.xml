@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ProductReplacementDetail" table="productreplacementdetail">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="addInventoryFlag" type="boolean">
+            <column name="addinventoryflag"/>
+        </property>
+        <property name="isAsset" type="boolean">
+            <column name="isasset"/>
+        </property>
+        <property name="replacementQuantity" type="double">
+            <column name="replacementquantity"/>
+        </property>
+        <property name="replacedQuantity" type="double">
+            <column name="replacedquantity"/>
+        </property>
+        
+        <set cascade="all" inverse="true" name="replacementProductBatchDetailsMappings">
+            <key column="productreplacementdetail"/>
+            <one-to-many class="com.krawler.hql.accounting.ReplacementProductBatchDetailsMapping"/>
+        </set>
+        
+        <many-to-one name="company" column="company" class="com.krawler.common.admin.Company"/>
+        <many-to-one name="product" column="product" class="com.krawler.hql.accounting.Product"/>
+        <many-to-one name="productReplacement" column="productreplacement" class="com.krawler.hql.accounting.ProductReplacement"/>
+        <many-to-one name="contract" column="contract" class="com.krawler.hql.accounting.Contract"/>
+    </class>
+</hibernate-mapping>

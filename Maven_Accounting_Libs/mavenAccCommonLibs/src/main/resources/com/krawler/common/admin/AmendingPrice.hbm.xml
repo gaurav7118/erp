@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.AmendingPrice" table="amendingprice">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="CInvoice" type="true_false">
+            <column  name="CInvoice"/>
+        </property>
+        <property name="VInvoice" type="true_false">
+            <column name="VInvoice" />
+        </property>
+        <property name="SalesOrder" type="true_false">
+            <column  name="SalesOrder" />
+        </property>
+        <property name="PurchaseOrder" type="true_false">
+            <column  name="PurchaseOrder" />
+        </property>
+        <property name="VendorQuotation" type="true_false">
+            <column  name="VendorQuotation" />
+        </property>
+        <property name="CustomerQuotation" type="true_false">
+            <column  name="CustomerQuotation" />
+        </property>
+        <property name="BlockAmendingPrice" type="true_false">
+            <column  name="blockamendingprice" />
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="companyid"  name="CompanyID" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="UserID" not-null="true"/>
+    
+    </class>
+</hibernate-mapping>

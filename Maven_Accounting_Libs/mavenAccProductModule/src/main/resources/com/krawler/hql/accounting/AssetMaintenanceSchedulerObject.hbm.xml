@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetMaintenanceSchedulerObject" table="assetmaintenanceschedulerobject">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="startDate" type="timestamp">
+            <column name="startdate"/>
+        </property>
+        <property name="scheduleName">
+            <column name="schedulename"/>
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="enddate"/>
+        </property>
+        <property name="adHoc" type="boolean">
+            <column name="isadhoc"/>
+        </property>
+        <property name="frequency">
+            <column name="frequency"/>
+        </property>
+        <property name="frequencyType">
+            <column name="frequencytype"/>
+        </property>
+        <property name="totalEvents">
+            <column name="totalevents"/>
+        </property>
+        <property name="scheduleDuration">
+            <column name="scheduleduration"/>
+        </property>
+        <property name="scheduleStopCondition">
+            <column name="schedulestopcondition"/>
+        </property>
+        <property name="scheduleType">
+            <column name="scheduletype"/>
+        </property>
+        <property name="contractId">
+            <column name="contractid"/>
+        </property>
+        <property name="maintenanceType" type="integer">
+            <column name="maintenancetype" default="1"/>
+        </property>
+    
+<!--        <set name="adhocScheduleDetails" cascade="all" inverse="true">
+            <key column="assetmaintenanceschedulerobject"/>
+            <one-to-many class="com.krawler.hql.accounting.AssetMaintenanceAdhocScheduleDetails"/>
+        </set>-->
+    
+        <set name="assetMaintenanceSchedulers" cascade="all" inverse="true">
+            <key column="assetmaintenanceschedulerobject"/>
+            <one-to-many class="com.krawler.hql.accounting.AssetMaintenanceScheduler"/>
+        </set>
+    
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.AssetDetails" column="assetdetails" name="assetDetails"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aged_subreport1" pageWidth="802" pageHeight="573" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="amount_0" class="java.lang.String"/>
+	<field name="amount_1" class="java.lang.String"/>
+	<field name="amount_2" class="java.lang.String"/>
+	<field name="amount_3" class="java.lang.String"/>
+	<field name="amount_4" class="java.lang.String"/>
+	<field name="amount_5" class="java.lang.String"/>
+	<field name="amount_6" class="java.lang.String"/>
+	<field name="amount_7" class="java.lang.String"/>
+	<field name="amount_8" class="java.lang.String"/>
+	<field name="amount_9" class="java.lang.String"/>
+	<field name="amount_10" class="java.lang.String"/>
+	<field name="amount_11" class="java.lang.String"/>
+	<field name="accName" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="accName1" class="java.lang.String"/>
+	<field name="accName2" class="java.lang.String"/>
+	<field name="accName3" class="java.lang.String"/>
+	<field name="amount_12" class="java.lang.String"/>
+	<field name="amount_13" class="java.lang.String"/>
+	<field name="amount_14" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="docnumber" class="java.lang.String"/>
+	<field name="billdate" class="java.lang.String"/>
+	<field name="duedate" class="java.lang.String"/>
+        <field name="amount_14_double" class="java.lang.Double"/> 
+        
+	<variable name="total" class="java.lang.Double" resetType="Group" resetGroup="accName" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_14_double}]]></variableExpression>
+	</variable>
+        <variable name="typeTotal" class="java.lang.Double" resetType="Group" resetGroup="type" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount_14_double}]]></variableExpression>
+	</variable>
+	<group name="accName">
+		<groupExpression><![CDATA[$F{accName2}]]></groupExpression>
+		<groupHeader>
+			<band height="49">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="11" y="34" width="113" height="15" forecolor="#00B6FF"/>
+					<box topPadding="3" leftPadding="3"/>
+					<textElement markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{accName2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="38">
+				<staticText>
+					<reportElement x="167" y="0" width="184" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL IN BASE :]]></text>
+				</staticText>
+				<textField pattern="#,##0.00;(#,##0.00)">
+					<reportElement x="351" y="0" width="373" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="type">
+		<groupExpression><![CDATA[$F{type}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="38" y="11" width="185" height="9"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="35">
+				<textField>
+					<reportElement x="38" y="15" width="557" height="20" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;(#,##0.00)">
+					<reportElement x="155" y="15" width="557" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{typeTotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="208" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="595" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_10}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="552" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_9}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="638" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_11}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="167" y="1" width="41" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_0}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="380" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_5}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="294" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="251" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="466" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_7}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="509" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_8}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="337" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_4}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="423" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_6}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="681" y="1" width="43" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_12}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
+				<reportElement x="124" y="2" width="42" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" >
+				<reportElement x="724" y="1" width="36" height="16"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{amount_13}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="760" y="1" width="43" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{amount_14_double}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
+				<reportElement x="36" y="1" width="42" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{billdate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
+				<reportElement x="1" y="0" width="35" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
+				<reportElement x="78" y="1" width="46" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duedate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

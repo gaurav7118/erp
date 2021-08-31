@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.FixedAssetOpening" table="fixedassetopening">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="creationDate" type="timestamp">
+            <column name="creationdate"/>
+        </property>
+        <property name="documentNumber" type="string">
+            <column name="documentnumber"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate"/>
+        </property>
+        <property name="wdv" type="double">
+            <column name="wdv"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column="company"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="product" column="product"/>
+        <many-to-one class="com.krawler.hql.accounting.Inventory" name="inventory" column="inventory"/>
+    </class>
+</hibernate-mapping>

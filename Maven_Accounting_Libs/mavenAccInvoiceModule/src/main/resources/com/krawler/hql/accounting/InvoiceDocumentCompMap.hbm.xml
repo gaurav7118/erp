@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.InvoiceDocumentCompMap" table="invoicedoccompmap">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.InvoiceDocuments" name="document" column="documentid" not-null="true"/>    
+        <property name="invoiceID" type="string" >
+            <column length="255" not-null="true" name="invoiceid"></column> 
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>        
+    </class>
+</hibernate-mapping>

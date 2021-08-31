@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.GstFormGenerationHistory" table="gstformgenerationhistory">
+    <id name="ID" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="generationDate" type="date">
+      <column name="generationdate"/>
+    </property>
+    <property name="startDate" type="date">
+      <column name="startdate"/>
+    </property>
+    <property name="endDate" type="date">
+      <column name="enddate"/>
+    </property>
+    <property name="fileName" type="string">
+      <column name="filename"/>
+    </property>
+    <property name="gstGuideVersion" type="int">
+        <column default="1" name="gstguideversion"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.User" name="user" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.MultiEntityMapping" name="entityMapping" column="entitymapping"/>
+  </class>
+</hibernate-mapping>

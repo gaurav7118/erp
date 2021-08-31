@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class dynamic-insert="true" dynamic-update="true" name="com.krawler.common.admin.SavedSearchQuery" table="SAVED_SEARCH_QUERY">
+    <id name="searchId" type="string">
+      <column name="searchid"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="moduleid" type="integer">
+      <column name="moduleid"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.User" fetch="select" name="user">
+      <column name="user"/>
+    </many-to-one>
+    <property name="searchName" type="string">
+      <column length="100" name="searchname"/>
+    </property>
+    <property name="searchquery" type="string">
+      <column length="5000" name="searchquery"/>
+    </property>
+    <property name="deleteFlag" type="integer">
+      <column default="0" name="deleteflag"/>
+    </property>
+    <property name="updatedOn" type="long">
+      <column name="updatedon"/>
+    </property>
+    <property name="filterAppend" type="integer">
+      <column default="1" name="filerappend"/>
+    </property>
+    <property name="templateid" type="string">
+      <column name="templateid"/>
+    </property>
+    <property name="iscustomlayout" type="true_false">
+        <column name="iscustomlayout" default="'F'" />
+    </property>
+    <property name="customReportId" type="string">
+        <column name="customreportid"/>
+    </property>
+    <property name="templatetitle" type="string">
+        <column name="templatetitle"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.PackingDoList" table="packingdolist">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="packNumber" type="string">
+            <column length="50" name="packnumber" not-null="true"/>
+        </property>
+        <property name="customer" type="string">
+            <column length="50" name="customer" not-null="true"/>
+        </property>
+        <property name="packingDate" type="timestamp">
+            <column name="packingdate" not-null="true"/>
+        </property>
+        <property name="memo" type="string">
+            <column length="1024" name="memo"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        <property name="dateOfLc" type="timestamp">
+            <column name="dateoflc" />
+        </property>
+        <property name="letterOfCn" type="string">
+            <column length="50" name="letterofcn" />
+        </property>
+        <property name="partialShipment" type="string">
+            <column length="50" name="partialshipment" />
+        </property>
+        <property name="transhipment" type="string">
+            <column length="50" name="transhipment" />
+        </property>
+        <property name="portOfLoading" type="string">
+            <column length="50" name="portofloading" />
+        </property>
+        <property name="portOfDischarge" type="string">
+            <column length="50" name="portofdischarge" />
+        </property>
+        <property name="vessel" type="string">
+            <column length="50" name="vessel" />
+        </property>
+        <property name="incoterms" type="string">
+            <column length="50" name="incoterms" />
+        </property>
+        
+        <set cascade="all" inverse="true" name="rows">
+            <key column="packingdolist"/>
+            <one-to-many class="com.krawler.hql.accounting.PackingDoListDetail"/>
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="status" column="status"/>    
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>        
+    </class>
+</hibernate-mapping>

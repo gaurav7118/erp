@@ -1,0 +1,47 @@
+.x-combo-list {
+	overflow: hidden;
+	border: 1px solid #98c0f4;
+	background: #ddecfe;
+	zoom: 1;
+}
+.x-combo-list-inner {
+	position: relative;
+	overflow: auto;
+	overflow-x: hidden;
+	background: white;
+	/* for calculating scroll offsets */
+	zoom: 1;
+}
+.x-combo-list-hd {
+	padding: 3px;
+	border-bottom: 1px solid #98c0f4;
+	background-image: url(../images/default/layout/panel-title-light-bg.gif);
+	color: #15428b;
+	font: bold 11px tahoma, arial, helvetica, sans-serif;
+}
+.x-resizable-pinned .x-combo-list-inner {
+	border-bottom: 1px solid #98c0f4;
+}
+.x-combo-list-item {
+	overflow: hidden;
+	padding: 2px;
+	border: 1px solid #fff;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font: normal 12px tahoma, arial, helvetica, sans-serif;
+}
+.x-combo-list .x-combo-selected {
+	border: 1px dotted #a3bae9 !important;
+	background: #dfe8f6;
+	cursor: pointer;
+}
+.x-combo-noedit {
+	cursor: pointer;
+}
+.x-combo-list .x-toolbar {
+	border-top: 1px solid #98c0f4;
+	border-bottom: 0 none;
+}
+.x-combo-list-small .x-combo-list-item {
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Cheque" table="cheque">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="chequeNo" type="string">
+      <column length="20" name="chequeno" not-null="true"/>
+    </property>
+    <property name="bankName" type="string">
+      <column length="50" name="bankname" not-null="false"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+     <property name="dueDate" type="date">
+      <column name="duedate" not-null="true"/>
+    </property>
+    <property name="createdFrom" type="integer">
+        <column name="createdfrom"/>
+    </property>
+    <property name="sequenceNumber" type="big_integer">
+        <column name="sequencenumber"/>
+    </property>
+    <property name="chequeNoAutoGenetated" type="boolean">
+        <column name="ischequenoautogenetated"/>
+    </property>
+    <property name="deleteFlag" type="boolean">
+        <column name="deleteflag"/>
+    </property>
+    <property name="datePreffixValue" type="string">
+        <column length="50" name="datepreffixvalue"/>
+    </property>
+    <property name="dateSuffixValue" type="string">
+        <column length="50" name="datesuffixvalue"/>
+    </property>
+    <property name="dateAfterPreffixValue" type="string">
+        <column length="50" name="dateafterpreffixvalue"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="BankMasterItem"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="bankAccount" column="bankaccount"/>
+    <many-to-one class="com.krawler.hql.accounting.ChequeSequenceFormat" name="seqformat" column="seqformat"/>
+  </class>
+</hibernate-mapping>

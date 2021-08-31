@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.DefaultCustomFields" table="defaultcustomfields">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="maxlength" type="int">
+            <column name="maxlength" not-null="true"/>
+        </property>
+        <property name="fieldtype" type="int">
+            <column name="fieldtype" not-null="true"/>
+        </property>
+        <property name="fieldlabel" type="string">
+            <column name="fieldlabel"/>
+        </property>
+        <property name="moduleid" type="string">
+            <column name="moduleid"/>
+        </property>
+        <property name="customfield" type="int">
+            <column name="customfield" default="0"/>
+        </property>
+        <property name="customcolumn" type="int">
+            <column name="customcolumn" default="0"/>
+        </property>
+<!--        <property name="isformultientity" type="boolean">
+            <column name="isformultientity" default="F"/>
+        </property>-->
+        <property name="insertsequence" type="int">
+            <column name="insertsequence" default="999"/>
+        </property>
+        <property name="isessential" type="int">
+            <column name="isessential" default="0"/>
+        </property>
+        <property name="isAutoPopulateDefaultValue" type="boolean">
+            <column name="isautopopulatedefaultvalue" default="0"/>
+        </property>
+        <property name="GSTMappingColnum" type="int">
+            <column default="0" name="gstmappingcolnum"/>
+        </property>
+<!--        <property name="isForGSTRuleMapping" type="boolean">
+            <column name="isforgstrulemapping" default="0"/>
+        </property>-->
+        <property name="relatedModuleIsAllowEdit" type="int">
+            <column name="relatedmoduleisallowedit" default="1" />
+        </property>
+        <property name="relatedmoduleid" type="string">
+            <column name="relatedmoduleid"/>
+        </property>
+        <property name="fieldtooltip" type="string">
+            <column name="fieldtooltip"/>
+        </property>
+        <property name="GSTConfigType" type="int">
+            <column default="0" name="gstconfigtype"/>
+        </property>
+        <property name="defaultValue" type="string">
+            <column name="defaultvalue"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Country" column="countryid" name="countryid" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.State" column="stateid" insert="false" name="stateid" update="false"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.ist.ISTStockBuffer" table="in_ist_stockbuffer">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="quantity" type="double">
+      <column name="quantity"/>
+    </property>
+    <property name="pricePerUnit" type="double">
+      <column name="priceperunit"/>
+    </property>
+    <property name="batchNo" type="long">
+      <column name="batchno"/>
+    </property>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location" not-null="true"/>
+    <many-to-one class="com.krawler.inventory.model.ist.ISTDetail" column="istrequestdetail" name="istd" not-null="true"/>
+  </class>
+</hibernate-mapping>

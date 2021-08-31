@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.GroupCompanyTermMapping" table="groupcompany_termmapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="sourceCompany" type="string">
+            <column length="50" name="sourcecompany" not-null="true"/>
+        </property>
+        <property name="destinationCompany" type="string">
+            <column length="50" name="destinationcompany" not-null="true"/>
+        </property>
+        <property name="sourceTermName" type="string">
+            <column default="" length="50" name="sourcetermname"/>
+        </property>
+        <property name="destinationTermName" type="string">
+            <column default="" length="50" name="destinationtermname"/>
+        </property>
+        <property name="sourceTermId" type="string">
+            <column default="" length="50" name="sourcetermid"/>
+        </property>
+        <property name="destinationTermId" type="string">
+            <column default="" length="50" name="destinationtermid"/>
+        </property>
+    </class>
+</hibernate-mapping>

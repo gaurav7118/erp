@@ -1,0 +1,1 @@
+if(Ext.util&&Ext.util.Format){Ext.define("Ext.locale.sv_SE.util.Format",{override:"Ext.util.Format",decimalSeparator:",",thousandSeparator:".",currencySign:"kr",dateFormat:"Y-m-d"},function(){var A=Ext.Date.parse;Ext.Date.parse=function(C,D,B){return A(C.replace("am","em").replace("pm","fm").replace("AM","EM").replace("PM","FM"),D,B)}})}

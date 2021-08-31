@@ -1,0 +1,1 @@
+Ext.define("Ext.device.browser.Cordova",{extend:"Ext.device.browser.Abstract",open:function(A){if(!this._window){this._window=Ext.create("Ext.device.browser.Window")}this._window.open(A);return this._window},close:function(){if(!this._window){return }this._window.close()}})

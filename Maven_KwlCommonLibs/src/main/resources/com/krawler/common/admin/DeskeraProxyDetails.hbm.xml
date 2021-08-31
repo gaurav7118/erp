@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.DeskeraProxyDetails" table="deskeraproxydetails">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="description" type="string">
+            <column  name="description" default=""/>
+        </property>
+        <property name="callBackURL" type="string">
+            <column  name="callbackurl" default=""/>
+        </property>
+        <property name="parameters" type="string">
+            <column  name="parameters" default=""/>
+        </property>
+        <property name="status" type="integer">
+            <column  name="status" default="0"/>
+        </property>
+        <property name="updatedOn" type="timestamp">
+            <column  name="updatedon"/>
+        </property>
+        <property name="companyid" type="string">
+            <column  name="companyid" />
+        </property>
+    </class>
+</hibernate-mapping>

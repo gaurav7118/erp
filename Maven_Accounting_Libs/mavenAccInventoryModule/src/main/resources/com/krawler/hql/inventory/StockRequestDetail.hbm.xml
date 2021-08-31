@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.stockrequest.StockRequestDetail" table="in_sr_detail">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="batchName" type="string">
+      <column length="50" name="batchname" />
+    </property>
+    <property name="issuedSerialNames" type="text">
+      <column name="issued_serialnames"/>
+    </property>
+    <property name="deliveredSerialNames" type="text">
+      <column name="delivered_serialnames"/>
+    </property>
+    <property name="issuedQuantity" type="double">
+      <column name="issuedqty"/>
+    </property>
+    <property name="deliveredQuantity" type="double">
+      <column name="deliveredqty"/>
+    </property>
+    <many-to-one class="com.krawler.inventory.model.stockrequest.StockRequest" column="stockrequest" name="stockRequest"/>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="issued_location" name="issuedLocation"/>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="delivered_location" name="deliveredLocation"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="issued_row" name="issuedRow"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="issued_rack" name="issuedRack"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="issued_bin" name="issuedBin"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="delivered_row" name="deliveredRow"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="delivered_rack" name="deliveredRack"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="delivered_bin" name="deliveredBin"/>
+  </class>
+</hibernate-mapping>

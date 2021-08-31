@@ -1,0 +1,1 @@
+Ext.define("Ext.draw.gradient.GradientDefinition",{singleton:true,urlStringRe:/^url\(#([\w\-]+)\)$/,gradients:{},add:function(A){var B=this.gradients,C,E,D;for(C=0,E=A.length;C<E;C++){D=A[C];if(Ext.isString(D.id)){B[D.id]=D}}},get:function(D){var A=this.gradients,B=D.match(this.urlStringRe),C;if(B&&B[1]&&(C=A[B[1]])){return C||D}return D}})

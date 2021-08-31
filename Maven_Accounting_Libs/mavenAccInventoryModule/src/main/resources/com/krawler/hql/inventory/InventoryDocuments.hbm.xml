@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.fileuploaddownlaod.InventoryDocuments" table="in_documents">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="docID" type="string">
+            <column length="255" name="docid" not-null="true"/>
+        </property>
+        <property name="docName" type="string">
+            <column length="255" name="docname" not-null="true"/>
+        </property>
+        <property name="docType" type="string">
+            <column length="255" name="doctypeid" not-null="true"/>
+        </property>    
+    </class>
+</hibernate-mapping>

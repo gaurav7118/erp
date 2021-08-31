@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bankbook_subreport" pageWidth="572" pageHeight="802" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.357947691000061"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1" forecolor="#DE0000"/>
+	<style name="style2" forecolor="#01469C"/>
+	<parameter name="CompanyAccountingPeriod" class="java.lang.String"/>
+	<parameter name="CompanyName" class="java.lang.String"/>
+	<parameter name="CompanyAdd" class="java.lang.String"/>
+	<parameter name="BankBookDateRange" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="voucherno" class="java.lang.String"/>
+	<field name="particulars" class="java.lang.String"/>
+	<field name="baseCurr" class="java.lang.String"/>
+	<field name="accCurr" class="java.lang.String"/>
+	<field name="transCurr" class="java.lang.String"/>
+	<field name="receipt" class="java.lang.String"/>
+	<field name="payment" class="java.lang.String"/>
+	<field name="balanceInBaseCurr" class="java.lang.String"/>
+	<field name="balanceInAccCurr" class="java.lang.String"/>
+	<field name="accname" class="java.lang.String"/>
+	<field name="openingbalance" class="java.lang.String"/>
+	<field name="vouchertotal" class="java.lang.String"/>
+	<field name="acccode" class="java.lang.String"/>
+	<group name="accountname" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{accname}]]></groupExpression>
+		<groupHeader>
+			<band height="13">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="69" y="0" width="231" height="12" forecolor="#010101"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{accname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="12" y="0" width="56" height="12" forecolor="#010101"/>
+					<textElement verticalAlignment="Middle" markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{acccode}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="22">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="style1" x="493" y="1" width="63" height="14" forecolor="#010101"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{balanceInBaseCurr}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="style1" x="199" y="1" width="97" height="14" forecolor="#010101"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Closing Balance]]></text>
+				</staticText>
+				<line>
+					<reportElement x="7" y="17" width="555" height="1" forecolor="#010101"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="7" y="1" width="555" height="1" forecolor="#010101"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="style1" x="428" y="1" width="65" height="14" forecolor="#010101"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{balanceInAccCurr}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="date">
+		<groupExpression><![CDATA[$F{date}]]></groupExpression>
+		<groupHeader>
+			<band height="9">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="12" y="0" width="56" height="9" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<staticText>
+					<reportElement x="156" y="0" width="140" height="14" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Day Closing]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="493" y="0" width="63" height="14" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{balanceInBaseCurr}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="428" y="0" width="65" height="14" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{balanceInAccCurr}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="voucherno">
+		<groupExpression><![CDATA[$F{voucherno}]]></groupExpression>
+		<groupHeader>
+			<band height="10">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="69" y="0" width="69" height="9" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="7" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{voucherno}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="11">
+				<staticText>
+					<reportElement style="style1" x="196" y="0" width="100" height="10" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Bottom">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Voucher Total]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="367" y="0" width="63" height="10" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{vouchertotal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="302" y="0" width="63" height="10" forecolor="#010101">
+						<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transCurr}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<pageHeader>
+		<band height="95" splitType="Stretch">
+			<line>
+				<reportElement x="6" y="13" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="227" y="19" width="329" height="24" forecolor="#010101"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="style2" x="227" y="40" width="329" height="12" forecolor="#010101"/>
+				<textElement textAlignment="Right" markup="html">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyAccountingPeriod}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="style2" x="12" y="16" width="198" height="12" forecolor="#010101"/>
+				<textElement markup="html">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyName}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="6" y="54" width="566" height="40" isPrintWhenDetailOverflows="true"/>
+				<textField>
+					<reportElement style="style2" x="442" y="0" width="93" height="18" forecolor="#010101"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page No. "+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="style2" x="6" y="0" width="272" height="20" forecolor="#010101"/>
+					<textElement>
+						<font size="8" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Date Range : "+$P{BankBookDateRange}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement style="style2" x="534" y="0" width="21" height="18" forecolor="#010101"/>
+					<textElement>
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" "+$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="style2" x="63" y="19" width="69" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Document Number]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="15" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement style="style2" x="360" y="19" width="64" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Payment]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="style2" x="487" y="19" width="63" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Balance in<br>"+$F{baseCurr}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="style2" x="134" y="19" width="160" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Particulars]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="style2" x="6" y="19" width="56" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="style2" x="297" y="19" width="62" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Receipt]]></text>
+				</staticText>
+				<line>
+					<reportElement x="1" y="18" width="555" height="1" forecolor="#010101"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="1" y="37" width="555" height="1" forecolor="#010101"/>
+					<graphicElement>
+						<pen lineWidth="0.75"/>
+					</graphicElement>
+				</line>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="style2" x="424" y="19" width="63" height="16" forecolor="#010101" backcolor="#FEFEFE"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Balance in<br>"+$F{accCurr}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="style2" positionType="Float" x="12" y="28" width="198" height="24" forecolor="#010101"/>
+				<textElement markup="none">
+					<font size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CompanyAdd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="366" y="0" width="64" height="11" forecolor="#010101">
+					<printWhenExpression><![CDATA[$F{payment}.equals("")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{payment}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="301" y="0" width="64" height="11" forecolor="#010101">
+					<printWhenExpression><![CDATA[$F{receipt}.equals("")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receipt}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="140" y="0" width="160" height="10" forecolor="#010101">
+					<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{particulars}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="style1" x="199" y="0" width="97" height="11" forecolor="#010101">
+					<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Opening Balance]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="style1" x="493" y="1" width="63" height="11" forecolor="#010101">
+					<printWhenExpression><![CDATA[$F{openingbalance}.equals("")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{openingbalance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

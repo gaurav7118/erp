@@ -1,0 +1,526 @@
+#Sharad Pawar 2 Nov 2015
+alter table extracompanypreferences add column  seqfmtforrecurinv char(1) default 'F';
+
+#Rushikesh Mandage 2nd Nov 2015
+
+ALTER TABLE `jedetail` MODIFY COLUMN `exchangeratefortransaction` double NULL DEFAULT -1;
+UPDATE `jedetail` SET exchangeratefortransaction = -1 where exchangeratefortransaction=1;
+
+# Anand Nimbalkar 3rd November 2015
+alter table extracompanypreferences  add salescommissionreportmode int(1) DEFAULT '0';
+
+#Swapnil D. Khandre 3rd November, 2015
+ALTER TABLE creditnote ADD cnamountinbase DOUBLE DEFAULT 0;
+ALTER TABLE debitnote ADD dnamountinbase DOUBLE DEFAULT 0;
+ALTER TABLE receipt ADD depositamountinbase DOUBLE DEFAULT 0;
+ALTER TABLE payment ADD depositamountinbase DOUBLE DEFAULT 0;
+
+#Rushikesh Mandage 3rd November 2015
+# New table for storing the linking info of receipt and debit note.
+CREATE TABLE `linkdetailreceipttodebitnote` (
+  `id` varchar(36) NOT NULL,
+  `company` varchar(36) NOT NULL,
+  `amount` double default 0.0,
+  `receipt` varchar(36) default NULL,
+  `debitnote` varchar(36) default NULL,
+  `srno` int(11) default '0',
+  `fromcurrency` varchar(36) default NULL,
+  `tocurrency` varchar(36) default NULL,
+  `exchangeratefortransaction` double default '1',
+  `amountindncurrency`  double NULL DEFAULT 1,
+  `linkedgainlossje` VARCHAR(40) default '',
+  `receiptlinkdate` BIGINT(20) DEFAULT NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`receipt`) REFERENCES `receipt` (`id`) ,
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ,
+  FOREIGN KEY (`debitnote`) REFERENCES `debitnote` (`id`) ,
+  FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`) ,
+  FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Santosh Belote 3rd Nov 2015
+# Store quotation amount and quotation amount in base currency in quotation table
+ALTER TABLE quotation ADD COLUMN quotationamount  double DEFAULT 0.0;
+ALTER TABLE quotation ADD COLUMN quotationamountinbase  double DEFAULT 0.0;
+ALTER TABLE quotation ADD COLUMN discountinbase  double DEFAULT 0.0;
+
+# Vivek Pakmode 4th Nov 2015
+update reportmaster set description="Summary of cost Center,Credit Amount,debit Amount and Transaction Flow" where id="Cost_Center_Report";
+
+# Vipin Gupta 4th Nov 2015
+CREATE TABLE `inventory_thread_running_status` (
+`company`  varchar(255) NOT NULL 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+# Santosh Belote 4th Nov 2015
+# Store vendor quotation amount and vendor quotation amount in base currency in vendorquotation table
+ALTER TABLE vendorquotation ADD COLUMN quotationamount  double DEFAULT 0.0;
+ALTER TABLE vendorquotation ADD COLUMN quotationamountinbase  double DEFAULT 0.0;
+ALTER TABLE vendorquotation ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE vendorquotation ADD COLUMN totallineleveldiscount  double DEFAULT 0.0;
+
+ALTER TABLE quotation ADD COLUMN totallineleveldiscount  double DEFAULT 0.0;
+
+# Suhas Chaware 4 Nov 2015
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("319146ff-d3f0-4c1d-9b4a-e965d832891c","2","Total Amount In Base ","Invoiceamountinbase",0,50,'F','F',2,"invoiceamountinbase","invoiceamountinbase",'0','invoice','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("b9451f40-12b5-4bae-ad50-426e3653e6e6","6","Total Amount In Base ","InvoiceAmountInBase",0,50,'F','F',2,"invoiceAmountInBase","invoiceamountinbase",'0','goodsreceipt','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("ef7bcce6-3a98-41f2-b397-00af3f09799d","14","Amount Paid In Base ","Depositamountinbase",0,50,'F','F',2,"depositamountinbase","depositamountinbase",'0','payment','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("81f80e99-4e11-4d61-aea4-af5d27e60aca","16","Amount Received In Base ","Depositamountinbase",0,50,'F','F',2,"depositamountinbase","depositamountinbase",'0','receipt','T');
+
+# Amol Dhokale 5th October 2015
+ALTER TABLE multilevelapprovalrule MODIFY COLUMN rule VARCHAR(2000);
+ALTER TABLE multilevelapprovalrule ADD COLUMN discountrule VARCHAR(2000);
+
+# Santosh Belote 5th Nov 2015
+# Store  total amount and  total amount in base currency in Sales Order
+ALTER TABLE salesorder ADD COLUMN totalamount  double DEFAULT 0.0;
+ALTER TABLE salesorder ADD COLUMN totalamountinbase  double DEFAULT 0.0;
+ALTER TABLE salesorder ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE salesorder ADD COLUMN totallineleveldiscount  double DEFAULT 0.0;
+
+# Store  total amount and  total amount in base currency in Purchase Order
+ALTER TABLE purchaseorder ADD COLUMN totalamount  double DEFAULT 0.0;
+ALTER TABLE purchaseorder ADD COLUMN totalamountinbase  double DEFAULT 0.0;
+ALTER TABLE purchaseorder ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE purchaseorder ADD COLUMN totallineleveldiscount  double DEFAULT 0.0;
+
+#Rushikesh Mandage 5th November 2015
+
+#Added Account setting in compnay preferences
+ALTER TABLE extracompanypreferences ADD COLUMN writeoffreceiptaccount  varchar(40) NULL DEFAULT NULL;
+
+# Added user permissions for Write Off Feature  
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('2a0cb967a6c14c78603391cce1712905','writeOffReceipts','Write Off and Recover Receipts',64);
+
+INSERT into userpermission(`feature`,`role`,`permissioncode`) VALUES ('2a0cb967a6c14c78603391cce1712905', '1', '7');
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('936ce31231712bce96f5fc72e7092011', 'writeOffEntryReceipts', 'Write Off Receipts', '1', NULL, '2a0cb967a6c14c78603391cce1712905') ,
+('c29da636c1715fcabda451e24aa32012', 'writeOffReportReceipts', 'View Written Off Receipts', '2',NULL, '2a0cb967a6c14c78603391cce1712905'),
+('c29da636c1714fcabda451e24aa32013', 'writeOffRecoverReceipts', 'Recover Receipts', '3','c29da636c1715fcabda451e24aa32012', '2a0cb967a6c14c78603391cce1712905') ;
+
+CREATE TABLE receiptwriteoff (
+  id varchar(40) NOT NULL,
+  writtenoffamountinreceiptcurrency double NULL DEFAULT 0.0,
+  writtenoffamountinbasecurrency double NULL DEFAULT 0.0,
+  writeoffdate datetime NOT NULL,
+  memo varchar(2048) DEFAULT NULL,
+  company varchar(40) DEFAULT NULL,
+  receipt varchar(40) DEFAULT NULL,
+  journalentry varchar(40) DEFAULT NULL,
+  reversejournalentry varchar(40) DEFAULT NULL,
+  isrecovered int(1) DEFAULT '0',
+  PRIMARY KEY (id),
+  CONSTRAINT FK717E2DD251214786 FOREIGN KEY (receipt) REFERENCES receipt (id),
+  CONSTRAINT FK717E2DD251350787 FOREIGN KEY (company) REFERENCES company (companyid),
+  CONSTRAINT FK717E2DD2514A9788 FOREIGN KEY (journalentry) REFERENCES journalentry (id),
+  CONSTRAINT FK717E2DD2515A9789 FOREIGN KEY (reversejournalentry) REFERENCES journalentry (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table receipt add column iswrittenoff int(1) DEFAULT '0';
+
+#Dipak Dorkar 6th November 2015
+alter table documentemailsettings add column RFQGenerationMail char(1) default 'F';
+alter table documentemailsettings add column RFQUpdationMail char(1) default 'F';
+
+# Suhas Chaware 6 Nov 2015
+update default_header set dbtabletame='quotation' ,allowadvancesearch='T' where module='22' and defaultHeader='Customer Quotation Number';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T' where module='22' and defaultHeader='Customer Quotation Date';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T' where module='22' and defaultHeader='Ship Date';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T' where module='22' and defaultHeader='Due Date';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T' where module='22' and defaultHeader='Shipping Term';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T',xtype='4' where module='22' and defaultHeader='Customer';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T',xtype='4' where module='22' and defaultHeader='Currency';
+
+update default_header set dbtabletame='quotation', allowadvancesearch='T',xtype='4' where module='22' and defaultHeader='Sales Person';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,
+allowimport,dbtabletame,allowadvancesearch) VALUES 
+("db29a90c-6ebe-4393-9259-315dd3a45a5d","22","Created By","Createdby",0,50,'F','F',4,"createdby","createdby","users",'0','quotation','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,
+allowimport,dbtabletame,allowadvancesearch) VALUES
+("95e283d4-655a-4258-92ad-337d2b5d9d12","22","Last Edited By","Modifiedby",0,50,'F','F',4,"modifiedby","modifiedby","users",'0','quotation','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,
+allowimport,dbtabletame,allowadvancesearch) VALUES 
+("2abdf837-f0be-454e-bab7-486499fe3e69","22","Valid Till","Validdate","date",0,50,'F','F',3,'validdate',"validdate",'0','quotation','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("b008d4e9-8d37-4599-9cf6-022d0db0c8da","22","Tax Name","Tax",0,50,'F','F',4,"tax","tax",'0','quotation','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("cfac0115-9054-4efc-8e35-521975662af2","22","Total Amount In Base ","Quotationamountinbase",0,50,'F','F',2,"quotationamountinbase","quotationamountinbase",'0','quotation','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("f2382a98-21aa-493f-94f8-de9c880c07de","22","Discount Amount In Base ","Discountinbase",0,50,'F','F',2,"discountinbase","discountinbase",'0','quotation','T');
+
+
+
+#Sharad Pawar 6th Nov 2015
+
+update default_header set validatetype='email' where id='6aa9e8ce-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set validatetype='email' where id='e5fbd372-c960-11e3-bbf7-001cc066e9f0'; 
+update default_header set validatetype='email' where id='41a014b0-d1d4-12e3-9d55-001cc066e9f9';
+update default_header set validatetype='email' where id='b184ab58-c962-11e3-bbf7-001cc066e9f0';
+
+# Anand Nimbalkar 6th November 2015
+ALTER TABLE deliveryplanner DROP FOREIGN KEY deliveryplanner_ibfk_3;
+ALTER TABLE deliveryplanner DROP COLUMN printedby;
+ALTER TABLE deliveryplanner ADD COLUMN printedby varchar(255) NULL DEFAULT NULL;
+
+# Amol Edewar 4th Nov 2015
+create table invoiceinused(document varchar(255),company varchar(255),moduleid int(11),bankid varchar(255));
+
+#Deepak Singh 6th November 2015
+ALTER TABLE purchasereturn ADD COLUMN totalamount  double DEFAULT 0.0;
+ALTER TABLE purchasereturn ADD COLUMN totalamountinbase  double DEFAULT 0.0;
+ALTER TABLE purchasereturn ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE purchasereturn ADD COLUMN totallineleveldiscount  double DEFAULT 0.0;
+ALTER TABLE salesreturn ADD COLUMN totalamount  double DEFAULT 0.0;
+ALTER TABLE salesreturn ADD COLUMN totalamountinbase  double DEFAULT 0.0;
+ALTER TABLE salesreturn ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE salesreturn ADD COLUMN totallineleveldiscount  double DEFAULT 0.0;
+
+
+
+#Swapnil D. Khandre 7th November, 2015
+ALTER TABLE invoice ADD invoiceamountdueinbase DOUBLE DEFAULT 0;
+ALTER TABLE invoice ADD discountamount DOUBLE DEFAULT 0;
+ALTER TABLE invoice ADD discountamountinbase DOUBLE DEFAULT 0;
+ALTER TABLE goodsreceipt ADD invoiceamountdueinbase DOUBLE DEFAULT 0;
+ALTER TABLE goodsreceipt ADD discountamount DOUBLE DEFAULT 0;
+ALTER TABLE goodsreceipt ADD discountamountinbase DOUBLE DEFAULT 0;
+
+# Anand Nimbalkar 9th November, 2015
+ALTER TABLE `masteritem` ADD COLUMN  `driver` varchar(255) DEFAULT NULL, ADD FOREIGN KEY (`driver`) REFERENCES `masteritem` (`id`);
+
+# Basaprabhu Ajur 9th November, 2015 (ERP-16758)
+#IST
+UPDATE in_interstoretransfer ist INNER JOIN in_stocktransfer_approval sta SET ist.`status`=  1 WHERE ist.`status` = 4 AND  ist.id = sta.stocktransferid AND sta.approval_status = 3;
+#SR
+UPDATE in_goodsrequest sr INNER JOIN in_stocktransfer_approval sta  SET sr.`status` = 4 WHERE  sr.`status` = 7 AND sr.id = sta.stocktransferid AND sta.approval_status = 3;
+#SA
+UPDATE in_stockadjustment sa INNER JOIN  in_sa_approval saa SET sa.`status`=  3 WHERE  sa.`status`=  0 AND sa.id = saa.stock_adjustment  AND saa.approval_status = 3;
+
+#Mohammed Uzair Momin 9th November 2015
+alter table `deliveryorder` add column `term` varchar(40) default null;
+
+alter table `deliveryorder` add foreign key (`term`) references `creditterm`(`termid`);
+
+alter table `grorder` add column `term` varchar(40) default null;
+
+alter table `grorder` add foreign key (`term`) references `creditterm`(`termid`);
+
+create table `deliveryordertermmap` (
+  `id` varchar(40) not null,
+  `term` varchar(40) default null,
+  `deliveryorder` varchar(40) default null,
+  `termamount` double default '0',
+  `percentage` tinyint(3) unsigned default '0',
+  `deleted` tinyint(4) default '0',
+  `creator` varchar(40) not null,
+  `createdon` bigint(20) default null,
+  primary key (`id`),
+  constraint `deliveryordertermmap_fk_1` foreign key (`term`) references `invoicetermssales` (`id`) on delete cascade on update cascade,
+  constraint `deliveryordertermmap_fk_2` foreign key (`deliveryorder`) references `deliveryorder` (`id`) on delete cascade on update cascade,
+  constraint `deliveryordertermmap_fk_3` foreign key (`creator`) references `users` (`userid`) on delete cascade on update cascade
+) ENGINE=InnoDB default CHARSET=utf8;
+
+alter table `deliveryordertermmap` modify column `percentage` double default 0.0;
+
+alter table `deliveryorder` add column `termsincludegst` char(1) default null;
+
+
+create table `goodsreceiptordertermmap` (
+  `id` varchar(40) not null,
+  `term` varchar(40) default null,
+  `goodsreceiptorder` varchar(40) default null,
+  `termamount` double default '0',
+  `percentage` tinyint(3) unsigned default '0',
+  `deleted` tinyint(4) default '0',
+  `creator` varchar(40) not null,
+  `createdon` bigint(20) default null,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `goodsreceiptordertermmap_fk_1` foreign key (`term`) references `invoicetermssales` (`id`) on delete cascade on update cascade,
+  CONSTRAINT `goodsreceiptordertermmap_fk_2` foreign key (`goodsreceiptorder`) references `grorder` (`id`) on delete cascade on update cascade,
+  constraint `goodsreceiptordertermmap_fk_3` foreign key (`creator`) references `users` (`userid`) on delete cascade on update cascade
+) ENGINE=InnoDB default CHARSET=utf8;
+
+alter table `goodsreceiptordertermmap` modify column `percentage` double default 0.0;
+
+alter table `grorder` add column `termsincludegst` char(1) default null;
+
+#Shashi Nandan Kumar 12th Nov 2015
+update reportmaster set description=" View Invoice WHT Report " where id="Invoice_VHT_Report";
+
+#Shashi Nandan Kumar 14th Nov 2015
+alter table requestforquotationdetail modify remark text;
+
+# Suhas Chaware 17 Nov 2015
+ALTER TABLE grorder ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE grorder ADD COLUMN totalamount  double DEFAULT 0.0;
+ALTER TABLE grorder ADD COLUMN totalamountinbase  double DEFAULT 0.0;
+ALTER TABLE deliveryorder ADD COLUMN discountinbase  double DEFAULT 0.0;
+ALTER TABLE deliveryorder ADD COLUMN totalamount  double DEFAULT 0.0;
+ALTER TABLE deliveryorder ADD COLUMN totalamountinbase  double DEFAULT 0.0;
+
+# Amol Dhokale 17th November,2015
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield, islinefield, isusermanadatoryfield) VALUES ('c42dfb71-e775-11e3-ac4d-eca86bfbb401','salesperson','Agent',28,1,1,0,0,0);
+
+
+#Raveesh Pathak 17th Nov 2015
+
+CREATE TABLE `notifictionrulesrecurringdetail` (
+`id`  varchar(40) NOT NULL ,
+`repeattime`  int  DEFAULT '1',
+`repeattimetype`  int(1) DEFAULT '1',
+`endtype`  int(1) DEFAULT '1', 
+`endinterval`  int DEFAULT '0', 
+`company`  varchar(40) NOT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE documentrecurringmailrecord (
+id  varchar(40) NOT NULL ,
+documentid  varchar(40) NOT NULL ,
+moduleid  int  DEFAULT 0, 
+maildate datetime default NULL,
+notificationruleid varchar(40) NOT NULL ,
+company  varchar(40) NOT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table mailnotification add column recurringdetail varchar(255) default NUll;
+alter table mailnotification add FOREIGN KEY (recurringdetail) REFERENCES notifictionrulesrecurringdetail (id);
+
+update default_header set validatetype='sequenceformat' where id='6781f4e6-195b-11e3-8a99-001e670e1459';
+update default_header set validatetype='sequenceformat' where id='67826d86-195b-11e3-8a99-001e670e1459';
+
+
+#Vaibhav Patil 18th Nov.2015
+insert into dateformat values ("20","Kdate8","dd-MM-yyyy","d-m-Y",10,5);
+
+#Raveesh pathak 18th NOv 2015
+Alter table sequenceformat add column showdateformataftersuffix CHAR(1) DEFAULT 'F';
+Alter table sequenceformat add column dateformataftersuffix VARCHAR(100) DEFAULT "";
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint47 created on 19th Nov 2015 10:30AM ---------------------------------------------- 
+
+#Swapnil D. Khandre 19th November, 2015
+#Query to update decimal places for buildmate (ERP-16496)
+
+update compaccpreferences set amountdigitafterdecimal=2, quantitydigitafterdecimal=3, unitpricedigitafterdecimal=4 where id in (select companyid from company where subdomain='buildmate');
+
+# Suhas Chaware 19 Nov 2015
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield,isusermanadatoryfield) VALUES ('bf213da0-8e76-11e5-a837-0800200c9a66','currency','Currency',28,1,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES ('d99ba710-8e76-11e5-a837-0800200c9a66','salesperson','Sales Person',27,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield,isusermanadatoryfield) VALUES ('b5b8cb20-8e76-11e5-a837-0800200c9a66','currency','Currency',27,1,1,1,1);
+
+# Anand Nimbalkar 20th November 2015
+insert into reportmaster values("Monthly_Commission_Of_Sales_Person","Monthly Commission of the Sales Person Report","View Monthly Commission of the Sales Person Report","callMonthlyCommissionOfSalesPersonReport()",NULL);
+
+#Mohammed Uzair Momin 20th November 2015
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(OP)@0.00%' and taxcode='GST(OP)@0.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(TX-N33)@7.00%' and taxcode='GST(TX-N33)@7.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(NR)@0.00%' and taxcode='GST(NR)@0.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(ZP)@0.00%' and taxcode='GST(ZP)@0.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(ME)@0.00%' and taxcode='GST(ME)@0.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(TX7)@7.00%' and taxcode='GST(TX7)@7.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(TX-E33)@7.00%' and taxcode='GST(TX-E33)@7.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(EP)@0.00%' and taxcode='GST(EP)@0.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(BL)@7.00%' and taxcode='GST(BL)@7.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(IM)@7.00%' and taxcode='GST(IM)@7.00%';
+update `tax` set `taxtype`=1 where company=(select companyid from company where subdomain='buildmate') and name='GST(TX-RE)@7.00%' and taxcode='GST(TX-RE)@7.00%';
+
+update `tax` set `taxtype`=2 where company=(select companyid from company where subdomain='buildmate') and name='GST(SR)@7.00%' and taxcode='GST(SR)@7.00%';
+update `tax` set `taxtype`=2 where company=(select companyid from company where subdomain='buildmate') and name='GST(ES33)@0.00%' and taxcode='GST(ES33)@0.00%';
+update `tax` set `taxtype`=2 where company=(select companyid from company where subdomain='buildmate') and name='GST(DS)@7.00%' and taxcode='GST(DS)@7.00%';
+update `tax` set `taxtype`=2 where company=(select companyid from company where subdomain='buildmate') and name='GST(ESN33)@0.00%' and taxcode='GST(ESN33)@0.00%';
+update `tax` set `taxtype`=2 where company=(select companyid from company where subdomain='buildmate') and name='GST(ZR)@0.00%' and taxcode='GST(ZR)@0.00%';
+update `tax` set `taxtype`=2 where company=(select companyid from company where subdomain='buildmate') and name='GST(OS)@0.00%' and taxcode='GST(OS)@0.00%';
+
+
+#Sharad Pawar 21th Nov 2015
+alter table repeatedinvoices add isallowtoeditrecurreddoc  char(1) not null default 'F';
+alter table repeatedinvoices add approverofeditedrecurring varchar(40) references users(userid);
+
+#Dipak Dorkar 21th Nov 2015
+alter table compaccpreferences ADD COLUMN chequeNoDuplicate INT(3) NULL DEFAULT 0;
+
+#Neeraj Dwivedi 24th November 2015
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22230a66-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','12','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22230f70-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','10','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22231394-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','2','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('222315ba-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','6','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('222318b2-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','27','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22231a7e-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','28','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22231dd0-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','20','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22231f7e-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','18','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('222322d0-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','22','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22232474-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','23','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('22232848-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','29','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('2223297e-9276-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','31','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('0e2f17ac-927b-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','14','F');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('0e2f1a36-927b-11e5-8994-feff819cdc9f','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','16','F');
+
+#Mayur Bhokase 25th November 2015
+update company set templateflag=40 where subdomain="ppcf";
+update company set templateflag=40 where subdomain="ppcfh";
+update company set templateflag=40 where subdomain="ppg";
+
+#Vijay Jawale  25th November 2015
+update company set templateflag=42 where subdomain="edno";
+update company set templateflag=43 where subdomain="cfdn";
+update company set templateflag=44 where subdomain="cftp";
+update company set templateflag=45 where subdomain="fved";
+
+#Raveesh Pathak 25th Nov 2015
+alter table extracompanypreferences ADD COLUMN vendorcreditcontroltype int(1) NULL DEFAULT 2;
+update extracompanypreferences set vendorcreditcontroltype=(select custcreditcontrol from compaccpreferences where  extracompanypreferences.id=compaccpreferences.id);
+
+# Suhas Chaware 26 Nov 2015
+alter table customeraddressdetails add column contactpersondesignation varchar(255) default '';
+alter table vendoraddressdetails add column contactpersondesignation varchar(255) default '';
+alter table customeraddresses add column billingContactDesignation1 varchar(255) default '';
+alter table customeraddresses add column billingContactDesignation2 varchar(255) default '';
+alter table customeraddresses add column billingContactDesignation3 varchar(255) default '';
+alter table customeraddresses add column shippingContactDesignation1 varchar(255) default '';
+alter table customeraddresses add column shippingContactDesignation2 varchar(255) default '';
+alter table customeraddresses add column shippingContactDesignation3 varchar(255) default '';
+alter table vendoraddresses add column billingContactDesignation1 varchar(255) default '';
+alter table vendoraddresses add column billingContactDesignation2 varchar(255) default '';
+alter table vendoraddresses add column billingContactDesignation3 varchar(255) default '';
+alter table vendoraddresses add column shippingContactDesignation1 varchar(255) default '';
+alter table vendoraddresses add column shippingContactDesignation2 varchar(255) default '';
+alter table vendoraddresses add column shippingContactDesignation3 varchar(255) default '';
+alter table companyaddressdetails add column contactpersondesignation varchar(255) default '';
+alter table billingshippingaddresses add column billingcontactpersondesignation varchar(255) default '';	
+alter table billingshippingaddresses add column shippingcontactpersondesignation varchar(255) default '';	
+alter table billingshippingaddresses add column vendcustshippingcontactpersondesignation varchar(255) default '';	
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("8aae43e0-9427-11e5-a837-0800200c9a66","09508488-c1d2-102d-b048-001e58a64cb6","Shipping Contact Person Designation","ShippingContactPersonDesignation",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("91ebc010-9427-11e5-a837-0800200c9a66","09508488-c1d2-102d-b048-001e58a64cb6","Billing Contact Person Designation","BillingContactPersonDesignation",
+0,255,'F','F',null,null,null,null,null);
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("73d21a60-9428-11e5-a837-0800200c9a66","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Contact Person Designation","ShippingContactPersonDesignation",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("7902af90-9428-11e5-a837-0800200c9a66","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Contact Person Designation","BillingContactPersonDesignation",
+0,255,'F','F',null,null,null,null,null);
+
+#Vaibhav Patil 27th Nov.2015
+insert into dateformat values ("21","Kdate9","dd MMM, yyyy","d M, Y",12,6);
+
+#Anand Thakur 27th Nov 2015
+#Billing Address Contact Person Designation
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('322377d3-ec1a-4092-8cb3-b7f951885be9','Billing Address Contact Person Designation','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersondesignation','Billing Address Contact Person Designation','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5226c9d6-5ecc-46b6-8e97-645a1ec70620','Shipping Address Contact Person Designation','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersondesignation','Shipping Address Contact Person Designation','1','2');
+
+#Deepak Pingale 27th Nov 2015
+update product set availablequantity=0 where producttype="4efb0286-5627-102d-8de6-001cc0794cfa";
+
+#Sharad Pawar 27th July 2015
+INSERT INTO reportmaster (id,name,description,method_name,Grouped_Under) VALUES ("Aged Receivable Report Based on Dimensions","Aged Receivable Report Based on Dimensions","View Aged Report Based On Dimensions","callDimensionsBasedAgeingReport()","Accounts Receivable - Sales");
+alter table SAVED_SEARCH_QUERY modify moduleid integer(5);
+
+
+#Rushikesh Mandage 27th November 2015
+# New table for storing the linking info of payment and credit note.
+CREATE TABLE `linkdetailpaymenttocreditnote` (
+  `id` varchar(36) NOT NULL,
+  `company` varchar(36) NOT NULL,
+  `amount` double default 0.0,
+  `payment` varchar(36) default NULL,
+  `creditnote` varchar(36) default NULL,
+  `srno` int(11) default '0',
+  `fromcurrency` varchar(36) default NULL,
+  `tocurrency` varchar(36) default NULL,
+  `exchangeratefortransaction` double default '1',
+  `amountincncurrency`  double NULL DEFAULT 1,
+  `linkedgainlossje` VARCHAR(40) default '',
+  `paymentlinkdate` BIGINT(20) DEFAULT NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`payment`) REFERENCES `payment` (`id`) ,
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ,
+  FOREIGN KEY (`creditnote`) REFERENCES `creditnote` (`id`) ,
+  FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`) ,
+  FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Amol Dhokale 30th November 2015
+UPDATE customizereportheader SET ismanadatoryfield=1, isusermanadatoryfield=0 WHERE dataIndex="creditTerm";
+
+#Mayur Bhokase 30th November 2015
+update company set templateflag=38 where subdomain="lbp";
+update company set templateflag=38 where subdomain="lbr";
+update company set templateflag=38 where subdomain="leh";
+update company set templateflag=38 where subdomain="lhp";
+update company set templateflag=38 where subdomain="lmp";
+update company set templateflag=38 where subdomain="lqr";
+update company set templateflag=38 where subdomain="lsr";
+update company set templateflag=38 where subdomain="lvp";
+update company set templateflag=38 where subdomain="zenn";
+update company set templateflag=38 where subdomain="msrd";
+update company set templateflag=38 where subdomain="lpn";
+
+# Suhas Chaware 30 Nov 2015
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("5693da60-91d5-11e5-a837-0800200c9a66","2","Amount Due In Base","getInvoiceAmountDueInBase",0,50,'F','F',2,"invoiceAmountDueInBase","invoiceamountdueinbase",'0','invoice','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) VALUES 
+("5cf352a0-91d5-11e5-a837-0800200c9a66","6","Amount Due In Base","getInvoiceAmountDueInBase",0,50,'F','F',2,"invoiceAmountDueInBase","invoiceamountdueinbase",'0','goodsreceipt','T');

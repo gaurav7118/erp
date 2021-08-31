@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.POOtherDetails" table="pootherdetails">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="poyourref" type="string">
+      <column length="255" name="poyourref"/>
+    </property>  
+    <property name="podelyterm" type="string">
+      <column length="255" name="podelyterm"/>
+    </property>  
+    <property name="poinvoiceto" type="string">
+      <column length="255" name="poinvoiceto"/>
+    </property>  
+    <property name="podelydate" type="string">
+      <column length="255" name="podelydate"/>
+    </property>  
+    <property name="podept" type="string">
+      <column length="255" name="podept"/>
+    </property>  
+    <property name="porequestor" type="string">
+      <column length="255" name="porequestor"/>
+    </property>  
+    <property name="poproject" type="string">
+      <column length="255" name="poproject"/>
+    </property>  
+    <property name="pomerno" type="string">
+      <column length="255" name="pomerno"/>
+    </property>  
+    <property name="purchaseOrderId" type="string">
+      <column length="255" name="purchaseOrderId"/>
+    </property>  
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

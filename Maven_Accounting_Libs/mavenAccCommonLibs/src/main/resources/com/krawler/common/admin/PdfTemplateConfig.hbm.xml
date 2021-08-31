@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.PdfTemplateConfig" table="pdftemplateconfig">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="module" type="integer">
+            <column length="255" name="module" not-null="true"/>    
+        </property>
+        <property name="pdfFooter" type="string">
+            <column length="1024" name="pdffooter" />
+        </property>
+        <property name="pdfHeader" type="string">
+            <column name="pdfheader" length="1024" default="" ></column>
+        </property>
+        <property name="pdfPreText" type="string" >
+            <column name="pdfpretext" default=""></column>
+        </property>
+        <property name="pdfPostText" type="string" >
+            <column name="pdfposttext" default=""></column>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

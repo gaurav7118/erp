@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.GroupCompanySubdomainMapping" table="groupcompany_companylist">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="subdomain" type="string">
+            <column length="50" name="subdomain" not-null="true"/>
+        </property>
+        <property name="companyId" type="string">
+            <column length="50" name="company" not-null="true"/>
+        </property>
+        <property name="contextUrl" type="string">
+            <column length="50" name="contexturl" default=''/>
+        </property>
+        <property name="isparent" type="boolean">
+            <column name="isparent" default="false"/>
+        </property>
+        <property name="parentCompany" type="string">
+            <column length="50" name="parentcompany" default=''/>
+        </property>
+    </class>
+</hibernate-mapping>

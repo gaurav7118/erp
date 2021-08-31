@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    
+    <bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+    	<property name="order" value="1" />
+    </bean>
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="deskeraAccounting.jsp">accountingIphonecontroller</prop>
+            </props>
+        </property>
+        <property name="interceptors">
+            <list>
+                <ref bean="openSessionInViewInterceptor" />
+            </list>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,428 @@
+# Atul sachan 1st April
+
+1. Added Opening balance feature for Credit Note/Debit note For both customer and vendor.
+
+#Mayur Pawar 1 April 2014
+
+issues:
+1.Pls check the Cash book Functionality. Cash book account report is listing the other GL accounts as well.
+2. Unable to edit the existing COA.
+3. Customers and Vendors list are list appearing in Ledger report
+4. All accounts are listing under the Bank book report. 
+
+#Mayur Bhokase 2 April 2014
+Jasper Reports for :
+1. Senwan Group Commercial Invoice
+2. Senwan Group Packing List
+3. Senwan Group Customer Quotation 
+4. Senwan Group Purchase Order
+5. Ferrate Group Tax Invoice
+6. Ferrate Group Vendor Invoice
+7. Ferrate Group Purchase Order
+8. Ferrate Group Payment Voucher Against GL code.
+
+#Anand Nimblalkar 2 April 2014
+1. In Customer List By Category tab in the Name field of grid Account name showing instead of Customer name.
+2. In Vendor List By Category tab in the Name field of grid Account name showing instead of Vendor name.
+3. In Debit Note Report Debit Notes not displayed.
+4. In Debit Note Report in the Vendor Name/Customer Name field of grid Account name showing instead of Vendor/customer name.
+
+
+#Anup 3 April 2014
+1. while RP, cash sales type of invoices are also getting included into grid. golden rules are: grid should filter only those credit invoices of selected customer which are having some Amount Due. 
+2. After RP against invoice in full (those invoices which are having term amount in it), Amount due are showing -10 in RP report where it should show 0 amount due.
+
+
+#Hitesh 4 April 2014
+1.In Quotation report, NaN are showing in paging when hide few columns of report customise report view.
+2.In Sales Order Report, NaN are showing in paging when hide few columns of report customise report view.
+3.In sales Return, Sequence number are not getting generated while copying a SR
+
+#Pandurang 4 April 2014
+1.COA import get Nuu pointer exception while import attached file.
+2.In Advance Vendors, record are not showing in grid after creating. so unable to perform other operation like edit, delete, print export etc
+3.In Sales Return, 1.Unable to create SR by linking invoice to it. 2. Unable to create SR from such DO in which some Invoice are Linked
+4.In Customer Credit Note, while creating a CN, Note type combo are not displaying for the first time. we need to close the tab and open again to have note type combo.
+
+#Mayur Pawar 4 April 2014
+
+1.In Customer Credit Note, unable to export single record
+2.Filter option for Vendors - Filter option for Vendor is not functioning in Purchase Requisition (disabled vendor combo).
+
+
+#Anup Kale 4 April 2014
+1.In SO Report, Copy and edit button should be disable from new dashboards report expander
+2.Edit case of Party journal entry with cn/dn 
+
+# Atul sachan 7th April 2014
+1. Added import functionality for OPENING CI/VI/MP/RP/CN/DN
+
+#Pandurang 8 April 2014 
+Account Re-evaluation Changes for According to New Version.
+
+#Mayur Bhokase 1 April 2014
+Ferrate Group Vendor Invoice Jasper report
+<>Newly Added Files
+1.FerrateGroupVendorInvoice.jrxml
+2.FerrateGroupVendorInvoiceTable2.java
+<>Change in old files
+1.Jasperview.xml
+2.Export Interface
+3.FerrateGroupPurchaseOrderSubReport.java
+4.accGoodReceiptControllerCMN.java 
+
+Ferrate Group Payment Voucher Jasper report
+<>Newly Added Files
+1.FerrateGroupPaymentVoucher.jrxml
+2.FerrateGroupPaymentVoucherTable.java
+<>Change in old files
+1.Jasperview.xml
+2.Export Interface
+3.accVendorPaymentControllerCMN.java 
+
+#Pandurang 1 April 2014 Quantity update in Inventory Said Update After Delete OPtion In 
+1.Goods Receipt
+2.Delivery Order
+3.Sales Return
+4.Purchase Return
+5.Customer Invoice
+6.Vendor Invoice
+
+#Pandurang 2 April 2014 
+1.Customized Summary Report Issues- Report Cannot Be Displaying Aging Values.
+
+# Neeraj - 2 April 2014
+Custom Designer - Line Items in table format with applied header style and border properties 
+
+
+#Hitesh Suryawanshi 2 April 2014 
+1.Edit invoice - open up fields for editing even if it is linked 
+ that is not strictly affecting the linked transaction(price, quantity, customer/vendor, items).
+2.Dimensions - Edit option should allow users to add modules. Note: Option should be disabled for pre-selected modules.
+3.Missing auto sequence number format report.
+
+
+#Pandurang 3 April 2014 
+1.Edit Case Issues for Inventory-Accounting Integration Sales Return and Purchase return values are not Updated.
+
+#Pandurang 3 April 2014
+1.SR/PR Inventory Update Issue.
+2.Remark Filed showing %20 for Space.
+
+#Amol Dhokale 3 April 2014 
+Custom Designer -Added footer band and allow to add field/label/table in it
+
+#Pandurang 4 April 2014
+1.VR Pdf Changes for Signature and Description text in line Issue.
+
+#Hitesh 4 April 2014
+1.COA permanent delete option.
+2.Product permanent delete option.
+3.JE permanent delete option
+
+#Mayur Bhokase 7 April 2014
+Added Product Term Description and Product Term Total in Custom Designer Module.
+
+# Neeraj Dwivedi 8th April 2014
+
+Custom Designer Changes - 
+1. Line item table border with 3 modes and changes in style property accordingly.
+
+#Mayur Pawar 8 april 2014
+Expense vendor invoice case in permenent delete functionality
+
+#Pandurang 8 April 2014
+Selection All Records In Sales By Customer,Product,Person Reports for Customer,Product,Person Combo. 
+
+#Mayur Bhokase 8 April 2014
+Jasper report for Aged payable and Aged Receivable.
+
+#Amol Dhokale 8 April 2014 
+Added new button - Page Footer and provide functionality like render and save content
+
+#Pandurang 9 April 2014
+Selection All Records In Sales By sales person name All Records Issue.
+
+#Pandurang 10 April 2014
+Credit/Debit Note can be able to select multiple invoices from the same customer/Vendor.
+
+#Anup 10 April 2014
+Issue Outstanding filter in Purchase Order. 
+
+#Pandurang 11 April 2014
+Sales by Person report- All Person selection criteria change.
+issue regarding CN/DN link Transaction window hidden in browser header.
+
+#Amol Dhokale 11 April 2014
+Allow user to select other modules fields if linked to each other.
+
+# Atul sachan 9th April 2014
+1. Added Opening balance feature for PO/SO.
+
+# Raveesh Pathak 10th April 2014
+1.Not possible to edit PR/SR as sequence number are not getting loaded while editing
+2.To date are showing as previous month last date instead of today date(Aged Payable). 
+3.Export SOA not working, records are not showing in report view
+
+#Mayur Pawar 8 April 2014
+1.in COA report column name should be group instead of Type and show one column Master Type
+2.COA Import - 1. Make account code mandatory. 2. Change Types to Groups
+
+#Mayur Pawar 10 April 2014
+Add one column in COA report showing the type of account
+
+#Pandurang 11 April 2014
+Vendor Code/Customer Code Mandatory while Import
+
+#Mayur  Pawar 12 april 2014
+
+void delete functionality in following report:-
+1.Sales Order.
+2.Purchase Order
+3.Goods Receipt
+4.Delivery Order
+5.Sales Return
+5.Purchase Return
+6.Customer Invoice
+7.Vendor Invoice
+8.Purchase Requisition
+9.Credit Note report
+10.Debit Note report.
+11.Payment Made report
+12.Payment received.
+13.Customer quotation
+14.Vendor quotation
+
+#mayur pawar 12 April 2014
+Functionality of delete in Purchase Requisition
+
+#mayur pawar 14 april 2014
+issue:
+1.Auto sequence not generated in make payment when save and create new
+
+#Atul sachan 14 April 2014
+
+1. In GST Form Five Report Revenue for accounting period was coming double.
+
+2. - Entry will come in GST and GST Form 5, Export GST Form5, GST Form 5 detail view , IAF File Report of -
+          - Receive Payment Otherwise ,against GL creation by selecting GST Account.
+          - Make Payment Otherwise ,against GL creation by selecting GST Account.
+3. - Fixed Transaction edit issue. transaction was not editable due to currency load issue.
+
+#Pandurang 15 April 2014 
+Issue that product name does not fit in line
+
+#Anand Nimbalkar 15 April 2014
+1.Show only selected links to which user has permission on navigation panel.
+2.Add Valid till field in Quotation and the quotation will expire if is not used before the valid date.
+3.Add 'cashtransaction' column for Cash Sales and Cash Purchase records and filter these transaction on this flag in particular reports .
+4.Product Import functionality 
+    a. Provide sample file download link. 
+    b. Provide exact validation message. 
+    c. Duplication check for Product ID. 
+    d. Maintain Import log entry and error log entry.
+5.JE# Should be displayed after saving the Invoice.
+6.Added script of 'addCustomerCategoryForOldRecords.jsp'
+7.Added script of 'addVendorCategoryForOldRecords.jsp'
+8.Added script of 'UpdateCashtransactionFlagForOldRecords.jsp'
+9.Displaye customer / vendor name in make and receive payment wherever applicable. Added in the following Report:
+    a. Customer Receipt
+    b. Customer Payment
+    c. Vendor Receipt
+    d. Vendor Payment
+10.Next auto generation handled when multiple user creating transaction in following report.
+    a. Make Payment
+    b. Receive Payment
+    c. Customer Invoice
+    d. Vendor Invoice
+
+
+#Anup 15 April 2014
+Issue:
+1.In MP/RP the sum of the grid and the summary were not equal.
+
+#mayur Pawar 15 april 2014
+Default account for customer and vendor should there after creating new company
+Hide Make payment otherwise and Receive payment otherwise option
+
+#Anup 15 April 2014
+Issue:
+1.Unable to save MP/RP Credit note debit note.
+
+#Mayur Bhokase 17 April 2014
+Payment Voucher Report Changes for LSH.
+
+#Anup 17 April 2014
+Issue:
+1.Edit Case of Journal Entry,data was not populating.
+
+#Mayur Bhokase 18 April 2014
+Payment Receipt Report Changes for LSH.
+
+#Anup 18 April 2014
+Issue:
+1.While RP against customer Debit note, system are giving error.
+2.While MP against customer Credit note, system are giving error.
+3.While RP against vendor DN, those DN should not be in the grid which are having amount due 0.
+4.While RP against Customer DN, those DN should not be in the grid which are having amount due 0.
+5.While MP against Customer CN, those CN should not be in the grid which are having amount due 0.
+6.While MP against Vendor CN, those CN should not be in the grid which are having amount due 0
+7.While MP against Vendor invoices, Cash Purchases should not be in the grid since it is already paid.
+8.While making DN against paid VI, Cash Purchases should not be in the grid.
+
+#Mayur Bhokase 19 April 2014
+Statement of Account Jasper Report Changes for LSH.
+Tax Invoice Jasper Report Changes for LSH.
+
+#Pandurang 19 April 2014
+Added Dimension at line level in journal entry. 
+
+#Mayur Bhokase 21 April 2014
+Alignment Issues in Statement of Account Jasper Report for LSH.
+
+#Pandurang Mukhekar 21 April 2014
+Mass Delete Functionality in All Reports.
+In Make Payment Credit and Debit Amounts are not equal issue in case of payment Against GL Code.
+Vendor invoices are not showing in combo while making Purchase Return.
+Sequence number issue in Purchase requisition.
+
+#Hitesh Suryawanshi 21 April 2014
+1.Solve Issue Related to Line items in Make Payment And Receive Payment
+
+#Atul sachan 22 April 2014
+
+1. Creation of Credit Note/Debit Note through new UI.
+
+#Anup 23 April 2014
+Enhancement:
+1.GST report in SGD for SINGAPORE Company.
+2.Added Period balance in Cash Book and Bank Book Report.
+3.Allowed Multi Currency Invoices Payment with/without User Defined rate.    
+
+#Malhari Pawar 23 April 2014
+1. Solved Round up issue number not calculated properly in some cases.
+
+#Mayur Bhokase 23 April 2014
+Statement of Accounts layout changes for LSH.
+
+#Raveesh Pathak 23rd April 2014
+Enhancement
+    1.Billing and Shipping Address fields are break down in multiple fields like country,state,city etc in following modules.
+        1.Customer Invoice
+        2.Vendor Invoice
+        3.customer Quotation
+        4.vendor Quotation
+        5.Cash Sales
+        6.Cash Purchase
+        7.Purchase order
+        8.Sales order
+        9.Customer
+        10.Vendor  
+    2.New UI designed for Address field in module name given below
+    3.New UI designed for customer and vendor Create and Edit functionality
+
+# Anand Nimbalkar 24 April 2014
+1. Handle Next auto generation  when multiple user creating transaction. Handled in following transaction:
+    a. Make Payment
+    b. Receive Payment
+    c. Vendor Invoice
+    d. Customer Invoice
+    e. Cash Purchase
+    f. Purchase Order
+    g. Vendor quotation
+    h. Cash Sales
+    i. Sales Order
+    j. Customer Quotation
+    k. Purchase Requisition
+    l. Goods Receipt
+    m. Delivery Order
+    n. Purchase Return
+    o. Sales Return
+    p. Debit Note.
+2. Sales by sales person report (To be able to search by category).
+3. While editing an unused custom field of text type or number field or anything, 
+   if we change the text field to number field or drop down or anything, 
+   system are giving success message but the changes are not getting saved.
+4. While editing a Custom Field of multi select drop down, values are not showing.
+5. Vendor Invoice to have sales person. Implemented in following modules:
+    a. Vendor Invoice
+    b. Cash Purchase
+    c. Purchase Order
+    d. Vendor Quotation
+6. [ERP] Credit term starts from shipping date captured on the vendor invoice.
+7. Product Price import functionality ( Mass Update the prices ).
+
+#Hitesh Suryawanshi 24th April 2014
+Enhancement
+    1.Added Button in User administration and company Preferences to Set User wise Amend price permissions
+
+#Mayur Bhokase 25 April 2014
+Change the address field value in all jasper reports for Senwan Group.
+Change the address field value in all jasper reports for Ferrate Group.
+
+# Atul sacha 25 April 2014
+
+1. Default Tax mapping option at customer and Vendor Master.
+2. Block one tax for each transaction- Either Transaction Level or Product Level.
+
+# Raveesh Pathak 25th April 2014
+Enhancement:
+1.Export Single report functionality changes for  billing and shipping address
+
+#Mayur Bhokase 26 April 2014
+Statement of Account Jasper report address field changes for LSH
+
+#Mayur Bhokase 26 April 2014
+Statement of Account Jasper report currency changes for LSH
+
+# Anand Nimbalkar 28 April 2014
+1. Add 'Initial Quantity' column in import product functionality.
+2. Add 'Customer' and 'Vendor' columns in Import Product Price functionality.
+
+#Mayur Bhokase 28 April 2014
+Layout changes in Statement of Account Jasper report for LSH
+
+# Atul sacha 28 April 2014
+
+1. Added Tax Amount feature in CN/DN -Otherwise, against vendor, customer.
+2. Implemented CN/DN Edit feature for all types of CN/DN.
+
+
+# Anup Kale 28 April 2014
+Issues
+1.All the currency are not loading up while creating a record. it is happening when some currency are selected other than default currency, again going to select some other currency.
+2.Solved Party Journal Issue CN/DN not generating
+Enhancement:
+1.Created a new report named Customer Default List.
+
+# Anand Nimbalkar 28 April 2014
+3.Payment transaction missing.
+
+#Raveesh Pathak 28 April 2014
+Issue:
+Debit note created for one Vendor and the shows different vendor name in  JE. 
+
+#Mayur Bhokase 29 April 2014.
+Add product level GST into summary level GST for all jasper reports of Senwan Group, Ferrate Group and LSH.
+
+# Anand Nimbalkar 29 April 2014
+1. Display 'Name' instead of 'Account Name' in MP and RP Reports.
+2. Display 'Name' instead of label 'Vendor name' in DN Report.
+3. Display 'Name' instead of label 'Customer name' in CN Report.
+
+
+#Raveesh Pathak 29th April 2014
+Issue:
+Entry of Make/Receive Payment in Ledger report showing account name instead of vendor/customer name
+
+
+# Atul sachan 30th April 2014
+1. Made reflection of GST on GST, IAF Reports while creating CN/DN By GST Selections.
+2. Fixed  Spot exchange rate not considered in GST form 5 and related reports.
+3. Fixed Amounts are not shown against CN & DN entries in GST report.
+4. Fixed entry are missing in GST form 5.
+5. Fixed While selecting a VI/CI in CN/DN, the value of invoices are not showing rounded off.
+
+# Hitesh Suryawanshi 30th April 2014
+Document Class (Not being able to add document class in every module) 1. Credit Note  2. Debit Note
+

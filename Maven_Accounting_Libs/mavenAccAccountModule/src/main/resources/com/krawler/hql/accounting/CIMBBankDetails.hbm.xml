@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.CIMBBankDetails" table="cimbbankdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="serviceCode" type="string">
+            <column length="255" name="servicecode"/>
+        </property>
+        <property name="bankAccountNumber" type="string">
+            <column length="255" name="bankaccountnumber"/>
+        </property>
+        <property name="ordererName" type="string">
+            <column length="255" name="orderername"/>
+        </property>
+        <property name="currencyCode" type="string">
+            <column length="255" name="currencycode"/>
+        </property>
+        <property name="settelementMode" type="integer">
+            <column name="settelementmode" default='0'/>
+        </property>
+        <property name="postingIndicator" type="integer">
+            <column name="postingindicator" default='0'/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account"/>
+    </class>
+  
+</hibernate-mapping>

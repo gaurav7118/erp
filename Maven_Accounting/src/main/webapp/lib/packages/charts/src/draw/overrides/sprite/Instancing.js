@@ -1,0 +1,1 @@
+Ext.define("Ext.draw.overrides.sprite.Instancing",{override:"Ext.draw.sprite.Instancing",hitTest:function(F,I){var E=this,G=E.getTemplate(),B=G.attr,A=E.instances,D=A.length,C=0,H=null;if(!E.isVisible()){return H}for(;C<D;C++){G.attr=A[C];H=G.hitTest(F,I);if(H){H.isInstance=true;H.template=H.sprite;H.sprite=this;H.instance=A[C];H.index=C;return H}}G.attr=B;return H}})

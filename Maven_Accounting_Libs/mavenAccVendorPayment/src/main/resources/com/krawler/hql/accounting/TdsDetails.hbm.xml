@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.TdsDetails" table="tdsdetails">
+        <id name="tdsid" column="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="documenttype" type="string">
+            <column name="documenttype"/>
+        </property>
+        <property name="documentid" type="string">
+            <column name="documentid"/>
+        </property>
+        <property name="documentdetails" type="string">
+            <column name="documentdetails"/>
+        </property>
+        <property name="includetaxamount" type="boolean">
+            <column name="includetaxamount"/>
+        </property>
+        <property name="tdspercentage" type="double">
+            <column name="tdspercentage"/>
+        </property>
+        <property name="tdsamount" type="double">
+            <column name="tdsamount"/>
+        </property>
+        <property name="enteramount" type="double">
+            <column name="enteramount"/>
+        </property>
+        <property name="journalEntryDetail" type="string">
+            <column name="journalentrydetail"/>
+        </property>
+        <property name="tdsAssessableAmount" type="double">
+            <column name="tdsassessableamount" default="0"/>
+        </property>
+
+       <many-to-one class="com.krawler.hql.accounting.MasterItem" name="natureOfPayment" column="natureofpayment"/>
+       <many-to-one class="com.krawler.hql.accounting.PaymentDetailOtherwise" name="paymentdetailotherwise" column="paymentdetailotherwise" not-null="false"/>
+       <many-to-one class="com.krawler.hql.accounting.CreditNotePaymentDetails" name="creditnotepaymentdetail" column="creditnotepaymentdetail" not-null="false"/>
+       <many-to-one class="com.krawler.hql.accounting.PaymentDetail" name="paymentdetail" column="paymentdetail" not-null="false"/>
+       <many-to-one class="com.krawler.hql.accounting.AdvanceDetail" name="advanceDetail" column="advancedetail" not-null="false"/>
+       <many-to-one class="com.krawler.common.admin.TDSRate" name="ruleid" column="ruleid" not-null="false"/>
+       <many-to-one class="com.krawler.common.admin.Company" name="company" column="company" not-null="true"/>
+       <many-to-one class="com.krawler.hql.accounting.Account" name="account" column="account" />
+       <many-to-one class="com.krawler.hql.accounting.Account" name="tdspayableaccount" column="tdspayableaccount" not-null="false"/>
+    </class>
+</hibernate-mapping>

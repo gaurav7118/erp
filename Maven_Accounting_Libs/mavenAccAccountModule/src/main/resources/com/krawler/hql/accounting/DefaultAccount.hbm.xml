@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DefaultAccount" table="defaultaccount">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column length="50" name="name" not-null="true"/>
+        </property>
+        <property name="companyType" type="string">
+            <column length="50" name="companytype"/>
+        </property>
+        <property name="openingBalance" type="double">
+            <column name="openingbalance" not-null="true"/>
+        </property>
+        <property name="creationDate" type="timestamp">
+            <column name="creationdate"/>
+        </property>
+        <property name="life" type="double">
+            <column name="life"/>
+        </property>
+        <property name="salvage" type="double">
+            <column default="0" name="salvage" not-null="true"/>
+        </property>
+        <property name="presentValue" type="double">
+            <column name="presentvalue" not-null="true"/>
+        </property>
+        <property name="controlAccounts" type="true_false">
+            <column name="controlaccounts" default="false"/>
+        </property>
+        <property name="mastertypevalue" type="integer">
+            <column name="mastertypeid" default="1" />
+        </property>
+        <property name="mrpAccount" type="true_false">
+            <column name="ismrpaccount" default="false" />
+        </property>
+        <set cascade="all" inverse="true" name="children">
+            <key column="parent"/>
+            <one-to-many class="com.krawler.hql.accounting.DefaultAccount"/>
+        </set>
+        <many-to-one class="com.krawler.common.admin.Country" column="country" name="country"/>
+        <many-to-one class="com.krawler.common.admin.State" column="state" name="state"/>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Group" column="groupname" name="group" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="parent"/>
+    </class>
+</hibernate-mapping>

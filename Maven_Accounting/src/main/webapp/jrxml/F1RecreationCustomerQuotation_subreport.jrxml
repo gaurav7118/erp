@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000012"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="srno" class="java.lang.String"/>
+	<field name="productname" class="java.lang.String"/>
+	<field name="productdesc" class="java.lang.String"/>
+	<field name="quantity" class="java.lang.String"/>
+	<field name="unitprice" class="java.lang.String"/>
+	<field name="totalprice" class="java.lang.String"/>
+	<field name="imgPath" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{imgPath}.equals("")]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="3" width="33" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="156" y="3" width="162" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productdesc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="34" y="3" width="122" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="318" y="3" width="56" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="439" y="3" width="101" height="20"/>
+				<box leftPadding="0" rightPadding="5"/>
+				<textElement textAlignment="Right" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalprice}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="374" y="3" width="65" height="20"/>
+				<box leftPadding="0" rightPadding="5"/>
+				<textElement textAlignment="Right" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unitprice}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="137">
+			<printWhenExpression><![CDATA[!$F{imgPath}.equals("")]]></printWhenExpression>
+			<image onErrorType="Blank">
+				<reportElement x="39" y="31" width="113" height="105"/>
+				<imageExpression><![CDATA[$F{imgPath}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="3" width="33" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{srno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="34" y="3" width="122" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="156" y="3" width="162" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productdesc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="318" y="3" width="56" height="20"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="374" y="3" width="65" height="20"/>
+				<box leftPadding="0" rightPadding="5"/>
+				<textElement textAlignment="Right" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unitprice}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="439" y="3" width="101" height="20"/>
+				<box leftPadding="0" rightPadding="5"/>
+				<textElement textAlignment="Right" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalprice}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

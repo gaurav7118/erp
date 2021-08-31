@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.BillingReceiptDetailOtherwise" table="billingreceiptdetailotherwise">
+    <id column="id" name="ID">
+      <generator class="uuid"/>  
+    </id>
+    <property name="taxJedId" type="string">
+      <column name="taxjedid" default=""/>
+    </property>
+    <property name="amount" type="double">
+      <column name="amount" not-null="true"/>
+    </property>
+    <property name="taxamount" type="double">
+      <column name="taxamount" not-null="true"/>
+    </property>
+    <property name="description" type="string">
+      <column  name="description"/>
+    </property>
+    <property name="isdebit" type="true_false">
+      <column name="isdebit"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.BillingReceipt" column="billingreceipt" name="billingReceipt" />
+    <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+      </class>
+</hibernate-mapping>

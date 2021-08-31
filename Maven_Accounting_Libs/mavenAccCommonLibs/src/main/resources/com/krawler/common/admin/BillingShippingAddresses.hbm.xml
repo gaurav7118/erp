@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.BillingShippingAddresses" table="billingshippingaddresses">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="billingAddress" type="string">
+            <column length="1024" name="billingaddress"/>
+        </property> 
+        <property name="billingCountry" type="string">
+            <column length="255" name="billingcountry"/>
+        </property> 
+        <property name="billingState" type="string">
+            <column length="255" name="billingstate"/>
+        </property> 
+        <property name="billingCity" type="string">
+            <column length="255" name="billingcity"/>
+        </property>
+        <property name="billingCounty" type="string">
+            <column length="50" name="billingcounty"/>
+        </property>
+        <property name="billingPostal" type="string">
+            <column length="255" name="billingpostal"/>
+        </property> 
+        <property name="billingEmail" type="string">
+            <column length="255" name="billingemail"/>
+        </property> 
+        <property name="billingFax" type="string">
+            <column length="255" name="billingfax"/>
+        </property> 
+        <property name="billingMobile" type="string">
+            <column length="255" name="billingmobile"/>
+        </property> 
+        <property name="billingPhone" type="string">
+            <column length="255" name="billingphone"/>
+        </property> 
+        <property name="billingRecipientName" type="string">
+            <column length="255" name="billingrecipientname"/>
+        </property> 
+        <property name="billingContactPerson" type="string">
+            <column length="255" name="billingcontactperson"/>
+        </property> 
+        <property name="billingContactPersonNumber" type="string">
+            <column length="255" name="billingcontactpersonnumber"/>
+        </property> 
+        <property name="billingContactPersonDesignation" type="string">
+            <column length="255" name="billingcontactpersondesignation"/>
+        </property>
+        <property name="billingWebsite" type="string">
+            <column length="255" name="billingwebsite"/>
+        </property>
+        <property name="billingAddressType" type="string">
+            <column length="255" name="billingaddresstype"/>
+        </property>
+        <property name="shippingAddress" type="string">
+            <column length="1024" name="shippingaddress"/>
+        </property> 
+        <property name="shippingCountry" type="string">
+            <column length="255" name="shippingCountry"/>
+        </property> 
+        <property name="shippingState" type="string">
+            <column length="255" name="shippingstate"/>
+        </property> 
+        <property name="shippingCounty" type="string">
+            <column length="50" name="shippingcounty"/>
+        </property> 
+        <property name="shippingCity" type="string">
+            <column length="255" name="shippingcity"/>
+        </property> 
+        <property name="shippingPostal" type="string">
+            <column length="255" name="shippingpostal"/>
+        </property> 
+        <property name="shippingEmail" type="string">
+            <column length="255" name="shippingemail"/>
+        </property> 
+        <property name="shippingFax" type="string">
+            <column length="255" name="shippingfax"/>
+        </property> 
+        <property name="shippingMobile" type="string">
+            <column length="255" name="shippingmobile"/>
+        </property> 
+        <property name="shippingPhone" type="string">
+            <column length="255" name="shippingphone"/>
+        </property> 
+        <property name="shippingContactPersonNumber" type="string">
+            <column length="255" name="shippingcontactpersonnumber"/>
+        </property> 
+        <property name="shippingContactPersonDesignation" type="string">
+            <column length="255" name="shippingcontactpersondesignation"/>
+        </property> 
+        <property name="shippingWebsite" type="string">
+            <column length="255" name="shippingwebsite"/>
+        </property> 
+        <property name="shippingContactPerson" type="string">
+            <column length="255" name="shippingcontactperson"/>
+        </property> 
+        <property name="shippingRecipientName" type="string">
+            <column length="255" name="shippingrecipientname"/>
+        </property> 
+        <property name="shippingRoute" type="string">
+            <column length="255" name="shippingroute"/>
+        </property> 
+        <property name="shippingAddressType" type="string">
+            <column length="255" name="shippingaddresstype"/>
+        </property>
+        <property name="vendcustShippingAddress" type="string">
+            <column length="1024" name="vendcustshippingaddress"/>
+        </property> 
+        <property name="vendcustShippingCountry" type="string">
+            <column length="255" name="vendcustshippingcountry"/>
+        </property> 
+        <property name="vendcustShippingState" type="string">
+            <column length="255" name="vendcustshippingstate"/>
+        </property> 
+        <property name="vendcustShippingCounty" type="string">
+            <column length="50" name="vendcustshippingcounty"/>
+        </property> 
+        <property name="vendcustShippingCity" type="string">
+            <column length="255" name="vendcustshippingcity"/>
+        </property> 
+        <property name="vendcustShippingPostal" type="string">
+            <column length="255" name="vendcustshippingpostal"/>
+        </property> 
+        <property name="vendcustShippingEmail" type="string">
+            <column length="255" name="vendcustshippingemail"/>
+        </property> 
+        <property name="vendcustShippingFax" type="string">
+            <column length="255" name="vendcustshippingfax"/>
+        </property> 
+        <property name="vendcustShippingMobile" type="string">
+            <column length="255" name="vendcustshippingmobile"/>
+        </property> 
+        <property name="vendcustShippingPhone" type="string">
+            <column length="255" name="vendcustshippingphone"/>
+        </property> 
+        <property name="vendcustShippingContactPersonNumber" type="string">
+            <column length="255" name="vendcustshippingcontactpersonnumber"/>
+        </property> 
+        <property name="vendcustShippingContactPersonDesignation" type="string">
+            <column length="255" name="vendcustshippingcontactpersondesignation"/>
+        </property> 
+        <property name="vendcustShippingWebsite" type="string">
+            <column length="255" name="vendcustshippingwebsite"/>
+        </property> 
+        <property name="vendcustShippingContactPerson" type="string">
+            <column length="255" name="vendcustshippingcontactperson"/>
+        </property> 
+        <property name="vendcustShippingRecipientName" type="string">
+            <column length="255" name="vendcustshippingrecipientname"/>
+        </property>         
+        <property name="vendcustShippingAddressType" type="string">
+            <column length="255" name="vendcustshippingaddresstype"/>
+        </property>
+        <property name="customerShippingAddress" type="string">
+            <column length="1024" name="customershippingaddress"/>
+        </property> 
+        <property name="customerShippingCountry" type="string">
+            <column length="255" name="customershippingcountry"/>
+        </property> 
+        <property name="customerShippingState" type="string">
+            <column length="255" name="customershippingstate"/>
+        </property> 
+        <property name="customerShippingCounty" type="string">
+            <column length="50" name="customershippingcounty"/>
+        </property> 
+        <property name="customerShippingCity" type="string">
+            <column length="255" name="customershippingcity"/>
+        </property> 
+        <property name="customerShippingPostal" type="string">
+            <column length="255" name="customershippingpostal"/>
+        </property> 
+        <property name="customerShippingEmail" type="string">
+            <column length="255" name="customershippingemail"/>
+        </property> 
+        <property name="customerShippingFax" type="string">
+            <column length="255" name="customershippingfax"/>
+        </property> 
+        <property name="customerShippingMobile" type="string">
+            <column length="255" name="customershippingmobile"/>
+        </property> 
+        <property name="customerShippingPhone" type="string">
+            <column length="255" name="customershippingphone"/>
+        </property> 
+        <property name="customerShippingContactPersonNumber" type="string">
+            <column length="255" name="customershippingcontactpersonnumber"/>
+        </property> 
+        <property name="customerShippingContactPersonDesignation" type="string">
+            <column length="255" name="customershippingcontactpersondesignation"/>
+        </property> 
+        <property name="customerShippingWebsite" type="string">
+            <column length="255" name="customershippingwebsite"/>
+        </property> 
+        <property name="customerShippingContactPerson" type="string">
+            <column length="255" name="customershippingcontactperson"/>
+        </property> 
+        <property name="customerShippingRecipientName" type="string">
+            <column length="255" name="customershippingrecipientname"/>
+        </property>         
+        <property name="customerShippingAddressType" type="string">
+            <column length="255" name="customershippingaddresstype"/>
+        </property>
+         <property name="customerShippingRoute" type="string">
+            <column length="255" name="customershippingroute"/>
+        </property>       
+        <property name="vendorBillingAddress" type="string">
+            <column length="1024" name="vendorbillingaddress"/>
+        </property> 
+        <property name="vendorBillingCountry" type="string">
+            <column length="255" name="vendorbillingcountry"/>
+        </property> 
+        <property name="vendorBillingState" type="string">
+            <column length="255" name="vendorbillingstate"/>
+        </property> 
+        <property name="vendorBillingCity" type="string">
+            <column length="255" name="vendorbillingcity"/>
+        </property>
+        <property name="vendorBillingCounty" type="string">
+            <column length="50" name="vendorbillingcounty"/>
+        </property>
+        <property name="vendorBillingPostal" type="string">
+            <column length="255" name="vendorbillingpostal"/>
+        </property> 
+        <property name="vendorBillingEmail" type="string">
+            <column length="255" name="vendorbillingemail"/>
+        </property> 
+        <property name="vendorBillingFax" type="string">
+            <column length="255" name="vendorbillingfax"/>
+        </property> 
+        <property name="vendorBillingMobile" type="string">
+            <column length="255" name="vendorbillingmobile"/>
+        </property> 
+        <property name="vendorBillingPhone" type="string">
+            <column length="255" name="vendorbillingphone"/>
+        </property> 
+        <property name="vendorBillingRecipientName" type="string">
+            <column length="255" name="vendorbillingrecipientname"/>
+        </property> 
+        <property name="vendorBillingContactPerson" type="string">
+            <column length="255" name="vendorbillingcontactperson"/>
+        </property> 
+        <property name="vendorBillingContactPersonNumber" type="string">
+            <column length="255" name="vendorbillingcontactpersonnumber"/>
+        </property> 
+        <property name="vendorBillingContactPersonDesignation" type="string">
+            <column length="255" name="vendorbillingcontactpersondesignation"/>
+        </property>
+        <property name="vendorBillingWebsite" type="string">
+            <column length="255" name="vendorbillingwebsite"/>
+        </property>
+        <property name="vendorBillingAddressType" type="string">
+            <column length="255" name="vendorbillingaddresstype"/>
+        </property>
+        <property name="vendorBillingAddressForINDIA" type="string">
+            <column length="1024" name="vendorbillingaddressforindia"/>
+        </property> 
+        <property name="vendorBillingCountryForINDIA" type="string">
+            <column length="255" name="vendorbillingcountryforindia"/>
+        </property> 
+        <property name="vendorBillingStateForINDIA" type="string">
+            <column length="255" name="vendorbillingstateforindia"/>
+        </property> 
+        <property name="vendorBillingCityForINDIA" type="string">
+            <column length="255" name="vendorbillingcityforindia"/>
+        </property>
+        <property name="vendorBillingCountyForINDIA" type="string">
+            <column length="50" name="vendorbillingcountyforindia"/>
+        </property>
+        <property name="vendorBillingPostalForINDIA" type="string">
+            <column length="255" name="vendorbillingpostalforindia"/>
+        </property> 
+        <property name="vendorBillingEmailForINDIA" type="string">
+            <column length="255" name="vendorbillingemailforindia"/>
+        </property> 
+        <property name="vendorBillingFaxForINDIA" type="string">
+            <column length="255" name="vendorbillingfaxforindia"/>
+        </property> 
+        <property name="vendorBillingMobileForINDIA" type="string">
+            <column length="255" name="vendorbillingmobileforindia"/>
+        </property> 
+        <property name="vendorBillingPhoneForINDIA" type="string">
+            <column length="255" name="vendorbillingphoneforindia"/>
+        </property> 
+        <property name="vendorBillingRecipientNameForINDIA" type="string">
+            <column length="255" name="vendorbillingrecipientnameforindia"/>
+        </property> 
+        <property name="vendorBillingContactPersonForINDIA" type="string">
+            <column length="255" name="vendorbillingcontactpersonforindia"/>
+        </property> 
+        <property name="vendorBillingContactPersonNumberForINDIA" type="string">
+            <column length="255" name="vendorbillingcontactpersonnumberforindia"/>
+        </property> 
+        <property name="vendorBillingContactPersonDesignationForINDIA" type="string">
+            <column length="255" name="vendorbillingcontactpersondesignationforindia"/>
+        </property>
+        <property name="vendorBillingWebsiteForINDIA" type="string">
+            <column length="255" name="vendorbillingwebsiteforindia"/>
+        </property>
+        <property name="vendorBillingAddressTypeForINDIA" type="string">
+            <column length="255" name="vendorbillingaddresstypeforindia"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

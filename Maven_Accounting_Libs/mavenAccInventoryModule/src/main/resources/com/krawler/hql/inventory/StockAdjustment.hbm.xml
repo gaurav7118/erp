@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.stockout.StockAdjustment" table="in_stockadjustment" >
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="transactionNo" type="string">
+            <column length="50" name="seqno" />
+    </property>
+    <property name="remark" type="string">
+      <column length="255" name="remark"/>
+    </property>
+    <property name="throughFile" type="string">
+      <column length="28" name="throughfile"/>
+    </property>
+    <property name="reason" type="string">
+      <column length="255" name="reason"/>
+    </property>
+    <property name="stockAdjustmentReason" type="string">
+      <column length="255" name="adjustmentreason"/>
+    </property>
+    <property name="adjustmentType" type="string">
+      <column length="255" name="adjustment_type" not-null="true"/>
+    </property>
+    <property name="quantity" type="double">
+      <column name="quantity"/>
+    </property>
+    <property name="finalQuantity" type="double">
+      <column name="finalquantity"/>
+    </property>
+    <property name="memo" type="string">
+      <column length="2048" name="memo"/>
+    </property>
+    <property name="pricePerUnit" type="double">
+            <column name="amount" />
+    </property>
+    <property name="businessDate" type="date">
+      <column name="bussinessdate"/>
+    </property>
+    <property name="createdOn" type="timestamp">
+      <column name="createdon"/>
+    </property>
+    <property name="modifiedOn" type="timestamp">
+      <column name="modifiedon"/>
+    </property>
+    <property name="creationdate" type="long">
+      <column name="creationdate"/>
+    </property>
+    <property name="priceupdated" type="true_false">
+             <column name="priceupdated" default="'F'" />
+    </property>
+    <property name="isdeleted" type="true_false">
+             <column name="isdeleted" default="'F'" />
+    </property>
+    <property name="isJobWorkIn" type="true_false">
+             <column name="isJobWorkIn" default="'F'" />
+    </property>
+    <property column="status" name="status">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.krawler.inventory.model.stockout.AdjustmentStatus</param>
+      </type>
+    </property>
+    <property column="transaction_module" name="transactionModule">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.krawler.inventory.model.stockmovement.TransactionModule</param>
+      </type>
+    </property>
+        <set name="stockAdjustmentDetail" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="stockadjustment"  />
+            <one-to-many class="com.krawler.inventory.model.stockout.StockAdjustmentDetail" />
+    </set>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.inventory.model.store.Store" column="store" name="store"/>
+    <!--        <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location"/>-->
+    <many-to-one class="com.krawler.inventory.model.packaging.Packaging" column="packaging" name="packaging"/>
+    <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="uom" name="uom"/>
+    <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.User" column="createdby" name="creator" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifier"/>
+    <many-to-one class="com.krawler.common.admin.CostCenter" column="costcenter" name="costCenter"/>
+    <many-to-one class="com.krawler.inventory.model.stockout.StockAdjustment" column="draft" name="stockAdjDraft"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryref" name="inventoryRef"/>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.JournalEntry" column="journalentry" name="journalEntry" unique="true"/>
+        <many-to-one column="stockadjustmentcustomdataref" class="com.krawler.inventory.model.stockout.StockAdjustmentCustomData" name="stockAdjustmentCustomData" />
+        <many-to-one column="stockadjustmentlinelevelcustomdataref" class="com.krawler.inventory.model.stockout.StockAdjustmentCustomData" name="stockAdjustmentLineLevelCustomData" />
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.JournalEntry" column="inventoryje" name="inventoryJE"/>
+    <many-to-one class="com.krawler.inventory.model.ist.RepairGRODetailISTMapping" column="rejectedgrodetailistmapping" name="rejectedRepairGRODetailISTMapping"/>
+    <many-to-one class="com.krawler.inventory.model.ist.RepairWOCDISTMapping" column="rejectedwocdistmapping" name="rejectedRepairWOCDetailISTMapping"/>
+    <many-to-one class="com.krawler.inventory.model.ist.RejectedDODQCISTMapping" column="rejectedapproveddodqcistmapping" name="rejectedApprovedDODQCISTMapping"/>
+    <many-to-one class="com.krawler.inventory.model.ist.RejectedDODQCISTMapping" column="rejecteddodqcistmapping" name="rejectedDODQCISTMapping"/>
+    <many-to-one class="com.krawler.inventory.model.ist.DODQCISTMapping" column="approveddodqcistmapping" name="approvedDODQCISTMapping"/>
+    <many-to-one class="com.krawler.inventory.model.cyclecount.CycleCount" column="cyclecount" name="cyclecount" not-null="false"/>
+  </class>
+</hibernate-mapping>

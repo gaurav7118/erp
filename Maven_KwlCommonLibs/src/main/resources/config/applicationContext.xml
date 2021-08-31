@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="baseDAO" class="com.krawler.common.dao.BaseDAO">
+       <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+<!--        <property name="jdbcTemplate" >
+            <bean class="org.springframework.jdbc.core.JdbcTemplate">
+                <property name="dataSource" ref="dataSource" />
+            </bean>           
+        </property>-->
+   </bean>
+    <bean id="sessionvalidator"  name="sessionvalidator" class="com.krawler.esp.handlers.sessionAdvisor"/>
+    <bean id="fieldDataManagerDao" class="com.krawler.customFieldMaster.fieldDataManagerDAOImpl"> 
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property> 
+    </bean>
+
+    <bean id="fieldDatamanager" class="com.krawler.customFieldMaster.fieldDataManager"> 
+        <property name="fieldDataManagerDAO">
+            <ref bean="fieldDataManagerDao"/>
+        </property> 
+    </bean>
+    
+    <bean id="exportPdfTemplateDao" class="com.krawler.spring.exportFunctionality.exportPdfTemplateDAOImpl" parent="baseDAO"/>
+        
+    <bean id="accExportpdfService" class="com.krawler.spring.commonlibs.service.AccExportpdfServiceImpl"> 
+        <property name="exportPdfTemplateDAO">
+            <ref bean="exportPdfTemplateDao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+    </bean> 
+    <!--Session Handler Controller-->
+    <bean id="sessionHandlerdao" class="com.krawler.spring.sessionHandler.sessionHandlerImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <!--KwlCommonTables Controller-->
+    <bean id="kwlCommonTablesdao" class="com.krawler.spring.common.kwlCommonTablesDAOImpl" parent="baseDAO"/>
+       
+    <bean id="kwlCommonTablesController" class="com.krawler.spring.common.kwlCommonTablesController">
+        <property name = "kwlCommonTablesService">
+            <ref bean="kwlCommonTablesService"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id="kwlCommonTablesService" class="com.krawler.spring.common.kwlCommonTablesServiceImpl">
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+    </bean>
+    
+    <!--Help Tour-->
+    <bean id="firstRunHelpdao" class="com.krawler.spring.firstRunHelp.firstRunHelpDAOImpl" parent="baseDAO"/>
+        
+    <bean id="EditHelpController" class="com.krawler.spring.firstRunHelp.firstRunHelpController">
+        <property name="firstRunHelpDAO">
+            <ref bean="firstRunHelpdao"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="mySessionFactory" />
+    </bean>
+    <!--Company Details Controller-->
+    <bean id="companyDetailsdao" class="com.krawler.spring.companyDetails.companyDetailsDAOImpl" parent="baseDAO">
+        <property name="storageHandlerImpl">
+            <ref bean="storageHandlerdao"/>
+        </property>
+    </bean>
+    <!--Storage Handler Controller-->
+    <bean id="storageHandlerdao" class="com.krawler.spring.storageHandler.storageHandlerImpl"/>
+    <bean id="companyDetailsController" class="com.krawler.spring.companyDetails.companyDetailsController">
+        <property name="companyDetailsDAO">
+            <ref bean="companyDetailsdao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+    </bean>
+    <!--Profile Handler Controller-->
+    <bean id="profileHandlerdao" class="com.krawler.spring.profileHandler.profileHandlerDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+    </bean>
+    <bean id="profileHandlerController" class="com.krawler.spring.profileHandler.profileHandlerController">
+        <property name="profileHandlerDAO">
+            <ref bean="profileHandlerdao"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="profileHandlerServiceObj">
+            <ref bean="profileHandlerServiceObj"/>
+        </property>
+    </bean>
+    
+    <bean id="profileHandlerServiceObj" class="com.krawler.spring.profileHandler.profileHandlerServiceImpl">
+        <property name="profileHandlerDAO">
+            <ref bean="profileHandlerdao"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+         <property name="apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+    </bean>
+    
+    <!--Permission Handler Controller-->
+    <bean id="permissionHandlerdao" class="com.krawler.spring.permissionHandler.permissionHandlerDAOImpl" parent="baseDAO"/>
+        
+    <bean id="permissionHandlercontroller" class="com.krawler.spring.permissionHandler.permissionHandlerController">
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="kwlCommonTablesDAOobj">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="permissionHandlerServiceObj">
+            <ref bean="permissionHandlerService"/>
+        </property>        
+    </bean>
+    <!--Audit Trail Controller-->
+    
+    <bean id="auditIndex" class="com.krawler.spring.auditTrailModule.AuditIndex">
+    </bean>
+    
+    <bean id="auditTraildao" class="com.krawler.spring.auditTrailModule.auditTrailDAOImpl" parent="baseDAO">
+        <property name="storageHandlerImpl">
+            <ref bean="storageHandlerdao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="auditIndex">
+            <ref bean="auditIndex"/>
+        </property>
+    </bean>
+    <!--Auth Handler Controller-->
+    <bean id="authHandlerdao" class="com.krawler.spring.authHandler.authHandlerDAOImpl" parent="baseDAO">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+    </bean>
+    
+    <!--export Pdf Template Controller-->
+
+    <bean id="exportPdfTemplateController" class="com.krawler.spring.exportFunctionality.exportPdfTemplateController">
+        <property name="exportPdfTemplateDAO">
+            <ref bean="exportPdfTemplateDao"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+    </bean>
+    
+    <!-- Import Data Beans-->
+    <bean id = "importDao" class = "com.krawler.spring.importFunctionality.ImportImpl" parent="baseDAO"/>
+      
+    <bean id = "importHandler" class = "com.krawler.spring.importFunctionality.ImportHandler">
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="authHandlerDAOObj">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="masterTables">
+            <list>
+                <value>MasterItem</value>
+                <value>com.krawler.hql.accounting.MasterItem</value>
+            </list>
+        </property>
+    </bean>
+    <bean id = "importcontroller" class = "com.krawler.spring.importFunctionality.ImportController">
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <!--    <bean id="baseDAO" class="com.krawler.customFieldMaster.BaseDAO" abstract="true">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>-->
+
+    <!-- For Save Advanced Search -->
+    <bean id="savesearchjson" class="com.krawler.acc.savedsearch.web.SavedSearchJson" />
+
+    <bean id="savesearchdao" class="com.krawler.acc.savedsearch.dao.SavedSearchDAOImpl" parent="baseDAO" />
+
+    <bean id="savesearchservice" class="com.krawler.acc.savedsearch.bizservice.SavedSearchServiceImpl">
+        <property name="saveSearchDAO">
+            <ref bean="savesearchdao"/>
+        </property>
+    </bean>
+
+    <bean id="SavedSearchController" class="com.krawler.acc.savedsearch.web.SavedSearchController">
+        <property name="saveSearchService">
+            <ref bean="savesearchservice"/>
+        </property>
+        <property name="saveSearchJson">
+            <ref bean="savesearchjson"/>
+        </property>
+        <property name="sessionHandlerImpl">
+            <ref bean="sessionHandlerdao"/>
+        </property>
+    </bean>
+    <!--Creating another class in common Libs for handle custom field related operation and  because of global access.-->
+            
+
+
+
+    
+
+    <!-- Locale Implementation beans -->
+    <bean id="props2jsController" class="com.krawler.common.util.Props2jsController" />
+
+    <bean id="localejsController" class="com.krawler.common.util.LocaleJsController" />
+    <bean id="apiCallHandlerDAO" class="com.krawler.esp.handlers.APICallHandlerDAOImpl" parent="baseDAO">
+    </bean>
+    
+    <bean id="apiCallHandlerService" class="com.krawler.esp.handlers.APICallHanlderServiceImpl">
+        <property name="apiCallHandlerDAO">
+            <ref bean="apiCallHandlerDAO"/>
+        </property>
+    </bean>
+    <bean id="kwlCommonBeanUtils" class="com.krawler.spring.common.KwlCommonBeanUtilsImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <bean id="restServiceFilter" class="com.krawler.common.filters.RestServiceFilter">
+        <property name="kwlCommonBeanUtils">
+            <ref bean="kwlCommonBeanUtils"/>
+        </property>
+        <property name="companyDetailsDAO">
+            <ref bean="companyDetailsdao"/>
+        </property>
+    </bean>
+    
+    <bean id="UserPreferences" class="com.krawler.common.admin.UserPreferences"/>
+    
+    
+    
+    <bean id="permissionHandlerService" class="com.krawler.spring.permissionHandler.permissionHandlerServiceImpl">
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+
+    </bean>
+    <bean id="CommonExportDAO" class="com.krawler.spring.exportFunctionality.CommonExportDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name="jdbcTemplate">
+            <bean class="org.springframework.jdbc.core.JdbcTemplate">
+                <property name="dataSource">
+                    <ref bean="myDataSource"/>
+                </property>
+            </bean>          
+        </property>
+    </bean>
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+    </bean>
+    <bean id="ExportQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="ExportQueue"/>
+    </bean>
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="receiveTimeout" value="10000"/>
+    </bean>  
+    <bean id="JMSExportProducer" class="com.krawler.spring.accounting.jms.JMSExportProducer">
+        <property name="jmsTemplate" ref="jmsTemplate"/>
+    </bean>
+</beans>

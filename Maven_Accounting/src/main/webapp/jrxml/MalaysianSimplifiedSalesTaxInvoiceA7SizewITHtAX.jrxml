@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SenwanGroupCustomerQuotation" pageWidth="210" pageHeight="297" columnWidth="182" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14">
+	<property name="ireport.zoom" value="3.797498335832474"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="217"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#010101"/>
+			<topPen lineWidth="0.0" lineColor="#010101"/>
+			<leftPen lineWidth="0.0" lineColor="#010101"/>
+			<bottomPen lineColor="#010101"/>
+			<rightPen lineWidth="0.0" lineColor="#010101"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" forecolor="#FEFEFE" backcolor="#FEFEFE" fill="Solid" fontName="SansSerif">
+		<pen lineWidth="1.0" lineColor="#010101"/>
+		<box>
+			<pen lineWidth="0.75" lineColor="#010101"/>
+			<topPen lineWidth="0.75" lineColor="#010101"/>
+			<leftPen lineWidth="0.0" lineColor="#010101"/>
+			<bottomPen lineWidth="0.75" lineColor="#010101"/>
+			<rightPen lineWidth="0.0" lineColor="#010101"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="sno" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="name" class="java.lang.String"/>
+		<field name="qty" class="java.lang.String"/>
+		<field name="rate" class="java.lang.String"/>
+		<field name="disc" class="java.lang.String"/>
+		<field name="totalwithouttaxndiscount" class="java.lang.String"/>
+		<field name="totalwithouttax" class="java.lang.String"/>
+		<field name="taxamount" class="java.lang.String"/>
+		<field name="totalwithtax" class="java.lang.String"/>
+		<field name="taxcode" class="java.lang.String"/>
+		<field name="currency" class="java.lang.String"/>
+		<field name="taxpercent" class="java.lang.String"/>
+	</subDataset>
+        <subDataset name="Table Dataset 2">
+		<field name="summary" class="java.lang.String"/>
+		<field name="amount" class="java.lang.String"/>
+		<field name="tax" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Table Dataset 3">
+		<field name="termName" class="java.lang.String"/>
+		<field name="termValue" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="TaxInvoiceSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="TaxSummaryData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="TermsData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="approvalNo" class="java.lang.String"/>
+	<field name="customergstno" class="java.lang.String"/>
+	<field name="terms" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="invno" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="subtotal" class="java.lang.String"/>
+	<field name="gst" class="java.lang.String"/>
+	<field name="totalamount" class="java.lang.String"/>
+	<field name="currencyname" class="java.lang.String"/>
+	<field name="discount" class="java.lang.String"/>
+	<field name="subtotalwithdiscount" class="java.lang.String"/>
+	<field name="duedate" class="java.lang.String"/>
+	<field name="companyname" class="java.lang.String"/>
+	<field name="companyaddress" class="java.lang.String"/>
+	<field name="gstnumber" class="java.lang.String"/>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="amountinwords" class="java.lang.String"/>
+	<field name="attn" class="java.lang.String"/>
+	<field name="poref" class="java.lang.String"/>
+	<field name="linkto" class="java.lang.String"/>
+	<field name="remark" class="java.lang.String"/>
+	<field name="posttext" class="java.lang.String"/>
+	<field name="printedon" class="java.lang.String"/>
+	<field name="labelname" class="java.lang.String"/>
+	<field name="poreflabel" class="java.lang.String"/>
+	<title>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="182" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companyname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="13">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="1" width="182" height="10"/>
+				<textElement textAlignment="Center" markup="html">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{companyaddress}+"<br>"+$F{gstnumber}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="29">
+			<textField>
+				<reportElement x="93" y="20" width="87" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date : "+$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="20" width="91" height="9"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Number : "+$F{invno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="4" width="180" height="13"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="182" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="10">
+			<componentElement>
+				<reportElement key="table" mode="Opaque" x="1" y="0" width="179" height="10"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TaxInvoiceSubReportData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="15">
+						<jr:tableHeader style="table_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="15" height="20" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Serial No.]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell height="10" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="15" height="10" isPrintWhenDetailOverflows="true"/>
+								<box topPadding="2"/>
+								<textElement textAlignment="Center" verticalAlignment="Top">
+									<font fontName="SansSerif" size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67">
+						<jr:tableHeader style="table_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="20" forecolor="#010101"/>
+								<box leftPadding="0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Description]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell height="10" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="67" height="10" isPrintWhenDetailOverflows="true"/>
+								<box topPadding="2" leftPadding="2" rightPadding="2"/>
+								<textElement verticalAlignment="Top" markup="html">
+									<font fontName="SansSerif" size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="24">
+						<jr:tableHeader style="table_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="24" height="20" forecolor="#010101"/>
+								<box rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Qty]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell height="10" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="24" height="10"/>
+								<box topPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="35">
+						<jr:tableHeader style="table_CH" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="35" height="20"/>
+								<box rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font size="5" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Unit Price"+"<br>"+"("+$F{currency}+")"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:detailCell height="10" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="35" height="10"/>
+								<box topPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="38">
+						<jr:tableHeader style="table_CH" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="38" height="20"/>
+								<box rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font size="5" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Total Amount"+"<br>"+"("+$F{currency}+")"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:detailCell height="10" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="38" height="10"/>
+								<box topPadding="2" rightPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Top">
+									<font size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{totalwithouttaxndiscount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="38">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="112" y="28" width="68" height="9" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gst}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="11" width="85" height="8"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Discount
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="21" width="86" height="8"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Excl. GST
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="28" width="86" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Add GST
+                ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="112" y="11" width="68" height="8" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{discount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="112" y="21" width="68" height="8" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotalwithdiscount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="182" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="51" y="19" width="131" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<componentElement>
+				<reportElement key="table" mode="Opaque" x="0" y="36" width="179" height="1"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 3">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TermsData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="111">
+						<jr:detailCell height="11" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="111" height="11" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="0" rightPadding="0"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="6" isBold="true"/>
+								</textElement>
+                                                                <textFieldExpression><![CDATA[$F{termName}]]>
+                                </textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68">
+						<jr:detailCell height="11" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="68" height="11" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="0" rightPadding="0"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="6"/>
+								</textElement>
+                                                                <textFieldExpression><![CDATA[$F{termValue}]]>
+                                </textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="112" y="4" width="68" height="9" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="4" width="85" height="9"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub Total
+                ]]></text>
+			</staticText>
+		</band>
+		<band height="32">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="112" y="2" width="69" height="12" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="2" width="86" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Payable Incl. GST
+                ]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="22" width="178" height="10" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="3"/>
+				<textElement verticalAlignment="Top" markup="html">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountinwords}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="182" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="14">
+			<componentElement>
+				<reportElement key="table" mode="Opaque" x="2" y="0" width="178" height="14"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 2">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TaxSummaryData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="95">
+						<jr:columnHeader style="table" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="95" height="19" forecolor="#010101"/>
+								<box leftPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5" isBold="true"/>
+								</textElement>
+								<text><![CDATA[GST Summary]]></text>
+							</staticText>
+							
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="95" height="17" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{summary}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="46">
+						<jr:columnHeader style="table" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="46" height="19" forecolor="#010101"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Amount
+                                ]]></text>
+							</staticText>
+							
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="46" height="17"/>
+								<box leftPadding="0" rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48">
+						<jr:columnHeader style="table" height="19" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="48" height="19" forecolor="#010101"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Tax
+                                ]]></text>
+							</staticText>
+							
+						</jr:columnHeader>
+						<jr:detailCell height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="48" height="17" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3" rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{tax}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="14">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="3" width="178" height="9"/>
+				<textElement markup="html">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Remarks : "+$F{remark}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="57">
+			<line>
+				<reportElement x="73" y="38" width="105" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="72" y="40" width="105" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Authorised Signature(s)
+                ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="2" width="178" height="11"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Prepared by : "+$F{createdby}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

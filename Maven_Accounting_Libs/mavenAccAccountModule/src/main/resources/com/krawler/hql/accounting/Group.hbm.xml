@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Group" table="accgroup">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column length="50" name="name" not-null="true"/>
+        </property>
+        <property name="nature" type="integer">
+            <column name="nature" not-null="true"/>
+        </property>
+        <property name="affectGrossProfit" type="true_false">
+            <column name="affectgp" not-null="true"/>
+        </property>
+        <property name="costOfGoodsSoldGroup" type="true_false">
+            <column name="isacostofgoodssoldgroup" default="false"/>
+        </property>
+        <property name="displayOrder" type="integer">
+            <column name="displayorder" not-null="true" unique="true"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        <property name="isMasterGroup" type="true_false">
+            <column name="isMasterGroup" />
+        </property>
+        <property name="grpOldId" type="string">
+            <column length="255" name="grpOldId"/>
+        </property>
+        <set cascade="all" inverse="true" name="children">
+            <key column="parent"/>
+            <one-to-many class="com.krawler.hql.accounting.Group"/>
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.Group" name="parent"/>
+        <many-to-one class="com.krawler.hql.accounting.Group" name="propagatedgroupid"/>
+    </class>
+</hibernate-mapping>

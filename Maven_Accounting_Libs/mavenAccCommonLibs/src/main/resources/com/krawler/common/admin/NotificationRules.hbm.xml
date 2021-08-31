@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class  name="com.krawler.common.admin.NotificationRules" table="mailnotification">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="moduleId" type="integer">
+            <column length="255" name="module" not-null="true"/>    
+        </property>
+        <property name="beforeafter" type="integer">
+            <column name="beforeafter" not-null="true"/>    
+        </property>
+        <property name="days" type="integer">
+            <column name="days" not-null="true"/>
+        </property>
+        <property name="fieldid" type="string">
+            <column length="40" name="fieldid" />    
+        </property>
+        <property name="templateid" type="string">
+            <column length="255" name="templateid" />    
+        </property>
+        <property name="emailids" type="string">
+            <column length="150" name="emailids" />    
+        </property>
+        <property name="senderid" type="string">
+            <column length="150" name="senderid" />    
+        </property>
+        <property name="mailcontent" type="string">
+            <column length="512" name="mailcontent" />    
+        </property>
+        <property name="mailsubject" type="string">
+            <column length="100" name="mailsubject" />    
+        </property>
+        <property name="users" type="string">
+            <column length="1024" name="users" />    
+        </property>
+        <property name="MailToSalesPerson" type="true_false">
+            <column default="false" name="mailtosalesperson"/>
+        </property>
+        <property name="MailToStoreManager" type="true_false">
+            <column default="false" name="mailtostoremanager"/>
+        </property>
+        <property name="MailToAssignedTo" type="true_false">
+            <column default="false" name="mailtoassignedto"/>
+        </property>
+        <property name="mailToCreator" type="true_false">
+            <column name="mailtocreator" /> 
+        </property>
+        <property name="MailToAssignedPersons" type="true_false">
+            <column name="mailtoassignedpersons" /> 
+        </property>
+        <property name="mailbodysqlquery" type="string">
+            <column length="1024" name="mailbodysqlquery" />    
+        </property>
+        <property name="mailbodyjson" type="string">
+            <column length="1024" name="mailbodyjson" />    
+        </property>
+        <property name="mailsubjectsqlquery" type="string">
+            <column length="1024" name="mailsubjectsqlquery" />    
+        </property>
+        <property name="mailsubjectjson" type="string">
+            <column length="1024" name="mailsubjectjson" />    
+        </property>
+        <property name="mailtoshippingemail" type="true_false">
+            <column default="false" name="mailtoshippingemail"/>
+        </property>
+        <property name="hyperlinkText" type="string">
+            <column default="255" name="hyperlinktext"/>
+        </property>
+        <property name="MailToContactPerson" type="true_false">
+            <column default="false" name="mailtocontactperson"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.NotifictionRulesRecurringDetail" column="recurringdetail" name="recurringDetail"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

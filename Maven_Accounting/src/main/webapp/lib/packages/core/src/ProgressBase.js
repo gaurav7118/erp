@@ -1,0 +1,1 @@
+Ext.define("Ext.ProgressBase",{mixinId:"progressbase",config:{value:0,textTpl:null},applyTextTpl:function(A){if(!A.isTemplate){A=new Ext.XTemplate(A)}return A},applyValue:function(A){return A||0}})

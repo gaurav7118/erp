@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>accounting-libs</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <name>accounting-libs</name>
+    <repositories>
+        <repository>
+            <id>test</id>
+            <url>${mvn-repo-url}</url>
+        </repository>
+    </repositories>
+    <modules>
+	<module>mavenAccCommonLibs</module>
+	<module>mavenAccCurrencyExchange</module>
+	<module>mavenAccTermModule</module>
+	<module>mavenAccUOMModule</module>
+	<module>mavenAccMasterItems</module>
+	<module>mavenAccDiscountModule</module>
+	<module>mavenAccAccountModule</module>
+	<module>mavenAccCompanyPreferences</module>
+	<module>mavenAccCustomerModule</module>
+	<module>mavenAccVendorModule</module>
+	<module>mavenAccTaxModule</module>
+	<module>mavenAccPaymentMethods</module>
+	<module>mavenAccJournalEntryModule</module>
+	<module>mavenAccDepreciation</module>
+	<module>mavenAccBankReconciliation</module>
+	<module>mavenAccProductModule</module>
+	<module>mavenAccSalesOrder</module>
+	<module>mavenAccInventoryModule</module>
+	<module>mavenAccMRPModule</module>
+	<module>mavenAccInvoiceModule</module>
+	<module>mavenAccReceiptModule</module>
+	<module>mavenAccCreditNote</module>
+	<module>mavenAccPurchaseOrder</module>
+	<module>mavenAccGoodsReceipt</module>
+	<module>mavenAccVendorPayment</module>
+	<module>mavenAccDebitNote</module>
+
+  </modules>
+</project>

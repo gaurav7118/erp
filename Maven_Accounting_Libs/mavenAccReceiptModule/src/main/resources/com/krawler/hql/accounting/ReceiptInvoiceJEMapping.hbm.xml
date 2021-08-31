@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ReceiptInvoiceJEMapping" table="receiptinvoicejemapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="invoiceamountdue" type="double">
+            <column  name="invoiceamountdue"/>
+        </property>
+        <property name="invoiceamountdueinbase" type="double">
+            <column  name="invoiceamountdueinbase"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Receipt" column="receipt" name="receipt"/>
+        <many-to-one class="com.krawler.hql.accounting.Invoice" column="invoice" name="invoice"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="journalentry" name="journalEntry"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="gstadjustment" name="gstAdjustment"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

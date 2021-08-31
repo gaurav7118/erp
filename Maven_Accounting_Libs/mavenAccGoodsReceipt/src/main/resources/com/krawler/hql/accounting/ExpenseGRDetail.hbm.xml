@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ExpenseGRDetail" table="expenseggrdetails">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" not-null="true"/>
+        </property>
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount" not-null="false"/>
+        </property>
+        <property name="wasRowTaxFieldEditable" type="boolean">
+            <column name="wasrowtaxfieldeditable" not-null="false"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount" not-null="true"/>
+        </property>
+        <property name="rateExcludingGst" type="double">
+            <column name="rateexcludinggst" not-null="true" default='0'/>
+        </property>
+        <property name="description" type="string">
+            <column  name="description" />
+        </property>
+        <property name="isdebit" type="true_false">
+      <column name="isdebit"/>
+    </property>
+        <property name="lineLevelTermAmount" type="double">
+            <column name="lineleveltermamount" default="0"/>
+        </property>
+        <property name="gstCurrencyRate" type="double">
+            <column  name="gstcurrencyrate" default="0"/>
+        </property>
+        <property name="tdsAssessableAmount" type="double">
+            <column  name="tdsassessableamount" default="0"/>
+        </property>
+        <property name="tdsRuleId" type="integer">
+            <column  name="tdsruleid" default="0"/>
+        </property>
+        <property name="tdsRate" type="double">
+            <column  name="tdsrate" default="0"/>
+        </property>
+        <property name="tdsLineAmount" type="double">
+            <column  name="tdslineamount" default="0"/>
+        </property>
+        <property name="tdsPaidFlag" type="integer">
+            <column name="tdspaidflag" default="0"/>
+        </property>
+        <property name="tdsPayment" type="string">
+            <column name="tdspayment"/>
+        </property>
+        <property name="tdsInterestPaidFlag" type="integer">
+            <column name="tdsinterestpaidflag" default="0"/>
+        </property>
+        <property name="tdsInterestPayment" type="string">
+            <column name="tdsinterestpayment"/>
+        </property>
+        <property name="tdsInterestRateAtPaymentTime" type="double">
+            <column name="tdsInterestRateAtPaymentTime" default="0"/>
+        </property>
+        <property name="isUserModifiedTaxAmount" type="boolean">
+            <column name="isusermodifiedtaxamount" not-null="false"/>
+        </property>
+        <set cascade="all" inverse="true" name="goodsReceiptDetailPaymentMapping">
+            <key column="erdetails"/>
+            <one-to-many class="com.krawler.hql.accounting.GoodsReceiptDetailPaymentMapping"/>
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.TdsJEMapping" name="tdsJEMapping" column="tdsjemapping"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="tdsPayableAccount" column="tdspayableaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="natureOfPayment" column="natureofpayment"/>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Discount" name="discount" unique="true"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" column="goodsreceipt" name="goodsReceipt" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="purchasejedid" name="purchaseJED"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="gstjedid" name="gstJED"/>
+        <many-to-one class="com.krawler.hql.accounting.ExpensePODetail" column="expensepodetails" name="expensePODetail"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="landedinvoicejedid" name="landedInvoiceJED"/>
+    </class>
+</hibernate-mapping>

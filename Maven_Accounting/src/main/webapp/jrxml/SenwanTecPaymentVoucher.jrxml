@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SenwanGroupCustomerQuotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3310000000000244"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#94A195"/>
+			<topPen lineColor="#94A195"/>
+			<leftPen lineColor="#94A195"/>
+			<bottomPen lineColor="#94A195"/>
+			<rightPen lineColor="#94A195"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#010101">
+		<box>
+			<pen lineWidth="1.0" lineColor="#010101"/>
+			<topPen lineWidth="1.0" lineColor="#010101"/>
+			<leftPen lineWidth="1.0" lineColor="#010101"/>
+			<bottomPen lineWidth="1.0" lineColor="#010101"/>
+			<rightPen lineWidth="1.0" lineColor="#010101"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<pen lineWidth="1.0" lineColor="#010101"/>
+		<box>
+			<pen lineWidth="1.0" lineColor="#94A195"/>
+			<topPen lineWidth="0.0" lineColor="#94A195"/>
+			<leftPen lineWidth="1.0" lineColor="#94A195"/>
+			<bottomPen lineWidth="0.0" lineColor="#94A195"/>
+			<rightPen lineWidth="1.0" lineColor="#94A195"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" forecolor="#FEFEFE" backcolor="#B7BFA9" fill="Solid" fontName="SansSerif">
+		<pen lineWidth="1.0" lineColor="#010101"/>
+		<box>
+			<pen lineWidth="1.0" lineStyle="Solid" lineColor="#94A195"/>
+			<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#94A195"/>
+			<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#94A195"/>
+			<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#94A195"/>
+			<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#94A195"/>
+		</box>
+	</style>
+	<parameter name="logo" class="java.lang.String"/>
+	<field name="no" class="java.lang.String"/>
+	<field name="to" class="java.lang.String"/>
+	<field name="details" class="java.lang.String"/>
+	<field name="amount" class="java.lang.String"/>
+	<field name="chequeno" class="java.lang.String"/>
+	<field name="pono" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<pageHeader>
+		<band height="129" splitType="Stretch">
+			<image scaleImage="RetainShape" hAlign="Right" onErrorType="Blank">
+				<reportElement x="483" y="13" width="63" height="65"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="99" y="13" width="345" height="26" forecolor="#010101"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Senwan Technologies Pte. Ltd.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="38" width="345" height="14" forecolor="#010101"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[38, Sungei Kadut Street 2, Singapore 729245
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="50" width="345" height="13" forecolor="#010101"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Tel: +65 6364 0338 Fax: +65 6286 2122]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="103" width="547" height="26" forecolor="#858C7B"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAYMENT VOUCHER
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="62" width="345" height="15" forecolor="#010101"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[GST Registration No.: 201401284H
+]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="70" splitType="Stretch">
+			<textField>
+				<reportElement x="458" y="36" width="101" height="20"/>
+				<textElement textAlignment="Left">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="458" y="8" width="101" height="21"/>
+				<textElement textAlignment="Left" markup="html">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="395" y="8" width="63" height="21"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PV Ref. No. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="8" width="10" height="21"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="36" width="63" height="20"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="36" width="10" height="20"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+		<band height="46">
+			<rectangle>
+				<reportElement style="table_CH" stretchType="RelativeToBandHeight" x="19" y="0" width="140" height="46"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#94A195"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="38" y="15" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Payment To
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="169" y="15" width="362" height="20"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{to}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="19" y="0" width="526" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="19" y="1" width="1" height="45"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="544" y="0" width="1" height="46"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="45">
+			<rectangle>
+				<reportElement style="table_CH" stretchType="RelativeToBandHeight" x="19" y="0" width="140" height="45"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#94A195"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="38" y="13" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Payment Details
+
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="169" y="13" width="362" height="20"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{details}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="544" y="0" width="1" height="45"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="19" y="0" width="1" height="45"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="44">
+			<rectangle>
+				<reportElement style="table_CH" stretchType="RelativeToBandHeight" x="19" y="0" width="140" height="44"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#94A195"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="168" y="15" width="362" height="20"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="544" y="0" width="1" height="44"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="19" y="0" width="1" height="44"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="37" y="15" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Payment Amount
+]]></text>
+			</staticText>
+		</band>
+		<band height="61">
+			<rectangle>
+				<reportElement style="table_CH" x="19" y="0" width="140" height="54"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineColor="#94A195"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="37" y="20" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cheque No
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="168" y="20" width="362" height="20"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{chequeno}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="19" y="53" width="525" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="544" y="-30" width="1" height="84"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="19" y="-30" width="1" height="84"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#94A195"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="93">
+			<staticText>
+				<reportElement x="395" y="50" width="58" height="12"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="18" width="58" height="12"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Received By
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="50" width="15" height="12"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="18" width="15" height="12"/>
+				<textElement textAlignment="Left">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

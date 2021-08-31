@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.LayoutGroup" table="layoutgroup">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column name="name" not-null="true"/>
+        </property>
+        <property name="nature" type="integer">
+            <column name="nature" not-null="true"/>
+        </property>
+        <property name="sequence" type="integer">
+            <column name="sequence" />
+        </property>
+        <property name="showtotal" type="integer">
+            <column name="showtotal"/>
+        </property>
+        <property name="showchild" type="integer">
+            <column name="showchild"/>
+        </property>
+        <property name="showchildacc" type="integer">
+            <column name="showchildacc"/>
+        </property>
+        <property name="excludeChildAccountBalances" type="true_false">
+            <column default="false" name="excludechildaccountbalances" not-null="true"/>
+        </property>
+         <property name="numberofrows" type="integer">
+            <column name="numberofrows" />
+        </property>
+        <set cascade="all" inverse="true" name="children">
+            <key column="parent"/>
+            <one-to-many class="com.krawler.hql.accounting.LayoutGroup"/>
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.Templatepnl" name="template"/>    
+        <many-to-one class="com.krawler.hql.accounting.LayoutGroup" name="parent"/>
+    </class>
+</hibernate-mapping>

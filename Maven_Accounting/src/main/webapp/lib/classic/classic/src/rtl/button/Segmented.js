@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.button.Segmented",{override:"Ext.button.Segmented",privates:{_getFirstCls:function(){var A=this._firstCls;if(!this.getVertical()&&this.getInherited().rtl){A=this._lastCls}return A},_getLastCls:function(){var A=this._lastCls;if(!this.getVertical()&&this.getInherited().rtl){A=this._firstCls}return A}}})

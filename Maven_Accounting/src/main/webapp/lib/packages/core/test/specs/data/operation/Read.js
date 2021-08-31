@@ -1,0 +1,1 @@
+describe("Ext.data.operation.Read",function(){var B;function A(C){B=new Ext.data.operation.Read(C)}afterEach(function(){B=null});describe("execute",function(){it("should call the proxy read method and pass itself",function(){var C=new Ext.data.proxy.Proxy();spyOn(C,"read").andReturn(new Ext.data.Request());A({proxy:C});B.execute();expect(C.read).toHaveBeenCalledWith(B)})})})

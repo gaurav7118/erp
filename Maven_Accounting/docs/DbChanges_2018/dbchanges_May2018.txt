@@ -1,0 +1,661 @@
+#Nitesh Kumar 02nd May 2018
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="state" WHERE id='6a9b98fa-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="state" WHERE id='e5f619e6-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="country" WHERE id='6a9c1956-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="country" WHERE id='e5f6a0e6-c960-11e3-bbf7-001cc066e9f0';
+
+#Bhushan Chitte 7th May 2018
+ALTER TABLE productbuild ADD COLUMN wastagetotaljed VARCHAR(255) DEFAULT NULL;
+ALTER TABLE pbdetails ADD COLUMN wastagejedetail VARCHAR(255) DEFAULT NULL;
+
+#Akshay Wagh 8th May 2018
+ALTER TABLE in_stockadjustment MODIFY COLUMN throughfile varchar(35);
+
+#Nitesh Kumar 8th May 2018
+#Delivery Order Module
+DROP FUNCTION IF EXISTS getDOGSTTerms;
+delimiter //
+CREATE FUNCTION getDOGSTTerms(dodetailsid varchar(255)) returns varchar(255)
+begin
+declare gstamount varchar(255);
+set gstamount= '';
+select GROUP_CONCAT(linelevelterms.term,':',deliveryorderdetailtermsmap.termamount,':',deliveryorderdetailtermsmap.percentage  SEPARATOR ',')  into gstamount from deliveryorderdetailtermsmap LEFT JOIN linelevelterms ON deliveryorderdetailtermsmap.term = linelevelterms.id left join entitybasedlineleveltermsrate on entitybasedlineleveltermsrate.id=deliveryorderdetailtermsmap.entityterm
+ where deliveryorderdetailtermsmap.dodetail=dodetailsid and linelevelterms.salesorpurchase=1;
+return gstamount;
+end//
+delimiter ;
+DROP FUNCTION IF EXISTS getDOGSTTermsRate;
+update default_header  set  dbcolumnname='getDOGSTTerms(dodetails.id)'  where id='9a87ee50-0755-11e8-9a0b-14dda9792912';
+update reportmaster set reportjson = REPLACE(reportjson, "getDOGSTTermsRate(dodetails.id)", "getDOGSTTerms(dodetails.id)")  where isdefaultreport='F';
+
+#GoodsReceiptOrder Module
+DROP FUNCTION IF EXISTS getGRNGSTTerms;
+delimiter //
+CREATE FUNCTION getGRNGSTTerms(grodetailsid varchar(255)) returns varchar(255)
+begin
+declare gstamount varchar(255);
+set gstamount= '';
+select GROUP_CONCAT(linelevelterms.term,':',receiptorderdetailtermsmap.termamount,':',receiptorderdetailtermsmap.percentage SEPARATOR ',')  into gstamount from receiptorderdetailtermsmap LEFT JOIN linelevelterms ON receiptorderdetailtermsmap.term = linelevelterms.id left join entitybasedlineleveltermsrate on entitybasedlineleveltermsrate.id=receiptorderdetailtermsmap.entityterm where receiptorderdetailtermsmap.grodetail=grodetailsid and linelevelterms.salesorpurchase=0;
+return gstamount;
+end//
+delimiter ;
+DROP FUNCTION IF EXISTS getGRNGSTTermsRate;
+update default_header  set  dbcolumnname='getGRNGSTTerms(grodetails.id)'  where id='234d9ea6-05c0-11e8-b1e4-14dda9792912';
+update reportmaster set reportjson = REPLACE(reportjson, "getGRNGSTTermsRate(grodetails.id)", "getGRNGSTTerms(grodetails.id)")  where isdefaultreport='F';
+
+
+#Sales Return
+DROP FUNCTION IF EXISTS getSalesreturnGSTTerms;
+delimiter //
+CREATE FUNCTION getSalesreturnGSTTerms(srdetailsid varchar(255)) returns varchar(255)
+begin
+declare gstamount varchar(255);
+set gstamount= '';
+select GROUP_CONCAT(linelevelterms.term,':',salesreturndetailtermmap.termamount,':',salesreturndetailtermmap.percentage SEPARATOR ',')  into gstamount from salesreturndetailtermmap LEFT JOIN linelevelterms ON salesreturndetailtermmap.term = linelevelterms.id left join entitybasedlineleveltermsrate on entitybasedlineleveltermsrate.id=salesreturndetailtermmap.entityterm where salesreturndetailtermmap.salesreturndetail=srdetailsid and linelevelterms.salesorpurchase=1;
+return gstamount;
+end//
+delimiter ;
+DROP FUNCTION IF EXISTS getSalesreturnGSTTermsRate;
+update default_header  set  dbcolumnname='getSalesreturnGSTTerms(srdetails.id)'  where id='53a6cf65-07eb-11e8-a4b0-14dda9792912';
+update reportmaster set reportjson = REPLACE(reportjson, "getSalesreturnGSTTermsRate (srdetails.id)", "getSalesreturnGSTTerms(srdetails.id)")  where isdefaultreport='F';
+
+#Purchase Return
+DROP FUNCTION IF EXISTS getPurchasereturnGSTTerms;
+delimiter //
+CREATE FUNCTION getPurchasereturnGSTTerms(prdetailsid varchar(255)) returns varchar(255)
+begin
+declare gstamount varchar(255);
+set gstamount= '';
+select GROUP_CONCAT(linelevelterms.term,':',purchasereturndetailtermmap.termamount,':',purchasereturndetailtermmap.percentage SEPARATOR ',')  into gstamount from purchasereturndetailtermmap LEFT JOIN linelevelterms ON purchasereturndetailtermmap.term = linelevelterms.id left join entitybasedlineleveltermsrate on entitybasedlineleveltermsrate.id=purchasereturndetailtermmap.entityterm where purchasereturndetailtermmap.purchasereturndetail=prdetailsid and linelevelterms.salesorpurchase=0;
+return gstamount;
+end//
+delimiter ;
+DROP FUNCTION IF EXISTS getPurchasereturnGSTTermsRate;
+update default_header  set  dbcolumnname='getPurchasereturnGSTTerms(prdetails.id)'  where id='11b22589-07eb-11e8-a4b0-14dda9792912';
+update reportmaster set reportjson = REPLACE(reportjson, "getPurchasereturnGSTTermsRate (prdetails.id)", "getPurchasereturnGSTTerms(prdetails.id)")  where isdefaultreport='F';
+
+#Kamlesh Jain 8th May 2018
+alter table in_stocktransfer_detail_approval modify column returnqty double;
+
+#Pratik Waykar 8th May 2018
+
+CREATE TABLE `wocdetailistmapping` (
+  `id` varchar(255) NOT NULL,
+  `wocdetail` varchar(255) DEFAULT NULL,
+  `istrequest` varchar(255) DEFAULT NULL,
+  `actualquantity` double DEFAULT '0',
+  `quantitydue` double DEFAULT '0',
+  `rejectedquantity` double DEFAULT '0',
+  `approvedquantity` double DEFAULT '0',
+  `approvedserials` varchar(100) DEFAULT NULL,
+  `rejectedserials` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `istrequest` (`istrequest`),
+  KEY `wocdetail` (`wocdetail`),
+  CONSTRAINT `wocdetailistmapping_ibfk_1` FOREIGN KEY (`istrequest`) REFERENCES `in_interstoretransfer` (`id`),
+  CONSTRAINT `wocdetailistmapping_ibfk_2` FOREIGN KEY (`wocdetail`) REFERENCES `workordercomponentdetail` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `repairwocdistmapping` (
+  `id` varchar(255) NOT NULL,
+  `repairstoreistrequest` varchar(255) DEFAULT NULL,
+  `rejectedquantitydue` double DEFAULT '0',
+  `rejectedquantity` double DEFAULT '0',
+  `wocdistmapping` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `repairstoreistrequest` (`repairstoreistrequest`),
+  KEY `wocdistmapping` (`wocdistmapping`),
+  CONSTRAINT `repairwocdistmapping_ibfk_1` FOREIGN KEY (`repairstoreistrequest`) REFERENCES `in_interstoretransfer` (`id`),
+  CONSTRAINT `repairwocdistmapping_ibfk_2` FOREIGN KEY (`wocdistmapping`) REFERENCES `wocdetailistmapping` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE in_interstoretransfer ADD wocdistmapping varchar(200) DEFAULT NULL REFERENCES wocdetailistmapping(id);
+ALTER TABLE in_interstoretransfer add repairwocdistmapping varchar(200) DEFAULT NULL REFERENCES repairwocdistmapping(id);
+ALTER TABLE in_stockadjustment add rejectedwocdistmapping varchar(200) DEFAULT NULL REFERENCES repairwocdistmapping(id);
+
+# Bhakti Chavare, 9th May, 2018
+insert into featurelist values('ff80808122f9dba90122fa4704a51234','barcodescanner','Barcode Scanner',76);
+insert into activitylist values('ff80808122f9dba90122fa4704a51243','scanbarcode','Barcode Scanner',1,'ff80808122f9dba90122fa4704a51234',NULL,0);
+
+#Pratik Waykar 10th May 2018
+ALTER TABLE in_inspection_form_details ADD column actualvalue varchar(255) default NULL;
+
+#Neeraj Dwivedi 11th May 2018
+ALTER TABLE cashouttransaction CHANGE COLUMN locationid storeid varchar(36) NOT NULL;
+ALTER TABLE cashouttransaction add column `isdeposit` char(1) DEFAULT 'F' ;
+
+#Tohid Maner 11th May 2018
+#ERP-38925
+#Display UOM column in Assembly Product module
+INSERT INTO  default_header (id, defaultHeader, recordname, xtype, pojomethodname, validatetype, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, dbcolumnname, dbtabletame, module, dataindex, formfieldname)
+VALUES ('51dffaa4-5289-11e8-bc02-14dda97927e6', 'Display UOM', 'displayUoM', '4', 'DisplayUoM', 'ref', 'UnitOfMeasure', 'name', 'ID', 'displayUoM', 'product', '91', 'displayUoM', 'displayUoM');
+
+#Assembly Product Sample file
+DELETE FROM samplefiledata WHERE id = '4707c542-dfe2-11e5-8ada-c03fd5632e9b';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('4707c542-dfe2-11e5-8ada-c03fd5632e9b', '[{\"title\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),BOM Code,BOM Name,Is Default BOM,BOM Product ID*,BOM Quantity*,BOM Percentage (%),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM\"},{\"header\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),BOM Code,BOM Name,Is Default BOM,BOM Product ID*,BOM Quantity*,BOM Percentage (%),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"Product ID*\":\"PIDA0001\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"Purchases\",\"Purchase Return Account*\":\"Purchases\",\"Sales Account*\":\"Sales\",\"Sales Return Account*\":\"Sales\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Code\":\"bom1\",\"BOM Name\":\"bom1\",\"Is Default BOM\":\"TRUE\",\"BOM Product ID*\":\"PID0001\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value,Quantity\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\"},{\"Product ID*\":\"PIDA0001\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"Purchases\",\"Purchase Return Account*\":\"Purchases\",\"Sales Account*\":\"Sales\",\"Sales Return Account*\":\"Sales\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Code\":\"bom1\",\"BOM Name\":\"bom1\",\"Is Default BOM\":\"TRUE\",\"BOM Product ID*\":\"PID0002\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value,Quantity\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\"},{\"Product ID*\":\"PIDA0001\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"Purchases\",\"Purchase Return Account*\":\"Purchases\",\"Sales Account*\":\"Sales\",\"Sales Return Account*\":\"Sales\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Code\":\"bom2\",\"BOM Name\":\"bom2\",\"Is Default BOM\":\"FALSE\",\"BOM Product ID*\":\"PID0001\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value,Quantity\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"},{\"Product ID*\":\"Note:\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"},{\"Product ID*\":\"1. Currency of imported Assembly Product is Company Base Currency.\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"}]', 'Assembly Product', 'sample_assembly_product', '_v4', 'T', '0');
+
+#Assembly Product without BOM Sample file
+DELETE FROM samplefiledata WHERE id = '9d920314-3626-11e7-8a21-2c4d544cd7fd';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('9d920314-3626-11e7-8a21-2c4d544cd7fd', '[{\"title\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM\"},{\"header\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"Product ID*\":\"PID000A1\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"AAA11\",\"Purchase Return Account*\":\"AAA11\",\"Sales Account*\":\"Demo\",\"Sales Return Account*\":\"Demo\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"},{\"Product ID*\":\"Note:\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"},{\"Product ID*\":\"1. Currency of imported Assembly Product is Company Base Currency.\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\"}]', 'Assembly Product', 'sample_assembly_product_withoutBOM', '_v5', 'T', '0');
+
+
+#ERP-38495
+#Perpetual Inventory Accounts columns in Assembly Product module
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isconditionalmandetory) 
+VALUES ('2fc40cc4-5381-11e8-af79-14dda97927e6',"91",'Cost of Goods Sold Account','CostOfGoodsSoldAccount',0,0,'F','F','Account','name','ID','ref',null,'cogsaccountid',null,'T');
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isconditionalmandetory) 
+VALUES ('3c19f52c-5381-11e8-af79-14dda97927e6',"91",'Inventory Account','InventoryAccount',0,0,'F','F','Account','name','ID','ref',null,'inventoryaccountid',null,'T');
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isconditionalmandetory) 
+VALUES ('40cea882-5381-11e8-af79-14dda97927e6',"91",'Stock Adjustment Account','StockAdjustmentAccount',0,0,'F','F','Account','name','ID','ref',null,'stockadjustmentaccountid',null,'T');
+
+#Assembly Product Sample file
+DELETE FROM samplefiledata WHERE id = '4707c542-dfe2-11e5-8ada-c03fd5632e9b';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('4707c542-dfe2-11e5-8ada-c03fd5632e9b', '[{\"title\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),BOM Code,BOM Name,Is Default BOM,BOM Product ID*,BOM Quantity*,BOM Percentage (%),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account"},{\"header\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),BOM Code,BOM Name,Is Default BOM,BOM Product ID*,BOM Quantity*,BOM Percentage (%),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"Product ID*\":\"PIDA0001\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"Purchases\",\"Purchase Return Account*\":\"Purchases\",\"Sales Account*\":\"Sales\",\"Sales Return Account*\":\"Sales\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Code\":\"bom1\",\"BOM Name\":\"bom1\",\"Is Default BOM\":\"TRUE\",\"BOM Product ID*\":\"PID0001\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value,Quantity\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"Accounting & Audit Fees\",\"Inventory Account\":\"Accounting & Audit Fees\",\"Stock Adjustment Account\":\"Accounting & Audit Fees\"},{\"Product ID*\":\"PIDA0001\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"Purchases\",\"Purchase Return Account*\":\"Purchases\",\"Sales Account*\":\"Sales\",\"Sales Return Account*\":\"Sales\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Code\":\"bom1\",\"BOM Name\":\"bom1\",\"Is Default BOM\":\"TRUE\",\"BOM Product ID*\":\"PID0002\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value,Quantity\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"Accounting & Audit Fees\",\"Inventory Account\":\"Accounting & Audit Fees\",\"Stock Adjustment Account\":\"Accounting & Audit Fees\"},{\"Product ID*\":\"PIDA0001\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"Purchases\",\"Purchase Return Account*\":\"Purchases\",\"Sales Account*\":\"Sales\",\"Sales Return Account*\":\"Sales\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Code\":\"bom2\",\"BOM Name\":\"bom2\",\"Is Default BOM\":\"FALSE\",\"BOM Product ID*\":\"PID0001\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value,Quantity\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"Accounting & Audit Fees\",\"Inventory Account\":\"Accounting & Audit Fees\",\"Stock Adjustment Account\":\"Accounting & Audit Fees\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"},{\"Product ID*\":\"Note:\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"},{\"Product ID*\":\"1. Currency of imported Assembly Product is Company Base Currency.\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Code\":\"\",\"BOM Name\":\"\",\"Is Default BOM\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"}]', 'Assembly Product', 'sample_assembly_product', '_v4', 'T', '0');
+
+#Assembly Product without BOM Sample file
+DELETE FROM samplefiledata WHERE id = '9d920314-3626-11e7-8a21-2c4d544cd7fd';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('9d920314-3626-11e7-8a21-2c4d544cd7fd', '[{\"title\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account\"},{\"header\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse,Landed Cost Category,Multiple UOM,UOM Schema,Display UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"Product ID*\":\"PID000A1\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Purchase Account*\":\"AAA11\",\"Purchase Return Account*\":\"AAA11\",\"Sales Account*\":\"Demo\",\"Sales Return Account*\":\"Demo\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\",\"Landed Cost Category\":\"Value\",\"Multiple UOM\":\"T\",\"UOM Schema\":\"UnitSchema\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"Accounting & Audit Fees\",\"Inventory Account\":\"Accounting & Audit Fees\",\"Stock Adjustment Account\":\"Accounting & Audit Fees\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"},{\"Product ID*\":\"Note:\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"},{\"Product ID*\":\"1. Currency of imported Assembly Product is Company Base Currency.\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\",\"Landed Cost Category\":\"\",\"Multiple UOM\":\"\",\"UOM Schema\":\"\",\"Display UOM\":\"\",\"Cost of Goods Sold Account\":\"\",\"Inventory Account\":\"\",\"Stock Adjustment Account\":\"\"}]', 'Assembly Product', 'sample_assembly_product_withoutBOM', '_v5', 'T', '0');
+
+#Prasad Patil 14th May 2018
+ALTER TABLE invoicedetails ADD column partialDiscount double DEFAULT 0;
+
+# Nitesh Kumar 15 May 2018
+UPDATE `default_header` SET  `dbcolumnname`='customer',  `reftablename`='customer', `reftablefk`='id',`reftabledatacolumn`='name', `iscustomreport`='T' ,`isdataindex`='0' ,`isdefaultfieldmappings` = 1 WHERE (`id`='c938fdec-4fd1-11e6-bd60-eca86bfcd415');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport,refmoduleid) VALUES
+('e34052dc-5728-11e8-ab63-14dda9792912','Customer Category',4,'customer','invoice','customer','id','name',2,'T',1112);
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('89482814-5730-11e8-ab63-14dda9792912','Customer Category and CustomerMapping','id','customer','customercategorymapping','customerid','id','Customer Category and CustomerMapping','4','1112','F','F','F');
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('35ebeb1e-5731-11e8-ab63-14dda9792912','c938fdec-4fd1-11e6-bd60-eca86bfcd415','89482814-5730-11e8-ab63-14dda9792912',0);
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('89482814-5730-11e8-ab63-14dda9792913','Customer Category and MasterItemMapping','customercategory','customercategorymapping','masteritem','id','value','Customer Category and MasterItemMapping','4','1112','F','F','F');
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('35ebeb1e-5731-11e8-ab63-14dda9792913','c938fdec-4fd1-11e6-bd60-eca86bfcd415','89482814-5730-11e8-ab63-14dda9792913',1);
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport,refmoduleid) VALUES
+('e34052dc-5728-11e8-ab63-14dda9792913','Customer Category',4,'customer','salesreturn','customer','id','name',29,'T',1112);
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport,refmoduleid) VALUES
+('e34052dc-5728-11e8-ab63-14dda9792914','Customer Category',4,'customer','salesorder','customer','id','name',20,'T',1112);
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport,refmoduleid) VALUES
+('e34052dc-5728-11e8-ab63-14dda9792915','Customer Category',4,'customer','quotation','customer','id','name',22,'T',1112);
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport,refmoduleid) VALUES
+('e34052dc-5728-11e8-ab63-14dda9792916','Customer Category',4,'customer','deliveryorder','customer','id','name',27,'T',1112);
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport,refmoduleid) VALUES
+('e34052dc-5728-11e8-ab63-14dda9792917','Customer Category',4,'customer','salesreturn','customer','id','name',98,'T',1112);
+
+#Pandharinath Vaghole 15th May 2018
+ALTER TABLE podetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE expensepodetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE grdetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE vendorquotationdetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE grodetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE expenseggrdetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE prdetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE quotationdetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE invoicedetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE sodetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE dodetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+ALTER TABLE srdetails ADD COLUMN isusermodifiedtaxamount INT(1) DEFAULT 0;
+
+#Tohid Maner 17th May 2018
+UPDATE default_header SET maxlength='100' WHERE id='2f9b37dc-f73d-102d-9b6d-001e4f3fdc1a';
+
+#Ashish Mohite 16th May 2018
+## Add new column
+ALTER TABLE fieldparams ADD COLUMN allowindocumentdesigner INT(1) DEFAULT 1;
+## Update existing records
+update fieldparams inner join company on fieldparams.companyid = company.companyid set allowindocumentdesigner = 0 where moduleid in (25, 26) and gstconfigtype=3 and fieldlabel="State" and company.country = '105';
+
+#Tohid Maner 21st May 2018
+#Allow empty value for Description column of RP Module
+UPDATE default_header SET hbmnotnull='F' WHERE id='78ebbaa8-d271-11e6-bf18-14dda97927d6';
+
+#Sample File of Receive Payment from Customer
+DELETE FROM samplefiledata WHERE id='f231cfc4-dd42-11e6-976c-14dda979275f';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('f231cfc4-dd42-11e6-976c-14dda979275f', '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Customer Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Clearance Date\",\"T12\":\"Reference Number/Description\",\"T13\":\"Memo\",\"T14\":\"Received From\",\"T15\":\"Bank Interest Account\",\"T16\":\"Bank Interest\",\"T17\":\"Bank Charges Account\",\"T18\":\"Bank Charges\",\"L18\":\"Document Type\",\"L19\":\"Document No\",\"L1\":\"Description\",\"L2\":\"Tax\",\"L3\":\"Tax Amount\",\"L4\":\"Transaction Amount\",\"L5\":\"Transaction Amount Due\",\"L6\":\"Exchange Rate\",\"L7\":\"Amount Due\",\"L8\":\"Enter Amount\"},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Cleared\",\"T11\":\"02/06/17\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0012\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":200,\"L5\":200,\"L6\":1,\"L7\":200,\"L8\":200},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":C,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Advanced/Deposit\",\"L19\":\"\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"\",\"T12\":\"description\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"Invoice\",\"L19\":\"INV0013\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"c\",\"T14\":\"Received\",\"T15\":\"A account\",\"T16\":200,\"T17\":\"A account\",\"T18\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100}]', 'ReceiptPaymentCustomer', 'sample_receipt_payment_customer', '_v1', 'T', '0');
+
+#Amol Dhokale 22nd May 2018
+#Insert Minimum Ordering Quantity field in product module for hide show form field functionality.
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e0177321-f444-a6ed-915b-c03fd5632dc1','minorderingquantity','Minimum Ordering Quantity',34,1,0,1,0,0);
+
+#Insert Maximum Ordering Quantity field in product module for hide show form field functionality.
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e0177321-f444-a6ed-915b-c03fd5632dc2','maxorderingquantity','Maximum Ordering Quantity',34,1,0,1,0,0);
+
+#Neeraj Dwivedi 21st May 2018
+insert into default_header(id,defaultHeader,module,allowadvancesearch,moduleName,xtype,dbtabletame,dbcolumnname,iscustomreport) values("d9027856-fd7f-11e5-86aa-5e551-289242a",'Store','29','T',"Sales Return","4","newproductbatch","warehouse",'F');
+
+#Akash V. Desai 21st May 2018
+ALTER TABLE `creditnote` ADD COLUMN `gstCurrencyRate` double DEFAULT 0;
+ALTER TABLE `debitnote` ADD COLUMN `gstCurrencyRate` double DEFAULT 0;
+
+
+#Prasad Patil 23rd May 2018
+
+#Added  termamountexcludingtax in all Term related table.
+
+ALTER TABLE invoicetermsmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE salesordertermmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE quotationtermmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE receipttermsmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE goodsreceiptordertermmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE purchaseordertermmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE vendorquotationtermmap ADD column termamountexcludingtax double DEFAULT 0;
+
+ALTER TABLE deliveryordertermmap ADD column termamountexcludingtax double DEFAULT 0;
+
+#Added  termamountexcludingtaxinbase in all Term related table.
+
+ALTER TABLE invoicetermsmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE salesordertermmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE quotationtermmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE receipttermsmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE goodsreceiptordertermmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE purchaseordertermmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE vendorquotationtermmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+ALTER TABLE deliveryordertermmap ADD column termamountexcludingtaxinbase double DEFAULT 0;
+
+#Added  termamountinbase in all Term related table.
+
+ALTER TABLE invoicetermsmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE salesordertermmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE quotationtermmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE receipttermsmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE goodsreceiptordertermmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE purchaseordertermmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE vendorquotationtermmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+ALTER TABLE deliveryordertermmap ADD column termamountinbase double DEFAULT 0 AFTER termamount;
+
+#Added  Including GST,Apply Tax to Terms in Sales and Purchase Return.
+
+ALTER TABLE salesreturn ADD COLUMN gstincluded char(1) DEFAULT 'F';
+ALTER TABLE salesreturn ADD COLUMN applytaxtoterms char(1) NOT NULL DEFAULT 'F';
+alter table srdetails add column rateincludegst double DEFAULT 0;
+
+ALTER TABLE purchasereturn ADD COLUMN gstincluded char(1) DEFAULT 'F';
+ALTER TABLE purchasereturn ADD COLUMN applytaxtoterms char(1) NOT NULL DEFAULT 'F';
+alter table prdetails add column rateincludegst double DEFAULT 0;
+
+#Implemented Invoice Terms in Sales and Purchase Return.
+
+CREATE TABLE `purchasereturntermsmap` (
+  `id` varchar(40) NOT NULL,
+  `term` varchar(40) DEFAULT NULL,
+  `purchasereturn` varchar(40) DEFAULT NULL,
+  `termamount` double DEFAULT '0',
+  `termamountinbase` double DEFAULT '0',
+  `percentage` double DEFAULT '0',
+  `deleted` tinyint(4) DEFAULT '0',
+  `creator` varchar(40) NOT NULL,
+  `createdon` bigint(20) DEFAULT NULL,  
+  `termTaxamount` double DEFAULT '0',
+  `termTaxamountinbase` double DEFAULT '0',
+  `termTax` varchar(40) DEFAULT NULL,
+  `termamountexcludingtax` double DEFAULT '0',
+  `termamountexcludingtaxinbase` double DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `term` (`term`),
+  KEY `purchasereturn` (`purchasereturn`),
+  KEY `purchasereturntermsmap_ibfk_4` (`termTax`),
+  CONSTRAINT `purchasereturntermsmap_ibfk_1` FOREIGN KEY (`term`) REFERENCES `invoicetermssales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchasereturntermsmap_ibfk_2` FOREIGN KEY (`purchasereturn`) REFERENCES `purchasereturn` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `purchasereturntermsmap_ibfk_4` FOREIGN KEY (`termTax`) REFERENCES `tax` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `salesreturntermsmap` (
+  `id` varchar(40) NOT NULL,
+  `term` varchar(40) DEFAULT NULL,
+  `salesreturn` varchar(40) DEFAULT NULL,
+  `termamount` double DEFAULT '0',
+  `termamountinbase` double DEFAULT '0',
+  `percentage` double DEFAULT '0',
+  `deleted` tinyint(4) DEFAULT '0',
+  `creator` varchar(40) NOT NULL,
+  `createdon` bigint(20) DEFAULT NULL,  
+  `termTaxamount` double DEFAULT '0',
+  `termTaxamountinbase` double DEFAULT '0',
+  `termTax` varchar(40) DEFAULT NULL,
+  `termamountexcludingtax` double DEFAULT '0',
+  `termamountexcludingtaxinbase` double DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `term` (`term`),
+  KEY `salesreturn` (`salesreturn`),
+  KEY `salesreturntermsmap_ibfk_4` (`termTax`),
+  CONSTRAINT `salesreturntermsmap_ibfk_1` FOREIGN KEY (`term`) REFERENCES `invoicetermssales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `salesreturntermsmap_ibfk_2` FOREIGN KEY (`salesreturn`) REFERENCES `salesreturn` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `salesreturntermsmap_ibfk_4` FOREIGN KEY (`termTax`) REFERENCES `tax` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Amit Kakade, 23rd May, 2018
+insert into activitylist values('ff80808122f9dba90122fa4704a52143','StartWorkOrderWithBarcodeScanner','Work Order',2,'ff80808122f9dba90122fa4704a51234',NULL,0);
+update activitylist set displayactivityname = 'DO and GRN', activityname = 'DOandGRNWithBarcodeScanner' where activityid = 'ff80808122f9dba90122fa4704a51243';
+
+
+#Priya Khaire 23rd May 2018
+
+INSERT INTO default_header (id,defaultHeader,dbtabletame,reftablename,reftablefk,dbcolumnname,module)
+VALUES ('16c194c1-5991-11e8-a15b-c03fd5683463','DeliveryOrderCompanyMapping','deliveryorder','company','companyid','company','27');
+
+INSERT INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+VALUES ('08ef3676-5998-11e8-a15b-c03fd5683463','8b8bce9e-5d36-11e6-9be6-c03fd5aad962 ','16c194c1-5991-11e8-a15b-c03fd5683463',0);
+
+UPDATE default_header SET reftabledatacolumn = "IF(company.country in (105,244),dodetails.rowtermamount,dodetails.rowtaxamount)", isdefaultfieldmappings='1' WHERE id = '8b8bce9e-5d36-11e6-9be6-c03fd5aad962';
+
+INSERT INTO default_header (id,defaultHeader,dbtabletame,reftablename,reftablefk,dbcolumnname,module)
+VALUES ('a5b8fbd4-59bc-11e8-a15b-c03fd5683463','QuotationCompanyMapping','quotation','company','companyid','company','22');
+
+INSERT INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+VALUES ('eac9872e-59bc-11e8-a15b-c03fd5683463','a13fc266-dd56-11e6-930b-eca86bfcd415 ','a5b8fbd4-59bc-11e8-a15b-c03fd5683463',0);
+
+UPDATE default_header SET reftabledatacolumn = "IF(company.country in (105,244),quotationdetails.rowtermamount,quotationdetails.rowtaxamount)" , isdefaultfieldmappings='1' WHERE id = 'a13fc266-dd56-11e6-930b-eca86bfcd415';
+
+INSERT INTO default_header (id,defaultHeader,dbtabletame,reftablename,reftablefk,dbcolumnname,module)
+VALUES ('aa5e6fbd-59be-11e8-a15b-c03fd5683463','ReceiptCompanyMapping','receipt','company','companyid','company','16');
+
+INSERT INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+VALUES ('13fe55f0-59bf-11e8-a15b-c03fd5683463','cb6cc3be-0c94-11e8-a031-14dda97926e6','aa5e6fbd-59be-11e8-a15b-c03fd5683463',0);
+
+UPDATE default_header SET reftabledatacolumn = "IF(company.country in (105,244),receiptdetails.rowtermamount,receiptdetails.rowtaxamount)" , isdefaultfieldmappings='1' WHERE id = 'cb6cc3be-0c94-11e8-a031-14dda97926e6';
+
+INSERT INTO default_header (id,defaultHeader,dbtabletame,reftablename,reftablefk,dbcolumnname,module)
+VALUES ('32b8334e-59c1-11e8-a15b-c03fd5683463','SalesReturnCompanyMapping','salesreturn','company','companyid','company','29');
+
+INSERT INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+VALUES ('a5f1eed8-59c1-11e8-a15b-c03fd5683463','d6458c2c-4823-11e6-b3d7-c03fd5aad962','32b8334e-59c1-11e8-a15b-c03fd5683463',0);
+
+UPDATE default_header SET reftabledatacolumn = "IF(company.country in (105,244),srdetails.rowtermamount,srdetails.rowtaxamount)" , isdefaultfieldmappings='1' WHERE id = 'd6458c2c-4823-11e6-b3d7-c03fd5aad962';
+
+INSERT INTO default_header (id,defaultHeader,dbtabletame,reftablename,reftablefk,dbcolumnname,module)
+VALUES ('6ba7929d-5a68-11e8-a2e6-c03fd5683463','PurchaseReturnCompanyMapping','purchasereturn','company','companyid','company','31');
+
+INSERT INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+VALUES ('89594f62-5a68-11e8-a2e6-c03fd5683463','1e853bee-5491-11e6-b223-c03fd5aad962','6ba7929d-5a68-11e8-a2e6-c03fd5683463',0);
+
+UPDATE default_header SET reftabledatacolumn = "IF(company.country in (105,244),prdetails.rowtermamount,prdetails.rowtaxamount)" , isdefaultfieldmappings='1' WHERE id = '1e853bee-5491-11e6-b223-c03fd5aad962';
+
+INSERT INTO default_header (id,defaultHeader,dbtabletame,reftablename,reftablefk,dbcolumnname,module)
+VALUES ('a7046016-5a6a-11e8-a2e6-c03fd5683463','GoodsReceiptCompanyMapping','grorder','company','companyid','company','6');
+
+INSERT INTO customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+VALUES ('b321c737-5a6a-11e8-a2e6-c03fd5683463','f0602d6c-57da-11e6-856d-c03fd5aad962','a7046016-5a6a-11e8-a2e6-c03fd5683463',0);
+
+UPDATE default_header SET reftabledatacolumn = "IF(company.country in (105,244),grodetails.rowtermamount,grodetails.rowtaxamount)" , isdefaultfieldmappings='1' WHERE id = 'f0602d6c-57da-11e6-856d-c03fd5aad962';
+
+update default_header set dbcolumnname="IF(company.country in (105,244),grdetails.rowtermamount,grdetails.rowtaxamount)" where id='e73f1cf4-ba2e-11e7-82ad-eca86bfcd415';
+
+#Pandharinath Vaghole 24th May 2018
+#Purchase Taxes
+INSERT INTO `defaultgst` VALUES('GST(TX)@0%','Purchases with GST incurred attributable to taxable supplies','GST(TX)',0,'137',1,NULL,'05edbbb6-d210-4c13-9dea-72837a982c48');
+INSERT INTO `defaultgst` VALUES('GST(TX-CG)@0%','Purchase with GST incurred for capital goods acquisition','GST(TX-CG)',0,'137',1,NULL,'6d7e4786-36db-4bec-97fd-1530453937f5');
+INSERT INTO `defaultgst` VALUES('GST(TX-ES)@0%','Purchase with GST incurred directly attributable to exempt supplies, and only applicable for partially exempt trader/mixed supplier.(Note: Rename of TX-N43)','GST(TX-ES)',0,'137',1,NULL,'6f20e752-783a-47c0-a16e-f0d18a2840e9');
+INSERT INTO `defaultgst` VALUES('GST(TX-IES)@0%','Purchase with GST incurred directly attributable to incidental exempt supplies.(Note: Rename of TX-E43)','GST(TX-IES)',0,'137',1,NULL,'21351b4b-b8fc-4abc-9f84-d6b100caa46b');
+INSERT INTO `defaultgst` VALUES('GST(TX-RE)@0%','Purchase with GST incurred that is not directly attributable to taxable or exempt supplies, and only applicable for partially exempt trader/mixed supplier.','GST(TX-RE)',0,'137',1,NULL,'008d525e-582c-4cf5-9586-d866a6e10793');
+INSERT INTO `defaultgst` VALUES('GST(IM)@0%','Import of goods with GST incurred','GST(IM)',0,'137',1,NULL,'d5b5ca4d-b706-40fa-8bbc-815d392018f4');
+INSERT INTO `defaultgst` VALUES('GST(IM-CG)@0%','Importation of capital goods with GST incurred (By referring Customs Form No. 1 (K1),and/or other reference documents)','GST(IM-CG)',0,'137',1,NULL,'b474fa62-f1d3-43c1-9eb7-90270b1d2ffc');
+INSERT INTO `defaultgst` VALUES('GST(BL)@0%','Purchases with GST incurred but not claimable or known as Disallowance of Input Tax.','GST(BL)',0,'137',1,NULL,'3266b56f-c813-48cc-8a29-9ef6f2a6667c');
+INSERT INTO `defaultgst` VALUES('GST(AJP)@0%','Any adjustment made to Input Tax e.g.: Bad Debt Relief & other input tax adjustment','GST(AJP)',0,'137',1,NULL,'ab752204-62f7-46b6-8adb-469c6018dbdc');
+INSERT INTO `defaultgst` VALUES('GST(TX-FRS)@0%','Purchase under Flat Rate Scheme.','GST(TX-FRS)',0,'137',1,NULL,'ac41f5a9-96e6-4364-88a7-1c5441a4c963');
+INSERT INTO `defaultgst` VALUES('GST(TX-NC)@0%','GST incurred and choose not to claim the input tax.','GST(TX-NC)',0,'137',1,NULL,'b599b53b-71f3-4e2e-8013-64348cc10485');
+
+#Sales Taxes
+INSERT INTO `defaultgst` VALUES('GST(SR)@0%','Standard-rated supplies with GST Charged','GST(SR)',0,'137',2,NULL,'3c9eeb2a-bc19-4c8b-a8e3-309895dcae82');
+INSERT INTO `defaultgst` VALUES('GST(DS)@0%','Deemed supplies under GST legislations. (e.g. transfer or disposal of business assets without consideration)','GST(DS)',0,'137',2,NULL,'77cfab8f-a49c-4c7b-b0fe-b27540db5c4c');
+INSERT INTO `defaultgst` VALUES('GST(AJS)@0%','Any adjustment made to Output Tax.(e.g. Bad Debt Recovered, & other output tax adjustments)','GST(AJS)',0,'137',2,NULL,'2654c1be-719c-4d02-acd7-73779c64b2eb');
+INSERT INTO `defaultgst` VALUES('GST(SR-MS)@0%','Standard-rated supplies under Margin Scheme.','GST(SR-MS)',0,'137',2,NULL,'0a81c9b5-1db5-4c8b-a677-9b650945a0bc');
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv21 created on 24rd May 2018 4:55PM ----------------------------------------------
+
+#Rahul A. Bhawar 24th May 2018
+#Add New Column In billingshippingaddresses for Vendor Billing Address
+ALTER TABLE `billingshippingaddresses` 
+ADD COLUMN  `vendorbillingaddressforindia` varchar(500) DEFAULT '',
+ADD COLUMN  `vendorbillingcountryforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingstateforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingcityforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingpostalforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingemailforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingfaxforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingmobileforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingphoneforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingcontactpersonnumberforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingcontactpersonforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingrecipientnameforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingaddresstypeforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingcontactpersondesignationforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingwebsiteforindia` varchar(50) DEFAULT '',
+ADD COLUMN  `vendorbillingcountyforindia` varchar(50) DEFAULT '';
+
+#Copy address Query for goodsreceipt
+update billingshippingaddresses bsa 
+inner join goodsreceipt gr on gr.billingshippingaddresses=bsa.id  
+inner join vendor v on v.id=gr.vendor 
+inner join vendoraddressdetails vad on vad.vendorid=v.id 
+inner join company c on c.companyid = v.company 
+inner join extracompanypreferences e on e.id=c.companyid 
+set 
+bsa.vendorbillingstateforindia = vad.state,
+bsa.vendorbillingcountyforindia = vad.county,
+bsa.vendorbillingcountryforindia = vad.county,
+bsa.vendorbillingaddressforindia = vad.address,
+bsa.vendorbillingcityforindia = vad.city, 
+bsa.vendorbillingpostalforindia = vad.postalcode,
+bsa.vendorbillingphoneforindia = vad.phone,
+bsa.vendorbillingmobileforindia = vad.mobilenumber,
+bsa.vendorbillingemailforindia = vad.emailid,
+bsa.vendorbillingfaxforindia = vad.fax,
+bsa.vendorbillingrecipientnameforindia = vad.recipientname,
+bsa.vendorbillingcontactpersonforindia = vad.contactperson,
+bsa.vendorbillingcontactpersonnumberforindia = vad.contactpersonnumber,
+bsa.vendorbillingcontactpersondesignationforindia = vad.contactpersondesignation,
+bsa.vendorbillingwebsiteforindia = vad.website, 
+bsa.vendorbillingaddresstypeforindia = vad.aliasname 
+where  bsa.vendorbillingstateforindia = '' and vad.state!='' and e.isaddressfromvendormaster='F' and (e.isnewgst = 'T' or e.isnewgst = '1') and (vad.isdefaultaddress = 'T' and vad.isbillingaddress='T') and gr.isopeningbalenceinvoice = '0'  and c.country=105 ;
+
+
+#Copy address Query for purchaseorder
+update billingshippingaddresses bsa 
+inner join purchaseorder gr on gr.billingshippingaddresses=bsa.id  
+inner join vendor v on v.id=gr.vendor 
+inner join vendoraddressdetails vad on vad.vendorid=v.id 
+inner join company c on c.companyid = v.company 
+inner join extracompanypreferences e on e.id=c.companyid 
+set 
+bsa.vendorbillingstateforindia = vad.state,
+bsa.vendorbillingcountyforindia = vad.county,
+bsa.vendorbillingcountryforindia = vad.county,
+bsa.vendorbillingaddressforindia = vad.address,
+bsa.vendorbillingcityforindia = vad.city, 
+bsa.vendorbillingpostalforindia = vad.postalcode,
+bsa.vendorbillingphoneforindia = vad.phone,
+bsa.vendorbillingmobileforindia = vad.mobilenumber,
+bsa.vendorbillingemailforindia = vad.emailid,
+bsa.vendorbillingfaxforindia = vad.fax,
+bsa.vendorbillingrecipientnameforindia = vad.recipientname,
+bsa.vendorbillingcontactpersonforindia = vad.contactperson,
+bsa.vendorbillingcontactpersonnumberforindia = vad.contactpersonnumber,
+bsa.vendorbillingcontactpersondesignationforindia = vad.contactpersondesignation,
+bsa.vendorbillingwebsiteforindia = vad.website, 
+bsa.vendorbillingaddresstypeforindia = vad.aliasname 
+where  bsa.vendorbillingstateforindia = '' and vad.state!='' and e.isaddressfromvendormaster='F' and (e.isnewgst = 'T' or e.isnewgst = '1') and (vad.isdefaultaddress = 'T' and vad.isbillingaddress='T') and c.country=105 ;
+
+
+#Copy address Query for grorder
+update billingshippingaddresses bsa 
+inner join grorder gr on gr.billingshippingaddresses=bsa.id  
+inner join vendor v on v.id=gr.vendor 
+inner join vendoraddressdetails vad on vad.vendorid=v.id 
+inner join company c on c.companyid = v.company 
+inner join extracompanypreferences e on e.id=c.companyid 
+set 
+bsa.vendorbillingstateforindia = vad.state,
+bsa.vendorbillingcountyforindia = vad.county,
+bsa.vendorbillingcountryforindia = vad.county,
+bsa.vendorbillingaddressforindia = vad.address,
+bsa.vendorbillingcityforindia = vad.city, 
+bsa.vendorbillingpostalforindia = vad.postalcode,
+bsa.vendorbillingphoneforindia = vad.phone,
+bsa.vendorbillingmobileforindia = vad.mobilenumber,
+bsa.vendorbillingemailforindia = vad.emailid,
+bsa.vendorbillingfaxforindia = vad.fax,
+bsa.vendorbillingrecipientnameforindia = vad.recipientname,
+bsa.vendorbillingcontactpersonforindia = vad.contactperson,
+bsa.vendorbillingcontactpersonnumberforindia = vad.contactpersonnumber,
+bsa.vendorbillingcontactpersondesignationforindia = vad.contactpersondesignation,
+bsa.vendorbillingwebsiteforindia = vad.website, 
+bsa.vendorbillingaddresstypeforindia = vad.aliasname 
+where  bsa.vendorbillingstateforindia = '' and vad.state!='' and e.isaddressfromvendormaster='F' and (e.isnewgst = 'T' or e.isnewgst = '1') and (vad.isdefaultaddress = 'T' and vad.isbillingaddress='T')  and c.country=105 ;
+
+
+#Copy address Query for debitnote
+update billingshippingaddresses bsa 
+inner join debitnote gr on gr.billingshippingaddresses=bsa.id  
+inner join vendor v on v.id=gr.vendor 
+inner join vendoraddressdetails vad on vad.vendorid=v.id 
+inner join company c on c.companyid = v.company 
+inner join extracompanypreferences e on e.id=c.companyid 
+set 
+bsa.vendorbillingstateforindia = vad.state,
+bsa.vendorbillingcountyforindia = vad.county,
+bsa.vendorbillingcountryforindia = vad.county,
+bsa.vendorbillingaddressforindia = vad.address,
+bsa.vendorbillingcityforindia = vad.city, 
+bsa.vendorbillingpostalforindia = vad.postalcode,
+bsa.vendorbillingphoneforindia = vad.phone,
+bsa.vendorbillingmobileforindia = vad.mobilenumber,
+bsa.vendorbillingemailforindia = vad.emailid,
+bsa.vendorbillingfaxforindia = vad.fax,
+bsa.vendorbillingrecipientnameforindia = vad.recipientname,
+bsa.vendorbillingcontactpersonforindia = vad.contactperson,
+bsa.vendorbillingcontactpersonnumberforindia = vad.contactpersonnumber,
+bsa.vendorbillingcontactpersondesignationforindia = vad.contactpersondesignation,
+bsa.vendorbillingwebsiteforindia = vad.website, 
+bsa.vendorbillingaddresstypeforindia = vad.aliasname 
+where  bsa.vendorbillingstateforindia = '' and vad.state!='' and e.isaddressfromvendormaster='F' and (e.isnewgst = 'T' or e.isnewgst = '1') and (vad.isdefaultaddress = 'T' and vad.isbillingaddress='T') and c.country=105 ;
+
+
+#Copy address Query for debitnote
+update billingshippingaddresses bsa 
+inner join creditnote gr on gr.billingshippingaddresses=bsa.id  
+inner join vendor v on v.id=gr.vendor 
+inner join vendoraddressdetails vad on vad.vendorid=v.id 
+inner join company c on c.companyid = v.company 
+inner join extracompanypreferences e on e.id=c.companyid 
+set 
+bsa.vendorbillingstateforindia = vad.state,
+bsa.vendorbillingcountyforindia = vad.county,
+bsa.vendorbillingcountryforindia = vad.county,
+bsa.vendorbillingaddressforindia = vad.address,
+bsa.vendorbillingcityforindia = vad.city, 
+bsa.vendorbillingpostalforindia = vad.postalcode,
+bsa.vendorbillingphoneforindia = vad.phone,
+bsa.vendorbillingmobileforindia = vad.mobilenumber,
+bsa.vendorbillingemailforindia = vad.emailid,
+bsa.vendorbillingfaxforindia = vad.fax,
+bsa.vendorbillingrecipientnameforindia = vad.recipientname,
+bsa.vendorbillingcontactpersonforindia = vad.contactperson,
+bsa.vendorbillingcontactpersonnumberforindia = vad.contactpersonnumber,
+bsa.vendorbillingcontactpersondesignationforindia = vad.contactpersondesignation,
+bsa.vendorbillingwebsiteforindia = vad.website, 
+bsa.vendorbillingaddresstypeforindia = vad.aliasname 
+where  bsa.vendorbillingstateforindia = '' and vad.state!='' and e.isaddressfromvendormaster='F' and (e.isnewgst = 'T' or e.isnewgst = '1') and (vad.isdefaultaddress = 'T' and vad.isbillingaddress='T') and c.country=105 ;
+
+
+#Copy address Query for vendorquotation
+update billingshippingaddresses bsa 
+inner join vendorquotation gr on gr.billingshippingaddresses=bsa.id  
+inner join vendor v on v.id=gr.vendor 
+inner join vendoraddressdetails vad on vad.vendorid=v.id 
+inner join company c on c.companyid = v.company 
+inner join extracompanypreferences e on e.id=c.companyid 
+set 
+bsa.vendorbillingstateforindia = vad.state,
+bsa.vendorbillingcountyforindia = vad.county,
+bsa.vendorbillingcountryforindia = vad.county,
+bsa.vendorbillingaddressforindia = vad.address,
+bsa.vendorbillingcityforindia = vad.city, 
+bsa.vendorbillingpostalforindia = vad.postalcode,
+bsa.vendorbillingphoneforindia = vad.phone,
+bsa.vendorbillingmobileforindia = vad.mobilenumber,
+bsa.vendorbillingemailforindia = vad.emailid,
+bsa.vendorbillingfaxforindia = vad.fax,
+bsa.vendorbillingrecipientnameforindia = vad.recipientname,
+bsa.vendorbillingcontactpersonforindia = vad.contactperson,
+bsa.vendorbillingcontactpersonnumberforindia = vad.contactpersonnumber,
+bsa.vendorbillingcontactpersondesignationforindia = vad.contactpersondesignation,
+bsa.vendorbillingwebsiteforindia = vad.website, 
+bsa.vendorbillingaddresstypeforindia = vad.aliasname 
+where  bsa.vendorbillingstateforindia = '' and vad.state!='' and e.isaddressfromvendormaster='F' and (e.isnewgst = 'T' or e.isnewgst = '1') and (vad.isdefaultaddress = 'T' and vad.isbillingaddress='T') and c.country=105 ;
+
+#Shrinath Shinde 23rd May 2018
+CREATE TABLE `bankreconciliationdraft` (
+  `id` varchar(40) NOT NULL,
+  `description` varchar(1000) default '',  
+  `account` varchar(255) NOT NULL,
+  `newstatementbalance` double NOT NULL,
+  `selectedrec` mediumtext,
+  `fromdate` date default NULL,
+  `todate` date default NULL,
+  `company` varchar(40) NOT NULL,
+  `createdby` varchar(40) DEFAULT NULL,
+  `modifiedby` varchar(40) DEFAULT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  `updatedon` bigint(20) DEFAULT NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`account`) REFERENCES `account` (`id`),
+  FOREIGN KEY (`createdby`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`modifiedby`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE journalentry ADD COLUMN reconciliationdraft VARCHAR(255) DEFAULT NULL;
+
+ALTER TABLE bankreconciliationdraft ADD COLUMN clearedchecksamountinacc double DEFAULT '0';
+
+ALTER TABLE bankreconciliationdraft ADD COLUMN cleareddepositsamountinacc double DEFAULT '0';
+
+ALTER TABLE bankreconciliationdraft ADD COLUMN unclearedchecksamountinacc double DEFAULT '0';
+
+ALTER TABLE bankreconciliationdraft ADD COLUMN uncleareddepositsamountinacc double DEFAULT '0';
+
+ALTER TABLE bankreconciliationdraft ADD COLUMN bankbookbalanceinacc double DEFAULT '0';
+
+ALTER TABLE bankreconciliationdraft ADD COLUMN bankstmtbalanceinacc double DEFAULT '0';
+
+#Rahul A. Bhawar 28 May 2018
+#Insert Pin Code field for Entity module 
+INSERT INTO defaultcustomfields (id,countryid,stateid,maxlength,fieldtype,fieldlabel,moduleid,customfield,customcolumn,insertsequence,isformultientity,isessential,isautopopulatedefaultvalue,gstconfigtype,fieldtooltip) VALUES ('50090297-5fdb-11e8-95d6-6045cb6f9ab5', '105', null, '6', '2', 'Pin Code', '1200', '1', '0', '999', 'F', '0', '0', 4,'This field is mandatory only in Entity dimension values Add/ Edit');
+
+#Insert City field for Entity module 
+INSERT INTO defaultcustomfields (id,countryid,stateid,maxlength,fieldtype,fieldlabel,moduleid,customfield,customcolumn,insertsequence,isformultientity,isessential,isautopopulatedefaultvalue,gstconfigtype,fieldtooltip) VALUES ('71ed243a-5fe2-11e8-95d6-6045cb6f9ab5', '105', null, '100', '1', 'City', '1200', '1', '0', '999', 'F', '0', '0', 4,'This field is present only in Entity dimension values');
+#Amol Dhokale 30th May 2018
+#Update Minimum Ordering Quantity and Maximum Ordering Quantity to system mandatory in hide show functionality
+update customizereportheader set ismanadatoryfield=1 where id in ('e0177321-f444-a6ed-915b-c03fd5632dc1', 'e0177321-f444-a6ed-915b-c03fd5632dc2');

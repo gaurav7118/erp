@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.CustomColumnFormulae" table="column_formulae">
+        <id column="formulaeid" name="formulaeid">
+            <generator class="uuid"/>
+        </id>
+        <property name="moduleid" type="string">
+            <column length="10" name="moduleid"/>
+        </property>
+        <property name="fieldname" type="string">
+            <column length="30" name="fieldname"/>
+        </property>
+        <property name="formulae" type="string">
+            <column length="30" name="formulae"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="companyid" not-null="true"/>
+    </class>
+</hibernate-mapping>

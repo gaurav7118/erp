@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.pos.PaymentDetailPos" table="pospaydetail">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="locationid" type="string">
+            <column length="50" name="locationid" not-null="true"/>
+        </property>
+        <property name="invoiceid" type="string">
+            <column length="50" name="invoiceid" not-null="true"/>
+        </property>
+        <property name="receiptid" type="string">
+            <column length="50" name="receiptid" not-null="true"/>
+        </property>
+        <property name="paymentmethodname" type="string">
+            <column length="50" name="paymentmethodname" not-null="true"/>
+        </property>
+        <property name="transactionDate" type="date">
+            <column name="transactiondate"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount"/>
+        </property>
+        <property name="transactionDateinLong" type="long">
+            <column name="transactiondateinlong" not-null="true"/>
+        </property>
+        <property name="paymenttype" type="integer">
+            <column default="0" name="paymenttype" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="userid"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

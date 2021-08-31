@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ProductBuildDetails" table="pbdetails">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">inventory</param>
+            </generator>
+        </id>
+        <property name="rate" type="double">
+          <column name="rate" not-null="true"/>
+        </property>
+        <property name="aquantity" type="double">
+          <column name="aquantity" not-null="true"/>
+        </property>
+         <property name="percentage" type="double">
+         <column name="percentage" />
+        </property>
+        <property name="actualQuantity" type="double">
+         <column name="actualquantity" />
+        </property>
+        <property name="inventoryQuantity" type="double">
+         <column name="inventoryquantity" />
+        </property>
+        <property name="remainingQuantity" type="double">
+         <column name="remainingquantity" />
+        </property>
+        <property name="unbuild" type="true_false">
+        <column default="false" name="isunbuild" />
+       </property>
+        <property name="recycleQuantity" type="double">
+         <column name="recyclequantity" />
+        </property>
+        <property name="wastageInventoryQuantity" type="double">
+            <column name="wastageinventoryquantity" default="0"/>
+        </property>
+        <property name="wastageQuantityType" type="integer">
+            <column name="wastagequantitytype" default="0"/>
+        </property>
+        <property name="wastageQuantity" type="double">
+            <column name="wastagequantity" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="aproduct" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.ProductBuild" name="build" not-null="true"/>
+        <one-to-one class="com.krawler.hql.accounting.Inventory" constrained="true" name="inventory"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="jedetail" name="jedetail"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="wastagejedetail" name="wastagejedetail"/>
+  </class>
+</hibernate-mapping>

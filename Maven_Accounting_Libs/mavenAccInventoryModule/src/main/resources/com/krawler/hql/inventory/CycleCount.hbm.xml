@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.cyclecount.CycleCount" table="in_cyclecount" >
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+        <property name="transactionNo" type="string">
+            <column length="50" name="transactionno" />
+        </property>
+    <property name="remark" type="string">
+      <column length="255" name="remark"/>
+    </property>
+    <property name="systemQty" type="double">
+      <column name="systemqty"/>
+    </property>
+    <property name="casingUomCount" type="double">
+      <column name="casinguom_count"/>
+    </property>
+    <property name="innerUomCount" type="double">
+      <column name="inneruom_count"/>
+    </property>
+    <property name="stockUomCount" type="double">
+      <column name="stockuom_count"/>
+    </property>
+    <property name="extraItem" type="boolean">
+      <column name="isextraitem"/>
+    </property>
+    
+        <property name="businessDate" type="timestamp">
+            <column name="businessdate"/>
+    </property>
+        <property name="createdOn" type="timestamp">
+      <column name="createdon"/>
+        </property>
+<!--        <property name="modifiedOn" type="timestamp">
+      <column name="modifiedon"/>
+        </property>-->
+        <property column="status" name="status">
+      <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">com.krawler.inventory.model.cyclecount.CycleCountStatus</param>
+      </type>
+    </property>
+        <set name="cycleCountDetails" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="cyclecount"  />
+            <one-to-many class="com.krawler.inventory.model.cyclecount.CycleCountDetail" />
+    </set>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="store" name="store"/>
+    <many-to-one class="com.krawler.inventory.model.packaging.Packaging" column="packaging" name="packaging"/>
+    <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdBy" not-null="true"/>
+        <many-to-one column="cyclecountcustomdataref" class="com.krawler.inventory.model.cyclecount.CycleCountCustomData"  name="cycleCountCustomData" />
+<!--        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedBy"/>-->
+<!--        <many-to-one class="com.krawler.inventory.model.cyclecount.CycleCountDraft" column="ccdraft" name="ccDraft"/>-->
+<!--        <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryref" name="inventoryRef"/>-->
+  </class>
+</hibernate-mapping>

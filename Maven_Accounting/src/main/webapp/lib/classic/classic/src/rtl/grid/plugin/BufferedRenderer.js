@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.grid.plugin.BufferedRenderer",{override:"Ext.grid.plugin.BufferedRenderer",translateBody:function(A,B){if(this.isRTL&&Ext.supports.xOriginBug&&this.view.scrollFlags.y){A.translate(Ext.getScrollbarSize().width,this.bodyTop=B)}else{this.callParent([A,B])}}})

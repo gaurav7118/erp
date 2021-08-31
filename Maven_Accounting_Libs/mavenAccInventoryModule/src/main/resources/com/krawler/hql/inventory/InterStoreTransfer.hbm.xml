@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.ist.InterStoreTransferRequest" table="in_interstoretransfer">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="transactionNo" type="string">
+            <column length="50" name="transactionno" not-null="true"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+        <property column="status" name="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.ist.InterStoreTransferStatus</param>
+            </type>
+        </property>
+        <property name="orderedQty" type="double">
+            <column name="orderedqty"/>
+        </property>
+        <property name="acceptedQty" type="double">
+            <column name="acceptedqty"/>
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="createdon" not-null="true"/>
+        </property>
+        <property name="creationdate" type="long">
+            <column name="creationdate"/>
+        </property>
+        <property name="isjobWorkClose" type="true_false">
+            <column name="isjobworkclose" default="'F'" />
+       </property>
+        <property name="modifieddate" type="long">
+            <column name="modifieddate"/>
+        </property>
+        <property name="memo" type="string">
+            <column length="2048" name="memo"/>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        <property name="businessDate" type="timestamp">
+            <column name="businessdate" not-null="true"/>
+        </property>
+        <property name="isJobWorkStockTransfer" type="true_false">
+            <column name="isjobworkstocktransfer" default="'F'" />
+        </property>
+        <property name="purchaseOrderDetail" type="string">
+            <column length="255" name="podetails"/>
+        </property>
+        <property column="transaction_module" name="transactionModule">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.stockmovement.TransactionModule</param>
+            </type>
+        </property>
+        <set cascade="all" inverse="true" lazy="true" name="istDetails" fetch="select">
+            <key column="istrequest"/>
+            <one-to-many class="com.krawler.inventory.model.ist.ISTDetail"/>
+        </set>
+        <property name="parentID" type="string">
+            <column length="50" name="parentid" />
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="fromstore" name="fromStore"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="tostore" name="toStore"/>
+        <many-to-one class="com.krawler.inventory.model.packaging.Packaging" column="packaging" name="packaging"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="uom" name="uom"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.CostCenter" column="costcenter" name="costCenter"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdBy" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="approvedby" name="approvedBy"/>
+        <many-to-one class="com.krawler.inventory.model.ist.ChallanNumber" column="challanno" name="challanNumber"/>
+        <many-to-one column="istcustomdataref" class="com.krawler.inventory.model.ist.InterStoreTransferCustomData" name="ISTCustomData" />
+        <many-to-one column="istlinelevelcustomdataref" class="com.krawler.inventory.model.ist.InterStoreTransferCustomData" name="ISTLineLevelCustomData"/>
+        <many-to-one class="com.krawler.inventory.model.ist.GRODetailISTMapping" column="detailistmapping" name="detailISTMapping"/>
+        <many-to-one class="com.krawler.inventory.model.ist.RepairGRODetailISTMapping" column="repairgrodetailistmapping" name="repairGRODetailISTMapping"/>
+        <many-to-one class="com.krawler.inventory.model.ist.WOCDetailISTMapping" column="wocdistmapping" name="wocdISTMapping"/>
+        <many-to-one class="com.krawler.inventory.model.ist.RepairWOCDISTMapping" column="repairwocdistmapping" name="repairWOCDISTMapping"/>
+    </class>
+</hibernate-mapping>

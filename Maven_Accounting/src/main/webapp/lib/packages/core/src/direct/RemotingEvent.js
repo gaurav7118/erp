@@ -1,0 +1,1 @@
+Ext.define("Ext.direct.RemotingEvent",{extend:"Ext.direct.Event",alias:"direct.rpc",getTransaction:function(){var A=this;return A.transaction||Ext.direct.Manager.getTransaction(A.tid)}})

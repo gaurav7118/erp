@@ -1,0 +1,1 @@
+Ext.define("Ext.draw.sprite.Triangle",{extend:"Ext.draw.sprite.Path",alias:"sprite.triangle",inheritableStatics:{def:{processors:{x:"number",y:"number",size:"number"},defaults:{x:0,y:0,size:4},triggers:{x:"path",y:"path",size:"path"}}},updatePath:function(D,B){var C=B.size*2.2,A=B.x,E=B.y;D.fromSvgString("M".concat(A,",",E,"m0-",C*0.58,"l",C*0.5,",",C*0.87,"-",C,",0z"))}})

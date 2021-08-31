@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.DefaultHeader" table="default_header">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="defaultHeader" type="string">
+      <column name="defaultHeader"/>
+    </property>
+    <property name="moduleName" type="string">
+      <column name="moduleName"/>
+    </property>
+    <property name="flag" type="int">
+      <column default="0" name="flag"/>
+    </property>
+    <property name="configid" type="string">
+      <column name=""/>
+    </property>
+    <property name="pojoheadername" type="string">
+      <column name="pojoheadername"/>
+    </property>
+    <property name="recordname" type="string">
+      <column name="recordname"/>
+    </property>
+    <property name="xtype" type="string">
+      <column name="xtype"/>
+    </property>
+    <property name="pojoMethodName" type="string">
+      <column name="pojomethodname"/>
+    </property>
+    <property name="validateType" type="string">
+        <column name="validatetype" />
+    </property>
+    <property name="maxLength" type="int">
+      <column default="0" name="maxlength"/>
+    </property>
+    <property name="mandatory" type="true_false">
+      <column default="false" name="ismandatory"/>
+    </property>
+    <property name="islineitem" type="true_false">
+      <column default="false" name="islineitem"/>
+    </property>
+    <property name="isbatchdetail" type="true_false">
+      <column default="false" name="isbatchdetail"/>
+    </property>
+    <property name="isdocumentimport" type="true_false">
+      <column default="false" name="isdocumentimport"/>
+    </property>
+    <property name="required" type="true_false">
+        <column name="required" default="false"/>
+    </property>
+    <property name="hbmNotNull" type="true_false">
+      <column default="false" name="hbmnotnull"/>
+    </property>
+    <property name="defaultValue" type="string">
+      <column name="defaultvalue"/>
+    </property>
+    <property name="refModule_PojoClassName" type="string">
+      <column name="refmodule_pojoclassname"/>
+    </property>
+    <property name="refDataColumn_HbmName" type="string">
+      <column name="refdatacolumn_hbmname"/>
+    </property>
+    <property name="refFetchColumn_HbmName" type="string">
+      <column name="reffetchcolumn_hbmname"/>
+    </property>
+    <property name="allowImport" type="true_false">
+      <column default="true" name="allowimport"/>
+    </property>
+    <property name="customflag" type="true_false">
+        <column name="customflag" default="false"/>
+    </property>
+    <property name="allowMapping" type="true_false">
+        <column name="allowmapping" default="'T'"/>
+    </property>
+    <property name="dbcolumnname" type="string">
+      <column name="dbcolumnname"/>
+    </property>
+    <property name="reftablename" type="string">
+        <column name="reftablename"/>
+    </property>
+    <property name="reftablefk" type="string">
+        <column name="reftablefk"/>
+    </property>
+    <property name="reftabledatacolumn" type="string">
+        <column name="reftabledatacolumn"/>
+    </property>
+    <property name="dataIndex" type="string">
+      <column name="dataindex"/>
+    </property>
+    <property name="rendererType" type="string">
+      <column name="renderertype"/>
+    </property>
+    <property name="countryID" type="string">
+      <column name="countryid" default="'0'"/>
+    </property>
+    <property name="allowAdvanceSearch" type="true_false">
+      <column default="false" name="allowadvancesearch"/>
+    </property>
+     <property name="iscustomreport" type="true_false">
+       <column default="false" name="iscustomreport"/>
+    </property>
+     <property name="allowindocumentdesigner" type="true_false">
+       <column default="false" name="allowindocumentdesigner"/>
+    </property>
+    <property name="dbTableName" type="string">
+      <column name="dbtabletame"/>
+    </property>
+    <property name="isreadonly" type="boolean">
+      <column name="isreadonly"/>
+    </property>
+    <property name="formFieldName" type="string">
+        <column name="formfieldname" not-null="false" default="null"> </column>
+    </property>
+    <property name="refModuleId" type="string">
+        <column name="refmoduleid"/>
+    </property>
+    <property name="isDefaultFieldMappings" type="boolean">
+      <column name="isdefaultfieldmappings" />
+    </property>
+     <property name="isDataIndex" type="boolean">
+      <column name="isdataindex" />
+    </property>
+    <property name="allowinotherapplication" type="true_false">
+      <column default="false" name="allowinotherapplication"/>
+    </property>
+        <property name="conditionalMandetory" type="true_false">
+            <column default="false" name="isconditionalmandetory"/>
+        </property>
+        <property name="subModuleFlag" type="string">
+            <column default="'0'" name="submoduleflag"/>
+        </property>
+    <many-to-one class="com.krawler.common.admin.Modules" column="module" name="Module" not-null="true"/>
+     <property name="allowcrossmodule" type="true_false">
+       <column default="false" name="allowcrossmodule"/>
+    </property>
+    <set name="headerinfo" inverse="true" cascade="all,delete-orphan" >
+        <key column="defaultheader" />
+        <one-to-many class="com.krawler.common.admin.ColumnHeader" />
+    </set>
+
+  </class>
+</hibernate-mapping>

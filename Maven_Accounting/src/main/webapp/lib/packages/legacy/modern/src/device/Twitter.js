@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Twitter",{alternateClassName:"Ext.ux.device.Twitter",singleton:true,requires:["Ext.device.Communicator","Ext.device.twitter.*"],constructor:function(){var A=Ext.browser.is;if(A.WebView&&A.Cordova){return Ext.create("Ext.device.twitter.Cordova")}else{return Ext.create("Ext.device.twitter.Abstract")}}})

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.CIMBReceivingDetails" table="cimbreceivingdetails">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="collectionAccountNumber" type="string">
+            <column length="255" name="collectionaccountnumber"/>
+        </property>
+        <property name="collectionAccountName" type="string">
+            <column length="255" name="collectionaccountname"/>
+        </property>
+        <property name="giroBICCode" type="string">
+            <column length="255" name="girobiccode"/>
+        </property>
+        <property name="referenceNumber" type="string">
+            <column length="255" name="referencenumber"/>
+        </property>
+        <property name="emailForGiro" type="string">
+            <column length="255" name="emailforgiro"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="masterItem" column="masteritem"/>
+        <many-to-one class="com.krawler.hql.accounting.Vendor" name="vendor" column="vendor"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column = "company" not-null="true"/>
+        
+    </class>
+  
+</hibernate-mapping>

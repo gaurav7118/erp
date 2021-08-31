@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accBankReconciliationDao" class="com.krawler.spring.accounting.bankreconciliation.accBankReconciliationImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="accBankReconciliationController" class="com.krawler.spring.accounting.bankreconciliation.accBankReconciliationController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accBankReconciliationDAO">
+            <ref bean="accBankReconciliationDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accBankReconciliationModuleService">
+            <ref bean="accBankReconciliationModuleService"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id="accBankReconciliationModuleService" class="com.krawler.spring.accounting.bankreconciliation.AccBankReconciliationModuleServiceImpl">
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accBankReconciliationDAO">
+            <ref bean="accBankReconciliationDao"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+    </bean>
+</beans>

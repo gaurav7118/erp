@@ -1,0 +1,1 @@
+Ext.define("Ext.dom.CompositeElement",{alternateClassName:"Ext.CompositeElement",extend:"Ext.dom.CompositeElementLite",isLite:false,getElement:function(A){return A},transformElement:function(A){return Ext.get(A)}})

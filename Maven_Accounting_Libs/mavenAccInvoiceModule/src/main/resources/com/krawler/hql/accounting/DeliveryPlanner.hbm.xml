@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DeliveryPlanner" table="deliveryplanner">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        
+        <property name="pushTime" type="timestamp">
+            <column name="pushtime"/>
+        </property>
+        
+        <property name="deliveryLocation" type="string">
+            <column length="255" name="deliverylocation"/>
+        </property>
+        
+        <property name="deliveryDate" type="date">
+            <column name="deliverydate"/>
+        </property>
+        
+        <property name="deliveryTime" type="string">
+            <column length="255" name="deliverytime"/>
+        </property>
+        
+        <property name="remarksBySales" type="string">
+            <column length="255" name="remarksbysales"/>
+        </property>
+        
+        <property name="remarksByPlanner" type="string">
+            <column length="255" name="remarksbyplanner"/>
+        </property>
+        
+        <property name="tripDescription" type="string">
+            <column name="tripdescription"/>
+        </property>
+        
+        <property name="invoiceOccurance" type="integer">
+            <column name="invoiceoccurance"/>
+        </property>
+        
+        <property name="printedBy" type="string">
+            <column length="255" name="printedby"/>
+        </property>
+        
+        <property name="documentNo" type="string">
+            <column length="255" name="documentno"/>
+        </property>
+        
+        <property name="module" type="integer">
+            <column name="module" default="0"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Invoice" column="referencenumber" name="referenceNumber"/>
+        <many-to-one class="com.krawler.common.admin.User" column="fromuser" name="fromUser"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="vehiclenumber" name="vehicleNumber"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="driver" name="driver"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="tripnumber" name="tripNumber"/>
+        <many-to-one class="com.krawler.hql.accounting.DeliveryOrder" column="deliveryorder" name="deliveryOrder"/>
+        <many-to-one class="com.krawler.hql.accounting.SalesReturn" column="salesreturn" name="salesReturn"/>
+    </class>
+</hibernate-mapping>

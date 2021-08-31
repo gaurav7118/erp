@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="StatementOfAccountsSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="StatementOfAccountsSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="imagePath2" class="java.lang.String"/>
+	<parameter name="imagePath3" class="java.lang.String"/>
+	<parameter name="Companyname" class="java.lang.String"/>
+	<parameter name="Companyaddress" class="java.lang.String"/>
+	<parameter name="Title" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="companyRegNo" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<background>
+		<band height="802">
+			<rectangle>
+				<reportElement x="7" y="230" width="87" height="446"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="94" y="230" width="261" height="446"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="355" y="230" width="86" height="446"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="441" y="230" width="111" height="446"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="-57" y="201" width="640" height="51" forecolor="#FEFEFE"/>
+			</rectangle>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="166">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="143" width="284" height="20"/>
+				<box leftPadding="5"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{Companyaddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="284" y="143" width="267" height="20"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="2">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{StatementOfAccountsSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{StatementOfAccountsSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="121"/>
+	</pageFooter>
+</jasperReport>

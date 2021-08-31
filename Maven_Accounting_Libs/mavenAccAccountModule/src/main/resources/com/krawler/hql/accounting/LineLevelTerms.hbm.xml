@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.LineLevelTerms" table="linelevelterms">
+    <id column="id" name="id" type="string">
+      <generator class="uuid"/>
+    </id>
+    <property name="term" type="string">
+      <column name="term"/>
+    </property>
+    <property name="formula" type="string">
+      <column name="formula"/>
+    </property>
+    <property name="sign" type="integer">
+      <column name="sign"/>
+    </property>
+    <property name="deleted" type="integer">
+      <column name="deleted"/>
+    </property>
+    <property name="createdOn" type="long">
+      <column name="createdon"/>
+    </property>
+    <property name="salesOrPurchase" type="boolean">
+      <column default="false" name="salesorpurchase" not-null="false"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="payableAccount"  column="payableaccount"/>
+    <many-to-one class="com.krawler.hql.accounting.DefaultTerms" name="defaultTerms"  column="defaultterms"/>
+    <many-to-one class="com.krawler.common.admin.User" name="creator" not-null="true"/>
+    <many-to-one cascade="delete,save-update" class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <property name="percentage" type="double">
+      <column default="0" name="percentage"/>
+    </property>
+    <property name="termAmount" type="double">
+      <column default="0" name="termamount"/>
+    </property>
+    <property name="termType" type="integer">
+      <column name="termtype"/>
+    </property>
+    <property name="formulaids" type="string">
+      <column length="1024" name="formulaids"/>
+    </property>
+    <property name="purchaseValueOrSaleValue" type="double">
+      <column default="0" name="purchasevalueorsalevalue"/>
+    </property>
+    <property name="deductionOrAbatementPercent" type="double">
+      <column default="0" name="deductionorabatementpercent"/>
+    </property>
+    <property name="taxType" type="int">
+      <column default="1" name="taxtype"/>
+    </property>
+    <property name="OtherTermTaxable" type="true_false">
+      <column default="T" name="isothertermtaxable"/>
+    </property>
+    <property name="isDefault" type="true_false">
+      <column default="F" name="isdefault"/>
+    </property>
+    <property name="isAdditionalTax" type="true_false">
+      <column default="F" name="isadditionaltax"/>
+    </property>
+    <property name="includeInTDSCalculation" type="true_false">
+      <column default="F" name="includeintdscalculation"/>
+    </property>
+    <property name="termSequence" type="integer">
+      <column name="termsequence"/>
+    </property>
+    <property name="formType" type="string">
+      <column name="formtype"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="masteritem" not-null="false"/>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="creditNotAvailedAccount"  column="creditnotavailedaccount"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.DefaultPaymentMethod" table="defaultpaymentmethod">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="methodName" type="string">
+      <column length="50" name="methodname" not-null="true"/>
+    </property>
+    <property name="detailType" type="int">
+      <column name="detailtype" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="account" not-null="true"/>
+  </class>
+</hibernate-mapping>

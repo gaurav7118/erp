@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.PackingDetail" table="packingdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="actualQuantity" type="double">
+            <column name="actualquantity" not-null="true"/>
+        </property>
+        <property name="packingQuantity" type="double">
+            <column name="packingquantity" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column length="255" name="description"/>
+        </property>
+        <property name="packageNumber" type="string">
+            <column length="255" name="packagenumber"/>
+        </property>
+        <set cascade="all" inverse="true" name="dodetails">
+            <key column="packingdetails"/>
+            <one-to-many class="com.krawler.hql.accounting.DoDetails"/>
+        </set>        
+        <set cascade="all" inverse="true" name="packingdetails">
+            <key column="packingdetails"/>
+            <one-to-many class="com.krawler.hql.accounting.ItemDetail"/>
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Packing" name="packing" column="packinglist"/>        
+        <many-to-one class="com.krawler.hql.accounting.DeliveryOrderDetail" name="dodetailid" column="dodetailid"/>        
+    </class>
+</hibernate-mapping>

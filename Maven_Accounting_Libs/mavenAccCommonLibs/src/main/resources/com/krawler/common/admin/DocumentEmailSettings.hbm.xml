@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.krawler.common.admin.DocumentEmailSettings" table="documentemailsettings">
+      <id column="id" name="id">
+          <generator class="foreign">
+              <param name="property">company</param>
+          </generator>
+      </id>
+      <property name="purchaseReqGenerationMail" type="true_false">
+            <column name="purchaseReqGenerationMail" default="false"/>
+        </property>
+        <property name="purchaseReqUpdationMail" type="true_false">
+            <column name="purchaseReqUpdationMail" default="false"/>
+        </property>
+        <property name="vendorQuotationGenerationMail" type="true_false">
+            <column name="vendorQuotationGenerationMail" default="false"/>
+        </property>
+        <property name="vendorQuotationUpdationMail" type="true_false">
+            <column name="vendorQuotationUpdationMail" default="false"/>
+        </property>
+        <property name="purchaseOrderGenerationMail" type="true_false">
+            <column name="purchaseOrderGenerationMail" default="false"/>
+        </property>
+        <property name="purchaseOrderUpdationMail" type="true_false">
+            <column name="purchaseOrderUpdationMail" default="false"/>
+        </property>
+        <property name="goodsReceiptGenerationMail" type="true_false">
+            <column name="goodsReceiptGenerationMail" default="false"/>
+        </property>
+        <property name="goodsReceiptUpdationMail" type="true_false">
+            <column name="goodsReceiptUpdationMail" default="false"/>
+        </property>
+        <property name="purchaseReturnGenerationMail" type="true_false">
+            <column name="purchaseReturnGenerationMail" default="false"/>
+        </property>
+        <property name="purchaseReturnUpdationMail" type="true_false">
+            <column name="purchaseReturnUpdationMail" default="false"/>
+        </property>
+        <property name="vendorPaymentGenerationMail" type="true_false">
+            <column name="vendorPaymentGenerationMail" default="false"/>
+        </property>
+        <property name="vendorPaymentUpdationMail" type="true_false">
+            <column name="vendorPaymentUpdationMail" default="false"/>
+        </property>
+        <property name="debitNoteGenerationMail" type="true_false">
+            <column name="debitNoteGenerationMail" default="false"/>
+        </property>
+        <property name="debitNoteUpdationMail" type="true_false">
+            <column name="debitNoteUpdationMail" default="false"/>
+        </property>
+        <property name="customerQuotationGenerationMail" type="true_false">
+            <column name="customerQuotationGenerationMail" default="false"/>
+        </property>
+        <property name="customerQuotationUpdationMail" type="true_false">
+            <column name="customerQuotationUpdationMail" default="false"/>
+        </property>
+        <property name="salesOrderGenerationMail" type="true_false">
+            <column name="salesOrderGenerationMail" default="false"/>
+        </property>
+        <property name="salesOrderUpdationMail" type="true_false">
+            <column name="salesOrderUpdationMail" default="false"/>
+        </property>
+        <property name="deleveryOrderGenerationMail" type="true_false">
+            <column name="deleveryOrderGenerationMail" default="false"/>
+        </property>
+        <property name="deleveryOrderUpdationMail" type="true_false">
+            <column name="deleveryOrderUpdationMail" default="false"/>
+        </property>
+        <property name="salesReturnGenerationMail" type="true_false">
+            <column name="salesReturnGenerationMail" default="false"/>
+        </property>
+        <property name="salesReturnUpdationMail" type="true_false">
+            <column name="salesReturnUpdationMail" default="false"/>
+        </property>
+        <property name="receiptGenerationMail" type="true_false">
+            <column name="receiptGenerationMail" default="false"/>
+        </property>
+        <property name="receiptUpdationMail" type="true_false">
+            <column name="receiptUpdationMail" default="false"/>
+        </property>
+        <property name="creditNoteGenerationMail" type="true_false">
+            <column name="creditNoteGenerationMail" default="false"/>
+        </property>
+        <property name="creditNoteUpdationMail" type="true_false">
+            <column name="creditNoteUpdationMail" default="false"/>
+        </property>
+        <property name="leaseQuotationGenerationMail" type="true_false">
+            <column name="leaseQuotationGenerationMail" default="false"/>
+        </property>
+        <property name="leaseQuotationUpdationMail" type="true_false">
+            <column name="leaseQuotationUpdationMail" default="false"/>
+        </property>
+        <property name="leaseOrderGenerationMail" type="true_false">
+            <column name="leaseOrderGenerationMail" default="false"/>
+        </property>
+        <property name="leaseOrderUpdationMail" type="true_false">
+            <column name="leaseOrderUpdationMail" default="false"/>
+        </property>
+        <property name="leaseInvoiceGenerationMail" type="true_false">
+            <column name="leaseInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="leaseInvoiceUpdationMail" type="true_false">
+            <column name="leaseInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="leaseDeliveryOrderGenerationMail" type="true_false">
+            <column name="leaseDeliveryOrderGenerationMail" default="false"/>
+        </property>
+        <property name="leaseDeliveryOrderUpdationMail" type="true_false">
+            <column name="leaseDeliveryOrderUpdationMail" default="false"/>
+        </property>
+        <property name="leaseReturnGenerationMail" type="true_false">
+            <column name="leaseReturnGenerationMail" default="false"/>
+        </property>
+        <property name="leaseReturnUpdationMail" type="true_false">
+            <column name="leaseReturnUpdationMail" default="false"/>
+        </property>
+        <property name="leaseContractGenerationMail" type="true_false">
+            <column name="leaseContractGenerationMail" default="false"/>
+        </property>
+        <property name="leaseContractUpdationMail" type="true_false">
+            <column name="leaseContractUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentReqGenerationMail" type="true_false">
+            <column name="consignmentReqGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentReqUpdationMail" type="true_false">
+            <column name="consignmentReqUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentDOGenerationMail" type="true_false">
+            <column name="consignmentDOGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentDOUpdationMail" type="true_false">
+            <column name="consignmentDOUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentInvoiceGenerationMail" type="true_false">
+            <column name="consignmentInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentInvoiceUpdationMail" type="true_false">
+            <column name="consignmentInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentReturnGenerationMail" type="true_false">
+            <column name="consignmentReturnGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentReturnUpdationMail" type="true_false">
+            <column name="consignmentReturnUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentPReqGenerationMail" type="true_false">
+            <column name="consignmentPReqGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentPReqUpdationMail" type="true_false">
+            <column name="consignmentPReqUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentPDOGenerationMail" type="true_false">
+            <column name="consignmentPDOGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentPDOUpdationMail" type="true_false">
+            <column name="consignmentPDOUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentPInvoiceGenerationMail" type="true_false">
+            <column name="consignmentPInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentPInvoiceUpdationMail" type="true_false">
+            <column name="consignmentPInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="consignmentPReturnGenerationMail" type="true_false">
+            <column name="consignmentPReturnGenerationMail" default="false"/>
+        </property>
+        <property name="consignmentPReturnUpdationMail" type="true_false">
+            <column name="consignmentPReturnUpdationMail" default="false"/>
+        </property>
+        
+        <property name="assetPurchaseReqGenerationMail" type="true_false">
+            <column name="assetPurchaseReqGenerationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseReqUpdationMail" type="true_false">
+            <column name="assetPurchaseReqUpdationMail" default="false"/>
+        </property>
+        <property name="assetVendorQuotationGenerationMail" type="true_false">
+            <column name="assetVendorQuotationGenerationMail" default="false"/>
+        </property>
+        <property name="assetVendorQuotationUpdationMail" type="true_false">
+            <column name="assetVendorQuotationUpdationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseOrderGenerationMail" type="true_false">
+            <column name="assetPurchaseOrderGenerationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseOrderUpdationMail" type="true_false">
+            <column name="assetPurchaseOrderUpdationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseInvoiceGenerationMail" type="true_false">
+            <column name="assetPurchaseInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseInvoiceUpdationMail" type="true_false">
+            <column name="assetPurchaseInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="assetGoodsReceiptGenerationMail" type="true_false">
+            <column name="assetGoodsReceiptGenerationMail" default="false"/>
+        </property>
+        <property name="assetGoodsReceiptUpdationMail" type="true_false">
+            <column name="assetGoodsReceiptUpdationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseReturnGenerationMail" type="true_false">
+            <column name="assetPurchaseReturnGenerationMail" default="false"/>
+        </property>
+        <property name="assetPurchaseReturnUpdationMail" type="true_false">
+            <column name="assetPurchaseReturnUpdationMail" default="false"/>
+        </property>
+        <property name="assetDisposalInvoiceGenerationMail" type="true_false">
+            <column name="assetDisposalInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="assetDisposalInvoiceUpdationMail" type="true_false">
+            <column name="assetDisposalInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="assetDeliveryOrderGenerationMail" type="true_false">
+            <column name="assetDeliveryOrderGenerationMail" default="false"/>
+        </property>
+        <property name="assetDeliveryOrderUpdationMail" type="true_false">
+            <column name="assetDeliveryOrderUpdationMail" default="false"/>
+        </property>
+        <property name="assetSalesReturnGenerationMail" type="true_false">
+            <column name="assetSalesReturnGenerationMail" default="false"/>
+        </property>
+        <property name="assetSalesReturnUpdationMail" type="true_false">
+            <column name="assetSalesReturnUpdationMail" default="false"/>
+        </property>
+        <property name="salesInvoiceGenerationMail" type="true_false">
+            <column name="salesInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="salesInvoiceUpdationMail" type="true_false">
+            <column name="salesInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="purchaseInvoiceGenerationMail" type="true_false">
+            <column name="purchaseInvoiceGenerationMail" default="false"/>
+        </property>
+        <property name="purchaseInvoiceUpdationMail" type="true_false">
+            <column name="purchaseInvoiceUpdationMail" default="false"/>
+        </property>
+        <property name="recurringInvoiceMail" type="true_false">
+            <column name="recurringInvoiceMail" default="false"/>
+        </property>
+        <property name="consignmentRequestApproval" type="true_false">
+            <column name="consignmentRequestApproval" default="false"/>
+        </property>
+        <property name="qtyBelowReorderLevelMail" type="true_false">
+            <column name="qtyBelowReorderLevelMail" default="false"/>
+        </property>
+        <property name="RFQGenerationMail" type="true_false">
+            <column name="RFQGenerationMail" default="false"/>
+        </property>
+        <property name="RFQUpdationMail" type="true_false">
+            <column name="RFQUpdationMail" default="false"/>
+        </property>
+         <property name="custShippingAddressInPurDoc" type="true_false">
+            <column name="iscustomershippaddressinpurchaseddoc" default="false"/>
+        </property>
+     <one-to-one class="com.krawler.common.admin.Company" name="company"/>
+      
+  </class>
+</hibernate-mapping>

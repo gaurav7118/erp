@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BMPurchaseReturn1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.75" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="4.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="code" class="java.lang.String"/>
+		<field name="productDescription" class="java.lang.String"/>
+		<field name="qty" class="java.lang.String"/>
+		<field name="productAmount" class="java.lang.String"/>
+		<field name="uPrice" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="PRSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="refno" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="prn" class="java.lang.String"/>
+	<field name="customer" class="java.lang.String"/>
+	<field name="accountCode" class="java.lang.String"/>
+	<field name="subtotal" class="java.lang.String"/>
+	<field name="gstpercent" class="java.lang.String"/>
+	<field name="gst" class="java.lang.String"/>
+	<field name="totalamount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="548" height="95"/>
+				<staticText>
+					<reportElement x="271" y="40" width="76" height="13"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Tel: 6589 5399]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="11" width="185" height="19" forecolor="#000000"/>
+					<textElement>
+						<font fontName="SansSerif" size="16" isBold="false"/>
+				        </textElement>
+					<text><![CDATA[Buildmate (S) Pte Ltd]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="347" y="41" width="100" height="13"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[A/cs Tel: 6589 5390]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="188" y="28" width="83" height="13"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Tel: 6631 0188]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="40" width="175" height="13"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[3 Eunos Ave 8A, Singapore 409458]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="271" y="28" width="76" height="13"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Tel: 6265 4211		]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="29" width="180" height="13"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<text><![CDATA[1 Joe Yee Road, Singapore 619197]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="220" y="63" width="166" height="31" forecolor="#000000"/>
+					<textElement verticalAlignment="Middle">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CREDIT NOTE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="348" y="28" width="100" height="13"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[A/cs Tel: 6589 5390]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="188" y="40" width="83" height="13"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Tel: 6589 5388]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="117" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="16"/>
+				<textElement/>
+				<text><![CDATA[Debit Note to:-]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="16" width="215" height="63"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{customer}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="1" width="51" height="15"/>
+				<textElement/>
+				<text><![CDATA[Doc. No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="15" width="51" height="15"/>
+				<textElement/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="29" width="51" height="15"/>
+				<textElement/>
+				<text><![CDATA[Ref.No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="43" width="51" height="15"/>
+				<textElement/>
+				<text><![CDATA[Page]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="57" width="51" height="15"/>
+				<textElement/>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="1" width="3" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="15" width="3" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="29" width="3" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="43" width="3" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="57" width="3" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="97" height="22"/>
+				<textElement/>
+				<text><![CDATA[Account Code      :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="79" width="119" height="22"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{accountCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="1" width="97" height="15"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{prn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="15" width="97" height="15"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="29" width="97" height="15"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{refno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="453" y="57" width="97" height="15"/>
+				<textElement textAlignment="Left" markup="html"/>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement key="table" style="table" x="2" y="112" width="548" height="4"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{PRSubReportData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="63">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="63" height="21"/>
+								<box bottomPadding="2"/>
+								<textElement verticalAlignment="Bottom"/>
+								<text><![CDATA[Stock Code]]></text>
+							</staticText>
+							 
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="63" height="20"/>
+								<box leftPadding="0"/>
+								<textElement markup="none"/>
+								<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="219">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="219" height="21"/>
+								<box bottomPadding="2"/>
+								<textElement verticalAlignment="Bottom"/>
+								<text><![CDATA[Description]]></text>
+							</staticText>
+							 
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="219" height="20"/>
+								<box leftPadding="5"/>
+								<textElement markup="html"/>
+								<textFieldExpression><![CDATA[$F{productDescription}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="84">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="84" height="21"/>
+								<box bottomPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+								<text><![CDATA[Qty]]></text>
+							</staticText>
+							 
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="84" height="20"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" markup="none"/>
+								<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="93">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="93" height="21"/>
+								<box bottomPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+								<text><![CDATA[Unit Price]]></text>
+							</staticText>
+							 
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="93" height="20"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" markup="none"/>
+								<textFieldExpression><![CDATA[$F{uPrice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="94">
+						<jr:columnHeader style="table_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="94" height="21"/>
+								<box bottomPadding="2"/>
+								<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+							 
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="94" height="20"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" markup="none"/>
+								<textFieldExpression><![CDATA[$F{productAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="453" y="43" width="97" height="15"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="160">
+			<line>
+				<reportElement x="0" y="1" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="347" y="16" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="347" y="35" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstpercent}+"GST"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="347" y="55" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="452" y="54" width="103" height="20"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="16" width="105" height="20"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="35" width="105" height="20"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gst}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="448" y="16" width="4" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="36" width="4" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="55" width="4" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="66" y="107" width="90" height="1"/>
+			</line>
+			<line>
+				<reportElement x="263" y="107" width="85" height="1"/>
+			</line>
+			<line>
+				<reportElement x="461" y="108" width="94" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="366" y="86" width="72" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Received by :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="89" width="78" height="17"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Approved by :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="89" width="78" height="17"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Certified by :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="461" y="35" width="94" height="1"/>
+			</line>
+			<line>
+				<reportElement x="461" y="53" width="94" height="1"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

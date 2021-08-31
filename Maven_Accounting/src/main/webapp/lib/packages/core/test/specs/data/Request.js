@@ -1,0 +1,1 @@
+describe("Ext.data.Request",function(){var A=Ext.data.Request;describe("instantiation",function(){var C="create",B={action:C};it("should have correct configuration options",function(){var D=new A();expect(D.getAction()).toBeUndefined();expect(D.getParams()).toBeUndefined();expect(D.getMethod()).toEqual("GET");D=null})})})

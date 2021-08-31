@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.mycompany</groupId>
+    <artifactId>mavenAccCreditNote</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+    <name>mavenAccCreditNote</name>
+    <url>http://maven.apache.org</url>
+    <repositories>
+        <repository>
+            <id>test</id>
+            <url>${mvn-repo-url}</url>
+        </repository>
+    </repositories>
+<parent>
+   <groupId>com.mycompany</groupId>
+    <artifactId>accounting-libs</artifactId>
+    <version>1.0</version>
+</parent>
+    <dependencies>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccCommonLibs</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccJournalEntryModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccDiscountModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccProductModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccInvoiceModule</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>mavenAccGoodsReceipt</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>mavenAccCreditNote</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
+    </properties>
+</project>

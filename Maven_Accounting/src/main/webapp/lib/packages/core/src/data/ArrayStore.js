@@ -1,0 +1,1 @@
+Ext.define("Ext.data.ArrayStore",{extend:"Ext.data.Store",alias:"store.array",alternateClassName:["Ext.data.SimpleStore"],requires:["Ext.data.proxy.Memory","Ext.data.reader.Array"],config:{proxy:{type:"memory",reader:"array"}},loadData:function(E,A){if(this.expandData){var D=[],B=0,C=E.length;for(;B<C;B++){D[D.length]=[E[B]]}E=D}this.callParent([E,A])}})

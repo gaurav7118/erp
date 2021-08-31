@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2009 11:17:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AccountMapping" table="accountmapping">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="parentAccountId">
+            <column name="parentaccountid"/>
+        </many-to-one>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="childAccountId">
+            <column name="childaccountid"/>
+        </many-to-one>    
+    </class>
+</hibernate-mapping>

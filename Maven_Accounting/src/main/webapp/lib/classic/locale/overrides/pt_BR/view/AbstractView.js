@@ -1,0 +1,1 @@
+Ext.define("Ext.locale.pt_BR.view.AbstractView",{override:"Ext.view.AbstractView",loadingText:"Carregando..."})

@@ -1,0 +1,1 @@
+Ext.define("Ext.ux.desktop.Module",{mixins:{observable:"Ext.util.Observable"},constructor:function(A){this.mixins.observable.constructor.call(this,A);this.init()},init:Ext.emptyFn})

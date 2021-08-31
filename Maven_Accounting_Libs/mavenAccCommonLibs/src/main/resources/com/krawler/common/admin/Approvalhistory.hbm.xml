@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+
+    <class name="com.krawler.common.admin.Approvalhistory" table="approvalhistory">
+      
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="transtype" type="string">
+            <column name="transtype" length="255"/>
+        </property>    
+        <property name="transid" type="string">
+            <column length="255" name="transid"/>
+        </property>
+        <property name="approvedon" type="long">
+            <column name="approvedon"/>
+        </property>
+        <property name="approvallevel" type="integer">
+            <column default="0" name="approvallevel" not-null="true"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="1024" name="remark"/>
+        </property>
+        <property name="rejected" type="boolean">
+            <column name="isrejected" default="false"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" column="approver" name="approver"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+  
+
+</hibernate-mapping>

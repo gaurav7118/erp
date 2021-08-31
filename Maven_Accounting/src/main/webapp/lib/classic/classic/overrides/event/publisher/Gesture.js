@@ -1,0 +1,1 @@
+Ext.define("Ext.overrides.event.publisher.Gesture",{override:"Ext.event.publisher.Gesture"},function(){if(Ext.isIE9m){this.override({updateTouches:function(C,A){var D=C.browserEvent,B=C.getXY();D.pageX=B[0];D.pageY=B[1];this.callParent([C,A])},doDelegatedEvent:function(A){this.callParent([Ext.event.Event.enableIEAsync(A)])}})}})

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000093"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="companyname" class="java.lang.String"/>
+	<parameter name="companyaddress" class="java.lang.String"/>
+	<parameter name="companyphone" class="java.lang.String"/>
+	<parameter name="companyfax" class="java.lang.String"/>
+	<parameter name="companyemail" class="java.lang.String"/>
+	<parameter name="startPeriod" class="java.lang.String"/>
+	<parameter name="endPeriod" class="java.lang.String"/>
+	<parameter name="rangeType" class="java.lang.String"/>
+	<parameter name="fromDate" class="java.lang.String"/>
+	<parameter name="toDate" class="java.lang.String"/>
+	<parameter name="currencyDescription" class="java.lang.String"/>
+	<parameter name="SubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="MonzoneSalesInvoiceRegisterSubReport" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="currencyCode" class="java.lang.String"/>
+	<parameter name="reportName" class="java.lang.String"/>
+	<parameter name="currencyname" class="java.lang.String"/>
+        <parameter name="currency" class="java.lang.String"/>
+	<parameter name="currencycode" class="java.lang.String"/>
+        <parameter name="gstlabel" class="java.lang.String"/>
+	<parameter name="basicamount" class="java.lang.String"/>
+	<parameter name="taxamount" class="java.lang.String"/>
+	<parameter name="termamount" class="java.lang.String"/>
+	<parameter name="discountamount" class="java.lang.String"/>
+	<parameter name="totalamount" class="java.lang.String"/>
+        <parameter name="custVenNameLabel" class="java.lang.String"/>
+        <parameter name="salesPerson_Agent_Label" class="java.lang.String"/>
+        <parameter name= "invoiceLabel" class="java.lang.String"/>
+        <parameter name= "sipiLabel" class="java.lang.String"/>
+	<pageHeader>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="2" y="28" width="317" height="34"/>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="20" width="34" height="14"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Email
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="0" width="34" height="14"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Phone
+                ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="32" y="20" width="263" height="14"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{companyemail}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="32" y="0" width="263" height="14"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{companyphone}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="32" y="10" width="263" height="14"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="false" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{companyfax}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="10" width="34" height="14"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Fax
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="23" y="0" width="7" height="14"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[:
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="23" y="10" width="7" height="14"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[:
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="23" y="20" width="7" height="14"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="7" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[:
+                ]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="49" width="555" height="28"/>
+				<textField isStretchWithOverflow="true" evaluationTime="Report">
+					<reportElement positionType="Float" x="530" y="2" width="21" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement positionType="FixRelativeToBottom" x="0" y="27" width="555" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement positionType="Float" x="497" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[#
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="474" y="2" width="25" height="11"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Page
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="520" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[/
+                ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="495" y="2" width="27" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="2" y="12" width="332" height="11"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Date Range : "+$P{rangeType}+", From Date : "+$P{fromDate}+" , To Date : "+$P{toDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="337" y="12" width="214" height="11"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Amount in "+$P{currencyname}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="2" y="3" width="204" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="2" y="14" width="204" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyaddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="333" y="23" width="218" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Accounting Period : "+$P{startPeriod}+" - "+$P{endPeriod}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="204" y="3" width="348" height="18"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="190" splitType="Stretch">
+			<subreport>
+				<reportElement x="-20" y="-1" width="553" height="9"/>
+                                <subreportParameter name="taxamount">
+					<subreportParameterExpression><![CDATA[$P{taxamount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="basicamount">
+					<subreportParameterExpression><![CDATA[$P{basicamount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="discountamount">
+					<subreportParameterExpression><![CDATA[$P{discountamount}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalamount">
+					<subreportParameterExpression><![CDATA[$P{totalamount}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="currencycode">
+					<subreportParameterExpression><![CDATA[$P{currencycode}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="gstlabel">
+					<subreportParameterExpression><![CDATA[$P{gstlabel}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="termamount">
+					<subreportParameterExpression><![CDATA[$P{termamount}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="custVenNameLabel">
+					<subreportParameterExpression><![CDATA[$P{custVenNameLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="salesPerson_Agent_Label">
+					<subreportParameterExpression><![CDATA[$P{salesPerson_Agent_Label}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="invoiceLabel">
+					<subreportParameterExpression><![CDATA[$P{invoiceLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="sipiLabel">
+					<subreportParameterExpression><![CDATA[$P{sipiLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{MonzoneSalesInvoiceRegisterSubReport}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

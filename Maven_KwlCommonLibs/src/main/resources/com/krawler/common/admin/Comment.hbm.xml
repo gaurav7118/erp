@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.Comment" table="comment">
+        <id name="id" type="string">
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="com.krawler.common.admin.User" name="user"/>
+        <property name="moduleId" type="string">
+            <column default="" name="moduleid"/>
+        </property>
+        <property name="recordId" type="string">
+            <column default="" name="recordid"/>
+        </property>
+        <property name="comment" type="string">
+            <column name="comment"/>
+        </property>
+        <property name="relatedto" type="string">
+            <column default="" name="relatedto"/>
+        </property>
+        <property name="updatedon" type="timestamp">
+            <column name="updatedon"/>
+        </property>                                                 
+        <property name="postedon" type="timestamp">
+            <column name="postedon"/>
+        </property>
+        <property name="oldpostedon" type="timestamp">
+            <column name="oldpostedon"/>
+        </property>
+  
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

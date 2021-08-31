@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Storage",{singleton:true,requires:["Ext.device.storage.Cordova","Ext.device.storage.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView){if(A.Cordova){return Ext.create("Ext.device.storage.Cordova")}}return Ext.create("Ext.device.storage.Simulator")}})

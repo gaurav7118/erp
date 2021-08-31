@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CST_form6"  pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="date_of_receipt" class="java.lang.String"/>
+	<parameter name="name_of_transferor" class="java.lang.String"/>
+	<parameter name="add_transferor" class="java.lang.String"/>
+	<parameter name="state_transferred" class="java.lang.String"/>
+	<parameter name="branch_transer" class="java.lang.String"/>
+	<parameter name="reg_act" class="java.lang.String"/>
+	<parameter name="reg_tax" class="java.lang.String"/>
+	<parameter name="desc" class="java.lang.String"/>
+	<parameter name="quantity" class="java.lang.String"/>
+	<parameter name="transport" class="java.lang.String"/>
+	<parameter name="challan" class="java.lang.String"/>
+	<parameter name="invoice" class="java.lang.String"/>
+	<parameter name="remark" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="13" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORM 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[The Central Sales Tax (Delhi) Rules 2005]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="66" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Register under rule 8 (12) of the Central Sales Tax (Delhi) Rules, 2005]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="96" width="45" height="100"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="45" y="96" width="84" height="100"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="201" y="96" width="115" height="100"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="129" y="96" width="72" height="100"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="417" y="136" width="138" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="136" width="101" height="60"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="196" width="45" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="201" y="196" width="115" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="129" y="196" width="72" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="45" y="196" width="84" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="417" y="196" width="138" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="196" width="101" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="200" width="45" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="200" width="84" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="200" width="72" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="200" width="115" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="200" width="101" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="200" width="138" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="316" y="216" width="101" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="201" y="216" width="115" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="417" y="216" width="138" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="129" y="216" width="72" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="45" y="216" width="84" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="316" y="96" width="239" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="316" y="118" width="239" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[transferor of goods]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="98" width="239" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Registration Certificate No. of the]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="138" width="101" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Under
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="158" width="101" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Central Act
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="138" width="138" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Under General Sales Tax
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="158" width="138" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[/ Value Added Tax law
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="178" width="138" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[of relevant State
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="216" width="45" height="120"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="201" y="141" width="117" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[your Head
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="101" width="117" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[State here whether
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="121" width="117" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[the transfer is to
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="161" width="117" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Office/Branch/
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="181" width="117" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Agent/ Principal
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="161" width="72" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[goods
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="181" width="72" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[transferred
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="141" width="72" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[which
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="101" width="72" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Name of
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="121" width="72" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[State from
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="121" width="84" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[full address
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="141" width="84" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[of the
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="181" width="84" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[goods
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="161" width="84" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[transferor of
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="101" width="84" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Name and
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="121" width="45" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[receipt
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="141" width="45" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[of
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="161" width="45" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[goods
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="101" width="45" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Date of
+]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="388" width="62" height="125"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="533" width="62" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="513" width="62" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="62" y="388" width="80" height="125"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="62" y="533" width="80" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="62" y="513" width="80" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="142" y="388" width="153" height="125"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="142" y="533" width="153" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="142" y="513" width="153" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="388" width="133" height="125"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="533" width="133" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="513" width="133" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="388" width="73" height="125"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="533" width="73" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="428" y="513" width="73" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="501" y="388" width="54" height="125"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="501" y="533" width="54" height="120"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="501" y="513" width="54" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="395" width="62" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Description
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="415" width="62" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[of goods
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="455" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[transfer
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="395" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Quantity of
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="435" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[received on
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="415" width="80" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[goods
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="455" width="153" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[and RR/GR No. etc. or
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="475" width="153" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[other relevant
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="395" width="153" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Name of the carrier (i.e.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="435" width="153" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[company/air company)
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="415" width="153" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[rail/transport
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="395" width="133" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Particulars of
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="455" width="133" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[covering the goods
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="415" width="133" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[challan or other
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="475" width="133" height="18"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[received
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="435" width="133" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[documents
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="395" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Sl. No. of
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="455" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[issued
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="415" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[declaration
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="435" width="73" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[in Form ‘F’
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="395" width="54" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Remarks
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="493" width="153" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[particulars
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="517" width="73" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="517" width="80" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="517" width="62" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="142" y="517" width="153" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="517" width="133" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="501" y="517" width="54" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[12]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="227" width="45" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{date_of_receipt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="227" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{name_of_transferor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="247" width="80" height="89"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{add_transferor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="227" width="72" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{state_transferred}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="227" width="115" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{branch_transer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="227" width="101" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{reg_act}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="227" width="138" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{reg_tax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="544" width="62" height="109"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{desc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="544" width="76" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="142" y="544" width="153" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{transport}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="544" width="133" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{challan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="544" width="73" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{invoice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="501" y="544" width="54" height="109"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{remark}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

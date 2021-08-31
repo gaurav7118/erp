@@ -1,0 +1,798 @@
+# Raveesh Pathak 2nd May 2014
+
+ALTER TABLE vendoraddresses ADD COLUMN shippingAddress1 varchar(500) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingAddress2 varchar(500) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingAddress3 varchar(500) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingCity1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingCity2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingCity3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingContactNumber1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingContactNumber2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingContactNumber3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingContactPerson1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingContactPerson2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingContactPerson3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingCountry1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingCountry2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingCountry3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingEmail1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingEmail2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingEmail3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingFax1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingFax2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingFax3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingMobile1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingMobile2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingMobile3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingPhone1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingPhone2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingPhone3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingPostal1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingPostal2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingPostal3 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingState1 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingState2 varchar(255) DEFAULT NULL;
+ALTER TABLE vendoraddresses ADD COLUMN shippingState3 varchar(255) DEFAULT NULL;
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Address","ShippingAddress1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping City","ShippingCity1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping State","ShippingState1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Country","ShippingCountry1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Postal Code","ShippingPostalCode1",
+0,50,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Phone","ShippingPhone1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Mobile","ShippingMobile1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Fax","ShippingFax1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Email","ShippingEmail1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Contact Person","ShippingContactPerson1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Contact Person Number","ShippingContactNumber1",
+0,255,'F','F',null,null,null,null,null);
+
+#Neeraj Dwivedi-5th May 2014
+
+# VendorProductMapping Table Create
+CREATE TABLE `vendorproductmapping` (
+`id` varchar(255) NOT NULL,
+`vendorid` varchar(255) default NULL,
+`vendorproducts` varchar(255) default NULL,
+PRIMARY KEY  (`id`),
+FOREIGN KEY (`vendorid`) REFERENCES vendor(id),
+FOREIGN KEY (`vendorproducts`) REFERENCES product(id)
+)ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+# Raveesh Pathak 5th May 2014
+ALTER TABLE compaccpreferences ADD COLUMN approvalemails varchar(255) DEFAULT NULL;
+ALTER TABLE compaccpreferences ADD COLUMN sendapprovalmail char(1) DEFAULT 'T';
+
+# Amol Dhokale 5th May,2014
+# Added new column printedflag 
+
+ALTER TABLE invoice ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE goodsreceipt ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE vendorquotation ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE quotation ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE grorder ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE deliveryorder ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE purchaseorder ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE salesorder ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE creditnote ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE debitnote ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE payment ADD COLUMN printedflag int(1) DEFAULT 0;
+ALTER TABLE receipt ADD COLUMN printedflag int(1) DEFAULT 0;
+
+
+# Sagar M - 6th May,2014
+# send email on date field depending on notification rule 
+
+alter table mailnotification add column fieldid varchar(40) NULL DEFAULT "";
+update mailnotification set fieldid = '1';
+update mailnotification set module = 6 where module = 0;
+update mailnotification set module = 2 where module = 1;
+update mailnotification set module = 24 where module = 2;
+alter table mailnotification add column emailids varchar(150) NULL DEFAULT "";
+alter table mailnotification add column mailcontent varchar(512) NULL DEFAULT "";
+update mailnotification set mailcontent = "Hello,<br/><br/>We have enclosed your Customer Invoice details today dated #Date_Today#.<br/><br/>For your kind information, the due date for Invoice is #Date_Val#" where module = 2;
+update mailnotification set mailcontent = "Hello,<br/><br/>We have enclosed your Vendor Invoice details today dated #Date_Today#.<br/><br/>For your kind information, the due date for Invoice is #Date_Val#" where module = 6;
+update mailnotification set mailcontent = "Hello,<br/><br/>We have enclosed your Journal Entry details today dated #Date_Today#.<br/><br/>For your kind information, the due date for Journal Entry is #Date_Val#" where module = 24;
+alter table mailnotification add column mailsubject varchar(100) NULL DEFAULT "";
+update mailnotification set mailsubject='Aged Receivable Details'  where module = 2;
+update mailnotification set mailsubject='Aged Payable Details' where module = 6;
+update mailnotification set mailsubject='Party Journal Entry' where module = 24;
+
+#Neeraj Dwivedi-6th May 2014
+# CustomerProductMapping Table Create
+CREATE TABLE `customerproductmapping` (
+`id` varchar(255) NOT NULL,
+`customerid` varchar(255) default NULL,
+`customerproducts` varchar(255) default NULL,
+PRIMARY KEY  (`id`),
+FOREIGN KEY (`customerid`) REFERENCES customer(id),
+FOREIGN KEY (`customerproducts`) REFERENCES product(id)
+)ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+#Mayur Pawar 7th May 2014
+ALTER TABLE `compaccpreferences` ADD COLUMN `memo` char(1) default '0';
+
+
+# Hitesh Suryawanshi - 7th May,2014
+alter table grorder modify status varchar(255) default NULL; 
+alter table compaccpreferences add column GRDOSetting char(1) DEFAULT 'F';
+
+# Sagar M 7th May 2014
+# Set Parent-Child relation between Product Category 
+alter table masteritem add column `parent` varchar(40) DEFAULT NULL;
+alter table masteritem add FOREIGN KEY (`parent`) REFERENCES `masteritem` (`id`);
+
+
+# Atul sachan 10th May
+
+
+# insertion of columns
+
+ALTER TABLE customizereportmapping ADD COLUMN isformfield INT(1) DEFAULT 0;
+
+ALTER TABLE customizereportheader ADD COLUMN isformfield INT(1) DEFAULT 0;
+
+ALTER TABLE customizereportmapping ADD COLUMN ismanadatoryfield INT(1) DEFAULT 0;
+
+ALTER TABLE customizereportheader ADD COLUMN ismanadatoryfield INT(1) DEFAULT 0;
+
+
+# FOR CI
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Sales Person',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'isPartialInv','Is Partial Invoice',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'porefno','PO Reference Number',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'templateModelCombo','Select Template',2,1,1);
+
+# CI Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Customer',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'creditTerm','Credit Term',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'duedate','Due Date',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Invoice Date',2,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',2,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',2,1,1,1);
+
+# FOR VI
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',6,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',6,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',6,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Agent',6,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',6,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',6,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'templateModelCombo','Select Template',6,1,1);
+
+# VI Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Vendor',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'creditTerm','Debit Term',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'duedate','Due Date',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Invoice Date',6,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',6,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',6,1,1,1);
+
+# FOR CS
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Sales Person',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'porefno','PO Reference Number',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'templateModelCombo','Select Template',4,1,1);
+
+# CS Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',4,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Customer',4,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Cash Sales Date',4,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',4,1,1,1);
+
+# FOR CP
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',8,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',8,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',8,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Agent',8,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',8,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',8,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'templateModelCombo','Select Template',8,1,1);
+
+# CP Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',8,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Vendor',8,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Cash Purchase Date',8,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',8,1,1,1);
+
+# FOR PO
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Agent',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'templateModelCombo','Select Template',18,1,1);
+
+# PO Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',18,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Vendor',18,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'creditTerm','Debit Term',18,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Purchase Order Date',18,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',18,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',18,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',18,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',18,1,1,1);
+
+# FOR SO
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Sales Person',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'templateModelCombo','Select Template',20,1,1);
+
+# SO Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',20,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Customer',20,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'creditTerm','Credit Term',20,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Sales Order Date',20,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',20,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link to Customer Quotation',20,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',20,1,1,1);
+
+
+
+# FOR VQ
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',23,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',23,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',23,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Agent',23,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',23,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'validdate','Valid Till',23,1,1);
+
+# VQ Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',23,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Vendor',23,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'creditTerm','Debit Term',23,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Vendor Quotation Date',23,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',23,1,1,1);
+
+
+# FOR CQ
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',22,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',22,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',22,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'salesperson','Sales Person',22,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',22,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'validdate','Valid Till',22,1,1);
+
+# CQ Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'currency','Currency',22,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Customer',22,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'creditTerm','Credit Term',22,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Customer Quotation Date',22,1,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',22,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link to Vendor Quotation',22,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',22,1,1,1);
+
+
+
+
+
+Anup Kale -10th MAy 2014
+
+CREATE TABLE `purchaserequisitioncustomdata` (
+  `purchaserequisitionid` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`purchaserequisitionid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+
+ALTER TABLE `purchaserequisition`
+ADD COLUMN `accpurchaserequisitioncustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+# Sagar M - 
+# DO Approval Flow 
+
+CREATE TABLE `multilevelapprovalrule` (
+  `id` varchar(36) NOT NULL DEFAULT '',
+  `level` int(11) DEFAULT '0',
+  `rule` varchar(25) DEFAULT '1',
+   `moduleid` int(11) DEFAULT NULL,
+  `companyid` varchar(36) DEFAULT '0',
+  `hasapprover` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `multilevelapprovalruletargetusers` (
+  `id` varchar(36) NOT NULL DEFAULT '',
+  `ruleid` varchar(36) DEFAULT NULL,
+  `userid` varchar(36) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ruleid` (`ruleid`),
+  CONSTRAINT `multilevelapprovalruletargetusers_ibfk_1` FOREIGN KEY (`ruleid`) REFERENCES `multilevelapprovalrule` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table deliveryorder add column `approvestatuslevel` int(11) NOT NULL DEFAULT '0';
+update deliveryorder set approvestatuslevel = 11;
+
+# Amol Dhokale 12th MAy 2014
+ALTER TABLE customdesigntemplate ADD COLUMN templatesubtype VARCHAR(2) DEFAULT 0;
+
+#[SATS] Mayur B  13th May 2014
+update company set templateflag=8 where subdomain="sats";
+
+#[SATS] mayur P 15 th may 2014    
+# missing query
+
+# Atul sachan 13th May
+
+# FOR PR
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',31,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',31,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',31,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',31,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',31,1,1);
+
+# PR Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Vendor',31,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Purchase Return Date',31,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',31,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',31,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',31,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',31,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceNo','Purchase Return Number',31,1,1,1);
+
+# FOR SR
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',29,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',29,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',29,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',29,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',29,1,1);
+
+# SR Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Customer',29,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Sales Return Date',29,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',29,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',29,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',29,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',29,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceNo','Sales Return Number',29,1,1,1);
+
+# FOR GR
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',28,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',28,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',28,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',28,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',28,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'permitNumberId','Permit Number',28,1,1);
+
+# GR Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Vendor',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Goods Receipt Date',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceNo','Goods Receipt Number',28,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'statuscomboId','Status',28,1,1,1);
+
+# FOR DO
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipvia','Ship Via',27,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'memo','Memo',27,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'fob','FOB',27,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'shipdate','Ship Date',27,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'costcenter','Cost Center',27,1,1);
+
+# DO Manadatory Fields
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'customer','Customer',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceDate','Delivery Order Date',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'sequenceFormatCombobox','Sequence Format',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'poNumberID','Number',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'linkToOrder','Link',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'fromLinkComboId','Link to',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'invoiceNo','Delivery Order Number',27,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES (UUID(),'statuscomboId','Status',27,1,1,1);
+
+#Neeraj D-13th May 2014-Created an extra column in table compaccprefrences for displaying quantity in decimal or integer format.
+ ALTER TABLE compaccpreferences ADD COLUMN quotationindecimalformat int DEFAULT 0;
+
+#[SATS]Missing table in sats database Malhari 14 May 2014
+CREATE TABLE `templateFieldInfo` (
+`id`  varchar(40) NOT NULL ,
+`templateId`  varchar(255) NOT NULL ,
+`fieldAttribJson`  varchar(2048) DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `templateidfk` FOREIGN KEY (`templateId`) REFERENCES `projreport_template` (`tempid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+#Anup Kale -14th May 2014
+ALTER TABLE jedetail ADD COLUMN accountpersontype int(10) DEFAULT 99; 
+ALTER TABLE jedetail ADD COLUMN customerVendorId varchar(255) DEFAULT NULL;
+
+Hitesh Suryawanshi -16th May 2014
+
+CREATE TABLE `repeatedje` (
+  `id` varchar(255) NOT NULL,
+  `intervalunit` int(11) DEFAULT '0',
+  `intervaltype` varchar(32) DEFAULT NULL,
+  `startdate` date NOT NULL,
+  `nextdate` date NOT NULL,
+  `expiredate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+alter table journalentry 
+add column `repeateje` varchar(255) DEFAULT NULL;
+
+alter table journalentry 
+add column `parentje` varchar(255) DEFAULT NULL;
+
+ALTER TABLE journalentry
+ADD CONSTRAINT `parentje` FOREIGN KEY (`parentje`) REFERENCES `journalentry` (`id`);
+
+#Malhari Pawar 20 May 2014 Inbound & Outbound logistics(Shipping, consignment tracking) - Serial number tracking
+CREATE TABLE `inventorylocation` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(1024) DEFAULT NULL,
+  `parent` varchar(255) DEFAULT NULL,
+  `company` varchar(255) default NULL,  
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK3580767E3505_inventorylocation` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE `inventorylocation` ADD CONSTRAINT `inventorylocation_fk` FOREIGN KEY (`parent`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `inventorywarehouse` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(1024) DEFAULT NULL,
+  `parent` varchar(255) DEFAULT NULL,
+  `location` varchar(255) default NULL,  
+  `company` varchar(255) default NULL,  
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK3580767E3505_inventorywarehouse` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE `inventorywarehouse` ADD CONSTRAINT `inventorywarehouse_fk` FOREIGN KEY (`parent`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `inventorywarehouse` ADD CONSTRAINT `inventorywarehouselocation_fk` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE `productserial` (
+`id`  varchar(255) NOT NULL ,
+`name`  varchar(255) NOT NULL ,
+`startdate`  date NULL ,
+`enddate`  date NULL ,
+`product`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `serialproduct_fk` FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `productbatch` (
+`id`  varchar(255) NOT NULL ,
+`name`  varchar(1024) NOT NULL ,
+`mfgdate`  date NULL ,
+`expdate`  date NULL ,
+`quantity`  double NULL ,
+`balance`  double NULL ,
+`product`  varchar(255) NULL ,
+`location`  varchar(255) NULL ,
+`warehouse`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `batch_product_fk1` FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `batch_location_fk1` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `batch_warehouse_fk1` FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `batch_company_fk1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `batchserial` (
+`id`  varchar(255) NULL ,
+`name`  varchar(1024) NULL ,
+`expfromdate`  date NULL ,
+`exptodate`  date NULL ,
+`batch`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `serial_batch_fk` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table productbatch add isopening char(1) NOT NULL default 'T';
+alter table productbatch add ispurchase char(1) NOT NULL default 'T';
+
+ALTER TABLE `product`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL AFTER `shelfLocation`;
+
+ALTER TABLE `grodetails`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `dodetails`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `product` ADD CONSTRAINT `FK_Product_batch` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `grodetails` ADD CONSTRAINT `FK_GRN_batch` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `dodetails` ADD CONSTRAINT `FK_DO_batch` FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE `batchserialmapping` (
+`id`  varchar(255) NOT NULL ,
+`purchaseSerial`  varchar(255) NULL ,
+`salesSerial`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `purchaseSerial_FK` FOREIGN KEY (`purchaseSerial`) REFERENCES `batchserial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `salesSerial_FK` FOREIGN KEY (`salesSerial`) REFERENCES `batchserial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `salespurchasebatchmapping` (
+`id`  varchar(255) NOT NULL ,
+`purchaseBatch`  varchar(255) NULL ,
+`salesBatch`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `purchaseBatch_FK` FOREIGN KEY (`purchaseBatch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `salesBatch_FK` FOREIGN KEY (`salesBatch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Mayur Pawar 20th march 2014
+ALTER TABLE `compaccpreferences` ADD COLUMN `showprodserial` char(1) default '0';
+
+#Anup Kale -22 May 2014
+
+alter table product 
+add column `salesrevenuerecognitionaccount` varchar(255) DEFAULT NULL;
+
+ALTER TABLE product
+ADD FOREIGN KEY (`salesrevenuerecognitionaccount`) REFERENCES `account` (`id`);
+
+alter table deliveryorder 
+add column `journalentry` varchar(255) DEFAULT NULL;
+
+ALTER TABLE deliveryorder
+ADD FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`);
+
+
+alter table extracompanypreferences 
+add column `deferredrevenuerecognition` char(1) default 'F';
+
+alter table extracompanypreferences 
+add column `salesaccount` varchar(255) DEFAULT NULL;
+
+alter table extracompanypreferences 
+add column `salesrevenuerecognitionaccount` varchar(255) DEFAULT NULL;
+
+alter table invoicedetails 
+add column `deferredjedetailid` varchar(255) Default NULL;
+
+alter table extracompanypreferences 
+add column `showallaccounts` char(1) default 'F';
+
+
+#mayur Pawar  22 may 2014
+alter table product ADD COLUMN warrantyperiodsal int(11) NOT NULL ;
+alter table product modify column warrantyperiodsal int(11) default 0 ;
+
+#Mayur Bhokase 23 May 2014
+update company set templateflag=7 where subdomain="pacifictec";
+
+#Malhari Pawar Assembly product serial no changes 27 May 2014
+ALTER TABLE `productbuild`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+
+CREATE TABLE `assemblysubproductbatchserialmapping` (
+`id`  varchar(255) NULL ,
+`subproductbatch`  varchar(255) NULL ,
+`mainproductserial`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `subproductbatchmap` FOREIGN KEY (`subproductbatch`) REFERENCES `productbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `mainproductserialfk` FOREIGN KEY (`mainproductserial`) REFERENCES `batchserial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+#Anand Nimbalkar 24th May 2014
+ALTER TABLE `goodsreceipt` ADD COLUMN `landedinvoice` varchar(255) DEFAULT NULL;
+ALTER TABLE `goodsreceipt` ADD FOREIGN KEY (`landedinvoice`) REFERENCES `goodsreceipt` (`id`);
+
+insert into reportmaster values("Stock_Ledger","Stock Ledger","View Stock Ledger Report","getStockLedgerTabView()");
+
+ALTER TABLE `dodetails` ADD COLUMN `rate` double NULL default 0;
+ALTER TABLE `grodetails` ADD COLUMN `rate` double NULL default 0;
+ALTER TABLE `prdetails` ADD COLUMN `rate` double NULL default 0;
+ALTER TABLE `srdetails` ADD COLUMN `rate` double NULL default 0;
+
+ALTER TABLE `grorder`
+ADD COLUMN `currency` varchar(255) default NULL,
+ADD FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`);
+ALTER TABLE `deliveryorder`
+ADD COLUMN `currency` varchar(255) default NULL,
+ADD FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`);
+ALTER TABLE `purchasereturn`
+ADD COLUMN `currency` varchar(255) default NULL,
+ADD FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`);
+ALTER TABLE `salesreturn`
+ADD COLUMN `currency` varchar(255) default NULL,
+ADD FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`);
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `shipDateConfiguration`  char(1) NULL DEFAULT 'F';
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `unitPriceConfiguration`  char(1) NULL DEFAULT 'F';
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'consignmentnumber','Consignment Number',6,1,1);
+
+#Hitesh Suryawanshi -24th May 2014
+
+alter table repeatedje 
+add column `noofjepost`int(11) DEFAULT '0';
+
+alter table repeatedje 
+add column `noofremainjepost`int(11) DEFAULT '0';
+
+
+CREATE TABLE `repeatedjememo` (
+  `id` varchar(255) NOT NULL,
+  `repeatedje` varchar(250) NOT NULL,
+  `count` int(11) DEFAULT '0',
+  `memo` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `repeatedjememo` FOREIGN KEY (`repeatedje`) REFERENCES `repeatedje` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+insert into reportmaster value("Revenue_Recognition_Report","Revenue Recognition Report","View Revenue Recognition Report from here.","callRevenueRecognitionReport()");
+
+#Hitesh Suryawanshi -24th May 2014
+
+insert into reportmaster value("Inactive_customer_List","Inactive Customer List","View Inactive Customer list from here.","callInactiveCustomerList()");
+
+#Hitesh Suryawanshi -28th May 2014
+
+update reportmaster set id="Default_Customer_List",name="Default Customer List", description="View those Customers who has exceeded Credit Sales iimit" where id="Customer_Default_List";
+
+
+#Anup Kale 27 May 2014
+
+alter table extracompanypreferences 
+add column `stockvaluationflag` char(1) default 'T';
+
+alter table extracompanypreferences 
+add column `recurringdeferredrevenuerecognition` char(1) default 'F';
+
+# Sagar M 29 May 2014
+
+alter table customdesigntemplate modify column json longtext;
+alter table customdesigntemplate modify column html longtext;

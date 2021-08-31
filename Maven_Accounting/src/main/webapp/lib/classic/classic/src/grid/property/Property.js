@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.property.Property",{extend:"Ext.data.Model",alternateClassName:"Ext.PropGridProperty",fields:[{name:"name",type:"string"},{name:"value"}],idProperty:"name",constructor:function(B,A){if(!Ext.isObject(B)){B={name:B,value:A}}this.callParent([B])}})

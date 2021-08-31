@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DefaultTerms" table="defaultterms">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="term" type="string">
+            <column name="term"/>
+        </property>
+        <property name="formula" type="string">
+            <column name="formula"/>
+        </property>
+        <property name="sign" type="integer">
+            <column name="sign"/>
+        </property>
+<!--        <property name="account" type="string">
+            <column name="account"/>
+        </property>-->
+        <property name="salesOrPurchase" type="boolean">
+            <column name="salesorpurchase" not-null="false" default="false"/>
+        </property>
+        <property name="percentage" type="double">
+            <column name="percentage"/>
+        </property>
+        <property name="termtype" type="integer">
+            <column name="termtype"/>
+        </property>
+        
+        <property name="accountname" type="string">
+            <column name="accountname"/>
+        </property>
+        <property name="creditNotAvailedAccountName" type="string">
+            <column name="creditnotavailedaccountname"/>
+        </property>
+        <property name="advancPayableAccountName" type="string">
+            <column name="advancepayableaccountname"/>
+        </property>
+        <property name="oppositeTermId" type="string">
+            <column name="oppositeterm"/>
+        </property>
+        <property name="taxType" type="int">
+            <column name="taxtype" default="1"/>
+        </property>
+        <property name="isDefault" type="true_false" >
+        <column name="isdefault" default="F"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Country" column="country" name="country" not-null="false"/>
+        <many-to-one class="com.krawler.common.admin.State" column="state" name="state" not-null="false"/>
+        <property name="termSequence" type="integer">
+            <column name="termsequence"/>
+        </property>
+    </class>
+</hibernate-mapping>

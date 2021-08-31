@@ -1,0 +1,1 @@
+Ext.define("Ext.chart.axis.Category",{requires:["Ext.chart.axis.layout.CombineDuplicate","Ext.chart.axis.segmenter.Names"],extend:"Ext.chart.axis.Axis",alias:"axis.category",type:"category",config:{layout:"combineDuplicate",segmenter:"names"}})

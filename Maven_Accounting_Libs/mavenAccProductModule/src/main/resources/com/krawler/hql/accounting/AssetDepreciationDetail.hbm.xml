@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetDepreciationDetail" table="assetdepreciationdetail">
+        <id name="ID" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="period" type="int">
+            <column name="period"/>
+        </property>
+        <property name="periodAmount" type="double">
+            <column name="pamount"/>
+        </property>
+        <property name="accumulatedAmount" type="double">
+            <column name="accvalue"/>
+        </property>
+        <property name="netBookValue" type="double">
+            <column name="nbvalue"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="journalentry" name="journalEntry"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="depreciationCreditToAccount" column="depreciationcredittoaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="depreciationAccount" column="depreciationaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="product"/>
+        <many-to-one class="com.krawler.hql.accounting.AssetDetails" name="assetDetails" column="assetdetail"/>
+    </class>
+</hibernate-mapping>

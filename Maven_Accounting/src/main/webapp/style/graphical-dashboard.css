@@ -1,0 +1,249 @@
+/* 
+    Document   : graphical-dashboard
+    Created on : Oct 7, 2016, 10:46:28 AM
+    Author     : krawler
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*#centerNavRegion .x-accordion-hd {
+    background: transparent url(../lib/resources/images/gray/panel/white-top-botom.gif) repeat-x scroll 0 -1px;
+}
+
+#loading,
+#docsloading {
+	position: absolute;
+	z-index: 20001;
+	padding: 2px;
+	border: 1px solid gray;
+	background: lightgray;
+	text-align: center;
+}*/
+
+.image-circle {
+    background-size: 32px 32px;
+    border-radius: 50%;
+    display: block;
+    height: 50px;
+    margin: -1px;
+    overflow: hidden;
+    position: relative;
+    width: 50px;
+    z-index: 0;
+    right: 10px;
+}
+
+.arrow-up {
+    border-bottom: 10px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    display: none;
+    height: 0;
+    width: 0;
+}
+
+.templateCont {
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 102px;
+    margin: 0 3px 6px 2px;
+    width: 85px;
+}
+
+.templateCont:hover {
+/*    background-color: #f1f1f1;*/
+    background-color: #eee;
+/*    background-color: #0084b4;*/
+    
+}
+
+.templateImg {
+    margin-top: 1px;
+}
+
+.templateName {
+    display: block;
+    padding-top: 4px;
+    text-align: center;
+    width: 100%;
+}
+
+.templateSpan {
+    font-size: 12px;
+    text-align: center;
+}
+
+/*.templateThumbContainer {
+	background: transparent url(../images/tbar.gif) no-repeat scroll 0 0 !important;
+}*/
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    
+    position: fixed;
+    right: 20px;
+    display: none;
+/*    visibility: hidden;*/
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 20000;
+}
+
+.dropdown-content a {
+    color: black;
+    font: 12px tahoma,arial,helvetica;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+/*    background-color: #f1f1f1;*/
+    background-color: #eee;
+/*    background-color: #0084b4;*/
+    
+}
+
+.dropdown:hover .dropdown-content {
+/*    visibility: visible;*/
+    display: block;
+}
+
+.dropdown:hover .arrow-up {
+/*    visibility: visible;*/
+    display: block;
+}
+
+.arrow-up:hover .dropdown-content {
+/*    visibility: visible;*/
+    display: block;
+}
+
+.dashlet-container{
+/*    background-color: #fff;*/
+/*    border: 1px dashed #464646;
+    border-radius: 5px;*/
+    margin-top:1%;
+    margin-left:1%;
+}
+
+.add-row ,.dashlet,.widget{
+    cursor: pointer;
+    border: 1px dashed #464646;
+    border-radius: 5px;
+    background-color: #fff;
+/*    margin: 0;*/
+}
+
+.widget{
+    border: 1px solid #d0d0d0;
+    border-radius: 0px;
+    cursor: default;
+}
+
+.add-row{
+    padding-top: 18px;
+}
+
+.add-row p {
+    color: #717171;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+}
+
+.add-dashlet {
+    color: #717171;
+    text-align: center;
+}
+
+.options a {
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.dashboard-manager {
+	background: transparent url(../images/graphicalDashboard/dashboard-manager.png) no-repeat scroll 0 2px !important;
+}
+
+.create-dashboard {
+	background: transparent url(../images/graphicalDashboard/create-dashborad.png) no-repeat scroll 0 2px !important;
+}
+
+.apply-dashboard {
+	background: transparent url(../images/graphicalDashboard/apply-dashobard.png) no-repeat scroll 0 2px !important;
+}
+
+.default-dashboard {
+	background: transparent url(../images/graphicalDashboard/apply-default-dashboard.png) no-repeat scroll 0 2px !important;
+}
+
+.loading-mask{
+    background: #d0d0d0 url("../lib/resources/images/gray/toolbar/gray-bg.gif") repeat-x scroll 0 -16px;
+    border: 1px solid gray;
+    top: 45% !important;
+    left: 45% !important;
+}
+
+.loading-mask div {
+    border: 1px solid #d0d0d0;
+    line-height: 16px;
+    padding: 5px 10px 5px 25px;
+    background: #fbfbfb url("../lib/resources/images/default/grid/loading.gif") no-repeat scroll 5px 5px;
+}
+
+.edit-links,.remove-links{
+    background-color: black;
+    color: white;
+    visibility: hidden;
+    display: block;
+    cursor: pointer;
+    font-family: "Helvetica Neue",Helvetica,Arial,Verdana,sans-serif;
+    font-weight: bold;
+    margin: 2px 15px 0 3px;
+    padding-right: 13px;
+    text-align: right;
+    width: 31px;
+    z-index: 999;
+    border-radius: 4px;
+}
+
+
+
+.remove-links {
+    margin: 2px 4px 0 auto;
+    padding-left: 5px;
+    width: 40px;
+}
+
+.edit-links li, .edit-content-links li {
+    display: inline;
+    list-style: outside none none;
+}
+
+.widget:hover .edit-links,.dashlet-container:hover .remove-links  {
+    visibility: visible;
+}
+
+.edit-links:hover,.remove-links:hover {
+     box-shadow: 0 1px 17px 1px gray;
+/*    background-color: lightgrey;
+    color:black;*/
+}

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Customer" table="customer">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="title" type="string">
+            <column length="255" name="title"/>
+        </property>
+        <property name="name" type="string">
+            <column length="255" name="name" not-null="true"/>
+        </property>
+        <property name="aliasname" type="string">
+            <column length="255" name="aliasname" />
+        </property>
+        <property name="billingAddress" type="string">
+            <column length="255" name="billingaddress"/>
+        </property>
+        <property name="billingAddress2" type="string">
+            <column length="255" name="billingaddress2"/>
+        </property>
+        <property name="billingAddress3" type="string">
+            <column length="255" name="billingaddress3"/>
+        </property>
+        <property name="email" type="string">
+            <column length="50" name="email"/>
+        </property>
+        <property name="contactNumber" type="string">
+            <column length="25" name="contactno"/>
+        </property>
+        <property name="altContactNumber" type="string">
+            <column length="25" name="altcontactno"/>
+        </property>
+        <property name="fax" type="string">
+            <column length="25" name="fax"/>
+        </property>
+        <property name="shippingAddress" type="string">
+            <column length="255" name="shippingaddress"/>
+        </property>
+        <property name="shippingAddress2" type="string">
+            <column length="255" name="shippingaddress2"/>
+        </property>
+        <property name="shippingAddress3" type="string">
+            <column length="255" name="shippingaddress3"/>
+        </property>
+        <property name="bankaccountno" type="string">
+            <column length="255" name="bankaccountno"/>
+        </property>
+        <property name="other" type="string">
+            <column length="255" name="other"/>
+        </property>
+         <property name="employmentStatus" type="string">
+            <column length="25" name="employmentstatus"/>
+        </property>
+         <property name="companyAddress" type="string">
+            <column length="1024" name="companyaddress"/>
+        </property>
+         <property name="employerName" type="string">
+            <column length="255" name="employername"/>
+        </property>
+         <property name="noofActiveCreditLoans" type="string">
+            <column length="25" name="activecreditloans"/>
+        </property>
+         <property name="occupation" type="string">
+            <column length="25" name="occupation"/>
+        </property>
+        <property name="income" type="double">
+            <column default="0" name="income"/>
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="createdon"/>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        <property name="preferedDeliveryMode" type="integer">
+            <column default="1" name="preferedDeliveryMode" not-null="true"/>
+        </property>
+        <property name="taxNo" type="string">
+            <column length="255" name="taxno"/>
+        </property>
+        <property name="VATTINnumber" type="string">
+            <column length="255" name="vattinnumber"/>
+        </property>
+        <property name="CSTTINnumber" type="string">
+            <column length="255" name="csttinnumber"/>
+        </property>
+        <property name="PANnumber" type="string">
+            <column length="255" name="pannumber"/>
+        </property>
+        <property name="panStatus" type="string">
+            <column length="255" name="panstatus"/>
+        </property>
+        <property name="deducteeType" type="string">
+            <column length="255" name="deducteetype"/>
+        </property>
+        <property name="residentialstatus" type="integer">
+            <column name="residentialstatus" default='0'/>
+        </property>
+        <property name="SERVICEnumber" type="string">
+            <column length="255" name="servicetaxnumber"/>
+        </property>
+        <property name="TANnumber" type="string">
+            <column length="255" name="tannumber"/>
+        </property>
+        <property name="ECCnumber" type="string">
+            <column length="255" name="eccnumber"/>
+        </property>
+        <property name="taxid" type="string">
+            <column length="255" name="taxid"/>
+        </property>
+        <property name="creditlimit" type="double">
+            <column default="0" name="creditlimit"/>
+        </property>
+        <property name="overseas" type="true_false">
+            <column default="false" name="overseas" not-null="true"/>
+        </property>
+        <property name="acccode" type="string">
+            <column length="50" name="acccode"/>
+        </property>
+        <property name="mapcustomervendor" type="true_false">
+            <column default="false" name="mapcustomervendor" not-null="true"/>
+        </property>
+        <property name="autoGenerated" type="true_false">
+            <column default="false" name="autogen" not-null="true"/>
+        </property>
+        <property name="isPermOrOnetime" type="true_false">
+            <column default="false" name="isonetime"/>
+        </property>
+        <property name="seqnumber" type="integer">
+            <column name="seqnumber" default='0'/>
+        </property>
+        <property name="datePreffixValue" type="string">
+            <column length="50" name="datepreffixvalue"/>
+        </property>
+        <property name="dateSuffixValue" type="string">
+            <column length="50" name="datesuffixvalue"/>
+        </property>
+        <property name="dateAfterPreffixValue" type="string">
+            <column length="50" name="dateafterpreffixvalue"/>
+        </property>
+        <property name="intercompanyflag" type="true_false">
+            <column name="intercompanyflag"/>
+        </property>
+        <property name="crmaccountid" type="string">
+            <column length="255" name="crmaccountid"/>
+        </property>
+        <property name="defaultPaymentMethod" type="string">
+            <column length="255" name="paymentmethod"/>
+        </property>
+        <property name="paymentCriteria" type="integer">
+            <column default="1" name="paymentcriteria"/>
+        </property>
+        <property name="companyRegistrationNumber">
+            <column name="companyregistrationnumber"/>
+        </property>
+        <property name="gstRegistrationNumber">
+            <column name="gstregistrationnumber"/>
+        </property>
+        <property name="UENNumber" type="string">
+            <column length="255" name="uennumber"/>
+        </property>
+        <property name="createdInVendor" type="true_false">
+            <column name="createdinvendor"/>
+        </property>
+        <property name="synchedFromOtherApp" type="true_false">
+            <column name="synchedfromotherApp"/>
+        </property>
+        <property name="activate" type="true_false">
+            <column name="activate" default="true"/>
+        </property>
+        <property name="isCusotmerAvailableOnlyToSalespersons" type="true_false">
+            <column name="isavailableonlytosalespersons"/>
+        </property>
+        <property name="interstateparty" type="true_false">
+            <column default="false" name="interstateparty" not-null="true"/>
+        </property>
+        <property name="cformapplicable" type="true_false">
+            <column default="false" name="cformapplicable" not-null="true"/>
+        </property>
+        <property name="isTDSapplicableoncust" type="true_false">
+            <column default="false" name="istdsapplicableoncust" />
+        </property>
+        <property name="dealertype" type="string">
+            <column length="10" name="dealertype"/>
+        </property>
+        <property name="vatregdate" type="timestamp">
+            <column name="vatregdate"/>
+        </property>
+        <property name="CSTRegDate" type="date">
+            <column name="cstregdate"/>
+        </property>
+        <property name="commissionerate" type="string">
+            <column length="255" name="commissionerate"/>
+        </property>
+        <property name="division" type="string">
+            <column length="100" name="division"/>
+        </property>
+        <property name="rangecode" type="string">
+            <column length="100" name="rangecode"/>
+        </property>
+        <property name="IECNo" type="string">
+            <column length="20" name="iecno"/>
+        </property>
+        <property name="importerECCNo" type="string">
+            <column length="20" name="importereccno"/>
+        </property>
+        <property name="defaultnatureOfPurchase" type="string">
+            <column length="255" name="defaultnatureofpurchase"/>
+        </property>
+        <property name="deliveryDate" type="integer">
+            <column name="deliverydate" default='0'/>
+        </property>
+        <property name="deliveryTime" type="string">
+            <column length="50" name="deliverytime"/>
+        </property>
+        <property name="GSTIN" type="string">
+            <column length="20" name="gstin"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.SequenceFormat" column="seqformat" name="seqformat"/>
+        <set cascade="all" inverse="true" name="children">
+            <key column="parent"/>
+            <one-to-many class="com.krawler.hql.accounting.Customer"/>
+        </set>
+        <set cascade="all" inverse="true" name="salesperson">
+            <key column="customerid"/>
+            <one-to-many class="com.krawler.hql.accounting.SalesPersonMapping"/>
+        </set>
+        <property name="sezFromDate" type="date">
+            <column name="sezfromdate" />
+        </property>
+        <property name="sezToDate" type="date">
+            <column name="seztodate"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Term" name="creditTerm"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="mappingSalesPerson" column="salespersonmap"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="mappingReceivedFrom" column="receivedfrommap"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="mappingPaidTo" column="mappingpaidto"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" name="parent"/>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Country" name="country"/>
+        <many-to-one column="acccustomercustomdataref" class="com.krawler.hql.accounting.CustomerCustomData"  name="accCustomerCustomData" />
+        <many-to-one class="com.krawler.common.admin.CustomerAddresses" column="customeraddresses" name="customerAddresses"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="intercompanytype"/>
+        <many-to-one class="com.krawler.common.admin.PricingBandMaster" column="pricingbandmaster" name="pricingBandMaster"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" name="propagatedCustomerID" column="propagatedcustomerid"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="vehicleNo" column="vehicleno"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="driver" column="driver"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="GSTRegistrationType" column="gstregistrationtype"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="GSTCustomerType" column="gstcustomertype"/>
+    </class>
+</hibernate-mapping>

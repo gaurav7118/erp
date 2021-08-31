@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ProductCategoryMapping" table="productcategorymapping">
+        <id name="ID" type="string">
+            <column name="id"/>
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="productcategory" name="productCategory"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="industrycode" name="industryCode"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="productid" name="productID"/>
+    </class>
+</hibernate-mapping>

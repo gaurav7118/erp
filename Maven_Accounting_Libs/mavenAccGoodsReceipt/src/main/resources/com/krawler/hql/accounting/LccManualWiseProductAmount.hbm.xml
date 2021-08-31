@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.LccManualWiseProductAmount" table="lccmanualwiseproductamount">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="percentage" type="double">
+            <column name="percentage" not-null="true"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount"  not-null="true"/>
+        </property>
+        <property name="taxablevalueforcustomduty" type="double">
+            <column name="taxablevalueforcustomduty"  />
+        </property>
+        <property name="customdutyandothercharges" type="double">
+            <column name="customdutyandothercharges"  />
+        </property>
+        <property name="taxablevalueforigst" type="double">
+            <column name="taxablevalueforigst" />
+        </property>
+        <property name="igstamount" type="double">
+            <column name="igstamount"/>
+        </property>
+        <property name="igstrate" type="double">
+            <column name="igstrate" />
+        </property>
+        <property name="customDutyAllocationType" type="true_false">
+            <column name="customdutyallocationtype" default="'F'" />
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptDetail" column="grdetailid" name="grdetailid" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" column="expenseInvoiceid" name="expenseInvoiceid" not-null="true"/>       
+        <many-to-one class="com.krawler.hql.accounting.AssetDetails" column="assetdetailid" name="assetDetails" />       
+    </class>
+</hibernate-mapping>

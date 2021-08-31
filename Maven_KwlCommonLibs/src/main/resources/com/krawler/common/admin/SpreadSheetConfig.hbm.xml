@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.SpreadSheetConfig" table="spreadsheet_config">
+    <id name="cid" type="string">
+      <column name="cid"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="rules" type="string">
+      <column length="2000" name="rules"/>
+    </property>
+    <property name="state" type="string">
+      <column length="2000" name="state"/>
+    </property>
+    <property name="module" type="string">
+      <column name="module"/>
+    </property>
+    <property name="deleteflag" type="integer">
+      <column default="0" name="deleteflag"/>
+    </property>
+    <property name="updatedon" type="timestamp">
+      <column name="updatedon"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.User" fetch="select" name="user">
+      <column name="user"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>

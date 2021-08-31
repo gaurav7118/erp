@@ -1,0 +1,52 @@
+<tr><td>
+    <TABLE bordertype="border9" id = "idLineitemTabel" border="0" class ="lineitemtablewrap" style="border-collapse:separate;width:$tablewidth%; margin:$margin;">  
+ <thead>   
+        <TR>
+        #foreach( $header1 in $tableHeader )  
+            <TH bgcolor="$bordercolor" align="$align" style="$header1.style" class="removeverticalborder">$header1.data</TH>  
+        #end  
+        </TR>
+</thead> 
+<tbody>
+        #set($rowCount=0)
+        $#if ( $isFirstRowPresent) 
+            $lineItemFirstRowHTML
+        #end
+        #foreach( $prod in $prodList )  
+          <TR style="padding: 4px;">
+            #foreach( $CustomDesignLineItemProp in $prod )
+                    #if($rowCount==$numberOfRows && !$isLastRowPresent)
+                        <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor;" class="onlybottomborderofcell" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #else
+                        <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor;" class="removeallborderofcell" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #end
+            #end  
+          </TR>
+          #set($rowCount=$rowCount+1)
+        #end  
+        #if ($isLastRowPresent)
+         $lineItemLastRowHTML
+        #end
+        #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            <TR style="padding: 4px;" id="totalrow">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    #if($CustomDesignLineItemProp.data)
+                        <TD style="padding: 4px ;font-weight: bold;border-color:$tablebordercolor;" class="onlybottomborderofcell" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #end
+                #end  
+            </TR>  
+            #end 
+       #end
+       #if ( $issummarytable ) 
+            #foreach( $prod in $summaryTable )  
+            <TR style="padding: 4px">  
+                #foreach( $SummaryTableCellProperty in $prod )  
+                    <TD style="$SummaryTableCellProperty.style" rowspan="$SummaryTableCellProperty.rowspan" colspan="$SummaryTableCellProperty.colspan" >$SummaryTableCellProperty.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end
+</tbody>
+    </TABLE>
+</td></tr>

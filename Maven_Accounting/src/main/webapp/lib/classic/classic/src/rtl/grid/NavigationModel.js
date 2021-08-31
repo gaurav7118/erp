@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.grid.NavigationModel",{override:"Ext.grid.NavigationModel",initKeyNav:function(A){var C=this,B=C.self.prototype;if(A.getInherited().rtl){C.onKeyLeft=B.onKeyRight;C.onKeyRight=B.onKeyLeft}C.callParent([A])}})

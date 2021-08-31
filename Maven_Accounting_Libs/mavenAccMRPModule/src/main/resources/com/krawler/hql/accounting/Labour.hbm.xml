@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.mrp.labormanagement.Labour" table="labour">
+        <meta attribute="class-description">
+         This class contains the labour detail. 
+      </meta>
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="empcode" type="string">
+            <column length="255" name="empcode" not-null="true"/>
+        </property>
+        <property name="fname" type="string">
+            <column length="255" name="fname" not-null="true"/>
+        </property>
+        <property name="lname" type="string">
+            <column length="255" name="lname" not-null="true"/>
+        </property>
+        <property name="mname" type="string">
+            <column length="255" name="mname"/>
+        </property>
+        <property name="dob" type="date">
+            <column length="50" name="dob"/>
+        </property>
+        <property name="createdOn" type="date">
+            <column name="createdon"/>
+        </property>
+        <property name="modifiedOn" type="date">
+            <column name="modifiedon"/>
+        </property>
+        <property name="age" type="string">
+            <column length="50" name="age"/>
+        </property>
+        <property name="gender" type="string">
+            <column length="50" name="gender"/>
+        </property>
+        <property name="maritalstatus" type="string">
+            <column length="255" name="maritalstatus"/>
+        </property>
+        <property name="bgroup" type="string">
+            <column length="50" name="bgroup"/>
+        </property>
+        <property name="nationality" type="string">
+            <column length="255" name="nationality"/>
+        </property>
+        <property name="countryorigin" type="string">
+            <column length="255" name="countryorigin"/>
+        </property>
+        <property name="department" type="string">
+            <column length="255" name="department" />
+        </property>
+        <property name="dlicenseno" type="string">
+            <column length="255" name="dlicenseno"/>
+        </property>
+        <property name="passportno" type="string">
+            <column length="255" name="passportno"/>
+        </property>
+        <property name="expirydatepassport" type="date">
+            <column length="50" name="expirydatepassport" />
+        </property>
+        <property name="paycycle" type="string">
+            <column length="50" name="paycycle"/>
+        </property>
+        <property name="residentstatus" type="string">
+            <column length="50" name="residentstatus"/>
+        </property>
+        <property name="prdate" type="date">
+            <column length="50" name="prdate"/>
+        </property>
+        <property name="race" type="string">
+            <column length="50" name="race"/>
+        </property>
+        <property name="religion" type="string">
+            <column length="50" name="religion"/>
+        </property>
+        <property name="bankac" type="string">
+            <column length="255" name="bankac" />
+        </property>
+        <property name="bankaname" type="string">
+            <column length="255" name="bankaname"/>
+        </property>
+        <property name="accountname" type="string">
+            <column length="255" name="accountname"/>
+        </property>
+        <property name="accountnumber" type="string">
+            <column length="255" name="accountnumber"/>
+        </property>
+        <property name="banknumber" type="string">
+            <column length="255" name="banknumber"/>
+        </property>
+
+        <property name="shifttiming" type="string">
+            <column length="255" name="shifttiming"/>
+        </property>
+        <property name="taskassigned" type="string">
+            <column length="255" name="taskassigned"/>
+        </property>
+        <property name="branchnumber" type="string">
+            <column length="255" name="branchnumber"/>
+        </property>
+        <property name="bankbranch" type="string">
+            <column length="255" name="bankbranch"/>
+        </property>
+        <property name="deleteflag" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        <property name="syncable" type="true_false">
+            <column default="false" name="syncable" not-null="true"/>
+        </property>
+        <property name="seqnumber" type="integer">
+            <column name="seqnumber" default='0'/>
+        </property>
+        <property name="datePreffixValue" type="string">
+            <column length="50" name="datepreffixvalue"/>
+        </property>
+        <property name="dateSuffixValue" type="string">
+            <column length="50" name="datesuffixvalue"/>
+        </property>
+        <property name="dateAfterPreffixValue" type="string">
+            <column length="50" name="dateafterpreffixvalue"/>
+        </property>
+        <property name="autoGenerated" type="true_false">
+            <column default="false" name="autogen" not-null="true"/>
+        </property>
+        <set name="labourWorkCentreMappings" cascade="all" inverse="true" sort="natural">
+            <key column="labour"/>
+            <one-to-many class="com.krawler.spring.mrp.labormanagement.LabourWorkCentreMapping"/>
+        </set>
+        <set name="labourSkillMappings" cascade="all" inverse="true">
+            <key column="labour"/>
+            <one-to-many class="com.krawler.spring.mrp.labormanagement.LabourSkillMapping"/>
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.PaymentMethod" name="paymentmethod"/>
+        <!--<many-to-one class="com.krawler.hql.accounting.MasterItem" name="keyskill" column="keyskill"/>-->    
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+        <many-to-one class="com.krawler.hql.accounting.SequenceFormat" column="seqformat" name="seqformat"/>
+        <many-to-one column="acclabourcustomdataref" class="com.krawler.spring.mrp.labormanagement.LabourCustomData"  name="accLabourCustomData" />
+    </class>
+</hibernate-mapping>

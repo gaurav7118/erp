@@ -1,0 +1,1 @@
+Ext.define("Ext.theme.neptune.panel.Table",{override:"Ext.panel.Table",lockableBodyBorder:true,initComponent:function(){var A=this;A.callParent();if(!A.hasOwnProperty("bodyBorder")&&!A.hideHeaders&&(A.lockableBodyBorder||!A.lockable)){A.bodyBorder=true}}})

@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrailBalance" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000026"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="accountname" class="java.lang.String"/>
+		<field name="entryno" class="java.lang.String"/>
+		<field name="entrydate" class="java.lang.String"/>
+		<field name="remmitto" class="java.lang.String"/>
+		<field name="amount" class="java.lang.Double"/>
+		<field name="currency" class="java.lang.String"/>
+		<field name="currencyword" class="java.lang.String"/>
+		<field name="basecurrency" class="java.lang.String"/>
+		<field name="duedate" class="java.lang.String"/>
+		<field name="project" class="java.lang.String"/>
+		<field name="ccy" class="java.lang.Double"/>
+		<variable name="sum" class="java.lang.Double" resetType="Group" resetGroup="currencygroup" calculation="Sum">
+			<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+		</variable>
+		<variable name="sum1" class="java.lang.Double" resetType="Group" resetGroup="currencygroup" calculation="Sum">
+			<variableExpression><![CDATA[$F{ccy}]]></variableExpression>
+                        <initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+		</variable>
+		<variable name="totalsum" class="java.lang.Double" incrementType="Group" incrementGroup="currencygroup" calculation="Sum">
+			<variableExpression><![CDATA[$V{sum1}]]></variableExpression>
+                        <initialValueExpression><![CDATA[0.0]]></initialValueExpression>
+		</variable>
+		<group name="bankname">
+			<groupExpression><![CDATA[$F{accountname}]]></groupExpression>
+		</group>
+		<group name="currencygroup">
+			<groupExpression><![CDATA[$F{currency}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="FinanceDetailsSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="dateRange" class="java.lang.String"/>
+	<field name="currencyinword" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="7" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="102" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="331" y="16" width="241" height="24"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Finance Details ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="374" y="86" width="195" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Amount in "+$F{currencyinword}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="88" width="321" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Date Range : "+$F{dateRange}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="70" width="34" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="42" width="34" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Phone ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="70" width="9" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="42" width="9" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="10" width="217" height="15"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="98" y="56" width="9" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="56" width="34" height="14"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fax]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="108" y="42" width="172" height="14"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="56" width="172" height="14"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="71" width="172" height="14"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="11" y="10" width="51" height="74"/>
+				<imageExpression><![CDATA[$P{imagePath}]]></imageExpression>
+			</image>
+                        <staticText>
+				<reportElement x="493" y="71" width="39" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Page #]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="531" y="71" width="19" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="559" y="71" width="20" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="552" y="71" width="6" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 3" x="0" y="0" width="572" height="125"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{FinanceDetailsSubReportData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="62">
+						<jr:tableFooter height="43" rowSpan="1">
+							<line>
+								<reportElement x="0" y="14" width="62" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="62" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="bankname">
+							<jr:cell height="16" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="62" height="16"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Bank Name]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="62" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[BANK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="62" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{accountname}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66">
+						<jr:tableFooter height="43" rowSpan="1">
+							<line>
+								<reportElement x="0" y="14" width="66" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="66" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="bankname">
+							<jr:cell height="16" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="66" height="16"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{accountname}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="currencygroup">
+							<jr:cell height="17" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="66" height="17"/>
+									<textElement>
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{currencyword}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="66" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TR NO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="66" height="20"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{entryno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63">
+						<jr:tableFooter height="43" rowSpan="1">
+							<line>
+								<reportElement x="0" y="14" width="63" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="63" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="63" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[FIN-DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="63" height="20"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{entrydate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="78">
+						<jr:tableFooter height="43" rowSpan="1">
+							<line>
+								<reportElement x="0" y="14" width="78" height="1"/>
+							</line>
+							<staticText>
+								<reportElement x="0" y="14" width="78" height="23"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TOTAL    ]]></text>
+							</staticText>
+							<line>
+								<reportElement x="0" y="36" width="78" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="78" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[REMIT TO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="78" height="20"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{remmitto}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="64">
+						<jr:tableFooter height="43" rowSpan="1">
+							<line>
+								<reportElement x="0" y="14" width="64" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="64" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="64" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DUE DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="64" height="20"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{duedate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="84">
+						<jr:tableFooter height="43" rowSpan="1">
+							<line>
+								<reportElement x="0" y="14" width="84" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="84" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="currencygroup">
+							<jr:cell height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="84" height="17"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<text><![CDATA[Total ]]></text>
+								</staticText>
+								<line>
+									<reportElement x="51" y="1" width="33" height="1"/>
+								</line>
+								<line>
+									<reportElement x="51" y="15" width="33" height="1"/>
+								</line>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="84" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[PROJECT]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="84" height="20"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{project}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="84">
+						<jr:tableFooter height="43" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="14" width="84" height="23"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{basecurrency}]]></textFieldExpression>
+							</textField>
+							<line>
+								<reportElement x="0" y="14" width="84" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="84" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="currencygroup">
+							<jr:cell height="17" rowSpan="1">
+								<textField pattern="###0.000;-###0.000">
+									<reportElement x="0" y="0" width="84" height="15"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression class="java.lang.Double"><![CDATA[$V{sum}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="9" y="2" width="28" height="13"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+								</textField>
+								<line>
+									<reportElement x="0" y="1" width="84" height="1"/>
+								</line>
+								<line>
+									<reportElement x="0" y="15" width="84" height="1"/>
+								</line>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="84" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[AMOUNT]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField pattern="###0.000;-###0.000">
+								<reportElement x="9" y="0" width="75" height="20"/>
+								<textElement textAlignment="Right">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression class="java.lang.Double"><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+							<textField>
+								<reportElement x="0" y="0" width="37" height="20"/>
+								<textElement textAlignment="Right" markup="html">
+									<font size="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70">
+						<jr:tableFooter height="43" rowSpan="1">
+							<textField pattern="###0.000;-###0.000">
+								<reportElement x="0" y="15" width="70" height="21"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.Double"><![CDATA[$V{totalsum}]]></textFieldExpression>
+							</textField>
+							<line>
+								<reportElement x="0" y="14" width="70" height="1"/>
+							</line>
+							<line>
+								<reportElement x="0" y="36" width="70" height="1"/>
+							</line>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="currencygroup">
+							<jr:cell height="17" rowSpan="1">
+								<textField pattern="###0.000;-###0.000">
+									<reportElement x="0" y="0" width="70" height="15"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression class="java.lang.Double"><![CDATA[$V{sum1}]]></textFieldExpression>
+								</textField>
+								<line>
+									<reportElement x="0" y="1" width="70" height="1"/>
+								</line>
+								<line>
+									<reportElement x="0" y="15" width="70" height="1"/>
+								</line>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="70" height="30" backcolor="#EAEAEA"/>
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+                                                                <textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[AMOUNT IN BASE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="20" rowSpan="1">
+							<textField pattern="###0.000;-###0.000">
+								<reportElement x="0" y="0" width="70" height="20"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression class="java.lang.Double"><![CDATA[$F{ccy}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

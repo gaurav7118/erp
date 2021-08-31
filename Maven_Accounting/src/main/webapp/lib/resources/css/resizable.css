@@ -1,0 +1,148 @@
+.x-resizable-handle {
+	position: absolute;
+	z-index: 100;
+	overflow: hidden;
+	background: white;
+	/* ie needs these */
+	font-size: 1px;
+	line-height: 6px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	zoom: 1;
+}
+.x-resizable-handle-east {
+	top: 0;
+	right: 0;
+	width: 6px;
+	height: 100%;
+	cursor: e-resize;
+}
+.wtf-ie .x-resizable-handle-east {
+	margin-right: -1px;
+	/*IE rounding error*/
+}
+.x-resizable-handle-south {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 6px;
+	cursor: s-resize;
+}
+.wtf-ie .x-resizable-handle-south {
+	margin-bottom: -1px;
+	/*IE rounding error*/
+}
+.x-resizable-handle-west {
+	top: 0;
+	left: 0;
+	width: 6px;
+	height: 100%;
+	cursor: w-resize;
+}
+.x-resizable-handle-north {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 6px;
+	cursor: n-resize;
+}
+.x-resizable-handle-southeast {
+	right: 0;
+	bottom: 0;
+	z-index: 101;
+	width: 6px;
+	height: 6px;
+	cursor: se-resize;
+}
+.x-resizable-handle-northwest {
+	top: 0;
+	left: 0;
+	z-index: 101;
+	width: 6px;
+	height: 6px;
+	cursor: nw-resize;
+}
+.x-resizable-handle-northeast {
+	top: 0;
+	right: 0;
+	z-index: 101;
+	width: 6px;
+	height: 6px;
+	cursor: ne-resize;
+}
+.x-resizable-handle-southwest {
+	bottom: 0;
+	left: 0;
+	z-index: 101;
+	width: 6px;
+	height: 6px;
+	cursor: sw-resize;
+}
+.x-resizable-over .x-resizable-handle,
+.x-resizable-pinned .x-resizable-handle {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.x-resizable-over .x-resizable-handle-east,
+.x-resizable-pinned .x-resizable-handle-east {
+	background: url(../images/default/sizer/e-handle.gif);
+	background-position: left;
+}
+.x-resizable-over .x-resizable-handle-west,
+.x-resizable-pinned .x-resizable-handle-west {
+	background: url(../images/default/sizer/e-handle.gif);
+	background-position: left;
+}
+.x-resizable-over .x-resizable-handle-south,
+.x-resizable-pinned .x-resizable-handle-south {
+	background: url(../images/default/sizer/s-handle.gif);
+	background-position: top;
+}
+.x-resizable-over .x-resizable-handle-north,
+.x-resizable-pinned .x-resizable-handle-north {
+	background: url(../images/default/sizer/s-handle.gif);
+	background-position: top;
+}
+.x-resizable-over .x-resizable-handle-southeast,
+.x-resizable-pinned .x-resizable-handle-southeast {
+	background: url(../images/default/sizer/se-handle.gif);
+	background-position: top left;
+}
+.x-resizable-over .x-resizable-handle-northwest,
+.x-resizable-pinned .x-resizable-handle-northwest {
+	background: url(../images/default/sizer/nw-handle.gif);
+	background-position: bottom right;
+}
+.x-resizable-over .x-resizable-handle-northeast,
+.x-resizable-pinned .x-resizable-handle-northeast {
+	background: url(../images/default/sizer/ne-handle.gif);
+	background-position: bottom left;
+}
+.x-resizable-over .x-resizable-handle-southwest,
+.x-resizable-pinned .x-resizable-handle-southwest {
+	background: url(../images/default/sizer/sw-handle.gif);
+	background-position: top right;
+}
+.x-resizable-proxy {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 50000;
+	display: none;
+	overflow: hidden;
+	border: 1px dashed #3b5a82;
+}
+.x-resizable-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 200000;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background: white;
+	opacity: 0;
+	filter: alpha(opacity=0);
+
+	-moz-opacity: 0;
+}

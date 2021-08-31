@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CustomerRemainderLetter_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="204"/>
+	<field name="customerName" class="java.lang.String"/>
+	<field name="custId" class="java.lang.String"/>
+	<field name="cutCode" class="java.lang.String"/>
+	<field name="custAddress" class="java.lang.String"/>
+	<field name="invoiceNo" class="java.lang.String"/>
+	<field name="doc" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="dueOn" class="java.lang.String"/>
+	<field name="amount" class="java.lang.String"/>
+	<field name="currencyCode" class="java.lang.String"/>
+	<field name="poNo" class="java.lang.String"/>
+	<field name="receivedAmount" class="java.lang.String"/>
+	<field name="interval" class="java.lang.String"/>
+	<field name="balance" class="java.lang.Double"/>
+	<field name="documentdate" class="java.lang.String"/>
+	<field name="companyName" class="java.lang.String"/>
+	<field name="currencySymbol" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{balance}]]></variableExpression>
+	</variable>
+	<group name="Customer" isStartNewPage="true" footerPosition="ForceAtBottom" keepTogether="true">
+		<groupExpression><![CDATA[$F{custId}]]></groupExpression>
+		<groupHeader>
+			<band height="170">
+				<textField>
+					<reportElement x="20" y="12" width="82" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{cutCode}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="108" y="12" width="312" height="20"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="479" y="13" width="36" height="12"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="427" y="13" width="52" height="12"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Page #]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="479" y="24" width="76" height="20"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{documentdate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="427" y="24" width="52" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date #]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="20" y="32" width="120" height="20"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{custAddress}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement x="515" y="13" width="40" height="12"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement positionType="Float" x="0" y="57" width="555" height="113"/>
+					<staticText>
+						<reportElement x="0" y="10" width="100" height="20"/>
+						<textElement/>
+						<text><![CDATA[Dear Sir or Madam,]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="129" y="90" width="60" height="23"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Due On ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="4" y="90" width="41" height="23"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Invoice]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="85" y="90" width="44" height="23"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="2" y="53" width="548" height="31"/>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[The following statement of account shows the detail of all Invoices / Debit Notes outstanding as the date of this reminder, for your kind
+perusal
+]]></text>
+					</staticText>
+					<line>
+						<reportElement x="2" y="90" width="553" height="1"/>
+					</line>
+					<staticText>
+						<reportElement x="0" y="30" width="343" height="20"/>
+						<textElement>
+							<font size="11" isBold="true" isUnderline="true"/>
+						</textElement>
+						<text><![CDATA[OVERDUE ACCOUNTS - REMINDER]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="343" y="90" width="58" height="23"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Balance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="45" y="90" width="40" height="23"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Doc]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="420" y="90" width="81" height="23"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Purchase Order #]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="279" y="90" width="66" height="23"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Rec D/A DJ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="196" y="90" width="83" height="23"/>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Amount ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="515" y="90" width="35" height="23"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Date]]></text>
+					</staticText>
+					<line>
+						<reportElement x="1" y="112" width="553" height="1"/>
+					</line>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="228">
+				<frame>
+					<reportElement x="2" y="0" width="553" height="211"/>
+					<staticText>
+						<reportElement x="1" y="185" width="120" height="20"/>
+						<box topPadding="2">
+							<topPen lineWidth="1.0"/>
+						</box>
+						<textElement>
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[ACCOUNTS DEPT.
+]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="1" y="0" width="100" height="20"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Total ===>]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="137" y="0" width="92" height="20"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{currencyCode}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="2" y="24" width="185" height="20"/>
+						<textElement markup="html">
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA["We note from our record that the amount of   <u>" +$F{currencySymbol}+"</u>  "]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00">
+						<reportElement x="343" y="0" width="107" height="20"/>
+						<textElement textAlignment="Left">
+							<font size="8" isBold="true" isUnderline="false"/>
+						</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{total}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="220" y="24" width="328" height="20"/>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<textFieldExpression><![CDATA["outstanding from your company was overdue for more than "+$F{interval}
++" days"]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0.00">
+						<reportElement x="187" y="25" width="31" height="20"/>
+						<textElement textAlignment="Center">
+							<font size="7" isBold="true" isUnderline="true"/>
+						</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{total}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="137" y="0" width="92" height="20"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true" isUnderline="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{currencyCode}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="1" y="56" width="392" height="51"/>
+						<textElement markup="html">
+							<font size="8" isBold="false"/>
+						</textElement>
+						<text><![CDATA[Should you require further clarification, please do not hesitate to contact us.<br>If your have already settled the above outstanding, kindly ignore this letter.<br>Thank you for your kind co-operation.
+
+
+]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="0" y="122" width="100" height="20"/>
+						<textElement>
+							<font size="8"/>
+						</textElement>
+						<text><![CDATA[Yours Sincerely,
+]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="1" y="142" width="342" height="20"/>
+						<textElement>
+							<font size="9" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{companyName}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<line>
+					<reportElement x="1" y="50" width="553" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="45" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invoiceNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="1" width="49" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="1" width="60" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dueOn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="0" width="90" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="1" width="66" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{receivedAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="1" width="56" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="1" width="81" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{poNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

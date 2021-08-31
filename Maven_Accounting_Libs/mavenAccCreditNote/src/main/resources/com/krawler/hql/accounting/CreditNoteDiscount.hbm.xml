@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.CreditNoteDiscount" table="cndiscount">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="taxAmount" type="double">
+            <column name="taxamount" default='0'/>
+        </property>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Invoice" column="invoice" name="invoice" not-null="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Discount" name="discount" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.CreditNote" column="creditnote" name="creditNote" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

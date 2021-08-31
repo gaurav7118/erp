@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.util.FocusableContainer",{override:"Ext.util.FocusableContainer",privates:{moveChildFocus:function(C,A){var B=this.getInherited().rtl?!A:A;return this.callParent([C,B])}}})

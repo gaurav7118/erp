@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.4641000000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PaymentVoucherSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="PaymentVoucherSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="companyregistrationno" class="java.lang.String"/>
+	<parameter name="paymentto" class="java.lang.String"/>
+	<parameter name="number" class="java.lang.String"/>
+	<parameter name="name" class="java.lang.String"/>
+	<parameter name="totalamount" class="java.lang.String"/>
+	<parameter name="remark" class="java.lang.String"/>
+	<parameter name="amountInWords" class="java.lang.String"/>
+	<parameter name="chequeDetails" class="java.lang.String"/>
+	<parameter name="bankAccountDetails" class="java.lang.String"/>
+	<parameter name="customercode" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="173">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="468" y="104" width="87" height="20"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{number}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="468" y="122" width="87" height="20"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="468" y="85" width="87" height="20"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="44" y="27" width="210" height="97"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{paymentto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="349" y="122" width="107" height="20"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customercode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="9" width="24" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[To :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="41" width="236" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[16, Raffles Quay, #37-01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="54" width="236" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Hong Leong Building, Singapore 048581]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="68" width="236" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Tel: 62208358  Fax: 62248783]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="85" width="107" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="104" width="9" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="85" width="9" height="19"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="123" width="9" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="297" y="7" width="274" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="297" y="27" width="236" height="14"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Company Registration No:"+$P{companyregistrationno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="349" y="105" width="107" height="15"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="50">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="27" y="6" width="491" height="18"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{chequeDetails}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="25" y="29" width="493" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{bankAccountDetails}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="63">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="63"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{PaymentVoucherSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{PaymentVoucherSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="44">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="27" y="15" width="292" height="25"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{amountInWords}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="371" y="11" width="157" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="371" y="39" width="157" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="375" y="18" width="48" height="20"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="423" y="18" width="102" height="20"/>
+				<textElement textAlignment="Right" markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalamount}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="37">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="27" y="10" width="491" height="25"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Remarks : "+$P{remark}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="165">
+			<staticText>
+				<reportElement x="292" y="41" width="79" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prepared by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="61" width="79" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Checked by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="81" width="79" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Authorised by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="101" width="79" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Received by]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="121" width="79" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Mailed on]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="81" width="8" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="121" width="8" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="101" width="8" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="41" width="8" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="61" width="8" height="18"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="375" y="52" width="167" height="1"/>
+			</line>
+			<line>
+				<reportElement x="375" y="72" width="167" height="1"/>
+			</line>
+			<line>
+				<reportElement x="375" y="92" width="167" height="1"/>
+			</line>
+			<line>
+				<reportElement x="375" y="112" width="167" height="1"/>
+			</line>
+			<line>
+				<reportElement x="375" y="131" width="167" height="1"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,80 @@
+<settings>
+  <thousands_separator>,</thousands_separator>
+  <decimals_separator>.</decimals_separator>
+    <redraw>1</redraw>
+  <background>
+    <alpha>100</alpha>
+    <border_alpha>20</border_alpha>
+  </background>
+  <plot_area>
+    <margins>
+      <left>200</left>
+      <right>200</right>
+      <top>100</top>
+      <bottom>100</bottom>
+    </margins>
+  </plot_area>
+  <grid>
+    <category>
+      <dashed>1</dashed>
+    </category>
+    <value>
+      <dashed>1</dashed>
+    </value>
+  </grid>
+  <axes>
+    <category>
+      <width>1</width>
+      <color>E7E7E7</color>
+    </category>
+    <value>
+      <width>1</width>
+      <color>E7E7E7</color>
+    </value>
+  </axes>
+  <values>
+    <value>
+      <min>0</min>
+    </value>
+  </values>
+  <depth>15</depth>
+  <column>
+    <width>45</width>
+    <balloon_text>{title}: {value}</balloon_text>
+    <grow_time>3</grow_time>
+  </column>
+  <strings>
+    <no_data>This graph gives information about the company's key vendor. There are no vendors related transaction recorded presently.</no_data>
+  </strings>
+  <graphs>
+    <graph gid="0">
+      <title>Transaction Amount</title>
+      <color>7F8DA9</color>
+      <alpha>97</alpha>
+    </graph>
+    <graph gid="1">
+      <title>Column</title>
+      <color>7F8DA9</color>
+    </graph>
+    <graph gid="2">
+      <title>Line</title>
+      <color>FEC514</color>
+    </graph>
+  </graphs>
+  <labels>
+    <label lid="0">
+      <text><![CDATA[<b><u>Our Key Vendors</u></b>]]></text>
+      <y>18</y>
+      <text_color>003333</text_color>
+      <text_size>15</text_size>
+      <align>center</align>
+    </label>
+    <label lid="1">
+      <text><![CDATA[<b>Amount</b>]]></text>
+      <x>70</x>
+      <y>300</y>
+      <text_size>14</text_size>
+      <rotate>1</rotate>
+    </label>
+  </labels>
+</settings>

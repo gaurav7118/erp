@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.grid.CellEditor",{override:"Ext.grid.CellEditor",getTreeNodeOffset:function(B){var A=this.callParent(arguments);if(this.editingPlugin.grid.isOppositeRootDirection()){A=-(B.getWidth()-A-B.child(this.treeNodeSelector).getWidth())}return A}})

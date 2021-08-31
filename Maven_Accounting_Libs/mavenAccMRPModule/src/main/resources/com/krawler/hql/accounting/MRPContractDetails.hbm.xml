@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.mrp.contractmanagement.MRPContractDetails" table="mrpcontractdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="description" type="string">
+            <column length="255" name="description"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+       
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+        <property name="baseuomquantity" type="double">
+            <column name="baseuomquantity" default="0" />
+        </property>
+        <property name="baseuomrate" type="double">
+            <column name="baseuomrate" default="1" />
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" not-null="true"/>
+        </property>
+        <property name="totalamount" type="double">
+            <column name="totalamount"/>
+        </property>
+        
+        <property name="totalnoofunit" type="integer">
+            <column name="totalnoofunit"/>
+        </property>
+        <property name="totalquantity" type="integer">
+            <column name="totalquantity"/>
+        </property>
+        <property name="shippingperiodfrom" type="date">
+            <column name="shippingperiodfrom"/>
+        </property>
+        <property name="shippingperiodto" type="date">
+            <column name="shippingperiodto"/>
+        </property>
+        <property name="partialshipmentallowed" type="integer">
+            <column name="partialshipmentallowed"/>
+        </property>
+        <property name="shippingagent" type="string">
+            <column name="shippingagent"/>
+        </property>
+        <property name="loadingportcountry" type="string">
+            <column name="loadingportcountry"/>
+        </property>
+        <property name="loadingport" type="string">
+            <column name="loadingport"/>
+        </property>
+        <property name="transshipmentallowed" type="integer">
+            <column name="transshipmentallowed"/>
+        </property>
+        <property name="dischargeportcountry" type="string">
+            <column name="dischargeportcountry"/>
+        </property>
+        <property name="dischargeport" type="string">
+            <column name="dischargeport"/>
+        </property>
+        <property name="finaldestination" type="string">
+            <column name="finaldestination"/>
+        </property>
+        <property name="postalcode" type="string">
+            <column name="postalcode"/>
+        </property>
+        <property name="budgetfreightcost" type="string">
+            <column name="budgetfreightcost"/>
+        </property>
+        <property name="shipmentcontractremarks" type="string">
+            <column name="shipmentcontractremarks"/>
+        </property>
+    
+    
+        <property name="unitweightvalue" type="string">
+            <column name="unitweightvalue"/>
+        </property>
+        <property name="unitweight" type="string">
+            <column name="unitweight"/>
+        </property>
+        <property name="packagingtype" type="string">
+            <column name="packagingtype"/>
+        </property>
+        <property name="certificaterequirement" type="integer">
+            <column name="certificaterequirement"/>
+        </property>
+        <property name="certificate" type="string">
+            <column name="certificate"/>
+        </property>
+        <property name="numberoflayers" type="string">
+            <column name="numberoflayers"/>
+        </property>
+        <property name="heatingpad" type="string">
+            <column name="heatingpad"/>
+        </property>
+        <property name="palletloadcontainer" type="string">
+            <column name="palletloadcontainer"/>
+        </property>
+        <property name="shippingmarksdetails" type="string">
+            <column name="shippingmarksdetails"/>
+        </property>
+        <property name="shipmentmode" type="string">
+            <column name="shipmentmode"/>
+        </property>
+        <property name="percontainerload" type="string">
+            <column name="percontainerload"/>
+        </property>
+        <property name="palletmaterial" type="string">
+            <column name="palletmaterial"/>
+        </property>
+        <property name="marking" type="string">
+            <column name="marking"/>
+        </property>
+        <property name="drumorbagdetails" type="string">
+            <column name="drumorbagdetails"/>
+        </property>
+        <property name="drumorbagsize" type="string">
+            <column name="drumorbagsize"/>
+        </property>
+    
+        <many-to-one class="com.krawler.spring.mrp.contractmanagement.MRPContract" column="mrpcontract" name="mrpcontract" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="packagingprofiletype" column="packagingprofiletype"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="deliverymode" column="deliverymode"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="shipmentstatus" column="shipmentstatus"/>
+        <many-to-one class="com.krawler.spring.mrp.contractmanagement.MRPContractDetailsCustomData" column="accmrpcontractdetailscustomdataref" name="accMRPContractDetailsCustomData" />
+    </class>
+</hibernate-mapping>

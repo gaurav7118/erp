@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="com.krawler.hql.accounting.ContractDetailTermsMap" table="contractdetailtermsmap">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="percentage" type="double">
+            <column name="percentage" default="0"/>
+        </property>
+        <property name="termamount" type="double">
+            <column name="termamount" not-null="true"/>
+        </property>
+        <property name="deleted" type="integer">
+            <column name="deleted"/>
+        </property>
+        <property name="createdOn" type="long">
+            <column name="createdon"/>
+        </property>
+        <property name="purchaseValueOrSaleValue" type="double">
+            <column name="purchasevalueorsalevalue" default='0'/>
+        </property>
+        <property name="deductionOrAbatementPercent" type="double">
+            <column name="deductionorabatementpercent" default='0'/>
+        </property>
+        <property name="assessablevalue" type="double">
+            <column name="assessablevalue" default="0"/>
+        </property>
+        <property name="taxType" type="int">
+            <column name="taxtype" default="1"/>
+        </property>
+        <property name="isGSTApplied" type="true_false" >
+            <column name="isgstapplied" default="F"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.ContractDetail" column="contractdetail" name="contractdetail" not-null="true"/>     
+        <many-to-one class="com.krawler.hql.accounting.EntitybasedLineLevelTermRate" column="entityterm" name="entitybasedLineLevelTermRate"/>
+        <many-to-one class="com.krawler.common.admin.User" name="creator" not-null="true"/>
+    </class>
+</hibernate-mapping>

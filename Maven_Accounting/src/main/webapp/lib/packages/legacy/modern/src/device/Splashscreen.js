@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Splashscreen",{singleton:true,requires:["Ext.device.splashscreen.Cordova","Ext.device.splashscreen.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView){if(A.Cordova){return Ext.create("Ext.device.splashscreen.Cordova")}}return Ext.create("Ext.device.splashscreen.Simulator")}})

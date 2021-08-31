@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ProductDiscountMapping" table="productdiscountmapping">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="applicableDate" type="date">
+            <column name="applicabledate"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="companyid" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="productid" name="product"/>
+        <many-to-one class="com.krawler.common.admin.PricingBandMaster" column="pricingbandmasterid" name="pricingBandMaster"/>
+        <many-to-one class="com.krawler.hql.accounting.DiscountMaster" column="discountmasterid" name="discountMaster"/>
+    </class>
+</hibernate-mapping>

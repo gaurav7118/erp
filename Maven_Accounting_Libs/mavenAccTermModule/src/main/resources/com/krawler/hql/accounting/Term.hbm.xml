@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Term" table="creditterm">
+    <id column="termid" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="termname" type="string">
+      <column length="50" name="termname" not-null="true"/>
+    </property>
+    <property name="termdays" type="integer">
+      <column name="termdays" not-null="true"/>
+    </property>
+    <property name="isdefault" type="true_false">
+        <column name="isdefault" default="false"/>
+    </property>
+    <property name="crmtermid" type="string">
+        <column name="crmtermid"/>
+    </property>
+    <property name="srno" type="integer">
+      <column name="srno" default="0"/>
+    </property>
+    <property name="applicableDays" type="integer">
+      <column name="applicabledays" default="-1"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.DiscountMaster" name="discountName"/>
+  </class>
+</hibernate-mapping>

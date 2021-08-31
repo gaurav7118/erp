@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="StatementOfAccountsSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="StatementOfAccountsSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="companyRegNo" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="dateRange" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="163">
+			<staticText>
+				<reportElement x="374" y="33" width="181" height="28"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATEMENT OF ACCOUNTS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="61" width="96" height="20"/>
+				<textElement/>
+				<text><![CDATA[Company Reg No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="81" width="96" height="20"/>
+				<textElement/>
+				<text><![CDATA[GST Reg No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="101" width="96" height="20"/>
+				<textElement/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="63" y="29" width="271" height="96" backcolor="#EAEAEA"/>
+				<staticText>
+					<reportElement x="4" y="72" width="47" height="20"/>
+					<textElement/>
+					<text><![CDATA[Email]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="4" y="57" width="47" height="20"/>
+					<textElement/>
+					<text><![CDATA[Fax]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="42" width="48" height="20"/>
+					<text><![CDATA[Phone]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="4" y="4" width="266" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="54" y="42" width="216" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="4" y="19" width="266" height="23"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="117" y="87" width="216" height="20"/>
+				<textFieldExpression><![CDATA[$F{fax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="101" width="216" height="20"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="61" width="81" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{companyRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="81" width="81" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{gstRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="101" width="81" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="41" width="61" height="61"/>
+				<imageExpression><![CDATA[$P{imagePath}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="470" y="101" width="4" height="20"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="81" width="4" height="20"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="61" width="4" height="20"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="71" width="4" height="20"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="86" width="4" height="20"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="101" width="4" height="20"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="125" width="293" height="21"/>
+                                <textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date Range : "+$F{dateRange}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="102">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{StatementOfAccountsSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{StatementOfAccountsSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="89" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="10" width="266" height="67" backcolor="#EAEAEA"/>
+				<staticText>
+					<reportElement x="10" y="12" width="237" height="20"/>
+					<textElement/>
+					<text><![CDATA[I/We confirm the transactions show above.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="38" width="142" height="20"/>
+					<textElement/>
+					<text><![CDATA[My/Our income tax PA # is:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="293" y="10" width="262" height="67" backcolor="#EAEAEA"/>
+				<staticText>
+					<reportElement x="10" y="38" width="113" height="20"/>
+					<textElement/>
+					<text><![CDATA[Authorised Signatory]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="12" width="31" height="20"/>
+					<textElement/>
+					<text><![CDATA[For ]]></text>
+				</staticText>
+			</frame>
+			<textField>
+				<reportElement x="334" y="22" width="221" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

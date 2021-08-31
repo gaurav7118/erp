@@ -1,0 +1,678 @@
+#Basaprabhu Ajur 2018-04-02
+
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('46bc9ab6-dfe4-28e5-adab-c03fd5632e9b', '[{\"title\":\"Product Id,Warehouse,Location,Quantity,Batch,Serial,unitprice,Type,Reason,Memo,businessdate,Exp Date,seqnumber\"},{\"header\":\"Product Id,Warehouse,Location,Quantity,Batch,Serial,unitprice,Type,Reason,Memo,businessdate,Exp Date,seqnumber\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,date,date,none\"}]', '[{\"Product Id\":\"  B_100\",\"Warehouse\":\"  DS\",\"Location\":\"  Default Location\",\"Quantity\":2,\"Batch\":\"\",\"Serial\":\"\",\"unitprice\":100,\"Type\":\"  Stock IN\",\"Reason\":\"  Adjustment\",\"Memo\":\" Adjustment\",\"businessdate\":\"  2018-01-01\",\"Exp Date\":\"\",\"seqnumber\":\"SA001\"},{\"Product Id\":\"  B_101\",\"Warehouse\":\"  DS\",\"Location\":\"  Default Location\",\"Quantity\":2,\"Batch\":\"B1\",\"Serial\":\"\",\"unitprice\":100,\"Type\":\"  Stock IN\",\"Reason\":\"  Adjustment\",\"Memo\":\" Adjustment\",\"businessdate\":\"  2018-01-01\",\"Exp Date\":\"  2018-03-22\",\"seqnumber\":\"SA001\"},{\"Product Id\":\"  B_102\",\"Warehouse\":\"  DS\",\"Location\":\"  Default Location\",\"Quantity\":2,\"Batch\":\"\",\"Serial\":\"S1,S2\",\"unitprice\":100,\"Type\":\"  Stock IN\",\"Reason\":\"  Adjustment\",\"Memo\":\" Adjustment\",\"businessdate\":\"  2018-01-01\",\"Exp Date\":\"  2018-03-21,2018-03-23\",\"seqnumber\":\"SA001\"},{\"Product Id\":\"  B_103\",\"Warehouse\":\"  DS\",\"Location\":\"  Default Location\",\"Quantity\":3,\"Batch\":\"B1\",\"Serial\":\"S1,S2,S3\",\"unitprice\":100,\"Type\":\"  Stock IN\",\"Reason\":\"  Adjustment\",\"Memo\":\" Adjustment\",\"businessdate\":\"  2018-01-01\",\"Exp Date\":\"  2018-03-21,2018-03-23,2018-12-31\",\"seqnumber\":\"SA001\"}]', 'StockAdjustment', 'sample_StockAdjustment_import', '_V2', 'T', '0');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,dataindex,islineitem,isdocumentimport) 
+VALUES ("d20ca286-363e-11e8-b026-c03fd5632dc7","1115","seqnumber","",0,0,'T','F',"","","","","seqnumber",'F','F');
+
+#Amol Dhokale 2nd April 2018
+#Update JE Details amount and amountinbase as per company specific decimal points.
+update jedetail jed inner join company c on c.companyid=jed.company inner join compaccpreferences cap on c.companyid=cap.id and cap.id=jed.company set jed.amount=round(jed.amount,cap.amountdigitafterdecimal), jed.amountinbase=round(jed.amountinbase,cap.amountdigitafterdecimal);
+
+#Arshad 3rd April 2018
+#Vendor Invoice
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport) VALUES
+('9c142978-3647-11e8-ac51-14dda97926e5','Exchange Rate',2,'exchangeratedetail','goodsreceipt','exchangeratedetails','id','foreigntobaseexchangerate',6,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('f305af8e-3663-11e8-ac51-14dda97926e5','Tax Amount In Base Currency',2,'taxamountinbase','goodsreceipt',6,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('9633a755-3664-11e8-ac51-14dda97926e5','Tax Amount',2,'taxamount','goodsreceipt',6,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('d65c7cee-366e-11e8-ac51-14dda97926e5','Amount Before GST',2,'excludinggstamount','goodsreceipt',6,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('776135c3-366f-11e8-ac51-14dda97926e5','Amount Before GST In Base Currency',2,'excludinggstamountinbase','goodsreceipt',6,'T');
+
+delete  from customreportsmeasuresfieldsmapping where measurefieldid='517ffd93-7ee6-4f19-8ce7-ec3384ad43cb';
+
+delete from customreportsmeasuresfields where measurefieldid='517ffd93-7ee6-4f19-8ce7-ec3384ad43cb';
+
+delete  from customreportsmeasuresfieldsmapping where measurefieldid='567ffd93-7ee6-4f19-8ce7-ec3384ad43cb';
+
+delete from customreportsmeasuresfields where measurefieldid='567ffd93-7ee6-4f19-8ce7-ec3384ad43cb';
+
+#Customer invoice
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,module,iscustomreport) VALUES
+('9c142978-3647-11e8-ac51-14dda97926e6','Exchange Rate',2,'exchangeratedetail','invoice','exchangeratedetails','id','foreigntobaseexchangerate',2,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('f305af8e-3663-11e8-ac51-14dda97926e6','Tax Amount In Base Currency',2,'taxamountinbase','invoice',2,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('9633a755-3664-11e8-ac51-14dda97926e6','Tax Amount',2,'taxamount','invoice',2,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('d65c7cee-366e-11e8-ac51-14dda97926e6','Amount Before GST',2,'excludinggstamount','invoice',2,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('776135c3-366f-11e8-ac51-14dda97926e6','Amount Before GST In Base Currency',2,'excludinggstamountinbase','invoice',2,'T');
+
+delete from customreportsmeasuresfieldsmapping where measurefieldid in ('25c1a8cb-fcd8-45e8-930c-3f994e2e9ad9','301866d6-feb2-4d7b-a2e8-f575e8d2340','db8a5425-6d0c-482b-bbc8-f8939091e638');
+
+delete from customreportsmeasuresfields where measurefieldid in ('25c1a8cb-fcd8-45e8-930c-3f994e2e9ad9','301866d6-feb2-4d7b-a2e8-f575e8d2340','db8a5425-6d0c-482b-bbc8-f8939091e638');
+
+
+#GRN
+
+insert into default_header (id, defaultHeader,dbcolumnname,module,xtype,iscustomreport) values ('b9397c7c-367c-11e8-ac51-14dda97926e5','Exchange Rate','(1/grorder.externalcurrencyrate)',28,2,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('d510b8f2-3709-11e8-ac51-14dda97926e5','Total Amount In Base Currency',2,'totalamountinbase','grorder',28,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('db76c93d-3709-11e8-ac51-14dda97926e5','Total Amount',2,'totalamount','grorder',28,'T');
+
+delete from customreportsmeasuresfieldsmapping where measurefieldid in ('60411b26-8d2a-11e6-a2e4-c03fd5aad962','70922852-586f-11e6-adb4-c03fd5aad962');
+
+delete from customreportsmeasuresfields where measurefieldid in ('60411b26-8d2a-11e6-a2e4-c03fd5aad962','70922852-586f-11e6-adb4-c03fd5aad962');
+
+#DeliveryOrder
+
+insert into default_header (id, defaultHeader,dbcolumnname,module,xtype,iscustomreport) values ('278f5e67-3725-11e8-ac51-14dda97926e5','Exchange Rate','(1/deliveryorder.externalcurrencyrate)',27,2,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('8d8ac4ee-371f-11e8-ac51-14dda97926e6','Total Amount In Base Currency',2,'totalamountinbase','deliveryorder',27,'T');
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('8d8ac4ee-371f-11e8-ac51-14dda97926e5','Total Amount',2,'totalamount','deliveryorder',27,'T');
+
+delete from customreportsmeasuresfieldsmapping where measurefieldid in ('8f719d7e-b62b-11e6-869d-c03fd5aad962','deddd496-5d65-11e6-beba-c03fd5aad962');
+
+delete from customreportsmeasuresfields where measurefieldid in ('8f719d7e-b62b-11e6-869d-c03fd5aad962','deddd496-5d65-11e6-beba-c03fd5aad962');
+
+#Neeraj Dwivedi 4rth April 2018
+ALTER TABLE erp_pos_mapping ADD COLUMN salesordersequenceformat varchar(255) default null;
+
+#Amol Dhokale 4th April 2018
+#UPDATE FOREIGN TO BASE EXCHANGE RATE FOR OLD RECORDS
+update exchangeratedetails set foreigntobaseexchangerate=round(1/exchangerate,16) where exchangerate!=0;
+
+#Shubham Singh 05th April 2018
+ALTER TABLE workordercomponentdetail ADD COLUMN producedinventory varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_2 FOREIGN KEY (inventoryproduced) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN returnedoutinventory varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_3 FOREIGN KEY (inventoryreturnedout) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN returnedininventory varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_4 FOREIGN KEY (inventoryreturnedin) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN inventorywasteout varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_5 FOREIGN KEY (inventorywasteout) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN inventorywastein varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_6 FOREIGN KEY (inventorywastein) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN inventoryrecycleout varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_7 FOREIGN KEY (inventoryrecycleout) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN inventoryrecyclein varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_8 FOREIGN KEY (inventoryrecyclein) REFERENCES inventory (id);
+
+#Rahul Ajgar 05th April 2018
+DELETE FROM samplefiledata WHERE ID='1f0b9694-e23b-11e5-abf3-c03fd5632e9b';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('1f0b9694-e23b-11e5-abf3-c03fd5632e9b', '[{\"title\":\"Entry Date,Entry Number,Memo,Description,Account code,Account Name,Currency,Debit Amount,Credit Amount,Exchange Rate,Global Level Text Field,Global Level Drop Down,Global Level Text Area,Global Level Check Box,Global Level Multi-Select Drop Down,Global Level Date,Global Level Numeric Field,Global Level Check List,Line Level Date,Line Level Drop Down,Line Level MultiSelect Drop Down,Line Level Numeric Field,Line Level Text Area,Line Level Text Field\"},{\"header\":\"Entry Date,Entry Number,Memo,Description,Account code,Account Name,Currency,Debit Amount,Credit Amount,Exchange Rate,Global Level Text Field,Global Level Drop Down,Global Level Text Area,Global Level Check Box,Global Level Multi-Select Drop Down,Global Level Date,Global Level Numeric Field,Global Level Check List,Line Level Date,Line Level Drop Down,Line Level MultiSelect Drop Down,Line Level Numeric Field,Line Level Text Area,Line Level Text Field\"},{\"align\":\"date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,date,none,none,none,none,none\"}]', '[{\"Entry Date\":\" 2015-01-01\",\"Entry Number\":\" JE0001\",\"Memo\":\" Test memo\",\"Description\":\" Test desc1\",\"Account code\":\" \",\"Account Name\":\" Advertising\",\"Currency\":\" US Dollars (USD)\",\"Debit Amount\":500,\"Credit Amount\":0,\"Exchange Rate\":1,\"Global Level Text Field\":\" Test Text Field\",\"Global Level Drop Down\":\" A\",\"Global Level Text Area\":\" Test Text Area \",\"Global Level Check Box\":true,\"Global Level Multi-Select Drop Down\":\" A;B\",\"Global Level Date\":\" 2015-01-01\",\"Global Level Numeric Field\":1234,\"Global Level Check List\":\" true;false\",\"Line Level Date\":\" 2015-10-13\",\"Line Level Drop Down\":\" A\",\"Line Level MultiSelect Drop Down\":\" A;B\",\"Line Level Numeric Field\":1234,\"Line Level Text Area\":\" Test Text Area\",\"Line Level Text Field\":\"Test Text Field\"},{\"Entry Date\":\" 2015-01-01\",\"Entry Number\":\" JE0001\",\"Memo\":\" Test memo\",\"Description\":\" Test desc2\",\"Account code\":\" \",\"Account Name\":\" Bad Debts\",\"Currency\":\" US Dollars (USD)\",\"Debit Amount\":0,\"Credit Amount\":400,\"Exchange Rate\":1,\"Global Level Text Field\":\" Test Text Field\",\"Global Level Drop Down\":\" A\",\"Global Level Text Area\":\" Test Text Area \",\"Global Level Check Box\":true,\"Global Level Multi-Select Drop Down\":\" A;B\",\"Global Level Date\":\" 2015-01-01\",\"Global Level Numeric Field\":1234,\"Global Level Check List\":\" true;false\",\"Line Level Date\":\" 2015-10-15\",\"Line Level Drop Down\":\" A\",\"Line Level MultiSelect Drop Down\":\" A\",\"Line Level Numeric Field\":4567,\"Line Level Text Area\":\" Test Text Area\",\"Line Level Text Field\":\"Test Text Field\"},{\"Entry Date\":\" 2015-01-01\",\"Entry Number\":\" JE0001\",\"Memo\":\" Test memo\",\"Description\":\" Test desc3\",\"Account code\":\" \",\"Account Name\":\" Bank\",\"Currency\":\" US Dollars (USD)\",\"Debit Amount\":0,\"Credit Amount\":100,\"Exchange Rate\":1,\"Global Level Text Field\":\" Test Text Field\",\"Global Level Drop Down\":\" A\",\"Global Level Text Area\":\" Test Text Area \",\"Global Level Check Box\":true,\"Global Level Multi-Select Drop Down\":\" A;B\",\"Global Level Date\":\" 2015-01-01\",\"Global Level Numeric Field\":1234,\"Global Level Check List\":\" true;false\",\"Line Level Date\":\" 2015-10-16\",\"Line Level Drop Down\":\" A\",\"Line Level MultiSelect Drop Down\":\" B\",\"Line Level Numeric Field\":1234,\"Line Level Text Area\":\" Test Text Area\",\"Line Level Text Field\":\"Test Text Field\"},{\"Entry Date\":\" 2015-01-01\",\"Entry Number\":\" JE0002\",\"Memo\":\" Test memo\",\"Description\":\" Test desc\",\"Account code\":\" Acc0001\",\"Account Name\":\" Acc0001\",\"Currency\":\" US Dollars (USD)\",\"Debit Amount\":100,\"Credit Amount\":0,\"Exchange Rate\":1,\"Global Level Text Field\":\" Test Text Field\",\"Global Level Drop Down\":\" A\",\"Global Level Text Area\":\" Test Text Area \",\"Global Level Check Box\":true,\"Global Level Multi-Select Drop Down\":\" A;B\",\"Global Level Date\":\" 2015-01-01\",\"Global Level Numeric Field\":1234,\"Global Level Check List\":\" true;false\",\"Line Level Date\":\" 2015-10-16\",\"Line Level Drop Down\":\" A\",\"Line Level MultiSelect Drop Down\":\" B\",\"Line Level Numeric Field\":4567,\"Line Level Text Area\":\" Test Text Area\",\"Line Level Text Field\":\"Test Text Field\"},{\"Entry Date\":\" 2015-01-01\",\"Entry Number\":\" JE0002\",\"Memo\":\" Test memo\",\"Description\":\" Test desc\",\"Account code\":\" Acc0002\",\"Account Name\":\" Acc0002\",\"Currency\":\" US Dollars (USD)\",\"Debit Amount\":0,\"Credit Amount\":100,\"Exchange Rate\":1,\"Global Level Text Field\":\" Test Text Field\",\"Global Level Drop Down\":\" A\",\"Global Level Text Area\":\" Test Text Area \",\"Global Level Check Box\":true,\"Global Level Multi-Select Drop Down\":\" A;B\",\"Global Level Date\":\" 2015-01-01\",\"Global Level Numeric Field\":1234,\"Global Level Check List\":\" true;false\",\"Line Level Date\":\" 2015-10-16\",\"Line Level Drop Down\":\" A\",\"Line Level MultiSelect Drop Down\":\" B\",\"Line Level Numeric Field\":1234,\"Line Level Text Area\":\" Test Text Area\",\"Line Level Text Field\":\"Test Text Field\"},{\"Entry Date\":\" \",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" \",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" \",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" Note:\",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" 1. If JE having multiple details then add multiple rows having same \'Default Global Items\'/\'Global Custom Items\' Data and different as per your details of \'Default Line Items\'/\'Line Level Custom Items\'.\",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" 2. If \'Account code\' is empty then \'Account Name\' should be in sample file.\",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" 2. If Custom Field Item having \'Multi-Select Drop Down\' then the values should differentiate by semicolon (;). \",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" 3. If Custom Field Item having \'Check List\' then values for the sequence should provide in true/false differentiate by semicolon (;). \",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" 4. If Custom Field Item having \'Check Box\' then values should be \'true\'/\'false\'.\",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"},{\"Entry Date\":\" 5. In import wizard pick the right matching  \'Date Format\'.\",\"Entry Number\":\" \",\"Memo\":\" \",\"Description\":\" \",\"Account code\":\" \",\"Account Name\":\" \",\"Currency\":\" \",\"Debit Amount\":null,\"Credit Amount\":null,\"Exchange Rate\":null,\"Global Level Text Field\":\" \",\"Global Level Drop Down\":\" \",\"Global Level Text Area\":\" \",\"Global Level Check Box\":null,\"Global Level Multi-Select Drop Down\":\" \",\"Global Level Date\":\" \",\"Global Level Numeric Field\":null,\"Global Level Check List\":\" \",\"Line Level Date\":\" \",\"Line Level Drop Down\":\" \",\"Line Level MultiSelect Drop Down\":\" \",\"Line Level Numeric Field\":null,\"Line Level Text Area\":\" \",\"Line Level Text Field\":\"\"}]', 'Journal Entry', 'sample_journal_entry', '_v2', 'T', '0');
+
+#Rahul A. Bhawar 5th April 2018
+#GST Rule add column merchant Exporter
+alter table entitybasedlineleveltermsrate add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Import Validation
+insert into default_header(id,defaultHeader,pojomethodname,validatetype,allowimport,allowmapping,module,dataindex,formfieldname,countryid,isdataindex,isdocumentimport) values("319615ad-3283-11e8-8c91-6045cb6f9ab5","Is Merchant Export","isMerchantExporter",'boolean',1,'T','1200','isMerchantExporter','isMerchantExporter','105',1,'T');
+
+#GST Output GST Rule Import sample File
+update samplefiledata set header_json = '[{"title":"T,T,T,T,T,T,T,T,T,T,T,T"},{"header":"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12"},{"align":"none,date,none,none,none,none,none,none,none,none,none,none"}]',
+filedata_json ='[{"T1":"Entity","T2":"Applied Date","T3":"Product Tax Class","T4":"Output CGST","T5":"Output SGST","T6":"Output IGST","T7":"Output UTGST","T8":"CESS","T9":"CESS Calculation Type","T10":"Amount for Quantity/ Thousand","T11":"State","T12":"Is Merchant Export"},{"T1":"Entity 1","T2":"01/07/2017","T3":"Product @ 0%","T4":"0","T5":"0","T6":"NA","T7":"NA","T8":"2","T9":"Value per Thousand or CESS % whichever is higher","T10":"2000","T11":"Maharashtra","T12":"Yes"},{"T1":"Entity 1","T2":"01/07/2017","T3":"Product @ 0%","T4":"NA","T5":"NA","T6":"0","T7":"NA","T8":"NA","T9":"","T10":"","T11":"Other","T12":"No"}]'
+where id='4741ae74-87bb-11e7-bd29-14dda9792823' and modulename='GSTOutputTerm';
+
+#GST Input GST Rule Import sample File
+update samplefiledata set header_json = '[{"title":"T,T,T,T,T,T,T,T,T,T,T,T"},{"header":"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12"},{"align":"none,date,none,none,none,none,none,none,none,none,none,none"}]',
+filedata_json ='[{"T1":"Entity","T2":"Applied Date","T3":"Product Tax Class","T4":"Input CGST","T5":"Input SGST","T6":"Input IGST","T7":"Input UTGST","T8":"CESS","T9":"CESS Calculation Type","T10":"Amount for Quantity/ Thousand","T11":"State","T12":"Is Merchant Export"},{"T1":"Entity 1","T2":" 01/07/2017","T3":"Product @ 0%","T4":"0","T5":"0","T6":"NA","T7":"NA","T8":"2","T9":"Value per Thousand or CESS % whichever is higher","T10":"2000","T11":"Maharashtra","T12":"Yes"},{"T1":"Entity 1","T2":"01/07/2017","T3":"Product @ 0%","T4":"NA","T5":"NA","T6":"0","T7":"NA","T8":"NA","T9":"","T10":"","T11":"Other","T12":"No"}]'
+where id='409284ae-87bb-11e7-bd29-14dda9792823' and modulename='GSTInputTerm';
+
+
+#Document Level Check
+#Vendor Qutation 
+alter table vendorquotation add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Purchase Order 
+alter table purchaseorder add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Purchase Invoice
+alter table goodsreceipt add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Customer Quotation
+alter table quotation add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Sales Order
+alter table salesorder add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Sales Invoice
+alter table invoice add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Goods Receipts
+alter table grorder add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Delivery Order
+alter table deliveryorder add column  ismerchantexporter char(1) DEFAULT 'F';
+
+#Akash V. Desai 5th April 2018
+insert into audit_action values('369','GST Details Add Update','60');
+insert into audit_action values('370','GST Details Delete','60');
+insert into audit_action values('371','GST Form 03 Generation','60');
+
+#Shubham Pawar
+DELETE from customervendormapping where customeraccountid in (select id from customer ) and vendoraccountid not in( select id from vendor );
+DELETE from customervendormapping where customeraccountid not in (select id from customer ) and vendoraccountid in( select id from vendor );
+
+#Shubham Singh 06th April 2018
+ALTER TABLE workordercomponentdetail DROP FOREIGN KEY `workordercomponentdetail_ibfk_2`;
+ALTER TABLE workordercomponentdetail DROP FOREIGN KEY `workordercomponentdetail_ibfk_3`;
+ALTER TABLE workordercomponentdetail DROP FOREIGN KEY `workordercomponentdetail_ibfk_4`;
+ALTER TABLE workordercomponentdetail DROP COLUMN producedinventory;
+ALTER TABLE workordercomponentdetail DROP COLUMN returnedoutinventory;
+ALTER TABLE workordercomponentdetail DROP COLUMN returnedininventory;
+ALTER TABLE workordercomponentdetail ADD COLUMN inventoryproduced varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_2 FOREIGN KEY (inventoryproduced) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN inventoryreturnedout varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_3 FOREIGN KEY (inventoryreturnedout) REFERENCES inventory (id);
+ALTER TABLE workordercomponentdetail ADD COLUMN inventoryreturnedin varchar(255) DEFAULT NULL;
+ALTER TABLE workordercomponentdetail ADD CONSTRAINT workordercomponentdetail_ibfk_4 FOREIGN KEY (inventoryreturnedin) REFERENCES inventory (id);
+
+#Pandharinath Vaghole 06th April 2018
+#To Add Reactivated Tax GST(OP) entry in defaultgst.
+INSERT INTO defaultgst (id,name,description,taxcode,percent,country,taxtype) VALUES ('430dfcc0-397d-11e8-b1d8-c03fd5632e9b','GST(OP)','Purchase transactions which is out of the scope of GST legislation.','GST(OP)',0,'137',1);
+
+#To Add New Tax GST(IM-CG) entry in defaultgst.
+INSERT INTO defaultgst (id,name,description,taxcode,percent,country,taxtype) VALUES ('83709564-397b-11e8-b1d8-c03fd5632e9b','GST(IM-CG)','Importation of capital goods with GST incurred. (By referring Customs Form No. 1 (K1),and/or other reference documents)','GST(IM-CG)',6,'137',1);
+
+#Reactivated Tax GST(OP)
+UPDATE tax SET activated = 1 WHERE name = 'GST(OP)' AND company IN (SELECT companyid FROM company WHERE country='137');
+
+#Deactivated Tax GST(NP)
+UPDATE tax SET activated = 0 WHERE name = 'GST(NP)' AND company IN (SELECT companyid FROM company WHERE country='137');
+
+#Pradip Zinjurde 7th April 2018
+#Bussinessdate
+UPDATE default_header SET id='c06560fa-dsad046-11e5-9d70-fedsada19cdc9f', defaultHeader='Business Date', moduleName=NULL, flag='0', configid=NULL, pojoheadername=NULL, recordname=NULL, xtype='3', pojomethodname='businessDate', validatetype='date', maxlength='0', ismandatory='T', required='0', hbmnotnull='T', defaultvalue=NULL, refmodule_pojoclassname=NULL, refdatacolumn_hbmname=NULL, reffetchcolumn_hbmname=NULL, allowimport='1', customflag='0', allowmapping='T', dbcolumnname='businessdate', dbtabletame=NULL, reftablename='in_interstoretransfer', reftablefk='', reftabledatacolumn='', dummyvalue='Business Date', module='1002', allowincustomtemplate='1', dataindex='businessdate', renderertype=NULL, allowadvancesearch='F', islineitem='F', isdocumentimport='F', isreadonly='F', formfieldname=NULL, isconditionalmandetory='F', refmoduleid=NULL, iscustomreport='T', allowindocumentdesigner='T', countryid='0', isdefaultfieldmappings='0', isdataindex='1', allowinotherapplication='F', submoduleflag='0', allowcrossmodule='F', isbatchdetail='F' WHERE (id='c06560fa-dsad046-11e5-9d70-fedsada19cdc9f');
+
+
+#SequenceFormat
+UPDATE default_header SET id='c065621c-60dsadada46-11e5-9d70-ferewrff819cdc9f', defaultHeader='Sequence Number', moduleName=NULL, flag='0', configid=NULL, pojoheadername=NULL, recordname=NULL, xtype='1', pojomethodname='transactionNo', validatetype='text', maxlength='0', ismandatory='T', required='0', hbmnotnull='T', defaultvalue=NULL, refmodule_pojoclassname=NULL, refdatacolumn_hbmname=NULL, reffetchcolumn_hbmname=NULL, allowimport='1', customflag='0', allowmapping='T', dbcolumnname='transactionno', dbtabletame=NULL, reftablename='in_interstoretransfer', reftablefk='', reftabledatacolumn='', dummyvalue='Inter Store Stock Number', module='1002', allowincustomtemplate='1', dataindex='number', renderertype=NULL, allowadvancesearch='F', islineitem='F', isdocumentimport='F', isreadonly='F', formfieldname=NULL, isconditionalmandetory='F', refmoduleid=NULL, iscustomreport='T', allowindocumentdesigner='T', countryid='0', isdefaultfieldmappings='0', isdataindex='1', allowinotherapplication='F', submoduleflag='0', allowcrossmodule='F', isbatchdetail='F' WHERE (id='c065621c-60dsadada46-11e5-9d70-ferewrff819cdc9f');
+
+
+
+#productId
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('4a841ecd-3437-4bba-9f1b-ab40d0f18823', 'Product Id', NULL, '0', NULL, NULL, NULL, NULL, 'productid', 'ref', '0', 'T', '0', 'T', NULL, 'Product', 'productid', 'ID', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'productid', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0','F', 'F');
+
+#Fromwarehouse
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('3e665b9b-35d3-48b4-ab17-ae9e699f734a', 'From Warehouse', NULL, '0', NULL, NULL, NULL, NULL, 'fromStore', 'ref', '0', 'T', '0', 'T', NULL, 'Store', 'abbreviation', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'fromwarehouse', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#fromlocation
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('7f189fcd-12da-47e1-890f-b99318ba15ed', 'From Location', NULL, '0', NULL, NULL, NULL, NULL, 'issuedLocation', 'ref', '0', 'T', '0', 'T', NULL, 'Location', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'fromlocation', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#fromrow
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('3e25d1ec-4c17-4616-da7f-9a2839183315', 'From Row', NULL, '0', NULL, NULL, NULL, NULL, 'issuedRow', 'ref', '0', 'F', '0', 'F', NULL, 'StoreMaster', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'fromrow', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+
+
+
+#FromRack
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('122e1cbb-8825-4c9a-80ee-1baec7620384', 'From Rack', NULL, '0', NULL, NULL, NULL, NULL, 'issuedRack', 'ref', '0', 'F', '0', 'F', NULL, 'StoreMaster', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'fromrack', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+
+#frombin
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('4edbf5ad-5477-49c6-edcc-7422b4cef434', 'From Bin', NULL, '0', NULL, NULL, NULL, NULL, 'issuedBin', 'ref', '0', 'F', '0', 'F', NULL, 'StoreMaster', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'frombin', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#towaerhouse
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag,  allowcrossmodule, isbatchdetail) VALUES ('879417a1-9a2b-4ae1-a80d-73ba229e7e9a', 'To Warehouse', NULL, '0', NULL, NULL, NULL, NULL, 'toStore', 'ref', '0', 'T', '0', 'T', NULL, 'Store', 'abbreviation', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'towarehouse', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+
+#tolocation
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('3de03cb3-d65d-4dfb-aeb5-b06f1f0dd18b', 'To Location', NULL, '0', NULL, NULL, NULL, NULL, 'issuedLocation_dummy', 'ref', '0', 'T', '0', 'T', NULL, 'Location', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'tolocation', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+
+#torow
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('3226938c-01ce-4ae9-f620-24a2daa86e7f', 'To Row', NULL, '0', NULL, NULL, NULL, NULL, 'deliveredRow', 'ref', '0', 'F', '0', 'F', NULL, 'StoreMaster', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'torow', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#torack
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('99e9fbe5-bb73-4aa8-c11e-19c19de3dbf6', 'To Rack', NULL, '0', NULL, NULL, NULL, NULL, 'deliveredRack', 'ref', '0', 'F', '0', 'F', NULL, 'StoreMaster', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'torack', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#tobin
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('86ce392c-f228-41e3-b2e5-325de594245b', 'To Bin', NULL, '0', NULL, NULL, NULL, NULL, 'deliveredBin', 'ref', '0', 'F', '0', 'F', NULL, 'StoreMaster', 'name', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'tobin', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#batch
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('1d6251e7-eca2-4474-b27b-aea4c8a3b160', 'Batch ', NULL, '0', NULL, NULL, NULL, NULL, 'batchname', 'custom', '0', 'F', '0', 'F', NULL, 'NewProductBatch', 'id', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'batchname', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#serial
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('b8b56501-3439-406f-8097-29fac136ca35', 'Serial ', NULL, '0', NULL, NULL, NULL, NULL, 'serialname', 'custom', '0', 'F', '0', 'F', NULL, 'NewBatchSerial', 'id', 'id', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'serialname', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#memo
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag,allowcrossmodule, isbatchdetail) VALUES ('0fed1db2-5b47-4fcf-f6be-4c5cbf79fe7a', 'memo', NULL, '0', NULL, NULL, NULL, NULL, 'memo', 'text', '50', 'F', '0', 'F', NULL, '', '', '', '1', '0', 'T', 'memo', 'in_interstoretransfer', 'in_interstoretransfer', NULL, NULL, '', '1002', '1', 'memo', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#remark
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('9ed58a2d-3bc4-4533-ea97-53b80ad7bce7', 'Remark', NULL, '0', NULL, NULL, NULL, '1', 'remark', 'text', '0', 'F', '0', '0', NULL, NULL, NULL, NULL, '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'remark', NULL, 'F', 'T', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'T', '0', 'F', 'F');
+
+#costcenter
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('e3f5da77-9855-47c6-9654-d60ef76ad829', 'Cost Center', NULL, '0', NULL, NULL, 'costcenter', '4', 'CostCenter', 'ref', '50', 'F', '0', 'F', NULL, 'CostCenter', 'name', 'ID', '1', '0', 'T', 'costcenter', 'in_interstoretransfer', 'costcenter', 'id', 'name', 'Cost Center', '1002', '1', 'costcenter', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'T', 'T', '0', '0', '1', 'T', '0', 'F', 'F');
+
+
+
+
+#quantity
+INSERT INTO default_header (id, defaultHeader, moduleName, flag, configid, pojoheadername, recordname, xtype, pojomethodname, validatetype, maxlength, ismandatory, required, hbmnotnull, defaultvalue, refmodule_pojoclassname, refdatacolumn_hbmname, reffetchcolumn_hbmname, allowimport, customflag, allowmapping, dbcolumnname, dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue, module, allowincustomtemplate, dataindex, renderertype, allowadvancesearch, islineitem, isdocumentimport, isreadonly, formfieldname, isconditionalmandetory, refmoduleid, iscustomreport, allowindocumentdesigner, countryid, isdefaultfieldmappings, isdataindex, allowinotherapplication, submoduleflag, allowcrossmodule, isbatchdetail) VALUES ('b53a3e39-2150-428f-c1b4-bd73e69898d2', 'Quantity', NULL, '0', NULL, NULL, NULL, NULL, 'acceptedQty', 'dobule', '0', 'T', '0', 'T', NULL, '', '', '', '1', '0', 'T', NULL, NULL, NULL, NULL, NULL, '', '1002', '1', 'quantity', NULL, 'F', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', 'F', 'F');
+
+#samplefiledata
+INSERT INTO samplefiledata (id, header_json, filedata_json, modulename, samplefilename, version, issamplefile, countryid) VALUES ('10eaaaae-4984-4a9a-961c-85136998f2f3', '[ { \"title\": \"Product Id,Business Date,Sequence Number,From Warehouse,From Location,From Row,From Rack,From Bin,To Warehouse,To Location,To Row,To Rack,To Bin,Quantity,Batch,Serial,Memo,Cost Center,Remarks\" }, { \"header\": \"Product Id,Business Date,Sequence Number,From Warehouse,From Location,From Row,From Rack,From Bin,To Warehouse,To Location,To Row,To Rack,To Bin,Quantity,Batch,Serial,Memo,Cost Center,Remarks\" }, { \"align\": \"none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\" } ]', '[ { \"Product Id\": \"P001\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1001\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"\", \"Serial\": \"\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P001\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1001\", \"From Warehouse\": \"DE\", \"From Location\": \"A002\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L002\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"\", \"Serial\": \"\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P002\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1001\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"b1\", \"Serial\": \"\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P002\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1001\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"b2\", \"Serial\": \"\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P003\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1001\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"\", \"Serial\": \"S1,S2\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P004\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1002\", \"From Warehouse\": \"DE\", \"From Location\": \"A002\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L002\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"b1\", \"Serial\": \"S1,S2\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P004\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1002\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"\", \"Quantity\": 2, \"Batch\": \"b2\", \"Serial\": \"S3,S4\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P005\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1002\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"Row1\", \"From Rack\": \"Rack1\", \"From Bin\": \"Bin1\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"Row2\", \"To Rack\": \"Rack2\", \"To Bin\": \"Bin2\", \"Quantity\": 2, \"Batch\": \"\", \"Serial\": \"\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" }, { \"Product Id\": \"P006\", \"Business Date\": \"13-03-2018\", \"Sequence Number\": \"IST1002\", \"From Warehouse\": \"DE\", \"From Location\": \"A001\", \"From Row\": \"\", \"From Rack\": \"\", \"From Bin\": \"Bin1\", \"To Warehouse\": \"CM\", \"To Location\": \"L001\", \"To Row\": \"\", \"To Rack\": \"\", \"To Bin\": \"Bin2\", \"Quantity\": 2, \"Batch\": \"\", \"Serial\": \"\", \"Memo\": \"\", \"Cost Center\": \"\", \"Remarks\": \"\" } ]', 'Inter Store Stock Transfer', 'sample_StoreStockTransfer_import', '_V2', 'T', '0');
+
+
+#Pradip Zinjurde 10th April 2108
+INSERT INTO modules (id, modulename, pojoclasspathfull, primarykey_methodname, uniquekey_methodname, uniquekey_hbmname, modulecategory) VALUES ('1002', 'Inter Store Stock Transfer', 'com.krawler.inventory.model.ist.InterStoreTransferRequest', 'id', '', '', NULL);
+
+
+#Pawan Kale 11th April 2018
+#Update validatetype of Bank Interest Account In Receive Payment
+UPDATE default_header set validatetype='ref' where module='16' and id='34324d2a-8760-11e3-b0c3-080027580062';
+
+#Update validatetype of Bank Charges Account In Receive Payment
+UPDATE default_header set validatetype='ref' where module='16' and id='3434e544-8760-11e3-b0c3-080027580062';
+
+#Neeraj Dwivedi 11th April 2018
+alter table receipt add column `generatedsource` int(11) DEFAULT '0';
+alter table deliveryorder add column `generatedsource` int(11) DEFAULT '0';
+
+#Akshay Wagh 12th April 2018
+ALTER TABLE in_stockadjustment ADD throughfile varchar(28);
+
+#Arshad 13th April 2018
+
+DROP FUNCTION IF EXISTS getDOTermsAmount;
+delimiter //
+CREATE FUNCTION getDOTermsAmount (doid VARCHAR(255)) RETURNS VARCHAR (255)
+begin
+declare termsamount varchar(255);
+set termsamount= '';
+select SUM(deliveryordertermmap.termamount)  into termsamount from deliveryorder left JOIN deliveryordertermmap on deliveryorder.id = deliveryordertermmap. deliveryorder where  deliveryordertermmap.deliveryorder = doid;
+return termsamount;
+END//
+delimiter ;
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,module,iscustomreport) VALUES
+('c0c28c87-3cad-11e8-9ae0-14dda97926e5','Invoice Terms',2,'getDOTermsAmount(deliveryorder.id)',27,'T');
+
+
+DROP FUNCTION IF EXISTS getGROrderTermsAmount;
+delimiter //
+CREATE FUNCTION getGROrderTermsAmount (groid VARCHAR(255)) RETURNS VARCHAR (255)
+begin
+declare termsamount varchar(255);
+set termsamount= '';
+select sum(goodsreceiptordertermmap.termamount)  into termsamount  from grorder left JOIN goodsreceiptordertermmap on grorder.id = goodsreceiptordertermmap.goodsreceiptorder where  goodsreceiptordertermmap.goodsreceiptorder = groid;
+return termsamount;
+END//
+delimiter ;
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,module,iscustomreport) VALUES
+('8a8db840-3cb6-11e8-9ae0-14dda97926e5','Invoice Terms',2,'getGROrderTermsAmount(grorder.id)',28,'T');
+
+# Sub total in DO
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('aa8dba36-3d7d-11e8-bd78-14dda97926e5','Sub Total','Sub Total',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',27,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('8cd79016-3d85-11e8-bd78-14dda97926e5','aa8dba36-3d7d-11e8-bd78-14dda97926e5','35b4f66a-5d65-11e6-beba-c03fd5aad962',1);
+
+# Sub Total in GRN
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('a5490b20-3edb-11e8-9cf7-14dda97926e5','Sub Total','Sub Total',2,'72ee172d-7a81-4424-bd15-7354e58aaa58',28,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('fd906c92-3edb-11e8-9cf7-14dda97926e5','a5490b20-3edb-11e8-9cf7-14dda97926e5','29325318-5871-11e6-adb4-c03fd5aad962',1);
+
+#Rahul A. Bhawar 16th April 2018
+#Update Sample Customer import File
+update samplefiledata set header_json='[{"title":"Account,Billing Address,Credit Term,Currency,Customer Code,Customer Name,Shipping Address,Customer Alias Name,Bank Account No,Billing Alias Name,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Vendor,Creation Date,Credit Sales Limit,Default Sales Person,Parent Customer,Payment Criteria,Preferred Product(s),Price List - Band,Sales Person,Shipping Alias Name,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping Route,Shipping State,Shipping Website,Title,Vendor Account,Vendor Code,Customer PAN Status,Customer PAN,Deductee Type,customer Residential Status,Commissionerate,Mode Of Payment,Is TDS Applicable On Customer,GST Registration Type,Customer Type,GSTIN/UIN,Entity,GST Applicable Date"},{"header":"Account,Billing Address,Credit Term,Currency,Customer Code,Customer Name,Shipping Address,Customer Alias Name,Bank Account No,Billing Alias Name,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Vendor,Creation Date,Credit Sales Limit,Default Sales Person,Parent Customer,Payment Criteria,Preferred Product(s),Price List - Band,Sales Person,Shipping Alias Name,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping Route,Shipping State,Shipping Website,Title,Vendor Account,Vendor Code,Customer PAN Status,Customer PAN,Deductee Type,customer Residential Status,Commissionerate,Mode Of Payment,Is TDS Applicable On Customer,GST Registration Type,Customer Type,GSTIN/UIN,Entity,GST Applicable Date"},{"align":" none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]',
+ filedata_json = '[{"Account":" Trade Debtors","Billing Address":"India","Credit Term":" NET 45","Currency":"Rupees (INR)","Customer Code":"C001","Customer Name":" Ceena","Shipping Address":"India","Customer Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":" ","Billing Contact Person Designation":" ","Billing Contact Person Number":"","Billing Country":" ","Billing Email":"admin@mailinator.com","Billing Fax":" ","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Vendor":"F","Creation Date":"2015-06-14 02:25:15","Credit Sales Limit":0,"Default Sales Person":" ","Parent Customer":"","Payment Criteria":"","Preferred Product(s)":"","Price List - Band":"","Sales Person":"","Shipping Alias Name":" ","Shipping City":" ","Shipping Contact Person":" ","Shipping Contact Person Designation":"","Shipping Contact Person Number":" ","Shipping Country":" ","Shipping Email":" ","Shipping Fax":" ","Shipping Mobile":" ","Shipping Phone":"","Shipping Postal Code":" ","Shipping Recipient Name":" ","Shipping Route":" ","Shipping State":" ","Shipping Website":"","Title":" Mr.","Vendor Account":"Trade Creditors","Vendor Code":"V001","Customer PAN Status":"Available","Customer PAN":"ABCDE1234F","Deductee Type":"HUF","customer Residential Status":"Resident","Commissionerate":"2","Mode Of Payment":"Bank","Is TDS Applicable On Customer":"F","GST Registration Type":"Composition","Customer Type":"NA","GSTIN/UIN":"29ABCDE1234F2Z5","Entity":"Mumbai","GST Applicable Date":"2015-01-01"},{"Account":" Trade Debtors","Billing Address":"India","Credit Term":" NET 45","Currency":"Rupees (INR)","Customer Code":"C002","Customer Name":"Peter","Shipping Address":"India","Customer Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":" ","Billing Contact Person Designation":" ","Billing Contact Person Number":"","Billing Country":" ","Billing Email":"admin@mailinator.com","Billing Fax":" ","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Vendor":"F","Creation Date":"2015-06-14 02:25:15","Credit Sales Limit":0,"Default Sales Person":" ","Parent Customer":"","Payment Criteria":"","Preferred Product(s)":"","Price List - Band":"","Sales Person":"","Shipping Alias Name":" ","Shipping City":" ","Shipping Contact Person":" ","Shipping Contact Person Designation":"","Shipping Contact Person Number":" ","Shipping Country":" ","Shipping Email":" ","Shipping Fax":" ","Shipping Mobile":" ","Shipping Phone":"","Shipping Postal Code":" ","Shipping Recipient Name":" ","Shipping Route":" ","Shipping State":" ","Shipping Website":"","Title":" Mr.","Vendor Account":"Trade Creditors","Vendor Code":"V002","Customer PAN Status":"APPLIEDFOR","Customer PAN":"","Deductee Type":"HUF","customer Residential Status":"Resident","Commissionerate":"2","Mode Of Payment":"Bank","Is TDS Applicable On Customer":"F","GST Registration Type":"Registered","Customer Type":"SEZ (WPAY)","GSTIN/UIN":"29ABCDE1234F2Z6","Entity":"Mumbai","GST Applicable Date":"2015-01-01"},{"Account":" Trade Debtors","Billing Address":"India","Credit Term":" NET 30","Currency":"Rupees (INR)","Customer Code":"C003","Customer Name":"John","Shipping Address":"India","Customer Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"admin@mailinator.com","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Vendor":"F","Creation Date":"2015-06-14 02:25:15","Credit Sales Limit":0,"Default Sales Person":"","Parent Customer":"","Payment Criteria":"","Preferred Product(s)":"","Price List - Band":"","Sales Person":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","ShippingCST Reg. D Country":"","Shipping Email":"","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping Route":"","Shipping State":"","Shipping Website":"","Title":" Mr.","Vendor Account":"Trade Creditors","Vendor Code":"V003","Customer PAN Status":"PANNOTAVBL","Customer PAN":"","Deductee Type":"HUF","customer Residential Status":"Resident","Commissionerate":"2","Mode Of Payment":"Bank","Is TDS Applicable On Customer":"F","GST Registration Type":"Unregistered","Customer Type":"NA","GSTIN/UIN":"","Entity":"Mumbai","GST Applicable Date":"2015-01-01"}]' where id='9e23dcb4-20af-11e6-b829-14dea97926e6' and countryid = 105 and modulename = 'Customer';
+
+#Update Sample Vendor import File
+update samplefiledata set header_json='[{"title":"Account,Billing Address,Currency,Debit Term,Shipping Address,Vendor Code,Vendor Name,Agent,Vendor Alias Name,Bank Account No,Billing Alias Name,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Customer,Creation Date,Credit Purchase Limit,Customer Account,Customer Code,Parent Vendor,Payment Criteria,Preferred Product Code,Price List - Band,Shipping Alias Name,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping State,Shipping Website,Title,Company Registration Number,RMCD Approval Number,Vendor PAN Status,Vendor PAN,Deductee Type,Vendor Residential Status,Commissionerate,Default nature of Payment,Is TDS Applicable On Vendor,GST Registration Type,Vendor Type,GSTIN/UIN,Entity,GST Applicable Date"},{"header":"Account,Billing Address,Currency,Debit Term,Shipping Address,Vendor Code,Vendor Name,Agent,Vendor Alias Name,Bank Account No,Billing Alias Name,Billing City,Billing Contact Person,Billing Contact Person Designation,Billing Contact Person Number,Billing Country,Billing Email,Billing Fax,Billing Mobile,Billing Phone,Billing Postal Code,Billing Recipient Name,Billing State,Billing Website,Category,Create As Customer,Creation Date,Credit Purchase Limit,Customer Account,Customer Code,Parent Vendor,Payment Criteria,Preferred Product Code,Price List - Band,Shipping Alias Name,Shipping City,Shipping Contact Person,Shipping Contact Person Designation,Shipping Contact Person Number,Shipping Country,Shipping Email,Shipping Fax,Shipping Mobile,Shipping Phone,Shipping Postal Code,Shipping Recipient Name,Shipping State,Shipping Website,Title,Company Registration Number,RMCD Approval Number,Vendor PAN Status,Vendor PAN,Deductee Type,Vendor Residential Status,Commissionerate,Default nature of Payment,Is TDS Applicable On Vendor,GST Registration Type,Vendor Type,GSTIN/UIN,Entity,GST Applicable Date"},{"align":"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]',
+filedata_json = '[{"Account":"Trade Creditors","Billing Address":"India","Currency":"Rupees (INR)","Debit Term":" NET 45","Shipping Address":"India","Vendor Code":"V001","Vendor Name":" Ceena","Agent":"","Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"admin@mailinator.com","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Customer":"F","Creation Date":"2015-06-14 02:25:15","Credit Purchase Limit":0,"Customer Account":"","Customer Code":"","Parent Vendor":"","Payment Criteria":"","Preferred Product Code":"","Price List - Band":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","Shipping Country":"","Shipping Email":"admin@mailinator.com","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping State":"","Shipping Website":"","Title":"Mr.","Company Registration Number":"CompRegNo-0001","RMCD Approval Number":"RMCD-001","Vendor PAN Status":"Available","Vendor PAN":"ABCDE1234F","Deductee Type":"Individual","Vendor Residential Status":"Resident","Commissionerate":"45","Default nature of Payment":"","Is TDS Applicable On Vendor":"F","GST Registration Type":"Composition","Vendor Type":"NA","GSTIN/UIN":"29ABCDE1234F2Z5","Entity":"Mumbai","GST Applicable Date":"2015-01-01"},{"Account":"Trade Creditors","Billing Address":"India","Currency":"Rupees (INR)","Debit Term":" NET 45","Shipping Address":"India","Vendor Code":"V002","Vendor Name":"Peter","Agent":"","Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"admin@mailinator.com","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Customer":"F","Creation Date":"2015-06-14 02:25:15","Credit Purchase Limit":0,"Customer Account":"","Customer Code":"","Parent Vendor":"","Payment Criteria":"","Preferred Product Code":"","Price List - Band":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","Shipping Country":"","Shipping Email":"admin@mailinator.com","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping State":"","Shipping Website":"","Title":"Mr.","Company Registration Number":"CompRegNo-0001","RMCD Approval Number":"RMCD-001","Vendor PAN Status":"APPLIEDFOR","Vendor PAN":"","Deductee Type":"Company","Vendor Residential Status":"Resident","Commissionerate":"55","Default nature of Payment":"","Is TDS Applicable On Vendor":"F","GST Registration Type":"Registered","Vendor Type":"SEZ (WPAY)","GSTIN/UIN":"29ABCDE1234F2Z6","Entity":"Mumbai","GST Applicable Date":"2015-01-01"},{"Account":"Trade Creditors","Billing Address":"India","Currency":"Rupees (INR)","Debit Term":" NET 45","Shipping Address":"India","Vendor Code":"V003","Vendor Name":"John","Agent":"","Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"admin@mailinator.com","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Customer":"F","Creation Date":"2015-06-14 02:25:15","Credit Purchase Limit":0,"Customer Account":"","Customer Code":"","Parent Vendor":"","Payment Criteria":"","Preferred Product Code":"","Price List - Band":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","Shipping Country":"","Shipping Email":"admin@mailinator.com","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping State":"","Shipping Website":"","Title":"Mr.","Company Registration Number":"CompRegNo-0001","RMCD Approval Number":"RMCD-001","Vendor PAN Status":"PANNOTAVBL","Vendor PAN":"","Deductee Type":"Unknown","Vendor Residential Status":"Non-Resident","Commissionerate":"","Default nature of Payment":"","Is TDS Applicable On Vendor":"F","GST Registration Type":"Unregistered","Vendor Type":"NA","GSTIN/UIN":"","Entity":"Mumbai","GST Applicable Date":"2015-01-01"},{"Account":"","Billing Address":"","Currency":"","Debit Term":"","Shipping Address":"","Vendor Code":"","Vendor Name":"","Agent":"","Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Customer":"","Creation Date":"","Credit Purchase Limit":0,"Customer Account":"","Customer Code":"","Parent Vendor":"","Payment Criteria":"","Preferred Product Code":"","Price List - Band":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","Shipping Country":"","Shipping Email":"","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping State":"","Shipping Website":"","Title":"","Company Registration Number":"","RMCD Approval Number":"","Vendor PAN Status":"","Vendor PAN":"","Deductee Type":"","Vendor Residential Status":"","Commissionerate":"","Default nature of Payment":"","Is TDS Applicable On Vendor":"","Entity":"","GST Applicable Date":""},{"Account":"Note:","Billing Address":"","Currency":"","Debit Term":"","Shipping Address":"","Vendor Code":"","Vendor Name":"","Agent":"","Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Customer":"","Creation Date":"","Credit Purchase Limit":0,"Customer Account":"","Customer Code":"","Parent Vendor":"","Payment Criteria":"","Preferred Product Code":"","Price List - Band":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","Shipping Country":"","Shipping Email":"","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping State":"","Shipping Website":"","Title":"","Company Registration Number":"","RMCD Approval Number":"","Vendor PAN Status":"","Vendor PAN":"","Deductee Type":"","Vendor Residential Status":"","Commissionerate":"","Default nature of Payment":"","Is TDS Applicable On Vendor":"","Entity":"","GST Applicable Date":""},{"Account":"1.PAN No. will be set only if TDS is applicable otherwise will set to EMPTY.","Billing Address":"","Currency":"","Debit Term":"","Shipping Address":"","Vendor Code":"","Vendor Name":"","Agent":"","Alias Name":"","Bank Account No":"","Billing Alias Name":"","Billing City":"","Billing Contact Person":"","Billing Contact Person Designation":"","Billing Contact Person Number":"","Billing Country":"","Billing Email":"","Billing Fax":"","Billing Mobile":"","Billing Phone":"","Billing Postal Code":"","Billing Recipient Name":"","Billing State":"","Billing Website":"","Category":"","Create As Customer":"","Creation Date":"","Credit Purchase Limit":0,"Customer Account":"","Customer Code":"","Parent Vendor":"","Payment Criteria":"","Preferred Product Code":"","Price List - Band":"","Shipping Alias Name":"","Shipping City":"","Shipping Contact Person":"","Shipping Contact Person Designation":"","Shipping Contact Person Number":"","Shipping Country":"","Shipping Email":"","Shipping Fax":"","Shipping Mobile":"","Shipping Phone":"","Shipping Postal Code":"","Shipping Recipient Name":"","Shipping State":"","Shipping Website":"","Title":"","Company Registration Number":"","RMCD Approval Number":"","Vendor PAN Status":"","Vendor PAN":"","Deductee Type":"","Vendor Residential Status":"","Commissionerate":"","Default nature of Payment":"","Is TDS Applicable On Vendor":"","Entity":"","GST Applicable Date":""}]' where id='9e23dcb4-20af-11e6-b829-14dea97926e5' and countryid = 105 and modulename = 'Vendor';
+
+#delete column entry from default Header SEZ from date and to date
+delete from default_header where id='2739c29d-5fd6-11e7-aeac-14dda979275f' and countryid=105;
+delete from default_header where id='27c75b9f-5fd6-11e7-aeac-14dda979275f' and countryid=105;
+delete from default_header where id='cd1e3808-5fd3-11e7-aeac-14dda979275f' and countryid=105;
+delete from default_header where id='d45c7412-5fd3-11e7-aeac-14dda979275f' and countryid=105;
+
+#Pandharinath Vaghole 17th April 2018
+DELETE FROM defaultgst WHERE name = 'GST(NP)' AND  country='137';
+ALTER TABLE gstformgenerationhistory ADD COLUMN gstguideversion INT(2) DEFAULT 0;
+
+#Bhushan Chitte 17th April 2018
+#Adding pricingbandmasterid column SDP-15269 
+ALTER TABLE invoicedetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE grdetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE sodetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE podetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE quotationdetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE vendorquotationdetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE dodetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE grodetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE srdetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE prdetails ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE purchaserequisitiondetail ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+
+#Akash V. Desai 17th April 2018
+#ERP-34641 Updating default gst tax description for malaysia and singapore
+Update defaultgst set description = 'Purchase transactions which is out of the scope of GST legislation' where taxcode = 'GST(OP)' and id = '430dfcc0-397d-11e8-b1d8-c03fd5632e9b' and country = '137'; 
+
+Update defaultgst set description = 'Importation of capital goods with GST incurred (By referring Customs Form No. 1 (K1),and/or other reference documents)' where taxcode = 'GST(IM-CG)' and id = '83709564-397b-11e8-b1d8-c03fd5632e9b' and country = '137'; 
+
+Update defaultgst set description = 'Purchase with GST incurred for capital goods acquisition' where taxcode = 'GST(TX-CG)' and id = 'a4838f85-b101-47af-8fdd-879c908c2b82' and country = '137'; 
+
+Update defaultgst set description = 'Goods And Services Tax(ZP) - Purchase from GST-registered supplier with no GST incurred (e.g. supplier provides transportation of goods that qualify as international services)' where taxcode = 'GST(ZP)@0.00%' and id = 'aa8fa92e-0146-11e6-87b5-c03fd5658531' and country = '203'; 
+
+#Bhushan Chitte 18th April 2018
+ALTER TABLE requestforquotationdetail ADD COLUMN pricingbandmasterid VARCHAR(255) DEFAULT NULL;
+
+#Swapnesh Kulkarni 19th April 2018
+CREATE TABLE contractdetailtermsmap (
+  id varchar(40) NOT NULL,
+  contractDetail varchar(40) NOT NULL,
+  termamount double DEFAULT '0',
+  percentage double DEFAULT '0',
+  deleted tinyint(4) DEFAULT '0',
+  creator varchar(40) NOT NULL,
+  createdon bigint(20) DEFAULT NULL,
+  purchasevalueorsalevalue double DEFAULT '0',
+  deductionorabatementpercent double DEFAULT '0',
+  taxtype int(1) DEFAULT '1',
+  assessablevalue double DEFAULT '0',
+  isgstapplied char(1) DEFAULT 'F',
+  entityterm varchar(50) DEFAULT NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`entityterm`) REFERENCES `entitybasedlineleveltermsrate` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE contractdetails ADD COLUMN rowtermamount double DEFAULT 0;
+
+#Pratik Joshi 19th April 2018
+Alter table in_goodsrequest add column parentid varchar(50) default null;
+
+#Rahul A. Bhawar 20th April 2018
+#Update E-way fields "gstconfigtype" column from default table
+update defaultcustomfields set gstconfigtype = 8  where countryid=105  and fieldlabel in('Transporter ID','Transporter Name','Transport Mode','Transportation Date','Vehicle No','Document Type','Distance level (Km)','Supply Type','Transporter Doc No','Sub Type');
+
+#Update E-way fields "gstconfigtype" column
+update fieldparams fp  inner join company c  on fp.companyid = c.companyid inner join extracompanypreferences ecf on ecf.id = c.companyid set fp.gstconfigtype = 8  where c.country=105  and (ecf.isnewgst='1' or ecf.isnewgst='T') and fp.fieldlabel in('Transporter ID','Transporter Name','Transport Mode','Transportation Date','Vehicle No','Document Type','Distance level (Km)','Supply Type','Transporter Doc No','Sub Type');
+
+#Import Eway Bill No and Eway Bill date
+insert into default_header(id,defaultHeader,pojomethodname,validatetype,allowimport,allowmapping,module,dataindex,formfieldname,countryid,isdataindex,isdocumentimport,ismandatory,hbmnotnull) values("b0b78e55-3c85-11e8-a97b-6045cb6f9ab5","Document Number","DocumentNumber",'string',1,'T','1300','DocumentNumber','DocumentNumber','105',1,'F','T','T');
+insert into default_header(id,defaultHeader,pojomethodname,validatetype,allowimport,allowmapping,module,dataindex,formfieldname,countryid,isdataindex,isdocumentimport,maxlength,ismandatory,hbmnotnull) values("94bc2bed-3c84-11e8-a97b-6045cb6f9ab5","E-Way Bill No","EWayBillNo",'double',1,'T','1300','EWayBillNo','EWayBillNo','105',1,'F',12,'T','T');
+insert into default_header(id,defaultHeader,pojomethodname,validatetype,allowimport,allowmapping,module,dataindex,formfieldname,countryid,isdataindex,isdocumentimport,ismandatory,hbmnotnull) values("9a6e1ee2-3c84-11e8-a97b-6045cb6f9ab5","E-Way Bill Date","EWayBillDate",'date',1,'T','1300','EWayBillDate','EWayBillDate','105',1,'F','T','T');
+
+insert into samplefiledata(id,header_json,filedata_json,modulename,samplefilename,version,issamplefile,countryid)
+values('725926d1-3c87-11e8-a97b-6045cb6f9ab5','[{"title":"T,T,T"},{"header":"T1,T2,T3"},{"align":"none,none,none"}]','[{"T1":"Document Number","T2":"E-Way Bill No","T3":"E-Way Bill Date"},{"T1":"DOC/12/0001","T2":"010720172154","T3":"01/07/2017"},{"T1":"DOC/12/0002","T2":"010720172153","T3":"05/07/2017"},{"T1":"DOC/12/0003","T2":"010720172152","T3":"09/07/2017"}]','E-Way Bill details','E-Way Bill details import','_V1','T',105);
+
+#Insert New Module in Modules table for Import E-Way Fileds data in transaction
+INSERT INTO modules (id,modulename)VALUES('1300','E-Way Bill details');
+
+# Added new column in "customtalbes" 
+alter table customtables add column reftableclasspath varchar(500);
+
+update customtables set reftableclasspath='com.krawler.hql.accounting.DeliveryOrderCustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658531' and reftable='deliveryordercustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.GoodsReceiptOrderCustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658539' and reftable='grordercustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.SalesReturnCustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658565' and reftable='salesreturncustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.PurchaseReturnCustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658573' and reftable='purchasereturncustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.AccJECustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658587' and reftable='accjecustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.AccJECustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658589' and reftable='accjecustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.AccJECustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658591' and reftable='accjecustomdata';
+update customtables set reftableclasspath='com.krawler.hql.accounting.AccJECustomData' where id='ee0943d8-896f-11e7-a15d-c03fd5658597' and reftable='accjecustomdata';
+
+#Nitesh Kumar 23rd April, 2018
+update default_header set reftabledatacolumn='if(deliveryorder.gstincluded="T",((dodetails.deliveredquantity*dodetails.rateincludegst)-(if(dodetails.discount IS NOT NULL,(select (if(dodetails.discountispercent=1,(dodetails.discount/100)*(dodetails.rateincludegst*dodetails.deliveredquantity),dodetails.discount))  ),0.0) )) ,((dodetails.baseuomquantity*dodetails.rate)-(if(dodetails.discount IS NOT NULL,(select (if(dodetails.discountispercent=1,(dodetails.discount/100)*(dodetails.rate*dodetails.deliveredquantity),dodetails.discount))  ),0.0) )+dodetails.rowtaxamount) ) ' where  id ='04960bd8-5d37-11e6-9be6-c03fd5aad962';
+
+#Shrinath Shinde 25th April 2018
+alter table templatepnl add column isdefault char(1) DEFAULT 'F';
+
+#Arshad 26th April 2018
+
+# Purchase Order
+
+delete from customreportsmeasuresfieldsmapping where measurefieldid='bb0398aa-4db7-45bb-9106-cc4e1b83dd73';
+
+delete from customreportsmeasuresfields where measurefieldid='bb0398aa-4db7-45bb-9106-cc4e1b83dd73';
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,module,iscustomreport) VALUES
+('6d3b089d-4224-11e8-a376-14dda97926e5','Total Amount',2,'totalamount','purchaseorder',18,'T');
+
+DROP FUNCTION IF EXISTS getPOTermsAmount;
+delimiter //
+CREATE FUNCTION getPOTermsAmount (poid VARCHAR(255)) RETURNS double
+begin
+declare termsamount  double;
+set termsamount= 0;
+select SUM(purchaseordertermmap.termamount)  into termsamount from purchaseorder left JOIN purchaseordertermmap on purchaseorder.id = purchaseordertermmap. purchaseorder where  purchaseordertermmap.purchaseorder = poid;
+return termsamount;
+END//
+delimiter ;
+
+insert into default_header (id,defaultHeader,xtype,dbcolumnname,module,iscustomreport) VALUES
+('0ccc28f7-4229-11e8-a376-14dda97926e5','Invoice Terms',2,'getPOTermsAmount(purchaseorder.id)',18,'T');
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('88188939-422a-11e8-a376-14dda97926e5','Amount Before Tax','Amount Before Tax',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',18,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('9b9268c6-422a-11e8-a376-14dda97926e5','88188939-422a-11e8-a376-14dda97926e5','995f389b-1541-4c86-b5e2-e93662ef635b',1);
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('11648a29-422d-11e8-a376-14dda97926e5','Sub Total','Sub Total',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',18,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('1b59700d-422d-11e8-a376-14dda97926e5','11648a29-422d-11e8-a376-14dda97926e5','995f389b-1541-4c86-b5e2-e93662ef635b',1);
+
+#Customer Invoice
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('c48a03d5-42d7-11e8-8656-14dda97926e5','Tax Amount','Tax Amount',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',2,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('f4271123-42d7-11e8-8656-14dda97926e5','c48a03d5-42d7-11e8-8656-14dda97926e5','7856d285-7fb6-43b5-b297-2b19ab903f80',1);
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('c48a03d5-42d7-11e8-8656-14dda97926e6','Amount Before Tax','Amount Before Tax',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',2,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('f4271123-42d7-11e8-8656-14dda97926e6','c48a03d5-42d7-11e8-8656-14dda97926e6','7856d285-7fb6-43b5-b297-2b19ab903f80',1);
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('c48a03d5-42d7-11e8-8656-14dda97926e7','Sub Total','Sub Total',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',2,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('f4271123-42d7-11e8-8656-14dda97926e7','c48a03d5-42d7-11e8-8656-14dda97926e7','7856d285-7fb6-43b5-b297-2b19ab903f80',1);
+
+#Customer Quotation
+
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('77a347c6-42e9-11e8-8656-14dda97926e6','Amount Before Tax','Amount Before Tax',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',22,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('f4271123-42d7-11e8-8656-14dda97926e8','77a347c6-42e9-11e8-8656-14dda97926e6','d8c0f632-dd6b-11e6-930b-eca86bfcd415',1);
+
+#Sales Order
+
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('87a347c6-42e9-11e8-8656-14dda97926e6','Sub Total','Sub Total',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',20,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('e4271123-42d7-11e8-8656-14dda97926e8','87a347c6-42e9-11e8-8656-14dda97926e6','11f89ee2-d6bd-4afb-b56c-1edbedc47bf5',1);
+
+#Purchase Invoice
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('87fdd541-4867-11e8-838d-14dda97926e5', 'Sub Total', 'Sub Total', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '6', 'T');
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('c6f7da8f-4867-11e8-838d-14dda97926e5', '87fdd541-4867-11e8-838d-14dda97926e5', '640dbd0a-156d-41bb-b07a-0735d41863a2', '1');
+
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('a597fdf8-486c-11e8-838d-14dda97926e5', 'Tax Amount', 'Tax Amount', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '6', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('fde2de7a-486c-11e8-838d-14dda97926e5', 'a597fdf8-486c-11e8-838d-14dda97926e5', '640dbd0a-156d-41bb-b07a-0735d41863a2', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('26e9e098-486e-11e8-838d-14dda97926e5', 'Amount Before Tax', 'Amount Before Tax', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '6', 'T');
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('3037560c-486e-11e8-838d-14dda97926e5', '26e9e098-486e-11e8-838d-14dda97926e5', '640dbd0a-156d-41bb-b07a-0735d41863a2', '1');
+
+
+#DeliveryOrder
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('80d23b96-4882-11e8-838d-14dda97926e5', 'Amount Before Tax', 'Amount Before Tax', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '27', 'T');
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('8a79e97f-4882-11e8-838d-14dda97926e5', '80d23b96-4882-11e8-838d-14dda97926e5', '35b4f66a-5d65-11e6-beba-c03fd5aad962', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('1e3000e4-4886-11e8-838d-14dda97926e5', 'Tax Amount', 'Tax Amount', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '27', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('2a0034e7-4886-11e8-838d-14dda97926e5', '1e3000e4-4886-11e8-838d-14dda97926e5', '35b4f66a-5d65-11e6-beba-c03fd5aad962', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('a3f6cd38-4887-11e8-838d-14dda97926e5', 'Total Amount', 'Total Amount', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '27', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('aeabf74c-4887-11e8-838d-14dda97926e5', 'a3f6cd38-4887-11e8-838d-14dda97926e5', '35b4f66a-5d65-11e6-beba-c03fd5aad962', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('d1e39378-4911-11e8-838d-14dda97926e5', 'Total Amount In Base Currency', 'Total Amount In Base Currency', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '27', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('dbd7e838-4911-11e8-838d-14dda97926e5', 'd1e39378-4911-11e8-838d-14dda97926e5', '35b4f66a-5d65-11e6-beba-c03fd5aad962', '1');
+
+#Goods Receipt
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('90d23b96-4882-11e8-838d-14dda97926e5', 'Amount Before Tax', 'Amount Before Tax', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '28', 'T');
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('9a79e97f-4882-11e8-838d-14dda97926e5', '90d23b96-4882-11e8-838d-14dda97926e5', '29325318-5871-11e6-adb4-c03fd5aad962', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('2e3000e4-4886-11e8-838d-14dda97926e5', 'Tax Amount', 'Tax Amount', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '28', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('3a0034e7-4886-11e8-838d-14dda97926e5', '2e3000e4-4886-11e8-838d-14dda97926e5', '29325318-5871-11e6-adb4-c03fd5aad962', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('b3f6cd38-4887-11e8-838d-14dda97926e5', 'Total Amount', 'Total Amount', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '28', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('beabf74c-4887-11e8-838d-14dda97926e5', 'b3f6cd38-4887-11e8-838d-14dda97926e5', '29325318-5871-11e6-adb4-c03fd5aad962', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('e1e39378-4911-11e8-838d-14dda97926e5', 'Total Amount In Base Currency', 'Total Amount In Base Currency', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', '28', 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('ebd7e838-4911-11e8-838d-14dda97926e5', 'e1e39378-4911-11e8-838d-14dda97926e5', '29325318-5871-11e6-adb4-c03fd5aad962', '1');
+
+#Asset Disposal Invoice
+
+delete from customreportsmeasuresfieldsmapping where measurefieldid in (select measurefieldid from customreportsmeasuresfields where measurefieldmodule=38);
+
+delete from customreportsmeasuresfields where measurefieldmodule=38;
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('d48a03d5-42d7-11e8-8656-14dda97926e5','Tax Amount','Tax Amount',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',38,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('a4271123-42d7-11e8-8656-14dda97926e5','d48a03d5-42d7-11e8-8656-14dda97926e5','7856d285-7fb6-43b5-b297-2b19ab903f80',1);
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('d48a03d5-42d7-11e8-8656-14dda97926e6','Amount Before Tax','Amount Before Tax',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',38,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('a4271123-42d7-11e8-8656-14dda97926e6','d48a03d5-42d7-11e8-8656-14dda97926e6','7856d285-7fb6-43b5-b297-2b19ab903f80',1);
+
+insert into customreportsmeasuresfields (measurefieldid, measurefieldname,measurefielddisplayname,xtype, measurefieldmodulecategory, measurefieldmodule,iscustomreport)
+values 
+('d48a03d5-42d7-11e8-8656-14dda97926e7','Sub Total','Sub Total',2,'72ee172d-7a81-4424-bd15-7354e58aaa57',38,'T');
+
+insert into customreportsmeasuresfieldsmapping 
+values ('a4271123-42d7-11e8-8656-14dda97926e7','d48a03d5-42d7-11e8-8656-14dda97926e7','7856d285-7fb6-43b5-b297-2b19ab903f80',1);
+
+# Asset Purchase Invoice
+
+delete from customreportsmeasuresfieldsmapping where measurefieldid in (select measurefieldid from customreportsmeasuresfields where measurefieldmodule=39);
+
+delete from customreportsmeasuresfields where measurefieldmodule=39;
+
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('97fdd541-4867-11e8-838d-14dda97926e5', 'Sub Total', 'Sub Total', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', 39, 'T');
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('d6f7da8f-4867-11e8-838d-14dda97926e5', '97fdd541-4867-11e8-838d-14dda97926e5', '640dbd0a-156d-41bb-b07a-0735d41863a2', '1');
+
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('b597fdf8-486c-11e8-838d-14dda97926e5', 'Tax Amount', 'Tax Amount', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', 39, 'T');
+
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('ade2de7a-486c-11e8-838d-14dda97926e5', 'b597fdf8-486c-11e8-838d-14dda97926e5', '640dbd0a-156d-41bb-b07a-0735d41863a2', '1');
+
+INSERT INTO customreportsmeasuresfields (measurefieldid, measurefieldname, measurefielddisplayname, xtype, measurefieldmodulecategory, measurefieldmodule, iscustomreport)
+VALUES ('36e9e098-486e-11e8-838d-14dda97926e5', 'Amount Before Tax', 'Amount Before Tax', '2', '72ee172d-7a81-4424-bd15-7354e58aaa58', 39, 'T');
+
+INSERT INTO customreportsmeasuresfieldsmapping (`id`, `measurefieldid`, `defaultheaderid`, `isdataindex`) 
+VALUES ('4037560c-486e-11e8-838d-14dda97926e5', '36e9e098-486e-11e8-838d-14dda97926e5', '640dbd0a-156d-41bb-b07a-0735d41863a2', '1');
+
+#Akash V. Desai 26th April 2018
+#ERP-40141 [Singapore] Why we are showing "GST Input Rule Report" and "GST Output Rule Report" for Singapore country.
+
+Update reportmaster set countryid = '105' where id = 'GST Input Rule Report' and name = 'GST Input Rule Report' and moduleid = '1200';
+
+Update reportmaster set countryid = '105' where id = 'GST Output Rule Report' and name = 'GST Output Rule Report' and moduleid = '1200';
+
+insert into reportmaster(id, name, description, method_name, Grouped_Under, moduleid, countryid) values ('GST Input Rule Report USA','GST Input Rule Report','View GST Input Rule Report','callGSTInputRuleReport()','GST Input Rule Report',1200,'244');
+
+insert into reportmaster(id, name, description, method_name, Grouped_Under, moduleid, countryid) values ('GST Output Rule Report USA','GST Output Rule Report','View GST Output Rule Report','callGSTOutputRuleReport()','GST Output Rule Report',1200,'244');
+
+#Tohid Maner 27th April 2018
+update modules set uniquekey_methodname='DeliveryOrderNumber',uniquekey_hbmname='deliveryOrderNumber' where modulename='Delivery Order' and id='27';
+
+#Neeraj Dwivedi 27th April 2018
+ALTER TABLE erp_pos_mapping ADD COLUMN depositaccount varchar(50) default '' ;
+
+#Pawan Kale 27th April 2018
+update default_header set allowindocumentdesigner='F' where id='bcbbf396-ad45-11e5-964f-14dda97927f2';
+
+# Ajinkya Dahale 30th April 2018 (Add Price Source Column in requestforquotationdetail)
+ALTER TABLE requestforquotationdetail ADD COLUMN pricesource VARCHAR(100) DEFAULT NULL;

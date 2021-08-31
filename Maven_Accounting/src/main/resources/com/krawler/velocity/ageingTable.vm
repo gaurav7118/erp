@@ -1,0 +1,21 @@
+<tr><td>
+    <TABLE class="ageingtable" style="$tableStyle">  
+<tbody>  
+       <tr>
+            #foreach( $header1 in $tableHeader )
+                <td width="$header1.width%" style="$header1.style">$header1.data</td>
+            #end    
+       </tr>
+
+        #foreach( $tabledata in $tableRowData )
+            <tr>
+                #foreach( $data in $tabledata )
+                    <td style="$data.style">$data.data</td>
+                #end
+            </tr>
+        #end   
+</tbody>
+    </TABLE> 
+</td></tr>
+
+

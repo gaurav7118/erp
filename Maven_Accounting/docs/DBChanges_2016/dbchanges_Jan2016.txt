@@ -1,0 +1,1156 @@
+#Pandurang 4th Jan 2016
+ CREATE TABLE `disbursement` (
+  `id` varchar(255) NOT NULL,
+  `loanrefnumber` varchar(50) DEFAULT NULL,
+  `disbursementdate` datetime DEFAULT NULL,
+  `firstpaymentdate` datetime DEFAULT NULL,
+  `approveddate` datetime DEFAULT NULL,
+  `applicationdate` datetime DEFAULT NULL,
+  `customer` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `loantype` varchar(255) NOT NULL,
+  `installmentinterval` int(11) DEFAULT '0',
+  `installmenttype` varchar(255) DEFAULT NULL,
+  `scheduletype` varchar(255) DEFAULT NULL,
+  `loancategory` varchar(255) DEFAULT NULL,
+  `surety` varchar(255) DEFAULT NULL,
+  `createdby` varchar(40) DEFAULT NULL,
+  `modifiedby` varchar(40) DEFAULT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  `updatedon` bigint(20) DEFAULT NULL,
+  `seqnumber` int(11) DEFAULT '0',
+  `seqformat` varchar(40) DEFAULT NULL,
+  `loanrate` double DEFAULT '0',
+  `loanfee` double DEFAULT '0',
+  `loanamount` double DEFAULT '0',
+  `loaneligibility` double DEFAULT '0',
+  `externalcurrencyrate` double DEFAULT '0',
+  `termvalue` int(11) DEFAULT '0',
+  `termtype` varchar(50) DEFAULT NULL,
+  `currency` varchar(255) DEFAULT NULL,
+  `centry` varchar(255) DEFAULT NULL,
+  `journalentry` varchar(255) DEFAULT NULL,
+  `autogen` char(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`customer`) REFERENCES `customer` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`),
+  FOREIGN KEY (`centry`) REFERENCES `jedetail` (`id`),
+  FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`),
+  FOREIGN KEY (`createdby`)  REFERENCES `users`(`userid`),
+  FOREIGN KEY (`modifiedby`)  REFERENCES `users`(`userid`),
+  FOREIGN KEY (`seqformat`)  REFERENCES `sequenceformat`(`id`),
+  FOREIGN KEY (`loantype`)  REFERENCES `masteritem`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ CREATE TABLE `repaymentdetails` (
+  `id` varchar(255) NOT NULL,
+  `startdate` datetime DEFAULT NULL,
+  `enddate` datetime DEFAULT NULL,
+  `disbursement` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `srno` int(11) DEFAULT '0',
+  `startingbalance` double DEFAULT '0',
+  `interest` double DEFAULT '0',
+  `principle` double DEFAULT '0',
+  `amountdue` double DEFAULT '0',
+  `endingbalance` double DEFAULT '0',
+  `paymentstatus` int(2) DEFAULT '0',
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`disbursement`) REFERENCES `disbursement` (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#Sharad Pawar 4 January 2016
+alter table vendor add propagatedvendorid varchar(255) DEFAULT NULL REFERENCES vendor (id);
+update default_header set formfieldname='accname' where id='2fdac050-f73d-102d-9b6d-001e4f3fdc1a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='termid' where id='aeadf136-f73d-102d-9b6d-001e4f3fdc1a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6';
+update default_header set formfieldname='currencyid' where id='4ffae150-3cbb-11e4-af74-c03fd5633215' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='acccode' where id='67826d86-195b-11e3-8a99-001e670e1459' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='accountid' where id='ce4aba28-b992-11e3-b51d-001cc066e9f0' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='title' where id='2fd7dcc8-f73d-102d-9b6d-001e4f3fdc1a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='creationDate' where id='aeaaf56c-f73d-102d-9b6d-001e4f3fdc1a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='aliasname' where id='3af31654-3a12-11e8-b49b-c03fd5633211' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='bankaccountno' where id='aa0abc7c-f73d-102d-9b6d-001e4f3fdc1a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='other' where id='aea7feac-f73d-102d-9b6d-001e4f3fdc1a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='creditLimit' where id='4ff909a2-3cbb-11e4-af74-c03fd5633215' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='parentid' where id='3af31654-3a12-11e8-b49b-c03fd5633216' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='paymentCriteria' where id='3af31654-3a12-11e8-b49b-c03fd5633215' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='pricingBand' where id='793a4948-9729-11e4-b1df-eca86bfcd415' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='uenno' where id='3af31654-3a12-11e8-b49b-c03fd5633212' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+update default_header set formfieldname='defaultagentmapping' where id='3af31654-3a12-11e8-b49b-c03fd5633212' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6'; 
+
+update default_header set validatetype=null where id='617891d3-6d82-11e5-911f-14dda97926b6' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6';
+
+#Swapnil Pandhare 4 January 2016
+ALTER TABLE `masteritem` MODIFY COLUMN `designation`  varchar(1024); 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt2 created on 5th Jan 2016 8:00AM ---------------------------------------------- 
+
+# Basaprabhu Ajur 2016-Jan-05
+ALTER TABLE `uomschema` ADD COLUMN `orderuom`  varchar(255) NULL DEFAULT NULL , ADD COLUMN `transferuom`  varchar(255) NULL DEFAULT NULL ;
+
+# Basaprabhu Ajur 2016-Jan-05
+UPDATE default_header SET hbmnotnull='F' WHERE id IN ("de1cd066-a7c5-11e5-bac1-14dda9792859","7fa57efd-a7c5-11e5-bac1-14dda9792859","1e097436-a7c6-11e5-bac1-14dda9792859");
+
+# Mohammed Uzair Momin 6th Jan 2016
+# CI Module
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('d58a7cbc-adef-11e5-9869-14dda97927f2','2','SO No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','invoicelinking','T');
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('11d906a3-adf3-11e5-9869-14dda97927f2','2','DO No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','invoicelinking','T');
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('1bca608b-ae0c-11e5-984b-14dda97927f2','2','CQ No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','invoicelinking','T');
+
+# SO Module
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('bcbbf396-ad45-11e5-964f-14dda97927f2','20','CQ No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','solinking','T');
+
+# DO Module
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('0984ee86-ad68-11e5-964f-14dda97927f2','27','SO No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','dolinking','T');
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('a65e6480-ad6a-11e5-964f-14dda97927f2','27','SI No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','dolinking','T');
+
+# Sales Return Module
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('a90a38e4-ae10-11e5-984b-14dda97927f2','29','DO No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','salesreturnlinking','T');
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('d3aa1314-ae11-11e5-984b-14dda97927f2','29','SI No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','salesreturnlinking','T');
+
+# Credit Note Module
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('463bb02c-ae26-11e5-984b-14dda97927f2','12','SI No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','creditnotelinking','T');
+
+#Deepak Singh 6th Jan 2015
+update reportmaster SET `name` ='Sales By Service Product Detail Report' ,description='View Sales By Service Product Detail Report'  where id='SalesByServiceProductDetailReport';
+update reportmaster SET `name` ='Sales By Product Category Detail Report' ,description='View Sales By Product Category Detail Report'  where id='Sales_by_Product_Category_Detail_Report';
+
+#Pandurang 6th Jan 2016
+alter table repaymentdetails 
+add column `monthlyinstalment` DOUBLE default 0,
+add column `amount` DOUBLE default 0;
+
+# Basaprabhu Ajur 2016-Jan-07
+ALTER TABLE `in_temp_stockadjustmentdetail` ADD COLUMN `skufield`  varchar(50) NULL DEFAULT NULL;
+
+#Pandurang 7th Jan 2016
+alter table disbursement
+add column creditaccount varchar(255) DEFAULT NULL, 
+ADD CONSTRAINT FOREIGN KEY (`creditaccount`) REFERENCES `account` (`id`);
+
+alter table disbursement
+add column debitaccount varchar(255) DEFAULT NULL, 
+ADD CONSTRAINT FOREIGN KEY (`debitaccount`) REFERENCES `account` (`id`);
+
+# Suhas Chaware 8 Jan 2016
+CREATE TABLE `assetdetailcustomdata` (
+  `assetDetailsId` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col16` varchar(255) DEFAULT NULL,
+ `col17` varchar(255) DEFAULT NULL,
+ `col18` varchar(255) DEFAULT NULL,
+ `col19` varchar(255) DEFAULT NULL,
+ `col20` varchar(255) DEFAULT NULL,
+ `col21` varchar(255) DEFAULT NULL,
+ `col22` varchar(255) DEFAULT NULL,
+ `col23` varchar(255) DEFAULT NULL,
+ `col24` varchar(255) DEFAULT NULL,
+ `col25` varchar(255) DEFAULT NULL,
+ `col26` varchar(255) DEFAULT NULL,
+ `col27` varchar(255) DEFAULT NULL,
+`col28` varchar(255) DEFAULT NULL,
+ `col29` varchar(255) DEFAULT NULL,
+ `col30` varchar(255) DEFAULT NULL,
+`col31` varchar(255) DEFAULT NULL,
+ `col32` varchar(255) DEFAULT NULL,
+ `col33` varchar(255) DEFAULT NULL,
+ `col34` varchar(255) DEFAULT NULL,
+ `col35` varchar(255) DEFAULT NULL,
+ `col36` varchar(255) DEFAULT NULL,
+ `col37` varchar(255) DEFAULT NULL,
+`col38` varchar(255) DEFAULT NULL,
+`col39` varchar(255) DEFAULT NULL,
+`col40` varchar(255) DEFAULT NULL,
+ `col41` varchar(255) DEFAULT NULL,
+ `col42` varchar(255) DEFAULT NULL,
+`col43` varchar(255) DEFAULT NULL,
+ `col44` varchar(255) DEFAULT NULL,
+ `col45` varchar(255) DEFAULT NULL,
+ `col46` varchar(255) DEFAULT NULL,
+`col47` varchar(255) DEFAULT NULL,
+ `col48` varchar(255) DEFAULT NULL,
+ `col49` varchar(255) DEFAULT NULL,
+ `col50` varchar(255) DEFAULT NULL,
+ `col1046`  longtext,
+ `col1047`  longtext,
+ `col1048`  longtext,
+ `col1049`  longtext,
+ `col1050`  longtext,
+ `col1051`  longtext,
+ `col1052`  longtext,
+ `col1053`  longtext,
+ `col1054`  longtext,
+ `col1055`  longtext,
+ `col1056`  longtext,
+ `col1057`  longtext,
+ `col1058`  longtext,
+ `col1059`  longtext,
+ `col1060`  longtext,
+ `col2001` varchar(255) default 'false',
+ `col2002` varchar(255) default 'false',
+ `col2003` varchar(255) default 'false',
+ `col2004` varchar(255) default 'false',
+ `col2005` varchar(255) default 'false',
+ `col2006` varchar(255) default 'false',
+ `col2007` varchar(255) default 'false',
+ `col2008` varchar(255) default 'false',
+ `col2009` varchar(255) default 'false',
+ `col2010` varchar(255) default 'false',
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+   `col1036` longtext,
+ `col1037` longtext,
+ `col1038` longtext,
+ `col1039` longtext,
+ `col1040` longtext,
+ `col1041` longtext,
+ `col1042` longtext,
+ `col1043` longtext,
+ `col1044` longtext,
+ `col1045` longtext,
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`assetDetailsId`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `assetdetail`
+ADD COLUMN `accassetdetailscustomdata`  varchar(255) NULL DEFAULT NULL;
+
+# Swapnil Pandhare 8th Jan 2016
+ALTER TABLE deliveryorder ADD COLUMN customerporefno VARCHAR(50);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8737bc60-b4fb-11e5-9f22-ba0be0483c18','customerporefno','Customer PO Reference No',20,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8737c6a6-b4fb-11e5-9f22-ba0be0483c18','customerporefno','Customer PO Reference No',22,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8737cba6-b4fb-11e5-9f22-ba0be0483c18','customerporefno','Customer PO Reference No',27,1,0,1,0,0);
+
+#Ajit Gogawale 8th Jan 2016
+ALTER TABLE `masteritem`
+ADD COLUMN `defaulttopos`  char(1) NULL DEFAULT 'F';
+
+#Deepak Satpute 11th Jan 2016
+create table duplicateno(
+    documentno varchar(255) NOT NULL,
+    company varchar(255) NOT NULL,
+    moduleid int(11) DEFAULT 0
+)ENGINE=InnoDB default CHARSET=utf8;
+
+#Rushikesh Mandage 12th Jan 2015
+
+CREATE TABLE `receiptdetailsloan` (
+  `id` varchar(40) NOT NULL,
+  `amount` double NOT NULL,
+  `receipt` varchar(40) NOT NULL,
+  `repaymentdetail` varchar(40) NOT NULL,
+  `company` varchar(40) NOT NULL,
+  `srno` int(11) DEFAULT '0',
+  `fromcurrency` varchar(40) DEFAULT NULL,
+  `tocurrency` varchar(40) DEFAULT NULL,
+  `exchangeratefortransaction` double DEFAULT '1',
+  `amountinrepaymentdetailcurrency` double DEFAULT '1',
+  `amountinbasecurrency` double DEFAULT '0',
+  `description` varchar(1000) DEFAULT NULL,
+  `gstcurrencyrate` double DEFAULT '0',
+  `srnoforrow` int(11) DEFAULT '0',
+  `totaljedid` varchar(40) DEFAULT '',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKE554110A342D2512` FOREIGN KEY (`receipt`) REFERENCES `receipt` (`id`),
+  CONSTRAINT `FKE554110A7E352513` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  CONSTRAINT `FKE554110A342D2514` FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`),
+  CONSTRAINT `FKE554110A342D2515` FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`),
+  CONSTRAINT `FKE554110A342D2518` FOREIGN KEY (`repaymentdetail`) REFERENCES `repaymentdetails` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table extracompanypreferences add column `loaninterestaccount` varchar(255) DEFAULT NULL;
+
+#Raveesh Pathak 12th Jan 2016
+alter table sequenceformat MODIFY dateformatinprefix varchar(100) DEFAULT "";
+update sequenceformat set dateformatinprefix="" where dateformatinprefix is null OR dateformatinprefix='empty';
+update sequenceformat set dateformataftersuffix="" where dateformataftersuffix is null OR dateformataftersuffix='empty';
+
+# Suhas Chaware 12 Jan 2016
+update default_header set dbtabletame='debitnote', allowadvancesearch='T',xtype='4' where module='10' and defaultHeader='Customer';
+
+update default_header set dbtabletame='creditnote', allowadvancesearch='T',xtype='4' where module='12' and defaultHeader='Vendor';
+
+#Ajit Gogawale 12th Jan 2016
+ALTER TABLE `in_stockmovement`
+ADD COLUMN `auto_sequence` bigint(20) NULL AUTO_INCREMENT  UNIQUE ;
+
+#Raveesh Pathak 13th Jan 2016
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,allowimport,dataindex,renderertype) 
+                   VALUES ("96502ad4-b523-11e5-8b92-14dda97926e5","09508488-c1d2-102d-b048-001e58a64cb6",'Shipping Website','ShippingWebsite',0,255,'F','F',null,null,null,null,null,'1','shippingWebsite',null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,allowimport,dataindex,renderertype) 
+                   VALUES ("6ecd73b3-b525-11e5-8b92-14dda97926e5","09508488-c1d2-102d-b048-001e58a64cb6",'Billing Website','BillingWebsite',0,255,'F','F',null,null,null,null,null,'1','billingWebsite',null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,allowimport,dataindex,renderertype) 
+                   VALUES ("f7466974-b526-11e5-8b92-14dda97926e5","b8bd81b0-c500-102d-bb0b-001e58a64cb6",'Shipping Website','ShippingWebsite',0,255,'F','F',null,null,null,null,null,'1','shippingWebsite',null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,allowimport,dataindex,renderertype) 
+                   VALUES ("0008b915-b527-11e5-8b92-14dda97926e5","b8bd81b0-c500-102d-bb0b-001e58a64cb6",'Billing Website','BillingWebsite',0,255,'F','F',null,null,null,null,null,'1','billingWebsite',null);
+
+update default_header set dataindex='billingContactPersonDesignation' where id="7902af90-9428-11e5-a837-0800200c9a66";
+update default_header set dataindex='shippingContactPersonDesignation' where id="73d21a60-9428-11e5-a837-0800200c9a66";
+update default_header set dataindex='billingContactPersonDesignation' where id="91ebc010-9427-11e5-a837-0800200c9a66";
+update default_header set dataindex='shippingContactPersonDesignation' where id="8aae43e0-9427-11e5-a837-0800200c9a66";
+
+#Vijay Jawale 13th jan 2016  
+ update defaultgst set country= 203 where country is Null;
+ update defaultgst set taxtype=2 where name='GST(AJS1)' and country=137;
+ update defaultgst set taxtype=1 where name='GST(AJP1)' and country=137;
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt3 created on 14th Jan 2016 9:00AM ---------------------------------------------- =======
+
+# Anand Nimbalkar 14th Jan, 2016
+update default_header set defaultHeader="Stock UOM" where module = 30 and defaultHeader = "Unit Of Measure";
+
+#Dipak Dorkar 14th Jan 2016
+ALTER TABLE customer ADD COLUMN activate CHAR(1) DEFAULT 'T';
+
+#Pandurang 15th Jan 2016
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("4761ef26-baa0-11e5-aac9-14dda979299c",'112','Sales Person','salesperson',0,0,'F','F','MasterItem','value','ID','ref',null,null,null);
+
+
+#Sharad Pawar 15 Jan 2016
+
+CREATE TABLE `productfieldsandmodulesmapping` (
+  `id` varchar(40) NOT NULL,
+  `moduleid` int(3) DEFAULT NULL,
+  `fieldid` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fieldid` (`fieldid`),
+  CONSTRAINT `productfieldsandmodulesmapping_ibfk_1` FOREIGN KEY (`fieldid`) REFERENCES `customizereportmapping` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table customizereportheader add  defaultheaderid varchar(255) ;
+ALTER TABLE customizereportheader ADD FOREIGN KEY (defaultheaderid) REFERENCES default_header(id);
+
+
+update customizereportheader set defaultheaderid='4fd810a6-3d99-11e4-bc4a-c03fd5633215' where id='c5888670-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='58399382-3d99-11e4-bc4a-c03fd5633215' where id='c623f498-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='583b693c-3d99-11e4-bc4a-c03fd5633215' where id='dc7135a8-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='11636634-deb3-11e4-b12a-eca86bff8e7d' where id='ee550d4e-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='60d6d216-3d99-11e4-bc4a-c03fd5633215' where id='dc78d89e-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='5834ad5e-3d99-11e4-bc4a-c03fd5633215' where id='e5ffde76-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='5836696e-3d99-11e4-bc4a-c03fd5633215' where id='e6194d98-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='25545ce8-deb3-11e4-b12a-eca86bff8e7d' where id='ee08a7ec-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='6c147909-2a22-11e5-b692-c03fd5657f27' where id='c5f1281a-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='800e633b-2a22-11e5-b692-c03fd5657f27' where id='c60558da-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='5b7958e9-2a22-11e5-b692-c03fd5657f27' where id='c5a9c844-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='58bfd77b-2a07-11e5-b729-c03fd5657f27' where id='ede8c440-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='4bbe9865-2a22-11e5-b692-c03fd5657f27' where id='c596c8c0-e44a-11e4-a6ed-c03fd5632dc7';
+update customizereportheader set defaultheaderid='746d52dc-2a22-11e5-b692-c03fd5657f27' where id='c5f78ee4-e44a-11e4-a6ed-c03fd5632dc7';
+
+update customizereportmapping crm inner join customizereportheader  crh  on crh.dataheader=crm.dataheader and crh.moduleid=crm.moduleid and crh.dataindex=crm.dataindex set crm.customizereportheader=crh.id;
+
+#Swapnil Pandhare 15th Jan 2016
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,
+reffetchcolumn_hbmname,validatetype,defaultvalue,allowimport,dataindex,renderertype) 
+VALUES ("95d1e5c8-b926-11e5-9912-ba0be0483c18","30",'Valuation Method','ValuationMethod',0,255,'F','F',null,null,null,'string',0,'1','valuationmethod',null);
+
+#Ajit Gogawale 15th jan 2016  
+ALTER TABLE `extracompanypreferences` ADD COLUMN `iscloseregistermultipletimes` char(1) DEFAULT 'F';
+
+#Mohammed Uzair Momin 18th Jan 2016
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('f219621d-aeb1-11e5-8d82-14dda97927f2','18','VQ No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','polinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('353ae73a-aeb9-11e5-a581-14dda97927f2','6','PO No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','goodsreceiptlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('01fb6177-aebf-11e5-a581-14dda97927f2','6','GR No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','goodsreceiptlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('aa83fe44-aec3-11e5-a581-14dda97927f2','6','VQ No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','goodsreceiptlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('03081292-aed3-11e5-a581-14dda97927f2','28','PO No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','goodsreceiptorderlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('c4563c05-aed4-11e5-a581-14dda97927f2','28','PI No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','goodsreceiptorderlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('c8f0e2b3-aeda-11e5-afa4-14dda97927f2','31','GR No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','purchasereturnlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('08b34dad-aedc-11e5-afa4-14dda97927f2','31','PI No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','purchasereturnlinking','T');
+
+insert into `default_header`(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,allowimport,dbtabletame,allowadvancesearch) values('ce5d9415-aedf-11e5-afa4-14dda97927f2','10','PI No.','LinkedDocNo',0,50,'F','F',4,'LinkedDocNo','linkeddocid','0','debitnotelinking','T');
+
+#Dipak Dorkar 18th jan 2016
+ INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('GST(IGDS)@7.00%','Goods And Services Tax(IGDS) - Purchases with GST incurred at 7% and Imports under IGDS','GST(IGDS)@7.00%',7.0,203,1);
+
+#Shashi Nandan Kumar 18th jan 2016
+ALTER TABLE audit_trail MODIFY prdjsondtls LONGTEXT;
+
+# Suhas Chaware 18 Jan 2016
+delete from default_header where id="47ce5488-a7bf-11e5-bf7f-feff819cdc9f";
+
+#Rushikesh Mandage 18th Jan 2016
+
+delete  from customizereportmapping where moduleid =2 and dataIndex= 'porefno' and dataheader = 'PO Reference Number';
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('9340f0ea-cac5-49e8-bd70-e7f2db5483fa','porefno','Customer PO Reference No',2,1,0,1,0,0);
+
+#Swapnil D. Khandre 19th Jan, 2016
+alter table layoutgroup add column excludechildaccountbalances char(1) default 'F';
+
+# Amol Dhokale 19th January,2016
+UPDATE customizereportheader SET dataIndex="uomid" WHERE dataIndex="stockuom" AND moduleid=34;
+UPDATE  customizereportmapping SET dataIndex="uomid" WHERE dataIndex="stockuom" AND moduleid=34;
+
+#Ajit Ankalle 19th Jan 2016
+
+insert into currency (currencyid,name,htmlcode,symbol,afterdecimalname,currencycode) values ('25','Omani Rial(OMR)','OMR','&#xFDFC;','Baisa','OMR');
+
+insert into defaultexchangerate values ('530','25','1');
+insert into defaultexchangerate values ('531','25','2');
+insert into defaultexchangerate values ('532','25','3');
+insert into defaultexchangerate values ('534','25','5');
+insert into defaultexchangerate values ('535','25','6');
+insert into defaultexchangerate values ('536','25','7');
+insert into defaultexchangerate values ('537','25','8');
+insert into defaultexchangerate values ('538','25','9');
+insert into defaultexchangerate values ('539','25','10');
+insert into defaultexchangerate values ('540','25','11');
+insert into defaultexchangerate values ('541','25','12');
+insert into defaultexchangerate values ('542','25','13');
+insert into defaultexchangerate values ('543','25','14');
+insert into defaultexchangerate values ('544','25','15');
+insert into defaultexchangerate values ('545','25','16');
+insert into defaultexchangerate values ('546','25','17');
+insert into defaultexchangerate values ('547','25','18');
+insert into defaultexchangerate values ('548','25','19');
+insert into defaultexchangerate values ('549','25','20');
+insert into defaultexchangerate values ('550','25','21');
+insert into defaultexchangerate values ('551','25','22');
+insert into defaultexchangerate values ('552','25','23');
+insert into defaultexchangerate values ('553','25','24');
+
+insert into defaultexchangerate values ('554','25','25');
+insert into defaultexchangerate values ('555','24','25');
+insert into defaultexchangerate values ('556','23','25');
+insert into defaultexchangerate values ('557','22','25');
+insert into defaultexchangerate values ('558','21','25');
+insert into defaultexchangerate values ('559','20','25');
+insert into defaultexchangerate values ('560','19','25');
+insert into defaultexchangerate values ('561','18','25');
+insert into defaultexchangerate values ('562','17','25');
+insert into defaultexchangerate values ('563','16','25');
+insert into defaultexchangerate values ('564','15','25');
+insert into defaultexchangerate values ('565','14','25');
+insert into defaultexchangerate values ('566','13','25');
+insert into defaultexchangerate values ('567','12','25');
+insert into defaultexchangerate values ('568','11','25');
+insert into defaultexchangerate values ('569','10','25');
+insert into defaultexchangerate values ('570','9','25');
+insert into defaultexchangerate values ('571','8','25');
+insert into defaultexchangerate values ('572','7','25');
+insert into defaultexchangerate values ('573','6','25');
+insert into defaultexchangerate values ('574','5','25');
+insert into defaultexchangerate values ('576','3','25');
+insert into defaultexchangerate values ('577','2','25');
+insert into defaultexchangerate values ('578','1','25');
+
+
+insert into exchangerate values ('530','25','1');
+insert into exchangerate values ('531','25','2');
+insert into exchangerate values ('532','25','3');
+insert into exchangerate values ('534','25','5');
+insert into exchangerate values ('535','25','6');
+insert into exchangerate values ('536','25','7');
+insert into exchangerate values ('537','25','8');
+insert into exchangerate values ('538','25','9');
+insert into exchangerate values ('539','25','10');
+insert into exchangerate values ('540','25','11');
+insert into exchangerate values ('541','25','12');
+insert into exchangerate values ('542','25','13');
+insert into exchangerate values ('543','25','14');
+insert into exchangerate values ('544','25','15');
+insert into exchangerate values ('545','25','16');
+insert into exchangerate values ('546','25','17');
+insert into exchangerate values ('547','25','18');
+insert into exchangerate values ('548','25','19');
+insert into exchangerate values ('549','25','20');
+insert into exchangerate values ('550','25','21');
+insert into exchangerate values ('551','25','22');
+insert into exchangerate values ('552','25','23');
+insert into exchangerate values ('553','25','24');
+
+insert into exchangerate values ('554','25','25');
+insert into exchangerate values ('555','24','25');
+insert into exchangerate values ('556','23','25');
+insert into exchangerate values ('557','22','25');
+insert into exchangerate values ('558','21','25');
+insert into exchangerate values ('559','20','25');
+insert into exchangerate values ('560','19','25');
+insert into exchangerate values ('561','18','25');
+insert into exchangerate values ('562','17','25');
+insert into exchangerate values ('563','16','25');
+insert into exchangerate values ('564','15','25');
+insert into exchangerate values ('565','14','25');
+insert into exchangerate values ('566','13','25');
+insert into exchangerate values ('567','12','25');
+insert into exchangerate values ('568','11','25');
+insert into exchangerate values ('569','10','25');
+insert into exchangerate values ('570','9','25');
+insert into exchangerate values ('571','8','25');
+insert into exchangerate values ('572','7','25');
+insert into exchangerate values ('573','6','25');
+insert into exchangerate values ('574','5','25');
+insert into exchangerate values ('576','3','25');
+insert into exchangerate values ('577','2','25');
+insert into exchangerate values ('578','1','25');
+
+
+insert into defaultexchangeratedetails values ('530','2016-01-01 00:00:00','0.39','530');
+insert into defaultexchangeratedetails values ('531','2016-01-01 00:00:00','0.55','531');
+insert into defaultexchangeratedetails values ('532','2016-01-01 00:00:00','0.42','532');
+insert into defaultexchangeratedetails values ('534','2016-01-01 00:00:00','0.0057','534');
+insert into defaultexchangeratedetails values ('535','2016-01-01 00:00:00','0.39','535');
+insert into defaultexchangeratedetails values ('536','2016-01-01 00:00:00','0.087','536');
+insert into defaultexchangeratedetails values ('537','2016-01-01 00:00:00','0.00072','537');
+insert into defaultexchangeratedetails values ('538','2016-01-01 00:00:00','0.00011','538');
+insert into defaultexchangeratedetails values ('539','2016-01-01 00:00:00','0.27','539');
+insert into defaultexchangeratedetails values ('540','2016-01-01 00:00:00','0.26','540');
+insert into defaultexchangeratedetails values ('541','2016-01-01 00:00:00','0.059','541');
+insert into defaultexchangeratedetails values ('542','2016-01-01 00:00:00','0.000028','542');
+insert into defaultexchangeratedetails values ('543','2016-01-01 00:00:00','0.011','543');
+insert into defaultexchangeratedetails values ('544','2016-01-01 00:00:00','0.011','544');
+insert into defaultexchangeratedetails values ('545','2016-01-01 00:00:00','0.0081','545');
+insert into defaultexchangeratedetails values ('546','2016-01-01 00:00:00','0.25','546');
+insert into defaultexchangeratedetails values ('547','2016-01-01 00:00:00','0.38','547');
+insert into defaultexchangeratedetails values ('548','2016-01-01 00:00:00','0.00032','548');
+insert into defaultexchangeratedetails values ('549','2016-01-01 00:00:00','0.10','549');
+insert into defaultexchangeratedetails values ('550','2016-01-01 00:00:00','0.27','550');
+insert into defaultexchangeratedetails values ('551','2016-01-01 00:00:00','0.049','551');
+insert into defaultexchangeratedetails values ('552','2016-01-01 00:00:00','0.0033','552');
+insert into defaultexchangeratedetails values ('553','2016-01-01 00:00:00','0.000017','553');
+
+insert into defaultexchangeratedetails values ('554','2016-01-01 00:00:00','1.0','554');
+insert into defaultexchangeratedetails values ('555','2016-01-01 00:00:00','58174.26','555');
+insert into defaultexchangeratedetails values ('556','2016-01-01 00:00:00','304.71','556');
+insert into defaultexchangeratedetails values ('557','2016-01-01 00:00:00','20.25','557');
+insert into defaultexchangeratedetails values ('558','2016-01-01 00:00:00','3.74','558');
+insert into defaultexchangeratedetails values ('559','2016-01-01 00:00:00','9.54','559');
+insert into defaultexchangeratedetails values ('560','2016-01-01 00:00:00','3141.27','560');
+insert into defaultexchangeratedetails values ('561','2016-01-01 00:00:00','2.61','561');
+insert into defaultexchangeratedetails values ('562','2016-01-01 00:00:00','4.02','562');
+insert into defaultexchangeratedetails values ('563','2016-01-01 00:00:00','124.15','563');
+insert into defaultexchangeratedetails values ('564','2016-01-01 00:00:00','94.25','564');
+insert into defaultexchangeratedetails values ('565','2016-01-01 00:00:00','87.19','565');
+insert into defaultexchangeratedetails values ('566','2016-01-01 00:00:00','36164.14','566');
+insert into defaultexchangeratedetails values ('567','2016-01-01 00:00:00','17.09','567');
+insert into defaultexchangeratedetails values ('568','2016-01-01 00:00:00','3.77','568');
+insert into defaultexchangeratedetails values ('569','2016-01-01 00:00:00','3.77','569');
+insert into defaultexchangeratedetails values ('570','2016-01-01 00:00:00','9011.82','570');
+insert into defaultexchangeratedetails values ('571','2016-01-01 00:00:00','1389.53','571');
+insert into defaultexchangeratedetails values ('572','2016-01-01 00:00:00','11.44','572');
+insert into defaultexchangeratedetails values ('573','2016-01-01 00:00:00','2.60','573');
+insert into defaultexchangeratedetails values ('574','2016-01-01 00:00:00','175.86','574');
+insert into defaultexchangeratedetails values ('576','2016-01-01 00:00:00','2.38','576');
+insert into defaultexchangeratedetails values ('577','2016-01-01 00:00:00','1.82','577');
+insert into defaultexchangeratedetails values ('578','2016-01-01 00:00:00','2.60','578');
+
+#Neeraj Dwivedi 19th Jan 2016
+delete from default_header where id='ab063f26-fecb-4517-a1c4-e3adf4beb695';
+delete from default_header where id='bdd78567-5c4b-453c-a3a8-b670ec8e653d';
+delete from default_header where id='07476260-f4f2-46e1-8c90-44ebd44f27f1';
+delete from default_header where id='3e1562cb8-5db9-43c6-bc35-25c79f1bdf9f';
+delete from default_header where id='b526f51e-b8c6-11e4-a71e-12e3f512a338';
+delete from default_header where id='681b0e6f-8165-4d0a-a086-c33b64521489';
+delete from default_header where  id='bff08d92-4a35-11e5-885d-feff819cdc9f';
+delete from default_header where  defaultHeader='Valid Till' and dummyvalue='Valid Till' and module=22 and isdocumentimport='F' and allowadvancesearch='F';
+delete from default_header where defaultHeader='Creation Date' and dummyvalue='Creation Date' and module=12 and isdocumentimport='F' and allowadvancesearch='F';
+
+update default_header set defaultHeader='Credit Term Name',dummyvalue='Credit Term Name' where id='b2703412-feb2-11e3-8da1-c03fd5633215';
+update default_header set module='122' where id='ec9edb12-306f-11e5-a151-feff819cdc9f';
+update default_header set module='122' where id='f27470ec-306f-11e5-a151-feff819cdc9f';
+UPDATE default_header SET pojomethodname="JournalEntry",recordname='journalEntry',dbcolumnname='journalentry',reftablefk='id',dummyvalue="Credit Note Date" where id='681e8278-a4a7-11e5-bf7f-feff819cdc9f' ;
+UPDATE default_header SET reftablename='quotation',dummyvalue="Valid Till" where id='2abdf837-f0be-454e-bab7-486499fe3e69' ;
+UPDATE default_header SET reftablename='currency',reftabledatacolumn='name',reftablefk='currencyid',dummyvalue="Currency" where id='eda5815e-a62c-11e5-bf7f-feff819cdc9f' ;
+
+#Swapnil Pandhare 19th Jan 2016
+#Sales Invoice :
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e85480-be72-11e5-9912-ba0be0483c18','invoiceNo','Sales Invoice Number',2,1,0,1,1,0);
+
+#Purchase Invoice :
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e85552-be72-11e5-9912-ba0be0483c18','invoiceNo','Purchase Invoice Number',6,1,0,1,1,0);
+
+#Cash Sales :
+delete  from customizereportmapping where moduleid =4 and dataIndex= 'porefno' and dataheader="PO Reference Number";
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e84b7a-be72-11e5-9912-ba0be0483c18','porefno','Customer PO Reference No',4,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e84e90-be72-11e5-9912-ba0be0483c18','pmtmethod','Payment Method',4,1,0,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ce1cdc44-be8a-11e5-9912-ba0be0483c18','pmtmethodacc','Payment Account',4,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e8539a-be72-11e5-9912-ba0be0483c18','invoiceNo','Cash Sales Number',4,1,0,1,1,0);
+
+#Cash Purchase :
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e8561a-be72-11e5-9912-ba0be0483c18','pmtmethod','Payment Method',8,1,0,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e85764-be72-11e5-9912-ba0be0483c18','pmtmethodacc','Payment Account',8,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e85afc-be72-11e5-9912-ba0be0483c18','invoiceNo','Cash Purchase Number',8,1,0,1,1,0);
+
+#Purchase Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('70e85be2-be72-11e5-9912-ba0be0483c18','invoiceNo','Purchase Order Number',18,1,0,1,1,0);
+
+#Sales Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e343e8-be78-11e5-9912-ba0be0483c18','invoiceNo','Sales Order Number',20,1,0,1,1,0);
+
+#Vendor quotation
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e34686-be78-11e5-9912-ba0be0483c18','fromLinkComboId','Link to',23,1,0,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e34794-be78-11e5-9912-ba0be0483c18','linkToOrder','Link',23,1,0,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e3487a-be78-11e5-9912-ba0be0483c18','invoiceNo','Vendor Quotation Number',23,1,0,1,1,0);
+
+#Customer quotation
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e3494c-be78-11e5-9912-ba0be0483c18','templateModelCombo','Select Template',22,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e34cd0-be78-11e5-9912-ba0be0483c18','invoiceNo','Customer Quotation Number',22,1,0,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('04e34e9c-be78-11e5-9912-ba0be0483c18','shippingterm','Shipping Term',22,1,0,1,0,0);
+
+#Purchase RETURN
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("04e34f96-be78-11e5-9912-ba0be0483c18",'includeprotax','Include Product Tax',31,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a5e36-be7c-11e5-9912-ba0be0483c18",'discountispercent','Discount Type',31,1,1,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a5efe-be7c-11e5-9912-ba0be0483c18",'prdiscount','Discount',31,1,1,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a6246-be7c-11e5-9912-ba0be0483c18",'reason','Reason',31,1,1,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1cc006-be8a-11e5-9912-ba0be0483c18",'prtaxid','Product Tax',31,1,1,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1cc7ae-be8a-11e5-9912-ba0be0483c18",'taxamount','Tax Amount',31,1,1,1,1,0);
+
+#Sales RETURN
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("04e35068-be78-11e5-9912-ba0be0483c18",'includeprotax','Include Product Tax',29,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1cc9fc-be8a-11e5-9912-ba0be0483c18",'discountispercent','Discount Type',29,1,1,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1ccbbe-be8a-11e5-9912-ba0be0483c18",'prdiscount','Discount',29,1,1,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1ccd58-be8a-11e5-9912-ba0be0483c18",'reason','Reason',29,1,1,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1ccefc-be8a-11e5-9912-ba0be0483c18",'taxamount','Tax Amount',29,1,1,1,1,0);
+
+#Goods receipt
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1cd0c8-be8a-11e5-9912-ba0be0483c18",'discountispercent','Discount Type',28,1,1,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1cd73a-be8a-11e5-9912-ba0be0483c18",'prdiscount','Discount',28,1,1,1,0,0);
+
+#Delivery ORDER 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a5846-be7c-11e5-9912-ba0be0483c18",'creditTerm','Credit Term',27,1,0,1,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a5b8e-be7c-11e5-9912-ba0be0483c18",'prdiscount','Discount',27,1,1,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("ce1cda28-be8a-11e5-9912-ba0be0483c18",'discountispercent','Discount Type',27,1,1,1,0,0);
+
+#Product Form
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a5c7e-be7c-11e5-9912-ba0be0483c18",'sequenceformat','Sequence Format',34,1,0,1,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ("a80a5d64-be7c-11e5-9912-ba0be0483c18",'currencyid','Product Price Currency',34,1,0,1,1,0);
+
+#Deepak Singh 20th Jan 2016
+create table purchaserequisitionlinking(
+id varchar(50) primary key,
+docid varchar(50) default null,
+moduleid int(4) default null,
+linkeddocid varchar(50) default null,
+linkeddocno varchar(50) default null,
+sourceflag int(1) default null,
+FOREIGN KEY (docid) REFERENCES purchaserequisition(id))
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Pandurang 20 jan 2016
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("5248f8d6-bea3-11e5-9b25-14dda979299c","30","Activate Row","Isrowforproduct",0,0,'F','F',null,null,null,"boolean",'F',"Activate Row",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("63276497-bea3-11e5-9b25-14dda979299c","30","Activate Rack","Israckforproduct",0,0,'F','F',null,null,null,"boolean",'F',"Activate Rack",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("6a0efca9-bea3-11e5-9b25-14dda979299c","30","Activate Bin","Isbinforproduct",0,0,'F','F',null,null,null,"boolean",'F',"Activate Bin",null);
+
+#Raj Shah 20th Jan,2016 (ERP-19076)
+UPDATE default_header SET hbmnotnull='F' WHERE id='0165e26c-cfa3-11e4-a639-c03fd5632dc7';
+UPDATE default_header SET hbmnotnull='F' WHERE id='f60b641e-cfa2-11e4-a639-c03fd5632dc7';
+
+#Anand Thakur 21 Jan 2016
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e0c56efb-e790-4ced-a6bd-26ce3322a3f7','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','23');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8bc247fa-5ea5-4416-8338-138e5dd73deb','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','23');
+
+#Swapnil Pandhare 21th Jan,2016 
+UPDATE modules SET modulename="Asset Delivery Order" WHERE id="41";
+UPDATE modules SET modulename="Consignment Stock Delivery Order" WHERE id="51";
+UPDATE modules SET modulename="Consignment GoodsReceipt Order" WHERE id="57";
+
+# Vijay Jawale 21st Jan 2016 (ERP-19147)
+insert into currency values(26,'Chinese Yuan (CNH)','CNH','CNH','Yen','CNH');
+
+insert into defaultexchangerate values ('579','1','26');
+insert into defaultexchangerate values ('580','2','26');
+insert into defaultexchangerate values ('581','3','26');
+insert into defaultexchangerate values ('582','5','26');
+insert into defaultexchangerate values ('583','6','26');
+insert into defaultexchangerate values ('584','7','26');
+insert into defaultexchangerate values ('585','8','26');
+insert into defaultexchangerate values ('586','9','26');
+insert into defaultexchangerate values ('587','10','26');
+insert into defaultexchangerate values ('588','11','26');
+insert into defaultexchangerate values ('589','12','26');
+insert into defaultexchangerate values ('590','13','26');
+insert into defaultexchangerate values ('591','14','26');
+insert into defaultexchangerate values ('592','15','26');
+insert into defaultexchangerate values ('593','16','26');
+insert into defaultexchangerate values ('594','17','26');
+insert into defaultexchangerate values ('595','18','26');
+insert into defaultexchangerate values ('596','19','26');
+insert into defaultexchangerate values ('597','20','26');
+insert into defaultexchangerate values ('598','21','26');
+insert into defaultexchangerate values ('599','22','26');
+insert into defaultexchangerate values ('600','23','26');
+insert into defaultexchangerate values ('601','24','26');
+insert into defaultexchangerate values ('602','25','26');
+insert into defaultexchangerate values ('603','26','26');
+
+
+insert into defaultexchangerate values ('604','26','1');
+insert into defaultexchangerate values ('605','26','2');
+insert into defaultexchangerate values ('606','26','3');
+insert into defaultexchangerate values ('607','26','5');
+insert into defaultexchangerate values ('608','26','6');
+insert into defaultexchangerate values ('609','26','7');
+insert into defaultexchangerate values ('610','26','8');
+insert into defaultexchangerate values ('611','26','9');
+insert into defaultexchangerate values ('612','26','10');
+insert into defaultexchangerate values ('613','26','11');
+insert into defaultexchangerate values ('614','26','12');
+insert into defaultexchangerate values ('615','26','13');
+insert into defaultexchangerate values ('616','26','14');
+insert into defaultexchangerate values ('617','26','15');
+insert into defaultexchangerate values ('618','26','16');
+insert into defaultexchangerate values ('619','26','17');
+insert into defaultexchangerate values ('620','26','18');
+insert into defaultexchangerate values ('621','26','19');
+insert into defaultexchangerate values ('622','26','20');
+insert into defaultexchangerate values ('623','26','21');
+insert into defaultexchangerate values ('624','26','22');
+insert into defaultexchangerate values ('625','26','23');
+insert into defaultexchangerate values ('626','26','24');
+insert into defaultexchangerate values ('627','26','25');
+
+ 
+
+
+
+insert into exchangerate values ('579','1','26');
+insert into exchangerate values ('580','2','26');
+insert into exchangerate values ('581','3','26');
+insert into exchangerate values ('582','5','26');
+insert into exchangerate values ('583','6','26');
+insert into exchangerate values ('584','7','26');
+insert into exchangerate values ('585','8','26');
+insert into exchangerate values ('586','9','26');
+insert into exchangerate values ('587','10','26');
+insert into exchangerate values ('588','11','26');
+insert into exchangerate values ('589','12','26');
+insert into exchangerate values ('590','13','26');
+insert into exchangerate values ('591','14','26');
+insert into exchangerate values ('592','15','26');
+insert into exchangerate values ('593','16','26');
+insert into exchangerate values ('594','17','26');
+insert into exchangerate values ('595','18','26');
+insert into exchangerate values ('596','19','26');
+insert into exchangerate values ('597','20','26');
+insert into exchangerate values ('598','21','26');
+insert into exchangerate values ('599','22','26');
+insert into exchangerate values ('600','23','26');
+insert into exchangerate values ('601','24','26');
+insert into exchangerate values ('602','25','26');
+insert into exchangerate values ('603','26','26');
+
+
+insert into exchangerate values ('604','26','1');
+insert into exchangerate values ('605','26','2');
+insert into exchangerate values ('606','26','3');
+insert into exchangerate values ('607','26','5');
+insert into exchangerate values ('608','26','6');
+insert into exchangerate values ('609','26','7');
+insert into exchangerate values ('610','26','8');
+insert into exchangerate values ('611','26','9');
+insert into exchangerate values ('612','26','10');
+insert into exchangerate values ('613','26','11');
+insert into exchangerate values ('614','26','12');
+insert into exchangerate values ('615','26','13');
+insert into exchangerate values ('616','26','14');
+insert into exchangerate values ('617','26','15');
+insert into exchangerate values ('618','26','16');
+insert into exchangerate values ('619','26','17');
+insert into exchangerate values ('620','26','18');
+insert into exchangerate values ('621','26','19');
+insert into exchangerate values ('622','26','20');
+insert into exchangerate values ('623','26','21');
+insert into exchangerate values ('624','26','22');
+insert into exchangerate values ('625','26','23');
+insert into exchangerate values ('626','26','24');
+insert into exchangerate values ('627','26','25');
+
+ 
+insert into defaultexchangeratedetails values ('579','2016-01-01 00:00:00','0.1511','579');
+insert into defaultexchangeratedetails values ('580','2016-01-01 00:00:00','0.1067','580');
+insert into defaultexchangeratedetails values ('581','2016-01-01 00:00:00','0.1385','581');
+insert into defaultexchangeratedetails values ('582','2016-01-01 00:00:00','10.2716','582');
+insert into defaultexchangeratedetails values ('583','2016-01-01 00:00:00','0.2174','583');
+insert into defaultexchangeratedetails values ('584','2016-01-01 00:00:00','0.6618','584');
+insert into defaultexchangeratedetails values ('585','2016-01-01 00:00:00','80.8432','585');
+insert into defaultexchangeratedetails values ('586','2016-01-01 00:00:00','525.4808','586');
+insert into defaultexchangeratedetails values ('587','2016-01-01 00:00:00','0.22044','587');
+insert into defaultexchangeratedetails values ('588','2016-01-01 00:00:00','0.22004','588');
+insert into defaultexchangeratedetails values ('589','2016-01-01 00:00:00','0.9946','589');
+insert into defaultexchangeratedetails values ('590','2016-01-01 00:00:00','2099.7224','590');
+insert into defaultexchangeratedetails values ('591','2016-01-01 00:00:00','5.0766','591');
+insert into defaultexchangeratedetails values ('592','2016-01-01 00:00:00','5.4846','592');
+insert into defaultexchangeratedetails values ('593','2016-01-01 00:00:00','7.2035','593');
+insert into defaultexchangeratedetails values ('594','2016-01-01 00:00:00','0.2372','594');
+insert into defaultexchangeratedetails values ('595','2016-01-01 00:00:00','0.1515','595');
+insert into defaultexchangeratedetails values ('596','2016-01-01 00:00:00','182.8190','596');
+insert into defaultexchangeratedetails values ('597','2016-01-01 00:00:00','0.5549','597');
+insert into defaultexchangeratedetails values ('598','2016-01-01 00:00:00','0.2174','598');
+insert into defaultexchangeratedetails values ('599','2016-01-01 00:00:00','1.1787','599');
+insert into defaultexchangeratedetails values ('600','2016-01-01 00:00:00','17.6790','600');
+insert into defaultexchangeratedetails values ('601','2016-01-01 00:00:00','3388.0967','601');
+insert into defaultexchangeratedetails values ('602','2016-01-01 00:00:00','0.0580','602');  
+insert into defaultexchangeratedetails values ('603','2016-01-01 00:00:00','1.0000','603');
+
+
+insert into defaultexchangeratedetails values ('604','2016-01-01 00:00:00','6.6667','604');
+insert into defaultexchangeratedetails values ('605','2016-01-01 00:00:00','9.3692','605');
+insert into defaultexchangeratedetails values ('606','2016-01-01 00:00:00','7.2183','606');
+insert into defaultexchangeratedetails values ('607','2016-01-01 00:00:00','0.0974','607');
+insert into defaultexchangeratedetails values ('608','2016-01-01 00:00:00','4.6003','608');
+insert into defaultexchangeratedetails values ('609','2016-01-01 00:00:00','1.5111','609');
+insert into defaultexchangeratedetails values ('610','2016-01-01 00:00:00','0.0124','610');
+insert into defaultexchangeratedetails values ('611','2016-01-01 00:00:00','0.0019','611');
+insert into defaultexchangeratedetails values ('612','2016-01-01 00:00:00','4.5363','612');
+insert into defaultexchangeratedetails values ('613','2016-01-01 00:00:00','4.5446','613');
+insert into defaultexchangeratedetails values ('614','2016-01-01 00:00:00','1.0059','614');
+insert into defaultexchangeratedetails values ('615','2016-01-01 00:00:00','0.0005','615');
+insert into defaultexchangeratedetails values ('616','2016-01-01 00:00:00','0.1970','616');
+insert into defaultexchangeratedetails values ('617','2016-01-01 00:00:00','0.1823','617');
+insert into defaultexchangeratedetails values ('618','2016-01-01 00:00:00','0.1388','618');
+insert into defaultexchangeratedetails values ('619','2016-01-01 00:00:00','4.2150','619');
+insert into defaultexchangeratedetails values ('620','2016-01-01 00:00:00','6.6002','620');
+insert into defaultexchangeratedetails values ('621','2016-01-01 00:00:00','0.0055','621');
+insert into defaultexchangeratedetails values ('622','2016-01-01 00:00:00','1.8020','622');
+insert into defaultexchangeratedetails values ('623','2016-01-01 00:00:00','4.6003','623');
+insert into defaultexchangeratedetails values ('624','2016-01-01 00:00:00','0.8484','624');
+insert into defaultexchangeratedetails values ('625','2016-01-01 00:00:00','0.0565','625');
+insert into defaultexchangeratedetails values ('626','2016-01-01 00:00:00','0.0003','626');
+insert into defaultexchangeratedetails values ('627','2016-01-01 00:00:00','17.2120','627');
+
+#Vaibhav Patil 22nd Jan 2015
+ALTER TABLE `podetails` ADD COLUMN `permit`  varchar(255) NULL DEFAULT NULL;
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield,islinefield,isusermanadatoryfield) VALUES ("7e6fae80-c00e-11e5-8614-c03fd5ab06a3",'permit','Permit No.',6,1,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield,islinefield,isusermanadatoryfield) VALUES ("3669dbc2-c010-11e5-8614-c03fd5ab06a3",'permit','Permit No.',18,1,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield,islinefield,isusermanadatoryfield) VALUES ("c367ab54-c113-11e5-beb9-c03fd5ab06a3",'permit','Permit No.',8,1,1,0,1,0);
+
+# Amol Dhokale 22nd January,2016
+# Purchase
+UPDATE customizereportheader SET dataheader="Height(Purchase)" WHERE dataIndex="itempurchaseheight" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Length(Purchase)" WHERE dataIndex="itempurchaselength" AND moduleid=34; 
+UPDATE customizereportheader SET dataheader="Width(Purchase)" WHERE dataIndex="itempurchasewidth" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Volume(Purchase)" WHERE dataIndex="itempurchasevolume" AND moduleid=34; 
+# Sales 
+UPDATE customizereportheader SET dataheader="Height(Sales)" WHERE dataIndex="itemsalesheight" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Length(Sales)" WHERE dataIndex="itemsaleslength" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Width(Sales)" WHERE dataIndex="itemsaleswidth" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Volume(Sales)" WHERE dataIndex="itemsalesvolume" AND moduleid=34;
+# Properties
+UPDATE customizereportheader SET dataheader="Height(Properties)" WHERE dataIndex="itemheight" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Length(Properties)" WHERE dataIndex="itemlength" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Width(Properties)" WHERE dataIndex="itemwidth" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Volume(Properties)" WHERE dataIndex="itemvolume" AND moduleid=34;
+# Purchase
+UPDATE customizereportheader SET dataheader="Height(Purchase)" WHERE dataIndex="itempurchaseheight" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Length(Purchase)" WHERE dataIndex="itempurchaselength" AND moduleid=34; 
+UPDATE customizereportheader SET dataheader="Width(Purchase)" WHERE dataIndex="itempurchasewidth" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Volume(Purchase)" WHERE dataIndex="itempurchasevolume" AND moduleid=34; 
+# Sales 
+UPDATE customizereportheader SET dataheader="Height(Sales)" WHERE dataIndex="itemsalesheight" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Length(Sales)" WHERE dataIndex="itemsaleslength" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Width(Sales)" WHERE dataIndex="itemsaleswidth" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Volume(Sales)" WHERE dataIndex="itemsalesvolume" AND moduleid=34;
+# Properties
+UPDATE customizereportheader SET dataheader="Height(Properties)" WHERE dataIndex="itemheight" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Length(Properties)" WHERE dataIndex="itemlength" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Width(Properties)" WHERE dataIndex="itemwidth" AND moduleid=34;
+UPDATE customizereportheader SET dataheader="Volume(Properties)" WHERE dataIndex="itemvolume" AND moduleid=34;
+# Delete existing Mapping for updated headers
+DELETE FROM customizereportmapping WHERE dataIndex="itempurchaseheight" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itempurchaselength" AND moduleid=34; 
+DELETE FROM customizereportmapping WHERE dataIndex="itempurchasewidth" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itempurchasevolume" AND moduleid=34; 
+DELETE FROM customizereportmapping WHERE dataIndex="itemsalesheight" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemsaleslength" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemsaleswidth" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemsalesvolume" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemheight" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemlength" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemwidth" AND moduleid=34;
+DELETE FROM customizereportmapping WHERE dataIndex="itemvolume" AND moduleid=34;
+
+#Raj Shah 22d Jan,2016 (ERP-19209)
+UPDATE default_header SET hbmnotnull='T' WHERE id='2f9e3a22-f73d-102d-9b6d-001e4f3fdc1a';
+UPDATE  default_header SET hbmnotnull='T' WHERE id='2fbdf9f2-f73d-102d-9b6d-001e4f3fdc1a';
+UPDATE default_header SET hbmnotnull='T' WHERE id='3b1caea8-3cbb-11e4-af74-c03fd5633215';
+UPDATE default_header SET hbmnotnull='T' WHERE id='cdfc3e20-b992-11e3-b51d-001cc066e9f0';
+
+#Vipin Gupta 22d Jan,2016
+UPDATE `default_header` SET `hbmnotnull`='T' WHERE (`id`='9e4e2180-f73d-102d-9b6d-001e4f3fdc1a');
+UPDATE `default_header` SET `ismandatory`='T', `hbmnotnull`='T' WHERE (`id`='21a014b0-d1d4-12e3-9d55-001cc066e9f1');
+UPDATE `default_header` SET `hbmnotnull`='T' WHERE (`id`='ce4aba28-b992-11e3-b51d-001cc066e9f0');
+UPDATE `default_header` SET `hbmnotnull`='T' WHERE (`id`='4ffae150-3cbb-11e4-af74-c03fd5633215');
+
+#Vijay Jawale 27th Jan 2016
+update advancedetail set description="" where description is NULL;
+
+# Vivek Pakmode 27th Jan 2016
+ALTER TABLE `jedetail` ADD COLUMN `roundingdifferencedetail` char(1) DEFAULT 'F';
+
+# Anand Nimbalkar 27th Jan, 2016
+ALTER TABLE default_header ADD COLUMN isconditionalmandetory char(1) DEFAULT 'F';
+update default_header set isconditionalmandetory="T" where module = 30 and defaultHeader = "Stock UOM";
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt5 created on 28th Jan 2016 11:00AM ---------------------------------------------- =======
+
+# Suhas Chaware 27 Jan 2016
+
+update default_header set defaultHeader="Asset Disposal Invoice Date" where id="d77b6170-a7b0-11e5-bf7f-feff819cdc9f";
+
+update default_header set defaultHeader="Total Amount In Base Currency" where defaultHeader="Total Amount In Base";
+
+update default_header set defaultHeader="Discount Amount In Base Currency" where defaultHeader="Discount Amount In Base";
+
+update modules set modulename="Consignment Request" where id=63 and modulename="Consignment Request No";
+
+update modules set modulename="Consignment Stock Sales Invoice" where id=52 and modulename="Consignment Stock Sales Request";
+
+# Amol Edewar 28th Jan, 2016
+alter table extracompanypreferences alter column  productoptimizedflag set default 1;
+
+# Naresh K : Add asofdate column in Product Table   28th Jan, 2016
+ALTER TABLE product ADD (asofdate DATE Default NULL);
+
+#Swapnil D. Khandre 28th Jan, 2016
+alter table compaccpreferences add negativestockso int(3) default 1;
+alter table compaccpreferences add negativestocksics int(3) default 1;
+alter table compaccpreferences add negativestockpr int(3) default 1;
+
+update compaccpreferences set negativestockso=negativestock ,negativestocksics=negativestock ,negativestockpr=negativestock;
+
+# Amol Dhokale 28th January, 2016
+UPDATE compaccpreferences SET unitpricedigitafterdecimal=5, amountdigitafterdecimal=2  WHERE id IN (SELECT companyid FROM company WHERE subdomain="gpluspharma");
+
+#Swapnil Pandhare 28 Jan,2016
+#Purchase Return
+UPDATE customizereportheader set ismanadatoryfield="0" WHERE id="a80a6246-be7c-11e5-9912-ba0be0483c18";
+UPDATE customizereportheader set ismanadatoryfield="0" WHERE id="ce1cc006-be8a-11e5-9912-ba0be0483c18";
+
+#Sales Return
+UPDATE customizereportheader set ismanadatoryfield="0" WHERE id="ce1ccd58-be8a-11e5-9912-ba0be0483c18";
+
+#Delivery Order
+DELETE from customizereportmapping WHERE customizereportheader="a80a5b8e-be7c-11e5-9912-ba0be0483c18";
+DELETE from customizereportheader WHERE id="a80a5b8e-be7c-11e5-9912-ba0be0483c18";
+DELETE from customizereportmapping WHERE customizereportheader="ce1cda28-be8a-11e5-9912-ba0be0483c18";
+DELETE from customizereportheader WHERE id="ce1cda28-be8a-11e5-9912-ba0be0483c18";
+
+
+#Sharad Pawar 28 jan 2015
+alter table product add propagatedproductid varchar(255) DEFAULT NULL REFERENCES product (id);
+
+update default_header set formfieldname='name' where id='4fdcb890-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='producttype' where id='4fd810a6-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='purchaseaccountid' where id='58399382-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='purchaseretaccountid' where id='583b693c-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='salesaccountid' where id='5834ad5e-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='salesretaccountid' where id='5836696e-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='desc' where id='4fdf7210-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='additionaldescription' where id='5b7958e9-2a22-11e5-b692-c03fd5657f27' and module=30;
+update default_header set formfieldname='foreigndescription' where id='64100058-2a22-11e5-b692-c03fd5657f27' and module=30;
+update default_header set formfieldname='isWarehouseForProduct' where id='b13a3cd2-d7ab-11e4-bf90-eca86bff8e7d' and module=30;
+update default_header set formfieldname='isLocationForProduct' where id='a303011c-d7ab-11e4-bf90-eca86bff8e7d' and module=30;
+update default_header set formfieldname='isActiveItem' where id='963a6a32-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='isKnittingItem' where id='908d8d8b-2a22-11e5-b692-c03fd5657f27' and module=30;
+update default_header set formfieldname='reusabilitycount' where id='dcb62eef-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='licensecode' where id='6c147909-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemgroup' where id='746d52dc-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itempricelist' where id='79583bbe-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='shippingtype' where id='800e633b-2a22-11e5-b692-c03fd5657f27' and module=30;
+update default_header set formfieldname='barcode' where id='4bbe9865-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='currencyid' where id='60e0537c-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='syncable' where id='60dd3c28-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='isrecyclable' where id='85ee2877-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='vendorid' where id='5837f34c-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='itempurchasewidth' where id='c9d56806-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itempurchasevolume' where id='c52b6dc9-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='purchasemfg' where id='57171403-2a09-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='alternateproductid' where id='e4f668ed-2a08-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemsaleswidth' where id='b9a7fdd6-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemsalesvolume' where id='a10e8e96-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemsalesheight' where id='b512de19-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemheight' where id='b9a7fdd6-2a22-11e5-b692-c03fd5657f27' and module=30;
+update default_header set formfieldname='itemwidth' where id='b9a7fdd6-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemvolume' where id='c52b6dc9-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='itemcolor' where id='22077929-2a08-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='productweight' where id='a7d550fc-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='warrantyperiod' where id='50dba364-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='warrantyperiodsal' where id='582a4d3c-3d99-11e4-bc4a-c03fd5633215' and module=30;
+update default_header set formfieldname='additionalfreetext' where id='58bfd77b-2a07-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='uomid' where id='4fe0f9e6-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='WIPoffset' where id='d95c1758-2a02-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='Inventoryoffset' where id='6ba98049-2a06-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='location' where id='60da05c6-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='leadtime' where id='582bcd6a-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='QAleadtime' where id='d63415ce-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='hsCode' where id='f14d1762-2a06-11e5-b729-c03fd5657f27' and module=30; 
+update default_header set formfieldname='reorderlevel' where id='4fe27258-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='reorderquantity' where id='4fe406cc-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='warehouse' where id='60dba818-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='valuationmethod' where id='95d1e5c8-b926-11e5-9912-ba0be0483c18' and module=30; 
+update default_header set formfieldname='multiuom' where id='60deb940-3d99-11e4-bc4a-c03fd5633215' and module=30; 
+update default_header set formfieldname='blockLooseSell' where id='9af1ee85-2a22-11e5-b692-c03fd5657f27' and module=30; 
+update default_header set formfieldname='uomschemaType' where id='36708504-4c79-11e5-9f7c-eca86bfcd415' and module=30; 
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("599f6ff0-c58b-11e5-9912-ba0be0483c18","30","Item Purchase Height","itempurchaseheight",0,0,'F','F',null,null,null,'double',null,"itempurchaseheight",null,"itempurchaseheight");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("c58b913e-a35d-4d2f-8643-6dff1852de95","30","Item Purchase length","itempurchaselength",0,0,'F','F',null,null,null,'double',null,"itempurchaselength",null,"itempurchaselength");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("5ab24fc4-6247-441d-adf7-eddd081687d9","30","Item Purchase Volume","itempurchasevolume",0,0,'F','F',null,null,null,'double',null,"itempurchasevolume",null,"itempurchasevolume");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("8a69e342-73fb-4365-9db2-70c16936d213","30","Catalog No","catalogNo",0,0,'F','F',null,null,null,null,null,"catalogNo",null,'catalogNo');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("48945cf2-d60b-46e3-a114-435251fda86e","30","Item Sales Width","itemsaleswidth",0,0,'F','F',null,null,null,'double',null,"itemsaleswidth",null,"itemsaleswidth");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("c7b0d89b-489f-476e-8cc2-9ddc21cbecb0","30","Item Sales Length","itemsaleslength",0,0,'F','F',null,null,null,'double',null,"itemsaleslength",null,"itemsaleslength");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("25262774-5e42-4d3e-977f-ad8f85823834","30","Item Length","itemlength",0,0,'F','F',null,null,null,'double',null,"itemlength",null,"itemlength");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,formfieldname)
+VALUES ("eb67f551-79eb-479f-b6c4-43387d996200","30","Item Height","itemheight",0,0,'F','F',null,null,null,'double',null,"itemheight",null,"itemheight");
+
+#Anand Thakur 30th Jan 2016
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('6ec8b8c6-32f5-4e6f-a313-cb44d1eb2c48','NET Debit Term','term','creditterm','termid','termname','NET Debit Term','1','18','F');
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Templatepnl" table="templatepnl">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column length="255" name="name" />
+        </property>
+        <property name="templateid" type="integer">
+            <column name="templateid" not-null="true"/>
+        </property>
+        <property name="templatetitle" type="string">
+            <column length="255" name="templatetitle" />
+        </property>
+        <property name="templateheading" type="string">
+            <column length="255" name="templateheading" />
+        </property>
+        <property name="templatetype" type="integer">
+            <column name="templatetype"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleted" not-null="true"/>
+        </property>
+        <property name="dontshowmsg" type="true_false">
+            <column name="dontshowmsg"/>
+        </property>
+        <property name="defaultTemplate" type="true_false">
+            <column name="isdefault"/>
+        </property>
+        <property name="status" type="integer">
+            <column name="status" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>
+

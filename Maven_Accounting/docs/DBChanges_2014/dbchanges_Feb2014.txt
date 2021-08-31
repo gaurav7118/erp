@@ -1,0 +1,539 @@
+#Hitesh Suryawanshi 3rd Feb 2014 -Give Report Permissions to users.
+
+create table reportmaster(
+id varchar(50) primary key,
+name varchar(100) not null default '',
+description varchar(256) not null default '')
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+create table reportrolemap(
+id varchar(250) primary key,
+reportid varchar(250) not null,
+roleid varchar(250) not null,
+constraint report_fk1 foreign key (reportid) references reportmaster(id) on delete cascade on update cascade,
+constraint role_fk2 foreign key (roleid) references role(id) on delete cascade on update cascade )
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Add column  into reportmaster table
+
+alter table reportrolemap add(userid  varchar(250));
+
+#Insert into reportmaster table 
+
+insert into reportmaster values("Cash_Flow_WorkSheet","Cash Flow WorkSheet","Cash Flow for Operating and Investing Activities"); 
+insert into reportmaster values("Cost_Center_Report","Cost Center Report","Summery of cost Center,Credit Amount,debit Amount and Transaction Flow ");
+insert into reportmaster values("Sales_By_Item_Report","Sales By Item Report","View Details and Summary of Items Sold"); 
+insert into reportmaster values("Tax_Report","Tax Report","View Tax Report for all Transactions"); 
+insert into reportmaster values("Statement_of_Accounts","Statement of Accounts","View Statement of Accounts for Customer and Vendor");
+insert into reportmaster values("Customer_and_Vendor_Analysis_Report","Customer and Vendor Analysis Report","View Customer and Vendor Analysis Report"); 
+insert into reportmaster values("Top_and_Dormant_Customers_By_Products","Top and Dormant Customers By Products","View Top Customers and Dormant Customers By Products"); 
+insert into reportmaster values("Top_and_Dormant_Vendors_By_Products","Top and Dormant Vendors By Products","View Top Vendors and Dormant Vendors By Products"); 
+insert into reportmaster values("Top_and_Dormant_Products_By_Customers","Top and Dormant Products By Customers","View Top Products and Dormant Products By Customers"); 
+insert into reportmaster values("Sales_Commission_Statement","Sales Commission Statement","View Sales Persons Commission Statement");
+insert into reportmaster values("Export_GST_Form_5","Export GST Form 5","View Export GST Form 5 PDF Report"); 
+insert into reportmaster values("Sales_By_Customer","Sales By Customer","View Details and Summary of Items Sold "); 
+insert into reportmaster values("Sales_By_Product","Sales By Product","View Details and Summary of Items Sold "); 
+insert into reportmaster values("Sales_By_Sales_Person","Sales By Sales Person","View Details and Summary of Items Sold (Sales Person)"); 
+insert into reportmaster values("Custom_Reports","Custom Reports","View Custom Reports List"); 
+insert into reportmaster values("Inter_Company_Ledger_Report","Inter Company Ledger Report","View Inter Company Transaction (Ledger Report)"); 
+insert into reportmaster values("Accounts Re-evaluation","Accounts Re-evaluation","Re-evaluate your Foreign Currency Accounts"); 
+insert into reportmaster values("Stock_Status_Report","Stock Status Report","View Stock Status Report"); 
+insert into reportmaster values("Foreign_Currency_Exposure_Report","Foreign Currency Exposure Report","View Foreign Currency Exposure Report"); 
+insert into reportmaster values("Monthly_Revenue","Monthly Revenue","View Monthly Revenue"); 
+insert into reportmaster values("Monthly_Sales_Report","Monthly Sales Report","View Monthly Sales Report"); 
+insert into reportmaster values("Monthly_Trading_&_Profit/Loss","Monthly Trading & Profit/Loss","View Monthly Trading & Profit/Loss Report"); 
+insert into reportmaster values("Finance_Details_Report","Finance Details Report","View Finance Details Report"); 
+insert into reportmaster values("Unpaid_Invoices_List","Unpaid Invoices List","View Unpaid Invoices List Report"); 
+ 
+#Add column method_name into reportmaster table 
+
+alter table reportmaster add(method_name  varchar(250));
+
+
+#Update into reportmaster table 
+
+update reportmaster set method_name="callCostCenterReport()" where id="Cost_Center_Report";
+update reportmaster set method_name="callCashFlowStatement()" where id="Cash_Flow_WorkSheet";
+update reportmaster set method_name="callSaleByItem()" where id="Sales_By_Item_Report";
+update reportmaster set method_name="callTaxReport()" where id="Tax_Report";
+update reportmaster set method_name="callCustomerVendorLedgerReport()" where id="Statement_of_Accounts";
+update reportmaster set method_name="callCustomerVendorLedgerAnalysisReport()" where id="Customer_and_Vendor_Analysis_Report"; 
+update reportmaster set method_name="topCustomersByProducts()" where id="Top_and_Dormant_Customers_By_Products"; 
+update reportmaster set method_name="topVendorsByProducts()" where id="Top_and_Dormant_Vendors_By_Products";
+update reportmaster set method_name="topProductsByCustomers()" where id="Top_and_Dormant_Products_By_Customers"; 
+update reportmaster set method_name="salesCommissionStmt()" where id="Sales_Commission_Statement"; 
+update reportmaster set method_name="callGSTForm5fileWindow()" where id="Export_GST_Form_5"; 
+update reportmaster set method_name="getSalesByCustTabView()" where id="Sales_By_Customer"; 
+update reportmaster set method_name="getSalesByProdTabView()" where id="Sales_By_Product"; 
+update reportmaster set method_name="getSalesBySalesPersonTabView()" where id="Sales_By_Sales_Person"; 
+update reportmaster set method_name="callCustomReportGrid()" where id="Custom_Reports"; 
+update reportmaster set method_name="callInterCompanyLedger()" where id="Inter_Company_Ledger_Report"; 
+update reportmaster set method_name="callAccountRevaluationWindow()" where id="Accounts Re-evaluation"; 
+update reportmaster set method_name="showStockStatusReportTab()" where id="Stock_Status_Report"; 
+update reportmaster set method_name="callForeignCurrencyExposure()" where id="Foreign_Currency_Exposure_Report"; 
+update reportmaster set method_name="monthlyRevenue()" where id="Monthly_Revenue";
+update reportmaster set method_name="monthlySalesReport()" where id="Monthly_Sales_Report"; 
+update reportmaster set method_name="monthlyTradingProfitLoss()" where id="Monthly_Trading_&_Profit/Loss";
+update reportmaster set method_name="FinanceDetailsReport()" where id="Finance_Details_Report"; 
+update reportmaster set method_name="UnpaidInvoices()" where id="Unpaid_Invoices_List"; 
+
+ 
+#Update into reportmaster table 
+
+insert into reportmaster values("Export IAF Text File","Export IAF Text File","Export IAF Text File","callIAFfileWindow()"); 
+insert into reportmaster values("General_Ledger_Report","General Ledger Report","View General Ledger Report.","callGeneralLedger()");
+insert into reportmaster values("view_gst_report","GST Report","View GST Report.","GSTReportTab()"); 
+
+#Hitesh Suryawanshi 5th Feb 2014 -Remove Accounts Re-evaluation and Custom Reports.
+#delete on reportmaster
+
+delete from reportmaster where id="Accounts Re-evaluation";    
+delete from reportmaster where id="Custom_Reports";  
+
+#Amol Dhokale Feb 4, 2014
+
+UPDATE currency SET name='Uganda Shillings (UGX)', htmlcode='UGX', symbol='&#85;&#71;&#88;' , currencycode='UGX'
+WHERE currencyid='9'; 
+
+# Anand N Feb 06, 2014
+ALTER TABLE `payment` ADD COLUMN `paidto`  varchar(255) DEFAULT NULL;
+ALTER TABLE payment add FOREIGN KEY (paidto)  REFERENCES masteritem(id);
+
+# Anand N Feb 06 2014
+
+insert into mastergroup values (17, 'Paid To');
+
+#Sagar A - Feb 6, 2014, Spelling mistake
+update reportmaster set description = "View Finance Details Report" where id = "Finance_Details_Report";
+update reportmaster set description = "View Unpaid Invoices List Report" where id = "Unpaid_Invoices_List";
+
+# Anand Nimbalkar Feb 06, 2014
+ALTER TABLE `billingpayment` ADD COLUMN `paidto`  varchar(255) DEFAULT NULL;
+ALTER TABLE billingpayment add FOREIGN KEY (paidto)  REFERENCES masteritem(id);
+
+
+
+#Atul sachan to make editable tax field DATE 7-Feb -2014
+
+alter table podetails add column rowtaxamount double default 0.0 NULL;
+
+alter table sodetails add column rowtaxamount double default 0.0 NULL;
+
+alter table quotationdetails add column rowtaxamount double default 0.0 NULL;
+
+alter table vendorquotationdetails add column rowtaxamount double default 0.0 NULL;
+
+alter table grdetails add column rowtaxamount double default 0.0 NULL;
+
+alter table expenseggrdetails add column rowtaxamount double default 0 NULL;
+
+alter table invoicedetails add column rowtaxamount double default 0 NULL;
+
+alter table invoicedetails add column wasrowtaxfieldeditable int(1) default 0 NULL;
+
+alter table grdetails add column wasrowtaxfieldeditable int(1) default 0 NULL;
+
+alter table expenseggrdetails add column wasrowtaxfieldeditable int(1) default 0 NULL;
+
+alter table billingpodetails add column rowtaxamount double default 0.0 NULL;
+
+alter table billingsodetails add column rowtaxamount double default 0.0 NULL;
+
+alter table billinggrdetails add column rowtaxamount double default 0.0 NULL;
+
+alter table billinggrdetails add column wasrowtaxfieldeditable int(1) default 0 NULL;
+
+alter table billinginvoicedetails add column rowtaxamount double default 0.0 NULL;
+
+alter table billinginvoicedetails add column wasrowtaxfieldeditable int(1) default 0 NULL;
+
+#mayur Pawar  7 Feb 2014    # For dropping foreing key from role table and adding from rolelist
+
+alter table reportrolemap drop foreign key `role_fk2`;
+alter table reportrolemap add constraint  FOREIGN KEY (`roleid`) REFERENCES `rolelist` (`roleid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+#Malhari - 10th Feb 2014 (Added Discount Rule for Product)
+ALTER TABLE `approvalrules`  ADD COLUMN `discountamount` double default 0;
+
+#Pandurang 10th Feb 2014 (Account Re-evaluation )
+CREATE TABLE `revaltime` (
+  `id` varchar(255) NOT NULL,
+  `month` tinyint(11) NOT NULL,
+  `year` mediumint(11) NOT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY FK_userid (`userid`),
+  KEY revalutioncompanyid (`company`),
+  CONSTRAINT revalutioncompanyid FOREIGN KEY (company) REFERENCES company (companyid),
+  CONSTRAINT FK_userid  FOREIGN KEY (userid) REFERENCES users (userid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter TABLE revaltime add COLUMN accounttype MEDIUMINT(11);  
+alter TABLE revaltime add COLUMN currencyid tinyint(11);
+
+alter TABLE revaluationhistory add COLUMN company varchar(255) DEFAULT NULL;
+
+ALTER TABLE revaluationhistory add FOREIGN KEY (company) REFERENCES company (companyid);
+ALTER TABLE revaluationhistory add COLUMN isrealised  CHAR(1) DEFAULT 'F';
+ALTER TABLE revaluationhistory add COLUMN deleteflag  CHAR(1) DEFAULT 'F';
+
+ALTER TABLE billingpayment add COLUMN revaljeid  CHAR(255) DEFAULT NULL;
+ALTER TABLE payment add COLUMN revaljeid  CHAR(255) DEFAULT NULL;
+ALTER TABLE receipt add COLUMN revaljeid  CHAR(255) DEFAULT NULL;
+ALTER TABLE billingreceipt add COLUMN revaljeid  CHAR(255) DEFAULT NULL;
+ALTER TABLE revaluationhistory add COLUMN revaljeid  CHAR(255) DEFAULT NULL;
+
+insert into reportmaster values("customReportLink","Accounts Re-evaluation History","Accounts re-evaluated history for your foreign currency accounts.","callAccountReevaluationHistoryWindow()");
+
+#Hitesh Suryawanshi 10th Feb 2014
+
+ALTER TABLE invoice ADD termid varchar(250) DEFAULT NULL;
+ALTER TABLE goodsreceipt ADD termid varchar(250) DEFAULT NULL;
+
+# Mayur Pawar 10 feb 2014 (adding column into sodetais)
+alter table sodetails add column quotationdetail varchar(255) default null;   //for storing the link information of quotation
+
+#Hitesh Suryawanshi 11th Feb 2014
+
+update reportmaster set method_name="callCostCenterReport(undefined,true)" where id="Cost_Center_Report";
+
+
+
+#Vivekanand L. Swami 12th Feb 2014
+alter table cyclecount MODIFY countedquantity double; //To allow fractional countedqauntity in Cyclecount
+
+
+#Hitesh Suryawanshi 13th Feb 2014
+Script to update table creiditterm 
+http://192.168.0.83:8084/Accounting/missingsql.jsp
+
+#pandurang 14 feb 2014 Sales person name in customer quotation
+ALTER TABLE quotation ADD COLUMN salesperson VARCHAR(255)  DEFAULT NULL;
+ALTER TABLE quotation ADD CONSTRAINT FK_quotationsalesperon FOREIGN KEY(salesperson) REFERENCES masteritem(id);
+
+# Anand Nimbalkar 14 Feb 2014
+insert into mastergroup values (18, 'Received From');
+ALTER TABLE `billingreceipt` ADD COLUMN `receivedfrom`  varchar(40) DEFAULT NULL;
+ALTER TABLE billingreceipt add FOREIGN KEY (receivedfrom)  REFERENCES masteritem(id);
+ALTER TABLE `receipt` ADD COLUMN `receivedfrom`  varchar(40) DEFAULT NULL;
+ALTER TABLE receipt add FOREIGN KEY (receivedfrom)  REFERENCES masteritem(id);
+
+
+
+# Dipak Mundhe 15 Feb 2014
+Script to update table fieldcombodate
+http://192.168.0.168:8084/Accounting/addMissingValueForCustomField.jsp
+Note: Please check DBName and Server Name
+
+# Anand Nimbalkar 15 Feb 2014
+ALTER TABLE masteritem MODIFY COLUMN value varchar(500) NOT NULL;
+
+# Sagar M 17th Feb 2014
+
+alter table accjedetailcustomdata add column recdetailId varchar(40) NOT NULL;
+
+# Raveesh pathak  19 th Feb 2014
+
+ALTER TABLE mailnotification ADD COLUMN users VARCHAR(255);
+ALTER TABLE mailnotification ADD CONSTRAINT FK_USER FOREIGN KEY(users) REFERENCES users(userid);
+
+#Atul sachan 19 Feb 2014
+
+
+CREATE TABLE `extracompanypreferences` (
+`id`  varchar(255) NOT NULL ,
+`wipaccountprefix`  varchar(255) NULL DEFAULT 'WIP' ,
+`cpaccountprefix`  varchar(255) NULL DEFAULT 'CP' ,
+`wipaccounttype`  varchar(255) NULL ,
+`cpAccountType`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`wipaccounttype`) REFERENCES `accgroup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`cpAccountType`) REFERENCES `accgroup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Prathamesh Sheth - 19th Feb 2014 - Add updateInvLevelCheck in compaccpreferences table for update inventory level in Inventory System.
+# 'T' = True means update inventory level in Inventory System through Accounting system, By Default 'F' = false means do not update inventory level in Inventory System through Accounting system. 
+
+alter table compaccpreferences add column updateInvLevelCheck char(1) default 'F';
+
+# added invstoreid field for saving inventory store id 
+ALTER TABLE invoicedetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE cndetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE dndetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE dodetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE grdetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE grodetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE prdetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE srdetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+
+# added invlocid field for saving inventory location id 
+ALTER TABLE invoicedetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE cndetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE dndetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE dodetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE grdetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE grodetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE prdetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+ALTER TABLE srdetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+
+# 'T' = True means include QA approval flow in Goods Receipt Note, By Default 'F' = false means do not include QA approval flow in Goods Receipt Note. 
+alter table compaccpreferences add column qaapprovalflow char(1) default 'F';
+
+# 1 = 1 means enable QA approval flow  for product , By Default 0 = 0 means do not enable QA approval flow  for product.  
+alter table product add column qaenable char(1) NOT NULL default 0;
+
+# 0 = 0 means item approved which is by default, 1 = 1 means item is pending for QA approval, 2 = 2 means item is rejected by QA.  
+alter table podetails add column qastatus int(5) NOT NULL default 0;
+
+# This field QA Rejected Remark 
+alter table podetails add column qastatusremark varchar(255) default '';
+
+
+#Added inventoryreferid column for reference of Inventory System UOM.
+alter table uom add column inventoryreferid varchar(255) default '';
+
+
+#  Atul sachan Added custom field history in case of product. 19-12-2013
+
+# need to addfollowing
+CREATE TABLE `productcustomfieldhistory` (
+`id`  varchar(255) NOT NULL ,
+`moduleid`  int(11) NULL ,
+`applydate`  datetime NULL ,
+`value`  longtext NULL ,
+`product`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+`fieldparams`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE NO ACTION,
+FOREIGN KEY (`fieldparams`) REFERENCES `fieldParams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+# Atul sachan -- added permit number in Gr and shelf location pn product  -- 25 dec-2013
+
+alter table grorder add permitnumber varchar(255) default NULL;
+
+CREATE TABLE `shelflocation` (
+`id`  varchar(255) NOT NULL ,
+`shelflocationvalue`  varchar(255) NOT NULL ,
+`company`  varchar(255) NOT NULL ,
+PRIMARY KEY(id),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE `product`
+ADD COLUMN `shelfLocation` varchar(255) NULL DEFAULT NULL ;
+
+ALTER TABLE `podetails`
+ADD COLUMN `shelflocation` varchar(255) NULL DEFAULT NULL;
+
+
+ALTER TABLE `grodetails`
+ADD COLUMN `shelflocation` varchar(255) NULL DEFAULT NULL;
+
+#**********************************************************************************************************#
+
+#Added supplier Part NUmber  field
+alter table podetails add column supplierpartnumber varchar(50) default '';
+alter table grdetails add column supplierpartnumber varchar(50) default '';
+alter table grodetails add column supplierpartnumber varchar(50) default '';
+
+# Added custom field history in case of product. 19-12-2013
+
+CREATE TABLE `productcustomfieldhistory` (
+`id`  varchar(255) NOT NULL ,
+`moduleid`  int(11) NULL ,
+`applydate`  datetime NULL ,
+`value`  longtext NULL ,
+`product`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+`fieldparams`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE NO ACTION,
+FOREIGN KEY (`fieldparams`) REFERENCES `fieldParams` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+
+
+# Atul sachan 26Dec 2013 
+
+ALTER TABLE `productcustomfieldhistory`
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `user`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `productcustomfieldhistory` ADD FOREIGN KEY (`user`) REFERENCES `users` (`userid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+CREATE TABLE `podetailproductcustomdata` (
+  `poDetailID` varchar(40) NOT NULL,
+  `recdetailId` varchar(40) NOT NULL,
+  `productId` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`poDetailID`),
+  KEY `podetailproductcustomdata_ibfk_1` (`company`),
+  CONSTRAINT `podetailproductcustomdata_ibfk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Extend product name column size
+alter table  product modify column name varchar(255) not null;
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Allow Product Discription HTML Format - Malhari Pawar 19 Feb 2014
+alter table grdetails modify column `description` text;
+alter table podetails modify column `description` text;
+alter table vendorquotationdetails modify column `description` text;
+
+alter table invoicedetails modify column `description` text;
+alter table sodetails modify column `description` text;
+alter table quotationdetails modify column `description` text;
+
+alter table dodetails modify column `description` text;
+alter table srdetails modify column `description` text;
+alter table prdetails modify column `description` text;
+
+alter table product modify column `description` text;
+ALTER TABLE `inventory`
+MODIFY COLUMN `description`  text CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `id`;
+
+ALTER TABLE `compaccpreferences` ADD COLUMN `ishtmlproddesc` char(1) NOT NULL default '0';
+
+# Raveesh pathak  21 th Feb 2014
+
+ALTER TABLE mailnotification ADD COLUMN users VARCHAR(1024);
+
+#Anup Kale 21 Feb 2014
+insert into accgroup (id,name,nature,affectgp,deleteflag,displayorder,isMasterGroup) values ('23','Cash',1,'F','F',183,'F');
+ALTER TABLE `compaccpreferences` ADD COLUMN `ishtmlproddesc` char(1) NOT NULL default '0';
+
+update account set groupname='23' where name='Cash in hand';
+
+#Raveesh Pathak 21th feb 2014
+UPDATE accgroup SET parent=NULL WHERE  id='23';
+insert into accgroup (id,name,nature,affectgp,deleteflag,displayorder,parent,isMasterGroup) values ('24','Bills Payable',0,'F','F',218,null,'F');
+
+#Anup Kale 24 Feb 2014
+update account set groupname='23' where name='PETTY CASH';
+update account set groupname='23' where name='PETTY CASH' and company like (Select companyid from company where subdomain='sms');
+
+# Anand Nimbalkar 26 Feb 2014
+ALTER TABLE `extracompanypreferences` ADD COLUMN `activefromdate` datetime default NULL;
+ALTER TABLE `extracompanypreferences` ADD COLUMN `activetodate` datetime default NULL;
+
+#Anup Kale 24 Feb 2014
+UPDATE cheque SET bankname=REPLACE(bankname, '%20', ' '),description=REPLACE(description, '%20', ' ');
+UPDATE billingpaymentdetailotherwise SET description=REPLACE(description, '%20', ' ');
+UPDATE paymentdetailotherwise SET description=REPLACE(description, '%20', ' ');
+UPDATE receiptdetailotherwise SET description=REPLACE(description, '%20', ' ');
+UPDATE billingreceiptdetailotherwise SET description=REPLACE(description, '%20', ' ');
+
+UPDATE cheque SET bankname=REPLACE(bankname, '%2520', ' '),description=REPLACE(description, '%2520', ' ');
+UPDATE billingpaymentdetailotherwise SET description=REPLACE(description, '%2520', ' ');
+UPDATE paymentdetailotherwise SET description=REPLACE(description, '%2520', ' ');
+UPDATE receiptdetailotherwise SET description=REPLACE(description, '%2520', ' ');
+UPDATE billingreceiptdetailotherwise SET description=REPLACE(description, '%2520', ' ');
+
+UPDATE cheque SET bankname=REPLACE(bankname, '%252520', ' '),description=REPLACE(description, '%252520', ' ');
+UPDATE billingpaymentdetailotherwise SET description=REPLACE(description, '%252520', ' ');
+UPDATE paymentdetailotherwise SET description=REPLACE(description, '%252520', ' ');
+UPDATE receiptdetailotherwise SET description=REPLACE(description, '%252520', ' ');
+UPDATE billingreceiptdetailotherwise SET description=REPLACE(description, '%252520', ' ');
+
+UPDATE cheque SET bankname=REPLACE(bankname, '%24', '$'),description=REPLACE(description, '%24', '$');
+UPDATE billingpaymentdetailotherwise SET description=REPLACE(description, '%24', '$');
+UPDATE paymentdetailotherwise SET description=REPLACE(description, '%24', '$');
+UPDATE receiptdetailotherwise SET description=REPLACE(description, '%24', '$');
+UPDATE billingreceiptdetailotherwise SET description=REPLACE(description, '%24', '$');
+
+# Hitesh Suryawanshi 28 Feb 2014
+Script to update table invoice and goodsreceipt
+http://192.168.0.195:8084/Accounting/UpdateTermIDForOldRecords.jsp.jsp
+Note: Please check DBName and Server Name
+

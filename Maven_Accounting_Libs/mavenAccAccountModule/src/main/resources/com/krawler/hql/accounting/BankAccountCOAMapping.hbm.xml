@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.BankAccountCOAMapping" table="bankaccountcoamapping">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">deskeraAccount</param>
+            </generator>
+        </id>
+        <property name="bankID" type="string">
+            <column length="63" name="bankid" not-null="true"/>
+        </property>
+        <property name="bankAccountName" type="string">
+            <column length="255" name="bankaccountname"/>
+        </property>
+        <property name="bankAccountNumber" type="string">
+            <column length="255" name="bankaccountnumber" not-null="true"/>
+        </property>
+        <property name="bankAccountDetails" type="string">
+            <column length="65535" name="bankaccountdetails" not-null="true"/>
+        </property>
+        <one-to-one class="com.krawler.hql.accounting.Account" constrained="true" name="deskeraAccount"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

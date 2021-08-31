@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrailBalance" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="GeneralLedgerSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="GeneralLedgerSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="address" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="dateRange" class="java.lang.String"/>
+	<field name="currencyinword" class="java.lang.String"/>
+	<field name="accountigperiod" class="java.lang.String"/>
+	<detail>
+		<band height="110" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="572" height="110"/>
+				<subreportParameter name="currencyinword">
+					<subreportParameterExpression><![CDATA[$F{currencyinword}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="accountingperiod">
+					<subreportParameterExpression><![CDATA[$F{accountigperiod}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="companyaddress">
+					<subreportParameterExpression><![CDATA[$P{address}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="companyname">
+					<subreportParameterExpression><![CDATA[$F{name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="daterange">
+					<subreportParameterExpression><![CDATA[$F{dateRange}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{GeneralLedgerSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{GeneralLedgerSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

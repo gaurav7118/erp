@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.CreditNoteTaxEntry" table="cntaxentry">
+        <id name="ID" column="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="taxJedId" type="string">
+            <column name="taxjedid" default=""/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount"/>
+        </property>
+        <property name="taxamount" type="double">
+            <column name="taxamount"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="isForDetailsAccount" type="true_false">
+            <column name="isdebit"/>
+        </property>
+        <property name="debitForMultiCNDN" type="true_false">
+            <column name="debitformulticndn" default="'T'"/>
+        </property>
+        <property name="gstCurrencyRate" type="double">
+            <column  name="gstcurrencyrate" default="0"/>
+        </property>
+        <property name="rateIncludingGst" type="double">
+            <column name="rateIncludingGst" not-null="true" default='0'/>
+        </property>
+        <property name="srNoForRow" type="integer">
+            <column name="srnoforrow" default='0'/>
+        </property>
+        <property name="productid" type="string">
+            <column name="productid" />
+        </property>
+        <property name="termAmount" type="double">
+            <column name="termamount" />
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" column="account" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.CreditNote" name="creditNote" column="creditnote" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="reason" column="reason"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="totaljedid" name="totalJED"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="gstjedid" name="gstJED"/>
+    </class>
+</hibernate-mapping>

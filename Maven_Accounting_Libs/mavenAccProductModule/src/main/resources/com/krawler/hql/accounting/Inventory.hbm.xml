@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Inventory" table="inventory">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="description" type="string">
+      <column  name="description"/>
+    </property>
+    <property name="quantity" type="double">
+      <column name="quantity" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+    <property name="baseuomquantity" type="double">
+      <column name="baseuomquantity" default="0" />
+    </property>
+    <property name="baseuomrate" type="double">
+      <column name="baseuomrate" default="1" />
+    </property>
+    <property name="actquantity" type="double">
+      <column name="actquantity" not-null="true" default="0" />
+    </property>
+    <property name="invrecord" type="true_false">
+      <column default="true" name="invrecord" not-null="true"/>
+    </property>
+    <property name="carryIn" type="true_false">
+      <column name="carryin" not-null="true"/>
+    </property>
+    <property name="defective" type="true_false">
+      <column name="defective" not-null="true"/>
+    </property>
+    <property name="newInv" type="true_false">
+      <column default="false" name="newinv" not-null="true"/>
+    </property>
+    <property name="updateDate" type="date">
+      <column name="updatedate" not-null="true"/>
+    </property>
+    <property name="deleted" type="true_false">
+      <column name="deleteflag" not-null="true"/>
+    </property>
+    <property name="openingInventory" type="boolean">
+        <column name="isopeninginv"/>
+    </property>
+    <property name="leaseFlag" type="boolean">
+        <column name="leaseflag"/>
+    </property>
+    <property name="isconsignment" type="true_false">
+      <column name="isconsignment" default="'F'" />
+    </property>
+    <property name="isjobworkorder" type="true_false">
+      <column name="isjobworkorder" default="'F'" />
+    </property>
+    <property name="consignuomquantity" type="double">
+      <column name="consignuomquantity" default="0" />
+    </property>
+    <property name="venconsignuomquantity" type="double">
+      <column name="venconsignuomquantity" default="0" />
+    </property>
+    <property name="productWeightPerStockUom" type="double">
+        <column name="productweightperstockuom" default="0"/>
+    </property>
+    <property name="productWeightIncludingPakagingPerStockUom" type="double">
+        <column name="productweightincludingpakagingperstockuom" default="0"/>
+    </property>
+    <property name="productVolumePerStockUom" type="double">
+        <column name="productvolumeperstockuom" default="0"/>
+    </property>
+    <property name="productVolumeIncludingPakagingPerStockUom" type="double">
+        <column name="productvolumeincludingpakagingperstockuom" default="0"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

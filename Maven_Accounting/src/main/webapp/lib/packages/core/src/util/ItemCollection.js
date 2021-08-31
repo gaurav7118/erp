@@ -1,0 +1,1 @@
+Ext.define("Ext.util.ItemCollection",{extend:"Ext.util.MixedCollection",alternateClassName:"Ext.ItemCollection",getKey:function(A){return A.getItemId&&A.getItemId()},has:function(A){return this.map.hasOwnProperty(A.getId())}})

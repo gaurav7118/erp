@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.UserActiveDaysDetails" table="useractivedaysdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="activeDays" type="integer">
+            <column name="activedays"/>
+        </property>
+        <property name="moduleID" type="integer">
+            <column name="moduleid"/>
+        </property>
+        <property name="allUser" type="true_false">
+            <column default="false" name="isalluser"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="user"/>
+    </class>
+</hibernate-mapping>

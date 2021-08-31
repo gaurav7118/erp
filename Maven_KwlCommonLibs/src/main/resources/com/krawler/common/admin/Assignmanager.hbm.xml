@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.Assignmanager" table="assignmanager">
+        <id column="id" name="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one name="assignemp" class="com.krawler.common.admin.User" column="empid" />
+
+        <many-to-one name="assignman" class="com.krawler.common.admin.User" column="manid" />
+        </class>
+</hibernate-mapping>

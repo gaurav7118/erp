@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.CustomReportsDefaults" table="customreportsdefaults">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="name" type="string">
+      <column length="100" name="name" not-null="true"/>
+    </property>
+    <property name="moduleid" type="string">
+      <column name="moduleid"/>
+    </property>
+    <property name="createdon" type="java.lang.Long">
+      <column name="createdon"/>
+    </property>
+    <property name="updatedon" type="java.lang.Long">
+      <column name="updatedon"/>
+    </property>
+    <property name="deleteflag" type="java.lang.Byte">
+      <column name="deleteflag"/>
+    </property>
+    <property name="defaultjson" type="string">
+      <column length="65535" name="defaultjson"/>
+    </property>
+    <property name="isShowasQuickLinks" type="true_false">
+      <column default="false" name="isshowasquicklinks"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Country" column="countryid" name="countryid" not-null="true"/>
+  </class>
+</hibernate-mapping>

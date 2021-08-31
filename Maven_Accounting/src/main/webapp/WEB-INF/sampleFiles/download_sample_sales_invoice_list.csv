@@ -1,0 +1,15 @@
+"T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","T","L","L","L","L","L","L","L","L","L","L","L","L"
+"Sequence Format","Invoice Number","Sales Invoice Date","PO Reference Number","Due Date","Cost Center Name","Customer Code","Credit Term Name","Sales Person Name","Currency Name","Memo","Ship Via","FOB","Sales Invoice Check List","Sales Invoice Text Field","Sales Invoice Numeric Field","Sales Invoice Date Field","Sales Invoice Check Box","Sales Invoice Text Area","MultiSelect Drop Down","Sales Invoice Drop Down","Product Code","Quantity","UOM","Unit Price ","Discount Type","Discount Value","Product Date Field","Product Text Area","Product Text Field","Product Numeric Field","Product Drop Down","Product MultiSelect Drop Down"
+"INV000000","INV000001",03/04/15,"Test PO",03/25/15,"Cost Center","Customer Code","NET 45","SalesPerson Name","US Dollars (USD)"," Test Import Memo","Test Ship Via","Test FOB","true;true;true","Test Field",10,03/10/15,TRUE,"Text Area Test","A;C","A","PID58",2,"Unit",100,"Percentage",11,03/10/15,"Test  Product Textarea","Test",10,"A","A;B"
+,"INV000001",03/04/15,"Test PO",03/25/15,"Cost Center","Customer Code","NET 45","SalesPerson Name","US Dollars (USD)"," Test Import Memo","Test Ship Via","Test FOB","true;true;true","Test Field",10,03/10/15,TRUE,"Text Area Test","A;C","A","PID59",2,"Unit",100,"Percentage",12,03/10/15,"Test  Product Textarea","Test",10,"A","A;B"
+"INV000000","INV000002",03/04/15,"Test PO",03/25/15,"Cost Center","Customer Code","NET 45","SalesPerson Name","SG Dollar (SGD)"," Test Import Memo","Test Ship Via","Test FOB","true;false","Test Field",30,03/10/15,FALSE,"Text Area Test","B","B","PID7",2,"Unit",100,"Flat",5,03/10/15,"Test  Product Textarea","Test",22,"B","C"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"Note:",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"1. If Sequence Format Column is not added or having blank data then 'NA' format is selected for transaction.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"2. If Invoice having multiple product details then add multiple rows having same 'Default Global Items'/'Global Custom Items' Data and different as per your details of 'Default Line Items'/'Line Level Custom Items'.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"3. Import file must have first row with having column header 'T'/'L' ('T' -  'Default Global Items'/'Global Custom Items' and 'L' - 'Default Line Items'/'Line Level Custom Items'.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"4. If Custom Field Item having 'Multi-Select Drop Down' then the values should differentiate by semicolon (;). ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"5. If Custom Field Item having 'Check List' then values for the sequence should provide in true/false differentiate by semicolon (;). ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"6. If Custom Field Item having 'Check Box' then values should be 'true'/'false'.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"7. In import wizard pick the right matching  'Date Format'.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DiamondPackagingSlip" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000357"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#C4BDBD"/>
+			<leftPen lineWidth="0.0" lineColor="#C4BDBD"/>
+			<bottomPen lineWidth="0.0" lineColor="#C4BDBD"/>
+			<rightPen lineWidth="0.0" lineColor="#C4BDBD"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" forecolor="#C4BDBD" backcolor="#FFFFFF">
+		<pen lineWidth="1.0"/>
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#C4C2C2"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="1.0" lineColor="#C4C2C2"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="qty" class="java.lang.String"/>
+		<field name="code" class="java.lang.String"/>
+		<field name="productDescription" class="java.lang.String"/>
+		<field name="uPrice" class="java.lang.String"/>
+		<field name="productAmount" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="shipTo" class="java.lang.String"/>
+	<parameter name="subtotal" class="java.lang.String"/>
+	<parameter name="donumber" class="java.lang.String"/>
+	<parameter name="gstvalue" class="java.lang.String"/>
+	<parameter name="totalamount" class="java.lang.String"/>
+	<parameter name="SRSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="companyname" class="java.lang.String"/>
+	<parameter name="customercode" class="java.lang.String"/>
+	<parameter name="gstregno" class="java.lang.String"/>
+	<parameter name="cnnumber" class="java.lang.String"/>
+	<parameter name="COMPANY_ADDRESS" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="68">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="304" y="30" width="242" height="19"/>
+				<textElement textAlignment="Right">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}+$P{cnnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="10" width="290" height="20"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="15" y="31" width="300" height="35"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_ADDRESS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="66">
+			<staticText>
+				<reportElement x="15" y="7" width="99" height="16"/>
+				<textElement/>
+				<text><![CDATA[TO :
+]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="24" width="289" height="35"/>
+				<textElement verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$P{shipTo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="376" y="7" width="72" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Date of issue:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="25" width="72" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[GST Reg No:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="43" width="106" height="16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Customer Code:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="454" y="7" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="25" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{gstregno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="454" y="43" width="100" height="16"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customercode}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="19">
+			<componentElement>
+				<reportElement key="table" style="table_TD" x="0" y="2" width="555" height="14" isPrintWhenDetailOverflows="true"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{SRSubReportData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="99">
+						<jr:columnHeader style="table_TD" height="37" rowSpan="1">
+							<staticText>
+								<reportElement mode="Transparent" x="0" y="0" width="99" height="30"/>
+								<box leftPadding="4" bottomPadding="2">
+									<topPen lineWidth="0.75" lineColor="#010101"/>
+									<leftPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75" lineColor="#010101"/>
+								</box>
+								<textElement verticalAlignment="Bottom"/>
+								<text><![CDATA[Item Number]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="99" height="23"/>
+								<box leftPadding="4"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="243">
+						<jr:columnHeader style="table_TD" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="243" height="30"/>
+								<box leftPadding="2" bottomPadding="2">
+									<topPen lineWidth="0.75" lineColor="#010101"/>
+									<bottomPen lineWidth="0.75" lineColor="#010101"/>
+								</box>
+								<textElement verticalAlignment="Bottom"/>
+								<text><![CDATA[Description]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="243" height="23"/>
+								<box leftPadding="2"/>
+								<textElement markup="html"/>
+								<textFieldExpression><![CDATA[$F{productDescription}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66">
+						<jr:columnHeader style="table_TD" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30"/>
+								<box bottomPadding="2" rightPadding="5">
+									<topPen lineWidth="0.75" lineColor="#010101"/>
+									<bottomPen lineWidth="0.75" lineColor="#010101"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+								<text><![CDATA[Qty]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="66" height="23"/>
+								<box leftPadding="0" rightPadding="5"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="61">
+						<jr:columnHeader style="table_TD" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="61" height="30"/>
+								<box bottomPadding="2" rightPadding="5">
+									<topPen lineWidth="0.75" lineColor="#010101"/>
+									<bottomPen lineWidth="0.75" lineColor="#010101"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+								<text><![CDATA[Unit Price]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="61" height="23"/>
+								<box leftPadding="0" rightPadding="5"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{uPrice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="83">
+						<jr:columnHeader style="table_TD" height="37" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="83" height="30"/>
+								<box bottomPadding="2" rightPadding="10">
+									<topPen lineWidth="0.75" lineColor="#010101"/>
+									<bottomPen lineWidth="0.75" lineColor="#010101"/>
+									<rightPen lineWidth="0.75"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+								<text><![CDATA[Total Amount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="83" height="23"/>
+								<box leftPadding="0" rightPadding="10"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{productAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="104">
+			<frame>
+				<reportElement x="0" y="8" width="555" height="96"/>
+				<box>
+					<topPen lineWidth="0.0" lineColor="#C4BDBD"/>
+					<leftPen lineWidth="0.0" lineColor="#C4BDBD"/>
+					<bottomPen lineWidth="0.0" lineColor="#C4BDBD"/>
+					<rightPen lineWidth="0.0" lineColor="#C4BDBD"/>
+				</box>
+				<staticText>
+					<reportElement x="343" y="8" width="50" height="20"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Subtotal:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="343" y="28" width="50" height="20"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[GST:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="383" y="52" width="171" height="1" forecolor="#110101"/>
+				</line>
+				<staticText>
+					<reportElement x="343" y="58" width="50" height="20"/>
+					<textElement textAlignment="Right">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="393" y="8" width="153" height="20"/>
+					<box rightPadding="4"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="393" y="28" width="153" height="20"/>
+					<box rightPadding="4"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{gstvalue}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="393" y="58" width="153" height="20"/>
+					<box rightPadding="4"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{totalamount}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<elementGroup/>
+			<line>
+				<reportElement x="0" y="4" width="554" height="1" forecolor="#110101"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

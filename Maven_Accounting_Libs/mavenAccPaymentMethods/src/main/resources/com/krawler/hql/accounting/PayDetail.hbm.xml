@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.PayDetail" table="paydetail">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <many-to-one class="com.krawler.hql.accounting.PaymentMethod" name="paymentMethod" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Card" name="card" not-null="false"/>
+    <many-to-one class="com.krawler.hql.accounting.Cheque" name="cheque" not-null="false"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.UserPermission" table="userpermission">
+        <id column="id" name="id" type="string">
+            <generator class="uuid"/>
+        </id> 
+        <many-to-one class="com.krawler.common.admin.ProjectFeature" column="feature" name="feature"/>
+        <many-to-one class="com.krawler.common.admin.Rolelist" name="role"/>
+        <many-to-one class="com.krawler.common.admin.RoleUserMapping" name="roleUserMapping" column="roleUserMapping"/>
+        <property name="permissionCode" type="long">
+            <column name="permissioncode" not-null="true"/>
+        </property>
+    
+    </class>
+</hibernate-mapping>

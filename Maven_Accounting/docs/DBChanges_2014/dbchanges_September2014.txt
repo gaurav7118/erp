@@ -1,0 +1,1702 @@
+# Anand Nimbalkar 2nd Sep 2014
+
+update modules set uniquekey_methodname='Productid' where modulename="Product";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Product Type","Producttype",0,0,'T','T',"Producttype","name","ID","ref",null,"type",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Product Name","Name",0,0,'T','T',null,null,null,null,null,"productname",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Product ID","Productid",0,0,'T','T',null,null,null,null,null,"pid",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Description","Description",0,0,'F','F',null,null,null,null,"","desc",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Unit Of Measure","UnitOfMeasure",0,0,'T','F',"UnitOfMeasure","name","ID","ref",null,"uomname",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Reorder Level","ReorderLevel",0,0,'T','T',null,null,null,"double",0.0,"reorderlevel",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Reorder Quantity","ReorderQuantity",0,0,'T','T',null,null,null,"double",0.0,"reorderquantity",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Warranty Period (in days)","Warrantyperiod",0,0,'F','F',null,null,null,"integer",-1,"warrantyperiod",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Sales Warranty Period (in days)","Warrantyperiodsal",0,0,'F','F',null,null,null,"integer",-1,"warrantyperiodsal",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Lead Time (in days)","LeadTimeInDays",0,0,'T','T',null,null,null,"integer",0,"leadtime",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Cycle count Interval (in days)","CountInterval",0,0,'T','T',"ProductCyclecount","countInterval","ID","integer",0,"ccountinterval",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Cycle count tolerance (%)","Tolerance",0,0,'T','T',"ProductCyclecount","tolerance","ID","integer",0,"ccounttolerance",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Parent Product","Parent",0,0,'F','F',"Product","name","ID","ref",null,"parentid",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Sales Account","SalesAccount",0,0,'T','F',"Account","name","ID","ref",null,"salesaccountname",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Sales Return Account","SalesReturnAccount",0,0,'T','F',"Account","name","ID","ref",null,"salesretaccountname",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Preferred Vendor","Vendor",0,0,'F','F',"Vendor","name","ID","ref",null,"vendornameid",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Purchase Account","PurchaseAccount",0,0,'T','F',"Account","name","ID","ref",null,"purchaseaccountname",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Purchase Return Account","PurchaseReturnAccount",0,0,'T','F',"Account","name","ID","ref",null,"purchaseretaccountname",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Initial Quantity","Quantity",0,0,'F','T',"Inventory","quantity","ID","double",null,"initialquantity",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Initial Purchase Price","Price",0,0,'F','T',"PriceList","price","ID","double",null,"initialprice",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Sales Price","Price",0,0,'F','T',"PriceList","price","ID","double",null,"initialsalesprice",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Default Location","Location",0,0,'F','T',"InventoryLocation","name","id","ref",null,"locationName",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Default Warehouse","Warehouse",0,0,'F','T',"InventoryWarehouse","name","id","ref",null,"warehouseName",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Make available in other application","Syncable",0,0,'F','T',null,null,null,"boolean",0,"syncable",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Multiple UOM","Multiuom",0,0,'F','T',null,null,null,"boolean",'F',"multiuom",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Currency","Currency",0,0,'F','F',"KWLCurrency","name","currencyID","ref",null,"currencyName",null);
+
+# Atul sachan 4 sept 2014
+
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) VALUES ("35", "Group", "com.krawler.hql.accounting.Group", "ID", "Name", "name");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"35","Group Type","Name",0,100,'T','T',null,null,null,"string",null,"groupname", null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"35","Nature","Nature",0,0,'T','T',null,null,null,"string",null,"nature",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"35","Affects Gross Profit","AffectGrossProfit",0,0,'T','T',null,null,null,"boolean",null,"affectgp",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"35","Parent","Parent",0,0,'F','F',"Group","name","ID","ref",null,"parentname",null);
+
+
+#Hitesh Suryawanshi 5th Sept
+
+CREATE TABLE `exportcompanypref` (
+  `id` varchar(50) NOT NULL,
+  `displayname` varchar(255) NOT NULL ,
+  `colnumname` varchar(255) NOT NULL ,
+  `gettermethod_name` varchar(255)  NOT NULL ,
+   `isfromextraorcomapnypref` char(1) NOT NULL DEFAULT 'T',
+   `namepasstosavefunction` varchar(255) NOT NULL ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+INSERT INTO  exportcompanypref VALUES("1","Send a copy to","approvalemails","getApprovalEmails",'T',"sendmailto");
+INSERT INTO  exportcompanypref VALUES("2","Edit Permission To only Creator-Sales Order","editso","isEditso",'T',"editso");
+
+INSERT INTO  exportcompanypref VALUES("3","Other Setting-Allow adding Batch Serial No. for product","showprodserial","isShowprodserial",'T',"showprodserial");
+INSERT INTO  exportcompanypref VALUES("4","Other Setting-Show all accounts in Trail Balances","showallaccounts","isShowAllAccount",'F',"showAllAccount");
+
+INSERT INTO  exportcompanypref VALUES("5","Other Setting-Customer Invoice With Delivery Order","DOSetting","isDOSettings",'T',"DOSettings");
+INSERT INTO  exportcompanypref VALUES("6","Other Setting-Vendor Invoice With Good Receipt","GRSetting","isGRSettings",'T',"GRSettings");
+
+INSERT INTO  exportcompanypref VALUES("7","Other Setting-Show stock valuation in financial report","stockvaluationflag","isStockValuationFlag",'F',"stockValuationFlag");
+INSERT INTO  exportcompanypref VALUES("8","Product Price In Multiple Currency","productpriceinmultiplecurrency","isProductPriceinMultipleCurrency",'F',"productPriceinMultipleCurrency");
+INSERT INTO  exportcompanypref VALUES("9","Other Setting-Enter no. of Days to set Valid Till Date field for CQ/VQ","noofdaysforvalidtillfield","getNoOfDaysforValidTillField",'F',"noOfDaysforValidTillField");
+INSERT INTO  exportcompanypref VALUES("10","Company Address Settings-Billing Address","billaddress","getBillAddress",'T',"billaddress");
+INSERT INTO  exportcompanypref VALUES("11","Company Address Settings-Shipping Address","shipAddress","getShipAddress",'T',"shipaddress");
+
+INSERT INTO  exportcompanypref VALUES("12","Inventory Settings-Transactions without inventory","withoutinventory","isWithoutInventory",'T',"withoutinventory");
+INSERT INTO  exportcompanypref VALUES("13","Inventory Settings-Include Trading Flow","withinvupdate","isWithInvUpdate",'T',"withinvupdate");
+INSERT INTO  exportcompanypref VALUES("14","Inventory Settings-Update Inventory Level","updateInvLevelCheck","isUpdateInvLevel",'T',"updateInvLevelCheck");
+INSERT INTO  exportcompanypref VALUES("15","Memo","memo","isMemo",'T',"memo");
+INSERT INTO  exportcompanypref VALUES("16","Without Tax 1099","withouttax1099","isWithoutTax1099",'T',"withouttax1099");
+INSERT INTO  exportcompanypref VALUES("17","Email Invoice","eminvoice","isEmailInvoice",'T',"emailinvoice");
+
+INSERT INTO  exportcompanypref VALUES("18","Dashboard View Setting","viewdashboard","getviewDashboard",'T',"viewDashboard");
+
+INSERT INTO  exportcompanypref VALUES("19","Transaction Settings-Allow Editing Transactions","editTransaction","isEditTransaction",'T',"editTransaction");
+INSERT INTO  exportcompanypref VALUES("20","Transaction Settings-Allow Deleting Transactions","deleteTransaction","isDeleteTransaction",'T',"deleteTransaction");
+INSERT INTO  exportcompanypref VALUES("21","Transaction Settings-Lock Editing Price and Quantity","editLinkedTransaction","isEditLinkedTransaction",'T',"editLinkedTransaction");
+INSERT INTO  exportcompanypref VALUES("22","Transaction Settings-Due Date in VI depends upon Ship Date","shipDateConfiguration","isShipDateConfiguration",'T',"shipDateConfiguration");
+INSERT INTO  exportcompanypref VALUES("23","Transaction Settings-Display Unit Price in GR/DO/PR/SR","unitPriceConfiguration","isUnitPriceConfiguration",'T',"unitPriceConfiguration");
+
+INSERT INTO  exportcompanypref VALUES("24","Negative Stock Settings","negativestock","getNegativestock",'T',"negativestock");
+INSERT INTO  exportcompanypref VALUES("26","Customer Credit Control","custcreditcontrol","getCustcreditcontrol",'T',"custcreditcontrol");
+INSERT INTO  exportcompanypref VALUES("27","Minimum Budget Settings","custbudgetcontrol","getCustbudgetcontrol",'T',"custbudgetcontrol");
+INSERT INTO  exportcompanypref VALUES("Accounts With Code","Accounts With Code","accountswithcode","isAccountsWithCode",'T',"accountWithOrWithoutCode");
+
+INSERT INTO  exportcompanypref VALUES("28","Part Numbers Settings-Show Part Number","partnumber","isPartNumber",'T',"partNumber");
+INSERT INTO  exportcompanypref VALUES("29","Show Leading Zeros","showleadingzero","isShowLeadingZero",'T',"showLeadingZero");
+
+INSERT INTO  exportcompanypref VALUES("30","Auto Generated Cheque Number","isshowautogeneratedchequenumber","isShowAutoGeneratedChequeNumber",'F',"showAutoGeneratedChequeNumber");
+
+INSERT INTO  exportcompanypref VALUES("31","QA Approval Flow in Goods Receipt Note","qaapprovalflow","isQaApprovalFlow",'T',"isQaApprovalFlow");
+
+INSERT INTO  exportcompanypref VALUES("32","Company GST Detail-GST Number","gstnumber","getGstNumber",'T',"gstnumber");
+INSERT INTO  exportcompanypref VALUES("33","Company GST Detail-Tax Number","taxnumber","getTaxNumber",'T',"taxNumber");
+INSERT INTO  exportcompanypref VALUES("34","Company GST Detail-Company UEN","companyuen","getCompanyUEN",'T',"companyuen");
+INSERT INTO  exportcompanypref VALUES("35","Company GST Detaile-IAF File Version","iafversion","getIafVersion",'T',"iafversion");
+
+INSERT INTO  exportcompanypref VALUES("36","First Financial Year Date","firstfyfrom","getFirstFinancialYearFrom",'T',"firstfyfrom");
+INSERT INTO  exportcompanypref VALUES("37","Financial Year Date","fyfrom","getFinancialYearFrom",'T',"fyfrom");
+
+INSERT INTO  exportcompanypref VALUES("38","Book Beginning Date","bbfrom","getBookBeginningFrom",'T',"bbfrom");
+
+INSERT INTO  exportcompanypref VALUES("39","WIP/CP Account settings-WIP Account Prefix","wipaccountprefix","getWipAccountPrefix",'F',"wipAccountPrefix");
+INSERT INTO  exportcompanypref VALUES("40","WIP/CP Account settings-WIP Type of Account","wipaccounttype","getWipAccountTypeId",'F',"wipAccountType");
+INSERT INTO  exportcompanypref VALUES("41","WIP/CP Account settings-CP Account Prefix","cpaccountprefix","getCpAccountPrefix",'F',"cpAccountPrefix");
+INSERT INTO  exportcompanypref VALUES("42","WIP/CP Account settings-CP Type of Account","cpAccountType","getCpAccountTypeId",'F',"cpAccountType");
+
+INSERT INTO  exportcompanypref VALUES("43","Revenue recognition on Delivery Order","salesrevenuerecognitionaccount","isDeferredRevenueRecognition",'F',"isDeferredRevenueRecognition");
+INSERT INTO  exportcompanypref VALUES("44","Revenue recognition on manual JE","recurringdeferredrevenuerecognition","isRecurringDeferredRevenueRecognition",'F',"recurringDeferredRevenueRecognition");
+
+INSERT INTO  exportcompanypref VALUES("45","Sales Account","salesaccount","getSalesAccount",'F',"salesAccount");
+INSERT INTO  exportcompanypref VALUES("46","Sales Revenue Recognition Account","salesrevenuerecognitionaccount","getSalesRevenueRecognitionAccount",'F',"salesRevenueRecognitionAccount");
+
+alter table exportcompanypref add column `accountfield` char(1) NOT NULL DEFAULT 'F';
+
+INSERT INTO  exportcompanypref VALUES("47","Auto Generate Cheque Number","isshowautogeneratedchequenumber","isShowAutoGeneratedChequeNumber",'F',"showAutoGeneratedChequeNumber",'F');
+INSERT INTO  exportcompanypref VALUES("48","Allow Sending Approval Mail","sendapprovalmail","isSendapprovalmail",'T',"approvalMail",'F');
+INSERT INTO  exportcompanypref VALUES("49","Discount Given goes to","discountGiven","getDiscountGiven",'T',"discountgiven",'T');
+INSERT INTO  exportcompanypref VALUES("50","Discount Received goes to","discountReceived","getDiscountReceived",'T',"discountreceived",'T');
+INSERT INTO  exportcompanypref VALUES("51","Asset Depreciation goes to","depereciationAccount","getDepereciationAccount",'T',"depreciationaccount",'T');
+INSERT INTO  exportcompanypref VALUES("52","Foreign Exchange goes to","foreignexchange","getForeignexchange",'T',"foreignexchange",'T');
+INSERT INTO  exportcompanypref VALUES("53","Unrealised Gain/Loss goes to","unrealisedgainloss","getUnrealisedgainloss",'T',"unrealisedgainloss",'T');
+INSERT INTO  exportcompanypref VALUES("54","Salary Expense goes to","expenseAccount","getExpenseAccount",'T',"expenseaccount",'T');
+INSERT INTO  exportcompanypref VALUES("55","Salary Payable (Liability) goes to","liabilityAccount","getLiabilityAccount",'T',"liabilityaccount",'T');
+INSERT INTO  exportcompanypref VALUES("56","Customer Default Account","customerdefaultacc","getCustomerdefaultaccount",'T',"customerdefaultacc",'T');
+INSERT INTO  exportcompanypref VALUES("57","Vendor Default Account","vendordefaultacc","getVendordefaultaccount",'T',"vendordefaultacc",'T');
+
+insert into modules VALUES("36","Company Account Preferences","com.krawler.hql.accounting.CompanyAccountPreferences","ID",null,null);
+
+
+#Raveesh pathak 5th Sept 2014
+
+#******************************Customer Side***************************
+
+update default_header set dataindex='billingAddress1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Address'; 
+update default_header set dataindex='billingCity1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing City'; 
+update default_header set dataindex='billingState1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing State'; 
+update default_header set dataindex='billingCountry1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Country'; 
+update default_header set dataindex='billingPostal1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Postal Code'; 
+update default_header set dataindex='billingPhone1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Phone'; 
+update default_header set dataindex='billingMobile1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Mobile'; 
+update default_header set dataindex='billingFax1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Fax'; 
+update default_header set dataindex='billingEmail1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Email'; 
+update default_header set dataindex='billingContactPerson1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Contact Person'; 
+update default_header set dataindex='billingContactPersonNumber1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Contact Person Number';
+
+update default_header set dataindex='shippingAddress1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Address'; 
+update default_header set dataindex='shippingCity1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping City'; 
+update default_header set dataindex='shippingState1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping State'; 
+update default_header set dataindex='shippingCountry1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Country'; 
+update default_header set dataindex='shippingPostal1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Postal Code'; 
+update default_header set dataindex='shippingPhone1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Phone'; 
+update default_header set dataindex='shippingMobile1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Mobile'; 
+update default_header set dataindex='shippingFax1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Fax'; 
+update default_header set dataindex='shippingEmail1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Email'; 
+update default_header set dataindex='shippingContactPerson1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Contact Person'; 
+update default_header set dataindex='shippingContactPersonNumber1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Contact Person Number';
+
+update default_header set dataindex='creationDate',renderertype='date',ismandatory='T' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Creation Date';
+update default_header set dataindex='termname' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Credit Term';
+update default_header set dataindex='title' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Title';
+update default_header set dataindex='accname' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Customer Name';
+update default_header set dataindex='bankaccountno' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Bank Account No';
+update default_header set dataindex='other' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Other Information';
+update default_header set dataindex='accountname',ismandatory='T' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Account';
+update default_header set dataindex='acccode' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Customer Code';
+update default_header set dataindex='categoryname',validatetype=null where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Category';
+update default_header set defaultHeader='Other Info(GST Number)' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Other Information';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Credit Sales Limit","Creditlimit",0,0,'F','F',null,null,null,"double",0.0,"limit","rowcurrency");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Currency","Currency",0,0,'T','F',"KWLCurrency","name","currencyID","ref",null,"currencyname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Preferred Product(s)", "Products",0,0,'F','F',"CustomerProductMapping","products","ID","null",null,"productcode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Tax Code","TaxNo",0,0,'F','F',null,null,null,null,null,"taxcode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Sales Person","MappingSalesPerson",0,0,'F','F',"MasterItem","value","ID","ref",null,"mappedSalesPersonName",null);
+
+delete from default_header where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader="Parent Customer";
+
+
+#******************************Vendor Side***************************
+
+update default_header set dataindex='billingAddress1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Address'; 
+update default_header set dataindex='billingCity1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing City'; 
+update default_header set dataindex='billingState1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing State'; 
+update default_header set dataindex='billingCountry1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Country'; 
+update default_header set dataindex='billingPostal1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Postal Code'; 
+update default_header set dataindex='billingPhone1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Phone'; 
+update default_header set dataindex='billingMobile1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Mobile'; 
+update default_header set dataindex='billingFax1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Fax'; 
+update default_header set dataindex='billingEmail1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Email'; 
+update default_header set dataindex='billingContactPerson1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Contact Person'; 
+update default_header set dataindex='billingContactPersonNumber1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Contact Person Number';
+
+update default_header set dataindex='shippingAddress1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Address'; 
+update default_header set dataindex='shippingCity1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping City'; 
+update default_header set dataindex='shippingState1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping State'; 
+update default_header set dataindex='shippingCountry1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Country'; 
+update default_header set dataindex='shippingPostal1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Postal Code'; 
+update default_header set dataindex='shippingPhone1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Phone'; 
+update default_header set dataindex='shippingMobile1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Mobile'; 
+update default_header set dataindex='shippingFax1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Fax'; 
+update default_header set dataindex='shippingEmail1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Email'; 
+update default_header set dataindex='shippingContactPerson1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Contact Person'; 
+update default_header set dataindex='shippingContactPersonNumber1' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Contact Person Number';
+
+update default_header set dataindex='creationDate',renderertype='date',ismandatory='T' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Creation Date';
+update default_header set dataindex='termname' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Debit Term';
+update default_header set dataindex='title' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Title';
+update default_header set dataindex='accname' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Vendor Name';
+update default_header set dataindex='bankaccountno' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Bank Account No';
+update default_header set dataindex='other' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Other Information';
+update default_header set dataindex='accountname',ismandatory='T' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Account';
+update default_header set dataindex='acccode' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Vendor Code';
+update default_header set dataindex='categoryname',validatetype=null where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Category';
+update default_header set defaultHeader='Other Info(GST Number)' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Other Information';
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Credit Purchase Limit","Debitlimit",0,0,'F','F',null,null,null,"double",0.0,"limit","rowcurrency");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Currency","Currency",0,0,'T','F',"KWLCurrency","name","currencyID","ref",null,"currencyname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Preferred Product(s)", "Products",0,0,'F','F',"VendorProductMapping","products","ID","null",null,"productcode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Tax Code","TaxIDNumber",0,0,'F','F',null,null,null,null,null,"taxcode",null);
+
+delete from default_header where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader="Parent Vendor";
+
+# Anand Nimbalkar 6th Sept 2014
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `activateibg` char(1) DEFAULT 'F';
+
+#Hitesh Suryawanshi 9th sept
+alter table exportcompanypref add column `dataindex` varchar(255) DEFAULT "";
+alter table exportcompanypref add column  `validatetype` varchar(255) DEFAULT "";
+alter table exportcompanypref add column `fullclassname` varchar(255) DEFAULT NULL;
+alter table exportcompanypref add column  `exportclassgetter` varchar(255) DEFAULT NULL;
+alter table exportcompanypref add column  `importclassgetter` varchar(255) DEFAULT NULL;
+update exportcompanypref set id="25" where id="Accounts With Code"
+
+update exportcompanypref set dataindex="companyEmailId",validatetype="string" where id="1";
+update exportcompanypref set dataindex="editso",validatetype="boolean" where id="2";
+update exportcompanypref set dataindex="showprodserial",validatetype="boolean" where id="3";
+update exportcompanypref set dataindex="showAllAccount",validatetype="boolean" where id="4";
+update exportcompanypref set dataindex="DOSettings",validatetype="boolean" where id="5";
+update exportcompanypref set dataindex="GRSettings",validatetype="boolean" where id="6";
+update exportcompanypref set dataindex="stockValuationFlag",validatetype="boolean" where id="7";
+update exportcompanypref set dataindex="productPriceinMultipleCurrency",validatetype="boolean" where id="8";
+update exportcompanypref set dataindex="noOfDaysforValidTillField",validatetype="string" where id="9";
+update exportcompanypref set dataindex="billaddress",validatetype="string" where id="10";
+update exportcompanypref set dataindex="shipaddress",validatetype="string" where id="11";
+update exportcompanypref set dataindex="withoutinventory",validatetype="boolean" where id="12";
+update exportcompanypref set dataindex="withinvupdate",validatetype="boolean" where id="13";
+update exportcompanypref set dataindex="isUpdateInvLevel",validatetype="boolean" where id="14";
+update exportcompanypref set displayname="Show alert if Memo is missing",dataindex="memo",validatetype="boolean" where id="15";
+update exportcompanypref set dataindex="withouttax1099",validatetype="boolean" where id="16";
+update exportcompanypref set dataindex="emailinvoice",validatetype="boolean" where id="17";
+update exportcompanypref set dataindex="viewDashboard",validatetype="int" where id="18";
+update exportcompanypref set dataindex="editTransaction",validatetype="boolean" where id="19";
+update exportcompanypref set dataindex="deleteTransaction",validatetype="boolean" where id="20";
+update exportcompanypref set dataindex="editLinkedTransaction",validatetype="boolean" where id="21";
+update exportcompanypref set dataindex="shipDateConfiguration",validatetype="boolean" where id="22";
+update exportcompanypref set dataindex="unitPriceConfiguration",validatetype="boolean" where id="23";
+update exportcompanypref set dataindex="negativestock",validatetype="int" where id="24";
+update exportcompanypref set dataindex="isAccountsWithCode",validatetype="boolean" where id="25";
+update exportcompanypref set dataindex="custcreditlimit",validatetype="int" where id="26";
+update exportcompanypref set dataindex="custMinBudget",validatetype="int" where id="27";
+update exportcompanypref set dataindex="partNumber",validatetype="boolean" where id="28";
+update exportcompanypref set dataindex="showLeadingZero",validatetype="boolean" where id="29";
+update exportcompanypref set dataindex="showAutoGeneratedChequeNumber",validatetype="boolean" where id="30";
+update exportcompanypref set dataindex="isQaApprovalFlow",validatetype="boolean" where id="31";
+update exportcompanypref set dataindex="gstnumber",validatetype="string" where id="32";
+update exportcompanypref set dataindex="taxNumber",validatetype="string" where id="33";
+update exportcompanypref set dataindex="companyuen",validatetype="string" where id="34";
+update exportcompanypref set dataindex="iafversion",validatetype="string" where id="35";
+update exportcompanypref set dataindex="firstfyfrom",validatetype="date" where id="36";
+update exportcompanypref set dataindex="fyfrom",validatetype="date" where id="37";
+update exportcompanypref set dataindex="bbfrom",validatetype="date" where id="38";
+update exportcompanypref set dataindex="wipAccountPrefix",validatetype="string" where id="39";
+update exportcompanypref set dataindex="wipAccountTypeId",validatetype="ref",fullclassname="com.krawler.hql.accounting.Group",exportclassgetter="getName", importclassgetter="getID" where id="40";
+update exportcompanypref set dataindex="cpAccountPrefix",validatetype="string" where id="41";
+update exportcompanypref set dataindex="cpAccountType",validatetype="ref",fullclassname="com.krawler.hql.accounting.Group",exportclassgetter="getName", importclassgetter="getID" where id="42";
+update exportcompanypref set dataindex="isDeferredRevenueRecognition",validatetype="boolean" where id="43";
+update exportcompanypref set dataindex="recurringDeferredRevenueRecognition",validatetype="boolean" where id="44";
+update exportcompanypref set dataindex="salesAccount ",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="45";
+update exportcompanypref set dataindex="salesRevenueRecognitionAccount ",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="46";
+update exportcompanypref set dataindex="showAutoGeneratedChequeNumber",validatetype="boolean" where id="47";
+update exportcompanypref set dataindex="approvalMail",validatetype="boolean" where id="48";
+update exportcompanypref set dataindex="discountgiven",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="49";
+update exportcompanypref set dataindex="discountreceived",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="50";
+update exportcompanypref set dataindex="depreciationaccount",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="51";
+update exportcompanypref set dataindex="foreignexchange",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="52";
+update exportcompanypref set dataindex="unrealisedgainloss",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="53";
+update exportcompanypref set dataindex="expenseaccount",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="54";
+update exportcompanypref set dataindex="liabilityaccount",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="55";
+update exportcompanypref set dataindex="customerdefaultaccount",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="56";
+update exportcompanypref set dataindex="vendordefaultaccount",validatetype="ref",fullclassname="com.krawler.hql.accounting.Account",exportclassgetter="getName", importclassgetter="getID" where id="57";
+
+delete from exportcompanypref where id="47";
+update exportcompanypref set accountfield='T' where id="45" or id="46";
+
+# Amol Dhokale 10th Sept 2014
+ALTER TABLE `productbuild`
+ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+# Atul sachan 11th Sept 2014
+
+CREATE TABLE `ibgreceivingbankdetails` (
+`id`  varchar(255) NOT NULL ,
+`receivingaccountname`  varchar(255) NULL DEFAULT NULL ,
+`receivingaccountnumber`  varchar(255) NULL DEFAULT NULL ,
+`receivingbankcode`  varchar(255) NULL DEFAULT NULL ,
+`receivingbankname`  varchar(255) NULL DEFAULT NULL ,
+`receivingbranchcode`  varchar(255) NULL DEFAULT NULL ,
+`masteritem`  varchar(255) NULL DEFAULT NULL ,
+`vendor`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `FK_IBGReceiver_MASTERITEM` FOREIGN KEY (`masteritem`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT `FK_IBGReceiver_VENDOR` FOREIGN KEY (`vendor`) REFERENCES `vendor` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT `FK_IBGReceiver_COMPANY` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `vendor`
+ADD COLUMN `isibgactivated`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `masteritem`
+ADD COLUMN `isibgactivated`  int(1) NULL DEFAULT 0;
+
+# Anand Nimbalkar 12th Sept 2014
+CREATE TABLE `ibgbankdetails` (
+  `id` varchar(255) NOT NULL,
+  `ibgbank` int(11) NULL DEFAULT NULL,
+  `bankcode` varchar(255) NULL DEFAULT NULL,
+  `branchcode` varchar(255) NULL DEFAULT NULL,
+  `accountnumber` varchar(255) NULL DEFAULT NULL,
+  `accountname` varchar(255) NULL DEFAULT NULL,
+  `senderscompanyid` varchar(255) NULL DEFAULT NULL,
+  `bankdailylimit` double NULL DEFAULT NULL,
+  `account` varchar(255) NULL DEFAULT NULL,
+  `company` varchar(255) NULL DEFAULT NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`account`) REFERENCES `account` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `account`
+ADD COLUMN `ibgbank` char(1) DEFAULT 'F';
+
+#Hitesh Surayawanshi 12 Sept
+insert into modules VALUES("37","Master Configuration","com.krawler.common.admin.FieldParams","id",null,null);
+
+#SATS Code Merge Db changes Malhari Pawar 12 Sep 2014
+insert into mastergroup (id, groupname) values (16, "Tariff Parameters");
+CREATE TABLE `pricetype` (
+  `id` varchar(255) NOT NULL,
+  `value` varchar(50) NOT NULL,
+  `type` int(11) NOT NULL,
+  `company` varchar(255) DEFAULT NULL, 
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `masteritemprice` (
+`id`  varchar(255) NOT NULL ,
+`value`  varchar(255) NOT NULL ,
+`price`  double NOT NULL ,
+`type`  varchar(255) NULL ,
+CONSTRAINT `masterpriceFK` FOREIGN KEY (`type`) REFERENCES `pricetype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+ALTER TABLE `product`
+ADD COLUMN `dependenttype`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `product` ADD CONSTRAINT `dependenttypeFK` FOREIGN KEY (`dependenttype`) REFERENCES `pricetype` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE `masteritempriceformula` (
+`id`  varchar(255) NULL ,
+`lowerlimitvalue`  int(11) NULL DEFAULT 0 ,
+`upperlimitvalue`  int(11) NULL DEFAULT 0 ,
+`basevalue`  int(11) NULL DEFAULT 0 ,
+`incvalue`  int(11) NULL DEFAULT 0 ,
+`type`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `masteritempriceformula` FOREIGN KEY (`type`) REFERENCES `pricetype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+); 
+
+alter table compaccpreferences add  dependentfield char(1) default '0';
+alter table grdetails add  dependenttype  varchar(255) default '';
+alter table invoicedetails add  dependenttype  varchar(255) default '';
+alter table invoicedetails add  inouttime  varchar(255) default '';
+alter table grdetails add  inouttime  varchar(255) default '';
+
+alter table product add  intervalfield char(1) default '0';
+
+
+
+CREATE TABLE `accountforecast` (
+  `id` varchar(255) NOT NULL,  
+  `account` varchar(255) NOT NULL,
+  `jan` double default -1,
+  `feb` double default -1,
+  `march` double default -1,
+  `april` double default -1,
+  `may` double default -1,
+  `june` double default -1,
+  `july` double default -1,
+  `aug` double default -1,
+  `sept` double default -1,
+  `oct` double default -1,
+  `nov` double default -1,
+  `december` double default -1,
+  PRIMARY KEY  (`id`),  
+  KEY `FK_accountforecast_acc` (`account`),
+  CONSTRAINT `FK_accountforecast_acc` FOREIGN KEY (`account`) REFERENCES `account` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `invoice`
+ADD COLUMN `shiplength`  int(11) DEFAULT 1;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `shiplength`  int(11) DEFAULT 1;
+
+insert into mastergroup (id, groupname) values (20, "Invoice Type");
+
+ALTER TABLE `invoice`
+ADD COLUMN `invoicetype`  varchar(255) DEFAULT '';
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `invoicetype`  varchar(255) DEFAULT '';
+
+ALTER TABLE `invoice`
+MODIFY COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `goodsreceipt`
+MODIFY COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ALTER TABLE `product`
+ADD COLUMN `timeinterval`  int(3) DEFAULT 1 ;
+
+ALTER TABLE `product`
+ADD COLUMN `noofquqntity`  int(3) DEFAULT 0;
+
+ALTER TABLE `product`
+ADD COLUMN `noofqtyvalue`  varchar(255) DEFAULT '';
+
+alter table invoicedetails add  showquantity  varchar(255) default '';
+alter table grdetails add  showquantity  varchar(255) default '';
+
+ALTER TABLE `invoice`
+MODIFY COLUMN `shiplength`  double DEFAULT 1; 
+
+ALTER TABLE `goodsreceipt`
+MODIFY COLUMN `shiplength`  double DEFAULT 1; 
+
+alter table product add  addshiplentheithqty char(1) default '0';
+
+ALTER TABLE `fieldParams`
+ADD COLUMN `parentid`  varchar(255) DEFAULT '';
+
+CREATE TABLE `fieldcombodatamapping` (
+`id`  varchar(255) NOT NULL ,
+`childid`  varchar(255) NOT NULL ,
+`parentid`  varchar(255) NOT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `fieldcombodatamappintchild` FOREIGN KEY (`childid`) REFERENCES `fieldcombodata` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `fieldcombodatamappintparent` FOREIGN KEY (`parentid`) REFERENCES `fieldcombodata` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+#Changes for PO
+ALTER TABLE `purchaseorder`
+ADD COLUMN `invoicetype`  varchar(255) DEFAULT '';
+
+ALTER TABLE `purchaseorder`
+ADD COLUMN `shiplength` double DEFAULT 1; 
+
+alter table podetails add  dependenttype  varchar(255) default '';
+alter table podetails add  inouttime  varchar(255) default '';
+alter table podetails add  showquantity  varchar(255) default '';
+
+#Changes of account code
+
+update account set acccode="8001" where name="GRANTS FRM GOVT BODY"  and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9100" where name="CAR & COACH PARKING OPERATIONS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9101" where name="CAR & COACH PARKING OPERATIONS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9200" where name="COMMERCIAL SPACE LEASING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9202" where name="COMMERCIAL SPACE LEASING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9300" where name="ADVERTISING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9303" where name="ADVERTISING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9400" where name="SPACE RENTAL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="9404" where name="SPACE RENTAL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20000" where name="BASIC PAY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20001" where name="ALLOWANCE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20002" where name="AWS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20003" where name like "%FOREIGN WORKERS%" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20004" where name="PROVIDENT FUNDS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20005" where name="SDF LEVY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20006" where name="CPF ON FLEXIWAGE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20007" where name="PROFIT SHARING BONUS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20008" where name="COMPN XP PSP/RSP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20009" where name="INHOUSE TRAINING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20010" where name="OUTHOUSE TRAINING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20011" where name="COST TSFR STAFF EXP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20012" where name="TRAVEL-DTY OUT BASE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20013" where name="TRAVEL-DUTY LOCAL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20014" where name="MED INS GST NO CLAIM" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20015" where name like "%INS/WORKMEN%" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20016" where name="MEDICAL GST CLAIM" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20017" where name="MED GST NON CLAIM" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20018" where name="UNIFORM" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20019" where name="TRANSPORT REIMBURSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20020" where name="STAFF ACCOM-RENTS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20021" where name="MISC STAFF COSTS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20022" where name="ENTERTMT-NON ACCOUNT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20023" where name="DEPT FUNCTIONS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20024" where name="STAFF WELFARE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20025" where name="OTHER STAFF FUNCTION" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21001" where name="ELECTRICITY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21002" where name="Water (Terminal usage)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21003" where name="Water (Sale of fresh water)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21100" where name="Building Maintenance - Fire Protection" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21101" where name="Landscaping EXPENSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21102" where name="Lifts & Escalator maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21103" where name="Renew of lift licence" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21104" where name="General building maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21105" where name="Door system MAINTENANCE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21106" where name="Baggage conveyor system maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21107" where name="Baggage conveyor system Spare Parts" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21108" where name="Electrical works" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21109" where name="Sanitary, Plumbing and Drainage works" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21110" where name="Carpark Maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21111" where name="Air Conditioning & Mechanical Ventilation" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21112" where name="Wharf Maintenance (Incl Seabed Sounding Test)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21113" where name="Wharf and Surronding Waters Maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21114" where name="Wharf Maintenance EXPENSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21115" where name="Current Meters inculding Flotsam" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21116" where name="Passenger Loading Bridge MAINTENANCE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21117" where name="X- ray and walk through detctectors maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21118" where name="X-ray license (NEA)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21119" where name="CCTV maintenance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21120" where name="Passenger metal detector" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21121" where name="Handheld metal detector" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21122" where name="Explosive Trace detector" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="24004" where name="DEPR-BLDG FITTINGS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21301" where name="RENTAL OF PREMISES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21302" where name="CLEANING OF PREMISES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21303" where name="PEST CONTROL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="21304" where name="RENOVATION" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23301" where name="BAD  DEBTS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23302" where name="SPEC DOUBT DEBT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23401" where name="OFFICIAL HOSPITALITY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="24001" where name="DEPR-COMPUTER" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="24002" where name="DEPR-OFFICE FURN&EQP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="24003" where name="DEPN GSE FIXED" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="25001" where name="PHONE RENT & CHARGE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="25002" where name="COMMUNICATION EXP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="25003" where name="MSD CHARGES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="25004" where name="SATS - Email and Telefax" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26001" where name="COY TPT - MISC" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26002" where name="PARKING FEES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26100" where name="PUBLICATION/NEWSPAPE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26101" where name="PRINTING & STAT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26102" where name="BROCHURES PRINTING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26200" where name="Audit Fee - Annual audit" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="Non-annual audit" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="ANNUAL AUDIT FEE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26201" where name="NON-ANNUAL AUDIT FEE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="Company secretariat" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26203" where name="Advisory fee" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26204" where name="PR retainer fee" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26205" where name="Company secretariat" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26206" where name="LEGAL FEE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26207" where name="TAXATION COMPLIANCE FEE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26208" where name="PROFESSIONAL FEE - LEGAL (IT RELATED)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="Taxation Services - Compliance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="Legal Fee" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26209" where name like "%DIRECTORS%" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22001" where name="MOORING SERVICES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22002" where name="Guest Relations Officers (""GRO"")" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22003" where name="Duty Managers Cost" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22004" where name="PART-TIMER COST" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22005" where name="IT TECHNICIAN SITE SUPPORT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22006" where name="CRUISEFLY MANPOWER" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22007" where name="PORTERS/ BAGGAGE HANDLERS DEPLOYMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23301" where name="BANK CHARGES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23302" where name="STAMP DUTY/REG FEE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26301" where name="HIRE OF COMP EQP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26302" where name="MTCE-OTHER EQP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26303" where name="MTCE/RENTL OF S/W" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26304" where name="MTCE OF COMP EQP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26305" where name="PURCH-MINOR ITEMS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26306" where name="LEASE EQUIPMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26307" where name="HIRE OF GROUND EQUIPMENT " and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26308" where name="HIRE OF FORKLIFT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26309" where name="HIRE OF SECURITY EQUIPMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26310" where name="MTCE OF LEASED EQPT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26401" where name="Marine terminal operator liability" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26402" where name="Industrial all risks" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26403" where name="Terrorism insurance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26404" where name="Business Interruption Insurance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26405" where name="Insurance Annual Services" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="20026" where name="SPORTS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26701" where name="SERVICES - SATS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26702" where name="SECURITY (FIXED DEPLOYMENT)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22008" where name="SECURITY (CRUISE DAYS DEPLOYMENT)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="26703" where name="CATERING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23303" where name="POSTAGE - DIRECT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23304" where name="STAFF RECRUITMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23405" where name="ADVERTISEMENT/NOTICE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23402" where name="ENTERTAINMT ACCTBLE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23305" where name="BOARD EXPENSES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23403" where name="OFFICIAL FUNCTIONS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23306" where name="BUSINESS MEETING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23307" where name="FREIGHT/INS/CUSTOM" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23404" where name="MEMBERSHIP FEES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23308" where name="AIRPORT PASSES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23309" where name="DONATIONS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23310" where name="FINES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23406" where name="VIP LOUNGE EXP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23407" where name="GEN GIVEAWAYS-OTH" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23408" where name="HOSPITAL GIFTS/EXP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23311" where name="CALENDARS ETC" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23312" where name="STAFF ID CARDS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23313" where name="LAUNDRY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23314" where name="INVENTORY ADJUSTMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23315" where name="CLEANING MATERIALS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23409" where name="PHOTOGRAPHY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23316" where name="COMPUTER SOFTWARES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="GAS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22009" where name="FUEL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23317" where name="REMOVAL COSTS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23318" where name="DISCOUNT ALLOWED" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="ADJ OF SPARES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23319" where name="PRE-OPERATIONAL EXP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23320" where name="SEMINAR EXPENSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23410" where name="LAUNCHING OF CEREMONY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23411" where name="BUSINESS DEVELOPMENT EXPENSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22101" where name="Licence Fee - STB" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22102" where name="Public licence Fee - MPA" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22103" where name="Water licence fee - MPA" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="23321" where name="MISC OTH EXP" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="27001" where name="REAL EXCH GAIN/LOSS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="27002" where name="UNREAL EXCH G/L" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="28001" where name="CURRENT TAX EXPENSES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="28002" where name="DEFERRED TAX " and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="28101" where name="PRIOR TAX EXPENSES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="28102" where name="PRIOR DEFERRED TAX" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50101" where name="LAND BLDG & FITTINGS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50102" where name="FIXED GSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50103" where name="OFFICE FURN & EQPT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50104" where name="OFFICE FITTINGS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50105" where name="COMPUTER EQPT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50201" where name="ACCUM DEPN BLG&FITTING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50202" where name="ACCUM FIXED GSE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50203" where name="ACCUM DEPN OFFICE F&E" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50204" where name="ACCUM DEPN O/FITTINGS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="50205" where name="ACCUM DEPN COMPUTERE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="51001" where name="COMP EQP A & P" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="51002" where name="OFF FIT - A & P" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54101" where name="TD SAS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54102" where name="TD CATERING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54103" where name="TD APS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54104" where name="TD CFPL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54105" where name="TD ALLS/" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54106" where name="TD ARL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54107" where name="TD SECURITY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54201" where name="ACCRUED TD SAS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54202" where name="ACCRUED TD CURACAO (ALLS)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54203" where name="ACCRUED TD ALLS/ARL/CFPL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54204" where name="ACCR TD APS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="56101" where name="PROV DOUBTFUL DEBTS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="56101" where name="TD OTHERS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="59101" where name="STAFF LOANS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="59102" where name="STAFF TRAVEL ADVANCE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="59601" where name="GST INPUT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="59602" where name="GST NET CLEAR" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="56201" where name like "%PROV INT REC%" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="56202" where name="REFUND" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="60101" where name="Deposit Paid" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="60102" where name="Prepayment of Insurance" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="60103" where name="MISC PREPAYMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="60101" where name="PCV CONTROL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="61001" where name="SIN SGD DB" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="61001" where name="SIN SGD-DBS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="80101" where name="PROV TAX - SIN" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54201" where name="TD - Creuers" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81101" where name="TC-Creuers" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81001" where name="TC OTHERS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82001" where name="ACCR UTILITIES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82002" where name="ACCR FUEL & OIL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82101" where name="PROVISION FOR EXPENSES1" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82003" where name="CPF" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82201" where name="TAX WITHHELD" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82301" where name="DEPOSIT RECEIVED" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82302" where name="ADV DEP RECEIVED" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82303" where name="UNPRESENTED CHEQUE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="82401" where name="GST OUTPUT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="54108" where name="TD SATS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81102" where name="TC-SATS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81103" where name="TC-SAS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81104" where name="TC-CATERING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81105" where name="TC-APS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81106" where name="TC-SECURITY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81107" where name="TC - ALLS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81108" where name="TC - CFPL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81109" where name="TC - Aerolog Express" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81201" where name="ACCR EXP SATS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="81202" where name="ACCR EXP ALLS" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="80201" where name="DEFERRED TAX" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="99901" where name="ISSUED CAPITAL" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="99910" where name="SHARE PREMIUM" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="99921" where name="UNAPPROPRIATED PROFITS - PREVIOUS YEAR" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="80201" where name="Deferred Taxation - Asset" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="22101" where name="Rebates/ Incentives" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="" where name="Operating Revenues" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10001" where name="DOCKAGE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10002" where name="PASSENGER WHARFAGE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10003" where name="SECURITY SERVICES" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10004" where name="BAGGAGE HANDLING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10005" where name="BERTHING/UNBERTHING" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10006" where name="LATE BERTH AMENDMENT" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10007" where name="VESSEL OVERSTAY" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10008" where name="WHARFAGE (CRUISE VESSEL)" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10009" where name="PORTERAGE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10010" where name="CHECK-IN-COUNTER" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10011" where name="FORKLIFT HIRE" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10012" where name="Sale of fresh water" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="10013" where name="SECURITY OFFIFER" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="52001" where name="Stocks" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+update account set acccode="56201" where name="Sundry Debtors" and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+
+#Account type changes
+
+
+update account set acccode="61002" where name="SIN SGD-DBS"  and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+
+update account set groupname="ff808081454f64a501454f6df24d002d" , mastertypeid=3 where name="SIN SGD-DBS"  and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+
+update account set groupname="ff808081454f64a501454f6df24d002d" , mastertypeid=3 where name="SIN SGD DB"  and company ="04575a0c-b33c-11e3-986d-001e670e1424";
+
+
+ALTER TABLE `invoicedetails`
+MODIFY COLUMN `dependenttype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
+ALTER TABLE `grdetails`
+MODIFY COLUMN `dependenttype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
+ALTER TABLE `grdetails`
+MODIFY COLUMN `showquantity` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0';
+
+ALTER TABLE `invoicedetails`
+MODIFY COLUMN `showquantity`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0';
+
+ALTER TABLE `invoicedetails`
+MODIFY COLUMN `inouttime`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+
+ALTER TABLE `grdetails`
+MODIFY COLUMN `inouttime`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
+#Dbchanges for set parent account groups null for sats
+update accgroup set parent=null where company="04575a0c-b33c-11e3-986d-001e670e1424";
+
+update company set templateflag=8 where subdomain="sats";
+
+# Amol Dhokale 11th Sept 2014
+# Vendor : Account field
+update default_header set ismandatory='T',validatetype='ref',refmodule_pojoclassname='Account',refdatacolumn_hbmname='name',reffetchcolumn_hbmname='ID' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Account';
+
+#Mayur Pawar 12 sep 2014 
+ALTER TABLE `compaccpreferences` ADD COLUMN `isSerialCompulsory` char(1) default 'T';
+
+ alter table salespurchasebatchmapping add column   `quantity` double DEFAULT '0';
+ alter table returnbatchmapping add column   `quantity` double DEFAULT '0';
+
+alter table product add column isSerialForProduct char(1) default 'F' ;
+alter table product add column isBatchForProduct char(1) default 'F' ;
+alter table customer modify column title varchar(255) DEFAULT NULL;
+
+#Pandurang 16 sept 2014
+ALTER TABLE salescomissionscehma ADD COLUMN categoryid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE salescomissionscehma ADD COLUMN commissiontype int(11) DEFAULT 1;
+insert into reportmaster value("Brand_Commission_Report","Brand Commission Report","View Brand Commission Report From here.","BrandCommissionReport()");
+
+#Anup Kale 16 September
+
+CREATE TABLE `datafilteringmodules` (
+ `id` varchar(255) NOT NULL,
+  `userid` varchar(250) NOT NULL,
+  `companyid` varchar(250) NOT NULL,
+  `customerinvoice` char(1) DEFAULT 'F',
+  `salesorder` char(1) DEFAULT 'F',
+  `customerquotation` char(1) DEFAULT 'F',
+  PRIMARY KEY (`id`),
+  CONSTRAINT FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT FOREIGN KEY (`companyid`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+# Atul sachan 16 sept 2014
+
+CREATE TABLE `girofileinfo` (
+`id`  varchar(255) NOT NULL ,
+`filename`  varchar(255) NULL DEFAULT NULL,
+`bank`  varchar(255) NULL DEFAULT NULL,
+`comments`  varchar(255) NULL DEFAULT NULL,
+`companyid`  varchar(255) NULL DEFAULT NULL,
+`sequencenumber`  integer NULL,
+`status`  varchar(255) NULL,
+`filecreationtime`  date NULL,
+`company`  varchar(255) NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+ALTER TABLE `payment`
+ADD COLUMN `isgirofilegenerated`  int(1) NULL DEFAULT 0;
+
+# Vivek Pakmode 16th Sept 2014
+update account set creationdate="2014-01-01 00:00:00"  where creationdate>("2014-01-01 00:00:00");
+
+# Anand Nimbalkar 13th Sept 2014
+ALTER TABLE `payment` ADD COLUMN `ibgtypetransaction`  int(1) NULL DEFAULT 0;
+ALTER TABLE `payment` ADD COLUMN `ibgreceivingbankdetails` varchar(255) default NULL, ADD  FOREIGN KEY (`ibgreceivingbankdetails`) REFERENCES `ibgreceivingbankdetails` (`id`);
+ALTER TABLE `payment` ADD COLUMN `ibgcode` varchar(255) DEFAULT NULL;
+
+#Neeraj Dwivedi 18th Sept 2014
+alter table customdesigntemplate add column pageheaderjson longtext default '';
+alter table customdesigntemplate add column pageheaderhtml longtext default '';
+alter table customdesigntemplate add column pageheadersqlquery varchar(4000) default '';
+
+#mayur pawar 19 sep 2014
+ALTER TABLE `salesorder` ADD COLUMN `shiplength`  double DEFAULT 1; 
+ALTER TABLE `vendorquotation` ADD COLUMN `shiplength`  double DEFAULT 1; 
+ALTER TABLE `quotation` ADD COLUMN `shiplength`  double DEFAULT 1; 
+
+alter table sodetails add  showquantity  varchar(255) default '';
+alter table podetails add  showquantity  varchar(255) default '';
+alter table quotationdetails add  showquantity  varchar(255) default '';
+alter table vendorquotationdetails add  showquantity  varchar(255) default '';
+
+alter table sodetails add  dependenttype  varchar(255) default '';
+alter table podetails add  dependenttype  varchar(255) default '';
+alter table quotationdetails add  dependenttype  varchar(255) default '';
+alter table vendorquotationdetails add  dependenttype  varchar(255) default '';
+
+alter table sodetails add  inouttime  varchar(255) default '';
+alter table podetails add  inouttime  varchar(255) default '';
+alter table quotationdetails add  inouttime  varchar(255) default '';
+alter table vendorquotationdetails add  inouttime  varchar(255) default '';
+
+ALTER TABLE `salesorder`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `purchaseorder`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `quotation`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `vendorquotation`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+# Anand Nimbalkar 22nd Sept 2014
+
+ALTER TABLE `salesreturn` ADD COLUMN `createdon` bigint(20) default 0;
+update salesreturn set createdon = UNIX_TIMESTAMP(orderdate);
+
+ALTER TABLE `product` ADD COLUMN `createdon` bigint(20) default 0;
+update product p inner join inventory inv on inv.product = p.id set p.createdon = UNIX_TIMESTAMP(inv.updatedate) where inv.newinv='T' and inv.defective='F' and inv.carryin='T';
+update product p inner join compaccpreferences pref on pref.id = p.company set p.createdon = UNIX_TIMESTAMP(pref.fyfrom) where p.createdon=0;
+
+
+#****************************** F1 Code Merge DB Changes  23 Sep 2014 **********************************#
+#Mayur Pawar 22th june 2014
+Alter table sodetails ADD COLUMN `lockquantity`  double NULL DEFAULT 0;
+Alter table salesorder ADD COLUMN `lockquantityflag`  boolean DEFAULT FALSE;
+
+
+ CREATE TABLE `lockassemblyquantitymapping` (
+  `id` varchar(255) NOT NULL,
+  `quantity` double NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `subproducts` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKEEA3ABD5AF620884` (`subproducts`),
+  KEY `FKEEA3ABD58E4485CF` (`product`),
+  CONSTRAINT `product_FK` FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  CONSTRAINT `subproduct_FK` FOREIGN KEY (`subproducts`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `assetdetail` ADD COLUMN `batch`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `productbatch` ADD COLUMN `asset`  varchar(255) NULL DEFAULT NULL; 
+
+ALTER TABLE productbatch ADD FOREIGN KEY (`asset`) REFERENCES `assetdetail` (`id`)  ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `compaccpreferences` ADD COLUMN `isBatchCompulsory` char(1) default 'T';
+
+
+
+#Pandurang 24th june 2014  Contract form
+
+CREATE TABLE contract (
+id  varchar(255) NOT NULL ,
+sonumber varchar(50) DEFAULT NULL,
+orderdate datetime DEFAULT NULL,
+originalenddate datetime DEFAULT NULL,
+
+fromdate datetime DEFAULT  NULL,
+todate datetime DEFAULT NULL,
+enddate datetime DEFAULT NULL,
+signdate datetime DEFAULT NULL,
+movedate datetime DEFAULT NULL,
+moveoutdate datetime DEFAULT NULL,
+
+memo varchar(2048) DEFAULT NULL,
+customer varchar(255) NOT NULL,
+company varchar(255) NOT NULL,
+contactperson  varchar(255) DEFAULT NULL ,
+
+cstatus varchar(255) DEFAULT NULL,
+createdby varchar(40) DEFAULT NULL,
+modifiedby varchar(40) DEFAULT NULL,
+createdon bigint(20) DEFAULT NULL,
+updatedon bigint(20) DEFAULT NULL,
+seqnumber int(11) DEFAULT '0',
+seqformat varchar(40) DEFAULT NULL,
+billingshippingaddresses varchar(255) DEFAULT NULL,
+
+
+amount double NULL DEFAULT 0 ,
+depositamount  double NULL DEFAULT 0 ,
+
+emailid varchar(50) NOT NULL,
+termtype varchar(50) DEFAULT NULL,
+currency varchar(255) DEFAULT NULL,
+
+
+PRIMARY KEY (id),
+FOREIGN KEY (seqformat) REFERENCES sequenceformat (id),
+FOREIGN KEY (billingshippingaddresses) REFERENCES billingshippingaddresses (id),
+FOREIGN KEY (cstatus) REFERENCES masteritem (id),
+FOREIGN KEY (createdby)  REFERENCES users(userid),
+FOREIGN KEY (modifiedby)  REFERENCES users(userid),
+FOREIGN KEY (currency) REFERENCES currency (currencyid),
+FOREIGN KEY (customer) REFERENCES customer (id),
+FOREIGN KEY (company) REFERENCES company (companyid) 
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+
+alter table contract add column
+parentContract varchar(255) DEFAULT NULL;
+
+alter table contract  add
+FOREIGN KEY (parentContract) REFERENCES contract (id);
+
+alter table contract add column
+contractnumber varchar(50) NOT NULL;
+
+alter table contract add column
+autogen char(1) NOT NULL DEFAULT '0';
+
+alter table contract add column
+agreedservices int(11) DEFAULT '0';
+
+alter table contract add column
+termvalue int(11) DEFAULT '0';
+
+
+
+
+CREATE TABLE contractdetails (
+  id varchar(255) NOT NULL,
+  remark varchar(255) DEFAULT NULL,
+  quantity double NOT NULL,
+  uom varchar(255) DEFAULT NULL,
+  baseuomquantity double DEFAULT '0',
+  baseuomrate double DEFAULT '1',
+  rate double NOT NULL,
+  product varchar(255) NOT NULL,
+  contract varchar(255) NOT NULL,
+  company varchar(255) NOT NULL,
+  srno int(11) DEFAULT '0',
+  tax varchar(255) DEFAULT NULL,
+  description text,
+  discount double DEFAULT '0',
+  discountispercent int(1) DEFAULT '1',
+  rowtaxamount double DEFAULT '0',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  FOREIGN KEY (`contract`) REFERENCES `contract` (`id`),
+  FOREIGN KEY (`uom`) REFERENCES `uom` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE servicedetails (
+  id varchar(255) NOT NULL,
+  servicedate datetime DEFAULT  NULL,
+  contract varchar(255) NOT NULL,
+  company varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`contract`) REFERENCES `contract` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Sagar M - 25th June
+# Added new fields - GST Number/Company UEN
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'GST Number','gstnumber','compaccpreferences','','','Company GST Number','1','43');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company UEN','companyuen','compaccpreferences','','','Company UEN','1','43');
+
+RENAME TABLE templateFieldInfo TO templatefieldinfo;
+
+CREATE TABLE `contractfile` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) default NULL,
+  `description` varchar(15) default NULL,
+  `type` tinyint(3) unsigned default NULL,
+  `deleted` tinyint(4) default '0',
+  `creator` varchar(255) NOT NULL,
+  `createdon` bigint(20) default NULL,
+   `contractid` varchar(255) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FK_AttachmentCreater` (`creator`),
+  CONSTRAINT `FK78591C21260084BA_AttachmentCreater` FOREIGN KEY (`creator`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Rushikesh Mandage - 27th June - Updated field "Account Type" to "Account Group"
+ update default_header set defaultHeader= "Account Group" where id= "2f8a92a6-f73d-102d-9b6d-001e4f3fdc1a";
+
+#Sagar A - 27th June 2014 - Deleted inter company ledger report as requirement not clear.
+delete from reportmaster where id = 'Inter_Company_Ledger_Report';
+
+# Sagar A - 27th June 2014 - Affect gross profit flag should be false for asset and liability types of accounts
+update accgroup set affectgp='F' where nature in (0, 1);
+
+
+# Atul sachan 30 June 2014 - Fixed Asset Leasing
+
+ALTER TABLE assetdetail ADD COLUMN islinkedtoleaseso INT(1) DEFAULT 0;
+
+ALTER TABLE assetdetail ADD COLUMN isleasedocreated INT(1) DEFAULT 0;
+
+ALTER TABLE assetdetail ADD COLUMN isleasecicreated INT(1) DEFAULT 0;
+
+ALTER TABLE salesorder ADD COLUMN leaseormaintenanceso INT(11) DEFAULT 0;
+
+ALTER TABLE deliveryorder ADD COLUMN isleasedo INT(1) DEFAULT 0;
+
+ALTER TABLE invoice ADD COLUMN isfixedassetleaseinvoice INT(1) DEFAULT 0;
+
+
+CREATE TABLE `productreplacement` (
+`id`  varchar(255) NOT NULL ,
+`replacementrequestnumber`  varchar(255) NULL ,
+`isclosed`  INT(1) NULL DEFAULT 0,
+`company`  varchar(255) NULL ,
+`customer`  varchar(255) NULL ,
+`contract`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`customer`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `productreplacementdetail` (
+`id`  varchar(255) NOT NULL ,
+`isasset`  int(1) NULL DEFAULT 0 ,
+`addinventoryflag`  int(1) NULL DEFAULT 0 ,
+`replacementquantity`  double NULL DEFAULT 0 ,
+`replacedquantity`  double NULL DEFAULT 0 ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`product`  varchar(255) NULL DEFAULT NULL ,
+`productreplacement`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+CREATE TABLE `replacementproductbatchdetailsmapping` (
+`id`  varchar(255) NOT NULL ,
+`batchserial`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`productreplacement`  varchar(255) NULL DEFAULT NULL ,
+`productreplacementdetail`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`batchserial`) REFERENCES `batchserial` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE `sodetails`
+ADD COLUMN `productreplacementdetail`  varchar(255) NULL;
+
+ALTER TABLE `sodetails` ADD FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE inventory ADD COLUMN leaseflag INT(1) DEFAULT 0;
+
+ALTER TABLE `salesorder`
+ADD COLUMN `contract`  varchar(255) NULL;
+
+ALTER TABLE `salesorder` ADD FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+CREATE TABLE `invoicecontractmapping` (
+`id`  varchar(255) NOT NULL ,
+`invoice`  varchar(255) NULL DEFAULT NULL ,
+`deliveryorder`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`invoice`) REFERENCES `invoice` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`deliveryorder`) REFERENCES `deliveryorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `docontractmapping` (
+`id`  varchar(255) NOT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+`deliveryorder`  varchar(255) NULL DEFAULT NULL ,
+`salesorder`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`deliveryorder`) REFERENCES `deliveryorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`salesorder`) REFERENCES `salesorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `maintenance` (
+`id`  varchar(255) NOT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+`customer`  varchar(255) NULL DEFAULT NULL ,
+`maintenancenumber`  varchar(255) NULL DEFAULT NULL ,
+`maintenanceamount`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`customer`) REFERENCES `customer` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE `salesorder`
+ADD COLUMN `maintenance`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `salesorder` ADD FOREIGN KEY (`maintenance`) REFERENCES `maintenance` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE maintenance ADD COLUMN `isclosed`  INT(1) NULL DEFAULT 0;
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'isMaintenanceOrder','Is Maintenance',20,1,1);
+
+#Pandurang 30 june 2014 -autpo populate products
+ALTER TABLE extracompanypreferences add COLUMN  autoPopulateMappedProduct char(1) DEFAULT 'F' ;
+
+
+# Atul sachan - 2nd July 2014
+
+ALTER TABLE `salesorder`
+ADD COLUMN `isreplacementso`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `docontractmapping`
+ADD COLUMN `productreplacement`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `docontractmapping` ADD FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Amol Dhokale 2nd July 2014
+alter table extracompanypreferences 
+add column `onlybasecurrency` char(1) default 'F';
+
+#Pandurang 4th Jule 2014
+
+CREATE TABLE  salescomissionscehma (
+  id varchar(255) NOT NULL DEFAULT '',
+  lowerlimit int(11) DEFAULT '0',
+  upperlimit int(11) DEFAULT '0',
+  percentagetype int(11) DEFAULT '0',
+  amount int(11) DEFAULT '0',
+  company varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (company) REFERENCES company (companyid) 
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE salescomissionscehma ADD COLUMN schemaitem VARCHAR(255) DEFAULT NULL;
+
+insert into reportmaster value("Sales_Commission_Report","Sales Commission Report","View Sales Commission Report From here.","SalesCommissionReport()");
+
+
+ALTER TABLE quotation ADD COLUMN isleasequotation INT(1) NULL DEFAULT 0;
+
+ALTER TABLE `quotationdetails`
+ADD COLUMN `productreplacementdetail`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `quotationdetails` ADD FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Anand Nimbalkar 8th July 2014
+alter table grorder add column `approvestatuslevel` int(11) NOT NULL DEFAULT '0';
+update grorder set approvestatuslevel = 11;
+
+# Atul sachan 8th July 2014
+
+ALTER TABLE salesreturn ADD COLUMN isleasesalesreturn INT(1) NULL DEFAULT 0;
+
+# Mayur Pawar 8 july
+alter table product add column `location`  varchar(255) NULL ;
+alter table product add column `warehouse`  varchar(255) NULL; 
+
+ALTER TABLE `product` ADD CONSTRAINT `product_location_fk1` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `product` ADD CONSTRAINT `product_warehouse_fk1` FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE inventorylocation ADD COLUMN isdefault INT(1) DEFAULT 0;
+ALTER TABLE inventorywarehouse ADD COLUMN isdefault INT(1) DEFAULT 0;
+
+insert into reportmaster values("SerialNO_Status_Report","Serial No. Status Report","View Serial No. Status Report","getSerialNoTabView()"); 
+
+
+# Atul sachan - 2nd July 2014
+
+ALTER TABLE `salesorder`
+ADD COLUMN `isreplacementso`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `docontractmapping`
+ADD COLUMN `productreplacement`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `docontractmapping` ADD FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Amol Dhokale 2nd July 2014
+alter table extracompanypreferences 
+add column `onlybasecurrency` char(1) default 'F';
+
+#Pandurang 4th Jule 2014
+
+CREATE TABLE  salescomissionscehma (
+  id varchar(255) NOT NULL DEFAULT '',
+  lowerlimit int(11) DEFAULT '0',
+  upperlimit int(11) DEFAULT '0',
+  percentagetype int(11) DEFAULT '0',
+  amount int(11) DEFAULT '0',
+  company varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (company) REFERENCES company (companyid) 
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE salescomissionscehma ADD COLUMN schemaitem VARCHAR(255) DEFAULT NULL;
+
+insert into reportmaster value("Sales_Commission_Report","Sales Commission Report","View Sales Commission Report From here.","SalesCommissionReport()");
+
+# Atul sachan 7 July 2014
+
+ALTER TABLE quotation ADD COLUMN isleasequotation INT(1) NULL DEFAULT 0;
+
+ALTER TABLE `quotationdetails`
+ADD COLUMN `productreplacementdetail`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `quotationdetails` ADD FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+# Anand Nimbalkar 8th July 2014
+alter table grorder add column `approvestatuslevel` int(11) NOT NULL DEFAULT '0';
+update grorder set approvestatuslevel = 11;
+
+# Atul sachan 8th July 2014
+
+ALTER TABLE salesreturn ADD COLUMN isleasesalesreturn INT(1) NULL DEFAULT 0;
+
+# Atul sachan 14th July 2014
+
+alter table servicedetails add column status int(1) null default 0;
+
+ALTER TABLE `fixedassetopening`
+MODIFY COLUMN `creationdate`  datetime NULL DEFAULT NULL;
+
+
+ALTER TABLE extracompanypreferences ADD COLUMN leasemanagementflag INT(1) DEFAULT 0;
+
+# Raveesh Pathak 14th July 2014
+
+update compaccpreferences set showprodserial='F';
+
+
+# Atul sachan 15th July 2014
+
+ALTER TABLE `quotation`
+ADD COLUMN `contract`  varchar(255) NULL;
+
+ALTER TABLE `quotation` ADD FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+#Added Contract Contract Expiry / Terminate,Goods Return,Renew Contract Flow for lease module Malhari 16 July
+
+ALTER TABLE `contract` DROP FOREIGN KEY `contract_ibfk_3`;
+ALTER TABLE `contract` DROP COLUMN `cstatus`;
+ALTER TABLE `contract` ADD COLUMN `cstatus`  tinyint(3) NULL DEFAULT 1;
+ALTER TABLE `contract` ADD COLUMN `srstatus`  tinyint(3) NULL DEFAULT 1;
+
+CREATE TABLE `contractdates` (
+`id`  varchar(255) NOT NULL ,
+`startdate`  datetime NULL DEFAULT NULL ,
+`enddate`  datetime NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `contractdates_contract_FK` FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE `contract`
+MODIFY COLUMN `cstatus`  tinyint(3) NULL DEFAULT 1 AFTER `contractcustomdataref`,
+MODIFY COLUMN `srstatus`  tinyint(3) NULL DEFAULT 1 AFTER `cstatus`;
+
+
+# Mayur Pawar 8 july
+alter table product add column `location`  varchar(255) NULL ;
+alter table product add column `warehouse`  varchar(255) NULL; 
+
+ALTER TABLE `product` ADD CONSTRAINT `product_location_fk1` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `product` ADD CONSTRAINT `product_warehouse_fk1` FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE inventorylocation ADD COLUMN isdefault INT(1) DEFAULT 0;
+ALTER TABLE inventorywarehouse ADD COLUMN isdefault INT(1) DEFAULT 0;
+
+insert into reportmaster values("SerialNO_Status_Report","Serial No. Status Report","View Serial No. Status Report","getSerialNoTabView()"); 
+
+#Hitesh Suryawanshi 16th July 2014
+CREATE TABLE `productpricerule` (
+  `id` varchar(255) NOT NULL DEFAULT '',
+  `lowerlimit` int(11) DEFAULT '0',
+  `upperlimit` int(11) DEFAULT '0',
+  `percentagetype` int(11) DEFAULT '0',
+  `ruletype` int(11) DEFAULT '0',
+  `pricetype` int(11) DEFAULT '0',
+  `increamentordecreamenttype` int(11) DEFAULT '0',
+  `category` varchar(255) DEFAULT NULL,
+  `amount` int(11) DEFAULT '0',
+  `company` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company` (`company`),
+  CONSTRAINT `productpricefk1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  CONSTRAINT `productpricefk2` FOREIGN KEY (`category`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#Hitesh Suryawanshi 18th July 2014
+CREATE TABLE `contractcustomdata` (
+  `contractid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `moduleId` int(11) DEFAULT '1',
+  `deleted` char(1) DEFAULT 'F',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`contractid`),
+  KEY `contractcustomdata_fk_1` (`company`),
+  CONSTRAINT `contractcustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `contract`
+ADD COLUMN  `contractcustomdataref` varchar(255) DEFAULT NULL;
+
+# Anand Nimbalkar 18th July 2014
+alter table masteritem add column emailid varchar(255) default null;
+alter table mailnotification add column mailtosalesperson char(1) default 0;
+
+alter table salesreturn add column contract varchar(255) default null;
+alter table salesreturn add constraint FK_contract foreign key(contract) references contract(id);
+
+#Pandurang Customer vendor T Ledger 22 Jule 2014
+insert into reportmaster(id,name,description,method_name) values ('customer_Vendor_T_Ledger','Customer Vendor Analysis T Report','View T shape Customer and Vendor Analysis Report','callCustomerVendorTLedgerReport()');
+
+#Mayur Pawar 17th July 2014 
+ALTER TABLE `compaccpreferences` ADD COLUMN `isBatchCompulsory` char(1) default 'T';
+
+alter table batchserial add column `company`  varchar(255) NULL ;
+ALTER TABLE `batchserial` ADD CONSTRAINT `serial_company_fk1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ alter table batchserial add column `product`  varchar(255) NULL;
+ALTER TABLE `batchserial` ADD CONSTRAINT `serial_product_fk1`  FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+alter table batchserial add ispurchase char(1) NOT NULL default 'T';
+alter table batchserial add transactiontype int(11) DEFAULT 1;
+
+
+#Neeraj Dwivedi 18th July 2014
+#for Credit Note-3rd condition
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor name','vendor','vendor','id','name','Vendor name','1','12');
+
+#for Debit Note-3rd condition
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer name','customer','customer','id','name','Customer name','1','10');
+
+#PO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','18');
+
+
+#Raveesh Pathak 18th July
+
+alter table vendor add column currency varchar(255);
+alter table vendor add CONSTRAINT  FK_vendor_currency FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+
+alter table customer add column currency varchar(255);
+alter table customer add CONSTRAINT  FK_customer_currency FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+
+update vendor INNER JOIN account on account.id=vendor.account
+set vendor.currency=account.currency;
+
+update customer INNER JOIN account on account.id=customer.account
+set customer.currency=account.currency;
+
+#Hitesh Suryawanshi 18th July
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `lastsyncwithpm` datetime DEFAULT NULL;
+
+#Neeraj Dwivedi 18th July 2014
+#CQ - Adding Billing Contact Person and Shipping Contact Person
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person Name','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person Name','1','22');
+
+#Hitesh Suryawanshi 21 July
+
+update defaultaccount set companytype=NULL where name="Unrealised Gain/Loss";
+
+ALTER TABLE `defaultcap`
+ADD COLUMN `unrealisedglaccount`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `defaultcap` ADD CONSTRAINT  FOREIGN KEY (`unrealisedglaccount`) REFERENCES `defaultaccount` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+update defaultcap set unrealisedglaccount='4028805041a768df0141bbe0c2610132';
+
+
+#Pandurang Customer vendor T Ledger 22 Jule 2014
+insert into reportmaster(id,name,description,method_name) values ('customer_Vendor_T_Ledger','Customer Vendor Analysis T Report','View T shape Customer and Vendor Analysis Report','callCustomerVendorTLedgerReport()');
+
+#Mayur Pawar 23 July 
+#0 - Asset, 1 - Liability, 2 - Expense, 3 - Income
+#Profit and Loss
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 0 where accgroup.nature in (2, 3);
+#Balance Sheet
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 1 where accgroup.nature in (0, 1);
+
+
+
+#pandurang 7 augast 2014 
+ALTER TABLE customer ADD COLUMN crmaccountid VARCHAR(255) DEFAULT NULL ;
+
+
+#Mayur Pawar 8 Aug 2014
+
+RENAME TABLE templateFieldInfo TO templatefieldinfo;
+delete from default_header where defaultHeader="Credit Term" and module=20;
+ 
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)VALUES (UUID(),'Credit Term','term','creditterm','termid','termname','Credit Term','1','20');
+);
+
+#pandurang 8 augast 2014 
+ALTER TABLE vendor ADD COLUMN crmaccountid VARCHAR(255) DEFAULT NULL ;
+
+#Hitesh Suryawanshi 12th Aug
+alter table customer add column isonetime char(1) DEFAULT 'F';
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',2,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',4,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',20,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',22,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',27,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',29,1,1,0);
+
+# Amol Dhokale 21st August,2014
+UPDATE company SET templateflag=0 WHERE subdomain='henggaun';
+UPDATE company SET templateflag=0 WHERE subdomain='henggauntest';
+
+#Rushikesh Mandage 21st August 2014
+ alter table vendor modify column title varchar(255) DEFAULT NULL;
+ alter table customer modify column title varchar(255) DEFAULT NULL;
+
+#Rushikesh Mandage 28th August 2014
+ALTER TABLE `productbatch` MODIFY COLUMN `mfgdate`  datetime NULL DEFAULT NULL AFTER `name`,
+MODIFY COLUMN `expdate`  datetime NULL DEFAULT NULL AFTER `mfgdate`;
+
+ALTER TABLE `batchserial` MODIFY COLUMN `expfromdate`  datetime NULL DEFAULT NULL AFTER `name`,
+MODIFY COLUMN `exptodate`  datetime NULL DEFAULT NULL AFTER `expfromdate`;
+
+
+# Amol Dhokale 11th Sept 2014
+# Vendor : Account field
+update default_header set ismandatory='T',validatetype='ref',refmodule_pojoclassname='Account',refdatacolumn_hbmname='name',reffetchcolumn_hbmname='ID' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Account';
+
+#Mayur Pawar 12 sep 2014 
+ALTER TABLE `compaccpreferences` ADD COLUMN `isSerialCompulsory` char(1) default 'T';
+
+ alter table salespurchasebatchmapping add column   `quantity` double DEFAULT '0';
+ alter table returnbatchmapping add column   `quantity` double DEFAULT '0';
+
+alter table product add column isSerialForProduct char(1) default 'F' ;
+alter table product add column isBatchForProduct char(1) default 'F' ;
+ alter table customer modify column title varchar(255) DEFAULT NULL;
+
+
+# Atul sachan 16 sept 2014
+
+CREATE TABLE `girofileinfo` (
+`id`  varchar(255) NOT NULL ,
+`filename`  varchar(255) NULL DEFAULT NULL,
+`bank`  varchar(255) NULL DEFAULT NULL,
+`comments`  varchar(255) NULL DEFAULT NULL,
+`companyid`  varchar(255) NULL DEFAULT NULL,
+`sequencenumber`  integer NULL,
+`status`  varchar(255) NULL,
+`filecreationtime`  date NULL,
+`company`  varchar(255) NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+ALTER TABLE `payment`
+ADD COLUMN `isgirofilegenerated`  int(1) NULL DEFAULT 0;
+
+# Vivek Pakmode 16th Sept 2014
+update account set creationdate="2014-01-01 00:00:00"  where creationdate>("2014-01-01 00:00:00");
+
+# Anand Nimbalkar 13th Sept 2014
+ALTER TABLE `payment` ADD COLUMN `ibgtypetransaction`  int(1) NULL DEFAULT 0;
+ALTER TABLE `payment` ADD COLUMN `ibgreceivingbankdetails` varchar(255) default NULL, ADD  FOREIGN KEY (`ibgreceivingbankdetails`) REFERENCES `ibgreceivingbankdetails` (`id`);
+ALTER TABLE `payment` ADD COLUMN `ibgcode` varchar(255) DEFAULT NULL;
+
+#Neeraj Dwivedi 18th Sept 2014
+alter table customdesigntemplate add column pageheaderjson longtext default '';
+alter table customdesigntemplate add column pageheaderhtml longtext default '';
+alter table customdesigntemplate add column pageheadersqlquery varchar(4000) default '';
+
+#mayur pawar 17 sep 2014
+ALTER TABLE `salesorder` ADD COLUMN `shiplength`  double DEFAULT 1; 
+ALTER TABLE `vendorquotation` ADD COLUMN `shiplength`  double DEFAULT 1; 
+ALTER TABLE `quotation` ADD COLUMN `shiplength`  double DEFAULT 1; 
+
+alter table sodetails add  showquantity  varchar(255) default '';
+alter table podetails add  showquantity  varchar(255) default '';
+alter table quotationdetails add  showquantity  varchar(255) default '';
+alter table vendorquotationdetails add  showquantity  varchar(255) default '';
+
+alter table sodetails add  dependenttype  varchar(255) default '';
+alter table podetails add  dependenttype  varchar(255) default '';
+alter table quotationdetails add  dependenttype  varchar(255) default '';
+alter table vendorquotationdetails add  dependenttype  varchar(255) default '';
+
+alter table sodetails add  inouttime  varchar(255) default '';
+alter table podetails add  inouttime  varchar(255) default '';
+alter table quotationdetails add  inouttime  varchar(255) default '';
+alter table vendorquotationdetails add  inouttime  varchar(255) default '';
+
+ALTER TABLE `salesorder`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `purchaseorder`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `quotation`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+ALTER TABLE `vendorquotation`add COLUMN `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+
+#******************************************************************************************#
+
+# Vivek Pakmode 24th Sept 2014
+insert into reportmaster values("Monthly Balance Sheet","Monthly Balance Sheet","View Monthly Balance Sheet","monthlyBalanceSheet()");
+
+# Anand Nimbalkar 24th Sept 2014
+
+update default_header set ismandatory='F' where module=30 and defaultHeader="Unit Of Measure";
+update default_header set ismandatory='F',hbmnotnull='F' where module=30 and defaultHeader="Reorder Level";
+update default_header set ismandatory='F',hbmnotnull='F' where module=30 and defaultHeader="Reorder Quantity";
+update default_header set ismandatory='F',hbmnotnull='F' where module=30 and defaultHeader="Lead Time (in days)";
+update default_header set ismandatory='F',hbmnotnull='F' where module=30 and defaultHeader="Cycle count Interval (in days)";
+update default_header set ismandatory='F',hbmnotnull='F' where module=30 and defaultHeader="Cycle count tolerance (%)";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Initial Quantity";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Initial Purchase Price";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Sales Price";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Default Location";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Default Warehouse";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Make available in other application";
+update default_header set hbmnotnull='F' where module=30 and defaultHeader="Multiple UOM";
+update default_header set hbmnotnull='T' where module=30 and defaultHeader="Sales Account";
+update default_header set hbmnotnull='T' where module=30 and defaultHeader="Sales Return Account";
+update default_header set hbmnotnull='T' where module=30 and defaultHeader="Purchase Account";
+update default_header set hbmnotnull='T' where module=30 and defaultHeader="Purchase Return Account";
+update default_header set refdatacolumn_hbmname="productid" where module=30 and defaultHeader="Parent Product";
+
+# Amol Dhokale 25th Sept 2014
+# Added new column user in masteitem for salesman to user mapping
+ALTER TABLE masteritem ADD COLUMN `user` VARCHAR(255) DEFAULT NULL;
+ALTER TABLE masteritem ADD CONSTRAINT  FK_masteritem_user FOREIGN KEY (`user`) REFERENCES `users` (`userid`);
+
+# Vivek Pakmode 25th Sept 2014
+update reportmaster set name="Cash Flow Statement" where id="Cash_Flow_Statement_As_Per_COA";
+update reportmaster set description="View Cash Flow Statement" where id="Cash_Flow_Statement_As_Per_COA";
+
+# Pandurang 26th Sept 2014
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `lmsintegration` char(1) DEFAULT 'F';
+
+# Amol Dhokale 29th Sept 2014
+ALTER TABLE `productbuild` ADD COLUMN `description` TEXT;
+ALTER TABLE `extracompanypreferences` MODIFY COLUMN `noofdaysforvalidtillfield` INT(11) DEFAULT -1;
+RENAME TABLE templateFieldInfo TO templatefieldinfo;
+
+# Hitesh Suryawanshi 30th Sept 2014
+alter table quotation add COLUMN `linkflag` int(2) DEFAULT '0';
+alter table vendorquotation add COLUMN `linkflag` int(2) DEFAULT '0';

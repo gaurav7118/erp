@@ -1,0 +1,1 @@
+Ext.define("Ext.theme.classic.grid.column.Widget",{override:"Ext.grid.column.Widget",config:{defaultWidgetUI:{button:"grid-cell",splitbutton:"grid-cell",cyclebutton:"grid-cell",textfield:"grid-cell",pickerfield:"grid-cell",combobox:"grid-cell",combo:"grid-cell",datefield:"grid-cell",timefield:"grid-cell",filefield:"grid-cell",fileuploadfield:"grid-cell"}}})

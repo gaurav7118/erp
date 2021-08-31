@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.GiroFileGenerationHistory" table="girofilegenerationhistory">
+        <id name="ID" type="string">
+            <column name="id"/>
+            <generator class="uuid"/>
+        </id>
+        <property name="generationDate" type="date">
+            <column name="generationdate"/>
+        </property>
+        <property name="fileName" type="string">
+            <column name="filename"/>
+        </property>
+        <property name="count" type="integer">
+            <column name="count" default="0"/>
+        </property>
+        <property name="Bank" type="integer">
+            <column name="bank"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

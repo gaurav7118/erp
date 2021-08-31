@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="salesorder" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1269722013523715"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFC400">
+		<pen lineStyle="Solid"/>
+		<box>
+			<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+			<topPen lineStyle="Solid"/>
+			<leftPen lineStyle="Solid"/>
+			<bottomPen lineStyle="Solid"/>
+			<rightPen lineStyle="Solid"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFB4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="category" mode="Opaque" backcolor="#FF6900">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="subcategory" mode="Opaque" backcolor="#FECC32">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="table2">
+		<field name="sno" class="java.lang.String"/>
+		<field name="name" class="java.lang.String"/>
+		<field name="desc" class="java.lang.String"/>
+		<field name="unit" class="java.lang.String"/>
+		<field name="quantity" class="java.lang.String"/>
+		<field name="amount" class="java.lang.Double"/>
+		<field name="currency" class="java.lang.String"/>
+		<field name="category" class="java.lang.String"/>
+		<field name="subcategory" class="java.lang.String"/>
+		<variable name="subcategorysum" class="java.lang.Double" resetType="Group" resetGroup="subcategory" calculation="Sum">
+			<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+		</variable>
+		<variable name="categorysum" class="java.lang.Double" resetType="Group" resetGroup="category" incrementType="Group" incrementGroup="subcategory" calculation="Sum">
+			<variableExpression><![CDATA[$V{subcategorysum}]]></variableExpression>
+		</variable>
+		<variable name="finalsum" class="java.lang.Double" incrementType="Group" incrementGroup="category" calculation="Sum">
+			<variableExpression><![CDATA[$V{categorysum}]]></variableExpression>
+		</variable>
+		<group name="category">
+			<groupExpression><![CDATA[$F{category}]]></groupExpression>
+		</group>
+		<group name="subcategory">
+			<groupExpression><![CDATA[$F{subcategory}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="QuotationTable1Data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="QuotationTable2Data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<field name="product" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="duration" class="java.lang.String"/>
+	<field name="language" class="java.lang.String"/>
+	<field name="client" class="java.lang.String"/>
+	<field name="contact" class="java.lang.String"/>
+	<field name="format" class="java.lang.String"/>
+	<field name="jobno" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="jobdesc" class="java.lang.String"/>
+	<field name="preparedby" class="java.lang.String"/>
+	<field name="approvedby" class="java.lang.String"/>
+	<background>
+		<band height="802">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="555" height="802"/>
+			</rectangle>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="4" y="12" width="516" height="99"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="369" y="90" width="172" height="28" forecolor="#EE3703"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QUOTATION]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="194" splitType="Stretch">
+			<frame>
+				<reportElement x="12" y="35" width="529" height="20"/>
+				<staticText>
+					<reportElement style="table_TH" x="0" y="0" width="96" height="20"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Product]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="table_TH" x="331" y="0" width="82" height="20"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Contact]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="96" y="0" width="235" height="20"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{product}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="413" y="0" width="116" height="20"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{contact}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="12" y="54" width="529" height="20"/>
+				<staticText>
+					<reportElement style="table_TH" x="0" y="1" width="96" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="table_TH" x="331" y="1" width="82" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PO / Job No]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="96" y="1" width="235" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="413" y="1" width="116" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{jobno}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="12" y="74" width="529" height="20"/>
+				<staticText>
+					<reportElement style="table_TH" x="0" y="0" width="96" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Languages]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="table_TH" x="331" y="0" width="82" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Format]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="96" y="0" width="235" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{language}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="413" y="0" width="116" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{format}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="12" y="92" width="529" height="20"/>
+				<staticText>
+					<reportElement style="table_TH" x="0" y="1" width="96" height="18"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Duration]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="table_TH" x="331" y="1" width="82" height="18"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="96" y="1" width="235" height="18"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{duration}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="table_CH" x="413" y="1" width="116" height="18"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement x="12" y="16" width="529" height="20"/>
+				<staticText>
+					<reportElement style="table_TH" x="0" y="0" width="96" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Quotation Date]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="96" y="0" width="235" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_CH" x="413" y="0" width="116" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{client}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="table_TH" x="331" y="0" width="82" height="19"/>
+					<box leftPadding="5">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="0.5"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Serif" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Client]]></text>
+				</staticText>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_CH" x="12" y="142" width="529" height="45" backcolor="#FEFEFE"/>
+				<box topPadding="4" leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="DejaVu Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jobdesc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="category" x="12" y="122" width="529" height="20"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Job Brief]]></text>
+			</staticText>
+		</band>
+		<band height="18">
+			<componentElement>
+				<reportElement key="table 1" style="table" x="12" y="5" width="529" height="0"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="table2">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{QuotationTable2Data}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="328">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="table_TD" height="18" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="328" height="18"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_TH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="328" height="24"/>
+								<box leftPadding="5"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Quotation Summary]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_TD" height="18" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="71">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="table_TD" height="18" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_TH" height="24" rowSpan="1"/>
+						<jr:columnFooter style="table_TD" height="18" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="55">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="table_TD" height="18" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_TH" height="24" rowSpan="1"/>
+						<jr:columnFooter style="table_TD" height="18" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="55" height="18"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="75">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="table_TD" height="18" rowSpan="1">
+								<textField evaluationTime="Group" evaluationGroup="category" pattern="###0.00;-###0.00">
+									<reportElement x="0" y="0" width="75" height="18"/>
+									<box rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8"/>
+									</textElement>
+									<textFieldExpression class="java.lang.Double"><![CDATA[$V{categorysum}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:columnHeader style="table_TH" height="24" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="75" height="24"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Amount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_TD" height="18" rowSpan="1">
+							<textField evaluationTime="Report" pattern="###0.00;-###0.00">
+								<reportElement x="0" y="0" width="75" height="18"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.Double"><![CDATA[$V{finalsum}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="41">
+			<staticText>
+				<reportElement style="table_CH" x="344" y="0" width="198" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Package]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 1" style="table" x="12" y="28" width="529" height="0"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="table2">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{QuotationTable2Data}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="25">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="category" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="subcategory">
+							<jr:cell style="subcategory" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="category">
+							<jr:cell height="15" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:detailCell style="table_CH" height="16" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="150">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="category" height="15" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="150" height="15"/>
+									<box leftPadding="5"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="subcategory">
+							<jr:cell style="subcategory" height="15" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="150" height="15"/>
+									<box leftPadding="5"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{subcategory}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="category">
+							<jr:cell height="15" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TH" height="16" rowSpan="1">
+							<textField>
+								<reportElement style="table_CH" x="0" y="0" width="150" height="16"/>
+								<box leftPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="154">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="category" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="subcategory">
+							<jr:cell style="subcategory" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="category">
+							<jr:cell height="15" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement style="table_CH" x="0" y="0" width="154" height="16"/>
+								<box leftPadding="5"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="category" height="15" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="69" height="15"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Special Rate]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="subcategory">
+							<jr:cell style="subcategory" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="category">
+							<jr:cell height="15" rowSpan="1"/>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="16" rowSpan="1">
+							<textField>
+								<reportElement style="table_TD" x="0" y="0" width="69" height="16"/>
+								<box rightPadding="5">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{unit}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="category" height="15" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="59" height="15"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Quantity]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="subcategory">
+							<jr:cell style="subcategory" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="category">
+							<jr:cell height="15" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="59" height="15"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Sub-Total]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="16" rowSpan="1">
+							<textField>
+								<reportElement style="table_TD" x="0" y="0" width="59" height="16"/>
+								<box rightPadding="5">
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="DejaVu Serif" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72">
+						<jr:groupHeader groupName="category">
+							<jr:cell style="category" height="15" rowSpan="1"/>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="subcategory">
+							<jr:cell style="subcategory" height="15" rowSpan="1">
+								<textField evaluationTime="Group" evaluationGroup="subcategory" pattern="###0.00;-###0.00">
+									<reportElement x="0" y="0" width="72" height="15"/>
+									<box rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<textFieldExpression class="java.lang.Double"><![CDATA[$V{subcategorysum}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="category">
+							<jr:cell height="15" rowSpan="1">
+								<textField pattern="###0.00;-###0.00">
+									<reportElement x="0" y="0" width="72" height="15"/>
+									<box rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="DejaVu Serif" size="8" isBold="true"/>
+									</textElement>
+									<textFieldExpression class="java.lang.Double"><![CDATA[$V{categorysum}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="16" rowSpan="1">
+							<textField pattern="###0.00;-###0.00">
+								<reportElement style="table_TD" x="0" y="0" width="72" height="16"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font fontName="DejaVu Serif" size="8"/>
+								</textElement>
+								<textFieldExpression class="java.lang.Double"><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="241">
+			<textField>
+				<reportElement x="79" y="134" width="145" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{preparedby}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="134" width="65" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prepared By :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="396" y="134" width="145" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{approvedby}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="331" y="134" width="65" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approved By :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="14" y="184" width="197" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="331" y="183" width="197" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="335" y="185" width="197" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(Company Chop & Sign)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="201" width="65" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name/ Date :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TH" x="12" y="17" width="198" height="15"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Serif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Term of Business]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="36" width="375" height="73"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[1. The above does NOT include any facilities and services not quoted for.
+2. Any change from original job brief may affect cost. 
+3. The above cost does NOT include revisions (after final approval from client)
+4. Confirmation of job by Purchase Order only. 
+5. Terms of payments, 1st 50% upon confirmation, balance upon invoicing
+6. In the event that job is cancelled within 24hrs of the session, minimum of 50% of quote is payable.
+7. All prices quoted are valid for 30 days from the date of this estimate.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

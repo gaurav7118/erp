@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.PriceList" table="pricelist">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="applyDate" type="date">
+      <column name="applydate" not-null="true"/>
+    </property>
+    <property name="carryIn" type="true_false">
+      <column name="carryin" not-null="true"/>
+    </property>
+    <property name="price" type="double">
+      <column name="price" default="0"/>
+    </property>
+    <property name="affecteduser" type="string">
+      <column length="255" name="affecteduser"/>
+    </property>
+    <property name="initialPrice" type="true_false">
+        <column name="initialprice" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+    <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="uomid" name="uomid"/>
+  </class>
+</hibernate-mapping>

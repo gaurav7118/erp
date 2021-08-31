@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.krawler.hql.accounting.DebitNoteAgainstCustomerGst" table="dndetailsgst">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" default="0"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+        <property name="actualQuantity" type="double">
+            <column name="actualquantity" not-null="true"/>
+        </property>
+
+        <property name="returnQuantity" type="double">
+            <column name="returnquantity" not-null="true"/>
+        </property>
+        <property name="baseuomquantity" type="double">
+            <column name="baseuomquantity" default="0"/>
+        </property>
+        <property name="baseuomreturnquantity" type="double">
+            <column name="baseuomreturnquantity" default="0"/>
+        </property>
+        <property name="baseuomrate" type="double">
+            <column name="baseuomrate" default="1"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount"/>
+        </property>
+        <property name="discountispercent" type="integer">
+            <column name="discountispercent"/>
+        </property>
+        <property name="discount" type="double">
+            <column name="discount"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+        <many-to-one class="com.krawler.hql.accounting.InvoiceDetail" column="cidetails" name="cidetails"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DebitNote" name="debitNote" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="reason" column="reason"/>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="jedid" name="jedid"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="gstjedid" name="gstJED"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptDetail" column="grdetail" name="grdetail"/>
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.device.orientation.Abstract",{mixins:["Ext.mixin.Observable"],onDeviceOrientation:function(A){this.doFireEvent("orientationchange",[A])}})

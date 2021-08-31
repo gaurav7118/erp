@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DisposeRevertAssets" table="disposerevertassets">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="isreverted" type="boolean">
+            <column name="isreverted"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.AssetDetails" name="asset" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="disposalJE" name="disposalJE" unique="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="reverseJE" name="reverseJE" unique="true"/>
+    </class>
+</hibernate-mapping>

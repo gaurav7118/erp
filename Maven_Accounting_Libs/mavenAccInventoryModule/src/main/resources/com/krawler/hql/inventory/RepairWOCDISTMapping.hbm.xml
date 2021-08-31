@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.ist.RepairWOCDISTMapping" table="repairwocdistmapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property column="rejectedquantitydue" name="rejectedQuantityDue" type="double"/>
+        <property column="rejectedquantity" name="rejectedQty" type="double"/>
+        <many-to-one class="com.krawler.inventory.model.ist.WOCDetailISTMapping" column="wocdistmapping" name="wocdistmapping"/>
+        <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="repairstoreistrequest" name="interStoreTransferRequest" not-null="true"/>
+        <set cascade="all" inverse="true" name="repairRejectedISTRequest">
+            <key column="repairwocdistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.ist.InterStoreTransferRequest"/>
+        </set>
+        <set cascade="all" inverse="true" name="rejectedStockOuts">
+            <key column="rejectedwocdistmapping"/>
+            <one-to-many class="com.krawler.inventory.model.stockout.StockAdjustment"/>
+        </set>
+    </class>
+</hibernate-mapping>

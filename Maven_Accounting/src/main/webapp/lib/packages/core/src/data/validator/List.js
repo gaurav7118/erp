@@ -1,0 +1,1 @@
+Ext.define("Ext.data.validator.List",{extend:"Ext.data.validator.Validator",alias:"data.validator.list",type:"list",config:{list:null},inclusion:null,validate:function(C){var B=Ext.Array.contains(this.getList(),C),E=this.inclusion,D=!E,A;A=(E&&B)||(D&&!B);return A||this.getMessage()}})

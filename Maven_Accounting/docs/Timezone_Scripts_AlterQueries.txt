@@ -1,0 +1,196 @@
+#Procedure to follow :
+
+#Check is there any company having NULL timezone.
+SELECT subdomain from company where timezone is NULL;
+Update company set timezone="23" where timezone is NULL;
+
+#Check Is there any Company Creator having timezone as NULL.
+SELECT c.subdomain, u.userid, u.fname, u.lname, u.address FROM users u INNER JOIN company c ON u.userid=c.creator WHERE u.timezone IS NULL;
+
+#Check Is there any Company User having timezone as NULL.
+SELECT c.subdomain, u.userid, u.fname, u.lname, u.address FROM users u INNER JOIN company c ON u.company=c.companyid WHERE u.timezone IS NULL;
+
+UPDATE users u SET u.timezone =(select c.timezone from company c where c.companyid=u.company and c.timezone is NOT NULL);
+
+#Check those companies having Creator's timezone & Company's timeszone is different.
+SELECT c.companyid, c.subdomain, c.timezone AS CompanyTZ, u.userid, u.fname, u.timezone AS UserTZ FROM company c INNER JOIN users u ON c.creator=u.userid WHERE c.timezone<>u.timezone;
+
+UPDATE company c SET c.timezone=(select u.timezone from users u where u.userid=c.creator and u.timezone is NOT NULL);
+
+#Check dateoflc in packingdolist table is having value '0000-00-00'.
+
+SELECT id,packingdate,dateoflc FROM packingdolist WHERE dateoflc='0000-00-00';
+
+#If above query returns any record then fire following query.
+
+UPDATE packingdolist SET dateoflc='1970-01-01' WHERE dateoflc='0000-00-00';
+------------------------------------------------------------------------------------------------------------------------------------
+
+#All these scripts need to execute in provided sequence.
+#Note: Execute below scripts only once. From 3rd script onward, subdomain is optional.
+# 1st & 2nd script will be execute without subdomain.
+
+1. http://<context-path>/ExchangeRateOrderFormation.jsp?serverip=?&dbname=?&username=?&password=?   (Do not pass subdomain)
+
+2. http://<context-path>/DatesMigrationForCurrencyExchange.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+3. http://<context-path>/DatesMigrationForPurchaseModules.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+4. http://<context-path>/DatesMigrationForSalesModule.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+5. http://<context-path>/DatesMigrationForBankRecon.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+6. http://<context-path>/DatesMigrationForSystemControls.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+7. http://<context-path>/DatesMigrationForInventoryModules.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+8. http://<context-path>/DatesMigrationForDeliveryPlanner.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+9. http://<context-path>/DatesMigrationForSpecialRatesForCustomerVendor.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+10. http://<context-path>/DatesMigrationForProductsModule.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+11. http://<context-path>/DatesMigrationForJournalEntry.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+12. http://<context-path>/DatesMigrationForVendor_Customer_AccountModule.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+13. http://<context-path>/DatesMigrationForProductsOldRecordsCreationDate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+14. http://<context-path>/DatesMigrationForDeliveryPlannerAnnouncementTime.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+15. http://<context-path>/DeleteDuplicatePriceListRecordFoSameDate.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+16. http://<context-path>/DatesMigrationForPriceList.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+17. http://<context-path>/DatesMigrationForWriteOffTable.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+18. http://<context-path>/DatesMigrationForInventoryTable.jsp?serverip=?&dbname=?&username=?&password=?&subdomain=?
+
+=====================================================================================================================================
+
+#After executing 13 scripts, we need to execute following ALTER queries :
+
+ALTER TABLE exchangeratedetails MODIFY applydate DATE;
+ALTER TABLE exchangeratedetails MODIFY todate DATE;
+
+ALTER TABLE vendorquotation MODIFY quotationdate DATE;
+ALTER TABLE vendorquotation MODIFY shipdate DATE;
+ALTER TABLE vendorquotation MODIFY duedate DATE;
+ALTER TABLE vendorquotation MODIFY validdate DATE;
+ALTER TABLE purchaseorder MODIFY orderdate DATE;
+ALTER TABLE purchaseorder MODIFY shipdate DATE;
+ALTER TABLE purchaseorder MODIFY duedate DATE;
+ALTER TABLE goodsreceipt MODIFY creationdate DATE;
+ALTER TABLE goodsreceipt MODIFY shipdate DATE;
+ALTER TABLE goodsreceipt MODIFY duedate DATE;
+ALTER TABLE goodsreceipt MODIFY debtclaimeddate DATE;
+ALTER TABLE goodsreceipt MODIFY partyinvoicedate DATE;
+ALTER TABLE payment MODIFY creationdate DATE;
+ALTER TABLE payment MODIFY chequedate DATE;
+ALTER TABLE grorder MODIFY grorderdate DATE;
+ALTER TABLE grorder MODIFY shipdate DATE;
+ALTER TABLE inventory MODIFY updatedate DATE;
+ALTER TABLE debitnote MODIFY creationdate DATE;
+ALTER TABLE purchasereturn MODIFY orderdate DATE;
+ALTER TABLE purchasereturn MODIFY shipdate DATE;
+ALTER TABLE purchaserequisition MODIFY requisitiondate DATE;
+ALTER TABLE purchaserequisition MODIFY duedate DATE;
+ALTER TABLE purchaserequisitionassetdetail MODIFY installationdate DATE;
+ALTER TABLE deliveryorder MODIFY orderdate DATE;
+ALTER TABLE purchasereturn MODIFY shipdate DATE;
+ALTER TABLE inventory MODIFY updatedate DATE;
+ALTER TABLE bankreconciliation MODIFY startdate DATE;
+ALTER TABLE bankreconciliation MODIFY enddate DATE;
+ALTER TABLE bankreconciliation MODIFY clearancedate DATE;
+
+ALTER TABLE extracompanypreferences MODIFY activefromdate DATE;
+ALTER TABLE extracompanypreferences MODIFY activetodate DATE;
+ALTER TABLE extracompanypreferences MODIFY gsteffectivedate DATE;
+ALTER TABLE extracompanypreferences MODIFY lastsyncwithpm DATE;
+ALTER TABLE extracompanypreferences MODIFY mslastsyncwithpm DATE;
+ALTER TABLE in_storemaster MODIFY createdon DATE;
+ALTER TABLE in_storemaster MODIFY modifiedon DATE;
+ALTER TABLE users MODIFY createdon DATE;
+ALTER TABLE users MODIFY updatedon DATE;
+
+ALTER TABLE company MODIFY createdon DATE;
+ALTER TABLE company MODIFY modifiedon DATE;
+
+ALTER TABLE quotation MODIFY quotationdate DATE;
+ALTER TABLE quotation MODIFY shipdate DATE;
+ALTER TABLE quotation MODIFY duedate DATE;
+ALTER TABLE quotation MODIFY validdate DATE;
+ALTER TABLE salesorder MODIFY orderdate DATE;
+ALTER TABLE salesorder MODIFY shipdate DATE;
+ALTER TABLE salesorder MODIFY duedate DATE;
+ALTER TABLE invoice MODIFY creationdate DATE;
+ALTER TABLE invoice MODIFY shipdate DATE;
+ALTER TABLE invoice MODIFY duedate DATE;
+ALTER TABLE invoice MODIFY debtclaimeddate DATE;
+ALTER TABLE invoice MODIFY lastmodifieddate DATE;
+ALTER TABLE invoice MODIFY porefdate DATE;
+ALTER TABLE receipt MODIFY creationdate DATE;
+ALTER TABLE receipt MODIFY chequedate DATE;
+ALTER TABLE salesreturn MODIFY orderdate DATE;
+ALTER TABLE salesreturn MODIFY shipdate DATE;
+ALTER TABLE creditnote MODIFY creationdate DATE;
+
+ALTER TABLE contract MODIFY orderdate DATE,MODIFY originalenddate DATE,MODIFY fromdate DATE,MODIFY todate DATE,MODIFY enddate DATE,MODIFY signdate DATE,MODIFY movedate DATE,MODIFY moveoutdate DATE;
+ALTER TABLE contractdates MODIFY startdate DATE,MODIFY enddate DATE;
+ALTER TABLE servicedetails MODIFY servicedate DATE;
+ALTER TABLE assetdetail MODIFY installationdate DATE;
+ALTER TABLE assetmaintenanceschedulerobject MODIFY startdate DATE,MODIFY enddate DATE;
+ALTER TABLE taxlist MODIFY applydate DATE;
+ALTER TABLE packingdolist MODIFY packingdate DATE,MODIFY dateoflc DATE;
+ALTER TABLE pricingbandmasterdetails MODIFY applicabledate DATE;
+ALTER TABLE pricelist MODIFY applydate DATE;
+ALTER TABLE journalentry MODIFY entrydate DATE;
+ALTER TABLE cheque MODIFY duedate DATE;
+
+ALTER TABLE deliveryplanner MODIFY deliverydate DATE;
+ALTER TABLE newproductbatch MODIFY COLUMN mfgdate DATE DEFAULT NULL, MODIFY COLUMN expdate DATE DEFAULT NULL;
+ALTER TABLE locationbatchdocumentmapping MODIFY COLUMN mfgdate DATE DEFAULT NULL, MODIFY COLUMN expdate DATE DEFAULT NULL;
+ALTER TABLE newbatchserial MODIFY COLUMN expfromdate DATE DEFAULT NULL, MODIFY COLUMN exptodate DATE DEFAULT NULL;
+ALTER TABLE serialdocumentmapping MODIFY COLUMN expfromdate DATE DEFAULT NULL, MODIFY COLUMN exptodate DATE DEFAULT NULL;
+ALTER TABLE inventory MODIFY COLUMN updatedate DATE DEFAULT NULL;
+ALTER TABLE deliveryplannerannouncement MODIFY announcementtime DATE;
+ALTER TABLE repeatedinvoices MODIFY startdate DATE;
+ALTER TABLE repeatedinvoices MODIFY nextdate DATE;
+ALTER TABLE repeatedinvoices MODIFY expiredate DATE;
+ALTER TABLE repeatedinvoices MODIFY prevDate DATE;
+ALTER TABLE repeatedje MODIFY startdate DATE;
+ALTER TABLE repeatedje MODIFY nextdate DATE;
+ALTER TABLE repeatedje MODIFY expiredate DATE;
+ALTER TABLE repeatedje MODIFY prevDate DATE;
+ALTER TABLE repeatedpayment MODIFY startdate DATE;
+ALTER TABLE repeatedpayment MODIFY nextdate DATE;
+ALTER TABLE repeatedpayment MODIFY expiredate DATE;
+ALTER TABLE repeatedpayment MODIFY prevDate DATE;
+ALTER TABLE repeatedsalesorders MODIFY startdate DATE;
+ALTER TABLE repeatedsalesorders MODIFY nextdate DATE;
+ALTER TABLE repeatedsalesorders MODIFY expiredate DATE;
+ALTER TABLE repeatedsalesorders MODIFY prevDate DATE;
+ALTER TABLE compaccpreferences MODIFY fyfrom DATE;
+ALTER TABLE compaccpreferences MODIFY firstfyfrom DATE;
+ALTER TABLE compaccpreferences MODIFY bbfrom DATE;
+
+ALTER TABLE in_stockadjustment MODIFY bussinessdate DATE;
+ALTER TABLE in_goodsrequest MODIFY bussinessdate DATE;
+ALTER TABLE invoicewriteoff MODIFY writeoffdate DATE;
+ALTER TABLE receiptwriteoff MODIFY writeoffdate DATE;
+
+
+=====================================================================================================================================
+
+#CHECK LIST : 
+1. Check Currency Exchange Rate Dates from UI Side. (If you get any difference in Financial Report Amount)
+2. Check Inventory update date & Price List applydate in case of Closing Stock Mismatch.
+
+#AmcoweldNew
+update account set creationdate ='2015-12-31 00:00:00' where id ='4028e4d3520d395e015211992c926d57';
+
+#cskbio
+update account set creationdate  = '2015-12-30 00:00:00' where id = '4028e4d351eb2b800151ed7f28521676';
+update account set creationdate  = '2015-12-30 00:00:00' where id = '4028e4d351eb2b800151ed7f28301672';
+update account set creationdate  = '2015-12-30 00:00:00' where id = '4028e4d351eb2b800151ed7f2884167c';
+update account set creationdate  = '2015-12-30 00:00:00' where id = '4028e4d351eb2b800151ed7f28a91680';

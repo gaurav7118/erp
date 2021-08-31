@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.SalesOrderDetail" table="sodetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+        <property name="baseuomquantity" type="double">
+            <column name="baseuomquantity" default="0" />
+        </property>
+        <property name="lockquantity" type="double">
+            <column name="lockquantity" default="0" />
+        </property>
+        <property name="lockQuantityInSelectedUOM" type="double">
+            <column name="lockquantityinselecteduom"/>
+        </property>
+        <property name="baseuomrate" type="double">
+            <column name="baseuomrate" default="1" />
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" not-null="true"/>
+        </property>
+        <property name="rateincludegst" type="double">
+            <column name="rateincludegst"  default="0"/>
+        </property>
+        <property name="discountispercent" type="integer">
+            <column name="discountispercent" not-null="true"/>
+        </property>
+        <property name="discount" type="double">
+            <column name="discount" not-null="false"/>
+        </property>
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount" not-null="false"/>
+        </property>
+<!--        <property name="rowTermTaxAmount" type="double">
+            <column name="rowtermtaxamount" not-null="false"/>
+        </property>
+        <property name="rowTermTaxAmountInBase" type="double">
+            <column name="rowtermtaxamountinbase"/>
+        </property>-->
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="dependentType" type="string">
+            <column length="1024" name="dependenttype"/>
+        </property>
+        <property name="showquantity" type="string">
+            <column length="1024" name="showquantity"/>
+        </property>
+        <property name="inouttime" type="string">
+            <column length="1024" name="inouttime"/>
+        </property>
+        <property name="purchaseorderdetailid" type="string">
+            <column length="40" name="purchaseorderdetailid"/>
+        </property>
+        <property name="mrpcontractdetailid" type="string">
+            <column length="255" name="mrpcontractdetailid"/>
+        </property>
+        <property name="invstoreid" type="string">
+            <column  name="invstoreid" default="" length="255"/>
+        </property>
+        <property name="invlocid" type="string">
+            <column  name="invlocid" default="" length="255"/>
+        </property>
+        <property name="priceSource" type="string">
+            <column  name="pricesource" default="" length="255"/>
+        </property>
+        <property name="lockquantitydue" type="double">
+            <column name="lockquantitydue"/>
+        </property>
+        <property name="approvedQuantity" type="double">
+            <column name="approvedbasequantity"/>
+        </property>
+        <property name="rejectedQuantity" type="double">
+            <column name="rejectedbasequantity"/>
+        </property>
+        <property name="balanceqty" type="double">
+            <column name="balanceqty" not-null="true"/>
+        </property>
+        <property name="rowtermamount" type="double">
+            <column name="rowtermamount"/>
+        </property>
+        <property name="OtherTermNonTaxableAmount" type="double">
+            <column name="otherrowtermamount" default="0"/>
+        </property>
+        <property name="isLineItemClosed" type="true_false">
+            <column name="islineitemclosed" default="'F'"/>
+        </property>
+         <property name="rejectionreason" type="string">
+            <column length="255" name="rejectionreason"/>
+        </property>
+        <property name="isLineItemRejected" type="true_false">
+            <column name="islineitemrejected" default="'F'"/>
+        </property> 
+        <set cascade="all,delete-orphan" name="approverSet" table="sodetailsapprovermapping">
+            <key column="sodetails"/>
+            <many-to-many class="com.krawler.common.admin.User" column="approver"/>
+        </set>
+         <property column="consignmentapprovalstatus" name="requestApprovalStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.admin.RequestApprovalStatus</param>
+            </type>
+        </property> 
+        <property name="lineLevelTermAmount" type="double">
+            <column name="lineleveltermamount" default="0"/>
+        </property>
+         <property name="discountJson" type="string">
+            <column name="discountjson"/>
+        </property>
+        <property name="sourcePurchaseOrderDetailsid" type="string">
+            <column  name="sourcepodetailsid" default="" length="255"/>
+        </property>
+        <property name="pricingBandMasterid" type="string">
+            <column  name="pricingbandmasterid" length="255"/>
+        </property>
+        <property name="isUserModifiedTaxAmount" type="boolean">
+            <column name="isusermodifiedtaxamount" not-null="false"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" column="rejectedby" name="rejectedby"/>
+        <many-to-one column="salesorderdetailcustomdataref" class="com.krawler.hql.accounting.SalesOrderDetailsCustomData"  name="soDetailCustomData" />
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.SalesOrder" column="salesorder" name="salesOrder" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.QuotationDetail" column="quotationdetail" name="quotationDetail"/>
+        <many-to-one class="com.krawler.hql.accounting.BOMDetail" column="bomcode" name="bomcode"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.ProductReplacementDetail" name="productReplacementDetail" column="productreplacementdetail"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="reportinguomexcise" name="reportingUOMExcise"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="reportinguomvat" name="reportingUOMVAT"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" column="reportingschematypeexcise" name="reportingSchemaTypeExcise"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" column="reportingschemavat" name="reportingSchemaVAT"/>
+        <many-to-one class="com.krawler.inventory.model.inspection.InspectionForm" column="inspectionformid" name="inspectionForm"/>
+        <many-to-one class="com.krawler.inventory.model.inspection.InspectionTemplate" column="inspectiontemplateid" name="inspectionTemplate"/>
+        <property name="mrpIndia" type="double">
+            <column  name="mrpindia" default="0"/>
+        </property>
+        <property name="exciseValuationType" type="string">
+            <column  name="excisevaluationtype" default=""/>
+        </property>
+        <property name="vatValuationType" type="string">
+            <column  name="vatvaluationtype" default=""/>
+        </property>
+        <property name="jobOrderItem" type="boolean">
+            <column name="joborderitem"/>   
+        </property>
+        <property name="jobOrderItemNumber" type="string">
+            <column length="50" name="joborderitemnumber"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1351 @@
+# Pandurang 3 August 2015
+alter table locationbatchdocumentmapping add column approvedbasequantity  double DEFAULT '0';
+alter table locationbatchdocumentmapping add column rejectedbasequantity  double DEFAULT '0';
+
+alter table locationbatchdocumentmapping 
+add column approver varchar(255) DEFAULT NULL, 
+ADD CONSTRAINT FOREIGN KEY (`approver`) REFERENCES `users` (`userid`);
+
+alter table locationbatchdocumentmapping 
+add column consignmentapprovalstatus int(2) DEFAULT NULL;
+
+CREATE TABLE `locationbatchdocumentapprovermapping` (
+`locationmapping`  varchar(255) NOT NULL ,
+`approver`  varchar(255) NOT NULL ,
+FOREIGN KEY (`locationmapping`) REFERENCES `locationbatchdocumentmapping` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`approver`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+
+CREATE TABLE `locationbatchrejectormapping` (
+    id varchar(255) NOT NULL,
+    rejectedquntity  double DEFAULT '0',
+    locationdocumentmapping varchar(255) default NULL,
+    rejectedby varchar(255) default NULL,
+    PRIMARY KEY  (`id`),
+    FOREIGN KEY (`rejectedby`) REFERENCES users(userid)ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`locationdocumentmapping`) REFERENCES locationbatchdocumentmapping(id)ON DELETE CASCADE ON UPDATE CASCADE
+    )ENGINE=InnoDB
+    DEFAULT CHARACTER SET=utf8;
+
+# Vivek Pakmode 3rd Aug 2015
+alter table extracompanypreferences 
+add column `showchildaccountsintb` char(1) default 'F';
+
+#Raj Shah - 3rd August 2015
+
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('3a0cb967a6c14c65903391cce5627f03','stockrepair','Stock Repair',56);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('936ce3123d144bce96f5fc72e709e8eb', 'viewstockrepair', 'View', '1', null, '3a0cb967a6c14c65903391cce5627f03') ,
+('c29da636c0394fcabda451e24aa31802', 'approverejectstockrepair', 'Approve / Reject', '2','936ce3123d144bce96f5fc72e709e8eb', '3a0cb967a6c14c65903391cce5627f03') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('3a0cb967a6c14c65903391cce5627f03', '1', '3');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('3a0cb967a6c14c65903391cce5627f03', '2', '3');
+
+ALTER TABLE `mailnotification`
+MODIFY COLUMN `mailcontent`  varchar(2048)  NULL DEFAULT '' AFTER `emailids`,
+MODIFY COLUMN `mailsubject`  varchar(1024)  NULL DEFAULT '' AFTER `mailcontent`;
+
+# Anand Nimbalkar 3rd August, 2015
+ALTER TABLE `grodetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `dodetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `prdetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `srdetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+
+#Mohammed Uzair Momin 3rd August 2015
+#[Olympus]: Update properties file for olympys3 subdomain
+update company set `language`=5 where subdomain='olympus3';
+
+#[Olympus]: Enable import button for olympus3 subdomain
+update extracompanypreferences set showimport='T' where id=(select companyid from company where subdomain='olympus3');
+
+#[Olympus]: Update importinfo for olympus3 subdomain
+update olympus_importscriptinfo set importinfo='{"producttype":"d8a50d12-515c-102d-8de6-001cc0794cfa","isbatchforproduct":true,"isserialforproduct":true,"islocationforproduct":true,"iswarehouseforproduct":true,"account":"402880504edd6669014edf126df900a2","initialpurchaseprice":"1","initialsalesirice":"1","frequency":"3","blankUOM":"-","casingUOMvalue":"1","defaultSerialNumber":"ZYBP","defaultBatch":"X"}' where subdomain='olympus3' and id ='PRODUCTMASTER';
+update olympus_importscriptinfo set importinfo='{"tradedebtoraccount":"402880504ec56925014edf100a220638"}' where subdomain='olympus3' and id='CUSTOMERBILLINGMASTER';
+update olympus_importscriptinfo set importinfo='{"tradedebtoraccount":"402880504ec56925014edf100a220638"}' where subdomain='olympus3' and id='CUSTOMERSHIPPINGMASTER';
+update olympus_importscriptinfo set importinfo='{"localcode":"ZH01","overseascode":"ZH02","localcategory":"402880504ee3aa58014ee42452aa0061","overseascategory":"402880504ee3aa58014ee42481b60062"}' where subdomain='olympus3' and id='LICENSEMASTER';
+update olympus_importscriptinfo set importinfo='{"customLabelMasterIntLicenseNo":"Master Int License No"}' where subdomain='olympus3' and id='SUPPLLICENSE2';
+update olympus_importscriptinfo set importinfo='{"storecode":"WH-DE"}' where subdomain='olympus3' and id='STOCKMOVEMENT1';
+update olympus_importscriptinfo set importinfo='{"storecode":"WH-SS"}' where subdomain='olympus3' and id='STOCKMOVEMENT2';
+update olympus_importscriptinfo set importinfo='{"storecode":"WH-KS"}' where subdomain='olympus3' and id='STOCKMOVEMENT3';
+update olympus_importscriptinfo set importinfo='{"storecode":"WH-ES"}' where subdomain='olympus3' and id='STOCKMOVEMENT4';
+
+#[Olympus]: Update sequence of Custom Fields for License Master for olympus3 subdomain
+update `fieldParams` set `sequence`=101 where moduleid=30 and fieldlabel='Master Int License No' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=102 where moduleid=30 and fieldlabel='Master License type' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=103 where moduleid=30 and fieldlabel='Master License' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=104 where moduleid=30 and fieldlabel='Lic status' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=105 where moduleid=30 and fieldlabel='Validity Start date' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=106 where moduleid=30 and fieldlabel='Validity End date' and companyid=(select companyid from company where subdomain='olympus3');
+
+#[Olympus]: Update sequence of Custom Fields for License Master Supp. 1 for olympus3 subdomain
+update `fieldParams` set `sequence`=111 where moduleid=30 and fieldlabel='Supplementary1 Int License No' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=112 where moduleid=30 and fieldlabel='Supplementary1 License type' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=113 where moduleid=30 and fieldlabel='License Code Supplementary1' and companyid=(select companyid from company where subdomain='olympus3');
+
+#[Olympus]: Update sequence of Custom Fields for License Master Supp. 2 for olympus3 subdomain
+update `fieldParams` set `sequence`=121 where moduleid=30 and fieldlabel='Supplementary2 Int License No' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=122 where moduleid=30 and fieldlabel='Supplementary2 License type' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=123 where moduleid=30 and fieldlabel='License Code Supplementary2' and companyid=(select companyid from company where subdomain='olympus3');
+
+#[Olympus]: Update sequence of Custom Fields for Product Master for olympus3 subdomain
+update `fieldParams` set `sequence`=131 where moduleid=30 and fieldlabel='Country of Origin' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=132 where moduleid=30 and fieldlabel='Material Group' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=133 where moduleid=30 and fieldlabel='Mat grp description' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=134 where moduleid=30 and fieldlabel='Profit Center' and companyid=(select companyid from company where subdomain='olympus3');
+update `fieldParams` set `sequence`=135 where moduleid=30 and fieldlabel='Profit Centre Description' and companyid=(select companyid from company where subdomain='olympus3');
+
+#Neeraj Dwivedi 3rd August 2015
+ALTER TABLE customdesigntemplate ADD COLUMN isdefaulttemplate BOOLEAN NOT NULL DEFAULT FALSE;
+
+SET foreign_key_checks = 0;
+
+insert into users(userid,fname,lname,emailid,company,dateformat,callwith,timeformat,roleid)
+VALUES ('1','Default','template','paritosh@krawler.com','1','18','0','0','1');
+
+insert into company(companyid,companyname,subdomain,emailid,createdon,modifiedon,deleteflag,creator,currency,timeZone,country,activated,switchpref,optimizedflag,templateflag,storeinvoiceamountdue,ledgerthreadflag)
+VALUES ('1','Default','defaulttemplate','paritosh@krawler.com','2010-10-20 08:48:09','2010-10-20 08:48:09','0','1','1','23','244','T','1','0','4','T','1');
+
+SET foreign_key_checks = 1;
+
+
+#Shashi Nandan kumar 4 AUG 2015
+update currency set htmlcode='NZD' where currencyid=17;
+update currency set htmlcode='AUD' where currencyid=11;
+update currency set htmlcode='CAD' where currencyid=10;
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('0cf8r6b69cb913e48d2eeca86bff8e9d', 'createscont', 'Create Sales Contract', '7', null, '5f52f9615e384a50a7e1c8c6a61deg99'),
+('177f2r309cb914e48d2eeca86bff8e9d', 'veiwscont', 'View Sales Contract Register', '8', null, '5f52f9615e384a50a7e1c8c6a61deg99') ,
+('1f488rc29cb914e48d2eeca86bff8e9d', 'editscont', 'Edit', '9', '177f2r309cb914e48d2eeca86bff8e9d', '5f52f9615e384a50a7e1c8c6a61deg99') ,
+('26b312629cb914e48d2eeca86bff8e9d', 'terminatescont', 'Terminate', '10', '177f2r309cb914e48d2eeca86bff8e9d','5f52f9615e384a50a7e1c8c6a61deg99') ,
+('360ba9c29cb914e48d2eeca86bff8e9d', 'renewscont', 'Renew', '11', '177f2r309cb914e48d2eeca86bff8e9d', '5f52f9615e384a50a7e1c8c6a61deg99'),
+('2f483f7e9cb915e48d2eeca86bff8e9d', 'exportscont', 'Export', '12', '177f2r309cb914e48d2eeca86bff8e9d','5f52f9615e384a50a7e1c8c6a61deg99');
+
+update `userpermission` set permissioncode='4095' where feature='5f52f9615e384a50a7e1c8c6a61deg99';
+delete from reportmaster where id='Contract';
+
+#Raveesh Pathak 4th Aug 2015
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("3af31654-3aaa-11e5-b49b-c03fd5633215","09508488-c1d2-102d-b048-001e58a64cb6","Shipping Route","ShippingRoute",0,255,'F','F',null,null,null,null,null,"shippingRoute",null);
+
+# Vivek Pakmode 4th Aug 2015
+update reportmaster set description="View Monthly Aged Payables" where id="Monthly_Aged_Payable";
+
+#Deepak singh 4th Aug 2015
+INSERT INTO  exportcompanypref  VALUES("139","Asset settings-Activate Assets Depreciation Calculation Method ","assetsetingactivation","isAssetSetingActivation","F","assetSetingActivation",'F',"ActivateFixedAssetModule","boolean",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("140","Asset settings ","depreciationcalculationtype","getAssetDepreciationCalculationType","F","depreciationCalculationType",'F',"depreciationCalculationType","int",null,null,null);
+
+#Ajit Gogawale 5th Aug 2015
+ALTER TABLE `in_interstoretransfer`
+ADD COLUMN `transaction_module`  int(2) NULL DEFAULT NULL;
+
+UPDATE  in_interstoretransfer ist  SET transaction_module = 2 ;
+UPDATE  in_interstoretransfer ist  SET transaction_module = 11 WHERE  ist.fromstore=ist.tostore AND ist.createdon=ist.modifiedon AND ist.status = 1;
+
+#Anand Thakur 5th Aug 2015
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,ismanadatoryfield) VALUES ('6c700e20-da5b-4504-bf0c-85a58600416d','fromLinkComboId','Link to',20,1,1,1);
+update customizereportheader set dataheader='Link ' where dataheader='Link to Customer Quotation' and moduleid=20;
+
+#Santosh Belote 5th Aug 2015
+CREATE TABLE `sodetailproductcustomdata` (
+  `soDetailID` varchar(40) NOT NULL,
+  `recdetailId` varchar(40) NOT NULL,
+  `productId` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`soDetailID`),
+  KEY `sodetailproductcustomdata_ibfk_1` (`company`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `dodetailproductcustomdata` (
+  `doDetailID` varchar(40) NOT NULL,
+  `recdetailId` varchar(40) NOT NULL,
+  `productId` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`doDetailID`),
+  KEY `dodetailproductcustomdata_ibfk_1` (`company`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Swapnil D. Khandre 5th Aug, 2015
+INSERT INTO reportmaster values('Foreign_Currency_GainAndLoss_Report', 'Foreign Currency Gain and Loss Report','View Foreign Currency Gain and Loss Report','callForeignCurrencyGainAndLossTabView()',NULL);
+
+#Sharad Pawar 5 August 2015
+update reportmaster set description='Weekly Cash Flow statement based on paid invoices for customers and vendors' where id='Cash_Flow_Statement';
+
+#Deepak Singh 5th Aug 2015
+UPDATE exportcompanypref SET displayname='Product Selection setting' WHERE id='125';
+UPDATE exportcompanypref SET dataindex='custminbudgetlimit' WHERE id='27';
+UPDATE exportcompanypref SET displayname='Document Mail Settings-Send Mail when Purchase Invoice/Cash Purchase Edited' WHERE id='103';
+
+
+#Rushikesh Mandage 5th August 2015
+
+#ERP- 12650 : Base Currency - Wrong for the Indonesia Company
+update defaultexchangeratedetails set exchangerate = 0.000074 where exchangeratelink ='122';
+update defaultexchangeratedetails set exchangerate = 0.040 where exchangeratelink ='128';
+update defaultexchangeratedetails set exchangerate = 0.00029 where exchangeratelink ='127';
+update defaultexchangeratedetails set exchangerate = 0.00010 where exchangeratelink ='126';
+update defaultexchangeratedetails set exchangerate = 0.0047 where exchangeratelink ='125';
+update defaultexchangeratedetails set exchangerate = 0.000068 where exchangeratelink ='124';
+update defaultexchangeratedetails set exchangerate = 1.62 where exchangeratelink ='519';
+update defaultexchangeratedetails set exchangerate = 0.0092 where exchangeratelink ='475';
+update defaultexchangeratedetails set exchangerate = 0.00057 where exchangeratelink ='433';
+update defaultexchangeratedetails set exchangerate = 0.00010 where exchangeratelink ='393';
+update defaultexchangeratedetails set exchangerate = 0.00027 where exchangeratelink ='355';
+update defaultexchangeratedetails set exchangerate = 0.000048 where exchangeratelink ='123';
+
+update defaultexchangeratedetails set exchangerate = 0.087 where exchangeratelink ='311';
+update defaultexchangeratedetails set exchangerate = 0.000072 where exchangeratelink ='278';
+update defaultexchangeratedetails set exchangerate = 0.00011 where exchangeratelink ='245';
+update defaultexchangeratedetails set exchangerate = 0.0034 where exchangeratelink ='214';
+update defaultexchangeratedetails set exchangerate = 0.0026 where exchangeratelink ='185';
+update defaultexchangeratedetails set exchangerate = 0.0023 where exchangeratelink ='169';
+update defaultexchangeratedetails set exchangerate = 0.26 where exchangeratelink ='129';
+update defaultexchangeratedetails set exchangerate = 0.00046 where exchangeratelink ='132';
+update defaultexchangeratedetails set exchangerate = 0.00010 where exchangeratelink ='131';
+update defaultexchangeratedetails set exchangerate = 0.000097 where exchangeratelink ='130';
+
+update defaultexchangeratedetails set exchangerate = 13498.00 where exchangeratelink ='134';
+update defaultexchangeratedetails set exchangerate = 10271.12 where exchangeratelink ='142';
+update defaultexchangeratedetails set exchangerate = 9815.07 where exchangeratelink ='143';
+update defaultexchangeratedetails set exchangerate = 2173.57 where exchangeratelink ='144';
+update defaultexchangeratedetails set exchangerate = 426.07 where exchangeratelink ='156';
+update defaultexchangeratedetails set exchangerate = 384.93 where exchangeratelink ='181';
+update defaultexchangeratedetails set exchangerate = 295.16 where exchangeratelink ='208';
+update defaultexchangeratedetails set exchangerate = 8904.84 where exchangeratelink ='237';
+update defaultexchangeratedetails set exchangerate = 13962.25 where exchangeratelink ='268';
+update defaultexchangeratedetails set exchangerate = 11.54 where exchangeratelink ='301';
+update defaultexchangeratedetails set exchangerate = 21045.41 where exchangeratelink ='135';
+
+update defaultexchangeratedetails set exchangerate = 3674.78 where exchangeratelink ='336';
+update defaultexchangeratedetails set exchangerate = 9801.05 where exchangeratelink ='373';
+update defaultexchangeratedetails set exchangerate = 1740.94 where exchangeratelink ='412';
+update defaultexchangeratedetails set exchangerate = 108.68 where exchangeratelink ='453';
+update defaultexchangeratedetails set exchangerate = 0.62 where exchangeratelink ='496';
+update defaultexchangeratedetails set exchangerate = 14801.03 where exchangeratelink ='136';
+update defaultexchangeratedetails set exchangerate = 210.89 where exchangeratelink ='137';
+update defaultexchangeratedetails set exchangerate = 9801.05 where exchangeratelink ='138';
+update defaultexchangeratedetails set exchangerate = 3505.61 where exchangeratelink ='139';
+update defaultexchangeratedetails set exchangerate = 25.27 where exchangeratelink ='140';
+update defaultexchangeratedetails set exchangerate = 3.91 where exchangeratelink ='141';
+
+update exchangeratedetails set exchangerate = 0.000074 where exchangeratelink ='122' and exchangerate=11613;
+update exchangeratedetails set exchangerate = 0.040 where exchangeratelink ='128' and exchangerate=21.17;
+update exchangeratedetails set exchangerate = 0.00029 where exchangeratelink ='127' and exchangerate=3558.72;
+update exchangeratedetails set exchangerate = 0.00010 where exchangeratelink ='126' and exchangerate=9246.76;
+update exchangeratedetails set exchangerate = 0.0047 where exchangeratelink ='125' and exchangerate=190.44;
+update exchangeratedetails set exchangerate = 0.000068 where exchangeratelink ='124' and exchangerate=16058.2;
+
+update exchangeratedetails set exchangerate = 0.000048 where exchangeratelink ='123' and exchangerate=19481.3;;
+update exchangeratedetails set exchangerate = 0.0023 where exchangeratelink ='169' and exchangerate = 393.564;
+update exchangeratedetails set exchangerate = 0.26 where exchangeratelink ='129' and exchangerate=4.6201;
+update exchangeratedetails set exchangerate = 0.00046 where exchangeratelink ='132'and exchangerate=1860.74;
+update exchangeratedetails set exchangerate = 0.00010 where exchangeratelink ='131' and exchangerate=10794.5;
+update exchangeratedetails set exchangerate = 0.000097 where exchangeratelink ='130'and exchangerate=10527.6;
+
+update exchangeratedetails set exchangerate = 13498.00 where exchangeratelink ='134' and exchangerate=0.000086;
+update exchangeratedetails set exchangerate = 10271.12 where exchangeratelink ='142' and exchangerate=0.000095;
+update exchangeratedetails set exchangerate = 9815.07 where exchangeratelink ='143'and exchangerate=0.000093;
+update exchangeratedetails set exchangerate = 2173.57 where exchangeratelink ='144' and exchangerate=0.00054;
+update exchangeratedetails set exchangerate = 426.07 where exchangeratelink ='156' and exchangerate=0.00254128;
+update exchangeratedetails set exchangerate = 21045.41 where exchangeratelink ='135'and exchangerate=0.000051;
+
+update exchangeratedetails set exchangerate = 14801.03 where exchangeratelink ='136' and exchangerate=0.000062;
+update exchangeratedetails set exchangerate = 210.89 where exchangeratelink ='137' and exchangerate=0.0053;
+update exchangeratedetails set exchangerate = 9801.05 where exchangeratelink ='138' and exchangerate=0.00011;
+update exchangeratedetails set exchangerate = 3505.61 where exchangeratelink ='139' and exchangerate=0.00028;
+update exchangeratedetails set exchangerate = 25.27 where exchangeratelink ='140' and exchangerate=0.047;
+update exchangeratedetails set exchangerate = 3.91 where exchangeratelink ='141'and exchangerate=0.21608;
+
+#Deepak Singh 6th Aug 2015
+INSERT INTO  exportcompanypref  VALUES("141","Consignment Stock Settings-Activate Request Approval Flow ","requestApprovalFlow","isRequestApprovalFlow","F","requestApprovalFlow",'F',"requestApprovalFlow","boolean",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("142","Consignment Stock Settings-Store for QA Inspection ","inspectionstore","getInspectionStore","F","inspectionStore",'F',"inspectionStore","string",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("143","Consignment Stock Settings-Store for Stock Repair ","repairstore","getRepairStore","F","repairStore",'F',"repairStore","string",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("144","Other Settings-Alert if duplicate product in transaction","duplicateItemsflag","isDuplicateItems","F","isDuplicateItems",'F',"isDuplicateItems","boolean",null,null,null);
+
+#Deepak Pingale 6th August 2015
+update default_header set defaultHeader="Customer Code",refdatacolumn_hbmname="acccode" where pojomethodname="customer" and module=80;
+update default_header set defaultHeader="Vendor Code",refdatacolumn_hbmname="acccode" where pojomethodname="vendor" and module=80;
+
+#Raveesh Pathak 6th August 2015
+#Please replace App database name "ondemandprod" as per Name on server [like name on 208,21, .com etc] 
+ALTER TABLE `extracompanypreferences` ADD COLUMN `activatecrmintegration` char(1) DEFAULT 'F';
+update extracompanypreferences 
+set  activatecrmintegration='T' where id in (select ondemandprod.companyapps.companyid COLLATE utf8_general_ci from ondemandprod.companyapps where ondemandprod.companyapps.appid='2' and ondemandprod.companyapps.companyid in (select ondemandprod.companyapps.companyid from ondemandprod.companyapps where ondemandprod.companyapps.appid='3'));
+# Vivek pakmode 7th Aug 2015
+alter table receipt add column dishonouredchequeje varchar(255) DEFAULT NULL;
+ALTER TABLE `receipt` ADD FOREIGN KEY (`dishonouredchequeje`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+alter table receipt 
+add column `isdishonouredcheque` char(1) default 'F';
+
+alter table journalentry 
+add column `isdishonouredcheque` char(1) default 'F';
+
+#Kottamidde Naresh - 7th August, 2015
+ALTER TABLE customer ADD(synchedfromotherApp CHAR(1) DEFAULT 'F'); #for finding the source of record i.e. from erp or from other application
+
+#Deepak Singh 7 Aug 2015
+INSERT INTO  exportcompanypref  VALUES("145","Inventory Settings-Activate Inventory Integration","inventory_accounting_inte_flag","isInventoryAccountingIntegration","T","isInventoryIntegration",'F',"inventoryAccountingIntegration","boolean",null,null,null);
+UPDATE exportcompanypref SET namepasstosavefunction ='customerForPOS' WHERE id='97';
+UPDATE exportcompanypref SET displayname="UOM Settings-" WHERE id='98';
+
+# Suhas Chaware 7 August 2015
+ update timezone set sortorder =1 where timezoneid =1;
+ update timezone set sortorder =2 where timezoneid =2;
+ update timezone set sortorder =3 where timezoneid =3;
+ update timezone set sortorder =4 where timezoneid =4;
+ update timezone set sortorder =5 where timezoneid =5;
+ update timezone set sortorder =6 where timezoneid =6;
+ update timezone set sortorder =7 where timezoneid =7;
+ update timezone set sortorder =8 where timezoneid =8;
+ update timezone set sortorder =9 where timezoneid =9;
+ update timezone set sortorder =10 where timezoneid =10; 
+ update timezone set sortorder =11 where timezoneid =11;
+ update timezone set sortorder =12 where timezoneid =12; 
+ update timezone set sortorder =13 where timezoneid =13;
+ update timezone set sortorder =14 where timezoneid =14;
+ update timezone set sortorder =15 where timezoneid =15;
+ update timezone set sortorder =16 where timezoneid =16;
+ update timezone set sortorder =17 where timezoneid =17;
+ update timezone set sortorder =21 where timezoneid =18;
+ update timezone set sortorder =18 where timezoneid =19;
+ update timezone set sortorder =22 where timezoneid =20;
+ update timezone set sortorder =23 where timezoneid =21;
+ update timezone set sortorder =20 where timezoneid =22;
+ update timezone set sortorder =19 where timezoneid =23;
+ update timezone set sortorder =24 where timezoneid =24;
+ update timezone set sortorder =25 where timezoneid =25;
+ update timezone set sortorder =26 where timezoneid =26;
+ update timezone set sortorder =31 where timezoneid =27;
+ update timezone set sortorder =33 where timezoneid =28;
+ update timezone set sortorder =35 where timezoneid =29; 
+ update timezone set sortorder =36 where timezoneid =30; 
+ update timezone set sortorder =27 where timezoneid =31; 
+ update timezone set sortorder =28 where timezoneid =32;
+ update timezone set sortorder =29 where timezoneid =33; 
+ update timezone set sortorder =30 where timezoneid =34;
+ update timezone set sortorder =32 where timezoneid =35;
+ update timezone set sortorder =34 where timezoneid =36;
+ update timezone set sortorder =37 where timezoneid =37; 
+ update timezone set sortorder =38 where timezoneid =38;
+ update timezone set sortorder =43 where timezoneid =39;
+ update timezone set sortorder =44 where timezoneid =40;
+ update timezone set sortorder =45 where timezoneid =41;
+ update timezone set sortorder =40 where timezoneid =42;
+ update timezone set sortorder =46 where timezoneid =43;
+ update timezone set sortorder =47 where timezoneid =44;
+ update timezone set sortorder =41 where timezoneid =45;
+ update timezone set sortorder =48 where timezoneid =46;
+ update timezone set sortorder =39 where timezoneid =47;
+ update timezone set sortorder =49 where timezoneid =48;
+ update timezone set sortorder =50 where timezoneid =49;
+ update timezone set sortorder =42 where timezoneid =50;
+ update timezone set sortorder =51 where timezoneid =51;
+ update timezone set sortorder =52 where timezoneid =52; 
+ update timezone set sortorder =53 where timezoneid =53;
+ update timezone set sortorder =54 where timezoneid =54;
+ update timezone set sortorder =55 where timezoneid =55;
+ update timezone set sortorder =57 where timezoneid =56;
+ update timezone set sortorder =59 where timezoneid =57;
+ update timezone set sortorder =60 where timezoneid =58;
+ update timezone set sortorder =61 where timezoneid =59;
+ update timezone set sortorder =62 where timezoneid =60;
+ update timezone set sortorder =63 where timezoneid =61;
+ update timezone set sortorder =64 where timezoneid =62;
+ update timezone set sortorder =65 where timezoneid =63;
+ update timezone set sortorder =66 where timezoneid =64;
+ update timezone set sortorder =56 where timezoneid =65;
+ update timezone set sortorder =67 where timezoneid =66;
+ update timezone set sortorder =68 where timezoneid =67;
+ update timezone set sortorder =69 where timezoneid =68;
+ update timezone set sortorder =70 where timezoneid =69;
+ update timezone set sortorder =72 where timezoneid =70;
+ update timezone set sortorder =73 where timezoneid =71;
+ update timezone set sortorder =74 where timezoneid =72;
+ update timezone set sortorder =75 where timezoneid =73;
+ update timezone set sortorder =76 where timezoneid =74;
+ update timezone set sortorder =77 where timezoneid =75;
+ update timezone set sortorder =79 where timezoneid =76; 
+ update timezone set sortorder =80 where timezoneid =77;
+ update timezone set sortorder =81 where timezoneid =78;
+ update timezone set sortorder =82 where timezoneid =79;
+ update timezone set sortorder =83 where timezoneid =80;
+ update timezone set sortorder =84 where timezoneid =81;
+ update timezone set sortorder =71 where timezoneid =82;
+ update timezone set sortorder =58 where timezoneid =83;
+ update timezone set sortorder =84 where timezoneid =84; 
+ update timezone set sortorder =85 where timezoneid =85;
+ update timezone set sortorder =86 where timezoneid =86;
+ update timezone set sortorder =88 where timezoneid =87;
+ update timezone set sortorder =98 where timezoneid =88;
+ update timezone set sortorder =87 where timezoneid =89;
+ update timezone set sortorder =89 where timezoneid =90;  
+ update timezone set sortorder =90 where timezoneid =91;
+ update timezone set sortorder =91 where timezoneid =92;
+ update timezone set sortorder =92 where timezoneid =93;
+ update timezone set sortorder =93 where timezoneid =94;
+ update timezone set sortorder =94 where timezoneid =95;
+ update timezone set sortorder =95 where timezoneid =96;
+ update timezone set sortorder =96 where timezoneid =97;
+ update timezone set sortorder =99 where timezoneid =98;
+ update timezone set sortorder =97 where timezoneid =99;
+ update timezone set sortorder =100 where timezoneid =100;
+ update timezone set sortorder =101 where timezoneid =101;
+ update timezone set sortorder =104 where timezoneid =102;
+ update timezone set sortorder =102 where timezoneid =103;
+ update timezone set sortorder =103 where timezoneid =104;
+ update timezone set sortorder =105 where timezoneid =105;
+ update timezone set sortorder =106 where timezoneid =106;
+ update timezone set sortorder =107 where timezoneid =107;
+ update timezone set sortorder =108 where timezoneid =108;
+ update timezone set sortorder =109 where timezoneid =109;
+ update timezone set sortorder =110 where timezoneid =110;
+ update timezone set sortorder =112 where timezoneid =111;
+ update timezone set sortorder =113 where timezoneid =112;
+ update timezone set sortorder =116 where timezoneid =113;
+ update timezone set sortorder =118 where timezoneid =114;
+ update timezone set sortorder =121 where timezoneid =115;
+ update timezone set sortorder =123 where timezoneid =116;
+ update timezone set sortorder =124 where timezoneid =117;
+ update timezone set sortorder =125 where timezoneid =118;
+ update timezone set sortorder =127 where timezoneid =119;
+ update timezone set sortorder =114 where timezoneid =120;
+ update timezone set sortorder =111 where timezoneid =121;
+ update timezone set sortorder =117 where timezoneid =122;
+ update timezone set sortorder =126 where timezoneid =123;
+ update timezone set sortorder =128 where timezoneid =124;
+ update timezone set sortorder =119 where timezoneid =125;
+ update timezone set sortorder =115 where timezoneid =126;
+ update timezone set sortorder =120 where timezoneid =127;
+ update timezone set sortorder =122 where timezoneid =128;
+ update timezone set sortorder =129 where timezoneid =129;
+ update timezone set sortorder =132 where timezoneid =130;
+ update timezone set sortorder =134 where timezoneid =131;
+ update timezone set sortorder =139 where timezoneid =132;
+ update timezone set sortorder =141 where timezoneid =133;
+ update timezone set sortorder =143 where timezoneid =134;
+ update timezone set sortorder =144 where timezoneid =135;
+ update timezone set sortorder =145 where timezoneid =136;
+ update timezone set sortorder =146 where timezoneid =137; 
+ update timezone set sortorder =149 where timezoneid =138;
+ update timezone set sortorder =152 where timezoneid =139;
+ update timezone set sortorder =153 where timezoneid =140;
+ update timezone set sortorder =156 where timezoneid =141;
+ update timezone set sortorder =160 where timezoneid =142;
+ update timezone set sortorder =164 where timezoneid =143;
+ update timezone set sortorder =130 where timezoneid =144;
+ update timezone set sortorder =131 where timezoneid =145;
+ update timezone set sortorder =137 where timezoneid =146;
+ update timezone set sortorder =133 where timezoneid =147;
+ update timezone set sortorder =135 where timezoneid =148;
+ update timezone set sortorder =136 where timezoneid =149; 
+ update timezone set sortorder =140 where timezoneid =150;
+ update timezone set sortorder =142 where timezoneid =151;
+ update timezone set sortorder =147  where timezoneid =152;
+ update timezone set sortorder =148 where timezoneid =153;
+ update timezone set sortorder =150 where timezoneid =154;  
+ update timezone set sortorder =151 where timezoneid =155;
+ update timezone set sortorder =154 where timezoneid =156;
+ update timezone set sortorder =155 where timezoneid =157;
+ update timezone set sortorder =138 where timezoneid =158;
+ update timezone set sortorder =157 where timezoneid =159;
+ update timezone set sortorder =158 where timezoneid =160;
+ update timezone set sortorder =159 where timezoneid =161;
+ update timezone set sortorder =161 where timezoneid =162;
+ update timezone set sortorder =162 where timezoneid =163;
+ update timezone set sortorder =163 where timezoneid =164;
+ update timezone set sortorder =165 where timezoneid =165;
+ update timezone set sortorder =169 where timezoneid =166;
+ update timezone set sortorder =171 where timezoneid =167;
+ update timezone set sortorder =172 where timezoneid =168; 
+ update timezone set sortorder =175 where timezoneid =169;
+ update timezone set sortorder =177 where timezoneid =170;
+ update timezone set sortorder =181 where timezoneid =171;
+ update timezone set sortorder =183 where timezoneid =172;
+ update timezone set sortorder =184 where timezoneid =173;
+ update timezone set sortorder =185 where timezoneid =174;
+ update timezone set sortorder =186 where timezoneid =175;
+ update timezone set sortorder =187 where timezoneid =176;
+ update timezone set sortorder =188 where timezoneid =177;
+ update timezone set sortorder =195 where timezoneid =178;
+ update timezone set sortorder =166 where timezoneid =179;
+ update timezone set sortorder =168 where timezoneid =180;
+ update timezone set sortorder =174 where timezoneid =181;
+ update timezone set sortorder =176 where timezoneid =182;
+ update timezone set sortorder =180 where timezoneid =183;
+ update timezone set sortorder =191 where timezoneid =184;
+ update timezone set sortorder =167 where timezoneid =185;
+ update timezone set sortorder =170 where timezoneid =186;
+ update timezone set sortorder =173 where timezoneid =187;
+ update timezone set sortorder =178 where timezoneid =188;
+ update timezone set sortorder =179 where timezoneid =189;
+ update timezone set sortorder =190 where timezoneid =190;
+ update timezone set sortorder =182 where timezoneid =191;
+ update timezone set sortorder =189 where timezoneid =192;
+ update timezone set sortorder =192 where timezoneid =193;
+ update timezone set sortorder =193 where timezoneid =194;
+ update timezone set sortorder =194 where timezoneid =195;
+ update timezone set sortorder =196 where timezoneid =196;
+ update timezone set sortorder =197 where timezoneid =197;
+ update timezone set sortorder =200 where timezoneid =198;
+ update timezone set sortorder =204 where timezoneid =199;
+ update timezone set sortorder =205 where timezoneid =200;
+ update timezone set sortorder =206 where timezoneid =201;
+ update timezone set sortorder =207 where timezoneid =202;
+ update timezone set sortorder =210 where timezoneid =203;
+ update timezone set sortorder =212 where timezoneid =204;
+ update timezone set sortorder =215 where timezoneid =205;
+ update timezone set sortorder =198 where timezoneid =206;
+ update timezone set sortorder =201 where timezoneid =207;
+ update timezone set sortorder =202 where timezoneid =208;
+ update timezone set sortorder =208 where timezoneid =209;
+ update timezone set sortorder =213 where timezoneid =210;
+ update timezone set sortorder =214 where timezoneid =211;
+ update timezone set sortorder =211 where timezoneid =212;
+ update timezone set sortorder =199 where timezoneid =213;
+ update timezone set sortorder =203 where timezoneid =214;
+ update timezone set sortorder =209 where timezoneid =215;
+ update timezone set sortorder =216 where timezoneid =216;
+ update timezone set sortorder =217 where timezoneid =217;
+ update timezone set sortorder =218 where timezoneid =218;
+ update timezone set sortorder =222 where timezoneid =219;
+ update timezone set sortorder =224 where timezoneid =220;
+ update timezone set sortorder =225 where timezoneid =221;
+ update timezone set sortorder =221 where timezoneid =222;
+ update timezone set sortorder =219 where timezoneid =223;
+ update timezone set sortorder =220 where timezoneid =224;
+ update timezone set sortorder =223 where timezoneid =225;
+ update timezone set sortorder =226 where timezoneid =226;
+ update timezone set sortorder =227 where timezoneid =227;
+ update timezone set sortorder =228 where timezoneid =228;
+ update timezone set sortorder =229 where timezoneid =229;
+ update timezone set sortorder =230 where timezoneid =230;
+ update timezone set sortorder =231 where timezoneid =231;
+ update timezone set sortorder =235 where timezoneid =232;
+ update timezone set sortorder =234 where timezoneid =233;
+ update timezone set sortorder =232 where timezoneid =234;
+ update timezone set sortorder =233 where timezoneid =235;
+ update timezone set sortorder =237 where timezoneid =236;
+ update timezone set sortorder =236 where timezoneid =237;
+ update timezone set sortorder =238 where timezoneid =238;
+ update timezone set sortorder =243 where timezoneid =239;
+ update timezone set sortorder =246 where timezoneid =240;
+ update timezone set sortorder =239 where timezoneid =241;
+ update timezone set sortorder =240 where timezoneid =242;
+ update timezone set sortorder =242 where timezoneid =243;
+ update timezone set sortorder =244 where timezoneid =244;
+ update timezone set sortorder =245 where timezoneid =245;
+ update timezone set sortorder =241 where timezoneid =246;
+ update timezone set sortorder =248 where timezoneid =247;
+ update timezone set sortorder =247 where timezoneid =248;
+ update timezone set sortorder =251 where timezoneid =249;
+ update timezone set sortorder =249 where timezoneid =250;
+ update timezone set sortorder =253 where timezoneid =251;
+ update timezone set sortorder =254 where timezoneid =252;
+ update timezone set sortorder =255 where timezoneid =253;
+ update timezone set sortorder =256 where timezoneid =254;
+ update timezone set sortorder =252 where timezoneid =255;
+ update timezone set sortorder =257 where timezoneid =256;
+ update timezone set sortorder =250 where timezoneid =257;
+ update timezone set sortorder =259 where timezoneid =258;
+ update timezone set sortorder =258 where timezoneid =259;
+ update timezone set sortorder =261 where timezoneid =260;
+ update timezone set sortorder =262 where timezoneid =261;
+ update timezone set sortorder =267 where timezoneid =262;
+ update timezone set sortorder =263 where timezoneid =263;
+ update timezone set sortorder =264 where timezoneid =264;
+ update timezone set sortorder =265 where timezoneid =265;
+ update timezone set sortorder =266 where timezoneid =266;
+ update timezone set sortorder =260 where timezoneid =267;
+ update timezone set sortorder =268 where timezoneid =268;
+ update timezone set sortorder =269 where timezoneid =269;
+ update timezone set sortorder =270 where timezoneid =270;
+ update timezone set sortorder =271 where timezoneid =271;
+ update timezone set sortorder =272 where timezoneid =272;
+ update timezone set sortorder =273 where timezoneid =273;
+ update timezone set sortorder =276 where timezoneid =274;
+ update timezone set sortorder =277 where timezoneid =275;
+ update timezone set sortorder =278 where timezoneid =276;
+ update timezone set sortorder =274 where timezoneid =277;
+ update timezone set sortorder =275 where timezoneid =278;
+ update timezone set sortorder =279 where timezoneid =279;
+ update timezone set sortorder =280 where timezoneid =280;
+ update timezone set sortorder =281 where timezoneid =281;
+ update timezone set sortorder =286 where timezoneid =282;
+ update timezone set sortorder =282 where timezoneid =283;
+ update timezone set sortorder =283 where timezoneid =284;
+ update timezone set sortorder =284 where timezoneid =285;
+ update timezone set sortorder =285 where timezoneid =286;
+ update timezone set sortorder =287 where timezoneid =287;
+ update timezone set sortorder =288 where timezoneid =288;
+ update timezone set sortorder =289 where timezoneid =289;
+ update timezone set sortorder =293 where timezoneid =290;
+ update timezone set sortorder =290 where timezoneid =291;
+ update timezone set sortorder =291 where timezoneid =292;
+ update timezone set sortorder =292 where timezoneid =293;
+ update timezone set sortorder =294 where timezoneid =294;
+ update timezone set sortorder =295 where timezoneid =295;
+ update timezone set sortorder =296 where timezoneid =296;
+ update timezone set sortorder =302 where timezoneid =297;
+ update timezone set sortorder =297 where timezoneid =298;
+ update timezone set sortorder =298 where timezoneid =299;
+ update timezone set sortorder =299 where timezoneid =300;
+ update timezone set sortorder =300 where timezoneid =301;
+ update timezone set sortorder =301 where timezoneid =302;
+ update timezone set sortorder =303 where timezoneid =303;
+ update timezone set sortorder =304 where timezoneid =304;
+ update timezone set sortorder =305 where timezoneid =305;
+ update timezone set sortorder =306 where timezoneid =306;
+ update timezone set sortorder =307 where timezoneid =307;
+ update timezone set sortorder =308 where timezoneid =308;
+ update timezone set sortorder =309 where timezoneid =309;
+
+#Deepak Singh 7 Aug 2015
+UPDATE exportcompanypref SET displayname="UOM Settings-" WHERE id='98';
+
+# Amol Dhokale 10th Aug 2015
+ALTER TABLE  product ADD COLUMN currency VARCHAR(255);
+ALTER TABLE product ADD CONSTRAINT  FK_product_currency FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+UPDATE product pr SET pr.currency=(SELECT cp.currency FROM company cp WHERE cp.companyid=pr.company);
+
+# Swapnil Pandhare 11th Aug 2015
+update helpedit set compid='quicksearch30' where modeid=30 and id=163;
+
+# Amol Dhokale 11th Aug 2015
+# Execute below Query only Once
+UPDATE exchangeratedetails SET applydate=DATE_SUB(applydate,INTERVAL 1 DAY) WHERE company in (SELECT companyid FROM company WHERE createdon>="2015-01-01 00:00:00");
+
+#Mayur Bhokase 11th Aug 2015
+insert into defaultcreditterm (termid, termname, termdays) values (UUID(), "NET 0", 0);
+
+#Shashi Nandan kumar  12th Aug 2015
+# Copy Payment Receipt
+
+INSERT INTO helpedit VALUES('511','Copy Payment Receipt','Receipt No', '58','Receipt No','Receipt number will be auto-generated, if it is set in Account Preferences or else you can also enter the Receipt Number.',"receiptNo58CopyReceivePayment");
+
+INSERT INTO helpedit VALUES('512','Copy Payment Receipt','Date', '58','Date','Select the transaction date.',"date58CopyReceivePayment");
+
+INSERT INTO helpedit VALUES('513','Copy Payment Receipt','Currency', '58','Currency',"Customers currency will be auto-populated.","currency58CopyReceivePayment");
+
+INSERT INTO helpedit VALUES('514','Copy Payment Receipt','Account', '58','Account','Select the customer from whom you are receiving payment. To add a new customer, simply click on add new customer in the drop down',"account58CopyReceivePayment");
+
+INSERT INTO helpedit VALUES('515','Copy Payment Receipt','Payment Method', '58','Payment Method','Add multiple payment types such as cash, cheque and also through Debit/Credit Card. You can add details for payment through cheque and card as well.',"paymentMethod58CopyReceivePayment");
+
+INSERT INTO helpedit VALUES('516','Copy Payment Receipt','Amount', '58','Amount','For the selected customer, total pending amount is displayed. You can enter the amount that is applicable for a particular transaction',"amount58CopyReceivePayment");
+
+INSERT INTO helpedit VALUES('517','Copy Payment Receipt','Save', '58','Save','Click on save to record the transaction.',"save58CopyReceivePayment");
+
+# Copy Payment made
+
+INSERT INTO helpedit VALUES('518','Copy Payment made','Payment No', '59','Payment No','Payment number will be auto-generated, if it is set in Account Preferences or else you can also enter the Payment Number.',"receiptNo59CopyPaymentMade");
+
+INSERT INTO helpedit VALUES('519','Copy Payment made','Date', '59','Date','Select the transaction date.',"date59CopyPaymentMade");
+INSERT INTO helpedit VALUES('520','Copy Payment made','Currency', '59','Currency','Vendors currency will be auto-populated.',"currency59CopyPaymentMade");
+
+INSERT INTO helpedit VALUES('521','Copy Payment made','Account', '59','Account','Select the vendor to whom you are making payment. To add a new vendor, simply click on add new vendor in the drop down',"account59CopyPaymentMade");
+
+INSERT INTO helpedit VALUES('522','Copy Payment made','Payment Method', '59','Payment Method','Add multiple payment types such as cash, cheque and also through Debit/Credit Card. You can add details for payment through cheque and card as well.',"paymentMethod59CopyPaymentMade");
+
+INSERT INTO helpedit VALUES('523','Copy Payment made','Amount', '59','Amount','For the selected vendor, total pending amount is displayed. You can enter the amount that is applicable for a particular transaction',"amount59CopyPaymentMade");
+
+INSERT INTO helpedit VALUES('524','Copy Payment made','Save', '59','Save','Click on save to record the transaction.',"save59CopyPaymentMade");
+
+
+# Ajit Ankalle 12th August 2015
+# ERP-4206 Implement the copy functionality in Purchase Requestion 
+# For providing permission to copy "Purchase Requisition" & "Asset Purchase Requisition".
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('add0fe3240d311e5a22tc03fd5632a48', 'copyapreq', 'Copy', '106', '3cea98179586416480d7d862fbea2868', 'ff80808122f9dba90122fa4888cf0068');
+
+update activitylist set orderno = 31 where activityid='a6ca0d2a9bb711e4b5cbeca86bmf8e9d';
+update activitylist set orderno = 30 where activityid='9c99f7669bb711e4b5cbeca86bmf8e9d';
+update activitylist set orderno = 29 where activityid='938481789bb711e4b5cbeca86bmf8e9d';
+update activitylist set orderno = 28 where activityid='8af321d69bb711e4b5cbeca86bmf8e9d';
+update activitylist set orderno = 27 where activityid='7b45ddbe9bb711e4b5cbeca86bmf8e9d';
+update activitylist set orderno = 26 where activityid='67f013889bb711e4b5cbeca86bmf8e9d';
+
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('319d5aa240e411e5a22fc03fd5632a48', 'copyasreq', 'Copy', '25', '7b45ddbe9bb711e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99');
+
+update userpermission set permissioncode='2147483647' where role=1 and feature='5f52f9615e374a50a7e1c8c6a51deg99';
+
+#Neeraj Dwivedi 13th August 2015
+update default_header set reftabledatacolumn="termname" where id='b2703412-feb2-11e3-8da1-c03fd5633215' and isdocumentimport='F' and module=2;
+
+#Santosh Belote 13 Aug 2015
+#add column to store flag if recurring SO is activated or not
+alter table repeatedsalesorders add isactivate char(1) NOT NULL default 'T';
+alter table repeatedsalesorders add approver varchar(50) NOT NULL;
+alter table repeatedsalesorders add ispendingapproval char(1) NOT NULL default 'F';
+alter table repeatedsalesorders add prevDate date DEFAULT NULL;
+Update repeatedsalesorders set prevDate = DATE_SUB(startdate, INTERVAL 1 DAY);
+
+# Amol Dhokale 13th August 2015
+ALTER TABLE account ADD COLUMN activate CHAR(1) DEFAULT 'T';
+
+#Rushikesh Mandage 13th August 2015
+#Adding user permissions for Copy case of CN and DN
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3846576f47ad41c8a8b5c1e8d7f7ee93', 'copycn', 'Copy', '8', 'f126f86ca2f411e4adaceca86bff8e7d', 'ac4d34fea2f411e4adaceca86bff8e7d') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3346576f47ad41c7g7b5c1e8d7f7ee95', 'copydn', 'Copy', '8', '80cd4ad4a2f511e4adaceca86bff8e7d', '485b1f96a2f511e4adaceca86bff8e7d') ;
+
+update userpermission set permissioncode = '255' where feature = 'ac4d34fea2f411e4adaceca86bff8e7d';
+update userpermission set permissioncode = '255' where feature = '485b1f96a2f511e4adaceca86bff8e7d';
+
+# Amol Dhokale 14th Aug 2015
+# Execute below Query only Once
+UPDATE exchangeratedetails SET applydate=DATE_ADD(applydate,INTERVAL 1 DAY) WHERE company in (SELECT companyid FROM company WHERE createdon>="2015-01-01 00:00:00");
+
+#Sharad Pawar 14 Aug 2015
+INSERT INTO helpedit VALUES('444','Vendor Quotation list','Quick Search', '95','Quick Search','Search through Vendor Quatation List easily from Quick search, which allows you to filter results as soon as you type them.  ','quickSearch35VendorQuotationList');
+INSERT INTO helpedit VALUES('445','Vendor Quotation list','Export Reports', '95','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports35VendorQuotationList');
+
+#Mohammed Uzair Momin 14th August 2014
+alter table `salesorder` add column `isopen` char(1) default 'T';
+
+# Anand Nimbalkar 14th August, 2015
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex) 
+VALUES ("c1fd2868-41b4-11e5-bde2-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Minimum Budget Limit","CustMinBudget",0,0,'F','F',null,null,null,"double",0.0,"custminbudget");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("3d97b62c-41b6-11e5-bde2-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Map Tax","Taxid",0,0,'F','F',"Tax","name","ID","ref",null,null,"taxName");
+
+update default_header set dataindex = 'acccode' where defaultHeader = 'Account Code' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'accdesc' where defaultHeader = 'Account Description' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'groupname' where defaultHeader = 'Account Group' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'accname' where defaultHeader = 'Account Name' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'aliascode' where defaultHeader = 'Alias Code' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'budget' where defaultHeader = 'Annual Budget' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'creationDate' where defaultHeader = 'Creation Date' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'mastertypevaluestring' where defaultHeader = 'Master Type' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'accountopenbalance' where defaultHeader = 'Opening Balance' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'parentname' where defaultHeader = 'Parent Account' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set dataindex = 'accounttypestring' where defaultHeader = 'Type' and module = 'e1e72896-bf85-102d-b644-001e58a64cb6';
+
+#Ajit Ankalle 14th August 2015
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES ('47214416425511e59e71c03fd5632a48', 'copyje', 'Copy', '206', 'ff80808122f9dba90122fa4888cf00276', 'ff80808122f3cb640122f44c528e0011');
+update userpermission set permissioncode='4095' where role=1 and feature='ff80808122f3cb640122f44c528e0011';
+
+# Vivek Pakmode 17th Aug 2015
+INSERT INTO reportmaster values('DimensionBased_BalanceSheet', 'Dimension Based Balance Sheet Report','View Dimension based Balance Sheet Report','callDimensionBasedBalanceSheet()',NULL);
+
+#Deepak Singh 17th Aug 2015
+UPDATE exportcompanypref SET namepasstosavefunction='showProductUpdate' WHERE id='61';
+UPDATE exportcompanypref SET namepasstosavefunction='showVendorUpdate' WHERE id='60';
+
+# Anand Nimbalkar 17th August, 2015
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) 
+VALUES ("94", "Product Category", "com.krawler.hql.accounting.ProductCategoryMapping", "ID", null, null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("aa6e4da4-44b0-11e5-9b66-eca86bfcd415","94","Product ID","ProductID",0,0,'T','T',"Product","productid","ID","ref",null,"productid",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("cfff3a74-44b0-11e5-9b66-eca86bfcd415","94","Product Category","ProductCategory",0,0,'T','T',"MasterItem","value","ID","ref",null,"productCategory",null);
+
+# Sagar M
+# Missing module entry in master table
+insert into modules (id,modulename,pojoclasspathfull,primarykey_methodname) values ('27','Delivery Order','com.krawler.hql.accounting.DeliveryOrder','ID');
+insert into modules (id,modulename,pojoclasspathfull,primarykey_methodname) values ('29','Sales Return','com.krawler.hql.accounting.SalesReturn','ID');
+insert into modules (id,modulename,pojoclasspathfull,primarykey_methodname) values ('31','Purchase Return','com.krawler.hql.accounting.PurchaseReturn','ID');
+
+
+#Sharad Pawar 17 Aug 2015
+update default_header set defaultHeader="Customer Code",refdatacolumn_hbmname="acccode" where pojomethodname="customer" and module=80;
+update default_header set defaultHeader="Vendor Code",refdatacolumn_hbmname="acccode" where pojomethodname="vendor" and module=80;
+
+#Ajit Ankalle 18th August 2015
+#ERP-4207 Implement the "copy" and "edit" functionality in Request for Quotation .
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('e18feea844e911e5a952c03fd5632a48', 'copyrfq', 'Copy', '206', '7c915ef1edd24ea6a17075b9ae800ce3', 'ff80808122f9dba90122fa4888cf0068');
+
+update userpermission set permissioncode='8191' where role=1 and feature='ff80808122f9dba90122fa4888cf0068';
+
+#Deepak Singh 18th Aug 2015
+INSERT INTO  exportcompanypref  VALUES("146","Company GST Detail-Enable GST ","enablegst","isEnableGST","F","enableGST",'F',"enableGST","boolean",null,null,null);
+
+#Deepak Singh 18th Aug 2015
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Revenue recognition on Delivery Order' WHERE id='43';
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Revenue recognition on manual JE' WHERE id='44';
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Sales Account' WHERE id='45';
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Sales Revenue Recognition Account' WHERE id='46';
+
+#Raj Shah 19th Aug 2015
+#this dbchange is missing in some DB because before merging inv-erp,inv side db changes were maintained inv_dbchanges.So,appended if not exist in query
+CREATE TABLE IF NOT EXISTS `in_inventoryconfig` (
+`id`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`createdby`  varchar(50) NULL ,
+`modifiedby`  varchar(50) NULL ,
+`createdon`  datetime NULL ,
+`modifiedon`  datetime NULL ,
+`negative_inventory_check`  int(2) NULL DEFAULT 0 ,
+`stock_update_batchtype`  int(2) NULL DEFAULT 0 ,
+`enable_stockadj_approvalflow`  bit NULL DEFAULT b'0' ,
+`enable_stockreq_approvalflow`  bit NULL DEFAULT b'0' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+#Ajit Ankalle 19th August 2015
+#To add copy journalEntry option true ERP-4216
+update userpermission set permissioncode='8191' where role=1 and feature='ff80808122f3cb640122f44c528e0011';
+
+#Neeraj Dwivedi 19th August 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5c89f0dc-ff66-4366-acc9-8de8aca4ac56','Sales Person','salesperson','masteritem','id','value','Sales Person','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1463ebad-143d-487e-9807-1c3145679bf2','Sales Person CNo','salesperson','masteritem','id','contactnumber','Sales Person CNo','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e3db210d-c6f6-4981-91ba-97a4037b35ee','Sales Person Email','salesperson','masteritem','id','emailid','Sales Person Email','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('172bb44f-3c51-44b6-ba86-8827453008fc','Sales Person Designation','salesperson','masteritem','id','designation','Sales Person Designation','1','27');
+
+# Anand Nimbalkar 20th August, 2015
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("32805be4-470c-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","IBG Bank Details","IBGBank",0,0,'F','F',null,null,null,"boolean",'F',"isibgbank",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("b12b1bfe-4708-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","IBG Bank","IbgbankName",0,0,'F','F',null,null,null,"string",null,"ibgbank",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("30a4e3ba-4709-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Originating Bank Number/Code","BankCode",0,0,'F','F',null,null,null,"integer",null,"bankCode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("a670fcdc-4709-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Originating Branch Number/Code","BranchCode",0,0,'F','F',null,null,null,"integer",null,"branchCode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("6e0dc1c6-470a-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Originating Account Number","AccountNumber",0,0,'F','F',null,null,null,"integer",null,"accountNumber",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("7479e4e0-470a-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Originating Account Name/Originator's Name","AccountName",0,0,'F','F',null,null,null,null,null,"accountName",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("54b63d6a-470b-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Sender's Company Id","SendersCompanyID",0,0,'F','F',null,null,null,null,null,"sendersCompanyID",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("b2ff2ecc-470b-11e5-8e3e-eca86bfcd415","e1e72896-bf85-102d-b644-001e58a64cb6","Bank Daily Limit","BankDailyLimit",0,0,'F','F',null,null,null,"double",null,"bankDailyLimit",null);
+
+#Anand Thakur 20th Aug 2015
+ALTER table compaccpreferences add column remitpaymentto text(1024);
+
+#Deepak Singh 20th Aug 2015
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Revenue recognition on Delivery Order' WHERE id='43';
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Revenue recognition on manual JE' WHERE id='44';
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Sales Account' WHERE id='45';
+UPDATE exportcompanypref SET displayname='Revenue Recognition Account-Sales Revenue Recognition Account' WHERE id='46';
+
+#Swapnil Pandhare 21th August 2015
+alter table extracompanypreferences  add downloadglprocessflag int(1) DEFAULT '0';
+ALTER TABLE company DROP COLUMN ledgerthreadflag;
+
+#Deepak Pingale 21th August 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5aadc430-1ft00-4381f-98br9-844f5f12c805','Billing Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('942fdffb-9964569-4a72-a09e-7a5fdbf633rebg12','Shipping Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','23');
+
+# Basaprabhu Ajur 21th August 2015
+
+ALTER TABLE `in_sa_detail_approval` ADD COLUMN `reason`  varchar(50) NULL DEFAULT '';
+ALTER TABLE `in_stocktransfer_detail_approval`ADD COLUMN `reason`  varchar(50) NULL DEFAULT '' ;
+ALTER TABLE `in_consignmentdetails` ADD COLUMN `reason`  varchar(50) NULL DEFAULT '' ;
+
+#Deepak Singh 21th Aug 2015
+INSERT INTO  exportcompanypref  VALUES("147","Default Purchase Type Selection Setting","purchasetypeflag","isPurchaseTypeFlag","T","PurchaseSelectionType",'F',"purchaseTypeFlag","boolean",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("148","Default Sales Type Selection Setting","salestypeflag","isSalesTypeFlag","T","SalesSelectionType",'F',"salesTypeFlag","boolean",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("149","Negative Stock Setting-Activate Negative Stock For Location Warehouse","isnegativestockforlocwar","isIsnegativestockforlocwar","T","isnegativestockforlocwar",'F',"isnegativestockforlocwar","boolean",null,null,null);
+
+#Anand Thakur 21st Aug 2015
+#For Goods Receipt
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('958f4b13-263e-49dd-967a-abf334735bd9','Shipping Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5aadc430-1f00-481f-98b9-844f5f12c805','Billing Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('942fdffb-9969-4a72-a09e-7a5fdbf63312','Shipping Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ff4b7b13-93cc-458e-9dc1-5723f4d42b4f','Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f477f1ea-b3f7-474e-bb14-16a6b678a23e','Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('30344f62-a575-466b-bfb5-15ff8b27e1a6','Billing Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address MobileNo','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9659320c-5234-4838-b759-bbc9a0a3b077','Billing Address Fax','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2516cc91-9dc4-4f06-a165-ff542aa964f1','Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7d4782bf-11cf-428b-86c6-768013039374','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9e24e138-6bb4-4e4a-867f-d26764cbecd9','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('a82dcf9c-b00c-462b-a33e-6d72affa576c','Shipping Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address MobileNo','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('fc619680-54e8-4d81-baf6-bde078c7538b','Shipping Address Fax','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('81efa2a9-4c0a-458a-9585-eaf0d2737193','Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','28');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('159f75f1-ffab-46ba-8453-884b3ca06f76','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','28');
+
+#Amol Edewar 21st Aug 2015
+alter table extracompanypreferences  add proddiscripritchtextboxflag int(1) DEFAULT '0';
+
+#Rushikesh Mandage 21st August 2015
+CREATE TABLE `repeatedpaymentchequedetail` (
+  `id` varchar(40) NOT NULL,
+  `repeatedpaymentid` varchar(40) NOT NULL,
+  `count` int(11) DEFAULT '0',
+  `chequedate` date NOT NULL,
+  `chequenumber` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table repeatedpayment add column autogeneratechequenumber char(1) Default 'F';
+
+# Vivek Pakmode 21th Aug 2015
+INSERT INTO reportmaster values('DimensionBased_TrialBalance', 'Dimension Based Trial Balance Report','View Dimension based Trial Balance Report','callDimensionBasedTrialBalance()',NULL);
+
+#Deepak Pingale 22th August 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('a82dcf9c-b00c-462b-a533e-6d72rt54affa576c','Shipping Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address MobileNo','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3034h4f62-a57r5-466b-bfb25-15ff8b27e1a6','Billing Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address MobileNo','1','23');
+
+#Neeraj Dwivedi 24rth August 2015
+update default_header set xtype=3 where defaultHeader='Ship Date' and module=29 and isdocumentimport='F';
+
+#Deepak Pingale 24th August 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('a8dcf9c-b0c-462b-a533e-6d72r54affa576c','Shipping Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address MobileNo','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3034h4f62-a57r5-466b-bfb25-1ff827e1a6','Billing Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address MobileNo','1','22');
+
+# Sumit Jain 24th August 2015
+
+INSERT INTO mailnotification 
+(id,module,beforeafter,fieldid,days,mailcontent,mailsubject)
+VALUES 
+('096c8800-4a35-11e5-90a9-c03fd5657f27',6,0,20,0,'Hello<b> #VendorName#</b><br/><br/><br/>We have enclosed your Purchase Invoice details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Purchase Invoice - #companyname# - #VendorName#');
+
+INSERT INTO mailnotification 
+(id,module,beforeafter,fieldid,days,mailcontent,mailsubject)
+VALUES 
+('6f454828-4a3b-11e5-ad59-eca86bff9ae1',2,0,20,0,'Hello<b> #CustomerName#</b><br/><br/><br/>We have enclosed your Sales Invoice details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Sales Invoice - #companyname# - #CustomerName#');
+
+INSERT INTO mailnotification 
+(id,module,beforeafter,fieldid,days,mailcontent,mailsubject)
+VALUES 
+('8400b7b4-4a3d-11e5-ad59-eca86bff9ae1',24,0,20,0,'Hello<b> #Vendor/CustomerName#</b><br/><br/><br/>We have enclosed your Journal Entry details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Journal Entry - #companyname# - #Vendor/CustomerName#');
+
+INSERT INTO mailnotification 
+(id,module,beforeafter,fieldid,days,mailcontent,mailsubject)
+VALUES 
+('7db997bc-4a3e-11e5-ad59-eca86bff9ae1',35,0,20,0,'Hello<b> #CustomerName#</b><br/><br/><br/>We have enclosed your Contract details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Contract - #companyname# - #CustomerName#');
+
+INSERT INTO mailnotification 
+(id,module,beforeafter,fieldid,days,mailcontent,mailsubject)
+VALUES 
+('8cae456a-4a3e-11e5-ad59-eca86bff9ae1',43,0,20,0,'Hello<b> #CustomerName#</b><br/><br/><br/>We have enclosed your Asset Maintenance details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Asset Maintenance - #companyname# - #CustomerName#');
+
+INSERT INTO mailnotification 
+(id,module,beforeafter,fieldid,days,mailcontent,mailsubject)
+VALUES 
+('a0725028-4a3e-11e5-ad59-eca86bff9ae1',30,0,20,0,'Hello<b> #Vendor/CustomerName#</b><br/><br/><br/>We have enclosed your Product details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Product - #companyname# - #Vendor/CustomerName#');
+
+#Neeraj Dwivedi 24rth August
+#Inserting company details for all modules
+#Address
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e98343e2-4a40-11e5-885d-feff819cdc9f','Company Address','address','company','','','Company Address','1','42');
+
+#City
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e98344fa-4a40-11e5-885d-feff819cdc9f','Company City','city','company','','','Company City','1','42');
+
+#State
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e98345e0-4a40-11e5-885d-feff819cdc9f','Company State','state','company','','','Company State','1','42');
+
+#Zipcode
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e98346c6-4a40-11e5-885d-feff819cdc9f','Company ZipCode','zipcode','company','','','Company ZipCode','1','42');
+
+#Phone No
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e98347ac-4a40-11e5-885d-feff819cdc9f','Company PhoneNo','phoneno','company','','','Company PhoneNo','1','42');
+
+#Fax No
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e9834bf8-4a40-11e5-885d-feff819cdc9f','Company FaxNo','faxno','company','','','Company FaxNo','1','42');
+
+#Email
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('280bfb1e-4a45-11e5-885d-feff819cdc9f','Company email','emailid','company','','','Company email','1','42');
+
+#Website
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e9834cfc-4a40-11e5-885d-feff819cdc9f','Company Website','website','company','','','Company Website','1','42');
+
+#Akshay Gujar 24th Aug 2015
+#Purchase return module Default Headers
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e30db374-4899-11e5-a151-feff819cdc9f','Purchase Return Date','orderdate','purchasereturn','','','Purchase Return Date','3','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('0200957e-4a2c-11e5-885d-feff819cdc9f','Vendor','vendor','vendor','id','name','Vendor','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ae1621da-4a2c-11e5-885d-feff819cdc9f','Purchase Return Number','prnumber','purchasereturn','','','Purchase Return Number','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4154e760-4a2d-11e5-885d-feff819cdc9f','Memo','memo','purchasereturn','','','Memo','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5ef65524-4a2d-11e5-885d-feff819cdc9f','Ship Date','shipdate','purchasereturn','','','Ship Date','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('95fe13ae-4a2d-11e5-885d-feff819cdc9f','Ship via','shipvia','purchasereturn','','','Ship via','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('77758030-4a31-11e5-885d-feff819cdc9f','FOB','fob','purchasereturn','','','FOB','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('c6dc64cc-4a31-11e5-885d-feff819cdc9f','Post Text','posttext','purchasereturn','','','Post Text','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('9070df72-4a35-11e5-885d-feff819cdc9f','Created By','createdby','users','userid','fname','Created By','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('bff08d92-4a35-11e5-885d-feff819cdc9f','Currency','currency','currency','currencyid','name','Currency','1','31');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('c5dede5c-4a35-11e5-885d-feff819cdc9f','Company Name','company','company','companyid','companyname','Company Name','1','31');
+
+#Deepak Singh 24th Aug 2015
+INSERT INTO  exportcompanypref  VALUES("150","Product Price Settings-Allow Zero Unit Price","allowzeroproductprice","isAllowZeroUntiPriceForProduct","T","allowZeroUntiPriceForProduct",'F',"allowZeroUntiPriceForProduct","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("151","Product Description Text Box Settings-Show as Text Box","proddiscripritchtextboxflag","getProddiscripritchtextboxflag","T","proddiscripritchtextboxflag",'F',"proddiscripritchtextboxflag","int",null,null,null);
+ 
+INSERT INTO  exportcompanypref  VALUES("152","Customer/Vendor Settings-Show Customer/Vendor on type ahead","custvenloadtype","getCustvenloadtype","T","custvenloadtype",'F',"custvenloadtype","int",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("153","Customize Product Functionality Settings-Show Tariff Parameters Field","dependentfield","isDependentField","F","dependentField",'F',"dependentField","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("154","View Details(Document/Comment) Settings-View Details(Document/Comment) Window","viewdetailsperm","isViewDetailsPerm","F","viewDetailsPerm",'F',"viewDetailsPerm","boolean",null,null,null);
+
+# Anand Thakur 24th Aug 2015
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5d6b2f9f-be1c-4023-b1c4-0df4efb8593c','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('b0c2679a-3483-4412-8ea5-45325b150137','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e69d886c-cea7-498d-8c82-49e3205f55e9','Billing Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address MobileNo','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ccf59eba-4bc8-481f-bab6-c575eafe79e4','Billing Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address MobileNo','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7921863c-18e8-4513-8659-3106744ba2d3','Shipping Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address MobileNo','1','20');
+
+# Anand Nimbalkar 25th August, 2015
+ALTER TABLE `purchasereturn`
+ADD COLUMN `isfixedasset`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `assetdetail`
+ADD COLUMN `ispurchasereturn`  int(1) NULL DEFAULT 0;
+
+#Rushikesh Mandage 25th August 2015
+CREATE TABLE `repeatedjechequedetail` (
+  `id` varchar(40) NOT NULL,
+  `repeatedjeid` varchar(50) NOT NULL,
+  `count` int(11) DEFAULT '0',
+  `chequedate` date NOT NULL,
+  `chequenumber` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table repeatedje add column autogeneratechequenumber char(1) Default 'F';
+
+
+#Ajit Ankalle 25th August 2015
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("3b633aee-4af7-11e5-b5f9-c03fd5632a48",'billno','Invoice No',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("5b05d49c-4af7-11e5-b5f9-c03fd5632a48",'date','Invoice Date',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("615c1770-4af7-11e5-b5f9-c03fd5632a48",'duedate','Due Date',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("678ac9c0-4af7-11e5-b5f9-c03fd5632a48",'personname','Customer',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("6dcb422e-4af7-11e5-b5f9-c03fd5632a48",'discount','Discount',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("73e34648-4af7-11e5-b5f9-c03fd5632a48",'taxamount','Tax Amount',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("7b188e6e-4af7-11e5-b5f9-c03fd5632a48",'amount','Total Amount',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("b007f1d2-4af7-11e5-b5f9-c03fd5632a48",'memo','Memo',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("d5ca53ec-4af7-11e5-b5f9-c03fd5632a48",'amountdue','Amount Due',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("a60247e6-4af7-11e5-b5f9-c03fd5632a48",'amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("b7c5da74-4af7-11e5-b5f9-c03fd5632a48",'attachdoc','Attach Documents',97,1); 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("bea76754-4af7-11e5-b5f9-c03fd5632a48",'attachments','Attachments',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("dc28f842-4af7-11e5-b5f9-c03fd5632a48",'lasteditedby','Last Edited By',97,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("cb6c5186-4af5-11e5-b5f9-c03fd5632a48",'entryno','Journal Entry No',97,1);
+
+#Deepak Singh 26th Aug 2015
+DELETE FROM exportcompanypref WHERE id='145';
+INSERT INTO  exportcompanypref  VALUES("145","Inventory Settings-Activate Inventory Integration","activateinventorytabflag","isActivateInventoryTab","F","activateInventoryTab",'F',"activateInventoryTab","boolean",null,null,null);
+
+#Anand Thakur 26th Aug 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('4b81c45b-275b-42b2-be60-8556501ff4fd','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('446e2b2b-3b39-4aac-a8fb-f5261123f014','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('c586653e-34f4-4c8d-b658-fc8f2e910b7b','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f4bbbaab-a164-4fd6-aaf2-7dead63f69ac','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8231dac5-50c2-42e0-ad0d-4c3fc55d7abb','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('06381391-7c64-4908-8e37-f511a8f2eff1','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('07476260-f4f2-46e1-8c90-44ebd44f27f1','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','20');
+
+# Anand Nimbalkar 26th August, 2015
+alter table salesreturn add column isfixedasset INT(1) NULL DEFAULT 0;
+alter table assetdetail add column issalesreturn  INT(1) NULL DEFAULT 0;
+
+#Deepak Singh 27th Aug 2015
+INSERT INTO  exportcompanypref  VALUES("155","Integration Settings-Activate CRM Integration","activatecrmintegration","isActivateCRMIntegration","F","activateCRMIntegration",'F',"activateCRMIntegration","boolean",null,null,null);
+INSERT INTO  exportcompanypref  VALUES("156","Integration Settings-Activate LMS Integration","lmsintegration","isLMSIntegration","F","activateLMSIntegration",'F',"isLMSIntegration","boolean",null,null,null);
+UPDATE exportcompanypref SET displayname='Integration Settings-Activate POS Integration' WHERE id='96';
+UPDATE exportcompanypref SET displayname='Integration Settings-POS Walk-in Customer' WHERE id='97';
+
+#Anand Thakur 27th Aug 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ab063f26-fecb-4517-a1c4-e3adf4beb695','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','2');
+
+#Akshay Gujar 28th Aug 2015
+update default_header set xtype='3' where id = '5ef65524-4a2d-11e5-885d-feff819cdc9f';
+
+#Vijay Jawale 28th Aug 2015
+INSERT INTO reportmaster values('Sales_By_Customer_Sales_Order', 'Sales By Customer against Sales Order','View Details and Summary of Items Sales','getSalesByCustSalesOrderTabView()','Accounts Receivable - Sales');
+
+#Anand Thakur 28th Aug 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3f8c91cc-f08f-4e0c-9e85-e44b1a3328f7','CurSym','currency','currency','currencyid','symbol','CurSym','1','20');
+
+# Amol Dhokale 28th Aug,2015
+INSERT INTO reportmaster VALUES("SO_By_Product_Reports","Sales Order By Product Reports","View Sales Order By Product Reports",'callSOPOByProductReportTab(true)','Accounts Receivable - Sales'); 
+INSERT INTO reportmaster VALUES("PO_By_Product_Reports","Purchase Order By Product Reports","View Purchase Order By Product Reports",'callSOPOByProductReportTab(false)','Accounts Payable - Purchases'); 
+
+# Anand Nimbalkar 28th August, 2015
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("36708504-4c79-11e5-9f7c-eca86bfcd415","30","UOM Schema","UomSchemaType",0,0,'F','F',"UOMschemaType","name","ID","ref",null,null,"uomSchemaTypeName");
+
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) 
+VALUES ("99", "UOM Schema", "com.krawler.hql.accounting.UOMSchema", "ID", null, null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("62151308-4c99-11e5-9f7c-eca86bfcd415","99","Schema Name","Uomschematype",0,0,'T','T',"UOMschemaType","name","ID","ref",null,null,"uomSchemaTypeName");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("ce884022-4c9a-11e5-9f7c-eca86bfcd415","99","Stock UOM","Stockuom",0,0,'T','T',"UnitOfMeasure","name","ID","ref",null,null,"stockUomName");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("341bf87a-4c9b-11e5-9f7c-eca86bfcd415","99","Schema Type","SchemaType",0,0,'T','T',null,null,null,"string",null,null,"schemaType");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("a9e3a4e0-4c9b-11e5-9f7c-eca86bfcd415","99","UOM","Purchaseuom",0,0,'T','T',"UnitOfMeasure","name","ID","ref",null,null,"uomName");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ("28e90a00-4c9c-11e5-9f7c-eca86bfcd415","99","Quantity","Baseuomrate",0,0,'T','T',null,null,null,"double",null,null,"baseuomrate");
+
+# Amol Dhokale 31st August,2015
+INSERT INTO reportmaster VALUES("Sales_By_Product_Against_SalesOrder","Sales By Product Against Sales Order","View Sales By Product Against Sales Order Report",'callSalesByProductAgainstSalesOrder()','Accounts Receivable - Sales'); 

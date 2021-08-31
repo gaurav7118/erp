@@ -1,0 +1,423 @@
+#Pandurang 3 March 2015 
+delete from default_header where defaultHeader like 'Sales GL';
+
+
+# Suhas Chaware  3 March 2015
+CREATE TABLE `taxtermsmapping` (`id`  varchar(255) NOT NULL ,`tax`  varchar(255) NULL DEFAULT NULL ,`invoicetermssales`  varchar(255) NULL DEFAULT
+NULL ,PRIMARY KEY (`id`),FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),FOREIGN KEY (`invoicetermssales`) REFERENCES `invoicetermssales` (`id`))
+ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+# Anand Nimbalkar 3rd March 2015
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) 
+VALUES ("80", "Product Price List", "com.krawler.hql.accounting.PriceList", "ID", null, null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("970dbfc0-c16a-11e4-985e-eca86bfcd415","80","Product ID","Product",0,0,'T','T',"Product","productid","ID","ref",null,"productid",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("a689379a-c16a-11e4-985e-eca86bfcd415","80","Customer","Customer",0,0,'F','F',"Customer","name","ID","ref",null,"customer",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("afc7da0a-c16a-11e4-985e-eca86bfcd415","80","Vendor","Vendor",0,0,'F','F',"Vendor","name","ID","ref",null,"vendor",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("b76ad14a-c16a-11e4-985e-eca86bfcd415","80","Purchase Price","PurchasePrice",0,0,'T','T',null,null,null,"double",0.0,"purchasePrice",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("c0656242-c16a-11e4-985e-eca86bfcd415","80","Sales Price","SalesPrice",0,0,'T','T',null,null,null,"double",0.0,"salesPrice",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("c771024e-c16a-11e4-985e-eca86bfcd415","80","Applicable Date","ApplyDate",0,0,'T','T',null,null,null,"date",0.0,"applyDate","date");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("ce656752-c16a-11e4-985e-eca86bfcd415","80","Currency","Currency",0,0,'F','F',"KWLCurrency","name","currencyID","ref",null,"currencyName",null);
+
+# Vivek Pakmode 4th March 2015
+update account set accounttype=1 where name="Net Profit/Loss";
+
+#Anand Thakur 4th March 
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8c655861-c448-4908-a8dss4-d0e9ecfd30e1','CurSym','currency','currency','currencyid','symbol','CurSym','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('28f67554ac-d80a-4781-a8fe-bd918f7dc844','Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f4e07335-1c55-4100-baf5-2a447b46f5ff','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','18');
+
+# Suhas Chaware 4th march 2015
+update extracompanypreferences set termsincludegst='F';
+
+
+# Anand Nimbalkar 5th March 2015
+UPDATE `customizereportheader` SET `ismanadatoryfield`='1' WHERE dataIndex='pid';
+UPDATE `customizereportheader` SET `ismanadatoryfield`='0' WHERE dataIndex='productid';
+
+# Amol Dhokale 10th March 2015
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('71e72895-4f81-368d-b744-001e58a64cb1','porefno','PO Reference Number',2,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('71e72895-4f81-368d-b744-001e58a64cb2','porefno','PO Reference Number',4,1,0,0,0);
+# Dipak Dorkar 11th March 2015
+  alter table extracompanypreferences ADD salestypeflag char(1) default 'F';
+
+# Nitin Narkhede 12th March 2015 
+delete from locationlevel where id='1' or id='2';
+insert into locationlevel values('2','Locations');
+insert into locationlevel values('1','Warehouse');
+
+#Pandurang 12th March 2015  
+update extracompanypreferences set productoptimizedflag=0 where productoptimizedflag='F';
+update extracompanypreferences set productoptimizedflag=1 where productoptimizedflag='T';
+
+Alter table extracompanypreferences modify
+productoptimizedflag int(1) Default '0';
+alter table product modify productid varchar(1024) COLLATE utf8_bin;
+
+# Nitin Narkhede 12th March 2015 
+
+insert into reportmaster value("Inventory_Movement_Details_Report","Inventory Movement Details Report","View Inventory Movement Details Report From here.","getInventoryMovementDetailsReport()","");
+insert into reportmaster value("Inventory_Movement_Summary_Report","Inventory Movement Summary Report","View Inventory Movement Summary Report From here.","getInventoryMovementSummaryReport()","");
+
+# Anand Nimbalkar 13th March 2015
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) 
+VALUES ("81", "Unit of Measure", "com.krawler.hql.accounting.UnitOfMeasure", "ID", "Name", "name");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("9c2d2482-c94e-11e4-a079-eca86bfcd415","81","Name","Name",0,0,'T','T',null,null,null,null,null,"uomname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("18537c8c-c94f-11e4-a079-eca86bfcd415","81","Type","Type",0,0,'T','T',null,null,null,null,null,"uomtype",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("c62be11e-c94f-11e4-a079-eca86bfcd415","81","Allowed Precision","AllowedPrecision",0,0,'T','T',null,null,null,"integer",0,"precision",null);
+
+#Ajit Ankalle 13th march 2015
+alter table newproductbatch  modify column mfgdate datetime default NULL;
+alter table newproductbatch  modify column expdate datetime default NULL;
+alter table newbatchserial modify column expfromdate datetime default NULL;
+alter table newbatchserial modify column exptodate datetime default NULL;
+alter table locationbatchdocumentmapping  modify column mfgdate datetime default NULL;
+alter table locationbatchdocumentmapping  modify column expdate datetime default NULL;
+alter table serialdocumentmapping  modify column expfromdate datetime default NULL;
+alter table serialdocumentmapping  modify column exptodate datetime default NULL;
+#Mayur Pawar 15th March 2015
+alter table `salesorder` ADD COLUMN `fromdate` datetime default NULL;
+alter table `salesorder` ADD COLUMN `todate` datetime default NULL;
+alter table newbatchserial add  qaApprovalstatus char(1) DEFAULT 'F';
+
+
+# Atul sachan 16 March 2015
+
+ALTER TABLE `grodetails`
+ADD COLUMN `tax`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `rowtaxamount`  double NULL DEFAULT 0;
+
+ALTER TABLE `dodetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0 ,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+ALTER TABLE `grodetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0 ,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+ALTER TABLE `srdetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0 ,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+ALTER TABLE `prdetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0 ,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+#Anand Thakur 18th March 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3e1562cb8-5db9-43c6-bc35-25c79f1bdf9f','Billing Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','billingMobile','Billing Address Mobile No','1','22');
+
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('b9728c48-c912-4397-9680-6bcbdd58b14a','Shipping Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','shippingMobile','Shipping Address Mobile No','1','22');
+
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5106605b-1795-4f26-a5f6-5217f25e2323','CurSym','currency','currency','currencyid','symbol','CurSym','1','22');
+
+# suhas Chaware 18th march 2015
+alter table receipt add column journalentryforbankinterest varchar(255) DEFAULT NULL;
+
+ALTER TABLE `receipt` ADD FOREIGN KEY (`journalentryforbankinterest`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+#Vijay Jawale 18th March 2015
+update currency set symbol="&#8364" where currencyid=3;
+
+#SagarM 19th March (ERP-3677 - link advance payment to vendor invoice)
+
+alter table linkdetailpayment add column linkedgainlossje VARCHAR(40) default '';
+
+alter table linkdetailreceipt add column linkedgainlossje VARCHAR(40) default '';
+
+alter table journalentry add column isexchangegainslossje char(1) default 'F';
+
+#Mayur Pawar 20 th march 2015
+alter table newbatchserial drop column qaApprovalstatus;
+alter table newbatchserial add column qaApprovalstatus  int(2) NULL DEFAULT 1 ;
+#Raveesh Pathak 20th March 2015
+alter table deliveryorder add column billingshippingaddresses VARCHAR(255);
+alter table deliveryorder add constraint FK_billingshippingaddresses_deliveryorder foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+alter table grorder add column billingshippingaddresses VARCHAR(255);
+alter table grorder add constraint FK_billingshippingaddresses_grorder foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+#Rushikesh Mandage 20th March 2015
+alter table receiptadvancedetail add column gst varchar(255) DEFAULT NULL;
+alter table receiptadvancedetail add FOREIGN KEY (gst) REFERENCES tax (id) ;
+
+# Atul sachan 20 March 2015
+
+ALTER TABLE goodsreceipt
+add column isretailpurchase int(1) NULL DEFAULT 0;
+
+#Deepak Pingale 21th March 2015
+ALTER TABLE vendor
+ADD COLUMN selfbilledfromdate datetime NULL DEFAULT NULL,
+ADD COLUMN selfbilledtodate datetime NULL DEFAULT NULL ;
+
+#Mayur Pawar 21 th march 2015
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) 
+VALUES ("82", "Product opening stock", "com.krawler.hql.accounting.Product", "ID", null, null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("408b5d54-cf9a-11e4-a639-c03fd5632dc7","82","Product ID","Productid",0,0,'T','T',null,null,null,null,null,"productid",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("f60b641e-cfa2-11e4-a639-c03fd5632dc7","82","Location","Location",0,0,'F','T',"InventoryLocation","name","id","ref",null,"locationName",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("0165e26c-cfa3-11e4-a639-c03fd5632dc7","82","Warehouse","Warehouse",0,0,'F','T',"InventoryWarehouse","name","id","ref",null,"warehouseName",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("12d1e078-cfa3-11e4-a639-c03fd5632dc7","82","Initial Quantity","Quantity",0,0,'F','T',"Inventory","quantity","ID","double",null,"initialquantity",null);
+
+alter table dodetails add column isFromVendorConsign char(1) DEFAULT 'F';
+
+#Neeraj Dwivedi 23rd March 2015
+alter table grodetails modify column description text;
+
+
+#  Atul sachan 24 March 2015
+
+INSERT INTO defaultaccount VALUES ('388fc876-d141-11e4-bc30-eca86bff8e7d','GST(Output)',0,'3',NULL,'1',Now(),5,0,0,NULL,NULL,'F');
+
+INSERT INTO defaultaccount VALUES ('6b605428-d141-11e4-bc30-eca86bff8e7d','GST(Input)',0,'3',NULL,'1',Now(),5,0,0,NULL,NULL,'F');
+
+
+
+# Raj Shah 24th March 2015
+
+CREATE TABLE `in_documents` (
+`id`  varchar(255) NOT NULL ,
+`docid`  varchar(255) NOT NULL ,
+`docname`  varchar(255) NOT NULL ,
+`doctypeid`  varchar(255) NULL DEFAULT '' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `in_documentcompmap` (
+`id`  varchar(255) NOT NULL ,
+`documentid`  varchar(255) NOT NULL ,
+`modulewiseid`  varchar(255) NOT NULL ,
+`module`  int NOT NULL ,
+`company`  varchar(255) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+# Malhari 25th March 2015 
+
+ALTER TABLE `default_header`
+ADD COLUMN `islineitem`  char(1) NOT NULL DEFAULT '0';
+
+ALTER TABLE `default_header`
+ADD COLUMN `isdocumentimport`  char(1) NULL DEFAULT 'F' AFTER `islineitem`;
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("c9d83fb6-cee9-11e4-83a1-eca86bfcd415","2","Currency","Currency",0,0,'T','T',"KWLCurrency","name","currencyID","ref",null,"currencyName",null,"T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("d3d2c608-cee9-11e4-83a1-eca86bfcd415","2","Customer","Customer",0,0,'T','T',"Customer","name","ID","ref",null,"customerName",null,"T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("daa1eaae-cee9-11e4-83a1-eca86bfcd415","2","Sequence Format","Seqformat",0,0,'F','F',"SequenceFormat","name","ID","ref",null,"sequenceformat",null,"T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("e1f90508-cee9-11e4-83a1-eca86bfcd415","2","Sales Invoice Date","EntryDate",0,0,'T','T',null,null,null,"date",0.0,"entryDate","date", "T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("e80cf97c-cee9-11e4-83a1-eca86bfcd415","2","Cost Center","Costcenter",0,0,'F','F',"CostCenter","name","ID","ref",null,"costcenter",null,"T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("ed666a2a-cee9-11e4-83a1-eca86bfcd415","2","Sales Person","MasterSalesPerson",0,0,'F','F',"MasterItem","value","ID","ref",null,"salesperson",null,"T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("f3abacce-cee9-11e4-83a1-eca86bfcd415","2","Credit Term","Termid",0,0,'T','T',"Term","termname","ID","ref",null,"terms",null,"T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("f9b819d6-cee9-11e4-83a1-eca86bfcd415","2","Due Date","DueDate",0,0,'T','T',null,null,null,"date",0.0,"dueDate","date","T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("ff92fa60-cee9-11e4-83a1-eca86bfcd415","2","PO Reference Number","PoRefNumber",0,0,'F','F',null,null,null,"text",0.0,"poRefNumber","","T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("13f8b85a-ceea-11e4-83a1-eca86bfcd415","2","Memo","Memo",0,0,'F','F',null,null,null,"text",0.0,"memo","","T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("1f9d5620-ceea-11e4-83a1-eca86bfcd415","2","Ship Via","Shipvia",0,0,'F','F',null,null,null,"text",0.0,"shipvia","","T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("2660c99c-ceea-11e4-83a1-eca86bfcd415","2","Invoice Number","InvoiceNumber",0,0,'T','T',null,null,null,"text",0.0,"invoiceNumber","","T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,isdocumentimport) 
+VALUES ("32fc2322-ceea-11e4-83a1-eca86bfcd415","2","FOB","Fob",0,0,'F','F',null,null,null,"text",0.0,"fob","","T");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport) 
+VALUES ("39f12e02-ceea-11e4-83a1-eca86bfcd415","2","Product Code","Product",0,0,'T','T',"Product","productid","ID","ref",null,"productID",null,'T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport) 
+VALUES ("40df2aca-ceea-11e4-83a1-eca86bfcd415","2","Quantity","Quantity",0,0,'T','T',"Inventory","quantity","ID","double",null,"initialquantity",null,'T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport) 
+VALUES ("4791cc06-ceea-11e4-83a1-eca86bfcd415","2","Unit Price","Rate",0,0,'T','T',"InvoiceDetail","rate","ID","double",null,"rate",null,'T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport) 
+VALUES ("4dca51b0-ceea-11e4-83a1-eca86bfcd415","2","UOM","UnitOfMeasure",0,0,'F','F',"UnitOfMeasure","name","ID","ref",null,"uomname",null,'T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport) 
+VALUES ("571c0fc2-d211-11e4-84e9-eca86bfcd415","2","Discount Type","InPercent",0,0,'F','F',null,null,null,"discount",0.0,"discountType","",'T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport) 
+VALUES ("8d38ce5c-d210-11e4-84e9-eca86bfcd415","2","Discount","Discount",0,0,'F','F',"Discount","discount","ID","double",null,"discount",null,'T','T');
+
+
+#Rushikesh Mandage 25th March
+# Queries for updating those records which are created in base currency but they shows different figures in transaction currency and base currency when they are edited.
+
+#'Payment made'
+update payment p inner join company c on p.company=c.companyid set p.externalcurrencyrate=1 where p.externalcurrencyrate <> 1 and p.externalcurrencyrate <> 0 and p.currency = c.currency ;
+
+# 'Payment Received'
+update receipt r inner join company c on r.company=c.companyid set r.externalcurrencyrate=1 where r.externalcurrencyrate <> 1 and r.externalcurrencyrate <> 0 and r.currency = c.currency ;
+
+#'Journal Entry'
+ update journalentry j inner join company c on j.company=c.companyid set j.externalcurrencyrate=1 where j.externalcurrencyrate <> 1 and j.externalcurrencyrate <> 0 and j.currency = c.currency ;
+
+#Rushikesh Mandage 25th March
+# Query to set 'storeinvoiceamountdue' flag true in 'company' table for each company
+    
+update company set storeinvoiceamountdue = 'T';
+
+
+#Deepak Pingale 26th March 2015
+
+ALTER TABLE journalentry
+ADD COLUMN baddebtseqnumber varchar(255) DEFAULT NULL;
+
+ALTER TABLE baddebtinvoicemapping
+ADD COLUMN seqnumber int(11) DEFAULT 0,
+ADD COLUMN seqformat varchar(255);
+
+ALTER TABLE baddebtinvoicemapping
+ADD COLUMN autogen char(1) DEFAULT 0;
+
+ALTER TABLE baddebtpurchaseinvoicemapping
+ADD COLUMN autogen char(1) DEFAULT 0;
+
+ALTER TABLE baddebtpurchaseinvoicemapping
+ADD COLUMN seqnumber int(11) DEFAULT 0,
+ADD COLUMN seqformat varchar(255);
+
+ALTER TABLE baddebtinvoicemapping
+ADD COLUMN baddebtseqnumber varchar(255)  DEFAULT NULL;
+
+ALTER TABLE baddebtpurchaseinvoicemapping
+ADD COLUMN baddebtseqnumber varchar(255)  DEFAULT NULL;
+
+# Amol Dhokale 26th March 2015
+ALTER TABLE defaultgst ADD COLUMN taxtype INT(1) DEFAULT 0;
+## Sales VAT
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('VAT(Sales@10.0%)','VAT(Sales@10.0%)','VAT 10%',10.0,106,2);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('VAT(Sales@0%)','VAT(Sales@0%)','VAT 0%',0,106,2);
+
+## Sales WHT
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 15(Sales@1.2%)','WHT PPh 15(Sales@1.2%)','WHT PPh 15(1.2%)',1.2,106,2);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 23(Sales@2.0%)','WHT PPh 23(Sales@2.0%)','WHT PPh 23(2.0%)',2.0,106,2);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 23(Sales@4.0%)','WHT PPh 23(Sales@4.0%)','WHT PPh 23(4.0%)',4.0,106,2);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT (Sales@0%)','WHT (Sales@0%)','WHT (0%)',0,106,2);
+
+## Purchase VAT
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('VAT(Purchase@10.0%)','VAT(Purchase@10.0%)','VAT 10%',10.0,106,1);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('VAT(Purchase@0%)','VAT(Purchase@0%)','VAT 0%',0,106,1);
+
+## Purchase WHT
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 4(2)(Purchase@10.0%)','WHT PPh 4(2)(Purchase@10.0%)','WHT PPh 4(2)(10.0%)',10.0,106,1);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 15(Purchase@1.2%)','WHT PPh 15(Purchase@1.2%)','WHT PPh 15(1.2%)',1.2,106,1);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 23(Purchase@2.0%)','WHT PPh 23(Purchase@2.0%)','WHT PPh 23(2.0%)',2.0,106,1);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT PPh 23(Purchase@4.0%)','WHT PPh 23(Purchase@4.0%)','WHT PPh 23(4.0%)',4.0,106,1);
+INSERT INTO defaultgst (name,description,taxcode,percent,country,taxtype) VALUES('WHT (Purchase@0%)','WHT (Purchase@0%)','WHT (0%)',0,106,1);
+
+# Sagar M 26th March 2015
+alter table invoicedetails add column rateincludegst double NULL DEFAULT 0;
+alter table sodetails add column rateincludegst double NULL DEFAULT 0;
+alter table quotationdetails add column rateincludegst double NULL DEFAULT 0;
+alter table podetails add column rateincludegst double NULL DEFAULT 0;
+alter table vendorquotationdetails add column rateincludegst double NULL DEFAULT 0;
+alter table grdetails add column rateincludegst double NULL DEFAULT 0;
+alter table quotationversiondetails add column rateincludegst double NULL DEFAULT 0;
+
+
+#Basaprabhu Ajur 26th March 2015
+
+ALTER TABLE `in_storemaster`
+ADD COLUMN `defaultlocation`  varchar(50) NULL DEFAULT NULL;
+
+#Dipak Dorkar 27th March 2015
+alter table extracompanypreferences ADD purchasetypeflag char(1) default 'F';
+
+#Pandurang 27th March 2015
+Alter table extracompanypreferences add
+movementwarehousemappingflag char(1) default 'F';
+
+insert into mastergroup (id, groupname) values (30, "Movement Type");
+
+#Ajit Gogawale 27th March 2015
+
+ALTER TABLE `in_storemaster`
+ADD COLUMN `movementtype`  varchar(255) NULL AFTER `defaultlocation`;
+
+ALTER TABLE `inventorywarehouse`
+ADD COLUMN `movementtype`  varchar(255) NULL AFTER `parentid`;
+
+#Ajit Ankalle 27th March 2015
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("3626389e-d462-11e4-932d-eca86bff8e7d","30","islocationforproduct","islocationforproduct",0,0,'F','F',null,null,null,"boolean",'F',"islocationforproduct",null);
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("dee933c0-d492-11e4-a639-c03fd5632dc7","30","isserialforproduct","isserialforproduct",0,0,'F','F',null,null,null,"boolean",'F',"isserialforproduct",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("e7f1c73e-d492-11e4-a639-c03fd5632dc7","30","iswarehouseforproduct","iswarehouseforproduct",0,0,'F','F',null,null,null,"boolean",'F',"iswarehouseforproduct",null);
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("ef026808-d492-11e4-a639-c03fd5632dc7","30","isbatchforproduct","isbatchforproduct",0,0,'F','F',null,null,null,"boolean",'F',"isbatchforproduct",null);
+
+#Pandurang 30th March 2015
+alter table invoice  ADD COLUMN movementtype varchar(255) DEFAULT NULL;
+ALTER TABLE invoice ADD FOREIGN KEY (`movementtype`) REFERENCES `masteritem` (`id`);
+
+alter table salesorder  ADD COLUMN movementtype varchar(255) DEFAULT NULL;
+ALTER TABLE salesorder ADD FOREIGN KEY (`movementtype`) REFERENCES `masteritem` (`id`);
+
+alter table deliveryorder  ADD COLUMN movementtype varchar(255) DEFAULT NULL;
+ALTER TABLE deliveryorder ADD FOREIGN KEY (`movementtype`) REFERENCES `masteritem` (`id`);
+
+
+#Ajit Ankalle 31th March 2015
+delete  from default_header where module=30 and defaultheader='islocationforproduct';
+delete  from default_header where module=30 and defaultheader='isserialforproduct';
+delete  from default_header where module=30 and defaultheader='iswarehouseforproduct';
+delete  from default_header where module=30 and defaultheader='isbatchforproduct';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("a303011c-d7ab-11e4-bf90-eca86bff8e7d","30","Activate Location","Activate Location",0,0,'F','F',null,null,null,"boolean",'F',"Activate Location",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("aa2f5332-d7ab-11e4-bf90-eca86bff8e7d","30","Activate Serial No","Activate Serial No",0,0,'F','F',null,null,null,"boolean",'F',"Activate Serial No",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("b13a3cd2-d7ab-11e4-bf90-eca86bff8e7d","30","Activate Warehouse","Activate Warehouse",0,0,'F','F',null,null,null,"boolean",'F',"Activate Warehouse",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("ba7ab79a-d7ab-11e4-bf90-eca86bff8e7d","30","Activate Batch","Activate Batch",0,0,'F','F',null,null,null,"boolean",'F',"Activate Batch",null);

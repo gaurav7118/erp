@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VHQPurchaseRequisition" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2396694214876032"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="JobDesc" class="java.lang.String"/>
+	<parameter name="Customer" class="java.lang.String"/>
+	<parameter name="JobConfPrice" class="java.lang.String"/>
+	<parameter name="Thirdpartyservice" class="java.lang.String"/>
+	<parameter name="SupplierName" class="java.lang.String"/>
+	<parameter name="ThirdpartyCostAmt" class="java.lang.String"/>
+	<parameter name="SupplierTerm" class="java.lang.String"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="SupplieAdd" class="java.lang.String"/>
+	<parameter name="SupplierContact" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="JobNO" class="java.lang.String"/>
+	<field name="prn" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<rectangle>
+				<reportElement x="22" y="30" width="49" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="22" y="49" width="49" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="22" y="68" width="49" height="19"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="73" y="29" width="209" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VHQ POST (S) PTE LTD]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="22" y="87" width="49" height="19"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="73" y="49" width="209" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VHQ POST (M) SDN BHD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="69" width="209" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VHQ POST INDONESIA PT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="88" width="209" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VHQ BEIJING LTD CO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="614" y="74" width="23" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement mode="Opaque" x="637" y="1" width="134" height="68"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="637" y="74" width="165" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prn}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="25" width="46" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Job No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="25" width="110" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Job Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="25" width="92" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="25" width="76" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Job confirm Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="25" width="122" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3rd party Service / Material description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="38" width="132" height="16"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[contact
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="603" y="25" width="80" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3rd party cost amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="683" y="25" width="77" height="29"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[*Supplier payment term]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="25" y="54" width="46" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{JobNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="71" y="54" width="110" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{JobDesc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="181" y="54" width="92" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Customer}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="273" y="54" width="76" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$P{JobConfPrice}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="349" y="54" width="122" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{Thirdpartyservice}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="471" y="54" width="132" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{SupplierName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="603" y="54" width="80" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA[$P{ThirdpartyCostAmt}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="683" y="54" width="77" height="30"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{SupplierTerm}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="471" y="25" width="132" height="21"/>
+				<box topPadding="3">
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supplier name,address,]]></text>
+			</staticText>
+		</band>
+		<band height="36">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="471" y="0" width="132" height="36" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{SupplieAdd}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="36">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="471" y="0" width="132" height="35" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{SupplierContact}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="287" splitType="Stretch">
+			<staticText>
+				<reportElement x="24" y="0" width="479" height="20"/>
+				<textElement>
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[* Please attach supplier quotation for reference.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="27" width="93" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Requested by:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="37" width="93" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Authorised by HOD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="86" width="31" height="33"/>
+				<textElement markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name:   <br>Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="138" width="93" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cheked by DPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="138" width="158" height="20"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Approved by MD/GM/Director]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="86" width="34" height="33"/>
+				<textElement markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name:    <br>Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="202" width="34" height="33"/>
+				<textElement markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name:     <br>Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="202" width="30" height="33"/>
+				<textElement markup="html">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name:     <br>Date:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="22" y="84" width="159" height="1"/>
+			</line>
+			<line>
+				<reportElement x="348" y="85" width="249" height="1"/>
+			</line>
+			<line>
+				<reportElement x="350" y="200" width="247" height="1"/>
+			</line>
+			<line>
+				<reportElement x="24" y="199" width="159" height="1"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

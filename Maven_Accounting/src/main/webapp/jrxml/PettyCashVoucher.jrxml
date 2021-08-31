@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.210000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PettyCashVoucherSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="PettyCashVoucherSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="imagePath2" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="footerflag" class="java.lang.Boolean"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="companyRegNo" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="authorisedBy" class="java.lang.String"/>
+	<field name="preparedBy" class="java.lang.String"/>
+	<field name="receivedBy" class="java.lang.String"/>
+	<field name="createdBy" class="java.lang.String"/>
+	<field name="paid" class="java.lang.String"/>
+	<field name="paymentNumber" class="java.lang.String"/>
+	<field name="paymentMethod" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="paidToName" class="java.lang.String"/>
+	<field name="paidToColon" class="java.lang.String"/>
+	<field name="checkNo" class="java.lang.String"/>
+	<field name="dated" class="java.lang.String"/>
+	<field name="bankCharges" class="java.lang.String"/>
+	<field name="bankChargesAmount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="229">
+			<staticText>
+				<reportElement x="410" y="147" width="37" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="447" y="147" width="107" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="253" y="147" width="57" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Number:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="147" width="92" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paymentNumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="84" width="45" height="18">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UEN]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="434" y="84" width="111" height="20">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="428" y="100" width="4" height="20">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="434" y="102" width="111" height="20">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstRegNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="428" y="82" width="4" height="20">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="102" width="45" height="20">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GST No]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="389" y="62" width="173" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="3" width="555" height="117"/>
+				<imageExpression><![CDATA[$P{imagePath}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="235" y="181" width="185" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkNo}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="179" width="555" height="42"/>
+			</rectangle>
+			<textField>
+				<reportElement x="78" y="181" width="157" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paymentMethod}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="181" width="131" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dated}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="181" width="72" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bank/Cash:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="201" width="224" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bankCharges}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="201" width="241" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bankChargesAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="181" width="185" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="102">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{PettyCashVoucherSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{PettyCashVoucherSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="49">
+			<image onErrorType="Blank">
+				<reportElement x="153" y="3" width="288" height="43">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{imagePath2}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="168">
+			<staticText>
+				<reportElement x="11" y="58" width="80" height="20"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Received By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="25" width="80" height="20"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Created By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="25" width="4" height="20"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="58" width="4" height="20"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="95" y="8" width="240" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{paid}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="95" y="25" width="240" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{createdBy}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="95" y="58" width="240" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{receivedBy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="8" width="80" height="20"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paidToName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="8" width="4" height="20"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paidToColon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="41" width="83" height="20"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Authorised By]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="95" y="41" width="240" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{authorisedBy}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="91" y="41" width="4" height="20"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="373" y="11" width="195" height="35"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement x="153" y="120" width="288" height="43">
+					<printWhenExpression><![CDATA[$P{footerflag}]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{imagePath2}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="342" y="93" width="195" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="342" y="93" width="195" height="20"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Authorised Signatory ]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

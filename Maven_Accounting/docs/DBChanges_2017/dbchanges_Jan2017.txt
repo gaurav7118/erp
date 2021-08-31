@@ -1,0 +1,1280 @@
+#Shashi Nandan Kumar 2 Jan 2017
+alter table userpermission drop FOREIGN KEY FK974CAFDAE8E619AF;
+
+#Pandurang 2nd Jan 2017
+alter table default_header add column isbatchdetail char(1) DEFAULT 'F';
+
+#Warehouse
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dataindex,isbatchdetail) 
+VALUES ('525bced5-c34b-11e6-a0b1-14dda979267b','Warehouse','id','inventorywarehouse','newproductbatch','id','warehouse','Warehouse',
+'InventoryWarehouse','ref','4','6','T','T','F','InventoryWarehouse','name','id','warehouse','T');
+
+#Location
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dataindex,isbatchdetail) 
+VALUES ('587e3699-c34b-11e6-a0b1-14dda979267b','Location','id','inventorylocation','newproductbatch','id','location','Location',
+'InventoryLocation','ref','4','6','T','T','F','InventoryLocation','name','id','location','T');
+
+#Batch
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('5ed81f3d-c34b-11e6-a0b1-14dda979267b','Batch',
+'id','newproductbatch','inventory','id','uom','Batch','NewProductBatch','custom','4','6','T','T','F','batch','T');
+
+#Serial
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('63f4a65d-c34b-11e6-a0b1-14dda979267b','Serial',
+'id','newbatchserial','inventory','id','uom','Serial','NewBatchSerial','custom','4','6','T','T','F','serial','T');
+
+#Batch Quantity
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport,iscustomreport,isbatchdetail)
+ VALUES ("a97887bd-c769-11e6-a37e-14dda979267b","6","Batch Quantity","Quantity",0,0,'T','T',null,null,null,"double",null,"batchquantity",null,'T','T','F','T');
+
+#Row
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('e0406747-c8c8-11e6-a37e-14dda979267b','Row',
+'id','storemaster','inventory','id','uom','Row','Row','custom','4','6','T','T','F','row','T');
+
+#Rack
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('e1070442-c8c8-11e6-a37e-14dda979267b','Rack',
+'id','storemaster','inventory','id','uom','Rack','Rack','custom','4','6','T','T','F','rack','T');
+
+#Bin
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('e184d3dd-c8c8-11e6-a37e-14dda979267b','Bin',
+'id','storemaster','inventory','id','uom','Bin','Bin','custom','4','6','T','T','F','bin','T');
+
+#Mfg Date
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('98cd7fc3-d0b3-11e6-aaaf-14dda979267b','6','Mfg Date','mfgdate',0,0,'F','F',
+null,null,null,'date',null,null,'mfgdate','T','T');
+
+#Exp Date
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('db2e3aab-d0b4-11e6-aaaf-14dda979267b','6','Exp Date','expdate',0,0,'F','F',
+null,null,null,'date',null,null,'expdate','T','T');
+
+
+#Warranty valid from
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('274b266f-d0b5-11e6-aaaf-14dda979267b','6','Warranty valid from','expstart',0,0,'F','F',
+null,null,null,'date',null,null,'expstart','T','T');
+
+
+#Warranty Expires on
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('3ff6d4a6-d0b5-11e6-aaaf-14dda979267b','6','Warranty Expires on','expend',0,0,'F','F',
+null,null,null,'date',null,null,'expend','T','T');
+
+#Pawan kale 3rd Jan 2017
+
+#Customer Personal Detail
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('07a3bace-c695-11e6-89ef-c03fd5632e9b','title','Title',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('7b9fa9d0-c5e9-11e6-a95b-c03fd5632e9b','accname','Customer Name',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('c4d2c6a8-c695-11e6-89ef-c03fd5632e9b','acccode','Customer Code',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e32a59e6-c68f-11e6-89ef-c03fd5632e9b','sequenceformat','Sequence Format',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('43cd7bf6-c6b9-11e6-89ef-c03fd5632e9b','aliasname','Customer Alias Name',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('18e3e036-c6bb-11e6-89ef-c03fd5632e9b','mappingcusaccid','Account',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('0e34b9b0-c6bd-11e6-89ef-c03fd5632e9b','openbalance','Opening Balance',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('fb6a5e48-c6bc-11e6-89ef-c03fd5632e9b','creationDate','Creation Date',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES (' be9272d4-c6bd-11e6-89ef-c03fd5632e9b','exchangeRate','Exchange Rate',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('c58b7f18-c6bd-11e6-89ef-c03fd5632e9b','currencyid','Currency',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('3516d2e2-c6be-11e6-89ef-c03fd5632e9b','isPermOrOnetime','One Time Customer',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('a2ba9a36-c6be-11e6-89ef-c03fd5632e9b','uenno','Customer UEN',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('38bd2d66-c6c2-11e6-89ef-c03fd5632e9b','issub','Is a sub Customer',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('5b8b32ce-c6c3-11e6-89ef-c03fd5632e9b','parentid','Select Parent',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1dded2b2-c6c5-11e6-89ef-c03fd5632e9b','isTDS','TDS Details',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e724c89e-c737-11e6-8ec2-c03fd5632e9b','employmentstatus','Employment Status',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2d02e098-c739-11e6-8ec2-c03fd5632e9b','employername','Employer Name',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('4a7fdcf2-c739-11e6-8ec2-c03fd5632e9b','companyaddress','Company Address',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f18c02a0-c739-11e6-8ec2-c03fd5632e9b','overseas','Full Payment Required',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('fccd7da6-c739-11e6-8ec2-c03fd5632e9b','mapcustomervendor','Create as Vendor',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2c13ac38-c73b-11e6-8ec2-c03fd5632e9b','sequenceformatvencus','Sequence Format',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('c93ef9e0-c73b-11e6-8ec2-c03fd5632e9b','custorvenacccode','Vendor Code',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('7f26026c-c73c-11e6-8ec2-c03fd5632e9b','mappingvenaccid','Account',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ab602ede-c73c-11e6-8ec2-c03fd5632e9b','customervenodoravailabletosalespersonagent','Customer available only to salespersons',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('0c29f3a8-c73d-11e6-8ec2-c03fd5632e9b','mapMultiSalesPerson','Map Sales Person',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('3202b778-c741-11e6-8ec2-c03fd5632e9b','mapsalesperson','Map Default Sales Person',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('6035518c-c741-11e6-8ec2-c03fd5632e9b','mapreceivedFrom','Map Received From',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('7ae5b24a-c74d-11e6-8ec2-c03fd5632e9b','mapPaidTo','Map Paid To',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('564c7d86-c759-11e6-8ec2-c03fd5632e9b','other','GST Number',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('fd64ac6a-c759-11e6-8ec2-c03fd5632e9b','bankaccountno','Bank Account No',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('6b5c612c-c75a-11e6-8ec2-c03fd5632e9b','creditTerm','Credit Term',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('cc1d9620-c75a-11e6-8ec2-c03fd5632e9b','category','Customer Category',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('136d1d3e-c75b-11e6-8ec2-c03fd5632e9b','tax','Tax',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('5344cbbe-c75b-11e6-8ec2-c03fd5632e9b','limit','Credit Sales Limit',25,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8d1fe652-c75b-11e6-8ec2-c03fd5632e9b','productmapping','Preferred Product(s)',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f6a8e696-c75b-11e6-8ec2-c03fd5632e9b','paymentCriteria','Payment Criteria',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('65ad6684-c75c-11e6-8ec2-c03fd5632e9b','occupationandyears','Occupation & Years',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('940a69be-c75c-11e6-8ec2-c03fd5632e9b','monthlyincome','Annual Income',25,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ebbe272c-c75c-11e6-8ec2-c03fd5632e9b','noofactivecreditloans','No. of Active Credit Loan',25,1,0,1,0,0,0);
+
+#Customer Contact Detail
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e1e07cdc-c784-11e6-aad6-c03fd5632e9b','billingAddr','Billing Address',25,1,2,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('14f5f77c-c786-11e6-aad6-c03fd5632e9b','billingAliasName','Alias Name',25,1,2,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2e568f10-c786-11e6-aad6-c03fd5632e9b','billingAddress','Address',25,1,2,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('520dd40e-c786-11e6-aad6-c03fd5632e9b','billingCity','City',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('9f3c2a14-c786-11e6-aad6-c03fd5632e9b','billingState','State',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ce0535ca-c786-11e6-aad6-c03fd5632e9b','billingCountry','Country',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('0facc434-c787-11e6-aad6-c03fd5632e9b','billingPostal','Postal Code',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2a5a9e78-c787-11e6-aad6-c03fd5632e9b','billingPhone','Phone',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('43369d48-c787-11e6-aad6-c03fd5632e9b','billingMobile','Mobile',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('5cc41ca4-c787-11e6-aad6-c03fd5632e9b','billingFax','Fax',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('73d09fc6-c787-11e6-aad6-c03fd5632e9b','billingEmail','Email',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('abd05bd2-c787-11e6-aad6-c03fd5632e9b','billingRecipientName','Recipient Name',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('cb3f037e-c787-11e6-aad6-c03fd5632e9b','billingContactPerson','Contact Person',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f0535688-c787-11e6-aad6-c03fd5632e9b','billingContactNumber','Contact Person No',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('061902ba-c788-11e6-aad6-c03fd5632e9b','billingContactDesignation','Contact Person Designation',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2a6c1990-c788-11e6-aad6-c03fd5632e9b','billingWebsite','Website',25,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('15a6f506-ce87-11e6-8e42-c03fd5632e9b','defaultbillingaddress','Set As Default',25,1,2,1,0,0,0);
+
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('82cbcf36-c788-11e6-aad6-c03fd5632e9b','copyadress','Same as Billing Address',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('a634a2c6-c789-11e6-aad6-c03fd5632e9b','shippingAddr','Shipping Address',25,1,3,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('54e4c81e-c78a-11e6-aad6-c03fd5632e9b','shippingAliasName','Alias Name',25,1,3,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e794f63a-c789-11e6-aad6-c03fd5632e9b','shippingAddress','Address',25,1,3,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('a7818148-c78a-11e6-aad6-c03fd5632e9b','shippingCity','City',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('bdaf30c8-c78a-11e6-aad6-c03fd5632e9b','shippingState','State',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('d68faee6-c803-11e6-9fd5-c03fd5632e9b','shippingCountry','Country',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e37b7162-c803-11e6-9fd5-c03fd5632e9b','shippingPostal','Postal Code',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ece0344a-c803-11e6-9fd5-c03fd5632e9b','shippingPhone','Phone',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f3c87894-c803-11e6-9fd5-c03fd5632e9b','shippingMobile','Mobile',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('fd6a9a94-c803-11e6-9fd5-c03fd5632e9b','shippingFax','Fax',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('039a655c-c804-11e6-9fd5-c03fd5632e9b','shippingEmail','Email',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('12a769f0-c804-11e6-9fd5-c03fd5632e9b','shippingRecipientName','Recipient Name',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1a092774-c804-11e6-9fd5-c03fd5632e9b','shippingContactPerson','Contact Person',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1fa0d4de-c804-11e6-9fd5-c03fd5632e9b','shippingContactNumber','Contact Person No',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2611b66c-c804-11e6-9fd5-c03fd5632e9b','shippingContactDesignation','Contact Person Designation',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2c1d7dfc-c804-11e6-9fd5-c03fd5632e9b','shippingWebsite','Website',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('32076ea8-c804-11e6-9fd5-c03fd5632e9b','shippingroute','Route',25,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('3816f6b0-c804-11e6-9fd5-c03fd5632e9b','defaultshippingaddress','Set As Default',25,1,3,1,0,0,0);
+
+#Neeraj Dwivedi 03rd Jan 2016
+update defaultmobilefieldsetup set formfieldjson="[{'fieldid':'f1d2f204-a49e-11e5-b4e2-14dda97926e5','fieldlabel':'Customer Name','changedfieldlabel':'Customer Name','showfield':true,'seq':1,'ismandatory':true},{'fieldid':'e5ee084c-306f-11e5-a151-feff819cdc9f','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':2,'ismandatory':true},{'fieldid':'daa1eaae-cee9-11e4-83a1-eca86bfcd415','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':3,'ismandatory':true},{'fieldid':'044e3ec1-e6a5-42b5-8f13-10cdf06ea739','fieldlabel':'Invoice Number','changedfieldlabel':'Invoice Number','showfield':true,'seq':4,'ismandatory':true},{'fieldid':'88f3454e-8760-11e3-b0c3-080027580062','fieldlabel':'Invoice Date','changedfieldlabel':'Invoice Date','showfield':true,'seq':5,'ismandatory':true},{'fieldid':'8d68a0b0-8760-11e3-b0c3-080027580062','fieldlabel':'PO Reference Number','changedfieldlabel':'PO Reference Number','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'3b6ac5cc-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':7,'ismandatory':false},{'fieldid':'3b6ac95a-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'e18c79fa-306f-11e5-a151-feff819cdc9f','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'85b883d0-8760-11e3-b0c3-080027580062','fieldlabel':'Ship via','changedfieldlabel':'Ship via','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'a4bba6a6-44c6-11e6-9b44-eca86bfcd415','fieldlabel':'Including GST','changedfieldlabel':'Including GST','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'7b2882e0-f843-b318-14dd92927de','fieldlabel':'Include Product Tax','changedfieldlabel':'Include Product Tax','showfield':true,'seq':12,'ismandatory':true},{'fieldid':'8d673950-8760-11e3-b0c3-080027580062','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'631b0cb8-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Generate Delivery Order','changedfieldlabel':'Generate Delivery Order','showfield':true,'seq':14,'ismandatory':false},{'fieldid':'dd97cd60-9796-11e6-ae22-56b6b6499611','fieldlabel':'Sequence Format Delivery Order','changedfieldlabel':'Sequence Format Delivery Order','showfield':true,'seq':15,'ismandatory':false},{'fieldid':'5df89b06-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Delivery Order Number','changedfieldlabel':'Delivery Order Number','showfield':true,'seq':16,'ismandatory':true},{'fieldid':'7b2443-27de-e4sa323-23768895443-33122','fieldlabel':'Payment Method','changedfieldlabel':'Payment Method','showfield':true,'seq':17,'ismandatory':true},{'fieldid':'7b2443-27de-e4sa323-23768895443-33122ASSA','fieldlabel':'Payment Account','changedfieldlabel':'Payment Account','showfield':false,'seq':18,'ismandatory':false},{'fieldid':'7b2443-27de-e4sae-4465435','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':19,'ismandatory':true},{'fieldid':'5d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':20,'ismandatory':false},{'fieldid':'4d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Discount','changedfieldlabel':'Discount','showfield':false,'seq':21,'ismandatory':false},{'fieldid':'060cc8a1-a65e-45b5-8573-89e656340384','fieldlabel':'Terms Amount','changedfieldlabel':'Terms Amount','showfield':false,'seq':22,'ismandatory':''},{'fieldid':'301866d6-feb2-4d7b-a2e8-f575e8d2340','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':23,'ismandatory':true},{'fieldid':'8e68d3d2-48df-443e-8e0e-a44c39aa9073','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':24,'ismandatory':true},{'fieldid':'319146ff-d3f0-4c1d-9b4a-e965d832891c','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':25,'ismandatory':true}]" where moduleid=4;
+update defaultmobilefieldsetup set detailreportjson="[{'fieldid':'f1d2f204-a49e-11e5-b4e2-14dda97926e5','fieldlabel':'Customer Name','changedfieldlabel':'Customer Name','showfield':true,'seq':1,'ismandatory':false},{'fieldid':'e5ee084c-306f-11e5-a151-feff819cdc9f','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':2,'ismandatory':false},{'fieldid':'daa1eaae-cee9-11e4-83a1-eca86bfcd415','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':3,'ismandatory':false},{'fieldid':'044e3ec1-e6a5-42b5-8f13-10cdf06ea739','fieldlabel':'Invoice Number','changedfieldlabel':'Invoice Number','showfield':true,'seq':4,'ismandatory':false},{'fieldid':'88f3454e-8760-11e3-b0c3-080027580062','fieldlabel':'Invoice Date','changedfieldlabel':'Invoice Date','showfield':true,'seq':5,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-33122ASSA','fieldlabel':'Payment Account','changedfieldlabel':'Payment Account','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-33122','fieldlabel':'Payment Method','changedfieldlabel':'Payment Method','showfield':true,'seq':7,'ismandatory':false},{'fieldid':'8d68a0b0-8760-11e3-b0c3-080027580062','fieldlabel':'PO Reference Number','changedfieldlabel':'PO Reference Number','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'3b6ac5cc-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'3b6ac95a-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'e18c79fa-306f-11e5-a151-feff819cdc9f','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'85b883d0-8760-11e3-b0c3-080027580062','fieldlabel':'Ship via','changedfieldlabel':'Ship via','showfield':true,'seq':12,'ismandatory':false},{'fieldid':'8d673950-8760-11e3-b0c3-080027580062','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'5df89b06-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Delivery Order Number','changedfieldlabel':'Delivery Order Number','showfield':true,'seq':14,'ismandatory':false},{'fieldid':'7b2872-b318-145657927de','fieldlabel':'Approval Status','changedfieldlabel':'Approval Status','showfield':true,'seq':15,'ismandatory':false},{'fieldid':'7b283232324-57927de0000','fieldlabel':'Status','changedfieldlabel':'Status','showfield':true,'seq':16,'ismandatory':false},{'fieldid':'7b2443-27de-e4sae-4465435','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':17,'ismandatory':false},{'fieldid':'5d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':18,'ismandatory':false},{'fieldid':'7b2882e0-f843-bd1e444w27de4-566','fieldlabel':'Amount before GST','changedfieldlabel':'Amount before GST','showfield':true,'seq':19,'ismandatory':false},{'fieldid':'4d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Discount','changedfieldlabel':'Discount','showfield':false,'seq':20,'ismandatory':false},{'fieldid':'060cc8a1-a65e-45b5-8573-89e656340384','fieldlabel':'Terms Amount','changedfieldlabel':'Terms Amount','showfield':false,'seq':21,'ismandatory':false},{'fieldid':'301866d6-feb2-4d7b-a2e8-f575e8d2340','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':22,'ismandatory':false},{'fieldid':'8e68d3d2-48df-443e-8e0e-a44c39aa9073','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':23,'ismandatory':false},{'fieldid':'319146ff-d3f0-4c1d-9b4a-e965d832891c','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':24,'ismandatory':false},{'fieldid':'7a4c6e53-7e40-4cbc-a064-5e80e4e29db0','fieldlabel':'Amount Due','changedfieldlabel':'Amount Due','showfield':true,'seq':25,'ismandatory':false}]" where moduleid=4;
+update default_header set allowinotherapplication='T',submoduleflag=0 where id in('631b0cb8-7e24-11e6-b32b-eca86bfcd415','5df89b06-7e24-11e6-b32b-eca86bfcd415');
+
+#Anand Thakur 4th Jan 2017
+update default_header set defaultHeader= 'Journal Entry No' where id='15437f55-e4e0-45b5-81ba-212dc5a4b8b2';
+
+#Pawan Kale 4th Jan 2017
+update customizereportheader set dataIndex='mapRecFrom' where id='6035518c-c741-11e6-8ec2-c03fd5632e9b';
+alter table  customizereportheader modify column dataIndex varchar(255);
+alter table  customizereportheader modify column dataheader varchar(255);
+#Vendor Personal Detail
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1bab6dbe-d19f-11e6-9b58-4ccc6a2d6a4d','title','Title',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('64081b48-d1a2-11e6-9b58-4ccc6a2d6a4d','sequenceformat','Sequence Format',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('9c52f842-d1a2-11e6-9b58-4ccc6a2d6a4d','acccode','Vendor Code',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('b7755bd2-d1a2-11e6-9b58-4ccc6a2d6a4d','accname','Vendor Name',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('d5f314f5-d1a2-11e6-9b58-4ccc6a2d6a4d','aliasname','Vendor Alias Name',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e886a54d-d1a2-11e6-9b58-4ccc6a2d6a4d','mappingcusaccid','Account',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('063ae251-d1a3-11e6-9b58-4ccc6a2d6a4d','openbalance','Opening Balance',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('31e9f456-d1a3-11e6-9b58-4ccc6a2d6a4d','creationDate','Creation Date',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('4e957500-d1a3-11e6-9b58-4ccc6a2d6a4d','exchangeRate','Exchange Rate',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('6833d832-d1a3-11e6-9b58-4ccc6a2d6a4d','currencyid','Currency',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('809cc236-d1a3-11e6-9b58-4ccc6a2d6a4d','uenno','Vendor UEN',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('be2dd4ec-d1a3-11e6-9b58-4ccc6a2d6a4d','issub','Is a sub Vendor',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('de17c0a4-d1a3-11e6-9b58-4ccc6a2d6a4d','parentid','Select Parent',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('9e3c4d57-d1a4-11e6-9b58-4ccc6a2d6a4d','mapcustomervendor','Create as Customer',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('65c971e6-d1a6-11e6-9b58-4ccc6a2d6a4d','sequenceformatvencus','Sequence Format',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('89ef0e53-d1a6-11e6-9b58-4ccc6a2d6a4d','custorvenacccode','Customer Code',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f22d8ea6-d1a6-11e6-9b58-4ccc6a2d6a4d','mappingvenaccid','Account',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2296f20a-d1a7-11e6-9b58-4ccc6a2d6a4d','venodorAvailableToAgentCheck','Vendor available only to agents',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f734e1fc-d1a7-11e6-9b58-4ccc6a2d6a4d','agent','Agent',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('3202b778-c741-11e6-8ec2-c03fd5632e9b','defaultAgent','Map Default Agent',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('16d61f45-d1a9-11e6-9b58-4ccc6a2d6a4d','mapRecFrom','Map Received From',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('0264a95c-d1aa-11e6-9b58-4ccc6a2d6a4d','mapPaidTo','Map Paid To',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1f2f7ba1-d1aa-11e6-9b58-4ccc6a2d6a4d','other','GST Number',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('73559dd6-d1aa-11e6-9b58-4ccc6a2d6a4d','bankaccountno','Bank Account No',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('88f2f26a-d1aa-11e6-9b58-4ccc6a2d6a4d','creditTerm','Debit Term',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('01269eaf-d1ab-11e6-9b58-4ccc6a2d6a4d','category','Vendor Category',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('419e13cd-d1ab-11e6-9b58-4ccc6a2d6a4d','tax','Tax',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8dd13c32-d1ab-11e6-9b58-4ccc6a2d6a4d','limit','Credit Purchase Limit',26,1,0,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('cc44b0f0-d1ab-11e6-9b58-4ccc6a2d6a4d','productmapping','Preferred Product(s)',26,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e2c5120e-d1ab-11e6-9b58-4ccc6a2d6a4d','paymentCriteria','Payment Criteria',26,1,0,1,0,0,0);
+
+#Vendor Contact Detail
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('efa2f25c-d1ac-11e6-9b58-4ccc6a2d6a4d','billingAddr','Billing Address',26,1,2,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('0ace3261-d1ad-11e6-9b58-4ccc6a2d6a4d','billingAliasName','Alias Name',26,1,2,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2ebf3c7f-d1ad-11e6-9b58-4ccc6a2d6a4d','billingAddress','Address',26,1,2,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('61f6a9af-d1ad-11e6-9b58-4ccc6a2d6a4d','billingCity','City',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8847ac5d-d1ad-11e6-9b58-4ccc6a2d6a4d','billingState','State',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('89626f3e-d1ad-11e6-9b58-4ccc6a2d6a4d','billingCountry','Country',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8a04ac2b-d1ad-11e6-9b58-4ccc6a2d6a4d','billingPostal','Postal Code',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('b4d1417a-d1ad-11e6-9b58-4ccc6a2d6a4d','billingPhone','Phone',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('b564b6bd-d1ad-11e6-9b58-4ccc6a2d6a4d','billingMobile','Mobile',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('b5e7f90a-d1ad-11e6-9b58-4ccc6a2d6a4d','billingFax','Fax',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('b6ef3b6b-d1ad-11e6-9b58-4ccc6a2d6a4d','billingEmail','Email',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('178b6625-d1ae-11e6-9b58-4ccc6a2d6a4d','billingRecipientName','Recipient Name',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2057021e-d1ae-11e6-9b58-4ccc6a2d6a4d','billingContactPerson','Contact Person',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('27b7707e-d1ae-11e6-9b58-4ccc6a2d6a4d','billingContactNumber','Contact Person No',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('2e3e23ff-d1ae-11e6-9b58-4ccc6a2d6a4d','billingContactDesignation','Contact Person Designation',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('39a0fdaf-d1ae-11e6-9b58-4ccc6a2d6a4d','billingWebsite','Website',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('449e3be2-d1ae-11e6-9b58-4ccc6a2d6a4d','defaultbillingaddress','Set As Default',26,1,2,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('10430f11-d1bf-11e6-8914-4ccc6a2d6a4d','copyadress','Same as Billing Address',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('6ee64e82-d1bf-11e6-8914-4ccc6a2d6a4d','shippingAddr','Shipping Address',26,1,3,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('7d603b57-d1bf-11e6-8914-4ccc6a2d6a4d','shippingAliasName','Alias Name',26,1,3,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('8a26bea3-d1bf-11e6-8914-4ccc6a2d6a4d','shippingAddress','Address',26,1,3,1,0,1,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('96afc757-d1bf-11e6-8914-4ccc6a2d6a4d','shippingCity','City',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('9c76049b-d1bf-11e6-8914-4ccc6a2d6a4d','shippingState','State',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('a7f31512-d1bf-11e6-8914-4ccc6a2d6a4d','shippingCountry','Country',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ae92242c-d1bf-11e6-8914-4ccc6a2d6a4d','shippingPostal','Postal Code',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('b619c867-d1bf-11e6-8914-4ccc6a2d6a4d','shippingPhone','Phone',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('bfd16f82-d1bf-11e6-8914-4ccc6a2d6a4d','shippingMobile','Mobile',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('c9ac53a7-d1bf-11e6-8914-4ccc6a2d6a4d','shippingFax','Fax',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('d1c84bb5-d1bf-11e6-8914-4ccc6a2d6a4d','shippingEmail','Email',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('da63ad6e-d1bf-11e6-8914-4ccc6a2d6a4d','shippingRecipientName','Recipient Name',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('e4bf2892-d1bf-11e6-8914-4ccc6a2d6a4d','shippingContactPerson','Contact Person',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('ec51e047-d1bf-11e6-8914-4ccc6a2d6a4d','shippingContactNumber','Contact Person No',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f3303c2a-d1bf-11e6-8914-4ccc6a2d6a4d','shippingContactDesignation','Contact Person Designation',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('f904dcd1-d1bf-11e6-8914-4ccc6a2d6a4d','shippingWebsite','Website',26,1,3,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('18a33184-d1c0-11e6-8914-4ccc6a2d6a4d','defaultshippingaddress','Set As Default',26,1,3,1,0,0,0);
+
+# Suhas Chaware 5 Jan 2017
+insert into reportmaster(id,name,description,method_name,Grouped_Under) values("salescommissionschema","Sales Commission Schema Report","View Sales Commission Schema Report","callSalesCommissionSchemaReport()","Sales Commission Report");
+insert into reportmaster(id,name,description,method_name,Grouped_Under) values("jobdateprofit","Job to date Profit Report","View Job to date Profit Report","callJobProfitabilityReport()","Sales Commission Report");
+
+#Sharad Pawar 4 Jan 2017
+insert into audit_group values('53', 'Labour Master');
+insert into audit_action values('337', 'labour Created','53');
+insert into audit_action values('338', 'Labour Updated','53');
+insert into audit_action values('339', 'Labour Deleted','53');
+
+#Ajit Ankalle 5th Jan 2017
+delete from tds_rate where id not in (select distinct tr.id from tds_rate tr INNER JOIN tdsdetails tdsd ON tr.id = tdsd.ruleid);
+
+#Vijay Jawale 5th Jan 2017
+ALTER TABLE productbuild MODIFY COLUMN memo longtext;
+ALTER TABLE in_stockmovement MODIFY COLUMN memo longtext;
+
+#Shubham Pal 5th Jan 2017
+#Insertion of Module Category 'Reports' into modulecategory
+insert into modulecategory values ('371f95a4-cc06-11e6-bd8e-eca86bff263e','Reports');
+
+#Flag which indicate whether a report is to be shown in report builder or not
+ALTER TABLE reportmaster ADD COLUMN showinreportbuilder CHAR(1) DEFAULT "F";
+update reportmaster set showinreportbuilder='T' where id='Sales_By_Product';
+
+#New column in reportmaster to store report URL
+ALTER TABLE reportmaster ADD COLUMN reporturl TEXT DEFAULT NULL;
+update reportmaster set reporturl='ACCInvoiceCMN/getSalesByCustomer.do' where id='Sales_By_Product';
+
+#Insertion of report columns into default_header for Sales_By_Product report
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('b4974f60-cc45-11e6-bd8e-eca86bff263e','Customer Name',NULL,NULL,'customername','1','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('b696f7da-ccd0-11e6-893c-eca86bff263e','Product ID',NULL,NULL,'rowproductid','1','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('734133be-ccea-11e6-893c-eca86bff263e','Sales Person',NULL,NULL,'salespersonname','1','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('7341dba2-ccea-11e6-893c-eca86bff263e','Product Name',NULL,NULL,'rowproductname','1','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('73429a60-ccea-11e6-893c-eca86bff263e','Product Description',NULL,NULL,'rowproductdescription','1','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('7343561c-ccea-11e6-893c-eca86bff263e','Invoice/Sales Return No.',NULL,NULL,'billno','1','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('7343f7de-ccea-11e6-893c-eca86bff263e','Invoice Date',NULL,NULL,'date','3','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('73449c48-ccea-11e6-893c-eca86bff263e','Quantity',NULL,NULL,'rowquantity','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('734552d2-ccea-11e6-893c-eca86bff263e','Base UOM Quantity',NULL,NULL,'rowbaseuomquantity','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('7345f336-ccea-11e6-893c-eca86bff263e','Unit Price',NULL,NULL,'rowrate','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('73469110-ccea-11e6-893c-eca86bff263e','Amount',NULL,NULL,'amount','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('73474114-ccea-11e6-893c-eca86bff263e','Margin (SGD)',NULL,NULL,'profitmargin','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('734801da-ccea-11e6-893c-eca86bff263e','Percentage Profit Margin',NULL,NULL,'percentmargin','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('7348e8d4-ccea-11e6-893c-eca86bff263e','Amount Without Tax in Base Currency (SGD)',NULL,NULL,'amountinbase','2','Sales_By_Product','F','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('74baa1c6-ccea-11e6-893c-eca86bff263e','Amount With Tax in Base Currency (SGD)',NULL,NULL,'amountinbasewithtax','2','Sales_By_Product','F','F','T');
+
+#Shrinath Shinde 6 Jan 2017
+CREATE TABLE `customwidgetreports` (
+  `id` varchar(40) ,
+  `reportname` varchar(255) default NULL,
+  `customreports` text,
+  `searchcriteria` text,
+  `company` varchar(255) NOT NULL,
+  `createdby` varchar(40) DEFAULT NULL,
+  `modifiedby` varchar(40) DEFAULT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  `updatedon` bigint(20) DEFAULT NULL,
+  `filerappend` tinyint(3) unsigned DEFAULT '1',
+  `deleteflag` char(1) NOT NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`createdby`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`modifiedby`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('db7ba162-d0e1-11e6-80e2-c03fd5aad962','6','5e331e276-a190-427b-ad83-2e83340a89f8',false,"customdatatable");
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('a5de247a-d17d-11e6-bade-c03fd5aad962','6','52ecb13b-a826-4a9d-bac0-8108ee23dd0b',true,"AccJEDetailCustomData");
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,dummyvalue,allowimport,xtype,module,islineitem,isdocumentimport,iscustomreport,isdataindex) VALUES ('691fe2e8-d17e-11e6-bade-c03fd5aad962','GoodRecepiptsJournalEntryDetailsMapping','journalentry','goodsreceipt','jedetail','journalentry','GoodRecepiptsJournalEntryDetailsMapping',0,'2','6','T','F','F',0);
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('938ca066-d17e-11e6-bade-c03fd5aad962','6','691fe2e8-d17e-11e6-bade-c03fd5aad962',true,"detailsdatatable");
+
+#Neeraj Dwivedi 6th Jan 2016
+
+#Inserting Generate DeliveryOrder field in detail report of Credit Sales and Cash Sales,Block Quantity in SO and Credit Note No in SR with CN
+
+update defaultmobilefieldsetup set detailreportjson="[{'fieldid':'f1d2f204-a49e-11e5-b4e2-14dda97926e5','fieldlabel':'Customer Name','changedfieldlabel':'Customer Name','showfield':true,'seq':1,'ismandatory':false},{'fieldid':'e5ee084c-306f-11e5-a151-feff819cdc9f','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':2,'ismandatory':false},{'fieldid':'daa1eaae-cee9-11e4-83a1-eca86bfcd415','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':3,'ismandatory':false},{'fieldid':'044e3ec1-e6a5-42b5-8f13-10cdf06ea739','fieldlabel':'Invoice Number','changedfieldlabel':'Invoice Number','showfield':true,'seq':4,'ismandatory':false},{'fieldid':'88f3454e-8760-11e3-b0c3-080027580062','fieldlabel':'Invoice Date','changedfieldlabel':'Invoice Date','showfield':true,'seq':5,'ismandatory':false},{'fieldid':'e80cf97c-cee9-11e4-83a1-eca86bfcd415','fieldlabel':'Cost Center','changedfieldlabel':'Cost Center','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'8d68a0b0-8760-11e3-b0c3-080027580062','fieldlabel':'PO Reference Number','changedfieldlabel':'PO Reference Number','showfield':true,'seq':7,'ismandatory':false},{'fieldid':'3b6ac5cc-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'f3abacce-cee9-11e4-83a1-eca86bfcd415','fieldlabel':'Credit Term','changedfieldlabel':'Credit Term','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'c4155874-402f-11e3-91ea-ce3f5508acd9','fieldlabel':'Due Date','changedfieldlabel':'Due Date','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'3b6ac95a-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'e18c79fa-306f-11e5-a151-feff819cdc9f','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':12,'ismandatory':false},{'fieldid':'85b883d0-8760-11e3-b0c3-080027580062','fieldlabel':'Ship via','changedfieldlabel':'Ship via','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'a4bba6a6-44c6-11e6-9b44-eca86bfcd415','fieldlabel':'Including GST','changedfieldlabel':'Including GST','showfield':true,'seq':14,'ismandatory':false},{'fieldid':'8d673950-8760-11e3-b0c3-080027580062','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':15,'ismandatory':false},{'fieldid':'631b0cb8-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Generate Delivery Order','changedfieldlabel':'Generate Delivery Order','showfield':true,'seq':16,'ismandatory':false},{'fieldid':'5df89b06-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Delivery Order Number','changedfieldlabel':'Delivery Order Number','showfield':true,'seq':17,'ismandatory':false},{'fieldid':'7b2872-b318-145657927de','fieldlabel':'Approval Status','changedfieldlabel':'Approval Status','showfield':true,'seq':18,'ismandatory':false},{'fieldid':'7b283232324-57927de0000','fieldlabel':'Status','changedfieldlabel':'Status','showfield':true,'seq':19,'ismandatory':false},{'fieldid':'7b2443-27de-e4sae-4465435','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':20,'ismandatory':false},{'fieldid':'5d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':21,'ismandatory':false},{'fieldid':'7b2882e0-f843-bd1e444w27de4-566','fieldlabel':'Amount before GST','changedfieldlabel':'Amount before GST','showfield':true,'seq':22,'ismandatory':false},{'fieldid':'4d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Discount','changedfieldlabel':'Discount','showfield':false,'seq':23,'ismandatory':false},{'fieldid':'060cc8a1-a65e-45b5-8573-89e656340384','fieldlabel':'Terms Amount','changedfieldlabel':'Terms Amount','showfield':false,'seq':24,'ismandatory':false},{'fieldid':'301866d6-feb2-4d7b-a2e8-f575e8d2340','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':25,'ismandatory':false},{'fieldid':'8e68d3d2-48df-443e-8e0e-a44c39aa9073','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':26,'ismandatory':false},{'fieldid':'319146ff-d3f0-4c1d-9b4a-e965d832891c','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':27,'ismandatory':false},{'fieldid':'7a4c6e53-7e40-4cbc-a064-5e80e4e29db0','fieldlabel':'Amount Due','changedfieldlabel':'Amount Due','showfield':true,'seq':28,'ismandatory':false}]" where moduleid=2;
+
+update defaultmobilefieldsetup set detailreportjson="[{'fieldid':'f1d2f204-a49e-11e5-b4e2-14dda97926e5','fieldlabel':'Customer Name','changedfieldlabel':'Customer Name','showfield':true,'seq':1,'ismandatory':false},{'fieldid':'e5ee084c-306f-11e5-a151-feff819cdc9f','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':2,'ismandatory':false},{'fieldid':'daa1eaae-cee9-11e4-83a1-eca86bfcd415','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':3,'ismandatory':false},{'fieldid':'044e3ec1-e6a5-42b5-8f13-10cdf06ea739','fieldlabel':'Invoice Number','changedfieldlabel':'Invoice Number','showfield':true,'seq':4,'ismandatory':false},{'fieldid':'88f3454e-8760-11e3-b0c3-080027580062','fieldlabel':'Invoice Date','changedfieldlabel':'Invoice Date','showfield':true,'seq':5,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-33122ASSA','fieldlabel':'Payment Account','changedfieldlabel':'Payment Account','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-33122','fieldlabel':'Payment Method','changedfieldlabel':'Payment Method','showfield':true,'seq':7,'ismandatory':false},{'fieldid':'8d68a0b0-8760-11e3-b0c3-080027580062','fieldlabel':'PO Reference Number','changedfieldlabel':'PO Reference Number','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'3b6ac5cc-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'3b6ac95a-45f7-11e3-86ae-ce3f5508acd9','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'e18c79fa-306f-11e5-a151-feff819cdc9f','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'85b883d0-8760-11e3-b0c3-080027580062','fieldlabel':'Ship via','changedfieldlabel':'Ship via','showfield':true,'seq':12,'ismandatory':false},{'fieldid':'a4bba6a6-44c6-11e6-9b44-eca86bfcd415','fieldlabel':'Including GST','changedfieldlabel':'Including GST','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'8d673950-8760-11e3-b0c3-080027580062','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':14,'ismandatory':false},{'fieldid':'631b0cb8-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Generate Delivery Order','changedfieldlabel':'Generate Delivery Order','showfield':true,'seq':15,'ismandatory':false},{'fieldid':'5df89b06-7e24-11e6-b32b-eca86bfcd415','fieldlabel':'Delivery Order Number','changedfieldlabel':'Delivery Order Number','showfield':true,'seq':16,'ismandatory':false},{'fieldid':'7b2872-b318-145657927de','fieldlabel':'Approval Status','changedfieldlabel':'Approval Status','showfield':true,'seq':17,'ismandatory':false},{'fieldid':'7b283232324-57927de0000','fieldlabel':'Status','changedfieldlabel':'Status','showfield':true,'seq':18,'ismandatory':false},{'fieldid':'7b2443-27de-e4sae-4465435','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':19,'ismandatory':false},{'fieldid':'5d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':20,'ismandatory':false},{'fieldid':'7b2882e0-f843-bd1e444w27de4-566','fieldlabel':'Amount before GST','changedfieldlabel':'Amount before GST','showfield':true,'seq':21,'ismandatory':false},{'fieldid':'4d44843a-84bd-01e3-8cd7-eca86bfbb906','fieldlabel':'Discount','changedfieldlabel':'Discount','showfield':false,'seq':22,'ismandatory':false},{'fieldid':'060cc8a1-a65e-45b5-8573-89e656340384','fieldlabel':'Terms Amount','changedfieldlabel':'Terms Amount','showfield':false,'seq':23,'ismandatory':false},{'fieldid':'301866d6-feb2-4d7b-a2e8-f575e8d2340','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':24,'ismandatory':false},{'fieldid':'8e68d3d2-48df-443e-8e0e-a44c39aa9073','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':25,'ismandatory':false},{'fieldid':'319146ff-d3f0-4c1d-9b4a-e965d832891c','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':26,'ismandatory':false},{'fieldid':'7a4c6e53-7e40-4cbc-a064-5e80e4e29db0','fieldlabel':'Amount Due','changedfieldlabel':'Amount Due','showfield':true,'seq':27,'ismandatory':false}]" where moduleid=4;
+
+update defaultmobilefieldsetup set detailreportjson="[{'fieldid':'7c823cac-7824-11e3-a0ff-080027580062','fieldlabel':'Sales Order Number','changedfieldlabel':'Sales Order Number','showfield':true,'seq':1,'ismandatory':false},{'fieldid':'83fe0150-7824-11e3-a0ff-080027580062','fieldlabel':'Sales Order Date','changedfieldlabel':'Sales Order Date','showfield':true,'seq':2,'ismandatory':false},{'fieldid':'b69ddf04-306f-11e5-a151-feff819cdc9f','fieldlabel':'Due Date','changedfieldlabel':'Due Date','showfield':true,'seq':3,'ismandatory':false},{'fieldid':'11cb0b8c-8760-11e3-b0c3-080027580062','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':4,'ismandatory':false},{'fieldid':'840169f8-7824-11e3-a0ff-080027580062','fieldlabel':'Customer','changedfieldlabel':'Customer','showfield':true,'seq':5,'ismandatory':false},{'fieldid':'11c94806-8760-11e3-b0c3-080027580062','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'e7885aa4-3e7b-11e4-89d5-c03fd5633215','fieldlabel':'Credit Term','changedfieldlabel':'Credit Term','showfield':true,'seq':7,'ismandatory':false},{'fieldid':'11c9c092-8760-11e3-b0c3-080027580062','fieldlabel':'Cost Center','changedfieldlabel':'Cost Center','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'c0c90266-a3e1-11e5-bf7f-feff819cdc9f','fieldlabel':'Customer PO Reference No','changedfieldlabel':'Customer PO Reference No','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'f8f495f6-181c-11e6-b651-eca86bfcd415','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'11ca8e82-8760-11e3-b0c3-080027580062','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'11c8dbfa-8760-11e3-b0c3-080027580062','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':12,'ismandatory':false},{'fieldid':'36a07ca4-741a-11e6-b280-eca86bfcd415','fieldlabel':'Block Quantity','changedfieldlabel':'Block Quantity','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'6b7ff234-70db-11e6-a19d-eca86bfcd415','fieldlabel':'Including GST','changedfieldlabel':'Including GST','showfield':true,'seq':14,'ismandatory':false},{'fieldid':'155ec27a-8760-11e3-b0c3-080027580062','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':15,'ismandatory':false},{'fieldid':'11ca15e2-8760-11e3-b0c3-080027580062','fieldlabel':'Post Text','changedfieldlabel':'Post Text','showfield':true,'seq':16,'ismandatory':false},{'fieldid':'7b2882e0-f843-bd1ew27de','fieldlabel':'Discount Amount','changedfieldlabel':'Discount Amount','showfield':true,'seq':17,'ismandatory':false},{'fieldid':'7b283232-b318-145657927de','fieldlabel':'Approval Status','changedfieldlabel':'Approval Status','showfield':true,'seq':18,'ismandatory':false},{'fieldid':'2d44243c-44bd-05e3-6cd7-eca86baab503','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':19,'ismandatory':false},{'fieldid':'9fa5b53-2fd4-4e56-a76d-2e0fc210d8f1','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':20,'ismandatory':false},{'fieldid':'7b283232-b318-14dda97927de','fieldlabel':'Terms Amount','changedfieldlabel':'Terms Amount','showfield':true,'seq':21,'ismandatory':false},{'fieldid':'7b2882e0-f843-b318-14dda97927de','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':22,'ismandatory':false},{'fieldid':'ae4384ea-a3e1-11e5-bf7f-feff819cdc9f','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':23,'ismandatory':false},{'fieldid':'7b2443-27de-e4sae-4465','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':24,'ismandatory':false},{'fieldid':'7b283232324-57927de','fieldlabel':'Status','changedfieldlabel':'Status','showfield':true,'seq':25,'ismandatory':false}]" where moduleid=20;
+
+update defaultmobilefieldsetup set detailreportjson="[{'fieldid':'b526ea60-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Customer','changedfieldlabel':'Customer','showfield':true,'seq':1,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-331224A','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':2,'ismandatory':false},{'fieldid':'b526ecd6-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Sales Return Number','changedfieldlabel':'Sales Return Number','showfield':true,'seq':3,'ismandatory':false},{'fieldid':'b526e6e6-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Sales Return Date','changedfieldlabel':'Sales Return Date','showfield':true,'seq':4,'ismandatory':false},{'fieldid':'253491e6-3704-4270-9120-fdbe871a7fc3','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':5,'ismandatory':false},{'fieldid':'d09e986c-482e-11e6-b3d7-c03fd5aad962','fieldlabel':'Cost Center','changedfieldlabel':'Cost Center','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'cdda14d0-8897-4676-8ad8-1d306e6dde75','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':7,'ismandatory':false},{'fieldid':'b526f3de-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'b526eee8-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'64f3cb08-4830-11e6-b3d7-c03fd5aad962','fieldlabel':'Post Text','changedfieldlabel':'Post Text','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'195f6cb0-4826-11e6-b3d7-c03fd5aad962','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'b526f032-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':12,'ismandatory':false},{'fieldid':'b526f15e-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Ship via','changedfieldlabel':'Ship via','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'b68b484c-482b-11e6-b3d7-c03fd5aad962','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':14,'ismandatory':false},{'fieldid':'113821ae-4988-11e6-bd05-c03fd5aad962','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':15,'ismandatory':false},{'fieldid':'d87d6d92-49be-11e6-b051-c03fd5aad962','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':16,'ismandatory':false},{'fieldid':'57b1e1ea-a499-11e5-bf7f-feff819cdc9f','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':17,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-3312432','fieldlabel':'Assign Sales Return Number to CN','changedfieldlabel':'Assign Sales Return Number to CN','showfield':true,'seq':18,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-3454323','fieldlabel':'Sequence Format CN','changedfieldlabel':'Sequence Format CN','showfield':true,'seq':19,'ismandatory':false},{'fieldid':'0e87e1f6-47f3-11e6-8316-c03fd5aad962','fieldlabel':'Credit Note No','changedfieldlabel':'Credit Note No','showfield':true,'seq':20,'ismandatory':false},{'fieldid':'34581666-47ef-11e6-8316-c03fd5aad962','fieldlabel':'Journal Entry No','changedfieldlabel':'Journal Entry No','showfield':true,'seq':21,'ismandatory':false}]" where moduleid=29;
+
+update defaultmobilefieldsetup set formfieldjson="[{'fieldid':'b526ea60-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Customer','changedfieldlabel':'Customer','showfield':true,'seq':1,'ismandatory':true},{'fieldid':'7b2443-27de-e4sa323-23768895443-331224A','fieldlabel':'Currency','changedfieldlabel':'Currency','showfield':true,'seq':2,'ismandatory':true},{'fieldid':'253491e6-3704-4270-9120-fdbe871a7fc3','fieldlabel':'Sequence Format','changedfieldlabel':'Sequence Format','showfield':true,'seq':3,'ismandatory':true},{'fieldid':'b526ecd6-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Sales Return Number','changedfieldlabel':'Sales Return Number','showfield':true,'seq':4,'ismandatory':true},{'fieldid':'b526e6e6-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Sales Return Date','changedfieldlabel':'Sales Return Date','showfield':true,'seq':5,'ismandatory':true},{'fieldid':'d09e986c-482e-11e6-b3d7-c03fd5aad962','fieldlabel':'Cost Center','changedfieldlabel':'Cost Center','showfield':true,'seq':6,'ismandatory':false},{'fieldid':'cdda14d0-8897-4676-8ad8-1d306e6dde75','fieldlabel':'External Currency Rate','changedfieldlabel':'External Currency Rate','showfield':true,'seq':7,'ismandatory':true},{'fieldid':'b526eee8-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Memo','changedfieldlabel':'Memo','showfield':true,'seq':8,'ismandatory':false},{'fieldid':'b526f032-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Ship Date','changedfieldlabel':'Ship Date','showfield':true,'seq':9,'ismandatory':false},{'fieldid':'b526f15e-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'Ship via','changedfieldlabel':'Ship via','showfield':true,'seq':10,'ismandatory':false},{'fieldid':'b526f3de-b8c6-11e4-a71e-12e3f512a338','fieldlabel':'FOB','changedfieldlabel':'FOB','showfield':true,'seq':11,'ismandatory':false},{'fieldid':'195f6cb0-4826-11e6-b3d7-c03fd5aad962','fieldlabel':'Sales Person','changedfieldlabel':'Sales Person','showfield':true,'seq':12,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-3312432','fieldlabel':'Assign Sales Return Number to CN','changedfieldlabel':'Assign Sales Return Number to CN','showfield':true,'seq':13,'ismandatory':false},{'fieldid':'7b2443-27de-e4sa323-23768895443-3454323','fieldlabel':'Sequence Format CN','changedfieldlabel':'Sequence Format CN','showfield':true,'seq':14,'ismandatory':true},{'fieldid':'0e87e1f6-47f3-11e6-8316-c03fd5aad962','fieldlabel':'Credit Note No','changedfieldlabel':'Credit Note No','showfield':true,'seq':15,'ismandatory':true},{'fieldid':'7b2882e0-f843-b318-14dd92927de','fieldlabel':'Include Product Tax','changedfieldlabel':'Include Product Tax','showfield':true,'seq':16,'ismandatory':true},{'fieldid':'64f3cb08-4830-11e6-b3d7-c03fd5aad962','fieldlabel':'Post Text','changedfieldlabel':'Post Text','showfield':true,'seq':17,'ismandatory':false},{'fieldid':'b68b484c-482b-11e6-b3d7-c03fd5aad962','fieldlabel':'Tax Name','changedfieldlabel':'Tax Name','showfield':true,'seq':18,'ismandatory':false},{'fieldid':'113821ae-4988-11e6-bd05-c03fd5aad962','fieldlabel':'Tax Amount','changedfieldlabel':'Tax Amount','showfield':true,'seq':19,'ismandatory':true},{'fieldid':'d87d6d92-49be-11e6-b051-c03fd5aad962','fieldlabel':'Total Amount','changedfieldlabel':'Total Amount','showfield':true,'seq':20,'ismandatory':true},{'fieldid':'57b1e1ea-a499-11e5-bf7f-feff819cdc9f','fieldlabel':'Total Amount In Base Currency','changedfieldlabel':'Total Amount In Base Currency','showfield':true,'seq':21,'ismandatory':false}]" where moduleid=29;
+
+
+#Pandurang 6th January 2016
+update default_header set isconditionalmandetory='T' where id in ('525bced5-c34b-11e6-a0b1-14dda979267b','587e3699-c34b-11e6-a0b1-14dda979267b','5ed81f3d-c34b-11e6-a0b1-14dda979267b','63f4a65d-c34b-11e6-a0b1-14dda979267b');
+update default_header set ismandatory='F',isconditionalmandetory='T' where id in ('a97887bd-c769-11e6-a37e-14dda979267b');
+
+#Swapnil D. Khandre 6th Jan, 2017
+ALTER TABLE compaccpreferences ADD COLUMN updatestockadjustmententries CHAR(1) DEFAULT 'T';
+update compaccpreferences set updatestockadjustmententries = 'F';
+
+#Shubham Pal 6th Jan 2017
+#Addition of columns to customreports table
+ALTER TABLE customreports add COLUMN widgetURL TEXT DEFAULT NULL;
+ALTER TABLE customreports add COLUMN parentreportid VARCHAR(100) DEFAULT NULL;
+
+#Deletion of column reporturl from reportmaster
+ALTER TABLE reportmaster DROP COLUMN reporturl;
+
+#Insertion of service URL for Sales By Product report from ReportList
+update reportmaster set widgetURL='ACCInvoiceCMN/getSalesByCustomer.do' where id='Sales_By_Product';
+
+#Vaibhav Patil 9th Jan, 2017
+ALTER TABLE extracompanypreferences ADD COLUMN  `withoutBOM` char(1) DEFAULT 'F';
+UPDATE extracompanypreferences SET withoutBOM='T' WHERE id=(SELECT companyid FROM company WHERE subdomain='hinsitsu');
+
+#Kapil Bhusari 9th Jan, 2017
+ALTER TABLE reportmaster ADD reportuniquename VARCHAR(255);
+ALTER TABLE reportmaster ADD createdon  BIGINT(25);
+ALTER TABLE reportmaster ADD createdbyid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE reportmaster ADD updatedbyid VARCHAR(255)DEFAULT NULL;
+ALTER TABLE reportmaster ADD deleteflag tinyint(4) DEFAULT NULL;
+ALTER TABLE reportmaster ADD reportmodulecategory VARCHAR(45)DEFAULT NULL;
+ALTER TABLE reportmaster ADD reportjson mediumtext;
+ALTER TABLE reportmaster ADD groupflag char(1)DEFAULT 'F';
+ALTER TABLE reportmaster ADD reportsql text;
+ALTER TABLE reportmaster ADD updatedon  bigint(25)DEFAULT NULL;
+ALTER TABLE reportmaster ADD filterjson mediumtext;
+ALTER TABLE reportmaster ADD ispivotreport char(1)DEFAULT 'F';
+ALTER TABLE reportmaster ADD isdefaultreport char(1)DEFAULT 'T';
+ALTER TABLE reportmaster ADD summaryflag char(1) DEFAULT 'T';
+ALTER TABLE reportmaster ADD companyid varchar(45) DEFAULT NULL;
+ALTER TABLE reportmaster add COLUMN parentreportid VARCHAR(100) DEFAULT NULL;
+
+INSERT INTO reportmaster(id,name,reportuniquename,createdon,createdbyid,updatedbyid,deleteflag,reportmodulecategory,reportjson,groupflag,reportsql,updatedon,filterjson,ispivotreport,isdefaultreport,summaryflag,description,moduleid,companyid )  
+SELECT  reportno,reportname,reportuniquename,createdon,createdbyid,updatedbyid,deleteflag,reportmodulecategory,reportjson,groupflag,reportsql,updatedon,filterjson,ispivotreport,isdefaultreport,summaryflag,reportdescription,reportmodule,companyid  FROM customreports;
+
+#Arshad Shaikh 9th Jan, 2017
+insert into modulecategory (modulecatid,modulecatname) values ('51c0a445-cce9-11e6-92cb-eca86bfcd415','Customers');
+update modules set modulecategory='51c0a445-cce9-11e6-92cb-eca86bfcd415' where id='09508488-c1d2-102d-b048-001e58a64cb6';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='2f9b37dc-f73d-102d-9b6d-001e4f3fdc1a';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='2f9e3a22-f73d-102d-9b6d-001e4f3fdc1a';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='2fbdf9f2-f73d-102d-9b6d-001e4f3fdc1a';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='2fc100e8-f73d-102d-9b6d-001e4f3fdc1a';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='2fc3fc4e-f73d-102d-9b6d-001e4f3fdc1a';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='2fc6f818-f73d-102d-9b6d-001e4f3fdc1a';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3af31654-3a12-11e8-b49b-c03fd5633201';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6781f4e6-195b-11e3-8a99-001e670e1459';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='cdfc3e20-b992-11e3-b51d-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6a9a8578-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6a9b98fa-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6a9c1956-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aa65538-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aa8c750-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aa93b86-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aa98bd6-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aa9e8ce-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aac1cb6-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6aac93e4-c95d-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5f592a0-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5f619e6-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5f6a0e6-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5f7494c-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5f7c5c0-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5f83cbc-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5fb708a-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5fbd372-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5fc8916-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='e5fe74d8-c960-11e3-bbf7-001cc066e9f0';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3af31654-3aaa-11e5-b49b-c03fd5633215';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3b1caea8-3cbb-11e4-af74-c03fd5633215';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3b204770-3cbb-11e4-af74-c03fd5633215';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3af31654-3a12-11e8-b49b-c03fd5633202';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3af31654-3a12-11e8-b49b-c03fd5633203';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3af31654-3a12-11e8-b49b-c03fd5633204';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='3af31654-3a12-11e8-b49b-c03fd5631628';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='8aae43e0-9427-11e5-a837-0800200c9a66';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='91ebc010-9427-11e5-a837-0800200c9a66';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='96502ad4-b523-11e5-8b92-14dda97926e5';
+update default_header set iscustomreport='T'  where module='09508488-c1d2-102d-b048-001e58a64cb6' and id='6ecd73b3-b525-11e5-8b92-14dda97926e5';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="address" WHERE id='2f9e3a22-f73d-102d-9b6d-001e4f3fdc1a';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="address" WHERE id='2fbdf9f2-f73d-102d-9b6d-001e4f3fdc1a';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="city" WHERE  id='6a9a8578-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="city" WHERE id='e5f592a0-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="state" WHERE id='6a9b98fa-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="state" WHERE id='e5f619e6-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="country" WHERE id='6a9b98fa-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="country" WHERE id='e5f619e6-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="postalcode" WHERE id='6aa65538-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="postalcode" WHERE id='e5f7494c-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="phone" WHERE id='6aa8c750-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="phone" WHERE id='e5f7c5c0-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="fax" WHERE id='6aa98bd6-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="fax" WHERE id='e5fb708a-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="emailid" WHERE id='6aa9e8ce-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="emailid" WHERE id='e5fbd372-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="recipientname" WHERE id='3af31654-3a12-11e8-b49b-c03fd5633203';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="recipientname" WHERE id='3af31654-3a12-11e8-b49b-c03fd5633204';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="contactperson" WHERE id='6aac1cb6-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="contactperson" WHERE id='e5fc8916-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="contactpersonnumber" WHERE id='6aac93e4-c95d-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="contactpersonnumber" WHERE id='e5fe74d8-c960-11e3-bbf7-001cc066e9f0';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="contactpersondesignation" WHERE id='91ebc010-9427-11e5-a837-0800200c9a66';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="contactpersondesignation" WHERE id='8aae43e0-9427-11e5-a837-0800200c9a66';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="shippingroute" WHERE id='3af31654-3aaa-11e5-b49b-c03fd5633215';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="website" WHERE id='96502ad4-b523-11e5-8b92-14dda97926e5';
+UPDATE default_header SET dbtabletame="customer",dbcolumnname="id",reftablename="customeraddressdetails",reftablefk="customerid",reftabledatacolumn="website" WHERE id='6ecd73b3-b525-11e5-8b92-14dda97926e5';
+
+#Arshad Shaikh 10th Dec 2017
+INSERT INTO `default_header` 
+(`id`, `defaultHeader`, `moduleName`, `flag`, `configid`, `pojoheadername`, `recordname`, `xtype`, `pojomethodname`, `validatetype`, `maxlength`, `ismandatory`, `required`, `hbmnotnull`, `defaultvalue`, `refmodule_pojoclassname`, `refdatacolumn_hbmname`, `reffetchcolumn_hbmname`, `allowimport`, `customflag`, `allowmapping`, `dbcolumnname`, `dbtabletame`, `reftablename`, `reftablefk`, `reftabledatacolumn`, `dummyvalue`, `module`, `allowincustomtemplate`, `dataindex`, `renderertype`, `allowadvancesearch`, `islineitem`, `isdocumentimport`, `isreadonly`, `formfieldname`, `isconditionalmandetory`, `refmoduleid`, `iscustomreport`, `allowindocumentdesigner`, `countryid`, `isdefaultfieldmappings`, `isdataindex`, `allowinotherapplication`, `submoduleflag`, `isnoneditablefield`, `allowcrossmodule`) 
+VALUES ('45dcbb85-d284-11e6-b1d8-eca86bfcd415', 'Status', 'Delivery Order', '0', NULL, NULL, 'status.ID', '4', NULL, NULL, '255', 'T', '0', '0', NULL, NULL, NULL, NULL, '1', '0', 'T', 'status', 'deliveryorder', NULL, NULL, NULL, '', '27', '1', NULL, NULL, 'T', 'F', 'F', 'F', NULL, 'F', NULL, 'F', 'F', '0', '0', '1', 'F', '0', '0', 'F');
+
+#Rushikesh Mandage 10th Jan 2017
+ALTER TABLE masteritem ADD COLUMN `biccode` VARCHAR(255) DEFAULT NULL;
+ALTER TABLE masteritem ADD COLUMN `bankcode` VARCHAR(255) DEFAULT NULL;
+ALTER TABLE masteritem ADD COLUMN `branchcode` VARCHAR(255) DEFAULT NULL;
+
+#Kapil Gupta 10th Jan 2017
+CREATE TABLE `companyreportconfiguration` (
+  `id` varchar(255) NOT NULL,
+  `format` text,
+  `type` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  PRIMARY KEY `id` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Pandharinath Vaghole 11th Jan 2017
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `endtoendid`  varchar(255) DEFAULT NULL,
+ADD COLUMN `purposecode`  varchar(255) DEFAULT NULL;
+
+#Neeraj Dwivedi 11th Jan 2017
+ALTER TABLE `extracompanypreferences` ADD COLUMN `activateddtemplateinsertlinkflowflag`  char(1) NULL DEFAULT 'F';
+
+#Shashi Nandan Kumar 11th Jan, 2017
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("5b795642e9-2a22-11e5-b692-c03fd5657f27","91","Additional Description","AdditionalDesc",0,0,'F','F',null,null,null,null,null,"additionaldesc",null);
+
+#Pawan Kale 11th Jan 2017
+#Vendor
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('0d43bb80-d7eb-11e6-b6e6-4ccc6a2d6a4d','defaultAgent','Map Default Agent',26,1,0,1,0,0,0);
+update customizereportheader set dataheader='Vendor Account' where id='f22d8ea6-d1a6-11e6-9b58-4ccc6a2d6a4d' and moduleid=26;
+update customizereportheader set dataheader='Customer Account' where id='e886a54d-d1a2-11e6-9b58-4ccc6a2d6a4d' and moduleid=26;
+#Customer
+update customizereportheader set dataheader='Customer Account' where id='18e3e036-c6bb-11e6-89ef-c03fd5632e9b' and moduleid=25;
+update customizereportheader set dataheader='Vendor Account' where id='7f26026c-c73c-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportmapping where customizereportheader='4a7fdcf2-c739-11e6-8ec2-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='940a69be-c75c-11e6-8ec2-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='2d02e098-c739-11e6-8ec2-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='e724c89e-c737-11e6-8ec2-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='ebbe272c-c75c-11e6-8ec2-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='65ad6684-c75c-11e6-8ec2-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='1dded2b2-c6c5-11e6-89ef-c03fd5632e9b';
+
+delete from customizereportheader where id='4a7fdcf2-c739-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportheader where id='940a69be-c75c-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportheader where id='2d02e098-c739-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportheader where id='e724c89e-c737-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportheader where id='ebbe272c-c75c-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportheader where id='65ad6684-c75c-11e6-8ec2-c03fd5632e9b' and moduleid=25;
+delete from customizereportheader where id='1dded2b2-c6c5-11e6-89ef-c03fd5632e9b' and moduleid=25;
+
+#Pandharinath Vaghole 11th Jan 2017
+UPDATE `fieldcombodata` SET `salescommissionschemamaster` = NULL;
+ALTER TABLE `fieldcombodata` ADD FOREIGN KEY (`salescommissionschemamaster`) REFERENCES `salescommissionschemamaster` (`id`);
+
+#Shrinath Shinde 11 Jan 2017
+ALTER TABLE reportmaster ADD COLUMN iscustomwidgetready CHAR(1) DEFAULT "F";
+update reportmaster set iscustomwidgetready = "T" where id in("jobdateprofit","salescommissionschema");
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,dummyvalue,allowimport,xtype,module,islineitem,isdocumentimport,iscustomreport,isdataindex) VALUES ('eeb861ec-d268-11e6-8424-c03fd5aad962','CustomerCustomDataMapping','acccustomercustomdataref','customer','customercustomdata','customerId','CustomerCustomDataMapping',0,'1','25','T','F','F',0);
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)VALUES('ff9b314c-d268-11e6-8424-c03fd5aad962','25','eeb861ec-d268-11e6-8424-c03fd5aad962',false,"customdatatable");
+
+#Sharad Pawar 11 Jan 2017
+INSERT INTO `language` (`id`, `langcode`, `countrycode`, `langname`) VALUES ('7', 'en', 'USA', 'English (USA)');
+update customizereportheader set dataheader='Remarks' where id='5419f080-6e18-11e4-9262-c03fd5632dc7' and moduleid='29';
+update customizereportmapping set dataheader='Remarks'  where customizereportheader='5419f080-6e18-11e4-9262-c03fd5632dc7' and moduleid='29';
+
+#Dipak Dorkar 12th Jan 2017
+insert into activitylist(activityid,activityname,displayactivityname,alignRight,orderno,parent,feature) values ('6b08cfadd769446490e2cj7a3c23259b','editrfq','Edit','0','207','7c915ef1edd24ea6a17075b9ae800ce3','ff80808122f9dba90122fa4888cf0068');
+update userpermission set permissioncode='16383' where feature='ff80808122f9dba90122fa4888cf0068';
+
+#Shrinath Shinde 12th Jan 2017
+update customreportscustomfieldsmapping set mappingfor = 'CustomerCustomData' where id = "ff9b314c-d268-11e6-8424-c03fd5aad962";
+
+#Deepak Singh 12th Jan 2017
+insert into reportmaster value("Outstanding_SO","Outstanding Sales Order","View Outstanding Sales Order","callSalesOrderList(undefined,true,true,undefined,undefined,undefined, undefined,undefined,undefined,true)","",null,null,null,'F',null,'F',null,null,null,null,null,null,null,'F',null,null,null,'F','T','T',null,null,'F');
+insert into reportmaster value("Outstanding_PO","Outstanding Purchase Order","View Outstanding Purchase Order","callPurchaseOrderList(undefined,true,true,undefined,undefined,undefined, undefined,undefined,true)","",null,null,null,'F',null,'F',null,null,null,null,null,null,null,'F',null,null,null,'F','T','T',null,null,'F');
+
+#Pawan Kale 13th Jan 2017
+update customizereportheader set ismanadatoryfield=0 where id='a1720ba8-2b8a-11e5-a43b-c03fd5632dc7' and moduleid=18;
+update customizereportheader set ismanadatoryfield=0 where id='a563591a-2b8a-11e5-a43b-c03fd5632dc7' and moduleid=18;
+
+#Deepak Satpue 12th Jan 2017
+Alter table fieldcombodata add column seqnumber int(11) default 0;
+Alter table fieldcombodata add column autogen CHAR(1) DEFAULT 'F';
+Alter table fieldcombodata add column seqformat varchar(50) default null;
+Alter table sequenceformat add column custom varchar(50) default NULL;
+
+#Deepak Singh 13th Jan 2017
+update reportmaster SET method_name="callPurchaseOrderList(undefined,true,true,undefined,'Outstanding Purchase Order',undefined, undefined,undefined,true)" where id='Outstanding_PO';
+
+#Shubham Pal 16th Jan 2017
+#ERP-30271 : SDP-6263-[Report List]: New Report: Monthly Sales Qty by Product report (Customization of existing report)
+UPDATE default_header set allowimport = 0, allowmapping = 'F', allowincustomtemplate = 0, isdataindex = 0  where module = 'Sales_By_Product';
+
+#ERP-29423 : [Report Builder] [MP] Rename Amount without tax field with Amount before tax.
+update customreportsmeasuresfields set measurefieldname = 'Amount Before Tax', measurefielddisplayname = 'Amount Before Tax' where measurefieldname = 'Amount Without Tax';
+update customreportsmeasuresfields set measurefieldname = 'Amount Before WHT', measurefielddisplayname = 'Amount Before WHT' where measurefieldname = 'Amount Without WHT';
+
+#Pandurang 17th January 2017
+ALTER TABLE extracompanypreferences ADD COLUMN  `autofillbatchdetails` char(1) DEFAULT 'F';
+
+#Raveesh Pathak 17th Jan 2017
+update default_header set hbmnotnull='F' where defaultHeader='Cost Center' and module='27';
+
+#Amol Edewar 17th Jan 2017
+
+#import Receive payment#
+
+INSERT INTO  default_header (id ,recordname,refdatacolumn_hbmname,defaultHeader, dbcolumnname, reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,ismandatory,isdocumentimport,allowimport,pojomethodname,dataindex,validatetype,reffetchcolumn_hbmname,refmodule_pojoclassname,submoduleflag)
+VALUES ('ddf27b32-d71c-11e6-87ef-14dda9792840','customer','name','Customer','customer','customer','id','customer','customer','1','16','T','T','1',"Customer","personname","ref","ID","Customer","1");
+
+update  default_header set ismandatory='T',validatetype="date",dataindex="date",dataindex="creationdate",isdocumentimport='T',allowimport='1',pojomethodname="date" where module=16  and defaultheader="date";
+
+update  default_header set ismandatory='T',isdocumentimport='T',allowimport='1',dataindex="billno",validatetype="text" where module=16  and defaultheader="Receipt No";
+
+update  default_header set reffetchcolumn_hbmname="ID",ismandatory='T',isdocumentimport='T',allowimport='1',dataindex="paymentmethod",reftablename="paymentmethod",reftablefk="id",refdatacolumn_hbmname="methodName" ,refmodule_pojoclassname="PaymentMethod",pojomethodname="PaymentMethod",validatetype="ref",recordname="paymentmethod",dbcolumnname="paymentMethod" where module=16  and defaultheader="Payment Method";
+
+update  default_header set reffetchcolumn_hbmname="currencyID",reftablename="currency",reftablefk="currencyid",refdatacolumn_hbmname= "name",refmodule_pojoclassname="KWLCurrency",dataindex="currencyname",pojomethodname="Currency",validatetype="ref",recordname="currency",dbcolumnname="currency",ismandatory='T',isdocumentimport='T',allowimport='1' where module=16  and defaultheader="Currency";
+
+update  default_header set ismandatory='F',isdocumentimport='T',allowimport='1',validatetype="text",dataindex="memo" where module=16  and defaultheader="Memo";
+
+update  default_header set ismandatory='F',isdocumentimport='T',hbmnotnull='F',allowimport='1',dataindex="bankCharges",validatetype="double" where module=16  and defaultheader="Bank Charges";
+
+update  default_header set ismandatory='F',isdocumentimport='T',hbmnotnull='F',allowimport='1',dataindex="bankInterest",validatetype="double" where module=16  and defaultheader="Bank Interest";
+
+update  default_header set ismandatory='F',pojomethodname="receivedfrom",isdocumentimport='T',allowimport='1',dataindex="paidToCmbValue" where module=16  and defaultheader="Received From";
+
+update  default_header set reffetchcolumn_hbmname="ID",reftablename="account",hbmnotnull='F',dataindex="bankChargesCmb",reftablefk="id",refdatacolumn_hbmname="name",refmodule_pojoclassname="Account",pojomethodname="bankChargesAccount",validatetype="text",recordname="account.ID",dbcolumnname="account",ismandatory='F',isdocumentimport='T',allowimport='1' where module=16  and defaultheader="Bank Charges Account";
+
+update  default_header set reffetchcolumn_hbmname="ID",dataindex="bankInterestCmb",hbmnotnull='F',reftablename="account",reftablefk="id",refdatacolumn_hbmname="name",refmodule_pojoclassname="Account",pojomethodname="bankInterestAccount",validatetype="text",recordname="account.ID",dbcolumnname="account",ismandatory='F',isdocumentimport='T',allowimport='1' where module=16  and defaultheader="Bank Interest Account";
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES 
+("1b03737c-d270-11e6-bf18-14dda97927d6","16","Document Type","documenttype",0,0,'T','T',1,'documenttype',"documenttype","receipt",'T','T',"type","text");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES 
+("94b01ca8-d270-11e6-bf18-14dda97927d6","16","Document No","documentno",0,0,'T','F',1,'documentno',"documentno","receipt",'T','T',"documentno","text");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES 
+("78ebbaa8-d271-11e6-bf18-14dda97927d6","16","Description","description",0,0,'F','T',1,'description',"description","receipt",'T','T',"description","text");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES 
+("2cee7e52-d272-11e6-bf18-14dda97927d6","16","Amount Due","amountdue",0,0,'T','T',1,'amountdue',"amountdue","receipt",'T','T',"amountDue","double");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES ("355f1934-d272-11e6-bf18-14dda97927d6","16","Exchange Rate","exchangerate",0,0,'T','T',1,'exchangerate',"exchangerate","receipt",'T','T',"exchangeratefortransaction","double");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES 
+("3cabf62f-d272-11e6-bf18-14dda97927d6","16","Enter Amount","enteramount",0,0,'T','T',1,'enteramount',"enteramount","receipt",'T','T',"enteramount","double");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype,submoduleflag) VALUES 
+("87df446c-d7bd-11e6-b96c-14dda97927d6","16","Type","creditType",0,0,'F','T',1,'creditType',"creditType","receipt",'T','T',"creditType","text","3");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) VALUES 
+("95df77d1-d7fa-11e6-b96c-14dda97927d6","16","Cheque Date","chequedate",0,0,'F','F',1,'chequedate',"chequedate","receipt",'T',"chequedate","date");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) VALUES 
+("f3ddad7e-d7fa-11e6-b96c-14dda97927d6","16","Bank Name","bankname",0,0,'F','F',1,'bankname',"bankname","receipt",'T',"bankname","text");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) VALUES 
+("87843f81-d7fb-11e6-b96c-14dda97927d6","16","Cashier's Cheque/Cheque Number","chequenumber",0,0,'F','F',1,'chequenumber',"chequenumber","receipt",'T',"chequenumber","text");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) VALUES 
+("bda73f40-d7fb-11e6-b96c-14dda97927d6","16","Payment Status","paymentstatus",0,0,'F','F',1,'paymentstatus',"paymentstatus","receipt",'T',"paymentstatus","text");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) VALUES 
+("ed5a95b5-d7fb-11e6-b96c-14dda97927d6"
+,"16","Reference Number/Description","Chequedescription",0,0,'F','F',1,'Chequedescription',"Chequedescription","receipt",'T',"Chequedescription","text");
+
+
+INSERT INTO default_header (id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,validatetype,dataindex) 
+VALUES ("183890ff-d8a2-11e6-a31a-14dda97927d6","16",
+"Document Currency To Payment Method Currency exchange rate","exrate",0,0,'T','T',1,"exrate","exrate","receipt",'T',"double","exrate");
+
+-- ReceiptPaymentCustomer
+
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ("f231cfc4-dd42-11e6-976c-14dda979275f", '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Customer\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Reference Number/Description\",\"T12\":\"Memo\",\"T13\":\"Received From\",\"T14\":\"Bank Interest Account\",\"T15\":\"Bank Interest\",\"T16\":\"Bank Charges Account\",\"T17\":\"Bank Charges\",\"L18\":\"Document Type\",\"L19\":\"Document No\",\"L1\":\"Description\",\"L2\":\"Tax\",\"L3\":\"Tax Amount\",\"L4\":\"Transaction Amount\",\"L5\":\"Transaction Amount Due\",\"L6\":\"Exchange Rate\",\"L7\":\"Amount Due\",\"L8\":\"Enter Amount\"},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":44,\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"Invoice\",\"L19\":\"INV0012\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":200,\"L5\":200,\"L6\":1,\"L7\":200,\"L8\":200},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":44,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"Advance/Deposite\",\"L19\":\"\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":44,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP002\",\"T2\":\"01/06/17\",\"T3\":44,\"T4\":\"US Dollars (USD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":44,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100}]', 'ReceiptPaymentCustomer', 'sample_receipt_payment_customer', '_v1', 'T');
+
+-- ReceiptPaymentVendor
+
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ("ffdb3a3e-dd42-11e6-976c-14dda979275f", '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"vendor\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Reference Number/Description\",\"T12\":\"Memo\",\"T13\":\"Received From\",\"T14\":\"Bank Interest Account\",\"T15\":\"Bank Interest\",\"T16\":\"Bank Charges Account\",\"T17\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"Ajit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"Debit Note\",\"L2\":\"DN000029\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"Ajit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"Refund/Deposit\",\"L2\":\"MP44\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]', 'ReceiptPaymentVendor', 'sample_receipt_payment_vendor', '_v1', 'T');
+
+-- ReceiptPaymentGL
+
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ("082117a2-dd43-11e6-976c-14dda979275f", '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Type\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Reference Number/Description\",\"T12\":\"Memo\",\"T13\":\"Received From\",\"T14\":\"Bank Interest Account\",\"T15\":\"Bank Interest\",\"T16\":\"Bank Charges Account\",\"T17\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"GST(IM)@7.00%\",\"L5\":8,\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"credit\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"General Ledger Code\",\"L2\":\"A account\",\"L3\":\"New\",\"L4\":\"GST(IM)@7.00%\",\"L5\":8,\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]', 'ReceiptPaymentGL', 'sample_receipt_payment_gl', '_v1', 'T');
+
+#Raveesh Pathak 17th Jan 2017
+
+insert into featurelist(featureid,featurename,displayfeaturename,orderno) values('ec85493ed63711e6acd414dda97926e5','unitpriceandamount','Unit Price And Amount',73);
+insert into activitylist (activityid,activityname,displayactivityname,orderno,feature,parent,alignRight) values('4b2c775bd64a11e6acd414dda97926e5','displayunitpriceandamountinpurchasedocument','Display Unit Price & Amount in Purchase Document',1,'ec85493ed63711e6acd414dda97926e5',null,'0');
+insert into activitylist (activityid,activityname,displayactivityname,orderno,feature,parent,alignRight) values('54c485bad64a11e6acd414dda97926e5','displayunitpriceandamountinsalesdocument','Display Unit Price & Amount in Sales Document',2,'ec85493ed63711e6acd414dda97926e5',null,'0');
+
+delete from userpermission  where feature="ec85493ed63711e6acd414dda97926e5";#To avoid duplicate entry
+INSERT INTO userpermission (feature, role,permissioncode,roleUserMapping) values('ec85493ed63711e6acd414dda97926e5',1,3,null);
+INSERT INTO userpermission (feature, role,permissioncode,roleUserMapping) select 'ec85493ed63711e6acd414dda97926e5',role_user_mapping.roleId,3,id FROM role_user_mapping
+inner join users on users.userid=role_user_mapping.userId
+inner join rolelist on rolelist.roleid=role_user_mapping.roleId
+where role_user_mapping.roleId!='1';
+
+#Amol Edewar 18th Jan 2017
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES ("bd195cdf-dd40-11e6-9424-14dda97927d6","16","Transaction Amount","transactionamount",0,0,'F','F',1,'transactionamount',"transactionamount","receipt",'T','T',"transactionamount","double");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,
+dataindex,validatetype,reffetchcolumn_hbmname,refdatacolumn_hbmname,refmodule_pojoclassname,hbmnotnull) VALUES ("37a4bc4d-d423-11e6-8e5c-14dda97927d6","16","Tax","ProductTax",0,0,'F',1,'ProductTax',"tax","tax",'T','T',"tax","ref","ID","taxCode","Tax",'F');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype,hbmnotnull) VALUES 
+("d7ea22e9-d423-11e6-8e5c-14dda97927d6","16","Tax Amount","taxamount",0,0,'F',1,'taxamount',"taxamount","receipt",'T','T',"taxamount","double",'F');
+
+
+INSERT INTO default_header(id,module,hbmnotnull,defaultHeader,pojomethodname,flag,maxlength,ismandatory,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) VALUES ("231d064a-d272-11e6-bf18-14dda97927d6","16",'F',"Transaction Amount Due","transactionamountdue",0,0,'F',1,'transactionamountdue',"transactionamountdue","receipt",'T','T',"amountDueOriginal","double");
+
+#Sumit Jain 17th Jan 2017
+CREATE TABLE lccmanualwiseproductamount(
+id VARCHAR(50) NOT NULL,
+grdetailid VARCHAR(50) NOT NULL,
+expenseInvoiceid VARCHAR(50) NOT NULL,
+percentage double NOT NULL,
+amount double NOT NULL,
+PRIMARY KEY (id),
+CONSTRAINT `lccManualWiseProductAmount_ibfk_1` FOREIGN KEY (`grdetailid`) REFERENCES `grdetails` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT `lccManualWiseProductAmount_ibfk_2` FOREIGN KEY (`expenseInvoiceid`) REFERENCES `goodsreceipt` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+)ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+ALTER TABLE lccmanualwiseproductamount ADD `expenseGRDetailsid` varchar(255) DEFAULT NULL , ADD CONSTRAINT `lccManualWiseProductAmountt_ibfk_3` FOREIGN KEY (`expenseGRDetailsid`) REFERENCES `expenseggrdetails` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+#Vaibhav Patil 18th Jan.2017
+UPDATE company SET templateflag=51 WHERE companyid IN ('820578cb-2cd1-4580-b501-0db06a72f64d');
+
+#Ajit Gogawale 19th Jan.2017
+insert into audit_action value(343, 'Stock Adjustment Deleted', 5);
+
+# Suhas Chaware 19 Jan 2017
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("dd97cd60-9796-11e6-ae22-56b6b5-1122","2","Conversion Factor","conversionfactor","1",'T','T','T');
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("dd97cd60-9796-11e6-ae22-56b6b5-1123","20","Conversion Factor","conversionfactor","1",'T','T','T');
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("dd97cd60-9796-11e6-ae22-56b6b5-1124","29","Conversion Factor","conversionfactor","1",'T','T','T');
+
+# Akshay Gujar 19 Jan 2017
+ALTER TABLE goodsreceipt ADD COLUMN `tdspaidflag` int(1) DEFAULT '0';
+ALTER TABLE goodsreceipt ADD COLUMN `tdspayment`  varchar(255) DEFAULT NULL;
+
+ALTER TABLE advancedetail ADD COLUMN `tdspaidflag` int(1) DEFAULT '0';
+ALTER TABLE advancedetail ADD COLUMN `tdspayment`  varchar(255) DEFAULT NULL;
+
+# Suhas Chaware 20 Jan 2016
+ALTER TABLE extracompanypreferences ADD COLUMN joborderitemflow CHAR(1) DEFAULT 'F';
+ALTER TABLE sodetails ADD COLUMN joborderitem CHAR(1) DEFAULT 'F';
+Alter table sodetails add column joborderitemnumber varchar(50) default null;
+ALTER TABLE invoicedetails ADD COLUMN joborderitem CHAR(1) DEFAULT 'F';
+Alter table invoicedetails add column joborderitemnumber varchar(50) default null;
+
+#Kapil Bhusari 20 Jan 2016
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('a939e25e-dd7f-11e6-8d87-c03fd5aad962','Closed Manually','id','purchaseorder','podetails','purchaseorder',"IF((podetails.islineitemclosed= 'T' or podetails.balanceqty = 0 or purchaseorder.ispoclosed='T'),'Closed','Mark Close')",'Closed Manually','1','18','T','F','T');
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport)
+VALUES ('a939e25e-dd7f-11e6-8d87-c03fd5aad965','Closed Manually','id','salesorder','sodetails','salesorder',"IF((sodetails.islineitemclosed= 'T' or sodetails.balanceqty = 0 or salesorder.issoclosed='T'),'Closed','Mark Close')",'Closed Manually','1','20','T','F','T');
+
+#Nitesh Kumar 20th Jan 2017
+update default_header set allowcrossmodule='T' where id in('a330f1fe-8760-11e3-b0c3-080027580062','4d44843a-84bd-01e3-8cd7-eca86bfbb906','d6f6bc90-a3e1-11e5-bf7f-feff819cdc9f','3b6ac5cc-45f7-11e3-86ae-ce3f5508acd9');
+update default_header set allowcrossmodule = 'T' where id ='bfea185c-306f-11e5-a151-feff819cdc9f';
+update default_header set allowcrossmodule = 'F' where id ='f9655e43-3f10-4b95-a2f0-56dc90a5458f';
+
+#Amol Edewar 20th Jan 2016
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield)
+VALUES ('e68cf6ff-dedc-11e6-914b-14dda97927d6','paymentCurrencyToPaymentMethodCurrencyEx','Document Currency To Payment Method Currency exchange rate',16,1,0,1,0,0,0);
+
+delete from customizereportmapping where customizereportheader='36182b7c-ea73-11e5-85ec-14dda9792758';
+delete from customizereportheader where moduleid=16 and dataindex='nonRefundable';
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield)
+VALUES ('c427f0b4-dedd-11e6-914b-14dda97927d6','sequenceformat','Sequence Format',16,1,0,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield)
+VALUES ('0aeeefdb-dede-11e6-914b-14dda97927d6','transactionAmount','Transaction Amount',16,1,1,1,0,0,0);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield)
+VALUES ('bbc5c91a-dede-11e6-914b-14dda97927d6','account','Customer',16,1,0,1,0,1,0);
+
+
+#Swapnil D. Khandre 20th Jan, 2017
+ALTER TABLE productbuild ADD tempcreatedon TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE productbuild modify createdon bigint(20) default null;
+UPDATE productbuild set tempcreatedon = createdon;
+update productbuild set createdon = UNIX_TIMESTAMP(tempcreatedon)*1000;
+ALTER TABLE productbuild drop tempcreatedon;
+
+#Bhushan Chitte 23rd Jan 2017
+ALTER TABLE chequesequenceformat ADD COLUMN isdefault CHAR(1) DEFAULT "F";
+
+#Arshad Shaikh 23rd Jan 2017
+
+update modules set modulecategory='72ee172d-7a81-4424-bd15-7354e58aaa57' where id='22';
+update default_header set iscustomreport='T', dbcolumnname='customerporefno' ,dbtabletame='quotation' where id='6f1256ec-36a4-11e6-aa97-eca86bfcd415' and module='22';
+update default_header set refmoduleid='09508488-c1d2-102d-b048-001e58a64cb6'  where id=' 6b72731e-8760-11e3-b0c3-080027580062';
+
+update default_header  set dbtabletame='quotation' where id in('6942e8b2-8760-11e3-b0c3-080027580062','7591dd12-8760-11e3-b0c3-080027580062','67cff420-8760-11e3-b0c3-080027580062','3b55800a-84bd-01e3-8ab7-cba86bfbb904','23240372-f860-11e3-ab9e-c03fd5633215','2330c828-f860-11e3-ab9e-c03fd5633215','1bb8b092-3360-11e5-a151-feff819cdc9f','234a458c-f860-11e3-ab9e-c03fd5633215','2364a18e-f860-11e3-ab9e-c03fd5633215','3ab06296-02bb-11e4-91b7-001e670e1459','3034h4f62-a57r5-466b-bfb25-1ff827e1a6','3aaff2c0-02bb-11e4-91b7-001e670e1459','2357464c-f860-11e3-ab9e-c03fd5633215','233d2ca8-f860-11e3-ab9e-c03fd5633215','9f01222a-306f-11e5-a151-feff819cdc9ff','3ae1f5f4-13f5-11e4-aa03-001e670e1459','1bb8b6a0-3360-11e5-a151-feff819cdc9f','f4bbbaab-a164-4fd6-aaf2-7dead63f69ac','3ae21002-13f5-11e4-aa03-001e670e1459','3ae21fb6-13f5-11e4-aa03-001e670e1459','3ae22772-13f5-11e4-aa03-001e670e1459','a8dcf9c-b0c-462b-a533e-6d72r54affa576c','3ae231b8-13f5-11e4-aa03-001e670e1459','3ae217f0-13f5-11e4-aa03-001e670e1459','3ae217f0-13f5-11e4-aa03-001e670e1459','ab10148f-5acf-4140-864a-f00a66d094e8','ab4b9709-5ae1-4fd1-881d-fbc8d0cb5b22','ad2900b4-5e6c-4971-b60e-a699ce4c8182','222322d0-9276-11e5-8994-feff819cdc9f','5106605b-1795-4f26-a5f6-5217f25e2323');
+
+update default_header set iscustomreport='F' where id='385d800a-848d-01a3-8ab7-cba76bfbb412';
+update default_header set reftablefk='id', reftablename='tax', reftabledatacolumn='name' where id = 'b008d4e9-8d37-4599-9cf6-022d0db0c8da';
+update default_header set islineitem='T' where id='89b4f384-c8cb-11e5-9956-625662870761';
+update default_header set iscustomreport='F' where id='db29a90c-6ebe-4393-9259-315dd3a45a5d';
+
+INSERT INTO default_header (id,module,defaultHeader,flag,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,allowadvancesearch,islineitem,iscustomreport,dummyvalue)
+VALUES
+("22b13b16-dbd6-11e6-878d-eca86bfcd415","22","Terms Amount",0,2,"id",'quotation','quotationtermmap','quotation','(select sum(termamount) from quotationtermmap  where quotationtermmap.quotation = quotation.id)','T','F','T','Terms Amount');
+
+
+
+INSERT INTO default_header  (id,defaultHeader,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('dbcda34e-dc9b-11e6-a745-eca86bfcd415','Product Name', 'product','quotationdetails','product','id','name','Product Name','1','22','T','F','T');
+
+INSERT INTO default_header  (id,defaultHeader,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('48296840-dc9c-11e6-a745-eca86bfcd415','Product Type', 'product','quotationdetails','product','id','producttype','Product Type','1','22','T','F','T');
+
+INSERT INTO default_header  (id,defaultHeader,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('011d4d30-dcaf-11e6-a745-eca86bfcd415','Basic UOM Quantity', 'id','quotation','quotationdetails','quotation','baseuomquantity','Base UOM Quantity','2','22','T','F','T');
+
+
+INSERT INTO default_header  (id,defaultHeader,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('fe186112-dd4f-11e6-930b-eca86bfcd415','Total Amount', 'id','quotation','quotationdetails','quotation','(quotationdetails.baseuomquantity*quotationdetails.rate)-(IF(quotationdetails.discountispercent=''1'',(quotationdetails.discount/100)*(quotationdetails.baseuomquantity*quotationdetails.rate),quotationdetails.discount))+quotationdetails.rowtaxamount','Total Amount','2','22','T','F','T');
+
+INSERT INTO default_header  (id,defaultHeader,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('a13fc266-dd56-11e6-930b-eca86bfcd415','Tax Amount', 'id','quotation','quotationdetails','quotation','rowtaxamount','Tax Amount','2','22','T','F','T');
+
+#Tax Amount for Quotation
+insert into customreportsmeasuresfields (measurefieldid,measurefieldname,measurefielddisplayname,xtype,measurefieldmodulecategory,measurefieldmodule,iscustomreport,dataindex,isreadonly,allowinotherapplication) 
+values('8db57557-dd63-11e6-930b-eca86bfcd415','Tax Amount','Tax Amount','2','72ee172d-7a81-4424-bd15-7354e58aaa57','22','T','taxamount','T','T');
+
+#Mapping for Quotation and Qutation Details
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('d8c0f632-dd6b-11e6-930b-eca86bfcd415','QuotationAndQuotationDetailsMapping','quotation','quotationdetails','quotation','id','id','QuotationAndQuotationDetailsMapping','1','22','T','F','F');
+
+#Mapping for Product and Quotation Details
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('0dbffef2-dd6c-11e6-930b-eca86bfcd415','QuotationDetailsAndProductMapping','product','quotationdetails','product','id','id','QuotationDetailsAndProductMapping','1','22','T','F','F');
+
+#Reference for  Quotation and Qutation Details for Tax Amount 
+INSERT INTO `customreportsmeasuresfieldsmapping`(`id`,`measurefieldid`,`defaultheaderid`,`isDataIndex`)
+VALUES
+('52410924-dd0d-4cad-b768-e784b254e617','8db57557-dd63-11e6-930b-eca86bfcd415','d8c0f632-dd6b-11e6-930b-eca86bfcd415',1);
+
+#Reference for  Qutation Details and Product for Tax Amount 
+INSERT INTO `customreportsmeasuresfieldsmapping`(`id`,`measurefieldid`,`defaultheaderid`,`isDataIndex`)
+VALUES
+('52410924-dd0d-4cad-b768-e784b254e618','8db57557-dd63-11e6-930b-eca86bfcd415','0dbffef2-dd6c-11e6-930b-eca86bfcd415',0);
+
+#Total Amount for Quotation
+insert into customreportsmeasuresfields (measurefieldid,measurefieldname,measurefielddisplayname,xtype,measurefieldmodulecategory,measurefieldmodule,iscustomreport,dataindex,isreadonly,allowinotherapplication) 
+values('a4a4160e-de2b-11e6-8ec8-eca86bfcd415','Total Amount','Total Amount','2','72ee172d-7a81-4424-bd15-7354e58aaa57','22','T','taxamount','T','T');
+
+#Reference for  Quotation and Qutation Details for Total Amount 
+INSERT INTO `customreportsmeasuresfieldsmapping`(`id`,`measurefieldid`,`defaultheaderid`,`isDataIndex`)
+VALUES
+('16bc94b7-de2e-11e6-8ec8-eca86bfcd415','a4a4160e-de2b-11e6-8ec8-eca86bfcd415','d8c0f632-dd6b-11e6-930b-eca86bfcd415',1);
+
+#Reference for  Qutation Details and Product for Total Amount 
+INSERT INTO `customreportsmeasuresfieldsmapping`(`id`,`measurefieldid`,`defaultheaderid`,`isDataIndex`)
+VALUES
+('23ac20d2-de2e-11e6-8ec8-eca86bfcd415','a4a4160e-de2b-11e6-8ec8-eca86bfcd415','0dbffef2-dd6c-11e6-930b-eca86bfcd415',0);
+
+update default_header set dbcolumnname='id', dbtabletame='quotation', reftablename='quotationdetails', reftablefk='quotation',reftabledatacolumn='discount',xtype='2',module='22', islineitem='T', iscustomreport='T' where id='b103bcd8-36ab-11e6-aa97-eca86bfcd415';
+
+update default_header set dbcolumnname='product', dbtabletame='quotationdetails', reftablename='product', reftablefk='id',reftabledatacolumn='productid',xtype='1',module='22', islineitem='T', iscustomreport='T' where id='02dc3590-36ab-11e6-aa97-eca86bfcd415';
+
+UPDATE default_header SET dbcolumnname = 'id',  dbtabletame = 'quotation',  reftablename = 'quotationdetails',  reftablefk = 'quotation',  reftabledatacolumn = 'quantity',  xtype = '2',  module = '22',  islineitem = 'T',  iscustomreport = 'T' WHERE id = '0899e482-36ab-11e6-aa97-eca86bfcd415';
+
+update default_header set dbcolumnname='tax', dbtabletame='quotation', reftablename='tax', reftablefk='id',reftabledatacolumn='name',xtype='1',module='22', islineitem='T', iscustomreport='T' where id='385d800a-848d-01a3-8ab7-cba76bfbb412';
+
+update default_header set dbcolumnname='id', dbtabletame='quotation', reftablename='quotationdetails', reftablefk='quotation',reftabledatacolumn='rate',xtype='2',module='22', islineitem='T', iscustomreport='T' where id='13a9ca36-36ab-11e6-aa97-eca86bfcd415';
+
+update default_header set reftablefk='id', reftablename='vendorquotation', reftabledatacolumn='quotationnumber' where id='89b4f384-c8cb-11e5-9956-625662870761';
+
+update default_header set reftablename= 'users', reftablefk='userid', reftabledatacolumn='fname' where id='95e283d4-655a-4258-92ad-337d2b5d9d12';
+
+INSERT INTO default_header (id,defaultHeader,dbcolumnname,dbtabletame,reftablename,reftablefk,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) VALUES	('6992e7b4-e148-11e6-b5ad-eca86bfcd415','CustomerQuotationCustomdata','accquotationcustomdataref','quotation','quotationcustomdata','quotationid','CustomerQuotationCustomdata',	'1','22','T','F','F');
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('075647e4-e149-11e6-b5ad-eca86bfcd415','22','6992e7b4-e148-11e6-b5ad-eca86bfcd415',NULL,'customdatatable');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) VALUES ('003a085b-e151-11e6-b5ad-eca86bfcd415','QuotationdetailCustomdata','accquotationdetailscustomdataref','quotationdetails','quotationdetailscustomdata','quotationdetailsid','QuotationdetailCustomdata','1','22','T','F','F');
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('472847e8-e151-11e6-b5ad-eca86bfcd415','22','003a085b-e151-11e6-b5ad-eca86bfcd415',NULL,'AccJEDetailCustomData');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('8a23da2d-e15b-11e6-b5ad-eca86bfcd415','CustomerCustomData','customer','quotation','customercustomdata','customerId','CustomerCustomData','1','22','T','F','F');
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('ba6d4f2d-e15b-11e6-b5ad-eca86bfcd415','22','8a23da2d-e15b-11e6-b5ad-eca86bfcd415',NULL,'CustomerCustomData');
+
+INSERT INTO `customreportscustomfieldsmapping`(`id`,`module`,`defaultheaderid`,`islineitem`,`mappingfor`)
+VALUES('5752b059-e177-11e6-b5ad-eca86bfcd415','22','13a9ca36-36ab-11e6-aa97-eca86bfcd415',NULL,'detailsdatatable');
+
+#Sumit Jain 17th Jan 2017
+ALTER TABLE lccmanualwiseproductamount DROP FOREIGN KEY lccManualWiseProductAmountt_ibfk_3;
+ALTER TABLE lccmanualwiseproductamount DROP COLUMN expenseGRDetailsid;
+
+#Nitesh Kumar 24th Jan 2017
+update default_header set allowcrossmodule = 'T' where id ='2978c158-a553-11e5-bf7f-feff819cdc9f';
+
+#Pandurang 24th Jan 2017
+#Warehouse
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dataindex,isbatchdetail,isconditionalmandetory) 
+VALUES ('20bedffb-d654-11e6-b2a8-14dda979267b','Warehouse','id','inventorywarehouse','newproductbatch','id','warehouse','Warehouse',
+'InventoryWarehouse','ref','4','28','T','T','F','InventoryWarehouse','name','id','warehouse','T','T');
+
+#Location
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dataindex,isbatchdetail,isconditionalmandetory) 
+VALUES ('2855bb19-d654-11e6-b2a8-14dda979267b','Location','id','inventorylocation','newproductbatch','id','location','Location',
+'InventoryLocation','ref','4','28','T','T','F','InventoryLocation','name','id','location','T','T');
+
+#Batch
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail,isconditionalmandetory) VALUES ('38e644fc-d654-11e6-b2a8-14dda979267b','Batch',
+'id','newproductbatch','inventory','id','uom','Batch','NewProductBatch','custom','4','28','T','T','F','batch','T','T');
+
+#Serial
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail,isconditionalmandetory) VALUES ('4404bd87-d654-11e6-b2a8-14dda979267b','Serial',
+'id','newbatchserial','inventory','id','uom','Serial','NewBatchSerial','custom','4','28','T','T','F','serial','T','T');
+
+#Batch Quantity
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,islineitem,isdocumentimport,iscustomreport,isbatchdetail,isconditionalmandetory)
+ VALUES ("50ea86bb-d654-11e6-b2a8-14dda979267b","28","Batch Quantity","Quantity",0,0,'F','T',null,null,null,"double",null,"batchquantity",null,'T','T','F','T','T');
+
+#Row
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('59e62641-d654-11e6-b2a8-14dda979267b','Row',
+'id','storemaster','inventory','id','uom','Row','Row','custom','4','28','T','T','F','row','T');
+
+#Rack
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('66dbd421-d654-11e6-b2a8-14dda979267b','Rack',
+'id','storemaster','inventory','id','uom','Rack','Rack','custom','4','28','T','T','F','rack','T');
+
+#Bin
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,islineitem,isdocumentimport,iscustomreport,dataindex,isbatchdetail) VALUES ('715f54bd-d654-11e6-b2a8-14dda979267b','Bin',
+'id','storemaster','inventory','id','uom','Bin','Bin','custom','4','28','T','T','F','bin','T');
+
+
+#Mfg Date
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('e2dd9856-de0c-11e6-be6a-14dda97926e5','28','Mfg Date','mfgdate',0,0,'F','F',
+null,null,null,'date',null,null,'mfgdate','T','T');
+
+#Exp Date
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('e45bbf26-de0c-11e6-be6a-14dda97926e5','28','Exp Date','expdate',0,0,'F','F',
+null,null,null,'date',null,null,'expdate','T','T');
+
+
+#Warranty valid from
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('e4a14974-de0c-11e6-be6a-14dda97926e5','28','Warranty valid from','expstart',0,0,'F','F',
+null,null,null,'date',null,null,'expstart','T','T');
+
+
+#Warranty Expires on
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex,isbatchdetail,isdocumentimport) 
+VALUES ('e4d96242-de0c-11e6-be6a-14dda97926e5','28','Warranty Expires on','expend',0,0,'F','F',
+null,null,null,'date',null,null,'expend','T','T');
+
+#Dipak Dorkar 25th Jan 2017
+ALTER TABLE chequelayout ADD COLUMN activateextrafields char(1) DEFAULT 'F';
+
+#Kapil Bhusari 25 Jan 2017
+update reportmaster set iscustomwidgetready = 'T' where id in('Monthly_Sales_Report','Daily_Bookings_Report','Daily_Sales_Report');
+
+#Deepak Singh 25th Jan 2017
+ALTER TABLE extracompanypreferences ADD showbulkdofromso char(1) DEFAULT 'F';
+
+#Shubham Pal 27th Jan 2017
+#To capture Opening Balance Amount on the check of 'isopeningbalencereceipt' flag
+update default_header set dbcolumnname = 'if(receipt.isopeningbalencereceipt=1,receipt.originalopeningbalancebaseamount,receipt.depositamountinbase)' where id = '81f80e99-4e11-4d61-aea4-af5d27e60aca';
+
+#Deepak Singh 31st Jan 2017
+Alter table quotation ADD COLUMN  reservestockquantityflag boolean DEFAULT FALSE;
+
+#Ashish Mohite 31st Jan 2017
+update default_header set reftablename='requestforquotation', dummyvalue='duedate', allowindocumentdesigner='T' where module='33' and id='45130a72-d91f-11e5-b5d2-0a1d41d68578';
+
+#Kapil Bhusari 31 Jan 2017
+update reportmaster set iscustomwidgetready = 'T' where id='Yearly_Bookings_Report';
+update reportmaster set iscustomwidgetready = 'T' where id='Yearly_Trading_&_Profit/Loss';
+update reportmaster set iscustomwidgetready = 'T' where id='Monthly_Bookings_Report';
+update reportmaster set iscustomwidgetready = 'T' where id='Monthly_Trading_&_Profit/Loss';
+
+
+#Pandurang 31st Jan 2017
+#Batch
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,iscustomreport,dataindex,isconditionalmandetory) VALUES ('89dcdfa8-e2da-11e6-99be-14dda97926e5','Batch',
+'id','newproductbatch','inventory','id','uom','Batch','NewProductBatch','custom','4','82','T','batch','T');
+
+#Serial
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,pojomethodname,
+validatetype,xtype,module,iscustomreport,dataindex,isconditionalmandetory) VALUES ('8abc689e-e2da-11e6-99be-14dda97926e5','Serial',
+'id','newbatchserial','inventory','id','uom','Serial','NewBatchSerial','custom','4','82','T','serial','T');
+
+
+#Mfg Date
+INSERT INTO default_header(id,module,iscustomreport,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ('8b158333-e2da-11e6-99be-14dda97926e5','82','T','Mfg Date','mfgdate',0,0,'F','F',
+null,null,null,'date',null,null,'mfgdate');
+
+#Exp Date
+INSERT INTO default_header(id,module,iscustomreport,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ('8b834532-e2da-11e6-99be-14dda97926e5','82','T','Exp Date','expdate',0,0,'F','F',
+null,null,null,'date',null,null,'expdate');
+
+
+#Warranty valid from
+INSERT INTO default_header(id,module,iscustomreport,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ('0ecf2311-e2db-11e6-99be-14dda97926e5','82','T','Warranty valid from','expstart',0,0,'F','F',
+null,null,null,'date',null,null,'expstart');
+
+
+#Warranty Expires on
+INSERT INTO default_header(id,module,iscustomreport,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,
+refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex) 
+VALUES ('0fc71596-e2db-11e6-99be-14dda97926e5','82','T','Warranty Expires on','expend',0,0,'F','F',
+null,null,null,'date',null,null,'expend');
+
+#Kapil Bhusari 31 Jan 2017
+update reportmaster set iscustomwidgetready = 'T' where id='Monthly_Sales_By_Product';

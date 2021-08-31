@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.TaxList" table="taxlist">
+    <id column="id" name="ID">
+     <generator class="assigned"/>
+    </id>
+    <property name="applyDate" type="timestamp">
+      <column name="applydate" not-null="true"/>
+    </property>
+    <property name="percent" type="double">
+      <column name="percent" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Tax" name="tax" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Country" name="countryid" />
+  </class>
+</hibernate-mapping>

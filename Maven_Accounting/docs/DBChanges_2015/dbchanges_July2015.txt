@@ -1,0 +1,1559 @@
+#Vaibhav Patil 01st July 2015
+alter table repeatedje add approver varchar(50) NOT NULL;
+alter table repeatedje add ispendingapproval char(1) NOT NULL default 'F';
+alter table repeatedje add prevDate date DEFAULT NULL ;
+
+# Anand Nimbalkar 1st July, 2015
+ALTER TABLE `invoice` ADD COLUMN `isdraft`  int(1) NULL DEFAULT 0;
+ALTER TABLE `journalentry` ADD COLUMN `isdraft`  int(1) NULL DEFAULT 0;
+
+#Sharad Pawar 1 July 2015
+ALTER TABLE extracompanypreferences ADD COLUMN isbaseuomrateedit CHAR(1) DEFAULT 'F';
+
+#shashi Nandan kumar 1 July 2015
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bfg1056', 'viewconsignmentloan', 'View Consignment Loan Report', '25', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bfg1057', 'exportloan', 'Export', '26', '2d428a08f31f11e48635eca86bfg1056', '2d428a08f31f11e48635eca86bff9ae1') ;
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bfg1058', 'viewconsignmentoutloan', 'View Consignment Loan outstanging Report', '27', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bfg1059', 'exportoutloan', 'Export', '28', '2d428a08f31f11e48635eca86bfg1058', '2d428a08f31f11e48635eca86bff9ae1') ;
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bfg1060', 'viewconsignmentcustomerwarehouse', 'view stock availability by customer Warehouse', '29', null, '2d428a08f31f11e48635eca86bff9ae1') ;
+update userpermission set permissioncode='536870911' where feature='2d428a08f31f11e48635eca86bff9ae1';
+
+#Akshay Gujar 1 July 2015
+ALTER TABLE billingshippingaddresses 
+MODIFY billingaddress VARCHAR(1024) DEFAULT "",
+MODIFY billingcountry VARCHAR(255) DEFAULT "",
+MODIFY billingstate VARCHAR(255) DEFAULT "",
+MODIFY billingcity VARCHAR(255) DEFAULT "",
+MODIFY billingpostal VARCHAR(255) DEFAULT "",
+MODIFY billingmobile VARCHAR(255) DEFAULT "",
+MODIFY billingphone VARCHAR(255) DEFAULT "",
+MODIFY billingemail VARCHAR(255) DEFAULT "",
+MODIFY billingfax VARCHAR(255) DEFAULT "",
+MODIFY billingcontactperson VARCHAR(255) DEFAULT "",
+MODIFY billingcontactpersonnumber VARCHAR(255) DEFAULT "",
+MODIFY shippingaddress VARCHAR(255) DEFAULT "",
+MODIFY shippingCountry VARCHAR(255) DEFAULT "",
+MODIFY shippingstate VARCHAR(255) DEFAULT "",
+MODIFY shippingcity VARCHAR(255) DEFAULT "",
+MODIFY shippingpostal VARCHAR(255) DEFAULT "",
+MODIFY shippingemail VARCHAR(255) DEFAULT "",
+MODIFY shippingfax VARCHAR(255) DEFAULT "",
+MODIFY shippingmobile VARCHAR(255) DEFAULT "",
+MODIFY shippingphone VARCHAR(255) DEFAULT "",
+MODIFY shippingcontactpersonnumber VARCHAR(255) DEFAULT "",
+MODIFY shippingcontactperson VARCHAR(255) DEFAULT "",
+MODIFY billingaddresstype VARCHAR(255) DEFAULT "",
+MODIFY shippingaddresstype VARCHAR(255) DEFAULT "",
+MODIFY shippingroute VARCHAR(255) DEFAULT "";
+
+#Vaibhav Patil 02 July 2015
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,
+validatetype,defaultvalue,dataindex,renderertype) VALUES ("fb860626-2009-11e5-8121-c03fd5ab06a3","91","Product Weight","Productweight",0,0,'F','T',"Product","productweight","productweight","double",0,"productweight",null);
+
+Delete from default_header where id='c31025f0-fa3a-11e4-b89f-c03fd5ab06a3';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,
+validatetype,defaultvalue,dataindex,renderertype) VALUES ("c31025f0-fa3a-11e4-b89f-c03fd5ab06a3","91","Lead Time (in days)","LeadTimeInDays",0,0,'F','T',null,null,null,"integer",0,"leadtime",null);
+
+Delete from default_header where id="26faed02-fa3b-11e4-b89f-c03fd5ab06a3";
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("26faed02-fa3b-11e4-b89f-c03fd5ab06a3","91","Purchase Price","Price",0,0,'F','T',"PriceList","price","ID","double",null,"initialprice",null);
+
+#shashi Nandan kumar 2 July 2015
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3346576f47ad41c7a7b5c1e8d7f1ee93', 'viewproductthreshold', 'product threshold Report', '5', null, '8aa257b02afc4f04875d1a54810257fd') ,
+('7adb6a622f124129af6e23b9b26ceaf7', 'viewinventryconfigration', 'inventry configration', '6', null, '8aa257b02afc4f04875d1a54810257fd') ;
+update userpermission set permissioncode='63' where feature='8aa257b02afc4f04875d1a54810257fd';
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3846576f47ad41c7a7b5c1e8d7f7ee93', 'copygr', 'Copy', '7', '408a4e1eb35811e3abe3001cc066e9f0', '4d5cb414b35411e3abe3001cc066e9f0') ,
+('3346576f47ad41c7a7b5c1e8d7f7ee95', 'copydo', 'Copy', '7', '7a6d0d5cb35c11e39a00001cc066e9f0', 'f487fea4b35b11e39a00001cc066e9f0') ,
+('3346576f47ad41c7a7b5c1e8d7f7ee96', 'copypret', 'Copy', '7', '151e5ab89bd811e4bbfeeca86bff8e7d', 'a528df089bd711e4bbfeeca86bff8e7d') ,
+('3346576f47ad41c7a7b5c1e8d7f7ee97', 'copysret', 'Copy', '7', '4a888d049bd811e4bbfeeca86bff8e7d', 'e092295a9bd711e4bbfeeca86bff8e7d') ;
+update userpermission set permissioncode='127' where feature in('4d5cb414b35411e3abe3001cc066e9f0','f487fea4b35b11e39a00001cc066e9f0','a528df089bd711e4bbfeeca86bff8e7d','e092295a9bd711e4bbfeeca86bff8e7d');
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3846576f47ad41c7a7b5c1e8d7f7et93', 'copyvendorquotation', 'Copy', '7', '906b2334a2ce11e4adaceca86bff8e7d', 'ff80808122f9dba90122fa4888cf0054') ,
+('3846576f47ad41c7a7b5c1e8d7f7et95', 'copypo', 'Copy', '106', 'ff80808122f9dba90122fa4888cf00106', 'ff80808122f9dba90122fa4888cf0054') ,
+('3846576f47ad41c7a7b5c1e8d7f7et99', 'copypayment', 'Copy', '307', 'ff80808122f9dba90122fa4888cf00274', 'ff80808122f9dba90122fa4888cf0054') ;
+update userpermission set permissioncode='8589934591' where feature='ff80808122f9dba90122fa4888cf0054';
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3846576f47ad41c7a7b5c1e8d7f7ey93', 'copysalesquotation', 'Copy', '17', 'ff80808122f9dba90122fa4888cf1000', 'ff80808122f3cb640122f44c9db10012') ,
+('3846576f47ad41c7a7b5c1e8d7f7ey95', 'copyso', 'Copy', '106', 'ff80808122f9dba90122fa4888cf00105', 'ff80808122f3cb640122f44c9db10012') ,
+('3846576f47ad41c7a7b5c1e8d7f7ey99', 'copyreceipt', 'Copy', '307', 'ff80808122f9dba90122fa4888cf00275', 'ff80808122f3cb640122f44c9db10012') ;
+update userpermission set permissioncode=' 17179869183' where feature='ff80808122f3cb640122f44c9db10012';
+
+#shashi Nandan kumar 3 July 2015
+insert into reportmaster values ('Sales_Replacement_Report','Sales Replacement Report','View Sales Replacement Report','callProductReplacementReport(null,true,WtfGlobal.getLocaleText("acc.contract.sales.replacement.report"))',' Accounts Receivable - Sales');
+insert into reportmaster values ('Sales_Maintenance_Report','Sales Maintenance Report','View Sales Maintenance Report','callProductMaintenanceReport(null,true,WtfGlobal.getLocaleText("acc.contract.sales.maintenance.report"))',' Accounts Receivable - Sales');
+insert into reportmaster values ('Contract','Contract','Contract','callContractOrder(false,null,null,true)',' Accounts Receivable - Sales');
+
+#Mohammed Uzair Momin 4th July 2015
+alter table assetdetail add column assetdescription varchar(1024) default '';
+alter table purchaserequisitionassetdetail add column assetdescription varchar(1024) default '';
+
+#shashi Nandan kumar 6 July 2015
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('4f52f9615e344a50a7e1c8c6a51def99','salesreceivepayment','Sales Receive Payment',50);
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('4f52f9615e344a50a7e1c8c6a51deg99','purchasemakepayment','Purchase Make Payment',51);
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('eb214daaa2cc11e4adaceca86bxf8e7d', 'importmakepayment', 'Import Make Payments', '1', null, '4f52f9615e344a50a7e1c8c6a51deg99'),
+('8122f9dba90122fa4888cfx085', 'createpayment', 'Make Payment', '2', null, '4f52f9615e344a50a7e1c8c6a51deg99') ,
+('ff80808122f9dba90122fa4888cfx0274', 'viewpayment', 'View Payment Made Report', '3', null, '4f52f9615e344a50a7e1c8c6a51deg99') ,
+('ff80808122f9dba90122fa4888cfx086', 'editpayment', 'Modify', '4', 'ff80808122f9dba90122fa4888cfx0274', '4f52f9615e344a50a7e1c8c6a51deg99') ,
+('3846576f47ad41c7a7b5c1e8d7fxet99', 'copypayment', 'Copy', '5', 'ff80808122f9dba90122fa4888cfx0274', '4f52f9615e344a50a7e1c8c6a51deg99') ,
+('ff80808122f9dba90122fa4888xf0087', 'removepayment', 'Delete', '6', 'ff80808122f9dba90122fa4888cfx0274', '4f52f9615e344a50a7e1c8c6a51deg99'),
+('ff80808122f9dba90122fa4888xf00117', 'emailpayment', 'Email', '7', 'ff80808122f9dba90122fa4888cfx0274', '4f52f9615e344a50a7e1c8c6a51deg99') ,
+('ff80808122f9dba90122fa4888xf00118', 'exportdatapayment', 'Export Data', '8', 'ff80808122f9dba90122fa4888cfx0274', '4f52f9615e344a50a7e1c8c6a51deg99') ,
+('ff80808122f9dba90122fa4888xf00119', 'printpayment', 'Print', '9', 'ff80808122f9dba90122fa4888cfx0274', '4f52f9615e344a50a7e1c8c6a51deg99'),
+('7f6b5cfaa1f911e489a8eca86yff8204', 'importreceivepayments', 'Import Receive Payments', '1', null, '4f52f9615e344a50a7e1c8c6a51def99'),
+('ff80808122f3cb640122f45ef38b0197e', 'createreceipt', 'Make Receipt Payment', '2', null, '4f52f9615e344a50a7e1c8c6a51def99') ,
+('ff80808122f9dba90122fa4888cf01985', 'viewreceipt', 'View Payment Received Report', '3', null, '4f52f9615e344a50a7e1c8c6a51def99') ,
+('ff80808122f9dba90122fa4888cf01994', 'editreceipt', 'Modify', '4', 'ff80808122f9dba90122fa4888cf01985', '4f52f9615e344a50a7e1c8c6a51def99') ,
+('3846576f47ad41c7a7b5c1e8d7f7e1200', 'copyreceipt', 'Copy', '5', 'ff80808122f9dba90122fa4888cf01985', '4f52f9615e344a50a7e1c8c6a51def99') ,
+('ff80808122f9dba90122fa4888yf00201', 'removereceipt', 'Delete', '6', 'ff80808122f9dba90122fa4888cf01985', '4f52f9615e344a50a7e1c8c6a51def99') ,
+('ff80808122f9dba90122fa4888yf00202', 'emailreceipt', 'Email', '7', 'ff80808122f9dba90122fa4888cf01985', '4f52f9615e344a50a7e1c8c6a51def99') ,
+('ff80808122f9dba90122fa4888yf00203', 'exportdatareceipt', 'Export', '8', 'ff80808122f9dba90122fa4888cf01985', '4f52f9615e344a50a7e1c8c6a51def99') ,
+('ff80808122f9dba90122fa4888yf00205', 'printreceipt', 'Print', '9', 'ff80808122f9dba90122fa4888cf01985', '4f52f9615e344a50a7e1c8c6a51def99') ;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('4f52f9615e344a50a7e1c8c6a51def99', '1', '511');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('4f52f9615e344a50a7e1c8c6a51deg99', '1', '511');
+
+delete from activitylist where feature='ff80808122f9dba90122fa4888cf0054' and activityid in('3846576f47ad41c7a7b5c1e8d7f7et99','8122f9dba90122fa4888cf0085','eb214daaa2cc11e4adaceca86bff8e7d','ff80808122f9dba90122fa4888cf00117',
+'ff80808122f9dba90122fa4888cf00118','ff80808122f9dba90122fa4888cf00119','ff80808122f9dba90122fa4888cf0086','ff80808122f9dba90122fa4888cf0087');
+delete from activitylist where feature='ff80808122f9dba90122fa4888cf0054' and activityid in('ff80808122f9dba90122fa4888cf00274');
+delete from activitylist where feature='ff80808122f3cb640122f44c9db10012' and activityid in('3846576f47ad41c7a7b5c1e8d7f7ey99','ff80808122f3cb640122f45ef38b003e','ff80808122f9dba90122fa4888cf00112','ff80808122f9dba90122fa4888cf00113',
+'ff80808122f9dba90122fa4888cf00114','ff80808122f9dba90122fa4888cf00115','ff80808122f9dba90122fa4888cf00116','ff80808122f9dba90122fa4888cf00275');
+delete from activitylist where feature='ff80808122f3cb640122f44c9db10012' and activityid in('7f6b5cfaa1f911e489a8eca86bff8e7d');
+
+# Suhas Chaware 6th July 2015
+alter table payment 
+add column `payee` varchar(50) DEFAULT NULL;
+
+#shashi Nandan kumar 7 July 2015
+delete from activitylist where activityid in('ff80808122f9dba90122fa4888cf00302','ff80808122f9dba90122fa4888cf00303','ff80808122f9dba90122fa4888cf00304','ff80808122f9dba90122fa4888cf00305','ff80808122f9dba90122fa4888cf00306','ff80808122f9dba90122fa4888cf00307','ff80808122f9dba90122fa4888cf00308','ff80808122f9dba90122fa4888cf00309');
+delete from activitylist where activityid in('ff80808122f9dba90122fa4888cf00300','ff80808122f9dba90122fa4888cf00301');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES  
+('eb214daaa2cc11e4adaceca86bxf8e9d', 'viewapprovalrule', 'View Approval Rule', '1', null, 'ff80808122f9dba90122fa4888cf0067'), 
+('eb214daaa2cc11e4adaceca86bxf8e9e', 'packagemaster', 'Package Master', '3', null, 'f8989a5ee8f11e59471eca86bff9ae1'), 
+('eb214daaa2cc11e4adaceca86bxf8e9f', 'inventrysetup', 'Inventry Setup ', '4', null, 'f8989a5ee8f11e59471eca86bff9ae1'), 
+('eb214daaa2cc11e4adaceca86bxf8e9g', 'customerwarehousemaster', 'Customer Warehouse Master ', '5', null, 'f8989a5ee8f11e59471eca86bff9ae1'),
+('eb214daaa2cc11e4adaceca86bxf8e10g', 'budgeting', 'Bugdgeting ', '6', null, 'f8989a5ee8f11e59471eca86bff9ae1'),
+('eb214daaa2cc11e4adaceca86bxf8e11g', 'inspectiontemplate','Inspection Template', '7', null, 'f8989a5ee8f11e59471eca86bff9ae1');
+update userpermission set permissioncode='127' where feature='f8989a5ee8f11e59471eca86bff9ae1';
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES  
+('eb214daaa2cc11e4adaceca86bxf8f9g', 'pricelistband', 'price List-Band ', '15', 'ff80808122f9dba90122fa4c54f60037', 'ff80808122f9dba90122fa4827210030'),
+('eb214daaa2cc11e4adbceca86bxf8f1g', 'pricelistvolumediscount', 'Price list -Volume Discount', '16', 'ff80808122f9dba90122fa4c54f60037', 'ff80808122f9dba90122fa4827210030');
+update userpermission set permissioncode=65535 where feature='ff80808122f9dba90122fa4827210030';
+
+#Sumit Jain 7 July 2015
+UPDATE default_header 
+SET validatetype='ref', refmodule_pojoclassname='Product',refdatacolumn_hbmname='productid',reffetchcolumn_hbmname='productid' 
+where `module`='91' and dataindex ='bompid';
+
+# Suhas Chaware 7th july 2015
+Update repeatedje set prevDate=startdate where prevDate=0000-00-00;
+
+#Sharad Pawar 8 July 2015
+ALTER TABLE extracompanypreferences ADD COLUMN allowzeroproductprice CHAR(1) DEFAULT 'F';
+#Dipak Dorkar 8th july 2015
+ALTER TABLE cndetails ADD goodsreceipt varchar(255) DEFAULT NULL;
+ALTER TABLE cndetails ADD CONSTRAINT fk_goodsreceipt FOREIGN KEY(goodsreceipt) REFERENCES goodsreceipt(id);
+ALTER TABLE cndetails ADD goodsReceiptRow varchar(255) DEFAULT NULL;
+ALTER TABLE cndetails ADD CONSTRAINT fk_goodsreceipt_Rows FOREIGN KEY(goodsReceiptRow) REFERENCES grdetails(id);
+
+#Raveesh Pathak 8th July 2015
+INSERT INTO reportmaster (id,name,description,method_name,Grouped_Under) VALUES ("Sales_Person_Ageing_Report","Aged Report Based On Sales Person","View Aged Report Based On Sales Person","callSalesPersonAgeingReport()","Accounts Receivable - Sales");
+
+#Dipak Dorkar 8th july 2015
+
+ALTER TABLE dndetails ADD invoice varchar(255) DEFAULT NULL;
+ALTER TABLE dndetails ADD invoiceRow varchar(255) DEFAULT NULL;
+ALTER TABLE dndetails ADD CONSTRAINT fk_invoiceDetails_Rows FOREIGN KEY(invoiceRow) REFERENCES invoicedetails(id);
+
+#Swapnil D. Khandre 8th July,2015
+INSERT INTO reportmaster values('Purchase_By_Vendor', 'Purchase By Vendor','View Details and Summary of Items Purchase','getPurchaseByVendorTabView()','Accounts Receivable - Purchases');
+
+#Vaibhav Patil 8th July,2015
+UPDATE default_header SET ismandatory='T' WHERE id='c31025f0-fa3a-11e4-b89f-c03fd5ab06a3';
+UPDATE default_header SET defaultHeader='Lead Time(in days)' WHERE id='c31025f0-fa3a-11e4-b89f-c03fd5ab06a3';
+
+#Sharad Pawar 8 July 2015
+update product set `name`=REPLACE(`name`,',',' ');
+
+#shashi Nandan kumar 9 July 2015
+
+delete from activitylist where activityid in('67f013889bb711e4b5cbeca86bff8e7d','8af321d69bb711e4b5cbeca86bff8e7d','938481789bb711e4b5cbeca86bff8e7d','9c99f7669bb711e4b5cbeca86bff8e7d','a6ca0d2a9bb711e4b5cbeca86bff8e7d',
+'aeb02ec09bb711e4b5cbeca86bff8e7d','c31ee8a69bb711e48d2eeca86bff8e7d','cc4da7469bb711e48d2eeca86bff8e7d','d5d0a44e9bb711e48d2eeca86bff8e7d','ded60e769bb711e48d2eeca86bff8e7d',
+'0ce856b69bb811e48d2eeca86bff8e7d','1f488cc29bb811e48d2eeca86bff8e7d','26b311629bb811e48d2eeca86bff8e7d','2f483f6e9bb811e48d2eeca86bff8e7d','360ba9b29bb811e48d2eeca86bff8e7d',
+'3f13c30a9bb811e48d2eeca86bff8e7d','6bd106829bb811e48d2eeca86bff8e7d','73e151889bb811e48d2eeca86bff8e7d','7b5afdb09bb811e48d2eeca86bff8e7d','826982029bb811e48d2eeca86bff8e7d');
+delete from activitylist where activityid in('7b45ddbe9bb711e4b5cbeca86bff8e7d','b6e1ce829bb711e4b5cbeca86bff8e7d','177f2c309bb811e48d2eeca86bff8e7d','645c75269bb811e48d2eeca86bff8e7d');
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('5f52f9615e344a50a7e1c8c6a51def99','assetsales','Asset Sales Management',52);
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('3f13c30a9bb811e48d2eeca86bff8e8d', 'createfado', 'Create Fixed Asset Delivery Order', '1', null, '5f52f9615e344a50a7e1c8c6a51def99') ,
+('645c75269bb811e48d2eeca86bff8e8d', 'viewfado', 'View Fixed Asset Delivery Order', '2', null, '5f52f9615e344a50a7e1c8c6a51def99') ,
+('6bd106829bb811e48d2eeca86bff8e8d', 'editfado', 'Edit', '3', '645c75269bb811e48d2eeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('73e151889bb811e48d2eeca86bff8e8d', 'deletefado', 'Delete', '4', '645c75269bb811e48d2eeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('7b5afdb09bb811e48d2eeca86bff8e8d', 'exportfado', 'Export', '5', '645c75269bb811e48d2eeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('826982029bb811e48d2eeca86bff8e8d', 'printfado', 'Print', '6', '645c75269bb811e48d2eeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('aeb02ec09bb711e4b5cbeca86bff8e8d', 'createdispinv', 'Create Disposal Invoice', '7', null, '5f52f9615e344a50a7e1c8c6a51def99'),
+('b6e1ce829bb711e4b5cbeca86bff8e8d', 'viewdispinv', 'View Disposal Invoice', '8', null, '5f52f9615e344a50a7e1c8c6a51def99') ,
+('c31ee8a69bb711e48d2eeca86bff8e8d', 'editdispinv', 'Edit', '9', 'b6e1ce829bb711e4b5cbeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('cc4da7469bb711e48d2eeca86bff8e8d', 'deletedispinv', 'Delete', '10', 'b6e1ce829bb711e4b5cbeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('d5d0a44e9bb711e48d2eeca86bff8e8d', 'exportdispinv', 'Export', '11', 'b6e1ce829bb711e4b5cbeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ,
+('ded60e769bb711e48d2eeca86bff8e8d', 'printdispinv', 'Print', '12', 'b6e1ce829bb711e4b5cbeca86bff8e8d', '5f52f9615e344a50a7e1c8c6a51def99') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('5f52f9615e344a50a7e1c8c6a51def99', '1', '4095');
+
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('5f52f9615e374a50a7e1c8c6a51deg99','assetpurchase','Asset Purchase Management',53);
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('0cf856b69bb811e48d2eeca86bff8e8d', 'createfagr', 'Create Fixed Asset Goods Receipt', '1', null, '5f52f9615e374a50a7e1c8c6a51deg99'),
+('177f2c309bb811e48d2eeca86bff8e8d', 'veiwfagr', 'View Fixed Asset Goods Receipt', '2', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('1f488cc29bb811e48d2eeca86bff8e8d', 'editfagr', 'Edit', '3', '177f2c309bb811e48d2eeca86bff8e8d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('26b311629bb811e48d2eeca86bff8e8d', 'deletefagr', 'Delete', '4', '177f2c309bb811e48d2eeca86bff8e8d','5f52f9615e374a50a7e1c8c6a51deg99') ,
+('2f483f6e9bb811e48d2eeca86bff8e9d', 'exportfagr', 'Export', '5', '177f2c309bb811e48d2eeca86bff8e8d','5f52f9615e374a50a7e1c8c6a51deg99') ,
+('360ba9b29bb811e48d2eeca86bff8e8d', 'printfagr', 'Print', '6', '177f2c309bb811e48d2eeca86bff8e8d', '5f52f9615e374a50a7e1c8c6a51deg99'),
+('67f013889bb711e4b5cbeca86bff8e9d', 'createacqinv', 'Create Acquired Invoice', '7', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('7b45ddbe9bb711e4b5cbeca86bff8e9d', 'viewacqinv', 'View Acquired Invoice', '8', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('8af321d69bb711e4b5cbeca86bff8e9d', 'editacqinv', 'Edit', '9', '7b45ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('938481789bb711e4b5cbeca86bff8e9d', 'deleteacqinv', 'Delete', '10', '7b45ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('9c99f7669bb711e4b5cbeca86bff8e9d', 'exportacqinv', 'Export', '11', '7b45ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('a6ca0d2a9bb711e4b5cbeca86bff8e9d', 'printacqinv', 'Print', '12', '7b45ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99'),
+('69f013889bb711e4b5cbeca86bff8e9d', 'createapo', 'Create Asset Purchase Order', '13', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('7b49ddbe9bb711e4b5cbeca86bff8e9d', 'viewapo', 'View Asset Purchase Order', '14', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('8af381d69bb711e4b5cbeca86bff8e9d', 'editapo', 'Edit', '15', '7b49ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('938491789bb711e4b5cbeca86bff8e9d', 'deleteapo', 'Delete', '16', '7b49ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('9c99k7669bb711e4b5cbeca86bff8e9d', 'exportapo', 'Export', '17', '7b49ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('a6ci7d2a9bb711e4b5cbeca86bff8e9d', 'printapo', 'Print', '18', '7b49ddbe9bb711e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a51deg99'),
+('67f013889bb711e4b5cbeca86bfp8e9d', 'createapreq', 'Create Asset Purchase Requisition', '19', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('7b45ddbe9bb711e4b5cbeca86bpf8e9d', 'viewapreq', 'View Asset Purchase Requisition', '20', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('8af321d69bb711e4b5cbeca86bpf8e9d', 'editapreq', 'Edit', '21', '7b45ddbe9bb711e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('938481789bb711e4b5cbeca86pff8e9d', 'deleteapreq', 'Delete', '22', '7b45ddbe9bb711e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('9c99f7669bb711e4b5cbeca86pff8e9d', 'exportapreq', 'Export', '23', '7b45ddbe9bb711e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('a6ca0d2a9bb711e4b5cbeca86pff8e9d', 'printapreq', 'Print', '24', '7b45ddbe9bb711e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('67f013889bb711e4b5cbeca86bmf8e9d', 'createavq', 'Create Asset Vendor Quotation', '25', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('7b45ddbe9bb711e4b5cbeca86bmf8e9d', 'viewavq', 'View  Asset Vendor Quotation', '26', null, '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('8af321d69bb711e4b5cbeca86bmf8e9d', 'editavq', 'Edit', '27', '7b45ddbe9bb711e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('938481789bb711e4b5cbeca86bmf8e9d', 'deleteavq', 'Delete', '28', '7b45ddbe9bb711e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('9c99f7669bb711e4b5cbeca86bmf8e9d', 'exportavq', 'Export', '29', '7b45ddbe9bb711e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ,
+('a6ca0d2a9bb711e4b5cbeca86bmf8e9d', 'printavq', 'Print', '30', '7b45ddbe9bb711e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a51deg99') ;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('5f52f9615e374a50a7e1c8c6a51deg99', '1', '1073741823');
+update activitylist set orderno=5 where activityid='88fc61029bb811e48d2eeca86bff8e7d';
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES
+('f25519889bb711e48d3eyca86bff8e7d', 'postadep', 'Post', '6', '88fc61029bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('d5d0a44e9bb711e48d3eeca86bff8e8d', 'exportadep', 'Export', '7', '88fc61029bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('ded60e769bb711e48d4eeca86bff8e8d', 'printadep', 'Print', '8', '88fc61029bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d'); 
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES
+('88fc61029bv911e49d2feca86bff8e7d', 'unpostdep', 'Unpost Asset Depreciation', '9', null, '1b1570e29bb411e4b5cbeca86bff8e7d'),
+('f25519889bb711e48d3fyca86bff8e7d', 'unpost', 'Unpost', '10', '88fc61029bv911e49d2feca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('a10a9b609bb811e48d2feca86bff8e7d', 'viewamaint', 'View Asset Maintenance Schedule', '11', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('90e752be9bb811e58d2feca86bff8e7d', 'createamaint', 'Create ', '12', 'a10a9b609bb811e48d2feca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('03125e2a9bb811e68d2feca86bff8e7d', 'deleteamaint', 'Delete', '13', 'a10a9b609bb811e48d2feca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d'),
+('98623ac29bb811e48d6feca83bfz8e7d', 'updateamaint', 'Update', '14', 'a10a9b609bb811e48d2feca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('a10a9b609bb811e48d2eeca86bftre7d', 'viewareport', 'View Asset Report', '15', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('90e752be9bb811e58d2eeca86bft8e7d', 'deleteareport', 'Delete', '16', 'a10a9b609bb811e48d2eeca86bftre7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('03126e2a9bb811e68d2eeca86brf8e7d', 'exportareport', 'Export', '17', 'a10a9b609bb811e48d2eeca86bftre7d', '1b1570e29bb411e4b5cbeca86bff8e7d'),
+('06126e2a9bb811e68d2eeca86brf8e7d', 'printareport', 'Print', '18', 'a10a9b609bb811e48d2eeca86bftre7d', '1b1570e29bb411e4b5cbeca86bff8e7d'),
+('ac409d229bb811e48d2eefa86bff8e7d', 'viewmainworkorder', 'View Maintenance Work Order', '19', null, '1b1570e29bb411e4b5cbeca86bff8e7d'),
+('95e752be9bb811e58d2eefa86bft8e7d', 'deletemainworkorder', 'Delete', '20', 'ac409d229bb811e48d2eefa86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('03125e2a9bb811e68d2eefa86brf8e7d', 'exportmainworkorder', 'Export', '21', 'ac409d229bb811e48d2eefa86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d'),
+('05625e2a9bb811e68d2eefa86brf8e7d', 'printmainworkorder', 'Print', '22', 'ac409d229bb811e48d2eefa86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d');
+update userpermission set permissioncode=4194303 where feature='1b1570e29bb411e4b5cbeca86bff8e7d';
+#Lease Management
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('5f52f9615e374a50a7e1c8c6a61deg99','leaseorder','Lease Management',54);
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('0cf856b69cb813e48d2eeca86bff8e8d', 'createlqt', 'Create Lease Quotation', '1', null, '5f52f9615e374a50a7e1c8c6a61deg99'),
+('177f2c309cb814e48d2eeca86bff8e8d', 'veiwlqt', 'View Lease Quotation Report', '2', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('1f488cc29cb814e48d2eeca86bff8e8d', 'editlqt', 'Edit', '3', '177f2c309cb814e48d2eeca86bff8e8d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('26b311629cb814e48d2eeca86bff8e8d', 'deletelqt', 'Delete', '4', '177f2c309cb814e48d2eeca86bff8e8d','5f52f9615e374a50a7e1c8c6a61deg99') ,
+('2f483f6e9cb815e48d2eeca86bff8e9d', 'exportlqt', 'Export', '5', '177f2c309cb814e48d2eeca86bff8e8d','5f52f9615e374a50a7e1c8c6a61deg99') ,
+('360ba9b29cb814e48d2eeca86bff8e8d', 'printlqt', 'Print', '6', '177f2c309cb814e48d2eeca86bff8e8d', '5f52f9615e374a50a7e1c8c6a61deg99'),
+('67f013889cb714e4b5cbeca86bff8e9d', 'createlor', 'Create Lease Order', '7', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('7b45ddbe9cb714e4b5cbeca86bff8e9d', 'viewlor', 'View Lease Order Report', '8', null, '5f52f9615e374a50a7e1c8c6a61deg99'), 
+('8af321d69cb714e4b5cbeca86bff8e9d', 'editlor', 'Edit', '9', '7b45ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('938481789cb714e4b5cbeca86bff8e9d', 'deletelor', 'Delete', '10', '7b45ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('9c99f7669cb714e4b5cbeca86bff8e9d', 'exportlor', 'Export', '11', '7b45ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('a6ca0d2a9cb714e4b5cbeca86bff8e9d', 'printlor', 'Print', '12', '7b45ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99'),
+('69f013889cb714e4b5cbeca86bff8e9d', 'createldo', 'Create Lease Delivery Order', '13', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('7b49ddbe9cb714e4b5cbeca86bff8e9d', 'viewldo', 'View Lease Delivery Order', '14', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('8af381d69cb714e4b5cbeca86bff8e9d', 'editldo', 'Edit', '15', '7b49ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('938491789cb714e4b5cbeca86bff8e9d', 'deleteldo', 'Delete', '16', '7b49ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('9c99k7669cb714e4b5cbeca86bff8e9d', 'exportldo', 'Export', '17', '7b49ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('a6ci7d2a9cb714e4b5cbeca86bff8e9d', 'printldo', 'Print', '18', '7b49ddbe9cb714e4b5cbeca86bff8e9d', '5f52f9615e374a50a7e1c8c6a61deg99'),
+('67f013889cb714e4b5cbeca86bfp8e9d', 'createlinv', 'Create Lease invoice', '19', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('7b45ddbe9cb714e4b5cbeca86bpf8e9d', 'viewlinv', 'View Lease invoice List', '20', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('8af321d69cb714e4b5cbeca86bpf8e9d', 'editlinv', 'Edit', '21', '7b45ddbe9cb714e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('938481789cb714e4b5cbeca86pff8e9d', 'deletelinv', 'Delete', '22', '7b45ddbe9cb714e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('9c99f7669cb714e4b5cbeca86pff8e9d', 'exportlinv', 'Export', '23', '7b45ddbe9cb714e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('a6ca0d2a9cb714e4b5cbeca86pff8e9d', 'printlinv', 'Print', '24', '7b45ddbe9cb714e4b5cbeca86bpf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('67f013889cb714e4b5cbeca86bmf8e9d', 'createlret', 'Create Lease Return', '25', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('7b45ddbe9cb714e4b5cbeca86bmf8e9d', 'viewlret', 'View Lease Return List', '26', null, '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('8af321d69cb714e4b5cbeca86bmf8e9d', 'editlret', 'Edit', '27', '7b45ddbe9cb714e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('938481789cb714e4b5cbeca86bmf8e9d', 'deletelret', 'Delete', '28', '7b45ddbe9cb714e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('9c99f7669cb714e4b5cbeca86bmf8e9d', 'exportlret', 'Export', '29', '7b45ddbe9cb714e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ,
+('a6ca0d2a9cb714e4b5cbeca86bmf8e9d', 'printlret', 'Print', '30', '7b45ddbe9cb714e4b5cbeca86bmf8e9d', '5f52f9615e374a50a7e1c8c6a61deg99') ;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('5f52f9615e374a50a7e1c8c6a61deg99', '1', '1073741823');
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('5f52f9615e384a50a7e1c8c6a61deg99','leasecontract','Lease Contract Management',55);
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('0cf856b69cb913e48d2eeca86bff8e8d', 'createlcont', 'Create Lease Contract', '1', null, '5f52f9615e384a50a7e1c8c6a61deg99'),
+('177f2c309cb914e48d2eeca86bff8e8d', 'veiwlcont', 'View Lease Contract Register', '2', null, '5f52f9615e384a50a7e1c8c6a61deg99') ,
+('1f488cc29cb914e48d2eeca86bff8e8d', 'editlcont', 'Edit', '3', '177f2c309cb914e48d2eeca86bff8e8d', '5f52f9615e384a50a7e1c8c6a61deg99') ,
+('26b311629cb914e48d2eeca86bff8e8d', 'terminatelcont', 'Terminate', '4', '177f2c309cb914e48d2eeca86bff8e8d','5f52f9615e384a50a7e1c8c6a61deg99') ,
+('360ba9b29cb914e48d2eeca86bff8e8d', 'renewlcont', 'Renew', '5', '177f2c309cb914e48d2eeca86bff8e8d', '5f52f9615e384a50a7e1c8c6a61deg99'),
+('2f483f6e9cb915e48d2eeca86bff8e9d', 'exportlcont', 'Export', '6', '177f2c309cb914e48d2eeca86bff8e8d','5f52f9615e384a50a7e1c8c6a61deg99');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('5f52f9615e384a50a7e1c8c6a61deg99', '1', '63');
+
+#Rushikesh mandage 9th July 2015
+# Create new table for recurred Payment
+CREATE TABLE `repeatedpayment` (
+  `id` varchar(255) NOT NULL,
+  `intervalunit` int(11) DEFAULT '0',
+  `intervaltype` varchar(32) DEFAULT NULL,
+  `startdate` date NOT NULL,
+  `nextdate` date NOT NULL,
+  `expiredate` date DEFAULT NULL,
+  `prevDate` date DEFAULT NULL,
+  `isactivate`char(1) NOT NULL default 'T',
+  `noofjepost` int(11) DEFAULT '0',
+  `noofremainjepost` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Add column for maintaining link between parent and child payment
+alter table payment 
+add column `repeatpayment` varchar(255) DEFAULT NULL;
+
+alter table payment add FOREIGN KEY (`repeatpayment`) REFERENCES `repeatedpayment` (`id`) ;
+
+# Add column for maintaining the memo details when adding recurring payment
+ALTER TABLE `repeatedjememo`
+ADD COLUMN `repeatedpayment`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE repeatedjememo
+ADD CONSTRAINT `repeatedpayment_memo` FOREIGN KEY (`repeatedpayment`) REFERENCES `repeatedpayment` (`id`);
+
+# Add column for maintaining link between parent and child payment
+alter table payment 
+add column `parentpayment` varchar(255) DEFAULT NULL;
+
+ALTER TABLE payment
+ADD CONSTRAINT `parentpayment` FOREIGN KEY (`parentpayment`) REFERENCES `payment` (`id`);
+
+#Maintaining crone schedule
+insert into croneschedule values('repeatpaymentcroneid','Repeat Payment Crone','2001-01-01');
+
+#shashi nandan kumar 10 july 2015
+update activitylist set activityname='printlqt' where activityid='360ba9b29cb814e48d2eeca86bff8e8d';
+
+# Vivek Pakmode 10th July 2015
+alter table extracompanypreferences 
+add column `showallaccountsingl` char(1) default 'T';
+
+# Vaibhav Patil 11th July 2015
+ALTER TABLE country ADD COLUMN timezoneid varchar(255) DEFAULT NULL;
+
+UPDATE country SET timezoneid='218' where id='1';
+UPDATE country SET timezoneid='52' where id='10';
+UPDATE country SET timezoneid='235' where id='100';
+UPDATE country SET timezoneid='33' where id='101';
+UPDATE country SET timezoneid='261' where id='102';
+UPDATE country SET timezoneid='149' where id='103';
+UPDATE country SET timezoneid='123' where id='104';
+UPDATE country SET timezoneid='236' where id='105';
+UPDATE country SET timezoneid='252' where id='106';
+UPDATE country SET timezoneid='216' where id='108';
+UPDATE country SET timezoneid='207' where id='109';
+UPDATE country SET timezoneid='126' where id='110';
+
+UPDATE country SET timezoneid='125' where id='11';
+UPDATE country SET timezoneid='183' where id='111';
+UPDATE country SET timezoneid='159' where id='112';
+UPDATE country SET timezoneid='105' where id='113';
+UPDATE country SET timezoneid='43' where id='114';
+UPDATE country SET timezoneid='276' where id='115';
+UPDATE country SET timezoneid='179' where id='116';
+UPDATE country SET timezoneid='254' where id='117';
+UPDATE country SET timezoneid='23' where id='118';	
+UPDATE country SET timezoneid='204' where id='119';
+UPDATE country SET timezoneid='23' where id='120';	
+
+UPDATE country SET timezoneid='53' where id='12';
+UPDATE country SET timezoneid='304' where id='121';
+UPDATE country SET timezoneid='274' where id='122';
+UPDATE country SET timezoneid='275' where id='123';
+UPDATE country SET timezoneid='209' where id='124';
+UPDATE country SET timezoneid='256' where id='125';
+UPDATE country SET timezoneid='193' where id='126';
+UPDATE country SET timezoneid='180' where id='127';
+UPDATE country SET timezoneid='176' where id='128';
+UPDATE country SET timezoneid='116' where id='129';
+UPDATE country SET timezoneid='178' where id='130';
+
+UPDATE country SET timezoneid='87' where id='13';
+UPDATE country SET timezoneid='162' where id='131';
+UPDATE country SET timezoneid='196' where id='132';
+UPDATE country SET timezoneid='152' where id='133';
+UPDATE country SET timezoneid='264' where id='134';
+UPDATE country SET timezoneid='213' where id='135';
+UPDATE country SET timezoneid='23' where id='136';	
+UPDATE country SET timezoneid='235' where id='138';
+UPDATE country SET timezoneid='263' where id='137';
+UPDATE country SET timezoneid='107' where id='139';
+UPDATE country SET timezoneid='154' where id='140';
+
+UPDATE country SET timezoneid='221' where id='14';
+UPDATE country SET timezoneid='23' where id='141';	
+UPDATE country SET timezoneid='68' where id='142';
+UPDATE country SET timezoneid='117' where id='143';
+UPDATE country SET timezoneid='224' where id='144';
+UPDATE country SET timezoneid='215' where id='145';
+UPDATE country SET timezoneid='31' where id='146';
+UPDATE country SET timezoneid='23' where id='147';	
+UPDATE country SET timezoneid='23' where id='148';	
+UPDATE country SET timezoneid='212' where id='149';
+UPDATE country SET timezoneid='155' where id='150';
+
+UPDATE country SET timezoneid='54' where id='15';
+UPDATE country SET timezoneid='270' where id='151';
+UPDATE country SET timezoneid='69' where id='152';
+UPDATE country SET timezoneid='23' where id='153';	
+UPDATE country SET timezoneid='175' where id='154';
+UPDATE country SET timezoneid='247' where id='155';
+UPDATE country SET timezoneid='23' where id='156';	
+UPDATE country SET timezoneid='303' where id='158';
+UPDATE country SET timezoneid='236' where id='159';
+UPDATE country SET timezoneid='144' where id='160';
+
+UPDATE country SET timezoneid='23' where id='16';	
+UPDATE country SET timezoneid='23' where id='161';	
+UPDATE country SET timezoneid='294' where id='163';
+UPDATE country SET timezoneid='298' where id='164';
+UPDATE country SET timezoneid='30' where id='165';
+UPDATE country SET timezoneid='140' where id='166';
+UPDATE country SET timezoneid='23' where id='167';	
+UPDATE country SET timezoneid='3' where id='168';
+UPDATE country SET timezoneid='296' where id='170';
+
+UPDATE country SET timezoneid='285' where id='17';
+UPDATE country SET timezoneid='23' where id='171';	
+UPDATE country SET timezoneid='288' where id='172';
+UPDATE country SET timezoneid='156' where id='173';
+UPDATE country SET timezoneid='219' where id='175';
+UPDATE country SET timezoneid='231' where id='176';
+UPDATE country SET timezoneid='278' where id='177';
+UPDATE country SET timezoneid='48' where id='178';
+UPDATE country SET timezoneid='287' where id='179';
+UPDATE country SET timezoneid='55' where id='180';
+
+UPDATE country SET timezoneid='163' where id='18';
+UPDATE country SET timezoneid='44' where id='181';
+UPDATE country SET timezoneid='266' where id='182';
+UPDATE country SET timezoneid='17' where id='183';
+UPDATE country SET timezoneid='164' where id='184';
+UPDATE country SET timezoneid='23' where id='185';	
+UPDATE country SET timezoneid='72' where id='186';
+UPDATE country SET timezoneid='210' where id='187';
+UPDATE country SET timezoneid='23' where id='188';	
+UPDATE country SET timezoneid='225' where id='189';
+UPDATE country SET timezoneid='186' where id='190';
+
+UPDATE country SET timezoneid='217' where id='19';
+UPDATE country SET timezoneid='212' where id='191';
+UPDATE country SET timezoneid='172' where id='192';
+UPDATE country SET timezoneid='1' where id='193';
+UPDATE country SET timezoneid='1' where id='194';
+UPDATE country SET timezoneid='146' where id='195';
+UPDATE country SET timezoneid='119' where id='196';
+UPDATE country SET timezoneid='211' where id='197';
+UPDATE country SET timezoneid='125' where id='198';
+UPDATE country SET timezoneid='112' where id='199';
+UPDATE country SET timezoneid='223' where id='200';
+
+UPDATE country SET timezoneid='23' where id='2';	
+UPDATE country SET timezoneid='46' where id='20';
+UPDATE country SET timezoneid='218' where id='201';
+UPDATE country SET timezoneid='114' where id='202';
+UPDATE country SET timezoneid='268' where id='203';
+UPDATE country SET timezoneid='146' where id='204';
+UPDATE country SET timezoneid='146' where id='205';
+UPDATE country SET timezoneid='291' where id='206';
+UPDATE country SET timezoneid='203' where id='207';
+UPDATE country SET timezoneid='171' where id='208';
+UPDATE country SET timezoneid='101' where id='209';
+UPDATE country SET timezoneid='23' where id='210';	
+
+UPDATE country SET timezoneid='208' where id='21';
+UPDATE country SET timezoneid='212' where id='211';
+UPDATE country SET timezoneid='153' where id='212';
+UPDATE country SET timezoneid='105' where id='213';
+UPDATE country SET timezoneid='124' where id='214';
+UPDATE country SET timezoneid='76' where id='215';
+UPDATE country SET timezoneid='77' where id='216';
+UPDATE country SET timezoneid='84' where id='217';
+UPDATE country SET timezoneid='79' where id='218';
+UPDATE country SET timezoneid='168' where id='219';
+UPDATE country SET timezoneid='85' where id='220';
+
+UPDATE country SET timezoneid='243' where id='22';
+UPDATE country SET timezoneid='158' where id='221';
+UPDATE country SET timezoneid='177' where id='222';
+UPDATE country SET timezoneid='160' where id='223';
+UPDATE country SET timezoneid='158' where id='224';
+UPDATE country SET timezoneid='181' where id='225';
+UPDATE country SET timezoneid='269' where id='226';
+UPDATE country SET timezoneid='244' where id='227';
+UPDATE country SET timezoneid='199' where id='228';
+UPDATE country SET timezoneid='250' where id='229';
+UPDATE country SET timezoneid='115' where id='230';
+
+UPDATE country SET timezoneid='56' where id='23';
+UPDATE country SET timezoneid='6' where id='231';
+UPDATE country SET timezoneid='308' where id='232';
+UPDATE country SET timezoneid='70' where id='233';
+UPDATE country SET timezoneid='142' where id='234';
+UPDATE country SET timezoneid='189' where id='235';
+UPDATE country SET timezoneid='229' where id='236';
+UPDATE country SET timezoneid='47' where id='237';
+UPDATE country SET timezoneid='300' where id='238';
+UPDATE country SET timezoneid='201' where id='239';
+UPDATE country SET timezoneid='212' where id='240';
+
+UPDATE country SET timezoneid='148' where id='24';
+UPDATE country SET timezoneid='23' where id='241';	
+UPDATE country SET timezoneid='218' where id='242';
+UPDATE country SET timezoneid='128' where id='243';
+UPDATE country SET timezoneid='23' where id='244';
+UPDATE country SET timezoneid='23' where id='245';
+UPDATE country SET timezoneid='95' where id='246';
+
+UPDATE country SET timezoneid='25' where id='25';
+UPDATE country SET timezoneid='232' where id='251';
+UPDATE country SET timezoneid='293' where id='252';
+UPDATE country SET timezoneid='159' where id='253';
+UPDATE country SET timezoneid='51' where id='254';
+UPDATE country SET timezoneid='255' where id='255';
+UPDATE country SET timezoneid='84' where id='256';
+UPDATE country SET timezoneid='305' where id='257';
+UPDATE country SET timezoneid='128' where id='258';
+UPDATE country SET timezoneid='306' where id='259';
+UPDATE country SET timezoneid='115' where id='260';
+
+UPDATE country SET timezoneid='141' where id='26';
+UPDATE country SET timezoneid='207' where id='261';
+UPDATE country SET timezoneid='146' where id='262';
+UPDATE country SET timezoneid='130' where id='263';
+UPDATE country SET timezoneid='174' where id='264';
+UPDATE country SET timezoneid='170' where id='265';
+UPDATE country SET timezoneid='183' where id='266';
+UPDATE country SET timezoneid='112' where id='267';
+
+UPDATE country SET timezoneid='83' where id='27';
+UPDATE country SET timezoneid='105' where id='28';
+UPDATE country SET timezoneid='66' where id='29';
+UPDATE country SET timezoneid='158' where id='30';
+
+UPDATE country SET timezoneid='226' where id='3';
+UPDATE country SET timezoneid='169' where id='31';
+UPDATE country SET timezoneid='125' where id='32';
+UPDATE country SET timezoneid='98' where id='33';
+UPDATE country SET timezoneid='246' where id='34';
+UPDATE country SET timezoneid='259' where id='35';
+UPDATE country SET timezoneid='194' where id='36';
+UPDATE country SET timezoneid='125' where id='37';
+UPDATE country SET timezoneid='167' where id='38';
+UPDATE country SET timezoneid='192' where id='39';
+UPDATE country SET timezoneid='164' where id='40';
+
+UPDATE country SET timezoneid='218' where id='4';
+UPDATE country SET timezoneid='23' where id='41';	
+UPDATE country SET timezoneid='26' where id='42';
+UPDATE country SET timezoneid='47' where id='43';
+UPDATE country SET timezoneid='47' where id='44';
+UPDATE country SET timezoneid='130' where id='45';
+UPDATE country SET timezoneid='139' where id='46';
+UPDATE country SET timezoneid='74' where id='47';
+UPDATE country SET timezoneid='267' where id='48';
+UPDATE country SET timezoneid='257' where id='49';
+UPDATE country SET timezoneid='248' where id='50';
+
+UPDATE country SET timezoneid='218' where id='5';
+UPDATE country SET timezoneid='37' where id='51';
+UPDATE country SET timezoneid='214' where id='53';
+UPDATE country SET timezoneid='134' where id='54';
+UPDATE country SET timezoneid='7' where id='55';
+UPDATE country SET timezoneid='27' where id='56';
+UPDATE country SET timezoneid='146' where id='57';
+UPDATE country SET timezoneid='92' where id='58';
+UPDATE country SET timezoneid='184' where id='59';
+UPDATE country SET timezoneid='158' where id='60';
+
+UPDATE country SET timezoneid='161' where id='6';
+UPDATE country SET timezoneid='150' where id='61';
+UPDATE country SET timezoneid='200' where id='62';
+UPDATE country SET timezoneid='61' where id='63';
+UPDATE country SET timezoneid='75' where id='64';
+UPDATE country SET timezoneid='218' where id='65';
+UPDATE country SET timezoneid='273' where id='66';
+UPDATE country SET timezoneid='138' where id='67';
+UPDATE country SET timezoneid='168' where id='68';
+UPDATE country SET timezoneid='28' where id='69';
+UPDATE country SET timezoneid='128' where id='70';
+
+UPDATE country SET timezoneid='125' where id='7';
+UPDATE country SET timezoneid='137' where id='71';
+UPDATE country SET timezoneid='198' where id='72';
+UPDATE country SET timezoneid='212' where id='73';
+UPDATE country SET timezoneid='197' where id='74';
+UPDATE country SET timezoneid='125' where id='75';
+UPDATE country SET timezoneid='84' where id='76';
+UPDATE country SET timezoneid='299' where id='77';
+UPDATE country SET timezoneid='188' where id='78';
+UPDATE country SET timezoneid='157' where id='79';
+UPDATE country SET timezoneid='102' where id='80';
+
+UPDATE country SET timezoneid='145' where id='8';
+UPDATE country SET timezoneid='7' where id='81';
+UPDATE country SET timezoneid='144' where id='82';
+UPDATE country SET timezoneid='218' where id='83';
+UPDATE country SET timezoneid='136' where id='84';
+UPDATE country SET timezoneid='108' where id='85';
+UPDATE country SET timezoneid='220' where id='86';
+UPDATE country SET timezoneid='147' where id='87';
+UPDATE country SET timezoneid='106' where id='88';
+UPDATE country SET timezoneid='151' where id='89';
+UPDATE country SET timezoneid='185' where id='90';
+
+UPDATE country SET timezoneid='137' where id='9';
+UPDATE country SET timezoneid='99' where id='91';
+UPDATE country SET timezoneid='62' where id='92';
+UPDATE country SET timezoneid='63' where id='93';
+UPDATE country SET timezoneid='286' where id='94';
+UPDATE country SET timezoneid='29' where id='95';
+UPDATE country SET timezoneid='111' where id='96';
+UPDATE country SET timezoneid='109' where id='97';
+UPDATE country SET timezoneid='87' where id='98';
+UPDATE country SET timezoneid='49' where id='99';
+UPDATE country SET timezoneid='102' where id='999';
+
+#mayur Pawar 12 July 2015
+ALTER TABLE `extracompanypreferences` ADD COLUMN `activatefromdateToDate`  char(1) NULL DEFAULT 'F';
+
+#Anand Thakur 13th July 2015
+
+delete from default_header where id='3e1562cb8-5db9-43c6-bc35-25c79f1bdf9f' and module='2';
+delete from default_header where id='b9728c48-c912-4397-9680-6bcbdd58b14a' and module='2';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('13a21e94-8911-4d84-98d4-832fc7e33ea0','Billing Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address Mobile No','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('bda1e149-c297-40bb-a067-90309b86323b','Shipping Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address Mobile No','1','2');
+
+#shashi Nandan kumar 13th July 2015
+insert into audit_group values('47','Cheque'); 
+insert into audit_action values('189','Cheque Layout Updated','45');
+insert into reportmaster values ('Product_Replacement_Report','Product Replacement Report','View Product Replacement Report','callProductReplacementReport()','Lease Management');
+insert into reportmaster values ('Product_Maintenance_Report','Product Maintenance Report','View Product Maintenance Report','callProductMaintenanceReport()','Lease Management');
+
+#Neeraj Dwivedi 13th July2015
+# Billing Address for Delivery Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f2c7a-292e-11e5-b345-feff819cdc9f','Billing Address','billingshippingaddresses','billingshippingaddresses','id','billingaddress','Billing Address','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f3008-292e-11e5-b345-feff819cdc9f','Billing Address City','billingshippingaddresses','billingshippingaddresses','id','billingcity','Billing Address City','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f31de-292e-11e5-b345-feff819cdc9f','Billing Address State','billingshippingaddresses','billingshippingaddresses','id','billingstate','Billing Address State','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f338c-292e-11e5-b345-feff819cdc9f','Billing Address Country','billingshippingaddresses','billingshippingaddresses','id','billingcountry','Billing Address Country','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f3864-292e-11e5-b345-feff819cdc9f','Billing Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','billingpostal','Billing Address Postal Code','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f3a1c-292e-11e5-b345-feff819cdc9f','Billing Address Email','billingshippingaddresses','billingshippingaddresses','id','billingemail','Billing Address Email','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f3ba2-292e-11e5-b345-feff819cdc9f','Billing Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','billingmobile','Billing Address MobileNo','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f3d28-292e-11e5-b345-feff819cdc9f','Billing Address Fax','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f3eb8-292e-11e5-b345-feff819cdc9f','Billing Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f42fa-292e-11e5-b345-feff819cdc9f','Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f44a8-292e-11e5-b345-feff819cdc9f','Billing Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','billingcontactpersonnumber','Billing Address ContactPersonNo','1','27');
+
+# Shipping Address for Delivery Order
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f4638-292e-11e5-b345-feff819cdc9f','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f4822-292e-11e5-b345-feff819cdc9f','Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f49c6-292e-11e5-b345-feff819cdc9f','Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f4b56-292e-11e5-b345-feff819cdc9f','Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f4cdc-292e-11e5-b345-feff819cdc9f','Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f513c-292e-11e5-b345-feff819cdc9f','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f52e0-292e-11e5-b345-feff819cdc9f','Shipping Address MobileNo','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address MobileNo','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f5466-292e-11e5-b345-feff819cdc9f','Shipping Address Fax','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f55f6-292e-11e5-b345-feff819cdc9f','Shipping Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f577c-292e-11e5-b345-feff819cdc9f','Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','27');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('557f5be6-292e-11e5-b345-feff819cdc9f','Shipping Address ContactPersonNo','billingshippingaddresses','billingshippingaddresses','id','shippingcontactpersonnumber','Shipping Address ContactPersonNo','1','27');
+
+#Sumit kumar jain 15th july 2015(Product import & Export)
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("d95c1758-2a02-11e5-b729-c03fd5657f27","30","WIP Offset P&L A/c","WIPOffset",0,0,'F','F',null,null,null,null,null,"wipoffset",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("6ba98049-2a06-11e5-b729-c03fd5657f27","30","Inventory Offset P&L A/c","InventoryOffset",0,0,'F','F',null,null,null,null,null,"inventoryoffset",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("f14d1762-2a06-11e5-b729-c03fd5657f27","30","HS Code","HSCode",0,0,'F','F',null,null,null,null,null,"hscode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("58bfd77b-2a07-11e5-b729-c03fd5657f27","30","Additional Free Text","AdditionalFreeText",0,0,'F','F',null,null,null,null,null,"additionalfreetext",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("22077929-2a08-11e5-b729-c03fd5657f27","30","Item Color","ItemColor",0,0,'F','F',null,null,null,null,null,"itemcolor",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("e4f668ed-2a08-11e5-b729-c03fd5657f27","30","Alternative Products","AlternateProduct",0,0,'F','F',null,null,null,null,null,"alternateproduct",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("57171403-2a09-11e5-b729-c03fd5657f27","30","Purchase Manufacturing","PurchaseMfg",0,0,'F','F',null,null,null,null,null,"purchasemfg",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("a31b79ac-2a09-11e5-b729-c03fd5657f27","30","catalog No","CatalogNo",0,0,'F','F',null,null,null,null,null,"catalogno",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("4bbe9865-2a22-11e5-b692-c03fd5657f27","30","Bar code","Barcode",0,0,'F','F',null,null,null,null,null,"barcode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("5b7958e9-2a22-11e5-b692-c03fd5657f27","30","Additional Description","AdditionalDesc",0,0,'F','F',null,null,null,null,null,"additionaldesc",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("64100058-2a22-11e5-b692-c03fd5657f27","30","Description in foreign language","DescInForeign",0,0,'F','F',null,null,null,null,null,"descinforeign",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("6c147909-2a22-11e5-b692-c03fd5657f27","30","License Code","LicenseCode",0,0,'F','F',null,null,null,null,null,"licensecode",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("746d52dc-2a22-11e5-b692-c03fd5657f27","30","Item Group/ Subgroup","ItemGroup",0,0,'F','F',null,null,null,null,null,"itemgroup",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("79583bbe-2a22-11e5-b692-c03fd5657f27","30","Price List","PriceList",0,0,'F','F',null,null,null,null,null,"pricelist",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("800e633b-2a22-11e5-b692-c03fd5657f27","30","Shipping type","ShippingType",0,0,'F','F',null,null,null,null,null,"shippingtype",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("85ee2877-2a22-11e5-b692-c03fd5657f27","30","Is Recyclable","Recyclable",0,0,'F','F',null,null,null,'boolean',null,"recyclable",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("8b804920-2a22-11e5-b692-c03fd5657f27","30","QA Approval Flow","Qaenable",0,0,'F','F',null,null,null,'boolean',null,"qaenable",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("908d8d8b-2a22-11e5-b692-c03fd5657f27","30","Is Knitting Item","IsKnittingItem",0,0,'F','F',null,null,null,'boolean',null,"isknittingitem",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("963a6a32-2a22-11e5-b692-c03fd5657f27","30","Is Active","IsActive",0,0,'F','F',null,null,null,'boolean',null,"isactive",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("9af1ee85-2a22-11e5-b692-c03fd5657f27","30","Block Loose Sell","blockLooseSell",0,0,'F','F',null,null,null,'boolean',null,"blockloosesell",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("a10e8e96-2a22-11e5-b692-c03fd5657f27","30","item Sales Volume","ItemSalesVolume",0,0,'F','F',null,null,null,'double',null,"itemsalesvolume",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("a7d550fc-2a22-11e5-b692-c03fd5657f27","30","product weight","Productweight",0,0,'F','F',null,null,null,'double',null,"productweight",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("af03715e-2a22-11e5-b692-c03fd5657f27","30","Item Sales Width","ItemSalesWidth",0,0,'F','F',null,null,null,'double',null,"itemsaleswidth",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("b512de19-2a22-11e5-b692-c03fd5657f27","30","Item Sales Height","ItemSalesHeight",0,0,'F','F',null,null,null,'double',null,"itemsalesheight",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("b9a7fdd6-2a22-11e5-b692-c03fd5657f27","30","Item Width","ItemWidth",0,0,'F','F',null,null,null,'double',null,"itemwidth",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("c52b6dc9-2a22-11e5-b692-c03fd5657f27","30","Item Volume","ItemVolume",0,0,'F','F',null,null,null,'double',null,"itemvolume",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("c9d56806-2a22-11e5-b692-c03fd5657f27","30","Item Purchase Width","ItemPurchaseWidth",0,0,'F','F',null,null,null,'double',null,"itempurchasewidth",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("a31b79ac-2a09-11e5-b729-c03fd5657f27","30","Item Purchase Volume","ItemPurchaseVolume",0,0,'F','F',null,null,null,'double',null,"itempurchasevolume",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("d0b69983-2a22-11e5-b692-c03fd5657f27","30","item Purchase Length","ItemPurchaseLength",0,0,'F','F',null,null,null,'double',null,"itempurchaselength",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("d63415ce-2a22-11e5-b692-c03fd5657f27","30","QA Lead Time(in days)","QALeadTimeInDays",0,0,'F','F',null,null,null,'integer',null,"qaleadtimeindays",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("dcb62eef-2a22-11e5-b692-c03fd5657f27","30","Re-usability Count","ReusabilityCount",0,0,'F','F',null,null,null,'integer',null,"reusabilitycount",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("32d75a34-2a2b-11e5-b692-c03fd5657f27","30","Ordering UOM","OrderingUOM",0,0,'F','F',"UnitOfMeasure","name","ID","ref",null,"orderinguom",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("3d5461d9-2a2b-11e5-b692-c03fd5657f27","30","Transfer UOM","TransferUOM",0,0,'F','F',"UnitOfMeasure","name","ID","ref",null,"transferuom",null);
+
+#Raveesh Pathak 16th July 2015
+ALTER TABLE billingshippingaddresses MODIFY billingaddress VARCHAR(2048) DEFAULT "";
+ALTER TABLE billingshippingaddresses MODIFY shippingaddress VARCHAR(2048) DEFAULT "";
+ALTER TABLE customeraddressdetails MODIFY address VARCHAR(2048) DEFAULT "";
+ALTER TABLE vendoraddressdetails MODIFY address VARCHAR(2048) DEFAULT "";
+
+# Sagar M 16th July
+
+alter table customdesigntemplate add column isnewdesign SMALLINT(6) NOT NULL default 0;
+
+#Raj Shah 17th July 2015
+UPDATE in_interstoretransfer  SET remark ="Stock Returned" where remark = "Stock Return";
+
+#Sayed Kausar Ali 17th July 2015
+
+CREATE TABLE `globalheaderfooter` (
+  `id` varchar(40) NOT NULL,
+  `companyid` varchar(255) DEFAULT NULL,
+  `html` longtext,
+  `json` longtext,
+  `isheader` INT(1),
+  PRIMARY KEY (`id`),
+  KEY `company` (`companyid`),
+  CONSTRAINT `globalheaderfooter_ibfk_1` FOREIGN KEY (`companyid`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Amol Dhokale 20th July 2015
+CREATE TABLE `gldescriptionconfig` (
+`id`  VARCHAR(255) NOT NULL ,
+`moduleid`  INT(11),
+`field`  VARCHAR(255)  ,
+`document`  INT(11),
+`jsondata`  LONGTEXT,
+`company`  VARCHAR(255) , 
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Nikhil Kshirsagar 20th July 2015   
+CREATE TABLE `stockcustomdata` (
+  `stockId` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,  `col2` varchar(255) default NULL,  `col3` varchar(255) default NULL,  `col4` varchar(255) default NULL,  `col5` varchar(255) default NULL,  `col6` varchar(255) default NULL,  `col7` varchar(255) default NULL,  `col8` varchar(255) default NULL,  `col9` varchar(255) default NULL,  `col10` varchar(255) default NULL,  `col101` varchar(255) default NULL,  `col102` varchar(255) default NULL,  `col103` varchar(255) default NULL,  `col104` varchar(255) default NULL,  `col105` varchar(255) default NULL,  `col106` varchar(255) default NULL,  `col107` varchar(255) default NULL,  `col108` varchar(255) default NULL,  `col109` varchar(255) default NULL,  `col110` varchar(255) default NULL,  `col1001` longtext,  `col1002` longtext,  `col1003` longtext,  `col1004` longtext,  `col1005` longtext,  `col1006` longtext,  `col1007` longtext,  `col1008` longtext,  `col1009` longtext,  `col1010` longtext,  `col1011` longtext,  `col1012` longtext,  `col1013` longtext,  `col1014` longtext,  `col1015` longtext,  `col1016` longtext,  `col1017` longtext,  `col1018` longtext,  `col1019` longtext,  `col1020` longtext,  `col1021` longtext,  `col1022` longtext,  `col1023` longtext,  `col1024` longtext,  `col1025` longtext,  `col1026` longtext,  `col1027` longtext,  `col1028` longtext,  `col1029` longtext,  `col1030` longtext,  `col1031` longtext,  `col1032` longtext,  `col1033` longtext,  `col1034` longtext,  `col1035` longtext,  `col1036` varchar(255) default 'false',  `col1037` varchar(255) default 'false',  `col1038` varchar(255) default 'false',  `col1039` varchar(255) default 'false',  `col1040` varchar(255) default 'false',  `col1041` varchar(255) default 'false',  `col1042` varchar(255) default 'false',  `col1043` varchar(255) default 'false',  `col1044` varchar(255) default 'false',  `col1045` varchar(255) default 'false',  
+  `company` varchar(255) default NULL,  `deleted` char(1) default 'F',  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,  `col112` varchar(255) default NULL,  `col113` varchar(255) default NULL,  `col114` varchar(255) default NULL,  `col115` varchar(255) default NULL,  `col11` varchar(255) default NULL,  `col12` varchar(255) default NULL,  `col13` varchar(255) default NULL,  `col14` varchar(255) default NULL,  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`stockId`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+ALTER TABLE `in_stock`ADD COLUMN `accstockcustomdataref`  varchar(40) NULL DEFAULT NULL;
+
+# Vivek Pakmode 21th July 2015
+alter table extracompanypreferences 
+add column `showallaccountsinpnl` char(1) default 'F';
+
+# Sumit Jain 21th July 2015
+UPDATE default_header set defaultHeader ='Product Description' where module='91' AND id='852ecbec-fa3a-11e4-b89f-c03fd5ab06a3';
+
+# Deepak Singh 21th July 2015(Before its Only 57 entry was present in exportcompanypref)
+
+#-------------------Update Settings-----------------------
+
+INSERT INTO  exportcompanypref  VALUES("59","Show Update setting-Customer Update ","showcustomerupdate","isShowCustomerUpdateFlag","F","showCustomerUpdate",'F',"showCustomerUpdate","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("60","Show Update setting-Vendor Update ","showVendorUpdate","isShowVendorUpdateFlag","F","showCustomerUpdate",'F',"showVendorUpdate","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("61","Show Update setting-Product Update ","showProductUpdate","isShowProductUpdateFlag","F","showCustomerUpdate",'F',"showProductUpdate","boolean",null,null,null);
+
+
+#---------------Other Settings---------------------
+
+INSERT INTO  exportcompanypref  VALUES("58","Other Settings-Activate Masters Management","mastermanagementflag","isMasterManagementFlag","F","masterManagementFlag",'F',"masterManagementFlag","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("62","Other Settings-Show All Accounts in GL ","showAllAccountInGl","getShowAllAccountInGl","F","showAllAccountInGl",'F',"showAllAccountInGl","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("63","Other Settings-Activate Block spot Rate ","activateToBlockSpotRate","isActivateToBlockSpotRate","F","activateToBlockSpotRate",'F',"activateToBlockSpotRate","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("64","Other Settings-Activate Import Option For Journal Entry ","activateimportForJE","isActivateimportForJE","F","activateimportForJE",'F',"activateimportForJE","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("65","Other Settings-Activate Profit Margin for SO and CQ ","activateProfitMargin","isActivateProfitMargin","F","activateProfitMargin",'F',"activateProfitMargin","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("67","Other Settings-Retain Exchange Rate on Bill Date Change ","retainexchangerate","isRetainExchangeRate","F","retainExchangeRate",'F',"retainExchangeRate","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("68","Other Settings-Activate Price Configuration Alert ","priceconfigurationalert","isPriceConfigurationAlert","F","priceConfigurationAlert",'F',"priceConfigurationAlert","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("69","Other Settings-Activate Delivery Planner ","deliveryplanner","isDeliveryPlanner","F","deliveryPlanner",'F',"deliveryPlanner","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("70","Other Settings-Alert for Min/Max Ordering Quantity ","minmaxorderingflag","isMinMaxOrdering","F","isMinMaxOrdering",'F',"isMinMaxOrdering","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("71","Other Settings-Alert if Customer has any Outstanding Invoice ","outstandinginvoiceforcustomerflag","isOutstandingInvoiceForCustomer","F","isOutstandingInvoiceForCustomer",'F',"isOutstandingInvoiceForCustomer","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("72","Other Settings-Alert if Sales Order is already created for Customer ","salesordercreatedforcustomerflag","isSalesOrderCreatedForCustomer","F","isSalesOrderCreatedForCustomer",'F',"isSalesOrderCreatedForCustomer","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("73","Other Settings-Activate Versioning in Customer Quotation ","versionslist","isVersionslist","F","versionslist",'F',"versionslist","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("74","Other Settings-Activate Pick And Pack Functionality in DO Report ","packingdolist","isPackingdolist","F","packingdolist",'F',"packingdolist","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("75","Other Settings-Activate Sales Contract Management ","activatesalescontrcatmanagement","isActivateSalesContrcatManagement","F","activateSalesContrcatManagement",'F',"activateSalesContrcatManagement","boolean",null,null,null);
+
+
+
+INSERT INTO  exportcompanypref  VALUES("76","Other Settings-Activate IBG ","activateibg","isActivateIBG","F","activateIBG",'F',"activateIBG","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("77","Other Settings-Activate Product Pricing List on Bands ","productpricingonbands","isProductPricingOnBands","F","productPricingOnBands",'F',"productPricingOnBands","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("78","Other Settings-Product Price In Multiple Currency ","productpriceinmultiplecurrency","isProductPriceinMultipleCurrency","F","productPriceinMultipleCurrency",'F',"productPriceinMultipleCurrency","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("79","Other Settings-Show All Accounts in Balance Sheet ","showallaccountsinbs","isShowallaccountsinbs","F","showallaccountsinbs",'F',"showallaccountsinbs","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("80","Other Settings-Activate Product Composition Functionality For Product  ","activateproductcomposition","isActivateProductComposition","F","activateProductComposition",'F',"activateProductComposition","boolean",null,null,null);
+
+
+
+INSERT INTO  exportcompanypref  VALUES("81","Other Settings-Activate Serial No  ","isSerialCompulsory","isIsSerialCompulsory","T","isSerialCompulsory",'F',"isSerialCompulsory","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("82","Other Settings-Activate Batches  ","isBatchCompulsory","isIsBatchCompulsory","T","isBatchCompulsory",'F',"isBatchCompulsory","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("83","Other Settings-Activate Bin  ","isbincompulsory","isIsbincompulsory","T","isBinCompulsory",'F',"isBinCompulsory","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("84","Other Settings-Activate Rack ","israckcompulsory","isIsrackcompulsory","T","isRackCompulsory",'F',"isRackCompulsory","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("85","Other Settings-Activate Row ","isrowcompulsory","isIsrowcompulsory","T","isRowCompulsory",'F',"isRowCompulsory","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("86","Other Settings-Activate Warehouse ","iswarehousecompulsory","isIswarehousecompulsory","T","isWarehouseCompulsory",'F',"isWarehouseCompulsory","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("87","Other Settings-Activate Location ","islocationcompulsory","isIslocationcompulsory","T","isLocationCompulsory",'F',"isLocationCompulsory","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("88","Other Settings-Show alert if Memo is missing ","memo","isMemo","T","memo",'F',"memo","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("89","Other Settings-Activate Miscellaneous Management ","miscellaneousmanagementflag","isMiscellaneousManagementFlag","F","miscellaneousManagementFlag",'F',"miscellaneousManagementFlag","boolean",null,null,null);
+
+
+
+INSERT INTO  exportcompanypref  VALUES("90","Other Settings-Activate Statutory Management ","statutorymanagementflag","isStatutoryManagementFlag","F","statutoryManagementFlag",'F',"statutoryManagementFlag","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("91","Other Settings-Activate Lease Management ","leasemanagementflag","isLeaseManagementFlag","F","leaseManagementFlag",'F',"leaseManagementFlag","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("92","Other Settings-Activate Assets Management ","assetmanagementflag","isAssetManagementFlag","F","assetManagementFlag",'F',"assetManagementFlag","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("93","Other Settings-Activate Accounts Payable - Purchases Management ","accountpayablemanagementflag","isAccountpayableManagementFlag","F","accountpayableManagementFlag",'F',"accountpayableManagementFlag","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("94","Other Settings-Activate Accounts Receivable - Sales Management ","accountsreceivablesalesflag","isAccountsreceivablesalesFlag","F","accountsreceivablesalesFlag",'F',"accountsreceivablesalesFlag","boolean",null,null,null);
+
+
+INSERT INTO  exportcompanypref  VALUES("95","Other Settings-Activate General Ledger/Cash/Bank Management ","generalledgermanagementflag","isGeneralledgerManagementFlag","F","generalledgerManagementFlag",'F',"generalledgerManagementFlag","boolean",null,null,null);
+
+#Mohammed Uzair Momin 22nd July 2015
+#[Olympus] Client specific query for updating file name to import Customer Shipping data
+update olympus_importscriptinfo set filepath='/home/krawler/olympusfiles/CustomerMaster-SH_Explaination.xls' where id='CUSTOMERSHIPPINGMASTER' and subdomain='olympus2';
+
+#Neeraj Dwivedi 22July 2015
+#Updating & Deleting Duplicate Fields  in DocumentDesigner
+##Invoice
+delete from default_header where defaultHeader="Company UEN" and isdocumentimport="F"; 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('f27470ec-306f-11e5-a151-feff819cdc9f','Company UEN','companyuen','compaccpreferences','','','Company UEN','1','43','F');
+
+#GST Number
+
+delete from default_header where defaultHeader="GST Number" and isdocumentimport="F"; 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('ec9edb12-306f-11e5-a151-feff819cdc9f','GST Number','gstnumber','compaccpreferences','','','Company GST Number','1','43','F');
+
+#Currency
+delete from default_header where defaultHeader="Currency" and isdocumentimport="F" and module=2; 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('e5ee084c-306f-11e5-a151-feff819cdc9f','Currency','currency','currency','currencyid','name','Currency','1','2','F');
+
+#FOB
+delete from default_header where defaultHeader="FOB" and isdocumentimport="F" and module=2;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('e18c79fa-306f-11e5-a151-feff819cdc9f','FOB','fob','invoice','','','FOB','1','2','F');
+
+#Post Text
+delete from default_header where defaultHeader="Post Text" and isdocumentimport="F" and module=2;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('dd110c7e-306f-11e5-a151-feff819cdc9f','Post Text','posttext','invoice','','','Post Text','1','2','F'); 
+
+#Shipping Address
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=2;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('d858d180-306f-11e5-a151-feff819cdc9f','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','2','F');
+
+##Purchase Order
+# Billing Address Fax No
+delete from default_header where defaultHeader="Billing Address Fax No" and isdocumentimport="F" and module=18; 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('d2df26f0-306f-11e5-a151-feff819cdc9f','Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','18','F');
+
+#Billing Address Phone No
+delete from default_header where defaultHeader="Billing Address Phone No" and isdocumentimport="F" and module=18; 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('cd3b0d22-306f-11e5-a151-feff819cdc9f','Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','18','F');
+
+#Debit Term
+delete from default_header where defaultHeader="Debit Term" and isdocumentimport="F" and module=18; 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('c8d7103c-306f-11e5-a151-feff819cdc9f','Debit Term','term','creditterm','termid','termdays','Debit Term','1','18','F');
+
+#Shipping Address
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=18;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('c4dfc4ce-306f-11e5-a151-feff819cdc9f','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','18','F');
+
+#Agent
+delete from default_header where defaultHeader="Agent" and isdocumentimport="F" and module=18;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('bfea185c-306f-11e5-a151-feff819cdc9f','Agent','masteragent','masteritem','id','value','Agent','1','18','F');
+
+##SalesOrder
+#Shipping Address
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=20;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('bae3f45e-306f-11e5-a151-feff819cdc9f','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','20','F');
+
+#Due Date
+delete from default_header where defaultHeader="Due Date" and isdocumentimport="F" and module=20;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('b69ddf04-306f-11e5-a151-feff819cdc9f','Due Date','duedate','salesorder','','','Due Date','3','20','F');
+
+##Vendor Quotation
+#Post Text
+delete from default_header where defaultHeader="Post Text" and isdocumentimport="F" and module=23;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('afd86bda-306f-11e5-a151-feff819cdc9f','Post Text','posttext','vendorquotation','','','Post Text','1','23','F');
+
+#Shipping Address
+
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=23;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('a9015664-306f-11e5-a151-feff819cdc9f','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','23','F');
+
+##Customer Quotation
+#Post Text
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=22;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('a3da48e4-306f-11e5-a151-feff819cdc9f','Post Text','posttext','quotation','','','Post Text','1','22','F');
+
+#Shipping Address
+
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=22;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('9f01222a-306f-11e5-a151-feff819cdc9ff','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','22','F');
+
+#Credit Term(Field already present in code)
+delete from default_header where defaultHeader="Credit Term" and isdocumentimport="F" and module=22;
+
+##Vendor Invoice
+#Shipping Address
+delete from default_header where defaultHeader="Shipping Address" and isdocumentimport="F" and module=6;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('9a03f2de-306f-11e5-a151-feff819cdc9f','Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','6','F');
+
+#Deepak singh 22nd July 2015
+#----------------------------Document Mail  Settings------------------------------------
+
+INSERT INTO  exportcompanypref  VALUES("100","Document Mail Settings-Send Mail when Sales Invoice/Cash Sales Generated ","cigenerationmail","isCiGenerationMail","F","ciGenerationMail",'F',"cigenerationmail","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("101","Document Mail Settings-Send Mail when Sales Invoice/Cash Sales Edited ","ciupdationmail","isCiUpdationMail","F","ciUpdationMail",'F',"ciupdationmail","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("102","Document Mail Settings-Send Mail when Purchase Invoice/Cash Purchase Generated ","vigenerationmail","isViGenerationMail","F","viGenerationMail",'F',"vigenerationmail","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("103","Document Mail Settings-Send Mail when Purchase Invoice/Cash Purchase Generated ","viupdationmail","isViUpdationMail","F","viUpdationMail",'F',"viupdationmail","boolean",null,null,null);
+
+#--------------------consignment Stock Setting------------------------
+
+INSERT INTO  exportcompanypref  VALUES("104","Consignment Stock Settings-Activate Consignment Sales Management ","consignmentSalesManagementFlag","isConsignmentSalesManagementFlag","F","consignmentSalesManagementFlag",'F',"consignmentSalesManagementFlag","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("105","Consignment Stock Settings-Activate Consignment Purchase Management ","consignmentPurchaseManagementFlag","isConsignmentPurchaseManagementFlag","F","consignmentPurchaseManagementFlag",'F',"consignmentPurchaseManagementFlag","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("106","Consignment Stock Settings-Activate From Date And To Date for Consignment Request ","activatefromdateToDate","isActivatefromdateToDate","F","activatefromdateToDate",'F',"activatefromdateToDate","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("108","Consignment Stock Settings-Activate QA Inspection Flow ","activateqaapprovalflowflag","isActivateQAApprovalFlow","F","activateQAApprovalFlow",'F',"activateQAApprovalFlow","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("109","Consignment Stock Settings-Default Customer Warehouse ","defaultwarehouse","getDefaultWarehouse","F","defaultWarehouse",'F',"defaultWarehouse","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("110","Consignment Stock Settings-Close Consignment Delivery Order
+ ","doclosedstatus","isDoClosedStatus","F","closedStatusforDo",'F',"doClosedStatus","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("111","Consignment Stock Settings-Movement Type and Warehouse Mapping
+ ","movementwarehousemappingflag","isMovementWarehouseMapping","F","isMovementWarehouseMapping",'F',"isMovementWarehouseMapping","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("112","Consignment Stock Settings-Allow user to raise consignment request even if item is not available
+","activateCRblockingWithoutStock","isActivateCRblockingWithoutStock","F","activateCRblockingWithoutStock",'F',"activateCRblockingWithoutStock","boolean",null,null,null);
+
+#----------------------------Default Mail Sender Setting-------------------------------
+
+INSERT INTO  exportcompanypref  VALUES("107","Default Mail Sender Settings ","defaultmailsenderFlag","getDefaultmailsenderFlag","F","defaultmailsenderFlag",'F',"defaultmailsenderFlag","int",null,null,null);
+
+
+#Pandurang 23 July 2015
+alter table salesorder add freezeflag char(1) DEFAULT 'F';
+
+#Deepak singh 23 July 2015
+#--------------------------Generate Barcode Setting--------------------------
+INSERT INTO  exportcompanypref  VALUES("113","Generate Barcode Setting-Barcode Type ","barcodetype","getBarcodetype","F","barcodetype",'F',"barcodetype","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("114","Generate Barcode Setting-Activate Generate Barcode Functionality ","generatebarcodeparm","isGenerateBarcodeParm","F","generateBarcodeParm",'F',"generateBarcodeParm","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("115","Generate Barcode Setting-DPI(in mm) ","barcodedpi","getBarcodeDPI","F","barcodeDPI",'F',"barcodeDpi","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("116","Generate Barcode Setting-Height(in mm) ","barcodeheight","getBarcodeHeight","F","barcodeHeight",'F',"barcodeHeight","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("117","Generate Barcode Setting-Barcode Top Margin ","barcdtopmargin","getBarcdTopMargin","F","barcdTopMargin",'F',"barcdTopMargin","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("118","Generate Barcode Setting-Barcode Left Margin ","barcdleftmargin","getBarcdLeftMargin","F","barcdLeftMargin",'F',"barcdLeftMargin","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("119","Generate Barcode Setting-Barcode Label Height(in mm) ","barcdlabelheight","getBarcdLabelHeight","F","barcdLabelHeight",'F',"barcdLabelHeight","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("120","Generate Barcode Setting-Generate Barcode along with Price Tag ","generatebarcodewithpriceparm","isGenerateBarcodeWithPriceParm","F","generateBarcodeWithPriceParm",'F',"generateBarcodeWithPriceParm","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("121","Generate Barcode Setting-Print Price Type ","priceprinttype","getPricePrinttype","F","pricePrintType",'F',"pricePrintType","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("122","Generate Barcode Setting-Price Translate Y
+ ","pricetranslatey","getPriceTranslateY","F","priceTranslateY",'F',"priceTranslateY","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("123","Generate Barcode Setting-Price Translate X
+ ","pricetranslatex","getPriceTranslateX","F","priceTranslateX",'F',"priceTranslateX","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("124","Generate Barcode Setting-Price Font Size
+ ","pricefontsize","getPriceFontSize","F","priceFontSize",'F',"priceFontSize","string",null,null,null);
+
+#---------------------Transaction Setting--------------
+
+INSERT INTO  exportcompanypref  VALUES("126","Transaction Settings-Filter Products on Customer Category ","isfilterproductbycustomercategory","isFilterProductByCustomerCategory","T","isFilterProductByCustomerCategory",'F',"isFilterProductByCustomerCategory","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("127","Transaction Settings-Auto Populate Mapped Products ","autoPopulateMappedProduct","isAutoPopulateMappedProduct","F","autoPopulateMappedProduct",'F',"autoPopulateMappedProduct","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("128","Transaction Settings-Lock Editing Quantity ","editLinkedTransactionQuantity","isEditLinkedTransactionQuantity","T","editLinkedTransactionQuantity",'F',"editLinkedTransactionQuantity","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("129","Transaction Settings-Lock Editing Price ","editLinkedTransactionPrice","isEditLinkedTransactionPrice","T","editLinkedTransactionPrice",'F',"editLinkedTransactionPrice","boolean",null,null,null);
+
+DELETE FROM exportcompanypref WHERE id='21';
+
+#--------------Product Selection setting-------------------
+
+INSERT INTO  exportcompanypref  VALUES("125","Product Selection setting-
+ ","productoptimizedflag","getProductOptimizedFlag","F","ProductSelectionType",'F',"productOptimizedFlag","int",null,null,null);
+
+#-------Minimum Budget Setting-------------
+UPDATE exportcompanypref SET dataindex='custminbudgetlimit' WHERE id='27';
+
+#------------UOM Settings------------------
+INSERT INTO  exportcompanypref  VALUES("98","UOM Settings- ","uomschematype","getUomSchemaType","F","UomSchemaType",'F',"UomSchemaType","int",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("99","UOM Settings-Allow editing UOM conversion rate ","isbaseuomrateedit","isBaseUOMRateEdit","F","isBaseUOMRateEdit",'F',"isBaseUOMRateEdit","boolean",null,null,null);
+
+#Sharad Pawar 24 July 2015
+update journalentry inner join goodsreceipt on goodsreceipt.journalentry = journalentry.id set journalentry.pendingapproval = goodsreceipt.pendingapproval;
+
+
+#Shashi Nandan kumar 24 July 2015
+ALTER TABLE `account` MODIFY COLUMN `description`  text ;
+ALTER TABLE `advancedetail` MODIFY COLUMN `description`  text ;
+ALTER TABLE `assetmaintenanceworkorderdetail` MODIFY COLUMN `description`  text ;
+ALTER TABLE `billingpaymentdetailotherwise` MODIFY COLUMN `description`  text ;
+ALTER TABLE `billingreceiptdetailotherwise` MODIFY COLUMN `description`  text ;
+ALTER TABLE `cheque` MODIFY COLUMN `description`  text ;
+ALTER TABLE `companyholiday` MODIFY COLUMN `description`  text ;
+ALTER TABLE `contractdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `contractfile` MODIFY COLUMN `description`  text ;
+ALTER TABLE `costcenter` MODIFY COLUMN `description`  text ;
+ALTER TABLE `creditnotpayment` MODIFY COLUMN `description`  text ;
+ALTER TABLE `cntaxentry` MODIFY COLUMN `description`  text ;
+ALTER TABLE `debitnotepayment` MODIFY COLUMN `description`  text ;
+ALTER TABLE `dntaxentry` MODIFY COLUMN `description`  text ;
+ALTER TABLE `dodetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `emailtemplatefiles` MODIFY COLUMN `description`  text ;
+ALTER TABLE `expenseggrdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `in_frequency` MODIFY COLUMN `description`  text ;
+ALTER TABLE `grdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `grodetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `in_inspection_template` MODIFY COLUMN `description`  text ;
+ALTER TABLE `inventory` MODIFY COLUMN `description`  text ;
+ALTER TABLE `invoicedetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `itempackingdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `jedetail` MODIFY COLUMN `description`  text ;
+ALTER TABLE `paymentdetail` MODIFY COLUMN `description`  text ;
+ALTER TABLE `paymentdetailotherwise` MODIFY COLUMN `description`  text ;
+ALTER TABLE `pricingbandmaster` MODIFY COLUMN `description`  text ;
+ALTER TABLE `product` MODIFY COLUMN `descinforeign`  text ;
+ALTER TABLE `product` MODIFY COLUMN `additionaldesc`  text ;
+ALTER TABLE `productbuild` MODIFY COLUMN `description`  text ;
+ALTER TABLE `projreport_template` MODIFY COLUMN `description`  text ;
+ALTER TABLE `podetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `prdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `quotationdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `quotationversiondetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `receiptadvancedetail` MODIFY COLUMN `description`  text ;
+ALTER TABLE `receiptdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `receiptdetailotherwise` MODIFY COLUMN `description`  text ;
+ALTER TABLE `reportmaster` MODIFY COLUMN `description`  text ;
+ALTER TABLE `sodetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `srdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `in_stockadjustmentdraft` MODIFY COLUMN `description`  text ;
+ALTER TABLE `in_storemaster` MODIFY COLUMN `description`  text ;
+ALTER TABLE `tax` MODIFY COLUMN `description`  text ;
+ALTER TABLE `vendorquotationdetails` MODIFY COLUMN `description`  text ;
+ALTER TABLE `purchaserequisitiondetail` MODIFY COLUMN `productdescription`  text ;
+
+#Deepak singh 24 July 2015
+#-------------Activate budgeting based on Department---------------------
+INSERT INTO  exportcompanypref  VALUES("131","Activate budgeting based on Department ","activatebudgetingforPR","isActivatebudgetingforPR","F","activatebudgetingforPR",'F',"activatebudgetingforPR","boolean",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("132","Activate budgeting based on Department-Budgeting based on ","budgetType","getBudgetType","F","budgetType",'F',"budgetType","int",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("133","Activate budgeting based on Department-Budgeting frequency type ","budgetFreqType","getBudgetFreqType","F","budgetFreqType",'F',"budgetFreqType","int",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("134","Activate budgeting based on Department-Minimum Budget setting ","budgetwarnblock","getBudgetwarnblock","F","budgetwarnblock",'F',"budgetwarnblock","int",null,null,null);
+
+#-------------Control Account Settings---------------------
+INSERT INTO  exportcompanypref  VALUES("135","Control Account Settings-Select Account For Profit Loss ","profitlossaccountid","getProfitLossAccountId","F","profitLossAccountId",'F',"profitLossAccountId","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("136","Control Account Settings-Select Account For Opening Stock ","openingstockaccountid","getOpeningStockAccountId","F","openingStockAccountId",'F',"openingStockAccountId","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("137","Control Account Settings-Select Account For Closing Stock ","closingstockaccountid","getClosingStockAccountId","F","closingStockAccountId",'F',"closingStockAccountId","string",null,null,null);
+
+INSERT INTO  exportcompanypref  VALUES("138","Control Account Settings-Select Account For Stock in Hand ","stockinhandaccountid","getStockInHandAccountId","F","stockInHandAccountId",'F',"stockInHandAccountId","string",null,null,null);
+
+#Sharad Pawar 24 July 2015
+update invoice inner join journalentry on journalentry.id = invoice.journalentry set invoice.pendingapproval = journalentry.pendingapproval;
+
+#Santosh Belote 24 July 2015
+#To update currency symbol of Thai Baht currency.
+UPDATE currency SET symbol="&#3647;" WHERE currencyid='15';
+
+#Raj Shah 24 July 2015
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `inspectionstore`  varchar(255) NULL DEFAULT NULL ,
+ADD COLUMN `repairstore`  varchar(255) NULL DEFAULT NULL;
+
+#Mayur Pawar 24 th July 2015
+insert into audit_action values('191','Stock Auto Assigned','5');
+alter table extracompanypreferences 
+add column `isnegativestockforlocwar` char(1) default 'F';
+
+#Ajit Gogawale 24 July 2015
+ALTER TABLE `invoice`
+ADD COLUMN `isfromPOS`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `deliveryorder`
+ADD COLUMN `isfromPOS`  int(1) NULL DEFAULT 0 ;
+
+#Neeraj Dwivedi 26th July2015
+#Receive Payment
+delete from default_header where defaultHeader="Total Amount" and module=16 and isdocumentimport="F" ;
+
+#Credit Note
+
+delete from default_header where defaultHeader="Company Address" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('17f8847e-3364-11e5-a151-feff819cdc9f','Company Address','company','company','companyid','address','Company Address','1','12');
+
+delete from default_header where defaultHeader="Company City" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('17f887e4-3364-11e5-a151-feff819cdc9f','Company City','company','company','companyid','city','Company City','1','12');
+
+delete from default_header where defaultHeader="Company Fax No" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f4b6068e-3364-11e5-a151-feff819cdc9f','Company Fax No','company','company','companyid','faxno','Company Fax No','1','12');
+
+delete from default_header where defaultHeader="Company State" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f4b60a62-3364-11e5-a151-feff819cdc9f','Company State','company','company','companyid','state','Company State','1','12');
+
+delete from default_header where defaultHeader="Company Zipcode" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f4b60e5e-3364-11e5-a151-feff819cdc9f','Company Zipcode','company','company','companyid','zipcode','Company Zipcode','1','12');
+
+delete from default_header where defaultHeader="Company Phone No" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f4b61084-3364-11e5-a151-feff819cdc9f','Company Phone No','company','company','companyid','phoneno','Company Phone No','1','12');
+
+delete from default_header where defaultHeader="Customer Code" and module=12 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('c97dd14c-3367-11e5-a151-feff819cdc9f','Customer Code','customer','customer','id','acccode','Customer Code','1','12');
+
+delete from default_header where defaultHeader="Post Text" and isdocumentimport="F" and module=22;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,isdocumentimport)
+VALUES ('a3da48e4-306f-11e5-a151-feff819cdc9f','Post Text','posttext','quotation','','','Post Text','1','22','F');
+
+#Billing Address Contact Person Name
+delete from default_header where defaultHeader="Billing Address Contact Person Name" and module=22 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1bb8b092-3360-11e5-a151-feff819cdc9f','Billing Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person Name','1','22');
+
+delete from default_header where defaultHeader="Shipping Address Contact Person Name" and module=22 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('1bb8b6a0-3360-11e5-a151-feff819cdc9f','Shipping Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person Name','1','22');
+
+delete from default_header where defaultHeader="Shipping Address Email" and module=18 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ef716952-3369-11e5-a151-feff819cdc9f','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','18');
+
+delete from default_header where defaultHeader="Shipping Address Postal Code" and module=18 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ef716fa6-3369-11e5-a151-feff819cdc9f','Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','18');
+
+#Sales Order
+delete from default_header where defaultHeader="Shipping Address Email" and module=20 and isdocumentimport="F" ;
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('e1c0bb80-336b-11e5-a151-feff819cdc9f','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','20');
+
+#Sharad Pawar 26 July 2015
+alter table payment modify  payee varchar(255) default null;
+update customer inner join company on company.companyid = customer.company set customer.currency =company.currency  where customer.currency is null; 
+
+#Raveesh Pathak 27th July 2015
+UPDATE quotation 
+inner join creditterm on creditterm.termid=quotation.term
+SET quotation.duedate = DATE_ADD(quotation.quotationdate , INTERVAL creditterm.termdays DAY)
+WHERE quotation.crmquoteid is not null and quotation.duedate<quotation.quotationdate;
+
+#Shashi Nandan kumar 27th July 2015
+ALTER TABLE `fieldParams`
+ADD COLUMN `defaultvalue`  VARCHAR(255);
+update currency set symbol='AUD' where currencyid=11;
+update currency set symbol='CAD' where currencyid=10;
+update currency set symbol='NZD' where currencyid=17;
+
+#Mayur  Pawar 27 July 2015
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('923fa822-338f-11e5-988c-c03fd5632dc7','billno','Asset Vendor Quotation No',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('987a9f4e-338f-11e5-988c-c03fd5632dc7','date','Asset Vendor Quotation Date',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('aa4b50a6-338f-11e5-988c-c03fd5632dc7','personname','Vendor',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('b2c78f6a-338f-11e5-988c-c03fd5632dc7','discount','Discount',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('c1365310-338f-11e5-988c-c03fd5632dc7','taxamount','Tax Amount',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('cfa2a5b6-338f-11e5-988c-c03fd5632dc7','orderamountwithTax','Total Amount',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('415df5d6-3393-11e5-988c-c03fd5632dc7','memo','Memo',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('2b693880-3393-11e5-988c-c03fd5632dc7','status','Status',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('0c3a02b6-3391-11e5-988c-c03fd5632dc7','aliasname','Vendor Alias Name',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('dc59cfc0-3392-11e5-988c-c03fd5632dc7','lasteditedby','Last Edited By',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('a080af66-3449-11e5-8724-eca86bff9ae1','amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',89,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('5cdf48e0-3448-11e5-8724-eca86bff9ae1','termamount','Terms Amount',89,1);
+
+
+#Pandurang 28th July 2015
+alter table salesorder 
+add column requestwarehouse  varchar(255) DEFAULT NULL,
+ADD CONSTRAINT FOREIGN KEY (`requestwarehouse`) REFERENCES `inventorywarehouse` (`id`);
+
+alter table salesorder
+add column requestlocation  varchar(255) DEFAULT NULL,
+ADD CONSTRAINT FOREIGN KEY (`requestlocation`) REFERENCES `inventorylocation` (`id`);
+
+alter table salesorder add column autoapproveflag tinyint(1) DEFAULT '0';
+alter table extracompanypreferences add column requestApprovalFlow char(1) DEFAULT 'F';
+
+alter table sodetails add column approvedbasequantity  double DEFAULT '0';
+alter table sodetails add column rejectedbasequantity  double DEFAULT '0';
+
+alter table sodetails 
+add column approver varchar(255) DEFAULT NULL, 
+ADD CONSTRAINT FOREIGN KEY (`approver`) REFERENCES `users` (`userid`);
+
+alter table sodetails 
+add column consignmentapprovalstatus int(2) DEFAULT NULL;
+
+alter table sodetails 
+add column rejectedby varchar(255) DEFAULT NULL;
+
+CREATE TABLE `sodetailsapprovermapping` (
+`sodetails`  varchar(255) NOT NULL ,
+`approver`  varchar(255) NOT NULL ,
+FOREIGN KEY (`sodetails`) REFERENCES `sodetails` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`approver`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+#Basaprabhu Ajur 28/07/2015
+
+ALTER TABLE `in_consignmentdetails` ADD COLUMN `repair_status`  int(2) NULL DEFAULT NULL ;
+ALTER TABLE `in_sa_detail_approval` ADD COLUMN `repair_status`  int(2) NULL DEFAULT NULL ;
+ALTER TABLE `in_stocktransfer_detail_approval` ADD COLUMN `repair_status`  int(2) NULL  DEFAULT NULL  ;
+
+#Mohammed Uzair Momin 28th Jul 2015
+alter table `fieldParams` add column `sequence` int(5) default 0;
+
+#[Olympus]: Sequence for License Master
+update `fieldParams` set `sequence`=101 where moduleid=30 and fieldlabel='Master Int License No' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=102 where moduleid=30 and fieldlabel='Master License type' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=103 where moduleid=30 and fieldlabel='Master License' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=104 where moduleid=30 and fieldlabel='Lic status' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=105 where moduleid=30 and fieldlabel='Validity Start date' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=106 where moduleid=30 and fieldlabel='Validity End date' and companyid=(select companyid from company where subdomain='olympus2');
+
+#[Olympus]: Sequence for License Master Supp. 1
+update `fieldParams` set `sequence`=111 where moduleid=30 and fieldlabel='Supplementary1 Int License No' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=112 where moduleid=30 and fieldlabel='Supplementary1 License type' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=113 where moduleid=30 and fieldlabel='License Code Supplementary1' and companyid=(select companyid from company where subdomain='olympus2');
+
+#[Olympus]: Sequence for Product Master
+update `fieldParams` set `sequence`=131 where moduleid=30 and fieldlabel='Country of Origin' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=132 where moduleid=30 and fieldlabel='Material Group' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=133 where moduleid=30 and fieldlabel='Mat grp description' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=134 where moduleid=30 and fieldlabel='Profit Center' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=135 where moduleid=30 and fieldlabel='Profit Centre Description' and companyid=(select companyid from company where subdomain='olympus2');
+
+#[Olympus]: Query for updating json saved in DB for Product Master
+update olympus_importscriptinfo set importinfo='{"producttype":"d8a50d12-515c-102d-8de6-001cc0794cfa","isbatchforproduct":true,"isserialforproduct":true,"islocationforproduct":true,"iswarehouseforproduct":true,"account":"402880504c7ed8d7014c8d1576d2000e","initialpurchaseprice":"1","initialsalesirice":"1","frequency":"3","blankUOM":"-","casingUOMvalue":"1","defaultSerialNumber":"ZYBP","defaultBatch":"X"}' where subdomain='olympus2' and id ='PRODUCTMASTER';
+
+# Anand Nimbalkar 29th July, 2015
+insert into showcustomcolumninreport(moduleid,customcolumninfo,companyid) values('30','[{"fieldid":"2342fec6-29dc-4198-9ddd-d54b6dc685ff"}]','3003967d-450b-4de9-abb2-48a548b29e94');
+
+#Vaibhav Patil 29th July, 2015
+alter table repeatedinvoices add isactivate char(1) NOT NULL default 'T';
+alter table repeatedinvoices add approver varchar(50) NOT NULL;
+alter table repeatedinvoices add ispendingapproval char(1) NOT NULL default 'F';
+alter table repeatedinvoices add prevDate date DEFAULT NULL;
+Update repeatedinvoices set prevDate = DATE_SUB(startdate, INTERVAL 1 DAY);
+
+#Update the data header for Customized Report View from Asset Purchase Order Report.
+UPDATE customizereportheader SET dataheader='Asset Purchase Order No' where id='a1bd577a-faca-11e4-ab41-c03fd5632dc7' and moduleid=90 ;
+
+UPDATE customizereportheader SET dataheader='Asset Purchase Order Date' where id='ac377d7a-faca-11e4-ab41-c03fd5632dc7' and moduleid=90 ;
+
+UPDATE customizereportheader SET dataheader='Vendor' where id='c731c69e-faca-11e4-ab41-c03fd5632dc7' and moduleid=90 ;
+
+UPDATE customizereportmapping SET dataheader='Asset Purchase Order Date' WHERE id='ff8080814eca4e07014eca7eff090013' AND moduleid=90;
+
+UPDATE customizereportmapping SET dataheader='Asset Purchase Order Date' WHERE id='ff8080814ecfa04e014ed0017eb1001e' AND moduleid=90;
+
+UPDATE customizereportmapping SET dataheader='Asset Purchase Order No' WHERE id='ff8080814eca4e07014eca7eff0a0014' AND moduleid=90;
+
+UPDATE customizereportmapping SET dataheader='Asset Purchase Order No' WHERE id='ff8080814ecfa04e014ed0017eb2001f' AND moduleid=90;
+
+UPDATE customizereportmapping SET dataheader='Vendor' WHERE id='ff8080814eca4e07014eca7eff0a001c' AND moduleid=90;
+
+UPDATE customizereportmapping SET dataheader='Vendor' WHERE id='ff8080814ecfa04e014ed0017eb30027' AND moduleid=90;
+
+#Mohammed Uzair Momin 29th July 2015
+#[Olympus]: Update JSON saved for License Master Supp. 2
+update olympus_importscriptinfo set importinfo='{"customLabelMasterIntLicenseNo":"Master Int License No"}' where subdomain='olympus2' and id='SUPPLLICENSE2';
+
+#[Olympus]: Sequence for License Master Supp. 2
+update `fieldParams` set `sequence`=121 where moduleid=30 and fieldlabel='Supplementary2 Int License No' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=122 where moduleid=30 and fieldlabel='Supplementary2 License type' and companyid=(select companyid from company where subdomain='olympus2');
+update `fieldParams` set `sequence`=123 where moduleid=30 and fieldlabel='License Code Supplementary2' and companyid=(select companyid from company where subdomain='olympus2');
+
+#Rushikesh Mandage 29th July 2015
+#ERP-12656 : allow term percentage in fraction
+alter table purchaseordertermmap modify column percentage double default 0.0;
+alter table quotationtermmap modify column percentage double default 0.0;
+alter table vendorquotationtermmap modify column percentage double default 0.0;
+alter table salesordertermmap modify column percentage double default 0.0;
+alter table invoicetermsmap modify column percentage double default 0.0;
+alter table receipttermsmap modify column percentage double default 0.0;
+
+# Amol Dhokale 30th July,2015
+# Credit Note Details
+ALTER TABLE cntaxentry ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE cntaxentry ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# Debit Note Details
+ALTER TABLE dntaxentry ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE dntaxentry ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# Anand Nimbalkar 30th July, 2015
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("f40408a4-35cf-11e5-a36e-eca86bfcd415","24","Entry Date","EntryDate",0,0,'T','T',null,null,null,"date",0.0,"entrydate","date");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("5866d36c-35d0-11e5-a36e-eca86bfcd415","24","Entry Number","EntryNumber",0,0,'T','T',null,null,null,null,null,"entryno",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("55812be2-35d1-11e5-a36e-eca86bfcd415","24","Memo","Memo",0,0,'F','F',null,null,null,null,"","memo",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("5a3d061a-35d1-11e5-a36e-eca86bfcd415","24","Account Name","Account",0,0,'T','F',"Account","name","ID","ref",null,"accountname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("5fcceeec-35d1-11e5-a36e-eca86bfcd415","24","Currency","Currency",0,0,'T','T',"KWLCurrency","name","currencyID","ref",null,"currencyName",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("6538b8f2-35d1-11e5-a36e-eca86bfcd415","24","Debit Amount","amount",0,0,'T','T',null,null,null,"double",0.0,"d_amount",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("6a3852e0-35d1-11e5-a36e-eca86bfcd415","24","Credit Amount","amount",0,0,'T','T',null,null,null,"double",0.0,"c_amount",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) 
+VALUES ("87bd1586-35d0-11e5-a36e-eca86bfcd415","24","Description","Description",0,0,'F','F',null,null,null,null,"","description",null);
+
+# Raj Shah 31th July, 2015
+ALTER TABLE  in_goodsrequest  ADD COLUMN `accstockcustomdataref`  varchar(40) NULL DEFAULT NULL;
+
+# Basaprabhu Ajur  31th July, 2015
+ALTER TABLE `in_consignmentdetails` ADD COLUMN `returnqty`  double(50,0) NULL DEFAULT 0 ;
+ALTER TABLE `in_sa_detail_approval` ADD COLUMN `returnqty`  double(50,0) NULL DEFAULT 0 ;
+ALTER TABLE `in_stocktransfer_detail_approval` ADD COLUMN `returnqty`  double(50,0) NULL DEFAULT 0 ;
+
+#Mohammed Uzair Momin 31st July 2015
+alter table extracompanypreferences add column `showimport` char(1) default 'F';
+
+#[Olympus]: Enable import button for olympus2 subdomain
+update extracompanypreferences set showimport='T' where id=(select companyid from company where subdomain='olympus2');
+
+#Raveesh Pathak 6th August 2015
+#Please replace App database name "ondemandprod" as per Name on server [like name on 208,21, .com etc] 
+
+ALTER TABLE `extracompanypreferences` ADD COLUMN `activatecrmintegration` char(1) DEFAULT 'F';
+update extracompanypreferences set  activatecrmintegration='T' where id in (select companyid from ondemandprod.companyapps where ondemandprod.companyapps.appid=2 and ondemandprod.companyapps.appid=3);
+

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TrailBalance" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="AgedReceivableSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="AgedReceivableSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="person" class="java.lang.String"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="companyaddress" class="java.lang.String"/>
+	<field name="startDate" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="dateRange" class="java.lang.String"/>
+	<field name="currencyinword" class="java.lang.String"/>
+	<field name="curentAmountDueHeader" class="java.lang.String"/>
+	<field name="amountDue1Header" class="java.lang.String"/>
+	<field name="amountDue2Header" class="java.lang.String"/>
+	<field name="amountDue3Header" class="java.lang.String"/>
+	<field name="amountDue4Header" class="java.lang.String"/>
+	<field name="amountDue5Header" class="java.lang.String"/>
+	<field name="amountDue6Header" class="java.lang.String"/>
+	<field name="amountDue7Header" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="40" width="752" height="31"/>
+				<textField isStretchWithOverflow="true" evaluationTime="Report">
+					<reportElement positionType="Float" x="735" y="2" width="14" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="27" width="752" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.5"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement positionType="Float" x="709" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[#
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="689" y="2" width="25" height="11"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Page
+                ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement positionType="Float" x="727" y="2" width="7" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[/
+                ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="714" y="2" width="16" height="12"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="2" y="12" width="332" height="11"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dateRange}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="535" y="12" width="214" height="11"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Amount in "+$F{currencyinword}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="2" y="3" width="280" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="2" y="14" width="280" height="30"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyaddress}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="511" y="23" width="238" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Accounting Period    : "+$F{startDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="382" y="3" width="368" height="18"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ageing Analysis - "+$P{person}+" - Detailed"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="753" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+<!--	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="753" height="29" backcolor="#E6E6E6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="4" y="2" width="38" height="19"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="3" width="59" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Document Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="3" width="77" height="19"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Amount in]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="52" y="15" width="69" height="14"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Document#]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="337" y="3" width="46" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curentAmountDueHeader}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="3" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue1Header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="3" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue2Header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="2" width="102" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{person}+" Name"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="15" width="69" height="14"/>
+				<textElement textAlignment="Left">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="3" width="54" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="266" y="15" width="135" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currencyinword}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="493" y="3" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue3Header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="546" y="3" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue4Header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="652" y="3" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue6Header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="3" width="55" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue5Header}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="707" y="3" width="46" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{amountDue7Header}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>-->
+	<detail>
+		<band height="156" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="753" height="156"/>
+                                 <subreportParameter name="currencyinword">
+					<subreportParameterExpression><![CDATA[$F{currencyinword}]]></subreportParameterExpression>
+				</subreportParameter>
+                                 <subreportParameter name="person">
+					<subreportParameterExpression><![CDATA[$P{person}]]></subreportParameterExpression>
+				</subreportParameter>
+                                 <subreportParameter name="curentAmountDueHeader">
+					<subreportParameterExpression><![CDATA[$F{curentAmountDueHeader}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue1Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue1Header}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue2Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue2Header}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue3Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue3Header}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue4Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue4Header}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue5Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue5Header}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue6Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue6Header}]]></subreportParameterExpression>
+				</subreportParameter>
+                                <subreportParameter name="amountDue7Header">
+					<subreportParameterExpression><![CDATA[$F{amountDue7Header}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{AgedReceivableSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{AgedReceivableSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

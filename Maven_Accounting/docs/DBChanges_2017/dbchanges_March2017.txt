@@ -1,0 +1,730 @@
+#Amol Edewar 2nd March 2017
+
+delete from customizereportmapping where customizereportheader='bbc5c91a-dede-11e6-914b-14dda97927d6';
+delete from customizereportmapping where customizereportheader='6f075a4c-b144-11e6-92b5-14dda9792840';
+update customizereportheader set dataindex='customer' where moduleid=16 and id='bbc5c91a-dede-11e6-914b-14dda97927d6';
+update customizereportheader set dataindex='vendor' where moduleid=16 and id='6f075a4c-b144-11e6-92b5-14dda9792840';
+
+update default_header set pojomethodname='Vendor',refmodule_pojoclassname='Vendor',refdatacolumn_hbmname='name',
+reffetchcolumn_hbmname='ID',ismandatory = 'T', hbmnotnull = 'T', validatetype='ref', dataindex='vendor', allowimport='1',isdocumentimport = 'T',
+submoduleflag=2  where module='16' and defaultHeader = 'Vendor';
+
+#Swapnil Pandhare 2nd March 2017
+delete from invoiceinused;
+
+#Vaibhav Patil 03rd March.2017
+
+CREATE TABLE `brdetailhistory` (
+  `id` varchar(255),
+  `debit` char(1),
+  `amount` double DEFAULT 0,
+  `name` text NOT NULL,
+  `journalEntry` varchar(255) DEFAULT NULL,
+  `bankReconciliation` varchar(255),
+  `company` varchar(255),
+  `reconciledate` datetime DEFAULT NULL,
+  `isopeningtransaction` char(1) DEFAULT 'F',
+  `transactionid` varchar(255) DEFAULT NULL,
+  `moduleid` int(11) DEFAULT '24',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`bankreconciliation`) REFERENCES `bankreconciliation` (`id`),
+  FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE bankreconciliation ADD COLUMN reconcilenumber VARCHAR(255) DEFAULT "";
+ALTER TABLE brdetailhistory ADD COLUMN iscleareddetails CHAR(1) DEFAULT NULL;
+ALTER TABLE bankreconciliation ADD COLUMN unclearedchecksamountinacc double DEFAULT 0;
+ALTER TABLE bankreconciliation ADD COLUMN uncleareddepositsamountinacc double DEFAULT 0;
+ALTER TABLE bankreconciliation ADD COLUMN clearedchecksamountinacc double DEFAULT 0;
+ALTER TABLE bankreconciliation ADD COLUMN cleareddepositsamountinacc double DEFAULT 0;
+ALTER TABLE bankreconciliation ADD COLUMN bankbookbalanceinacc double DEFAULT 0;
+ALTER TABLE bankreconciliation ADD COLUMN bankstmtbalanceinacc double DEFAULT 0;
+ALTER TABLE bankreconciliation ADD COLUMN datesuffixvalue VARCHAR(50) DEFAULT "";
+ALTER TABLE bankreconciliation ADD COLUMN datepreffixvalue VARCHAR(50) DEFAULT "";
+ALTER TABLE bankreconciliation ADD COLUMN dateafterpreffixvalue VARCHAR(50) DEFAULT "";
+ALTER TABLE bankreconciliation ADD COLUMN autogen CHAR(1) DEFAULT 'F';
+ALTER TABLE bankreconciliation ADD COLUMN seqnumber int(11) default '0';
+ALTER TABLE bankreconciliation ADD COLUMN seqformat varchar(40) DEFAULT NULL;
+ALTER TABLE bankreconciliation ADD CONSTRAINT  FK__brseqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+#Ajit Ankalle 6th Mar 2017
+ALTER TABLE vendor ADD COLUMN istdsapplicableonvendor char(1) NOT NULL DEFAULT 'F';
+ALTER TABLE customer ADD COLUMN istdsapplicableoncust char(1) NOT NULL DEFAULT 'F';
+
+#Neeraj Dwivedi 7th March 2017
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,ismandatory) VALUES ("98b87w23b-4a7c-11e6-97e2-14dda9e58","b8bd81b0-c500-102d-bb0b-001e58a64cb6",'Credit Purchase Limit',"openbalance","2",'F','T');
+#Disabling Billing Address & Shipping Address
+update default_header set ismandatory='F' where id in('9e4e2180-f73d-102d-9b6d-001e4f3fdc1a','21a014b0-d1d4-12e3-9d55-001cc066e9f1');
+
+
+CREATE TABLE `default_header_rest` (
+  `id` varchar(255) NOT NULL,
+  `moduleid` varchar(255) DEFAULT NULL,
+  `defaultheaderid` varchar(255) DEFAULT NULL,
+  `jsonmappingkey` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Inserting for default Header module
+#Currency
+insert into default_header_rest values ('857130ea-0316-11e7-93ae-92361f002671','b8bd81b0-c500-102d-bb0b-001e58a64cb6','4ffae150-3cbb-11e4-af74-c03fd5633215','currencyid');
+
+#Account Name
+insert into default_header_rest values ('7ec3fc40-031c-11e7-93ae-92361f002671','b8bd81b0-c500-102d-bb0b-001e58a64cb6','ce4aba28-b992-11e3-b51d-001cc066e9f0','accountid');
+
+#Vendor Name
+insert into default_header_rest values ('7ec3fee8-031c-11e7-93ae-92361f002671','b8bd81b0-c500-102d-bb0b-001e58a64cb6','2fdac050-f73d-102d-9b6d-001e4f3fdc1a','accname');
+
+#Vendor Code
+insert into default_header_rest values ('7ec40136-031c-11e7-93ae-92361f002671','b8bd81b0-c500-102d-bb0b-001e58a64cb6','67826d86-195b-11e3-8a99-001e670e1459','acccode');
+
+#Debit Term
+insert into default_header_rest values ('7ec4023a-031c-11e7-93ae-92361f002671','b8bd81b0-c500-102d-bb0b-001e58a64cb6','aeadf136-f73d-102d-9b6d-001e4f3fdc1a','termid');
+
+#Dipak Dorkar 8th March 2017
+ALTER TABLE `extracompanypreferences` ADD COLUMN `isautosaveandprint` char(1) NULL DEFAULT 'F';
+
+#Nitesh Kumar 8th March 2017
+# Cross Module Line Item Queris SQL File
+# For Purchase Order Mdoule Line Items 
+# Amount,Balance Quantity,Base UOM Quantity,Closed Manually,Discount,Product Description,Product ID,Product Name,Product Type,Quantity,Tax Amount,Tax Name,Unit Price,Unit Price,UOM
+update default_header set allowcrossmodule = 'T' where id in('3d57b1f8-f6fc-4bf0-8de9-980f437a765d','9fa23-2f432-4e556-a81d-2e0fc210d8f2','9fa5e2b53-2fd4-4e89-a76d23-210d8f2','9fa52b53-2fd4-4e57-a76d-2e0fc210d8f2','9fa52b53-2fd4-4452a79d-2e0fc210d8f2','9fa52b53-22d4-4e53278d-2e0fc210d8f2','9fa54b53-2fd4-4e545876d-2e0fc210d8f2','9fa5e2b53-2fd4-4e56-a76d23-210d3f1','9fa5b53-2fd4-4e90-a76d-2e0fc210d8f2','9fa52b53-2f2d4-4e56-a96d-2e40fc210d8f2','9fa2e2b53-2fd4-4f78-a76d23-2148f2','9fa52b53-43-a80d-2e0fc210d8f2','9fuub53-2fd4-4e56-a91d-2e0fc210d8f2','a939e25e-dd7f-11e6-8d87-c03fd5aad962');
+
+# For Sales Order Mdoule Line Items 
+#Amount,Balance Amount,Product ID,Product Tax,Product Type,Quantity,Tax Amount,Product Description,Unit Price,UOM,Base UOM Quantity,Balance Quantity,Closed Manually,Discount
+ update default_header set allowcrossmodule = 'T' where id  in ('9fuub53-2fd4-4e56-a76d-2e0fc210d8f1','d4258c68-8d04-4983-aa8d-82ebaf7861c7','9fa5e2b53-2fd4-4e56-a76d23-210d8f1','9fa2e2b53-2fd4-4e56-a76d23-2148f1','9fa5e2b53-2fd4-4e56-a76d23-210d9f9','9fa52b53-2fd4-4452a76d-2e0fc210d8f1','9fa5b53-2fd4-4e56-a76d-2e0fc210d8f1','9fa52b53-22d4-4e53276d-2e0fc210d8f1','9fa54b53-2fd4-4e545676d-2e0fc210d8f1','9fa52b53-43-a76d-2e0fc210d8f1','9fa23-2f432-4e556-a76d-2e0fc210d8f1','38c31313-a02f-4a8f-b23f-a4e015de1213','a939e25e-dd7f-11e6-8d87-c03fd5aad965','9fa52b53-2f2d4-4e56-a76d-2e40fc210d8f1');
+
+# For UOM  Field in customer invoice module
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('153eb49c-58d1-4cd0-90c8-cf36103bf13e','UOM and InventoryMapping','uom','inventory','uom','id','name','UOM and InventoryMapping','4','2','F','F','F');
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('b8f154f9-e0f4-490a-9545-4060b62e7893','4be31864-3ce7-4abe-abbd-fd4dba1b1c23','153eb49c-58d1-4cd0-90c8-cf36103bf13e',1);
+update default_header set isdefaultfieldmappings = 1,isdataindex = 0  where id ='4be31864-3ce7-4abe-abbd-fd4dba1b1c23';
+
+# For UOM  Field in vendor invoice module
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('153eb49c-58d1-4cd0-90c8-cf36103bf13f','UOM and InventoryMapping','uom','inventory','uom','id','name','UOM and InventoryMapping','4','6','F','F','F');
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('b8f154f9-e0f4-490a-9545-4060b62e7894','8e9d04d1-eec7-4b50-a30d-087af07411be','153eb49c-58d1-4cd0-90c8-cf36103bf13f',1);
+update default_header set isdefaultfieldmappings = 1, isdataindex = 0  where id ='8e9d04d1-eec7-4b50-a30d-087af07411be';
+
+# For Product Name  Field in customer invoice module
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('153eb49c-58d1-4cd0-90c8-cf36103bf13g','Product Name and InventoryMapping','product','inventory','product','id','name','Product Name and InventoryMapping','4','2','F','F','F');
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('b8f154f9-e0f4-490a-9545-4060b62e7895','07b8cd44-ee98-43b3-ab9c-4d416aaae1d7','153eb49c-58d1-4cd0-90c8-cf36103bf13g',1);
+update default_header set isdefaultfieldmappings = 1,isdataindex = 0  where id ='07b8cd44-ee98-43b3-ab9c-4d416aaae1d7';
+
+# For Product Name  Field in vendor invoice module
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('153eb49c-58d1-4cd0-90c8-cf36103bf13h','Product Name and InventoryMapping','product','inventory','product','id','name','Product Name and InventoryMapping','4','6','F','F','F');
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('b8f154f9-e0f4-490a-9545-4060b62e7896','37ea1563-a51a-43c2-b5b3-82c30597bce4','153eb49c-58d1-4cd0-90c8-cf36103bf13h',1);
+update default_header set isdefaultfieldmappings = 1, isdataindex = 0  where id ='37ea1563-a51a-43c2-b5b3-82c30597bce4';
+
+#VI-GR(Vendor Invoice to GoodsReceipt)
+#Product ID,Actual Quantity ,Amount,Product Description,Product Type,Received Quantity,Remark,Tax Amount,Unit Price,UOM,Product Tax,Discount
+ update default_header set allowcrossmodule = 'T' where id  in ('0654f4c0-1e6c-11e6-a70e-eca86bfcd169','5f5bf4f6-1e6c-11e6-a70e-eca86bfcd169','8d030d90-57dd-11e6-856d-c03fd5aad962','f438bad8-57d7-11e6-856d-c03fd5aad962','9ed0d2ec-57d7-11e6-856d-c03fd5aad962','5f5bf4f6-1e6c-17e6-a70e-eca86bfcd169','9752ffec-57da-11e6-856d-c03fd5aad962','f0602d6c-57da-11e6-856d-c03fd5aad962','db0435e8-1e6f-11e6-a70e-eca86bfcd169','39e8a00a-1e6e-11e6-a70e-eca86bfcd169','46b2dd84-57d8-11e6-856d-c03fd5aad962','b103bcd8-36ab-11e6-aa97-eca86bfcd169');
+
+#SO-CI(Sales Order  to Customer Invoice)
+#Product ID,Product Type,Product Description,Quantity,Discount,Tax Amount,Tax Name,Unit Price,Amount,Partial Amount,UOM,Base UOM Quantity
+ update default_header set allowcrossmodule = 'T' where id  in ('f920a3dc-bcca-4ed6-a5dc-f1c74af74907','e123e806-13ee-4c22-8ac7-381ac79b0ce9','15b387fb-0837-4373-8614-bee907cf806c','84586b37-1cbd-46ee-8a14-433dea44da26','3985d93d-b9f1-4c16-a23f-e31e37849747','33474ae2-b4c3-49ae-ae93-41e6bd98203b','bfd788de-f866-424e-92df-f9a3f3549750','2ba3c857-9fe4-432c-9fc7-ca4188d784bc','d7356ce0-346d-4c1f-a737-3352386789d4','6977fdff-fd96-4529-be50-a08a0be86ced','4be31864-3ce7-4abe-abbd-fd4dba1b1c23','8e094c93-30b0-4571-a65f-f97771248d01');
+update default_header set reftabledatacolumn ='baseuomrate*quantity' where id = '8e094c93-30b0-4571-a65f-f97771248d01';
+
+#SO-DO(Sales Order  to Delivery Order)
+#Product ID,Product Description,Product Type,Actual Quantity,Delivered Quantity,Amount,Product Tax,Remark,Tax Amount,Unit Price,UOM,Discount,Unit Weight,Unit Volume,Unit Volume with Packaging,Unit Weight with Packaging
+ update default_header set allowcrossmodule = 'T' where id  in ('0654f4c0-1e6c-11e6-a70e-eca86bfcd770','45f2996a-5d33-11e6-9be6-c03fd5aad962','942f3ab2-5d32-11e6-9be6-c03fd5aad962','5f5bf4f6-1e6c-11e6-a70e-eca86bfcd770','5f5bf4f6-1e6c-17e6-a70e-eca86bfcd770','04960bd8-5d37-11e6-9be6-c03fd5aad962','2ffe7a7e-5d34-11e6-9be6-c03fd5aad962','4cf0dd86-5d32-11e6-9be6-c03fd5aad962','8b8bce9e-5d36-11e6-9be6-c03fd5aad962','db0435e8-1e6f-11e6-a70e-eca86bfcd770','39e8a00a-1e6e-11e6-a70e-eca86bfcd770','b103bcd8-36ab-11e6-aa97-eca86bfcd770','aa80500e-5eb7-11e6-9e89-c03fd5aad962','b7ebd992-5eb8-11e6-9e89-c03fd5aad962','f52d54b6-5eb8-11e6-9e89-c03fd5aad962','8627c844-5eb8-11e6-9e89-c03fd5aad962');
+
+#PO-VI(Purchase Order  to Vendor Invoice)
+#Product ID,Product Description,Quantity,Product Type,UOM,Tax Amount,Unit Price,Amount,Base UOM Quantity,Tax Name,Discount
+ update default_header set allowcrossmodule = 'T' where id  in ('155529a9-dccf-4f08-84af-f67edbcedcd1','b9e3de9b-5063-410a-b28e-0f355c5ec9c6','7b29cef2-670b-475e-9671-2265d975727f','ceabaf13-8cf0-43b4-adc7-aa8d72f504ec','8e9d04d1-eec7-4b50-a30d-087af07411be','9f42ff81-fcb6-4481-983d-fa37b0594513','b214621c-fb87-46ee-aa93-df8122938f00','60bf8c54-de77-47b9-b89f-83d04d5dda02','f6cd2f01-0f92-4589-beed-92a35c8091ec','b490a9e8-6ebb-40b2-8a6e-5256038bde7f','4d3335db-4ac5-4164-b30c-a99005bc27b7');
+
+#VI-Purchase Return(Vendor Invoice to Purchase Return)
+#Product ID,Product Description,Product Type,Quantity,Reason,Remark,Return Quantity,Tax Amount,Unit Price,UOM,Amount,Product Tax,Discount
+update default_header set allowcrossmodule = 'T' where id  in ('8c07a28c-54b0-11e6-b223-c03fd5aad962','f2921208-54b0-11e6-b223-c03fd5aad962','b5236534-54b0-11e6-b223-c03fd5aad962','2e720a94-54b1-11e6-b223-c03fd5aad962','89ca7302-556c-11e6-926a-c03fd5aad962','6f286b9a-54b2-11e6-b223-c03fd5aad962','8a8f6b0a-54b1-11e6-b223-c03fd5aad962','1e853bee-5491-11e6-b223-c03fd5aad962','ce485f82-54b1-11e6-b223-c03fd5aad962','d583d438-54b2-11e6-b223-c03fd5aad962','8ebea7f6-57de-11e6-856d-c03fd5aad962','cfd67a52-5496-11e6-b223-c03fd5aad962','0ef89b46-54b2-11e6-b223-c03fd5aad962');
+
+#CI-Sales Return(Customer Invoice to sales Return)
+#Product ID,Product Description,Product Type,Remark,Return Quantity,Tax Amount,Unit Price,Product Tax,Actual Quantity,Amount,UOM,DiscountUnit Volume,Unit Volume with Packaging,Unit Weight,Unit Weight with Packaging
+update default_header set allowcrossmodule = 'T' where id  in ('02f052ca-48bf-11e6-be69-c03fd5aad962','b9d5124a-48c5-11e6-be69-c03fd5aad962','0af20530-48c5-11e6-be69-c03fd5aad962','a272ccca-48d7-11e6-be69-c03fd5aad962','b7d35b0e-48cb-11e6-be69-c03fd5aad962','d6458c2c-4823-11e6-b3d7-c03fd5aad962','c5e9ce02-48cc-11e6-be69-c03fd5aad962','ae082e7c-482d-11e6-b3d7-c03fd5aad962','0b792bd6-48cb-11e6-be69-c03fd5aad962','55f63aba-57de-11e6-856d-c03fd5aad962','d2563ce6-48d8-11e6-be69-c03fd5aad962','41048380-48d6-11e6-be69-c03fd5aad962','bf10b5de-48de-11e6-be69-c03fd5aad962','0b8c1318-48df-11e6-be69-c03fd5aad962','2271bb16-48dd-11e6-be69-c03fd5aad962','70640b34-48de-11e6-be69-c03fd5aad962');
+
+# SO-Product Name
+update default_header set allowcrossmodule = 'T' where id ='9fa52b53-2fd4-4e56-a76d-2e0fc210d8f1';
+
+# For Customer Quotation Module Line Items below
+update default_header set allowcrossmodule = 'T' where id IN ('02dc3590-36ab-11e6-aa97-eca86bfcd415','0899e482-36ab-11e6-aa97-eca86bfcd415','0e85d5cc-36ab-11e6-aa97-eca86bfcd415','13a9ca36-36ab-11e6-aa97-eca86bfcd415',    '194b7066-36ab-11e6-aa97-eca86bfcd415','b103bcd8-36ab-11e6-aa97-eca86bfcd415','dbcda34e-dc9b-11e6-a745-eca86bfcd415','48296840-dc9c-11e6-a745-eca86bfcd415','011d4d30-dcaf-11e6-a745-eca86bfcd415','fe186112-dd4f-11e6-930b-eca86bfcd415',
+ 'a13fc266-dd56-11e6-930b-eca86bfcd415','eb9790d8-f500-11e6-950b-eca86bfcd415')  and module=22;
+
+#Ajay Motwani 7th Mar 2017
+INSERT INTO audit_group VALUES (54,'Check In and Check Out');
+INSERT INTO audit_group VALUES (58,'Incident');
+
+INSERT INTO audit_action VALUES (347,'Check In',54);
+INSERT INTO audit_action VALUES (348,'Check Out',54);
+INSERT INTO audit_action VALUES (349,'Added Incident',58);
+INSERT INTO audit_action VALUES (350,'Updated Incident',58);
+INSERT INTO audit_action VALUES (351,'Deleted Incident',58);
+
+DROP TABLE audittrail;
+DROP TABLE auditaction;
+DROP TABLE auditgroup;
+
+#Shubham Pal 8th March 2017
+ALTER TABLE packing ADD COLUMN upsshipmentnumber VARCHAR (31) DEFAULT NULL;
+ALTER TABLE packing ADD COLUMN upsresponsejson text DEFAULT NULL;
+
+ALTER TABLE salesorder ADD COLUMN totalshippingcost DOUBLE DEFAULT 0;
+
+#Swapnil D. Khandre 9th March, 2017
+ALTER TABLE uobreceivingdetails ADD COLUMN activated char(1) DEFAULT 'F';
+UPDATE uobreceivingdetails SET activated = 'T';
+
+#Pandharinath Vaghole 9th March 2017
+ALTER TABLE paymentmethod ADD COLUMN autopopulateinibggeneration CHAR(1) DEFAULT 'F';
+
+#Vaibhav Patil 10th March, 2017
+UPDATE default_header SET ismandatory='T' WHERE module=91 AND id='1d51e7c4-fa3b-11e4-b89f-c03fd5ab06a3';
+
+#Bhushan Chitte 10th March 2017
+UPDATE debitnote dn  inner join jedetail jed on dn.centry=jed.id set dn.dntype=2,dn.account=jed.account where dn.purchasereturn is not null  and dn.account is null;
+
+#Neeraj Dwivedi 13th March 2017
+alter table salesreturn add column `generatedsource` int(11) DEFAULT '0';
+alter table salesorder add column `generatedsource` int(11) DEFAULT '0';
+alter table invoice add column `generatedsource` int(11) DEFAULT '0';
+
+#Ravindra Patare 14th March 2017
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4cb4e-04b4-11e7-93ae-92361f002671','packingNumber','Packing Number',554,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4ce6e-04b4-11e7-93ae-92361f002671','packingDate','Packing Date',554,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4cffe-04b4-11e7-93ae-92361f002671','customername','Customer',554,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4d166-04b4-11e7-93ae-92361f002671','statuscombo','Status',554,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4d2ce-04b4-11e7-93ae-92361f002671','memo','Memo',554,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4d422-04b4-11e7-93ae-92361f002671','letterofcn','Letter Of Credit Note:',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4d580-04b4-11e7-93ae-92361f002671','customername','Customer',854,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4daf8-04b4-11e7-93ae-92361f002671','dateoflc','Date Of LC',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4dfd0-04b4-11e7-93ae-92361f002671','packingnumber','Shipping Number',854,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4e156-04b4-11e7-93ae-92361f002671','packingdate','Shipping Date',854,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4e2c8-04b4-11e7-93ae-92361f002671','statuscombo','Status',854,1,0,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('30b4e426-04b4-11e7-93ae-92361f002671','memo','Memo',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ebc0e-07cb-11e7-93ae-92361f002671','portofloading','Port Of Loading',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ebff6-07cb-11e7-93ae-92361f002671','portofdischarge','Port Of Discharge',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ec10e-07cb-11e7-93ae-92361f002671','vessel','Vessel',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ec1e0-07cb-11e7-93ae-92361f002671','incoterms','INCOTERMS',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ec2bc-07cb-11e7-93ae-92361f002671','partialshipment','Partial Shipment',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ec398-07cb-11e7-93ae-92361f002671','transhipment','Transhipment',854,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('1c4ec398-07cb-11e7-93ae-92361f002671','transhipment','Transhipment',854,1,1,1,0,0,0);
+
+
+#Arshad Shaikh 14th March 2017
+update default_header set defaultHeader= 'Amount' , dummyvalue ='Amount'  where id='fe186112-dd4f-11e6-930b-eca86bfcd415';
+
+#Shubham Pal 14th March 2017
+update default_header set xtype = 4 where id = "8e171820-c047-11e6-ad26-eca86bff263e";
+
+#Swapnil D. Khandre 14th March, 2017
+CREATE TABLE grodetailistmapping (
+id  varchar(255) NOT NULL ,
+grodetail  varchar(255) NULL DEFAULT NULL ,
+istrequest  varchar(255) NULL DEFAULT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (istrequest) REFERENCES in_interstoretransfer (id),
+FOREIGN KEY (grodetail) REFERENCES grodetails (id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+alter table in_interstoretransfer add detailistmapping varchar(200) DEFAULT NULL REFERENCES grodetailistmapping(id);
+
+ALTER TABLE grodetailistmapping add actualquantity double DEFAULT 0;
+ALTER TABLE grodetailistmapping add quantitydue double DEFAULT 0;
+ALTER TABLE grodetailistmapping add rejectedquantity double DEFAULT 0;
+ALTER TABLE grodetailistmapping add approvedquantity double DEFAULT 0;
+
+CREATE TABLE repairgrodistmapping (
+id  varchar(255) NOT NULL ,
+repairstoreistrequest varchar(255) DEFAULT NULL,
+rejectedquantitydue double DEFAULT 0,
+rejectedquantity double DEFAULT 0,
+grodistmapping  varchar(255) DEFAULT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (repairstoreistrequest) REFERENCES in_interstoretransfer (id),
+FOREIGN KEY (grodistmapping) REFERENCES grodetailistmapping (id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE in_interstoretransfer add repairgrodetailistmapping varchar(200) DEFAULT NULL REFERENCES repairgrodistmapping(id);
+ALTER TABLE in_stockadjustment add rejectedgrodetailistmapping varchar(200) DEFAULT NULL REFERENCES repairgrodistmapping(id);
+ALTER TABLE grodetailistmapping add approvedserials varchar(100) DEFAULT NULL;
+ALTER TABLE grodetailistmapping add rejectedserials varchar(100) DEFAULT NULL;
+
+#Nitesh Kumar 14 March 2017
+#CN Line Item Fixed
+#Linking Date
+delete from customreportsdefaultfieldsmapping where id in ('cf833105-4924-4dd2-b2c5-1aa326972249','cf833105-4924-4dd2-b2c5-1aa326972250','cf833105-4924-4dd2-b2c5-1aa326972251');
+#Amount Due
+update default_header set iscustomreport = 'F' where id ='bd265ea3-eb86-471f-a6ee-3544db1471b9';
+#Invoice Amount
+update default_header set iscustomreport = 'F' where id ='bd265ea3-eb86-471f-a6ee-3544db1471b7';
+#Creation Date
+update default_header set iscustomreport = 'F' where id ='bd265ea3-eb86-471f-a6ee-3544db1471b3';
+#Due Date
+update default_header set iscustomreport = 'F' where id ='bd265ea3-eb86-471f-a6ee-3544db1471b4';
+#Created On field in Customer Invoice
+update default_header set dbtabletame="invoice",allowcrossmodule = 'T' where id ='1e10803a-84bd-01e3-8ab7-cba86bfbb901';
+#Due Date field in Customer Invoice
+update default_header set allowcrossmodule = 'T' where id ='c4155874-402f-11e3-91ea-ce3f5508acd9'; 
+#DN Line Item Fixed
+#Linking Date
+delete from customreportsdefaultfieldsmapping where id in ('1c803646-2fa4-475b-8b10-d1ba80157b43','1c803646-2fa4-475b-8b10-d1ba80157b44','1c803646-2fa4-475b-8b10-d1ba80157b45');
+#Invoice No
+update default_header set iscustomreport = 'F' where id ='c88d0a45-123a-4dec-bd74-d2d9a7bca5c3';
+#Invoice Amount
+update default_header set iscustomreport = 'F' where id ='c88d0a45-123a-4dec-bd74-d2d9a7bca5c7';
+#Creation Date 
+update default_header set iscustomreport = 'F' where id ='c88d0a45-123a-4dec-bd74-d2d9a7bca5c4';
+#Due Date 
+update default_header set iscustomreport = 'F' where id ='c88d0a45-123a-4dec-bd74-d2d9a7bca5c5';
+# Amount Due
+update default_header set iscustomreport = 'F' where id ='c88d0a45-123a-4dec-bd74-d2d9a7bca5c8';
+#Created On field in Vendor Invoice
+update default_header set dbtabletame="goodsreceipt",allowcrossmodule = 'T' where id ='2e10803a-84bd-01e3-8ab7-cba86bfbb901';
+#Due Date field in Vendor Invoice
+update default_header set allowcrossmodule = 'T' where id ='3d736c48-8760-11e3-b0c3-080027580062';
+#Amount Due field in Vendor Invoice
+update default_header set allowcrossmodule = 'T' where id ='53eb6354-61a6-4a6d-9cbf-6aea87bfe4fd';
+
+#Akshay Gujar 15th March 2017
+ALTER TABLE dntaxentry ADD COLUMN `istdsamount` int(1) DEFAULT 0;
+
+ALTER TABLE debitnote ADD COLUMN `tdspaidflag` int(1) DEFAULT '0';
+ALTER TABLE debitnote ADD COLUMN `tdspayment`  varchar(255) DEFAULT NULL;
+
+ALTER TABLE debitnote ADD COLUMN tdsinterestpaidflag int(1) DEFAULT '0';
+ALTER TABLE debitnote ADD COLUMN tdsinterestpayment varchar(255) DEFAULT NULL;
+
+#Neeraj Dwivedi 15th March 2017
+#Inserting Packaging field in Line Item for Products
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("2a3676ae-089d-11e7-93ae-92361f002671","2","Packaging","packaging","1",'T','T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("2a367a1e-089d-11e7-93ae-92361f002671","20","Packaging","packaging","1",'T','T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("2a367c30-089d-11e7-93ae-92361f002671","29","Packaging","packaging","1",'T','T','T');
+
+INSERT INTO default_header(id,module,defaultHeader,dataindex,xtype,islineitem,allowinotherapplication,isreadonly) VALUES ("2a367c440-089d-11e7-93ae-92361f002671","30","Packaging","packaging","1",'F','T','T');
+
+#Ajay Motwani 15 March 2017
+
+INSERT INTO default_header (id,defaultHeader,pojomethodname,validatetype,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,module,dataindex,
+isdocumentimport,ismandatory,submoduleflag)VALUES('fa7acf7b-f8ee-11e6-858e-14dda97928d6','Vendor Code','Acccode','ref','Vendor','acccode','ID','14','acccode','T','T',2);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype)
+VALUES ('2f945704-f9a5-11e6-8e97-14dda97928d6','14','Cashier\'s Cheque/Cheque Number','ChequeNumber',0,0,'F','F',1,'chequenumber','chequenumber','payment','T','chequenumber','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype)
+ VALUES ('590a79e0-f9a8-11e6-8e97-14dda97928d6','14','Cheque Date','ChequeDate',0,0,'F','F',1,'chequedate','chequedate','payment','T','chequedate','date');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,validatetype,dataindex) 
+VALUES ('8655b171-f99a-11e6-8e97-14dda97928d6','14','Document Currency To Payment Method Currency exchange rate','exrate',0,0,'T','T',1,'exrate','exrate','payment','T','double','exrate');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) 
+VALUES ('326180d8-f9a7-11e6-8e97-14dda97928d6','14','BankName','bankname',0,0,'F','F',1,'bankname','bankname','payment','T', 'bankname','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) 
+VALUES ('f622011c-f9a8-11e6-8e97-14dda97928d6','14','Payment Status','paymentstatus',0,0,'F','F',1,'paymentstatus', 'paymentstatus','payment','T','paymentstatus','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,dataindex,validatetype) 
+VALUES ('075cae8e-f9ac-11e6-8e97-14dda97928d6','14','Reference Number/Description','Chequedescription',0,0,'F','F',1, 'Chequedescription','Chequedescription','payment','T','Chequedescription','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('7ca021d6-f9b0-11e6-8e97-14dda97928d6','14','Document Type','documenttype',0,0,'T','T',1,'documenttype','documenttype','payment','T','T','type','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname, reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('83e7a4d7-fd7c-11e6-9962-14dda97928d6','14','Document No','documentno',0,0,'T','F',1,'documentno','documentno','payment','T','T','documentno','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('9e446ba4-fd80-11e6-9962-14dda97928d6','14','Description','description',0,0,'F','F',1,'description','description','payment','T','T','description','text');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('8e964ecf-fd9b-11e6-9962-14dda97928d6','14','Amount Due','amountdue',0,0,'T','T',1,'amountdue','amountdue','payment','T','T','amountDue','double');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('671e5eff-fd84-11e6-9962-14dda97928d6','14','Enter Amount','enteramount',0,0,'T','T',1,'enteramount','enteramount','payment','T','T','enteramount','double');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('b66fb6ce-fd85-11e6-9962-14dda97928d6','14','Exchange Rate','exchangerate',0,0,'T','T',1,'exchangerate','exchangerate','payment','T','T','exchangeratefortransaction','double');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype,submoduleflag) 
+VALUES ('baaf43ac-fd87-11e6-9962-14dda97928d6','14','Type','debitType',0,0,'F','T',1,'debitType','debitType','payment','T','T','debitType','text','3');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('fd1a41f0-fd97-11e6-9962-14dda97928d6','14','Transaction Amount','transactionamount',0,0,'F','F',1,'transactionamount','transactionamount','payment','T','T','transactionamount','double');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype,hbmnotnull) 
+VALUES ('3bc36f42-fd98-11e6-9962-14dda97928d6','14','Tax Amount','taxamount',0,0,'F',1,'taxamount','taxamount','payment','T','T','taxamount','double','F');
+
+INSERT INTO default_header(id,module,hbmnotnull,defaultHeader,pojomethodname,flag,maxlength,ismandatory,xtype,dummyvalue,dbcolumnname,reftablename,isdocumentimport,islineitem,dataindex,validatetype) 
+VALUES ('4318dee6-fd98-11e6-9962-14dda97928d6','14','F','Transaction Amount Due','transactionamountdue',0,0,'F',1,'transactionamountdue','transactionamountdue','payment','T','T','amountDueOriginal','double');
+
+INSERT INTO  default_header (id ,recordname,refdatacolumn_hbmname,defaultHeader, dbcolumnname, reftablename,reftablefk,reftabledatacolumn,dummyvalue,xtype,module,ismandatory,isdocumentimport,allowimport,pojomethodname,dataindex,validatetype,
+reffetchcolumn_hbmname,refmodule_pojoclassname,submoduleflag) 
+VALUES ('6bb19a35-fe80-11e6-9554-14dda97928d6','customer','acccode','Customer','customer','customer','id','customer','customer','1','14','T','T','1','Customer','acccode','ref','ID','Customer','1');
+
+update  default_header set dataindex='billno',isdocumentimport='T' where module='14'  and defaultheader='Payment No';
+
+update  default_header set validatetype='text', dataindex='memo',isdocumentimport='T',hbmnotnull='F' where module='14'  and defaultheader='Memo';
+
+update  default_header set validatetype='date',dataindex='creationdate',isdocumentimport='T' where module='14'  and defaultheader='Date';
+
+update  default_header set validatetype='ref',dataindex='currencyname',isdocumentimport='T',refdatacolumn_hbmname='name' where module='14'  and defaultheader='Currency';
+
+update  default_header set reffetchcolumn_hbmname='ID',ismandatory='T',isdocumentimport='T',allowimport='1',dataindex='paymentmethod',reftablefk='id',refdatacolumn_hbmname='methodName',
+refmodule_pojoclassname='PaymentMethod',pojomethodname='PaymentMethod',validatetype='ref' where module='14'  and defaultheader='Payment Method';
+
+update  default_header set refmodule_pojoclassname='MasterItem',reffetchcolumn_hbmname='ID',ismandatory='F',isdocumentimport='T', dataindex='paidto',refdatacolumn_hbmname='value', 
+pojomethodname='PaidTo',validatetype='ref' where module='14'  and defaultheader='Paid To';
+
+update  default_header set ismandatory='F',isdocumentimport='T',hbmnotnull='F',allowimport='1',
+dataindex='bankInterest',validatetype='double' where module='14'  and defaultheader='Bank Interest';
+
+update  default_header set ismandatory='F',isdocumentimport='T',hbmnotnull='F',allowimport='1',
+dataindex='bankCharges',validatetype='double' where module='14'  and defaultheader='Bank Charges';
+
+update  default_header set dataindex='bankInterestCmb',refmodule_pojoclassname='Account',pojomethodname='bankInterestAccount',validatetype='text',
+recordname='account.ID',ismandatory='F',isdocumentimport='T',hbmnotnull='F' where module='14' and defaultheader='Bank Interest Account';
+
+update  default_header set dataindex='bankChargesCmb',refdatacolumn_hbmname='name',pojomethodname='bankChargesAccount',validatetype='text',
+ismandatory='F',isdocumentimport='T',allowimport='1',hbmnotnull='F' where module='14'  and defaultheader='Bank Charges Account';
+
+#Sample File query's for Make Payment module
+
+INSERT INTO samplefiledata VALUES ('3088eb1c-f75d-11e6-bf48-14dda97928d6', '[{"title":"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L"},{"header":"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8"},{"align":"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]',		'[{"T1":"Payment No","T2":"Date","T3":"Vendor Code","T4":"Currency","T5":"Payment Method","T6":"Document Currency To Payment Method Currency exchange rate","T7":"Cashier\'s Cheque/Cheque Number","T8":"Bank Name","T9":"Cheque Date","T10":"Payment Status","T11":"Reference Number/Description","T12":"Memo","T13":"Paid To","T14":"Bank Interest Account","T15":"Bank Interest","T16":"Bank Charges Account","T17":"Bank Charges","L18":"Document Type","L19":"Document No","L1":"Description","L2":"Tax","L3":"Tax Amount","L4":"Transaction Amount","L5":"Transaction Amount Due","L6":"Exchange Rate","L7":"Amount Due","L8":"Enter Amount"},{"T1":"MP002","T2":"01/06/17","T3":V000,"T4":"SG Dollar (SGD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"Invoice","L19":"INV0012","L1":"New","L2":"","L3":"","L4":200,"L5":200,"L6":1,"L7":200,"L8":200},{"T1":"MP003","T2":"01/06/17","T3":V001,"T4":"US Dollars (USD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"Advance/Deposit","L19":"","L1":"New","L2":"","L3":"","L4":100,"L5":100,"L6":1,"L7":100,"L8":100},{"T1":"MP004","T2":"01/06/17","T3":V002,"T4":"US Dollars (USD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"General Ledger Code","L19":"A/P Accrual - Inventory","L1":"New","L2":"GST(DS)@7.00%","L3":14,"L4":100,"L5":100,"L6":1,"L7":100,"L8":100},{"T1":"MP005","T2":"01/06/17","T3":V001,"T4":"US Dollars (USD)","T5":"Cash","T6":1,"T7":"","T8":"","T9":"","T10":"","T11":"","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"General Ledger Code","L19":"A/P Accrual - Inventory","L1":"New","L2":"GST(DS)@7.00%","L3":14,"L4":100,"L5":100,"L6":1,"L7":100,"L8":100},{"T1":"MP006","T2":"01/06/17","T3":V002,"T4":"US Dollars (USD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"General Ledger Code","L19":"A/P Accrual - Inventory","L1":"New","L2":"GST(DS)@7.00%","L3":14,"L4":100,"L5":100,"L6":1,"L7":100,"L8":100}]', 
+'MakePaymentVendor', 'sample_make_payment_vendor', '_v1', 'T', 0);
+
+INSERT INTO samplefiledata VALUES ('ae0b5b9e-f83a-11e6-858e-14dda97928d6', '[{"title":"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L"},{"header":"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10"},{"align":"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]', '[{"T1": "Payment No","T2": "Date","T3": "Customer Code","T4": "Currency","T5": "Payment Method","T6": "Document Currency To Payment Method Currency exchange rate","T7": "Cashier\'s Cheque/Cheque Number","T8": "Bank Name","T9": "Cheque Date","T10": "Payment Status","T11": "Reference Number/Description","T12": "Memo","T13": "Paid To","T14": "Bank Interest Account","T15": "Bank Interest","T16": "Bank Charges Account","T17": "Bank Charges","L1": "Document Type","L2": "Document No","L3": "Description","L4": "Tax","L5": "Tax Amount","L6": "Transaction Amount","L7": "Transaction Amount Due","L8": "Exchange Rate","L9": "Amount Due","L10": "Enter Amount"},{"T1": "MP001","T2": "01/06/17","T3": "C000","T4": "SG Dollar (SGD)","T5": "Cash","T6": 1,"T7": "","T8": "","T9": "","T10": "","T11": "","T12": "Memo","T13": "Paid","T14": "Bank","T15": 100,"T16": "Bank","T17": 100,"L1": "Credit Note","L2": " CN000029","L3": "New","L4": "","L5": "","L6": 100,"L7": 100,"L8": 1,"L9":100, "L10":100  },{"T1": " MP002","T2": "01/06/17","T3": "C001","T4": "SG Dollar (SGD)","T5": "Bank","T6": 1,"T7": 1,"T8": "Banks Name","T9": "01/06/17","T10": "Uncleared","T11": "BANKREF123","T12": "Memo","T13": "Paid","T14": "Bank","T15": 100,"T16": "Bank","T17": 100,"L1": "Refund/Deposit","L2": " RP002","L3": "New","L4": "","L5": "","L6": 100,"L7": 100,"L8": 1} ]', 
+'MakePaymentCustomer', 'sample_make_payment_customer', '_v1', 'T', 0);
+
+INSERT INTO samplefiledata VALUES ('e6092adf-f839-11e6-858e-14dda97928d6', '[{"title":"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L"},{"header":"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10"},{"align":"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]',	'[{"T1":"Payment No","T2":"Date","T3":"Type","T4":"Currency","T5":"Payment Method","T6":"Document Currency To Payment Method Currency exchange rate","T7":"Cashier\'s Cheque/Cheque Number","T8":"Bank Name","T9":"Cheque Date","T10":"Payment Status","T11":"Reference Number/Description","T12":"Memo","T13":"Paid To","T14":"Bank Interest Account","T15":"Bank Interest","T16":"Bank Charges Account","T17":"Bank Charges","L1":"Document Type","L2":"Document No","L3":"Description","L4":"Tax","L5":"Tax Amount","L6":"Transaction Amount","L7":"Transaction Amount Due","L8":"Exchange Rate","L9":"Amount Due","L10":"Enter Amount"},{"T1":"MP001","T2":"01/06/17","T3":"Debit","T4":"SG Dollar (SGD)","T5":"Bank","T6":1,"T7":1,"T8":"BankName","T9":"01/06/17","T10":"Uncleared","T11":"description","T12":"Memo","T13":"Paid","T14":"Bank","T15":100,"T16":"Bank","T17":100,"L1":"General Ledger Code","L2":"Net Profit/Loss","L3":"New","L4":"GST(IM)@7.00%","L5":8,"L6":100,"L7":100,"L8":1,"L9":100,"L10":100},{"T1":"MP002","T2":"01/06/17","T3":"Debit","T4":"SG Dollar (SGD)","T5":"Cash","T6":1,"T7":"","T8":"","T9":"","T10":"","T11":"","T12":"Memo","T13":"Paid","T14":"Bank","T15":100,"T16":"Bank","T17":100,"L1":"General Ledger Code","L2":"Net Profit/Loss","L3":"New","L4":"","L5":"","L6":100,"L7":100,"L8":1,"L9":100,"L10":100},{"T1":"MP003","T2":"01/06/17","T3":"Debit","T4":"SG Dollar (SGD)","T5":"Bank","T6":1,"T7":1,"T8":"BankName","T9":"01/06/17","T10":"Uncleared","T11":"description","T12":"Memo","T13":"Paid","T14":"Bank","T15":100,"T16":"Bank","T17":100,"L1":"General Ledger Code","L2":"Net Profit/Loss","L3":"New","L4":"GST(IM)@7.00%","L5":8,"L6":100,"L7":100,"L8":1,"L9":100,"L10":100}]', 
+'MakePaymentGL', 'sample_make_payment_gl', '_v1', 'T', 0);
+
+#Sumit Jain 15th March, 2017
+ALTER TABLE `purchasereturn` ADD COLUMN `mvattransactionno`  varchar(50) DEFAULT '';
+ALTER TABLE `salesreturn` ADD COLUMN `mvattransactionno`  varchar(50) DEFAULT '';
+ALTER TABLE `debitnote` ADD COLUMN `mvattransactionno`  varchar(50) DEFAULT '';
+ALTER TABLE `creditnote` ADD COLUMN `mvattransactionno`  varchar(50) DEFAULT '';
+
+#Ravindra Patare 15 th March 2017
+ update  customizereportheader set dataIndex='dateOfLc' where moduleid=854 and id='30b4daf8-04b4-11e7-93ae-92361f002671';
+
+#Rahul Sawale 16th March, 2017
+ALTER TABLE extracompanypreferences ADD COLUMN productsearchingflag INT(1) DEFAULT 1;
+
+#Dipak Dorkar 16th March, 2017
+insert into reportmaster(id,name,description,method_name) values("CheckInCheckOut","Check In and Check Out Report","View Check In and Check Out Report","callCheckInandCheckOutReport()");
+
+# Suhas Chaware 17 March 2017
+
+ALTER TABLE extracompanypreferences ADD COLUMN jobworkoutflow CHAR(1) DEFAULT 'F';
+ALTER TABLE extracompanypreferences ADD COLUMN `vendorjoborderstore`  varchar(55) DEFAULT NULL;
+
+CREATE TABLE `challannumber` (
+`id`  varchar(255) NOT NULL ,
+`challanno`  varchar(255) NOT NULL ,
+`company`  varchar(255) NOT NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`))
+ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `grodstockoutistmapping` (
+`id`  varchar(255) NOT NULL ,
+`outqty`  DOUBLE DEFAULT 0 ,
+`interstoretransfer`  varchar(255) NOT NULL,
+`grodetails`  varchar(255) NOT NULL,
+`stockadjustment`  varchar(255) NOT NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`interstoretransfer`) REFERENCES `in_interstoretransfer` (`id`),
+FOREIGN KEY (`grodetails`) REFERENCES `grodetails` (`id`),
+FOREIGN KEY (`stockadjustment`) REFERENCES `in_stockadjustment` (`id`))
+ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE purchaseorder add column `isjobworkoutorder` char(1) DEFAULT 'F';
+ALTER TABLE goodsreceipt add column `isjobworkoutinv` char(1) DEFAULT 'F';
+alter table podetails add  `bomcode` varchar(255) DEFAULT NULL  REFERENCES `bomdetail` (`id`);
+alter table grodetails add  `bomcode` varchar(255) DEFAULT NULL  REFERENCES `bomdetail` (`id`);
+ALTER TABLE in_interstoretransfer add column `isjobworkstocktransfer` char(1) DEFAULT 'F';
+ALTER TABLE in_interstoretransfer ADD COLUMN podetails varchar(255) DEFAULT NULL;
+ALTER TABLE in_interstoretransfer ADD COLUMN challanno varchar(255) DEFAULT NULL REFERENCES `challanno` (`id`);
+
+#Pandharinath Vaghole 20th March 2017
+ALTER TABLE expenseggrdetails ADD COLUMN gstcurrencyrate double DEFAULT '0';
+ALTER TABLE expenseggrdetails CHANGE COLUMN rateIncludingGst rateexcludinggst DOUBLE DEFAULT '0';
+
+#Pawan Kale 20th March 2017
+#Purchase Requisition
+#Line Level Fields
+#Product Id
+update customizereportheader set ismanadatoryfield=1 where id='c991141a-eeae-11e6-9459-4ccc6a2d6a4d';
+#Quantity
+update customizereportheader set ismanadatoryfield=1 where id='11d65577-eeaf-11e6-9459-4ccc6a2d6a4d';
+#UOM
+update customizereportheader set ismanadatoryfield=1 where id='1de6319c-eeaf-11e6-9459-4ccc6a2d6a4d';
+#Unit Price
+update customizereportheader set ismanadatoryfield=1 where id='380c6a5e-eeaf-11e6-9459-4ccc6a2d6a4d'; 
+#Estimated Cost
+update customizereportheader set ismanadatoryfield=1 where id='3f808dc1-eeaf-11e6-9459-4ccc6a2d6a4d'; 
+
+#Report Fields
+#Sub-Total
+delete from customizereportmapping where customizereportheader='4b1e9c51-eed3-11e6-82f1-4ccc6a2d6a4d';
+delete from customizereportheader where id='4b1e9c51-eed3-11e6-82f1-4ccc6a2d6a4d';
+#Currency
+delete from customizereportmapping where customizereportheader='01f04dbc-eed1-11e6-82f1-4ccc6a2d6a4d';
+delete from customizereportheader where id='01f04dbc-eed1-11e6-82f1-4ccc6a2d6a4d';
+
+#Request For Quotation
+#Line Level Fields
+#Product Id
+update customizereportheader set ismanadatoryfield=1 where id='7c31c1d8-f032-11e6-a359-4ccc6a2d6a4d';
+#Quantity
+update customizereportheader set ismanadatoryfield=1 where id='e63e7ea4-f032-11e6-a359-4ccc6a2d6a4d';
+#UOM
+update customizereportheader set ismanadatoryfield=1 where id='f7176be9-f032-11e6-a359-4ccc6a2d6a4d'; 
+
+#Dipak Dorkar 17th March 2017
+ALTER TABLE receipt MODIFY approvestatuslevel INT DEFAULT 11;
+update receipt set approvestatuslevel = 11;
+
+#Rahul Ajgar 21th March 2017
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Ageing';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Ledger';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Ledger_detailed_report';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Movement_with_Advance_Search';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Report';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Status_Report';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Valuation_Detail_Report';
+update reportmaster set iscustomwidgetready= 'T' where id='Stock_Valuation_Summary_Report';
+
+#Ajit Ankalle 22nd March 2017
+ALTER TABLE dealerexciseterm ADD COLUMN dutyamount double DEFAULT 0, ADD COLUMN manuimpdutyamount double DEFAULT 0;
+
+#Dipak Dorkar 21st March 2017
+insert into reportmaster(id,name,description,method_name) values("IncidentCases","Incident Cases Report","View Incident Cases Report","callIncidentCasesReport()");
+alter table customercheckinout add column inlatitude VARCHAR(255) DEFAULT NULL;
+alter table customercheckinout add column inlongitude VARCHAR(255) DEFAULT NULL;
+alter table customercheckinout add column outlatitude VARCHAR(255) DEFAULT NULL;
+alter table customercheckinout add column outlongitude VARCHAR(255) DEFAULT NULL;
+alter table incidentcases add column latitude VARCHAR(255) DEFAULT NULL;
+alter table incidentcases add column longitude VARCHAR(255) DEFAULT NULL;
+
+#Deepak Satpute 22nd March 2017
+Alter table packing add column seqnumber int(11) default 0;
+Alter table packing add column autogen CHAR(1) DEFAULT 'F';
+Alter table packing add column seqformat varchar(50) default null;
+Alter table shippingdelivery add column seqnumber int(11) default 0;
+Alter table shippingdelivery add column autogen CHAR(1) DEFAULT 'F';
+Alter table shippingdelivery add column seqformat varchar(50) default null;
+
+#Ajay Motwani 23th Mar 2017
+
+INSERT INTO audit_action VALUES (352,'Receive Payment',12);
+
+INSERT INTO audit_action VALUES (345,'Receive Payment Approved',12);
+
+INSERT INTO audit_action VALUES (344,'Receive Payment Rejected',12);
+
+update  default_header set defaultheader='Bank Name' where id='326180d8-f9a7-11e6-8e97-14dda97928d6';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,xtype,dummyvalue,dbcolumnname,
+reftablename,isdocumentimport,islineitem,dataindex,validatetype,reffetchcolumn_hbmname,refdatacolumn_hbmname,refmodule_pojoclassname,
+hbmnotnull) VALUES ('0c86c388-fd98-11e6-9962-14dda97928d6','14','Tax','Tax',0,0,'F',1,'Tax','tax','tax','T','T','tax','ref',
+"ID","taxCode","Tax",'F');
+
+# Suhas Chaware 23 March 2017
+ALTER TABLE grorder add column `isjobworkoutorder` char(1) DEFAULT 'F';
+
+#Deepak Singh 23rd March 2017
+
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname) VALUES ("128", "Role Management", "com.krawler.common.admin.Rolelist", "roleid");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("89063710-0943-11e7-8451-14dda97927de","128","Permission Group",null,0,0,'T','T',null,null,null,null,null,"permissiongroup",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("de111abc-0943-11e7-8451-14dda97927de","128","Permission Name",null,0,0,'T','F',null,null,null,null,null,"permissionname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("bfb9573a-0944-11e7-b787-14dda97927de","128","Permission Type",null,0,0,'T','F',null,null,null,null,null,"permissiontype",null);
+
+#Ajit Ankalle 24th March 2017
+UPDATE vendor v INNER JOIN extracompanypreferences e ON v.company = e.id SET v.isTDSapplicableonvendor = e.istdsapplicable where e.istdsapplicable='T';
+UPDATE customer c INNER JOIN extracompanypreferences e ON c.company = e.id SET c.istdsapplicableoncust = e.istdsapplicable where e.istdsapplicable='T';
+
+#Sumit Jain 27th March 2017
+ALTER TABLE t_landingcostcategory ADD allocationid INT(3);
+UPDATE t_landingcostcategory set allocationid=lcallocationid;
+ALTER TABLE t_landingcostcategory DROP COLUMN lcallocationid;
+
+
+#Pandurang 27th March 2017
+CREATE TABLE revaluationjecustomdata (
+  `id` varchar(255) NOT NULL,
+  `customfield` text,
+  `lineleveldimensions` text,
+  `userid` varchar(255) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`userid`) REFERENCES `users` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#Arshad 28 th March 2017
+update default_header set islineitem='F' , iscustomreport='F' where id='385d800a-848d-01a3-8ab7-cba76bfbb412';
+
+insert INTO default_header (id,defaultHeader,xtype,dbcolumnname,dbtabletame,reftablename,reftablefk,reftabledatacolumn,dummyvalue,module,islineitem,iscustomreport,allowcrossmodule) VALUES
+('6cd9c8a2-1395-11e7-805c-eca86bfcd415','Tax Name',4,'tax','quotationdetails','tax','id','name','Tax Name',22,'T','T','T');
+
+# Amol Dhokale 28th March 2017 (SDP-8514)
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield,isreportfield,ismanadatoryfield,islinefield,isusermanadatoryfield) 
+VALUES ("55434611-d624-11e5-aa45-625662870761",'barcode','Barcode',34,1,1,1,0,1,0);
+
+# Basaprabhu Ajur 2017-03-28
+
+INSERT INTO in_seqmodule VALUES (6,'Asset Id',1);
+
+#Swapnil D. Khandre 28th March, 2017
+
+CREATE TABLE dodqcistmapping (
+id  varchar(255) NOT NULL ,
+dodetailid  varchar(255) NULL DEFAULT NULL ,
+qcistrequest  varchar(255) NULL DEFAULT NULL,
+approvedserials varchar(100) DEFAULT NULL,
+rejectedserials varchar(100) DEFAULT NULL,
+quantity double DEFAULT 0,
+quantitydue double DEFAULT 0,
+approvedquantity double DEFAULT 0,
+rejectedquantity double DEFAULT 0,
+pickedquantity double DEFAULT 0,
+PRIMARY KEY (id),
+FOREIGN KEY (qcistrequest) REFERENCES in_interstoretransfer (id),
+FOREIGN KEY (dodetailid) REFERENCES dodetails (id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE rejectdodistmapping (
+id  varchar(255) NOT NULL ,
+repairistrequest  varchar(255) NULL DEFAULT NULL ,
+dodqcistmapping varchar(255) NULL DEFAULT NULL,
+pickedquantity double DEFAULT 0,
+repairedquantity double DEFAULT 0,
+rejectedquantity double DEFAULT 0,
+quantity double DEFAULT 0,
+quantitydue double DEFAULT 0,
+PRIMARY KEY (id),
+FOREIGN KEY (repairistrequest) REFERENCES in_interstoretransfer (id),
+FOREIGN KEY (dodqcistmapping) REFERENCES dodqcistmapping (id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE in_stockadjustment add rejectedapproveddodqcistmapping varchar(200) DEFAULT NULL REFERENCES rejectdodistmapping(id);
+ALTER TABLE in_stockadjustment add rejecteddodqcistmapping varchar(200) DEFAULT NULL REFERENCES rejectdodistmapping(id);
+ALTER TABLE in_stockadjustment add approveddodqcistmapping varchar(200) DEFAULT NULL REFERENCES dodqcistmapping(id);
+ALTER TABLE dodistmapping add dodqcistmapping varchar(200) DEFAULT NULL REFERENCES dodqcistmapping(id);
+ALTER TABLE dodistmapping add pickrejecteddodqcistmapping varchar(200) DEFAULT NULL REFERENCES rejectdodistmapping(id);
+
+ALTER TABLE compaccpreferences ADD qaapprovalflowindo CHAR(1) DEFAULT 'F';
+
+#Dipak Dorkar 30 March 2017
+update default_header set hbmnotnull='F' where module=28 and id='50ea86bb-d654-11e6-b2a8-14dda979267b' and defaultHeader='Batch Quantity';
+update default_header set hbmnotnull='F' where module=28 and id='25c1e782-8760-11e3-b0c3-080027580062' and defaultHeader='Cost Center';
+update  modules  set uniquekey_methodname='GoodsReceiptOrderNumber' and uniquekey_hbmname='goodsReceiptOrderNumber' where id='28';
+
+#Sankalpa Sitaphale 30 March 2017
+alter table productreplacement add column description varchar(2048);
+
+#Dipak Dorkar 30 March 2017
+update default_header set hbmnotnull='F' where module=28 and id='50ea86bb-d654-11e6-b2a8-14dda979267b' and defaultHeader='Batch Quantity';
+update default_header set hbmnotnull='F' where module=28 and id='25c1e782-8760-11e3-b0c3-080027580062' and defaultHeader='Cost Center';
+update  modules  set uniquekey_methodname='GoodsReceiptOrderNumber',uniquekey_hbmname='goodsReceiptOrderNumber' where id='28';
+
+
+#Neeraj Dwivedi 31st March 2017
+CREATE TABLE `rest_client_details` (
+  `id` varchar(255),
+  `company` varchar(255),
+ `moduleid` varchar(40) NOT NULL,
+  `detail` LONGTEXT  NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into rest_client_details values('21f10678-105c-11e7-93ae-92361f002671','030c3196-2310-4b98-9f30-8b7089f7c5af','2',"{'accountid':'402880ce5b001e20015b004c0b950027','accountcode':'DummyCode','paymentmethodid':'402880ce5b001e20015b0051b3c40028'}");
+
+#Ajay Motwani 24th Mar 2017
+
+#Customer Code Payment
+update  default_header set defaultheader='Customer Code', hbmnotnull='T' where id='6bb19a35-fe80-11e6-9554-14dda97928d6';
+
+#Type Payment
+update  default_header set ismandatory='T' where id='baaf43ac-fd87-11e6-9962-14dda97928d6';
+
+update modules set uniquekey_methodname='PaymentNumber', uniquekey_hbmname='paymentNumber' WHERE id='14';
+
+update modules set uniquekey_methodname='ReceiptNumber', uniquekey_hbmname='receiptNumber' WHERE id='16';
+
+#Bank Name Payment
+update  default_header set defaultheader='Bank Name' where id='326180d8-f9a7-11e6-8e97-14dda97928d6';
+
+UPDATE samplefiledata SET header_json='[{"title":"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L,L"}, {"header":"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11"}, {"align":"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]', filedata_json='[{"T1":"Payment No","T2":"Date","T3":"Currency","T4":"Payment Method","T5":"Document Currency To Payment Method Currency exchange rate","T6":"Cashier\'s Cheque/Cheque Number","T7":"Bank Name","T8":"Cheque Date","T9":"Payment Status","T10":"Reference Number/Description","T11":"Memo","T12":"Paid To","T13":"Bank Interest Account","T14":"Bank Interest","T15":"Bank Charges Account","T16":"Bank Charges","L1":"Document Type","L2":"Type","L3":"Document No","L4":"Description","L5":"Tax","L6":"Tax Amount","L7":"Transaction Amount","L8":"Transaction Amount Due","L9":"Exchange Rate","L10":"Amount Due","L11":"Enter Amount"},{"T1":"MP001","T2":"01/06/17","T3":"SG Dollar (SGD)","T4":"Bank","T5":1,"T6":1,"T7":"BankName","T8":"01/06/17","T9":"Uncleared","T10":"description","T11":"Memo","T12":"Paid","T13":"Bank","T14":100,"T15":"Bank","T16":100,"L1":"General Ledger Code","L2":"Debit","L3":"Net Profit/Loss","L4":"New","L5":"GST(IM)@7.00%","L6":8,"L7":100,"L8":100,"L9":1,"L10":100,"L11":100},{"T1":"MP002","T2":"01/06/17","T3":"SG Dollar (SGD)","T4":"Cash","T5":1,"T6":"","T7":"","T8":"","T9":"","T10":"","T11":"Memo","T12":"Paid","T13":"Bank","T14":100,"T15":"Bank","T16":100,"L1":"General Ledger Code","L2":"Debit","L3":"Net Profit/Loss","L4":"New","L5":"","L6":"","L7":100,"L8":100,"L9":1,"L10":100,"L11":100},{"T1":"MP003","T2":"01/06/17","T3":"SG Dollar (SGD)","T4":"Bank","T5":1,"T6":1,"T7":"Bank Name","T8":"01/06/17","T9":"Uncleared","T10":"description","T11":"Memo","T12":"Paid","T13":"Bank","T14":100,"T15":"Bank","T16":100,"L1":"General Ledger Code","L2":"Debit","L3":"Net Profit/Loss","L4":"New","L5":"GST(IM)@7.00%","L6":8,"L7":100,"L8":100,"L9":1,"L10":100,"L11":100}]' WHERE id='e6092adf-f839-11e6-858e-14dda97928d6';
+
+#ReceiptNo
+update  default_header set  submoduleflag=1 WHERE id='a9f69dcc-8760-11e3-b0c3-080027580062';
+
+update  default_header set defaultHeader='Customer Code', recordname='customer', refdatacolumn_hbmname='acccode', dataindex='acccode'
+WHERE id='ddf27b32-d71c-11e6-87ef-14dda9792840';
+
+update default_header set pojomethodname='Vendor', defaultHeader='Vendor Code', refmodule_pojoclassname='Vendor', refdatacolumn_hbmname='acccode', reffetchcolumn_hbmname='ID', ismandatory = 'T', hbmnotnull = 'T', validatetype='ref', dataindex='acccode', allowimport='1',isdocumentimport = 'T', submoduleflag=2  where id = 'ada8da16-8760-11e3-b0c3-080027580062';
+
+#Amount Due Receipt
+UPDATE default_header set ismandatory='F', hbmnotnull='F' where id='2cee7e52-d272-11e6-bf18-14dda97927d6';
+
+#Amount Due Payment
+UPDATE default_header set ismandatory='F', hbmnotnull='F' where id='8e964ecf-fd9b-11e6-9962-14dda97928d6';
+
+UPDATE samplefiledata SET filedata_json='[{"T1":"Payment No","T2":"Date","T3":"Vendor Code","T4":"Currency","T5":"Payment Method","T6":"Document Currency To Payment Method Currency exchange rate","T7":"Cashier\'s Cheque/Cheque Number","T8":"Bank Name","T9":"Cheque Date","T10":"Payment Status","T11":"Reference Number/Description","T12":"Memo","T13":"Paid To","T14":"Bank Interest Account","T15":"Bank Interest","T16":"Bank Charges Account","T17":"Bank Charges","L18":"Document Type","L19":"Document No","L1":"Description","L2":"Tax","L3":"Tax Amount","L4":"Transaction Amount","L5":"Transaction Amount Due","L6":"Exchange Rate","L7":"Amount Due","L8":"Enter Amount"},{"T1":"MP002","T2":"01/06/17","T3":V000,"T4":"SG Dollar (SGD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"Invoice","L19":"INV0012","L1":"New","L2":"","L3":"","L4":200,"L5":200,"L6":1,"L7":200,"L8":200},{"T1":"MP003","T2":"01/06/17","T3":V001,"T4":"US Dollars (USD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"Advanced/Deposit","L19":"","L1":"New","L2":"","L3":"","L4":100,"L5":100,"L6":1,"L7":100,"L8":100},{"T1":"MP004","T2":"01/06/17","T3":V002,"T4":"US Dollars (USD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"General Ledger Code","L19":"A/P Accrual - Inventory","L1":"New","L2":"GST(DS)@7.00%","L3":14,"L4":100,"L5":100,"L6":1,"L7":100,"L8":100},{"T1":"MP005","T2":"01/06/17","T3":V001,"T4":"US Dollars (USD)","T5":"Cash","T6":1,"T7":"","T8":"","T9":"","T10":"","T11":"","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"General Ledger Code","L19":"A/P Accrual - Inventory","L1":"New","L2":"GST(DS)@7.00%","L3":14,"L4":100,"L5":100,"L6":1,"L7":100,"L8":100},{"T1":"MP006","T2":"01/06/17","T3":V002,"T4":"US Dollars (USD)","T5":"Bank","T6":1,"T7":1,"T8":"a","T9":"01/06/17","T10":"Uncleared","T11":"BankRef123","T12":"Memo","T13":"Paid","T14":"A/P Accrual - Inventory","T15":200,"T16":"A/P Accrual - Inventory","T17":200,"L18":"General Ledger Code","L19":"A/P Accrual - Inventory","L1":"New","L2":"GST(DS)@7.00%","L3":14,"L4":100,"L5":100,"L6":1,"L7":100,"L8":100}]' 
+where id='3088eb1c-f75d-11e6-bf48-14dda97928d6';
+
+#ReceiptPaymentCustomer
+
+UPDATE `samplefiledata`  set `header_json` = '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L18,L19,L1,L2,L3,L4,L5,L6,L7,L8\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Customer Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Reference Number/Description\",\"T12\":\"Memo\",\"T13\":\"Received From\",\"T14\":\"Bank Interest Account\",\"T15\":\"Bank Interest\",\"T16\":\"Bank Charges Account\",\"T17\":\"Bank Charges\",\"L18\":\"Document Type\",\"L19\":\"Document No\",\"L1\":\"Description\",\"L2\":\"Tax\",\"L3\":\"Tax Amount\",\"L4\":\"Transaction Amount\",\"L5\":\"Transaction Amount Due\",\"L6\":\"Exchange Rate\",\"L7\":\"Amount Due\",\"L8\":\"Enter Amount\"},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"Invoice\",\"L19\":\"INV0012\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":200,\"L5\":200,\"L6\":1,\"L7\":200,\"L8\":200},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":C,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"Advance/Deposite\",\"L19\":\"\",\"L1\":\"New\",\"L2\":\"\",\"L3\":\"\",\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP003\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP004\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100},{\"T1\":\"RP005\",\"T2\":\"01/06/17\",\"T3\":CustomerCode,\"T4\":\"US Dollars (USD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"A account\",\"T15\":200,\"T16\":\"A account\",\"T17\":200,\"L18\":\"General Ledger Code\",\"L19\":\"A account\",\"L1\":\"New\",\"L2\":\"GST(DS)@7.00%\",\"L3\":14,\"L4\":100,\"L5\":100,\"L6\":1,\"L7\":100,\"L8\":100}]' 
+WHERE id='f231cfc4-dd42-11e6-976c-14dda979275f';
+
+#ReceiptPaymentVendor
+
+UPDATE `samplefiledata`  set `header_json`= '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,T17,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10\"},{\"align\":\"none,date,none,none,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', 
+`filedata_json` =  '[{\"T1\":\"Receipt No\",\"T2\":\"Date\",\"T3\":\"Vendor Code\",\"T4\":\"Currency\",\"T5\":\"Payment Method\",\"T6\":\"Document Currency To Payment Method Currency exchange rate\",\"T7\":\"Cashier\'s Cheque/Cheque Number\",\"T8\":\"Bank Name\",\"T9\":\"Cheque Date\",\"T10\":\"Payment Status\",\"T11\":\"Reference Number/Description\",\"T12\":\"Memo\",\"T13\":\"Received From\",\"T14\":\"Bank Interest Account\",\"T15\":\"Bank Interest\",\"T16\":\"Bank Charges Account\",\"T17\":\"Bank Charges\",\"L1\":\"Document Type\",\"L2\":\"Document No\",\"L3\":\"Description\",\"L4\":\"Tax\",\"L5\":\"Tax Amount\",\"L6\":\"Transaction Amount\",\"L7\":\"Transaction Amount Due\",\"L8\":\"Exchange Rate\",\"L9\":\"Amount Due\",\"L10\":\"Enter Amount\"},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Cash\",\"T6\":1,\"T7\":\"\",\"T8\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"Debit Note\",\"L2\":\"DN000029\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100},{\"T1\":\"RP001\",\"T2\":\"01/06/17\",\"T3\":\"VendorCode\",\"T4\":\"SG Dollar (SGD)\",\"T5\":\"Bank\",\"T6\":1,\"T7\":1,\"T8\":\"a\",\"T9\":\"01/06/17\",\"T10\":\"Uncleared\",\"T11\":\"des\",\"T12\":\"c\",\"T13\":\"Received\",\"T14\":\"Bank\",\"T15\":100,\"T16\":\"Bank\",\"T17\":100,\"L1\":\"Refund/Deposit\",\"L2\":\"MP44\",\"L3\":\"New\",\"L4\":\"\",\"L5\":\"\",\"L6\":100,\"L7\":100,\"L8\":1,\"L9\":100,\"L10\":100}]' 
+where id='ffdb3a3e-dd42-11e6-976c-14dda979275f';
+
+#Deepak Singh 31st March 2017
+update default_header set pojomethodname="featurename" where id="89063710-0943-11e7-8451-14dda97927de";
+
+update default_header set pojomethodname="activityname" where id="de111abc-0943-11e7-8451-14dda97927de";
+
+update default_header set pojomethodname="permissiontype" where id="bfb9573a-0944-11e7-b787-14dda97927de";
+
+update default_header set ismandatory='F' where id="bfb9573a-0944-11e7-b787-14dda97927de";
+
+update activitylist set displayactivityname ='Recurring Vendor Invoice' where activityid='67f0138tebbwe4b5cbeca8ewrwfp8e9d' and feature='ff80808122f9dba90122fa4888cf0054';
+
+insert into activitylist(activityid,activityname,displayactivityname,orderno,parent,feature) VALUES 
+('67f013889bb711e4b5treca8ewrwfp8e9d', 'printdata', 'print', '3','ff80808122f9dba90122fa4888cf0088', 'ff80808122f9dba90122fa4888cf0057');

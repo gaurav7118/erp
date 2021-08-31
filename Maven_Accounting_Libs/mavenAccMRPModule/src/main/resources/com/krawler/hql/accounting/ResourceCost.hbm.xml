@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.mrp.labormanagement.ResourceCost" table="resourcecost">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="resourcecost" type="string">
+            <column length="50" name="resourcecost" not-null="true"/>
+        </property>
+        <property name="effectivedate" type="date">
+            <column length="50" name="effectivedate" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.spring.mrp.labormanagement.Labour" name="labour" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

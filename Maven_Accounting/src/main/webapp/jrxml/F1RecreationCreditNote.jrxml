@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="F1taxinvoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="384"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.75"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#C3BFBF">
+		<pen lineWidth="1.0"/>
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="sNo" class="java.lang.String"/>
+		<field name="productDescription" class="java.lang.String"/>
+		<field name="qty" class="java.lang.String"/>
+		<field name="uPrice" class="java.lang.String"/>
+		<field name="productAmount" class="java.lang.String"/>
+		<field name="amountCurrency" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="invoicesublist" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath1" class="java.lang.String"/>
+	<parameter name="imagePath2" class="java.lang.String"/>
+	<parameter name="notetype" class="java.lang.String"/>
+	<parameter name="currency" class="java.lang.String"/>
+	<parameter name="CompanyName" class="java.lang.String"/>
+	<field name="custname" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="contactPerson" class="java.lang.String"/>
+	<field name="customerTel" class="java.lang.String"/>
+	<field name="customerFax" class="java.lang.String"/>
+	<field name="pONumber" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="invoiceNo" class="java.lang.String"/>
+	<field name="dONomber" class="java.lang.String"/>
+	<field name="qtNumber" class="java.lang.String"/>
+	<field name="paymentTerms" class="java.lang.String"/>
+	<field name="salesPerson" class="java.lang.String"/>
+	<field name="customfield" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="amount" class="java.lang.String"/>
+	<field name="gstValue" class="java.lang.String"/>
+	<field name="grandTotal" class="java.lang.String"/>
+	<field name="customerEmail" class="java.lang.String"/>
+	<field name="gstpercent" class="java.lang.String"/>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="-21" y="0" width="598" height="802"/>
+				<imageExpression><![CDATA[$P{imagePath2}]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<pageHeader>
+		<band height="86" splitType="Stretch">
+			<textField>
+				<reportElement x="175" y="57" width="209" height="27"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{notetype}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="181" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="327" y="20" width="214" height="150"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="13" y="20" width="270" height="150"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="19" y="27" width="47" height="15"/>
+				<textElement/>
+				<text><![CDATA[Co Name
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="41" width="47" height="15"/>
+				<textElement/>
+				<text><![CDATA[Address
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="98" width="47" height="15"/>
+				<textElement/>
+				<text><![CDATA[Attn
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="112" width="47" height="15"/>
+				<textElement/>
+				<text><![CDATA[Tel
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="126" width="47" height="15"/>
+				<textElement/>
+				<text><![CDATA[Fax
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="140" width="47" height="15"/>
+				<textElement/>
+				<text><![CDATA[Email
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="41" width="4" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="27" width="4" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="98" width="4" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="112" width="4" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="126" width="4" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="140" width="4" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="24" width="102" height="15"/>
+				<textElement/>
+				<text><![CDATA[Date
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="46" width="102" height="15"/>
+				<textElement/>
+				<text><![CDATA[Credit Note No.
+
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="60" width="102" height="15"/>
+				<textElement/>
+				<text><![CDATA[Invoice No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="74" width="101" height="15"/>
+				<textElement/>
+				<text><![CDATA[Quotation Ref No.
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="88" width="102" height="15"/>
+				<textElement/>
+				<text><![CDATA[Purchase Order No.
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="102" width="102" height="15"/>
+				<textElement/>
+				<text><![CDATA[Terms Of Payment
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="116" width="102" height="15"/>
+				<textElement/>
+				<text><![CDATA[Sales Person
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="130" width="101" height="15"/>
+				<textElement/>
+				<text><![CDATA[Source/Type
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="156" width="102" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GST Reg No.
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="61" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="74" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="88" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="104" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="117" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="131" width="10" height="13"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="155" width="10" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="61" y="12" width="58" height="17"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CUSTOMER
+                ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="438" y="25" width="101" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="46" width="102" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dONomber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="60" width="101" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{invoiceNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="73" width="99" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qtNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="87" width="101" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pONumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="102" width="102" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{paymentTerms}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="438" y="116" width="102" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{salesPerson}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="130" width="102" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customfield}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="155" width="101" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="27" width="213" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{custname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="41" width="213" height="57"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="98" width="201" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{contactPerson}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="112" width="213" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerTel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="126" width="213" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerFax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="140" width="213" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerEmail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="432" y="25" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="46" width="10" height="15"/>
+				<textElement/>
+				<text><![CDATA[:
+                ]]></text>
+			</staticText>
+		</band>
+		<band height="11">
+			<componentElement>
+				<reportElement key="table" style="table" x="13" y="5" width="524" height="0"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{invoicesublist}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="47">
+						<jr:columnHeader height="17" rowSpan="1">
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="47" height="16"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[ITEM
+                                ]]></text>
+							</staticText>
+							
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="47" height="21"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{sNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="191">
+						<jr:columnHeader height="17" rowSpan="1">
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="191" height="16"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[DESCRIPTION
+                                ]]></text>
+							</staticText>
+							
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="191" height="21"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+								<textFieldExpression><![CDATA[$F{productDescription}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70">
+						<jr:columnHeader height="17" rowSpan="1">
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="70" height="16"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[QUANTITY
+                                ]]></text>
+							</staticText>
+							
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="70" height="21"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="96">
+						<jr:columnHeader height="17" rowSpan="1">
+							<textField>
+								<reportElement style="table_CH" x="0" y="0" width="96" height="16"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["UNIT PRICE ("+$F{amountCurrency}+")"]]></textFieldExpression>
+							</textField>
+							
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="96" height="21"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{uPrice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="123">
+						<jr:columnHeader height="17" rowSpan="1">
+							<textField>
+								<reportElement style="table_CH" x="0" y="0" width="123" height="16"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["TOTAL PRICE ("+$F{amountCurrency}+")"]]></textFieldExpression>
+							</textField>
+							
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="21" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="123" height="21"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{productAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="69">
+			<staticText>
+				<reportElement x="306" y="1" width="128" height="20"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="437" y="2" width="104" height="19"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="20" width="103" height="19"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{gstValue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="43" width="103" height="13"/>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{grandTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="440" y="41" width="100" height="1"/>
+			</line>
+			<line>
+				<reportElement x="440" y="39" width="100" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="292" y="19" width="142" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Add GST " +$F{gstpercent}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="43" width="222" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Amount Due In " +$P{currency}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="105" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="220">
+			<line>
+				<reportElement x="364" y="70" width="164" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="388" y="70" width="129" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[AUTHORISED SIGNATURE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="31" width="332" height="78"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[
+-Member of DP SME Commercial Credit Bureau.
+-Member of DP SME Credit Bureau - Your prompt payment records contributes
+towards building a positive credit profile for your company.
+-Please note that any overdue payment/s will be listed in DP SME Credit
+Bureau's records and this record may be assessed by financial institutions
+and other approving credit companies.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="13" y="7" width="528" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["All cheques should be crossed and made payable to "+$P{CompanyName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="43"/>
+	<parameter name="StatementOfAccountsSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="StatementOfAccountsSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="statementdate" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="companyRegNo" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="233">
+			<staticText>
+				<reportElement x="354" y="180" width="200" height="18"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATEMENT OF ACCOUNTS]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="435" y="198" width="119" height="20"/>
+				<textFieldExpression><![CDATA[$P{statementdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="354" y="198" width="81" height="20"/>
+				<text><![CDATA[Statement Date :]]></text>
+			</staticText>
+                        <line>
+                            <reportElement x="0" y="220" width="555" height="1"/>
+                        </line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="103">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{StatementOfAccountsSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{StatementOfAccountsSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="134"/>
+	</pageFooter>
+</jasperReport>

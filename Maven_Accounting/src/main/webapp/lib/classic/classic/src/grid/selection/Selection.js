@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.selection.Selection",{constructor:function(A){if(!A||!(A.isTableView||A.isLockingView)){Ext.raise("Selection must be created for a given TableView or LockingView")}this.view=A.ownerGrid.view}})

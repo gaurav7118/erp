@@ -1,0 +1,1 @@
+Ext.define("Ext.device.analytics.Cordova",{extend:"Ext.device.analytics.Abstract",trackEvent:function(A){if(!this.getAccountID()){return }window.plugins.googleAnalyticsPlugin.trackEvent(A.category,A.action,A.label,A.value,A.nonInteraction)},trackPageview:function(A){if(!this.getAccountID()){return }window.plugins.googleAnalyticsPlugin.trackPageview(A)}})

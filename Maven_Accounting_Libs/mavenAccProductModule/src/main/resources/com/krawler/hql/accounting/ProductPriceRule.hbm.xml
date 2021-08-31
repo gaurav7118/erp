@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ProductPriceRule" table="productpricerule">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="lowerlimit" type="double">
+      <column default="0" name="lowerlimit" />
+    </property>
+    <property name="upperlimit" type="double">
+      <column default="0" name="upperlimit" />
+    </property>
+    <property name="percentageType" type="integer">
+      <column default="0" name="percentagetype" />
+    </property>
+    <property name="amount" type="double">
+      <column default="0" name="amount" />
+    </property>
+    <property name="ruleType" type="integer">
+      <column default="0" name="ruletype" />
+    </property>
+    <property name="priceType" type="integer">
+      <column default="0" name="pricetype" />
+    </property>
+    <property name="increamentordecreamentType" type="integer">
+      <column default="0" name="increamentordecreamenttype" />
+    </property>
+    <property name="basedOn" type="integer">
+        <column default="0" name="basedon" />
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="category" column="category"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+    
+  </class>
+</hibernate-mapping>
+ 

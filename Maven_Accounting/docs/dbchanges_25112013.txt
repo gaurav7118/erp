@@ -1,0 +1,1612 @@
+#// Atul sachan - added discount in PO/SO -- 25 DEC 2013
+
+ALTER TABLE `purchaseorder`
+ADD COLUMN `discount`  double NULL DEFAULT 0,
+ADD COLUMN `perdiscount`  char(1) NULL DEFAULT 'F' ;
+
+
+ALTER TABLE `podetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0 ,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+////update podetails set discountispercent = 1;<-- no need to do this.
+
+ALTER TABLE `billingpurchaseorder`
+ADD COLUMN `discount`  double NULL DEFAULT 0,
+ADD COLUMN `perdiscount`  char(1) NULL DEFAULT 'F' ;
+
+
+ALTER TABLE `billingpodetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+
+ALTER TABLE `salesorder`
+ADD COLUMN `perdiscount`  char(1) NULL DEFAULT 'F' ,
+ADD COLUMN `discount`  double NULL DEFAULT 0 ;
+
+ALTER TABLE `sodetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+
+ALTER TABLE `billingsalesorder`
+ADD COLUMN `perdiscount`  char(1) NULL DEFAULT 'F',
+ADD COLUMN `discount`  double NULL DEFAULT 0;
+
+ALTER TABLE `billingsodetails`
+ADD COLUMN `discount`  double NULL DEFAULT 0,
+ADD COLUMN `discountispercent`  int(1) NULL DEFAULT 1;
+
+#//Sagar A - 25th Dec, 2013, Added preference to show/hide child accounts in custom BS and PL report.
+alter table layoutgroup add column `showchildacc` int(1) default 1;
+
+
+#//Anup - 25rd Dec, 2013 added a table for credit note and debit note terms purchase terms
+
+CREATE TABLE `debitnotetermmap` (
+  `id` varchar(40) NOT NULL,
+  `term` varchar(40) DEFAULT NULL,
+  `debitnote` varchar(40) DEFAULT NULL,
+  `termamount` double DEFAULT '0',
+  `percentage` tinyint(3) unsigned DEFAULT '0',
+  `deleted` tinyint(4) DEFAULT '0',
+  `creator` varchar(40) NOT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `debitnotetermmap_ibfk_1` FOREIGN KEY (`term`) REFERENCES `invoicetermssales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `debitnotetermmap_ibfk_2` FOREIGN KEY (`debitnote`) REFERENCES `debitnote` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `creditnotetermmap` (
+  `id` varchar(40) NOT NULL,
+  `term` varchar(40) DEFAULT NULL,
+  `creditnote` varchar(40) DEFAULT NULL,
+  `termamount` double DEFAULT '0',
+  `percentage` tinyint(3) unsigned DEFAULT '0',
+  `deleted` tinyint(4) DEFAULT '0',
+  `creator` varchar(40) NOT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `creditnotetermmap_ibfk_1` FOREIGN KEY (`term`) REFERENCES `invoicetermssales` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `creditnotetermmap_ibfk_2` FOREIGN KEY (`creditnote`) REFERENCES `creditnote` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+//Raveesh Pathak 27th Dec 2013 (Bill to and Ship to)
+ALTER TABLE purchaseorder ADD COLUMN shipto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE purchaseorder ADD COLUMN billto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billingpurchaseorder ADD COLUMN shipto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billingpurchaseorder ADD COLUMN billto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE compaccpreferences ADD COLUMN shipaddress VARCHAR(255) DEFAULT NULL;
+ALTER TABLE compaccpreferences ADD COLUMN billaddress VARCHAR(255) DEFAULT NULL;
+ALTER TABLE vendorquotation ADD COLUMN shipto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE vendorquotation ADD COLUMN billto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE goodsreceipt ADD COLUMN billto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE goodsreceipt ADD COLUMN shipto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billinggr ADD COLUMN shipto VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billinggr ADD COLUMN billto VARCHAR(255) DEFAULT NULL;
+
+
+#Anup 27 Dec
+
+UPDATE `notetype` SET `name`='Discount' WHERE `id`='0';
+
+#Pandurang 31 Dec For journal entry Type
+
+alter table journalentry add typevalue int(5) default 1 after istemplate;
+
+#Anup 31 Dec
+
+ALTER TABLE receipt ADD COLUMN bankchargesamount double DEFAULT '0';
+ALTER TABLE receipt ADD COLUMN bankinterestamount double DEFAULT '0';
+ALTER TABLE receipt ADD COLUMN bankchargesaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE receipt ADD CONSTRAINT `bankchargesaccountid_fk` FOREIGN KEY (`bankchargesaccountid`) REFERENCES `account` (`id`);
+ALTER TABLE receipt ADD COLUMN bankinterestaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE receipt ADD CONSTRAINT `bankinterestaccountid_fk` FOREIGN KEY (`bankinterestaccountid`) REFERENCES `account` (`id`);
+
+
+ALTER TABLE payment ADD COLUMN bankchargesamount double DEFAULT '0';
+ALTER TABLE payment ADD COLUMN bankinterestamount double DEFAULT '0';
+ALTER TABLE payment ADD COLUMN bankchargesaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE payment ADD CONSTRAINT `bankchargesaccountid_fk` FOREIGN KEY (`bankchargesaccountid`) REFERENCES `account` (`id`);
+ALTER TABLE payment ADD COLUMN bankinterestaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE payment ADD CONSTRAINT `bankinterestaccountid_fk` FOREIGN KEY (`bankinterestaccountid`) REFERENCES `account` (`id`);
+
+#Sagar A - 1st Jan, Is received advance payment from vendor
+alter table receipt add column `isadvancefromvendor` char(1) DEFAULT 'F';
+alter table billingreceipt add column `isadvancefromvendor` char(1) DEFAULT 'F';
+
+#Sagar A + Atul sachan - 1st jan 2014, Running number - set starting number. The running number will start from that number
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `invnoformatstartfrom` int(2) default 1,
+ADD COLUMN `sonoformatstartfrom` int(2) default 1;
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `showleadingzero` int(1) NOT NULL DEFAULT 1;
+
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `jenoformatstartfrom` int(2) default 1,
+ADD COLUMN `cmnoformatstartfrom` int(2) default 1,
+ADD COLUMN `receiptnoformatstartfrom` int(2) default 1,
+ADD COLUMN `grnoformatstartfrom` int(2) default 1,
+ADD COLUMN `ponoformatstartfrom` int(2) default 1,
+ADD COLUMN `dnnoformatstartfrom` int(2) default 1,
+ADD COLUMN `paymentnoformatstartfrom` int(2) default 1,
+ADD COLUMN `csnoformatstartfrom` int(2) default 1,
+ADD COLUMN `cpnoformatstartfrom` int(2) default 1,
+ADD COLUMN `brnoformatstartfrom` int(2) default 1,
+ADD COLUMN `bcsnoformatstartfrom` int(2) default 1,
+ADD COLUMN `bcpnoformatstartfrom` int(2) default 1,
+ADD COLUMN `binoformatstartfrom` int(2) default 1,
+ADD COLUMN `bgrnoformatstartfrom` int(2) default 1,
+ADD COLUMN `bpnoformatstartfrom` int(2) default 1,
+ADD COLUMN `bcnnoformatstartfrom` int(2) default 1,
+ADD COLUMN `bdnnoformatstartfrom` int(2) default 1,
+ADD COLUMN `bsonoformatstartfrom` int(2) default 1,
+ADD COLUMN `bponoformatstartfrom` int(2) default 1,
+ADD COLUMN `qnoformatstartfrom` int(2) default 1,
+ADD COLUMN `vqnoformatstartfrom` int(2) default 1,
+ADD COLUMN `rqnoformatstartfrom` int(2) default 1,
+ADD COLUMN `rfqnoformatstartfrom` int(2) default 1,
+ADD COLUMN `pidformatstartfrom` int(2) default 1,
+ADD COLUMN `donoformatstartfrom` int(2) default 1,
+ADD COLUMN `srnoformatstartfrom` int(2) default 1,
+ADD COLUMN `prnoformatstartfrom` int(2) default 1,
+ADD COLUMN `gronoformatstartfrom` int(2) default 1;
+
+
+#Sagar A - 2nd Jan, Need to store amount deposited in bank account and its related jedetail id in receipt table.
+
+#Receipt
+alter table receipt add column `deposittojedetail` varchar(255);
+alter table  receipt add CONSTRAINT  FK_receipt_deposittojedetail FOREIGN KEY (`deposittojedetail`) REFERENCES `jedetail` (`id`);
+alter table receipt add column `depositamount` double DEFAULT '0';
+
+select count(*) from receipt inner join journalentry on journalentry.id = receipt.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+where jedetail.debit = 'T' and receipt.receipttype = '6';
+
+update receipt inner join journalentry on journalentry.id = receipt.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+ set depositamount = jedetail.amount, deposittojedetail = jedetail.id where jedetail.debit = 'T' and receipt.receipttype = '6';
+
+#Billing Receipt
+alter table billingreceipt add column `deposittojedetail` varchar(255);
+alter table  billingreceipt add CONSTRAINT  FK_billingreceipt_deposittojedetail FOREIGN KEY (`deposittojedetail`) REFERENCES `jedetail` (`id`);
+alter table billingreceipt add column `depositamount` double DEFAULT '0';
+
+select count(*) from billingreceipt inner join journalentry on journalentry.id = billingreceipt.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+where jedetail.debit = 'T'; # and billingreceipt.receipttype = '6';
+
+update billingreceipt inner join journalentry on journalentry.id = billingreceipt.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+ set depositamount = jedetail.amount, deposittojedetail = jedetail.id where jedetail.debit = 'T'; # and billingreceipt.receipttype = '6';
+
+#Payment
+alter table payment add column `deposittojedetail` varchar(255);
+alter table  payment add CONSTRAINT  FK_payment_deposittojedetail FOREIGN KEY (`deposittojedetail`) REFERENCES `jedetail` (`id`);
+alter table payment add column `depositamount` double DEFAULT '0';
+
+select count(*) from payment inner join journalentry on journalentry.id = payment.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+where jedetail.debit = 'F' and payment.receipttype = '6';
+
+update payment inner join journalentry on journalentry.id = payment.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+ set depositamount = jedetail.amount, deposittojedetail = jedetail.id where jedetail.debit = 'F' and payment.receipttype = '6';
+
+#Billing Payment
+alter table billingpayment add column `deposittojedetail` varchar(255);
+alter table  billingpayment add CONSTRAINT  FK_billingpayment_deposittojedetail FOREIGN KEY (`deposittojedetail`) REFERENCES `jedetail` (`id`);
+alter table billingpayment add column `depositamount` double DEFAULT '0';
+
+select count(*) from billingpayment inner join journalentry on journalentry.id = billingpayment.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+where jedetail.debit = 'F'; # and billingpayment.receipttype = '6';
+
+update billingpayment inner join journalentry on journalentry.id = billingpayment.journalentry inner join jedetail on jedetail.journalEntry = journalentry.id
+ set depositamount = jedetail.amount, deposittojedetail = jedetail.id where jedetail.debit = 'F'; # and billingpayment.receipttype = '6';
+
+#Sagar A - 2nd Jan, Added bank charges and Bank Interest functionality in Billing Receipt and Billing Payment.
+
+ALTER TABLE billingreceipt ADD COLUMN bankchargesamount double DEFAULT '0';
+ALTER TABLE billingreceipt ADD COLUMN bankinterestamount double DEFAULT '0';
+ALTER TABLE billingreceipt ADD COLUMN bankchargesaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billingreceipt ADD CONSTRAINT `bankchargesaccountid_billingreceipt_fk` FOREIGN KEY (`bankchargesaccountid`) REFERENCES `account` (`id`);
+ALTER TABLE billingreceipt ADD COLUMN bankinterestaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billingreceipt ADD CONSTRAINT `bankinterestaccountid_billingreceipt_fk` FOREIGN KEY (`bankinterestaccountid`) REFERENCES `account` (`id`);
+
+ALTER TABLE billingpayment ADD COLUMN bankchargesamount double DEFAULT '0';
+ALTER TABLE billingpayment ADD COLUMN bankinterestamount double DEFAULT '0';
+ALTER TABLE billingpayment ADD COLUMN bankchargesaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billingpayment ADD CONSTRAINT `bankchargesaccountid_billingpayment_fk` FOREIGN KEY (`bankchargesaccountid`) REFERENCES `account` (`id`);
+ALTER TABLE billingpayment ADD COLUMN bankinterestaccountid VARCHAR(255) DEFAULT NULL;
+ALTER TABLE billingpayment ADD CONSTRAINT `bankinterestaccountid_billingpayment_fk` FOREIGN KEY (`bankinterestaccountid`) REFERENCES `account` (`id`);
+
+//Sagar A - 2nd Jan. 1. Accept payment from Vendor 2. Make payment to customer in billing mode
+
+alter table `billingreceipt` ADD COLUMN `vendor` varchar(40) default NULL;
+alter table `billingreceipt` ADD COLUMN `receipttype` int default 0;
+
+alter table `billingpayment` ADD COLUMN `customer` varchar(40) default NULL;
+alter table `billingpayment` ADD COLUMN `receipttype` int default 0;
+
+// Sagar M - added column to specify module specific pdf width for newly created custom column
+
+ALTER TABLE `fieldParams`
+ADD COLUMN `relatedmodulepdfwidth`  varchar(255) DEFAULT NULL AFTER `relatedmoduleid`;
+
+
+#Anup 6 jan 2014 added taxAmount in account preferences
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `taxnumber`  varchar(255) DEFAULT '';
+
+
+
+#Anup 7 Jan 2014 Custom Design in PO,SO,CN,DN 
+
+alter table default_header modify column `dummyvalue` varchar(255) DEFAULT '';
+
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(20, 'Sales Order', 'com.krawler.hql.accounting.SalesOrder', 'ID', NULL, NULL); 
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(18, 'Purchase Order', 'com.krawler.hql.accounting.PurchaseOrder', 'ID', NULL, NULL);
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(12, 'Credit Note', 'com.krawler.hql.accounting.CreditNote', 'ID', NULL, NULL);  
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(10, 'Debit Note', 'com.krawler.hql.accounting.DebitNote', 'ID', NULL, NULL);  
+
+#Sales Order
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Sales Order No","SalesOrderNumber","string",0,50,'T','T',1,'Sales Order No','sonumber','salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Sales Order Date","OrderDate","date",0,50,'T','T',3,'Sales Order Date',"orderdate",'salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Due Date","DueDate","date",0,50,'T','T',3,'Due Date',"duedate",'salesorder');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"20","Customer Name","Customer",0,50,'T','T',1,"customer","customer","customer","id","name",'Customer','name','ID','Customer Name');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Billing Address","BillTo",0,50,'T','T',1,'Billing Address',"billto","salesorder");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Shipping Address","ShipTo",0,50,'T','T',1,'Shipping Address',"shipto","salesorder");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"2","Entry Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Entry Date');
+
+#Purchase Order
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Purchase Order No","PurchaseOrderNumber",0,50,'T','T',1,'Purchase Order No',"ponumber","purchaseorder");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Purchase Order Date","OrderDate",0,50,'T','T',3,'Purchase Order Date',"orderdate","purchaseorder");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Due Date","DueDate",0,50,'T','T',3,'Due Date',"duedate","purchaseorder");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"18","Vendor Name","Vendor",0,50,'T','T',1,"vendor","vendor","vendor","id","name",'Vendor','name','ID','Vendor Name');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Billing Address","BillTo",0,50,'T','T',1,'Billing Address',"billto","purchaseorder");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Shipping Address","ShipTo",0,50,'T','T',1,'Shipping Address',"shipto","purchaseorder");
+
+
+#Credit Note
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"12","Customer Name","Customer",0,50,'T','T',1,"customer","customer","customer","id","name",'Customer','name','ID','Customer Name');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"12","Credit Note Number","CreditNoteNumber",0,50,'T','T',1,'Credit Note Number',"cnnumber","creditnote");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"12","Journal Entry","JournalEntry",0,50,'T','T',1,"journalEntry","journalentry","journalentry","id","entryno",'JournalEntry','entryNumber','ID','Journal Entry');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"12","Memo","Memo",0,50,'T','T',1,'Memo',"memo","creditnote");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"12","Entry Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Entry Date');
+
+
+#Debit Note
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"10","Vendor Name","Vendor",0,50,'T','T',1,"vendor","vendor","vendor","id","name",'Vendor','name','ID','Vendor Name');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"10","Debit Note Number","DebitNoteNumber",0,50,'T','T',1,'Debit Note Number',"dnnumber","debitnote");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"10","Journal Entry","JournalEntry",0,50,'T','T',1,"journalEntry","journalentry","journalentry","id","entryno",'JournalEntry','entryNumber','ID','Journal Entry');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"10","Memo","Memo",0,50,'T','T',1,'Memo',"memo","debitnote");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"10","Entry Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Entry Date');
+
+# Pandurang Sales order and Purchase Order - Term
+alter table purchaseorder ADD COLUMN `term` varchar(255) DEFAULT NULL;
+ 
+alter table purchaseorder ADD CONSTRAINT `FKCF1EA548D06BCCC` FOREIGN KEY (`term`) REFERENCES `creditterm` (`termid`);
+
+alter table billingpurchaseorder ADD COLUMN `term` varchar(255) DEFAULT NULL;
+ 
+alter table billingpurchaseorder ADD CONSTRAINT `FKCF1EA548D06BCDC` FOREIGN KEY (`term`) REFERENCES `creditterm` (`termid`);
+
+ALTER TABLE billingsalesorder ADD COLUMN salesperson VARCHAR(255)  DEFAULT NULL;
+ALTER TABLE billingsalesorder ADD CONSTRAINT FK_BILLSALESPERSON FOREIGN KEY(salesperson) REFERENCES masteritem(id);
+
+alter table salesorder ADD COLUMN `term` varchar(255) DEFAULT NULL;
+ 
+alter table salesorder ADD CONSTRAINT `FKCF1EA548D06BDDD` FOREIGN KEY (`term`) REFERENCES `creditterm` (`termid`);
+
+alter table billingsalesorder ADD COLUMN `term` varchar(255) DEFAULT NULL;
+ 
+alter table billingsalesorder ADD CONSTRAINT `FKCF1EA548D06BDCD` FOREIGN KEY (`term`) REFERENCES `creditterm` (`termid`);
+
+#Raveesh Pathak 7th January 2013 -Sales Person in SO and mail notification table
+
+CREATE TABLE mailnotification(
+id VARCHAR(255) NOT NULL,
+module INT NOT NULL,
+beforeafter INT NOT NULL,
+days INT NOT NULL,
+company VARCHAR(255) NOT NULL,
+PRIMARY KEY(id),
+KEY FK_COMPANY_MAIL (company),
+CONSTRAINT FK_COMPANY_MAIL FOREIGN KEY (company) REFERENCES company (companyid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE salesorder ADD COLUMN salesperson VARCHAR(255)  DEFAULT NULL;
+ALTER TABLE salesorder ADD CONSTRAINT FK_SALESPERSON FOREIGN KEY(salesperson) REFERENCES masteritem(id);
+
+ALTER TABLE billingsalesorder ADD COLUMN salesperson VARCHAR(255)  DEFAULT NULL;
+ALTER TABLE billingsalesorder ADD CONSTRAINT FK_BILLSALESPERSON FOREIGN KEY(salesperson) REFERENCES masteritem(id);
+
+# Sagar M - store link information between PO and SO
+
+ALTER TABLE `podetails`
+ADD COLUMN `salesorderdetailid`  varchar(40) NULL DEFAULT '';
+
+ALTER TABLE `podetails`
+ADD COLUMN `vqdetail`  varchar(40) DEFAULT NULL;
+
+ALTER TABLE podetails add FOREIGN KEY (vqdetail)  REFERENCES vendorquotationdetails(id);
+
+
+#Anup 9 Jan 2014 Custom Design in DO
+
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(27, 'Delivery Order', 'com.krawler.hql.accounting.DeliveryOrder', 'ID', NULL, NULL); 
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Delivery Order Number","DeliveryOrderNumber","string",0,50,'T','T',1,'Delivery Order Number','donumber','deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Delivery Order Date","OrderDate","date",0,50,'T','T',3,'Delivery Order Date',"orderdate",'deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Ship Date","Shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'deliveryorder');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"27","Customer Name","Customer",0,50,'T','T',1,"customer","customer","customer","id","name",'Customer','name','ID','Customer Name');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via','shipvia','deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Memo","Memo",0,50,'T','T',1,'Memo',"memo","deliveryorder");
+
+
+#Anup-13 jan 2014 Customizing report in SO 
+
+CREATE TABLE `customizereportheader` (
+  `id` varchar(40) NOT NULL,
+  `dataIndex` varchar(40) DEFAULT NULL,
+  `dataheader` varchar(40) DEFAULT NULL,
+  `moduleid` int(11) DEFAULT 0,
+  `reportid` int(11) DEFAULT 0,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `customizereportmapping` (
+  `id` varchar(40) NOT NULL,
+  `moduleid` int(11) DEFAULT 0,
+  `reportid` int(11) DEFAULT 0,
+  `hidden` int(1)  DEFAULT 0,
+  `customfieldid` varchar(255) default NULL,
+  `dataheader` varchar(255) default NULL,
+  `dataIndex` varchar(255) default NULL,
+  `company` varchar(255) default NULL,
+  `users` varchar(255) default NULL,
+  `customizereportheader` varchar(255) default NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`customizereportheader`) REFERENCES `customizereportheader` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Sales Order No',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Sales Order Date',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'duedate','Due Date',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Customer',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxname','Tax Name',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxamount','Tax Amount',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'orderamountwithTax','Total Amount',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'status','Status',20,1);
+
+# Pravin Auti - createdon/updatedon fields in SO
+ALTER TABLE salesorder add column createdby varchar(40) default null;
+ALTER TABLE salesorder add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE salesorder add column modifiedby varchar(40) default null;
+ALTER TABLE salesorder add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE salesorder add column createdon bigint(20) default null;
+ALTER TABLE salesorder add column updatedon bigint(20) default null;
+
+update salesorder so set createdby=(select creator from company c where c.companyid=so.company );
+update salesorder so set modifiedby=(select creator from company c where c.companyid=so.company );
+
+update salesorder set createdon = UNIX_TIMESTAMP(orderdate)*1000, updatedon = UNIX_TIMESTAMP(orderdate)*1000;
+
+# Pravin Auti - createdon/updatedon fields in Customer Quotation
+ALTER TABLE quotation add column createdby varchar(40) default null;
+ALTER TABLE quotation add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE quotation add column modifiedby varchar(40) default null;
+ALTER TABLE quotation add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE quotation add column createdon bigint(20) default null;
+ALTER TABLE quotation add column updatedon bigint(20) default null;
+update quotation q set createdby=(select creator from company c where c.companyid=q.company);
+update quotation q set modifiedby=(select creator from company c where c.companyid=q.company);
+
+update quotation set createdon = UNIX_TIMESTAMP(quotationdate)*1000, updatedon = UNIX_TIMESTAMP(quotationdate)*1000;
+
+# Pravin Auti - createdon/updatedon fields in PO
+ALTER TABLE purchaseorder add column createdby varchar(40) default null;
+ALTER TABLE purchaseorder add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE purchaseorder add column modifiedby varchar(40) default null;
+ALTER TABLE purchaseorder add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE purchaseorder add column createdon bigint(20) default null;
+ALTER TABLE purchaseorder add column updatedon bigint(20) default null;
+update purchaseorder q set createdby=(select creator from company c where c.companyid=q.company);
+update purchaseorder q set modifiedby=(select creator from company c where c.companyid=q.company);
+
+update purchaseorder set createdon = UNIX_TIMESTAMP(orderdate)*1000, updatedon = UNIX_TIMESTAMP(orderdate)*1000;
+
+# Pravin Auti - createdon/updatedon fields in Vendor Quotation
+ALTER TABLE vendorquotation add column createdby varchar(40) default null;
+ALTER TABLE vendorquotation add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE vendorquotation add column modifiedby varchar(40) default null;
+ALTER TABLE vendorquotation add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE vendorquotation add column createdon bigint(20) default null;
+ALTER TABLE vendorquotation add column updatedon bigint(20) default null;
+update vendorquotation q set createdby=(select creator from company c where c.companyid=q.company);
+update vendorquotation q set modifiedby=(select creator from company c where c.companyid=q.company);
+
+update vendorquotation set createdon = UNIX_TIMESTAMP(quotationdate)*1000, updatedon = UNIX_TIMESTAMP(quotationdate)*1000;
+ 
+//15th Jan 2014, Sagar A - Running number in sequence format..
+CREATE TABLE `sequenceformat` (
+  `id` varchar(40) NOT NULL,
+  `name` varchar(50) default '',
+  `prefix` varchar(20) default '',
+  `suffix` varchar(20) default '',
+  `numberofdigit` int(10) DEFAULT 1,
+  `startfrom` int(10) DEFAULT 1,
+  `deleted` char(1) DEFAULT 'F',
+  `showleadingzero` char(1) DEFAULT 'T',
+  `modulename` varchar(20) default '',
+  `moduleid` int(11) DEFAULT 0,
+  `company` varchar(255) default NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table goodsreceipt add column seqnumber int(11) default '0';
+alter table goodsreceipt add column seqformat varchar(40);
+alter table goodsreceipt add CONSTRAINT  FK_goodsreceipt_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+alter table billinggr add column seqnumber int(11) default '0';
+alter table billinggr add column seqformat varchar(40);
+alter table billinggr add CONSTRAINT  FK_billinggr_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+alter table invoice add column seqnumber int(11) default '0';
+alter table invoice add column seqformat varchar(40);
+alter table invoice add CONSTRAINT  FK_invoice_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+alter table billinginvoice add column seqnumber int(11) default '0';
+alter table billinginvoice add column seqformat varchar(40);
+alter table billinginvoice add CONSTRAINT  FK_billinginvoice_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+
+# Raveesh Pathak 15th January 2014 Running Number
+
+alter table salesorder add column seqnumber int(11) default '0';
+ alter table salesorder add column seqformat varchar(40);
+ alter table salesorder add CONSTRAINT  FK_salesorder_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+  
+ alter table billingsalesorder add column seqnumber int(11) default '0';
+ alter table billingsalesorder add column seqformat varchar(40);
+ alter table billingsalesorder add CONSTRAINT  FK_bsalesorder_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+  
+ alter table purchaseorder add column seqnumber int(11) default '0';
+ alter table purchaseorder add column seqformat varchar(40);
+ alter table purchaseorder add CONSTRAINT  FK_purchaseorder_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+  
+ alter table billingpurchaseorder add column seqnumber int(11) default '0';
+ alter table billingpurchaseorder add column seqformat varchar(40);
+ alter table billingpurchaseorder add CONSTRAINT  FK_bpurchaseorder_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table vendorquotation add column seqnumber int(11) default '0';
+ alter table vendorquotation add column seqformat varchar(40);
+ alter table vendorquotation add CONSTRAINT  FK_vendorquotation_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table quotation add column seqnumber int(11) default '0';
+ alter table quotation add column seqformat varchar(40);
+ alter table quotation add CONSTRAINT  FK_quotation_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table purchaserequisition add column seqnumber int(11) default '0';
+ alter table purchaserequisition add column seqformat varchar(40);
+ alter table purchaserequisition add CONSTRAINT  FK_purchaserequisition_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+ 
+ alter table requestforquotation add column seqnumber int(11) default '0';
+ alter table requestforquotation add column seqformat varchar(40);
+ alter table requestforquotation add CONSTRAINT  FK_requestforquotation_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+ 
+ alter table deliveryorder add column seqnumber int(11) default '0';
+ alter table deliveryorder add column seqformat varchar(40);
+ alter table deliveryorder add CONSTRAINT  FK_deliveryorder_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table salesreturn add column seqnumber int(11) default '0';
+ alter table salesreturn add column seqformat varchar(40);
+ alter table salesreturn add CONSTRAINT  FK_salesreturn_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table grorder add column seqnumber int(11) default '0';
+ alter table grorder add column seqformat varchar(40);
+ alter table grorder add CONSTRAINT  FK_grorder_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table purchasereturn add column seqnumber int(11) default '0';
+ alter table purchasereturn add column seqformat varchar(40);
+ alter table purchasereturn add CONSTRAINT  FK_purchasereturn_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table debitnote add column seqnumber int(11) default '0';
+ alter table debitnote add column seqformat varchar(40);
+ alter table debitnote add CONSTRAINT  FK_debitnote_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table billingdebitnote add column seqnumber int(11) default '0';
+ alter table billingdebitnote add column seqformat varchar(40);
+ alter table billingdebitnote add CONSTRAINT  FK_billingdebitnote_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table creditnote add column seqnumber int(11) default '0';
+ alter table creditnote add column seqformat varchar(40);
+ alter table creditnote add CONSTRAINT  FK_creditnote_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table billingcreditnote add column seqnumber int(11) default '0';
+ alter table billingcreditnote add column seqformat varchar(40);
+ alter table billingcreditnote add CONSTRAINT  FK_billingcreditnote_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+ 
+ alter table receipt add column seqnumber int(11) default '0';
+ alter table receipt add column seqformat varchar(40);
+ alter table receipt add CONSTRAINT  FK_receipt_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table billingreceipt add column seqnumber int(11) default '0';
+ alter table billingreceipt add column seqformat varchar(40);
+ alter table billingreceipt add CONSTRAINT  FK_billingreceipt_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table payment add column seqnumber int(11) default '0';
+ alter table payment add column seqformat varchar(40);
+ alter table payment add CONSTRAINT  FK_payment_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table billingpayment add column seqnumber int(11) default '0';
+ alter table billingpayment add column seqformat varchar(40);
+ alter table billingpayment add CONSTRAINT  FK_billingpayment_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+ alter table journalentry add column seqnumber int(11) default '0';
+ alter table journalentry add column seqformat varchar(40);
+ alter table journalentry add CONSTRAINT  FK_journalentry_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+#Anup 15 Jan 2014 Custom Design in GRO
+
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(28, 'GoodsReceiptOrder', 'com.krawler.hql.accounting.GoodsReceiptOrder', 'ID', NULL, NULL); 
+
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(14, 'Payment', 'com.krawler.hql.accounting.Payment', 'ID', NULL, NULL); 
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(16, 'Receipt', 'com.krawler.hql.accounting.Receipt', 'ID', NULL, NULL); 
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Goods Receipt Order Number","GoodsReceiptOrderNumber","string",0,50,'T','T',1,'Goods Receipt Order Number','gronumber','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Order Date","OrderDate","date",0,50,'T','T',3,'Delivery Order Date',"grorderdate",'grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Ship Date","Shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'grorder');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"28","Vendor Name","Vendor",0,50,'T','T',1,"vendor","vendor","vendor","id","name",'Vendor','name','ID','Vendor Name');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via','shipvia','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Memo","Memo",0,50,'T','T',1,'Memo',"memo","grorder");
+
+#Make Payment
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Payment Voucher Number","PaymentNumber","string",0,50,'T','T',1,'Payment Voucher Number','paymentnumber','payment');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"14","Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Date');
+
+#Receive Payment
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Payment Voucher Number","ReceiptNumber","string",0,50,'T','T',1,'Payment Voucher Number','receiptNumber','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"16","Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Date');
+
+
+#Sagar A - Multiple UOM in sales and purchase 19 Jan 2013
+/*
+ALTER TABLE `inventory`
+DROP COLUMN `convertedquantity`;
+
+ALTER TABLE `product`
+DROP COLUMN `purchaseuom`,
+DROP COLUMN `salesuom`,
+DROP COLUMN `purchasetostockuomvalue`,
+DROP COLUMN `salestostockuomvalue`;
+*/
+
+#inventory
+ALTER TABLE `inventory` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `inventory` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `inventory` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table inventory add CONSTRAINT  FK_inventory_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update inventory inner join product on product.id = inventory.product set inventory.uom = product.unitOfMeasure, inventory.baseuomquantity = inventory.quantity, inventory.baseuomrate = 1;
+update inventory set inventory.quantity = inventory.actquantity where inventory.invrecord in ('F') and inventory.quantity = 0 and inventory.actquantity != 0 ;
+
+#purchaserequisitiondetail
+ALTER TABLE `purchaserequisitiondetail` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `purchaserequisitiondetail` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `purchaserequisitiondetail` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table purchaserequisitiondetail add CONSTRAINT  FK_purchaserequisitiondetail_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update purchaserequisitiondetail inner join product on product.id = purchaserequisitiondetail.product set purchaserequisitiondetail.uom = product.unitOfMeasure, purchaserequisitiondetail.baseuomquantity = purchaserequisitiondetail.quantity, purchaserequisitiondetail.baseuomrate = 1;
+
+#requestforquotationdetail
+ALTER TABLE `requestforquotationdetail` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `requestforquotationdetail` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `requestforquotationdetail` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table requestforquotationdetail add CONSTRAINT  FK_requestforquotationdetail_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update requestforquotationdetail inner join product on product.id = requestforquotationdetail.product set requestforquotationdetail.uom = product.unitOfMeasure, requestforquotationdetail.baseuomquantity = requestforquotationdetail.quantity, requestforquotationdetail.baseuomrate = 1;
+
+alter table requestforquotationdetail modify column `quantity` double NOT NULL;
+
+#vendorquotationdetails
+ALTER TABLE `vendorquotationdetails` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `vendorquotationdetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `vendorquotationdetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table vendorquotationdetails add CONSTRAINT  FK_vendorquotationdetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update vendorquotationdetails inner join product on product.id = vendorquotationdetails.product set vendorquotationdetails.uom = product.unitOfMeasure, vendorquotationdetails.baseuomquantity = vendorquotationdetails.quantity, vendorquotationdetails.baseuomrate = 1;
+
+
+#podetails
+ALTER TABLE `podetails` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `podetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `podetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table podetails add CONSTRAINT  FK_podetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update podetails inner join product on product.id = podetails.product set podetails.uom = product.unitOfMeasure, podetails.baseuomquantity = podetails.quantity, podetails.baseuomrate = 1;
+
+#sodetails
+ALTER TABLE `sodetails` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `sodetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `sodetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table sodetails add CONSTRAINT  FK_sodetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update sodetails inner join product on product.id = sodetails.product set sodetails.uom = product.unitOfMeasure, sodetails.baseuomquantity = sodetails.quantity, sodetails.baseuomrate = 1;
+
+#quotationdetails
+ALTER TABLE `quotationdetails` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `quotationdetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `quotationdetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table quotationdetails add CONSTRAINT  FK_quotationdetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update quotationdetails inner join product on product.id = quotationdetails.product set quotationdetails.uom = product.unitOfMeasure, quotationdetails.baseuomquantity = quotationdetails.quantity, quotationdetails.baseuomrate = 1;
+
+
+#quotationdetails
+ALTER TABLE `quotationdetails` ADD COLUMN `uom`  varchar(255) AFTER `quantity`;
+ALTER TABLE `quotationdetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `quotationdetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table quotationdetails add CONSTRAINT  FK_quotationdetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+#grodetails
+ALTER TABLE `grodetails` ADD COLUMN `uom`  varchar(255) AFTER `actualquantity`;
+ALTER TABLE `grodetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `grodetails` ADD COLUMN `baseuomdeliveredquantity`  double default 0 AFTER `baseuomquantity`;
+ALTER TABLE `grodetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table grodetails add CONSTRAINT  FK_grodetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update grodetails inner join product on product.id = grodetails.product set grodetails.uom = product.unitOfMeasure, grodetails.baseuomdeliveredquantity = grodetails.deliveredquantity, 
+grodetails.baseuomquantity = grodetails.actualquantity, grodetails.baseuomrate = 1;
+
+#dodetails
+ALTER TABLE `dodetails` ADD COLUMN `uom`  varchar(255) AFTER `actualquantity`;
+ALTER TABLE `dodetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `dodetails` ADD COLUMN `baseuomdeliveredquantity`  double default 0 AFTER `baseuomquantity`;
+ALTER TABLE `dodetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomquantity`;
+alter table dodetails add CONSTRAINT  FK_dodetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+update dodetails inner join product on product.id = dodetails.product set dodetails.uom = product.unitOfMeasure, dodetails.baseuomdeliveredquantity = dodetails.deliveredquantity, 
+dodetails.baseuomquantity = dodetails.actualquantity, dodetails.baseuomrate = 1;
+
+#Sagar A- 20 Jan 2014 , Multi UOM at product level
+ alter table product add column `multiuom` char(1) DEFAULT 'F';
+
+#Sagar A- 22 Jan 2014, Updated note types for CN & DN
+update notetype set name = 'Quality Descrepancy' where id = '1';
+update notetype set name = 'Qauntity Descrepancy' where id = '2';
+delete from notetype where id = '3';
+
+#Raveesh pathak 22 Jan 2014 - Alias Code in COA.
+ALTER TABLE account ADD COLUMN aliascode VARCHAR(50) DEFAULT NULL;
+
+#Sagar A- 23 Jan 2014, Multi UOM in sales and purchase return
+#prdetails
+ALTER TABLE `prdetails` ADD COLUMN `uom`  varchar(255) AFTER `actualquantity`;
+ALTER TABLE `prdetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `prdetails` ADD COLUMN `baseuomreturnquantity`  double default 0 AFTER `baseuomquantity`;
+ALTER TABLE `prdetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomreturnquantity`;
+alter table prdetails add CONSTRAINT  FK_prdetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+#srdetails
+ALTER TABLE `srdetails` ADD COLUMN `uom`  varchar(255) AFTER `actualquantity`;
+ALTER TABLE `srdetails` ADD COLUMN `baseuomquantity`  double default 0 AFTER `uom`;
+ALTER TABLE `srdetails` ADD COLUMN `baseuomreturnquantity`  double default 0 AFTER `baseuomquantity`;
+ALTER TABLE `srdetails` ADD COLUMN `baseuomrate`  double default 1 AFTER `baseuomreturnquantity`;
+alter table srdetails add CONSTRAINT  FK_srdetails_uom FOREIGN KEY (`uom`) REFERENCES `uom` (`id`);
+
+
+#Raveesh pathak 23 Jan 2014 - Sequence Number in Product.
+alter table product add column seqnumber int(11) default '0';
+alter table product add column seqformat varchar(40);
+alter table product add CONSTRAINT  FK_product_seqformat FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`);
+
+# Mayur Bhokase - 24/01/2014 Customize report View button in [Customer Invoice & Cash Sales Report] adding Default Header Column in DB.
+
+alter table customizereportheader modify dataheader varchar(50);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Invoice No',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'entryno','Journal Entry No',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Invoice Date',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'duedate','Due Date',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Customer',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxamount','Tax Amount',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amount','Total Amount',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'attachdoc','Attach Documents',2,1); 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'attachments','Attachments',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amountdue','Amount Due',2,1);
+
+# Mayur Bhokase - 24/01/2014 Customize report View button in [Vendor Invoice & Cash Sales Report] adding Default Header Column in DB.
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Vendor Invoice No',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'entryno','Journal Entry No',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Vendor Invoice Date',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'duedate','Due Date',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Vendor',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxamount','Tax Amount',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amount','Total Amount',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'attachdoc','Attach Documents',6,1); 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'attachments','Attachments',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amountdue','Amount Due',6,1);
+
+#[Customer Quotation Report] 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Customer Quotation No',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Customer Quotation Date',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Customer',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxamount','Tax Amount',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'orderamountwithTax','Total Amount',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',22,1);
+
+#[Vendor Quotation Report] -24/01/2014
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Vendor Quotation No',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Vendor Quotation Date',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Vendor',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxamount','Tax Amount',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'orderamountwithTax','Total Amount',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',23,1);
+
+#[Request For Quotation(RFQ)]
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','RFQ No',33,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','RFQ Date',33,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'duedate','Due Date',33,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Vendor',33,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',33,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',33,1);
+
+# Mayur Pawar 24 jan 2014 Customize report view button in PO adding default column field
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Purchase Order No',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Purchase Order Date',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'duedate','Due Date',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'personname','Vendor(s)',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxname','Tax Name',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'taxamount','Tax Amount',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'orderamountwithTax','Total Amount',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'status','Status',18,1);
+
+# Mayur Pawar 24 jan 2014 Customize report view button in Purchase Requisition adding default column field
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'billno','Purchase Requisition No',32,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'date','Purchase Requisition Date',32,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'duedate','Due Date',32,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'discount','Discount',32,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'orderamountwithTax','Budgeted Amount',32,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'memo','Memo',32,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'status','Status',32,1);
+
+
+#Neeraj Dwivedi-24/1/2014  Insert Queries
+#SalesOrder
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Memo","Memo",0,50,'T','T',1,'Memo',"memo","salesorder");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"20","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"20","Cost Center","CostCenter",0,50,'T','T',1,"costcenter","costcenter","costcenter","id","name",'CostCenter','costcenter','ID','Cost Center');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"20","Ship Date","shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Pending Approval","Pendingapproval","double",0,50,'T','T',1,'Pending Approval','pendingapproval','salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"20","Entry Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Entry Date');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"20","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via','shipvia','salesorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"20","Sales Person","MasterItem",0,50,'T','T',1,"salesperson","salesperson","masteritem","id","value",'MasterItem','salesperson','ID','Sales Person');
+
+
+##Purchase Order
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Memo","Memo",0,50,'T','T',1,'Memo',"memo","purchaseorder");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"18","Billing Address","BillTo","string",0,50,'T','T',1,'Billing Address','billto','purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"18","Shipping Address","ShipTo","string",0,50,'T','T',1,'Shipping Address','shipto','purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"18","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"18","Cost Center","CostCenter",0,50,'T','T',1,"costcenter","costcenter","costcenter","id","name",'CostCenter','costcenter','ID','Cost Center');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"18","Ship Date","shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Pending Approval","Pendingapproval","double",0,50,'T','T',1,'Pending Approval','pendingapproval','purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"18","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via','shipvia','purchaseorder');
+
+#Credit Note
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"12","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+
+#Debit Note
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"10","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+
+#GRO
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"28","Cost Center","CostCenter",0,50,'T','T',1,"costcenter","costcenter","costcenter","id","name",'CostCenter','costcenter','ID','Cost Center');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"28","Status","MasterItem",0,50,'T','T',1,"status","status","masteritem","id","value",'MasterItem','status','ID','Status');
+
+
+#Make Payment
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Memo","Memo",0,50,'T','T',1,'Memo',"memo","payment");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"14","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Bank Charges","BankChargesAmount","double",0,50,'T','T',1,'Bank Charges','bankchargesamount','payment');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Bank Interest","BankInterestAmount","double",0,50,'T','T',1,'Bank Interest','bankinterestamount','payment');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Advance Amount","advanceamount","double",0,50,'T','T',1,'Advance Amount','advanceamount','payment');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"14","Bank Interest Account","Account",0,50,'T','T',1,"bankInterestAccount","bankinterestaccountid","account","id","name",'Account','bankInterestAccount','ID','Bank Interest Account');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"14","Bank Charges Account","Account",0,50,'T','T',1,"bankChargesAccount","bankchargesaccountid","account","id","name",'Account','bankChargesAccount','ID','Bank Charges Account');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Is Advance","isadvancepayment","char",0,50,'T','T',1,'Is Advance','isadvancepayment','payment');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Total Amount","DepositAmount","double",0,50,'T','T',1,'Total Amount','depositamount','payment');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Vendor","Customer","string",0,50,'T','T',1,'Vendor','customer','payment');
+
+#Receive Payment
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Memo","Memo",0,50,'T','T',1,'Memo',"memo","receipt");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"16","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Bank Charges","BankChargesAmount","double",0,50,'T','T',1,'Bank Charges','bankchargesamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Bank Interest","BankInterestAmount","double",0,50,'T','T',1,'Bank Interest','bankinterestamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Advance Amount","advanceamount","double",0,50,'T','T',1,'Advance Amount','advanceamount','receipt');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"16","Bank Interest Account","Account",0,50,'T','T',1,"bankInterestAccount","bankinterestaccountid","account","id","name",'Account','bankInterestAccount','ID','Bank Interest Account');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"16","Bank Charges Account","Account",0,50,'T','T',1,"bankChargesAccount","bankchargesaccountid","account","id","name",'Account','bankChargesAccount','ID','Bank Charges Account');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Is Advance","isadvancepayment","char",0,50,'T','T',1,'Is Advance','isadvancepayment','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Total Amount","DepositAmount","double",0,50,'T','T',1,'Total Amount','depositamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Vendor","Vendor","string",0,50,'T','T',1,'Vendor','vendor','receipt');
+
+
+#Neeraj Changes- 24/1/2014
+#Vendor Invoice
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Vendor Invoice Number","GoodsReceiptNumber",0,50,'T','T',1,'Vendor Invoice Number',"grnumber","goodsreceipt");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Billing Address","BillFrom","string",0,50,'T','T',1,'Billing Address','billfrom','goodsreceipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Shipping Address","ShipFrom","string",0,50,'T','T',1,'Shipping Address',"shipfrom",'goodsreceipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Due Date","DueDate","date",0,50,'T','T',3,'Due Date',"duedate",'goodsreceipt');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES
+(UUID(),"6","Vendor","Vendor",0,50,'T','T',11,"vendor","vendor","vendor","id","name",'Vendor','name','ID','Vendor');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Memo","memo",0,50,'T','T',1,'Memo',"memo","goodsreceipt");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Ship Date","ShipDate","date",0,50,'T','T',3,'Ship Date',"shipdate",'goodsreceipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via',"shipvia",'goodsreceipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"6","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"6","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','goodsreceipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"6","Vendor Invoice Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Vendor Invoice Date');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"6","Cost Center","CostCenter",0,50,'T','T',1,"costcenter","costcenter","costcenter","id","name",'CostCenter','costcenter','ID','Cost Center');
+
+#insert into modules
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(6, 'Vendor Invoice', 'com.krawler.hql.accounting.GoodsReceipt', 'ID', NULL, NULL); 
+
+
+
+#Neeraj Changes- 24/1/2014
+#Vendor Quotation
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Vendor Quotation Number","QuotationNumber",0,50,'T','T',1,'Vendor Quotation Number',"quotationnumber","vendorquotation");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Quotation Date","QuotationDate","string",0,50,'T','T',1,'Quotation Date','quotationdate','vendorquotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Due Date","DueDate","date",0,50,'T','T',3,'Due Date',"duedate",'vendorquotation');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Ship Date","Shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'vendorquotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via',"shipvia",'vendorquotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES
+(UUID(),"23","Vendor","Vendor",0,50,'T','T',11,"vendor","vendor","vendor","id","name",'Vendor','name','ID','Vendor');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Memo","Memo",0,50,'T','T',1,'Memo',"memo","vendorquotation");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Billing Address","BillTo","string",0,50,'T','T',1,'Billing Address','billto','vendorquotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"23","Shipping Address","ShipTo","string",0,50,'T','T',1,'Shipping Address','shipto','vendorquotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"23","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"23","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','vendorquotation');
+
+
+#insert into modules
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(23, 'Vendor Quotation', 'com.krawler.hql.accounting.VendorQuotation', 'ID', NULL, NULL); 
+ 
+
+
+#Neeraj Changes- 26/1/12014
+#Customer Quotation
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Customer Quotation Number","QuotationNumber",0,50,'T','T',1,'Customer Quotation Number',"quotationnumber","quotation");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Quotation Date","QuotationDate","string",0,50,'T','T',1,'Quotation Date','quotationdate','quotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Due Date","DueDate","date",0,50,'T','T',3,'Due Date',"duedate",'quotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Ship Date","Shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'quotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via',"shipvia",'quotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Memo","Memo",0,50,'T','T',1,'Memo',"memo","quotation");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"22","Customer","Customer",0,50,'T','T',1,"customer","customer","customer","id","name",'Customer','name','ID','Customer');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Billing Address","BillTo","string",0,50,'T','T',1,'Billing Address','billto','quotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"22","Shipping Address","ShipTo","string",0,50,'T','T',1,'Shipping Address','shipto','quotation');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+
+(UUID(),"22","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"22","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','quotation');
+
+#insert into modules
+insert into modules(id, modulename,pojoclasspathfull,primarykey_methodname,uniquekey_methodname,uniquekey_hbmname) values(22, 'Quotation', 'com.krawler.hql.accounting.Quotation', 'ID', NULL, NULL); 
+ 
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"16","Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Date');
+
+
+#DO
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"27","Cost Center","CostCenter",0,50,'T','T',1,"costcenter","costcenter","costcenter","id","name",'CostCenter','costcenter','ID','Cost Center');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"27","Status","MasterItem",0,50,'T','T',1,"status","status","masteritem","id","value",'MasterItem','status','ID','Status');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','deliveryorder');
+
+#Update Queries
+
+UPDATE default_header SET defaultHeader="Customer",dummyvalue="Customer" where module=12 and reftablename='customer';
+UPDATE default_header SET defaultHeader="Customer",dummyvalue="Customer" where module=20 and reftablename='customer';
+UPDATE default_header SET defaultHeader="Customer",dummyvalue="Customer" where module=27 and reftablename='customer';
+
+
+
+UPDATE default_header SET defaultHeader="Vendor",dummyvalue="Vendor" where module=10 and reftablename='vendor';
+UPDATE default_header SET defaultHeader="Vendor",dummyvalue="Vendor" where module=18 and reftablename='vendor';
+UPDATE default_header SET defaultHeader="Vendor",dummyvalue="Vendor" where module=28 and reftablename='vendor';
+
+UPDATE default_header SET defaultHeader="Credit Date",dummyvalue="Credit Date" where module=12 and reftablename='journalentry';
+UPDATE default_header SET defaultHeader="Creation Date",dummyvalue="Creation Date" where module=10 and reftablename='journalentry';
+
+
+UPDATE default_header SET defaultHeader="Debit Note No",dummyvalue="Debit Note No" where module=10 and reftablename='debitnote';
+
+UPDATE default_header SET defaultHeader="Receipt No",dummyvalue="Receipt No" where module=16 and reftablename='receipt';
+
+UPDATE default_header SET defaultHeader="Goods Receipt Number",dummyvalue="Goods Receipt Number" where module=28 and reftablename='grorder';
+
+UPDATE default_header SET defaultHeader="Goods Receipt Date",dummyvalue="Goods Receipt Date" where module=28 and reftablename='grorder';
+
+#Neeraj Dwivedi-27/1/2014
+#Customer Invoice
+
+UPDATE default_header SET defaultHeader="Billing Address",dummyvalue="Billing Address" where module=2 and dbcolumnname='billfrom';
+UPDATE default_header SET defaultHeader="Shipping Address",dummyvalue="Shipping Address" where module=2 and dbcolumnname='shipfrom';
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"2","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via',"shipvia",'invoice');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"2","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','invoice');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"2","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','invoice');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"2","Invoice Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Invoice Date');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"2","Cost Center","CostCenter",0,50,'T','T',1,"costcenter","costcenter","costcenter","id","name",'CostCenter','costcenter','ID','Cost Center');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"2","Currency","KWLCurrency",0,50,'T','T',1,"currency","currency","currency","currencyid","name",'KWLCurrency','currency','currencyID','Currency');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"2","Sales Person","MasterItem",0,50,'T','T',1," masterSalesPerson","mastersalesperson","masteritem","id","value",'MasterItem','masterSalesPerson','ID','Sales Person');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"2","PO Reference Number","PoRefNumber","string",0,50,'T','T',1,'PO Reference Number','porefno','invoice');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"2","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','invoice');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"2","Is Partial Invoice","Partialinv","char",0,50,'T','T',1,'PO Reference Number','partialinv','invoice');
+
+
+#Purchase Order
+UPDATE default_header SET defaultHeader="Purchase Order No",dummyvalue="Purchase Order No" where module=18 and dbcolumnname='ponumber';
+
+DELETE from default_header where module=18 and defaultHeader="Due Date";
+DELETE from default_header where module=18 and defaultHeader="Shipping Address";
+DELETE from default_header where module=18 and defaultHeader="Billing Address";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"18","Billing Address","BillTo","string",0,50,'T','T',1,'Billing Address','billto','purchaseorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"18","Shipping Address","ShipTo","string",0,50,'T','T',1,'Shipping Address','shipto','purchaseorder');
+
+
+#Sales Order
+UPDATE default_header SET defaultHeader="Sales Order No",dummyvalue="Sales Order No" where module=20 and dbcolumnname='sonumber';
+
+DELETE from default_header where module=20 and defaultHeader="Due Date";
+
+#Credit Note
+
+DELETE from default_header where module=12 and defaultHeader="Credit Date";
+UPDATE default_header SET defaultHeader="Credit Note Number",dummyvalue="Credit Note Number" where module=12 and dbcolumnname='cnnumber';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"12","Creation Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Creation Date');
+
+
+#Debit Note
+DELETE from default_header where module=10 and defaultHeader="Debit Note No";
+DELETE from default_header where module=10 and defaultHeader="Creation Date";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"10","Debit Note No","DebitNoteNumber",0,50,'T','T',1,'Debit Note No',"dnnumber","debitnote");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"10","Creation Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Creation Date');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"10","Memo","Memo",0,50,'T','T',1,'Memo',"memo","debitnote");
+
+
+#Vendor Invoice
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"6","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','goodsreceipt');
+
+#Vendor Quotation
+
+UPDATE default_header SET defaultHeader="Vendor Quotation Date",dummyvalue="Vendor Quotation Date" where module=23 and dbcolumnname='quotationdate';
+DELETE from default_header where module=23 and defaultHeader="Due Date";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"23","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','vendorquotation');
+
+
+#Customer Quotation
+
+UPDATE default_header SET defaultHeader="Customer Quotation Date",dummyvalue="Customer Quotation Date" where module=22 and dbcolumnname='quotationdate';
+
+DELETE from default_header where module=22 and defaultHeader="Due Date";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"22","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','quotation');
+
+#GoodsReceipt Order
+DELETE from default_header where module=28 and defaultHeader="Goods Receipt Date";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","FOB","Fob","string",0,50,'T','T',1,'FOB','fob','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via','shipvia','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Memo","Memo",0,50,'T','T',1,'Memo',"memo","grorder");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Goods Receipt Number","GoodsReceiptOrderNumber","string",0,50,'T','T',1,'Goods Receipt Number','gronumber','grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Goods Receipt Date","OrderDate","date",0,50,'T','T',3,'Goods Receipt Date',"grorderdate",'grorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"28","Ship Date","Shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'grorder');
+
+#Delivery Order
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Delivery Order Number","DeliveryOrderNumber","string",0,50,'T','T',1,'Delivery Order Number','donumber','deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Delivery Order Date","OrderDate","date",0,50,'T','T',3,'Delivery Order Date',"orderdate",'deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Ship Date","Shipdate","date",0,50,'T','T',3,'Ship Date',"shipdate",'deliveryorder');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"27","Customer","Customer",0,50,'T','T',1,"customer","customer","customer","id","name",'Customer','name','ID','Customer');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Ship via","Shipvia","string",0,50,'T','T',1,'Ship via','shipvia','deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','deliveryorder');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"27","Memo","Memo",0,50,'T','T',1,'Memo',"memo","deliveryorder");
+
+#Receive Payment
+
+DELETE from default_header where module=16 and defaultHeader="Receipt No";
+DELETE from default_header where module=16 and defaultHeader="Date";
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Receipt No","ReceiptNumber","string",0,50,'T','T',1,'Receipt No','receiptNumber','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"16","Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Date');
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Bank Charges","BankChargesAmount","double",0,50,'T','T',1,'Bank Charges','bankchargesamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Bank Interest","BankInterestAmount","double",0,50,'T','T',1,'Bank Interest','bankinterestamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Advance Amount","advanceamount","double",0,50,'T','T',1,'Advance Amount','advanceamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Memo","Memo",0,50,'T','T',1,'Memo',"memo","receipt");
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Is Advance","isadvancepayment","char",0,50,'T','T',1,'Is Advance','isadvancepayment','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Total Amount","DepositAmount","double",0,50,'T','T',1,'Total Amount','depositamount','receipt');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"16","Vendor","Vendor","string",0,50,'T','T',1,'Vendor','vendor','receipt');
+
+
+#Make Payment
+UPDATE default_header SET defaultHeader="Payment No",dummyvalue="Payment No" where module=14 and dbcolumnname='paymentnumber';
+
+
+#Neeraj-27/1/2014
+
+#Customer Invoice
+
+ UPDATE default_header SET defaultHeader="Is Partial Invoice",dummyvalue="Is Partial Invoice" where module=2 and dbcolumnname='partialinv'; 
+ UPDATE default_header SET defaultHeader="Shipping Address",dummyvalue="Shipping Address" where module=2 and dbcolumnname='shipto';
+ UPDATE default_header SET defaultHeader="Billing Address",dummyvalue="Billing Address" where module=2 and dbcolumnname='billto';
+
+ DELETE from default_header where module=2 and defaultHeader="Cost Center";
+ DELETE from default_header where module=2 and defaultHeader="Billing Address";
+ DELETE from default_header where module=2 and defaultHeader="Shipping Address";
+ DELETE from default_header where module=2 and defaultHeader="Ship To";
+ DELETE from default_header where module=2 and defaultHeader="Bill To";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"2","Billing Address","BillTo","string",0,50,'T','T',1,'Billing Address','billto','invoice');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"2","Shipping Address","ShipTo","string",0,50,'T','T',1,'Shipping Address',"shipto",'invoice');
+
+
+#Sales Order Number
+UPDATE default_header SET defaultHeader="Sales Order Number",dummyvalue="Sales Order Number" where module=20 and dbcolumnname='sonumber';
+
+#Credit Note
+UPDATE default_header SET defaultHeader="Credit Note No",dummyvalue="Credit Note No" where module=12 and dbcolumnname='cnnumber';
+
+#Vendor Quotation
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"23","Post Text","PostText","string",0,50,'T','T',1,'Post Text','posttext','vendorquotation');
+
+#Neeraj-27/1/2014-for 192.168.0.209
+#GoodsReceipt Order
+
+DELETE from default_header where module=28 and defaultHeader="Vendor";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"28","Vendor","Vendor",0,50,'T','T',1,"vendor","vendor","vendor","id","name",'Vendor','name','ID','Vendor');
+
+
+#Make Payment
+DELETE from default_header where module=14 and defaultHeader="Payment No";
+DELETE from default_header where module=14 and defaultHeader="Date";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,validatetype,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES 
+(UUID(),"14","Payment No","PaymentNumber","string",0,50,'T','T',1,'Payment No','paymentnumber','payment');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,recordname,dbcolumnname,reftablename,reftablefk,reftabledatacolumn,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,dummyvalue) VALUES 
+(UUID(),"14","Date","JournalEntry",0,50,'T','T',3,"journalEntry","journalentry","journalentry","id","entrydate",'JournalEntry','entryDate','ID','Date');
+
+
+#Vendor Invoice
+DELETE from default_header where module=6 and defaultHeader="Bill From";
+DELETE from default_header where module=6 and defaultHeader="Shipping_From";
+DELETE from default_header where module=6 and defaultHeader="Due_Date";
+DELETE from default_header where module=6 and defaultHeader="Vendor Name";
+DELETE from default_header where module=6 and defaultHeader="Receipt Number";
+DELETE from default_header where module=6 and defaultHeader="Memo";
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,xtype,dummyvalue,dbcolumnname,reftablename) VALUES
+(UUID(),"6","Memo","memo",0,50,'T','T',1,'Memo',"memo","goodsreceipt");
+
+#Raveesh pathak 27th January 2014 -Sequnce format,PDF Tempalte,RFQ
+
+CREATE TABLE  pdftemplateconfig(
+id VARCHAR(255) NOT NULL,
+module INT NOT NULL,
+pdffooter VARCHAR(1024),
+pdfheader VARCHAR(1024),
+pdfpretext  LONGTEXT  DEFAULT NULL,
+pdfposttext LONGTEXT DEFAULT NULL,
+company VARCHAR(255) NOT NULL,
+PRIMARY KEY(id),
+KEY FK_COMPANY_PDF(company),
+CONSTRAINT FK_COMPANY_PDF FOREIGN KEY (company) REFERENCES company (companyid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table sequenceformat modify modulename varchar(50) default ''; 
+ALTER TABLE requestforquotationdetail MODIFY quantity double;
+
+# Sagar M - 28th Jan 2014 Added type flag to identify Purchase and Sales related taxes
+alter table tax add column `taxtype` int(11) default 0;
+
+
+
+/ By Dipak Mundhe ----- on 29th Jan 2014 -- Related to audit
+
+   /*  Update into Audit_action table */
+
+    insert into audit_action value(74, 'Customer Quotation created', 8);
+    insert into audit_action value(73, 'Vendor Quotation created', 9);
+    insert into audit_action value(75, 'MAKE PAYMENT', 9);   
+
+    insert into audit_action value(76, 'Journal Entry Deleted', 13);
+    insert into audit_action value(77, 'Sales Order', 18);
+    insert into audit_action value(78, 'Delivery Order', 18);
+    insert into audit_action value(79, 'Sales Return', 18);
+    
+    insert into audit_action value(80, 'Sales Return', 19);
+ 
+    insert into audit_action value(81, 'Goods Receipt Created', 12);
+    insert into audit_action value(82, 'Goods Receipt Deleted', 12);
+    insert into audit_action value(83, 'Cash_Purchase_Receipt_Created', 12);
+    insert into audit_action value(84, 'Vendor Quotation Deleted', 9);
+
+    
+
+    /*  Update into Audit_group table */
+    insert into audit_group value(7, 'Payment');
+    insert into audit_group value(18, 'Orders');
+
+    insert into audit_group value(19, 'Debit Note');
+
+
+#Hitesh Suryawanshi 3rd Feb 2014 -Give Report Permissions to users.
+
+create table reportmaster(
+id varchar(50) primary key,
+name varchar(100) not null default '',
+description varchar(256) not null default '')
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table reportrolemap(
+id varchar(250) primary key,
+reportid varchar(250) not null,
+roleid varchar(250) not null,
+constraint report_fk1 foreign key (reportid) references reportmaster(id) on delete cascade on update cascade,
+constraint role_fk2 foreign key (roleid) references role(id) on delete cascade on update cascade )
+ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Add column  into reportmaster table */
+
+alter table reportrolemap add(userid  varchar(250));
+
+ /*  Insert into reportmaster table */
+
+insert into reportmaster values("Cash_Flow_WorkSheet","Cash Flow WorkSheet","Cash Flow for Operating and Investing Activities"); 
+insert into reportmaster values("Cost_Center_Report","Cost Center Report","Summery of cost Center,Credit Amount,debit Amount and Transaction Flow ");
+insert into reportmaster values("Sales_By_Item_Report","Sales By Item Report","View Details and Summary of Items Sold"); 
+insert into reportmaster values("Tax_Report","Tax Report","View Tax Report for all Transactions"); 
+insert into reportmaster values("Statement_of_Accounts","Statement of Accounts","View Statement of Accounts for Customer and Vendor");
+insert into reportmaster values("Customer_and_Vendor_Analysis_Report","Customer and Vendor Analysis Report","View Customer and Vendor Analysis Report"); 
+insert into reportmaster values("Top_and_Dormant_Customers_By_Products","Top and Dormant Customers By Products","View Top Customers and Dormant Customers By Products"); 
+insert into reportmaster values("Top_and_Dormant_Vendors_By_Products","Top and Dormant Vendors By Products","View Top Vendors and Dormant Vendors By Products"); 
+insert into reportmaster values("Top_and_Dormant_Products_By_Customers","Top and Dormant Products By Customers","View Top Products and Dormant Products By Customers"); 
+insert into reportmaster values("Sales_Commission_Statement","Sales Commission Statement","View Sales Persons Commission Statement");
+insert into reportmaster values("Export_GST_Form_5","Export GST Form 5","View Export GST Form 5 PDF Report"); 
+insert into reportmaster values("Sales_By_Customer","Sales By Customer","View Details and Summary of Items Sold "); 
+insert into reportmaster values("Sales_By_Product","Sales By Product","View Details and Summary of Items Sold "); 
+insert into reportmaster values("Sales_By_Sales_Person","Sales By Sales Person","View Details and Summary of Items Sold (Sales Person)"); 
+insert into reportmaster values("Custom_Reports","Custom Reports","View Custom Reports List"); 
+insert into reportmaster values("Inter_Company_Ledger_Report","Inter Company Ledger Report","View Inter Company Transaction (Ledger Report)"); 
+insert into reportmaster values("Accounts Re-evaluation","Accounts Re-evaluation","Re-evaluate your Foreign Currency Accounts"); 
+insert into reportmaster values("Stock_Status_Report","Stock Status Report","View Stock Status Report"); 
+insert into reportmaster values("Foreign_Currency_Exposure_Report","Foreign Currency Exposure Report","View Foreign Currency Exposure Report"); 
+insert into reportmaster values("Monthly_Revenue","Monthly Revenue","View Monthly Revenue"); 
+insert into reportmaster values("Monthly_Sales_Report","Monthly Sales Report","View Monthly Sales Report"); 
+insert into reportmaster values("Monthly_Trading_&_Profit/Loss","Monthly Trading & Profit/Loss","View Monthly Trading & Profit/Loss Report"); 
+insert into reportmaster values("Finance_Details_Report","Finance Details Report","View Finance Details Report"); 
+insert into reportmaster values("Unpaid_Invoices_List","Unpaid Invoices List","View Unpaid Invoices List Report"); 
+ 
+/*  Add column method_name into reportmaster table */
+
+alter table reportmaster add(method_name  varchar(250));
+
+
+ /*  Update into reportmaster table */
+
+update reportmaster set method_name="callCostCenterReport()" where id="Cost_Center_Report";
+update reportmaster set method_name="callCashFlowStatement()" where id="Cash_Flow_WorkSheet";
+update reportmaster set method_name="callSaleByItem()" where id="Sales_By_Item_Report";
+update reportmaster set method_name="callTaxReport()" where id="Tax_Report";
+update reportmaster set method_name="callCustomerVendorLedgerReport()" where id="Statement_of_Accounts";
+update reportmaster set method_name="callCustomerVendorLedgerAnalysisReport()" where id="Customer_and_Vendor_Analysis_Report"; 
+update reportmaster set method_name="topCustomersByProducts()" where id="Top_and_Dormant_Customers_By_Products"; 
+update reportmaster set method_name="topVendorsByProducts()" where id="Top_and_Dormant_Vendors_By_Products";
+update reportmaster set method_name="topProductsByCustomers()" where id="Top_and_Dormant_Products_By_Customers"; 
+update reportmaster set method_name="salesCommissionStmt()" where id="Sales_Commission_Statement"; 
+update reportmaster set method_name="callGSTForm5fileWindow()" where id="Export_GST_Form_5"; 
+update reportmaster set method_name="getSalesByCustTabView()" where id="Sales_By_Customer"; 
+update reportmaster set method_name="getSalesByProdTabView()" where id="Sales_By_Product"; 
+update reportmaster set method_name="getSalesBySalesPersonTabView()" where id="Sales_By_Sales_Person"; 
+update reportmaster set method_name="callCustomReportGrid()" where id="Custom_Reports"; 
+update reportmaster set method_name="callInterCompanyLedger()" where id="Inter_Company_Ledger_Report"; 
+update reportmaster set method_name="callAccountRevaluationWindow()" where id="Accounts Re-evaluation"; 
+update reportmaster set method_name="showStockStatusReportTab()" where id="Stock_Status_Report"; 
+update reportmaster set method_name="callForeignCurrencyExposure()" where id="Foreign_Currency_Exposure_Report"; 
+update reportmaster set method_name="monthlyRevenue()" where id="Monthly_Revenue";
+update reportmaster set method_name="monthlySalesReport()" where id="Monthly_Sales_Report"; 
+update reportmaster set method_name="monthlyTradingProfitLoss()" where id="Monthly_Trading_&_Profit/Loss";
+update reportmaster set method_name="FinanceDetailsReport()" where id="Finance_Details_Report"; 
+update reportmaster set method_name="UnpaidInvoices()" where id="Unpaid_Invoices_List"; 
+
+ 
+/*  Update into reportmaster table */
+
+insert into reportmaster values("Export IAF Text File","Export IAF Text File","Export IAF Text File","callIAFfileWindow()"); 
+insert into reportmaster values("General_Ledger_Report","General Ledger Report","View General Ledger Report.","callGeneralLedger()");
+insert into reportmaster values("view_gst_report","GST Report","View GST Report.","GSTReportTab()"); 
+
+# Sagar M - company level templateflag to call different function for single record export
+
+ALTER TABLE company ADD COLUMN templateflag int(11) default 0;
+
+#Hitesh Suryawanshi 5th Feb 2014 -Remove Accounts Re-evaluation and Custom Reports.
+#delete on reportmaster
+
+delete from reportmaster where id="Accounts Re-evaluation";    
+delete from reportmaster where id="Custom_Reports";  

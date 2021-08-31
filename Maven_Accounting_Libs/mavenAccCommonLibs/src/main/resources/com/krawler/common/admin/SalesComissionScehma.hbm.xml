@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.SalesComissionScehma" table="salescomissionscehma">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="lowerlimit" type="double">
+            <column default="0" name="lowerlimit" />
+        </property>
+        <property name="upperlimit" type="double">
+            <column default="0" name="upperlimit" />
+        </property>
+        <property name="commissiontype" type="int">
+            <column default="1" name="commissiontype" />
+        </property>
+        <property name="percentageType" type="double">
+            <column default="0" name="percentagetype" />
+        </property>
+        <property name="amount" type="double">
+            <column default="0" name="amount" />
+        </property>
+        <property name="schemaItem" type="string">
+            <column length="255" name="schemaitem"/>
+        </property>
+        <property name="categoryid" type="string">
+            <column length="255" name="categoryid"/>
+        </property>
+        <property name="productId" type="string">
+            <column length="255" name="productid"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+   
+    
+    </class>
+</hibernate-mapping>
+ 

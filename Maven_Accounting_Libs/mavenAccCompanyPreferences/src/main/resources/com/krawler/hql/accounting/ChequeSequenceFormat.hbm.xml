@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ChequeSequenceFormat" table="chequesequenceformat">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="numberOfDigits" type="integer">
+            <column name="numberofdigits"/>
+        </property>
+        <property name="startFrom" type="big_integer">
+            <column name="startfrom"/>
+        </property>
+        <property name="showLeadingZero" type="boolean">
+            <column name="isshowleadingzero"/>
+        </property>
+         <property name="isactivate" type="true_false">
+            <column name="isactivate" not-null="false"/>
+        </property>
+         <property name="isdefault" type="true_false">
+            <column name="isdefault" not-null="false"/>
+        </property>
+        <property name="chequeEndNumber" type="big_integer">
+            <column name="chequeEndNumber"/>
+        </property>
+        <property name="name" type="string">
+            <column length="255" name="name" />
+        </property>
+        <property name="prefix" type="string">
+            <column length="255" name="prefix" />
+        </property>
+        <property name="suffix" type="string">
+            <column length="255" name="suffix" />
+        </property>
+        <property name="dateBeforePrefix" type="true_false">
+            <column name="isdatebeforeprefix" />
+        </property>
+        <property name="dateformatinprefix" type="string">
+            <column length="255" name="dateformatinprefix" />
+        </property>
+        
+        <property name="dateAfterPrefix" type="true_false">
+            <column name="isdateafterprefix" />
+        </property>
+        <property name="dateformatafterprefix" type="string">
+            <column length="255" name="dateformatafterprefix" />
+        </property>
+        
+        <property name="showDateFormatAfterSuffix" type="true_false">
+            <column name="showdateformataftersuffix" />
+        </property>
+        <property name="dateFormatAfterSuffix" type="string">
+            <column length="255" name="dateformataftersuffix" />
+        </property>
+        <property name="resetCounter" type="true_false">
+            <column name="resetcounter" not-null="false"/>
+        </property>
+    
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column="company"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="bankAccount" column="bankaccount"/>
+    </class>
+</hibernate-mapping>

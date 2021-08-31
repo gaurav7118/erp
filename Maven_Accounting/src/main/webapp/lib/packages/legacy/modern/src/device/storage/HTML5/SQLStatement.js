@@ -1,0 +1,1 @@
+Ext.define("Ext.device.storage.HTML5.SQLStatement",{extend:"Ext.Base",sql:null,arguments:null,success:Ext.emptyFn,failure:Ext.emptyFn,constructor:function(A){this.sql=A.sql;this.arguments=A.arguments;this.success=A.success;this.failure=A.failure}})

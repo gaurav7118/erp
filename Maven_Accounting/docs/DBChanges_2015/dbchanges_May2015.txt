@@ -1,0 +1,840 @@
+#Mayur Pawar -4th May 2015
+
+insert into reportmaster value("Stock_Avl_by_Warehouse_List","Stock Availability by Customer Warehouse List","View Stock Availability by Customer Warehouse list from here.","getStockByCustomerStore()",null);
+
+
+# Sagar M 5th May 2015
+
+CREATE TABLE `olympus_importscriptinfo` (
+`id` varchar(40) NOT NULL, 
+`filepath` varchar(255) NOT NULL,
+`importinfo` varchar(500) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into olympus_importscriptinfo values('CUSTOMERBILLINGMASTER','/Users/sagar/Desktop/CustomerMaster-SP_Explaination.xls',
+'{"tradedebtoraccount":"402880524d09fbf1014d09ff74b5000b"}');
+
+insert into olympus_importscriptinfo values('CUSTOMERSHIPPINGMASTER','/Users/sagar/Desktop/CustomerMaster-SH_Explaination.xls',
+'{"tradedebtoraccount":"402880524d09fbf1014d09ff74b5000b"}');
+
+insert into olympus_importscriptinfo values('SUPPLLICENSE1','/Users/sagar/Desktop/License Sup 1_explaination.xls','');
+
+insert into olympus_importscriptinfo values('SUPPLLICENSE2','/Users/sagar/Desktop/License Sup 2_explaination.xls','');
+
+insert into olympus_importscriptinfo values('LICENSEMASTER','/Users/sagar/Desktop/Master License.xls','{"localcode":"ZH01","overseascode":"ZH02","localcategory":"402880524d0a16c2014d0a204d230216","overseascategory":"402880524d0a16c2014d0a207d050217"}');
+
+insert into olympus_importscriptinfo values('STOCKMOVEMENT1','/Users/sagar/Desktop/Incoming Demo Asset_explaination.xls','{"storecode":"WH-DE"}');
+
+insert into olympus_importscriptinfo values('STOCKMOVEMENT2','/Users/sagar/Desktop/Incoming Free Stock-A900_explaination.xls','{"storecode":"WH-SS"}');
+
+insert into olympus_importscriptinfo values('STOCKMOVEMENT3','/Users/sagar/Desktop/Incoming-K stocks_explaination.xls','{"storecode":""WH-KS"}');
+
+insert into olympus_importscriptinfo values('STOCKMOVEMENT4','/Users/sagar/Desktop/Incoming SP Stock-A900_explaination.xls','{"storecode":"WH-ES"}');
+
+INSERT INTO olympus_importscriptinfo VALUES('PRODUCTMASTER','/Users/sagar/Desktop/Material Master_ Explaination.xls','{"producttype":"d8a50d12-515c-102d-8de6-001cc0794cfa","isbatchforproduct":true,"isserialforproduct":true,"islocationforproduct":true,"iswarehouseforproduct":true,"account":"402880524d09fbf1014d0a00f1350048","initialpurchaseprice":"1","initialsalesirice":"1","frequency":"3","blankUOM":"-"}');
+
+#Sharad Pawar -5th May 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('cea3a5ee-6b93-41c0-8fb7-581bf984b1eb','Shipping Term','shippingterm','quotation','','','Shipping Term','1','22');
+
+# Amol Dhokale 5th May 2015
+ALTER TABLE extracompanypreferences ADD COLUMN activatetodateforexchangerates CHAR(1) DEFAULT 'F';
+ALTER TABLE extracompanypreferences ADD COLUMN activatetoblockspotrate CHAR(1) DEFAULT 'F';
+ALTER TABLE exchangeratedetails ADD COLUMN todate datetime DEFAULT NULL;
+UPDATE exchangeratedetails SET todate=ADDDATE(applydate, INTERVAL 30 DAY);
+
+# Mohammed Uzair Momin 6th May 2015
+CREATE TABLE consignreqapprovalrules (
+  `id` VARCHAR(255) NOT NULL,
+  `rulename` VARCHAR(255) DEFAULT NULL,
+  `createdon` BIGINT(20) DEFAULT NULL,
+  `modifiedon` BIGINT(20) DEFAULT NULL,
+  `createdby` VARCHAR(40) DEFAULT NULL,
+  `modifiedby` VARCHAR(40) DEFAULT NULL,
+  `requester` VARCHAR(40) DEFAULT NULL,
+  `approver` VARCHAR(40) DEFAULT NULL,
+  `warehouse` VARCHAR(40) DEFAULT NULL,
+  `company` VARCHAR(40) NOT NULL,
+  
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`approver`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`requester`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`createdby`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`modifiedby`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE consignreqlocmapping (
+  `id` VARCHAR(255) NOT NULL,
+  `consignmentrequest` VARCHAR(40) DEFAULT NULL,
+  `inventorylocation` VARCHAR(40) DEFAULT NULL,
+  
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`consignmentrequest`) REFERENCES `consignreqapprovalrules` (`id`),
+  FOREIGN KEY (`inventorylocation`) REFERENCES `inventorylocation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Anand Nimbalkar 6th 2015
+insert into modules VALUES("24","Journal Entry","com.krawler.hql.accounting.JournalEntry","ID",null,null);
+
+# Amol Dhokale 6th May 2015
+ALTER TABLE purchaseorder ADD COLUMN `approvestatuslevel` INT(11) DEFAULT '11';
+
+# Mohammed Uzair Momin 6th May 2015
+UPDATE olympus_importscriptinfo SET importinfo='{"producttype":"d8a50d12-515c-102d-8de6-001cc0794cfa","isbatchforproduct":true,"isserialforproduct":true,"islocationforproduct":true,"iswarehouseforproduct":true,"account":"402880504b8198df014b81b589920042","initialpurchaseprice":"1","initialsalesirice":"1","frequency":"3","blankUOM":"-","casingUOMvalue":"1"}' WHERE id='PRODUCTMASTER';
+
+#Nitin Narkhede 7th May 2015
+alter table extracompanypreferences 
+ add column priceprinttype varchar(3) default '90' ,
+ add column barcdtopmargin varchar(5) default '50' ,
+ add column barcdlabelheight varchar(5) default '40',
+ add column pricetranslatex varchar(5) default '-15',
+ add column pricetranslatey varchar(5) default '-40',
+ add column generatebarcodewithpriceparm char(1) default 'F',
+ add column pricefontsize varchar(2) default '10';
+
+#shashi Nandan kumar 7th May 2015
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('2d428a08f31f11e48635eca86bff9ae1', 'consignmentsales', 'Consignment Stock - Sales',40);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9001', 'createsalesconreq', 'Create Consignment Request', '1', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9002', 'viewsalesconreq', 'View Consignment Request', '2', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9003', 'editsalesconreq', 'Edit', '3', '2d428a08f31f11e48635eca86bff9002', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9004', 'deletesalesconreq', 'Delete', '4', '2d428a08f31f11e48635eca86bff9002', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9005', 'exportsalesconreq', 'Export', '5', '2d428a08f31f11e48635eca86bff9002', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9006', 'printsalesconreq', 'Print', '6', '2d428a08f31f11e48635eca86bff9002', '2d428a08f31f11e48635eca86bff9ae1') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9007', 'createsalescondo', 'Create Consignment Delivery Order', '7', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9008', 'viewsalescondo', 'View Consignment Delivery Order', '8', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9009', 'editsalescondo', 'Edit', '9', '2d428a08f31f11e48635eca86bff9008', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9010', 'deletesalescondo', 'Delete', '10', '2d428a08f31f11e48635eca86bff9008', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9011', 'exportsalescondo', 'Export', '11', '2d428a08f31f11e48635eca86bff9008', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9012', 'printsalescondo', 'Print', '12', '2d428a08f31f11e48635eca86bff9008', '2d428a08f31f11e48635eca86bff9ae1') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9013', 'createsalesconinv', 'Create Consignment Invoice', '13', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9014', 'viewsalesconinv', 'View Consignment Invoice', '14', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9015', 'editsalesconinv', 'Edit', '15', '2d428a08f31f11e48635eca86bff9014', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9016', 'deletesalesconinv', 'Delete', '16', '2d428a08f31f11e48635eca86bff9014', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9017', 'exportsalesconinv', 'Export', '17', '2d428a08f31f11e48635eca86bff9014', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9018', 'printsalesconinv', 'Print', '18', '2d428a08f31f11e48635eca86bff9014', '2d428a08f31f11e48635eca86bff9ae1') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9019', 'createsalesconret', 'Create Consignment Return', '19', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9020', 'viewsalesconret', 'View Consignment Return', '20', null, '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9021', 'editsalesconret', 'Edit', '21', '2d428a08f31f11e48635eca86bff9020', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9022', 'deletesalesconret', 'Delete', '22', '2d428a08f31f11e48635eca86bff9020', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9023', 'exportsalesconret', 'Export', '23', '2d428a08f31f11e48635eca86bff9020', '2d428a08f31f11e48635eca86bff9ae1') ,
+('2d428a08f31f11e48635eca86bff9024', 'printsalesconret', 'Print', '24', '2d428a08f31f11e48635eca86bff9020', '2d428a08f31f11e48635eca86bff9ae1') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('2d428a08f31f11e48635eca86bff9ae1', '1', '16777215');
+
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('2d428a08f31f11e48635eca86bff9ae2', 'consignmentpurchase', 'Consignment Stock - Purchase',41);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9101', 'createpurchaseconreq', 'Create Vendor Consignment Request', '1', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9102', 'viewpurchaseconreq', 'View Vendor Consignment Request', '2', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9103', 'editpurchaseconreq', 'Edit', '3', '2d428a08f31f11e48635eca86bff9102', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9104', 'deletepurchaseconreq', 'Delete', '4', '2d428a08f31f11e48635eca86bff9102', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9105', 'exportpurchaseconreq', 'Export', '5', '2d428a08f31f11e48635eca86bff9102', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9106', 'printpurchaseconreq', 'Print', '6', '2d428a08f31f11e48635eca86bff9102', '2d428a08f31f11e48635eca86bff9ae2') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9107', 'createpurchasecondo', 'Create Consignment Goods Receipt Order', '7', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9108', 'viewpurchasecondo', 'View Consignment Goods Receipt Order', '8', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9109', 'editpurchasecondo', 'Edit', '9', '2d428a08f31f11e48635eca86bff9108', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9110', 'deletepurchasecondo', 'Delete', '10', '2d428a08f31f11e48635eca86bff9108', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9111', 'exportpurchasecondo', 'Export', '11', '2d428a08f31f11e48635eca86bff9108', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9112', 'printpurchasecondo', 'Print', '12', '2d428a08f31f11e48635eca86bff9108', '2d428a08f31f11e48635eca86bff9ae2') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9113', 'createpurchaseconinv', 'Create Consignment Purchase Invoice', '13', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9114', 'viewpurchaseconinv', 'View Consignment Purchase Invoice', '14', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9115', 'editpurchaseconinv', 'Edit', '15', '2d428a08f31f11e48635eca86bff9114', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9116', 'deletepurchaseconinv', 'Delete', '16', '2d428a08f31f11e48635eca86bff9114', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9117', 'exportpurchaseconinv', 'Export', '17', '2d428a08f31f11e48635eca86bff9114', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9118', 'printpurchaseconinv', 'Print', '18', '2d428a08f31f11e48635eca86bff9114', '2d428a08f31f11e48635eca86bff9ae2') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('2d428a08f31f11e48635eca86bff9119', 'createpurchaseconret', 'Create Consignment Purchase Return', '19', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9120', 'viewpurchaseconret', 'View Consignment Purchase Return', '20', null, '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9121', 'editpurchaseconret', 'Edit', '21', '2d428a08f31f11e48635eca86bff9120', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9122', 'deletepurchaseconret', 'Delete', '22', '2d428a08f31f11e48635eca86bff9120', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9123', 'exportpurchaseconret', 'Export', '23', '2d428a08f31f11e48635eca86bff9120', '2d428a08f31f11e48635eca86bff9ae2') ,
+('2d428a08f31f11e48635eca86bff9124', 'printpurchaseconret', 'Print', '24', '2d428a08f31f11e48635eca86bff9120', '2d428a08f31f11e48635eca86bff9ae2') ;
+
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('2d428a08f31f11e48635eca86bff9ae2', '1', '16777215');
+delete from helpedit where id=206;
+delete from helpedit where id=343;
+
+# Basaprabhu Ajur 7th May 2015
+
+CREATE TABLE `customerwarehousemap` (
+`id`  varchar(255) NOT NULL ,
+`warehouse`  varchar(50) NOT NULL ,
+`customer`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+INSERT INTO customerwarehousemap  (SELECT UUID(),id,customer FROM inventorywarehouse where customer is not NULL);
+ALTER TABLE `product` MODIFY COLUMN `itemreusability`  int(2) NULL DEFAULT NULL ;
+
+#Ajit Gogawale 7th May 2015
+
+ALTER TABLE `in_consignmentdetails`
+ADD COLUMN `movementstatus`  bit(1) NULL DEFAULT b'0';
+ALTER TABLE `in_sa_detail_approval`
+ADD COLUMN `movementstatus`  bit(1) NULL DEFAULT b'0';
+ALTER TABLE `in_stocktransfer_detail_approval`
+ADD COLUMN `movementstatus`  bit(1) NULL DEFAULT b'0';
+
+#Pandurang 7th May 2015
+alter table newbatchserial  
+add column consignmentapprovalstatus int(2) DEFAULT NULL;  
+
+alter table newbatchserial 
+add column approver varchar(255) DEFAULT NULL, 
+ADD CONSTRAINT FOREIGN KEY (`approver`) REFERENCES `users` (`userid`);
+
+# Vivek Pakmode 8th May 2015
+update reportmaster set name="Monthly Aged Receivables" where id="Monthly_Aged_Receivable";
+update reportmaster set description="View Monthly Aged Receivables" where id="Monthly_Aged_Receivable";
+
+#shashi Nandan kumar 11th May 2015
+
+# Fixed Purchase Requisition
+INSERT INTO helpedit VALUES('871','Asset Purchase Requisition','Purchase Requisition Number', '87','Purchase Requisition Number','Purchase Requisition Number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.','invoiceNo87');
+
+INSERT INTO helpedit VALUES('872','Asset Purchase Requisition','Purchase Requisition Date', '87','Purchase Requisition Date','Select the transaction date.','invoiceDate87');
+
+INSERT INTO helpedit VALUES('873','Asset Purchase Requisition','Memo', '87','Memo','Provide the comments about the transaction.','memo87');
+
+INSERT INTO helpedit VALUES('874','Asset Purchase Requisition','Currency', '87','Currency','Select the Currency for transaction.','currency87');
+
+INSERT INTO helpedit VALUES('875','Asset Purchase Requisition','Submit', '87','Submit','Click on submit to record the transaction.','save87assetRequisition');
+
+# Fixed Purchase Requisition Report
+
+INSERT INTO helpedit VALUES('876','Asset Purchase Requisition','Quick Search', '87','Quick Search',"Search through Purchase Requisition Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch87FixedAssetPurchaseRequisitionListEntry');
+
+INSERT INTO helpedit VALUES('877','Asset Purchase Requisition','Export Reports', '87','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Fixed Purchase Requisition receipt can also be exported.','exportReports87FixedAssetPurchaseRequisitionListEntry');
+
+INSERT INTO helpedit VALUES('878','Asset Purchase Requisition','Quick Search', '87','Quick Search',"Search through Purchase Requisition Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch87FixedAssetPurchaseRequisitionList');
+
+INSERT INTO helpedit VALUES('879','Asset Purchase Requisition','Export Reports', '87','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Fixed Purchase Requisition receipt can also be exported.','exportReports87FixedAssetPurchaseRequisitionList');
+
+
+# Create Asset Vendor Quotation 
+
+INSERT INTO helpedit VALUES('884','Create Asset Vendor Quotation','Quotation number', '89','Quotation number','Quotation number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo89assetvendorquotationundefined");
+
+INSERT INTO helpedit VALUES('885','Create Asset Vendor Quotation','Quotation Date', '89','Quotation Date','Select the transaction date.',"invoiceDate89assetvendorquotationundefined");
+
+INSERT INTO helpedit VALUES('886','Create Asset Vendor Quotation','Customer', '89','Customer',"Select the Vendor with whom you are carrying out the transaction. To add a new Vendor, simply click on add new Vendor in the drop down","customer89assetvendorquotationundefined");
+
+INSERT INTO helpedit VALUES('887','Create Asset Vendor Quotation','Memo', '89','Memo','Provide the comments about the transaction.',"memo89assetvendorquotationundefined");
+
+INSERT INTO helpedit VALUES('888','Create Asset Vendor Quotation','Currency', '89','Currency','Customer currency will be auto-populated.',"currency6089assetvendorquotationundefined");
+
+INSERT INTO helpedit VALUES('889','Create  Asset Vendor Quotation','Include Product Tax', '89','Include Product Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax89assetvendorquotationundefined");
+
+INSERT INTO helpedit VALUES('891','Create Asset Vendor Quotation','Save', '89','Save','Click on save to record the transaction.',"savencreate89assetvendorquotationundefined");
+
+
+#  Vendor Quotation Report 
+
+INSERT INTO helpedit VALUES('880','Asset Vendor Quotation','Quick Search', '89','Quick Search',"Search through Fixed Vendor Quotation Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch89assetVendorQuotationListEntry');
+
+INSERT INTO helpedit VALUES('881','Asset Vendor Quotation','Export Reports', '89','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Fixed Vendor Quotation receipt can also be exported.','exportReports89assetVendorQuotationListEntry');
+
+
+INSERT INTO helpedit VALUES('882','Asset Vendor Quotation','Quick Search', '89','Quick Search',"Search through Fixed Vendor Quotation Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch89assetVendorQuotationList');
+
+INSERT INTO helpedit VALUES('883','Asset Vendor Quotation','Export Reports', '89','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Fixed Vendor Quotation receipt can also be exported.','exportReports89assetVendorQuotationList');
+
+# purchase order
+
+INSERT INTO helpedit VALUES('892','Asset Purchase Order Report','Quick Search', '90','Quick Search',"Search through Asset Purchase Order Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch90assetPurchaseOrderListEntry');
+
+INSERT INTO helpedit VALUES('893','Asset Purchase Order Report','Export Reports', '90','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Asset Purchase Order receipt can also be exported.','exportReports90assetPurchaseOrderListEntry');
+
+
+INSERT INTO helpedit VALUES('894','Asset Purchase Order Report','Quick Search', '90','Quick Search',"Search through Asset Purchase Order Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch90assetPurchaseOrderList');
+
+INSERT INTO helpedit VALUES('895','Asset Purchase Order Report','Export Reports', '90','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Asset Purchase Order receipt can also be exported.','exportReports90assetPurchaseOrderList');
+
+
+INSERT INTO helpedit VALUES('896','Asset Purchase Order','Order No', '90','Order No','Purchase Order number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('897','Asset Purchase Order','Order Date', '90','Order Date','Select the transaction date.',"invoiceDate90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('898','Asset Purchase Order','Customer', '90','Customer',"Select the vendor with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('899','Asset Purchase Order','Memo', '90','Memo','Provide the comments about the transaction.',"memo90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('900','Asset Purchase Order','Currency', '90','Currency',"Vendor's currency will be auto-populated.","currency90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('901','Asset Purchase Order','Product-wise Tax', '90','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('902','Asset Purchase Order','Save', '90','Save','Click on save to record the transaction.',"save90assetpurchaseorder");
+
+INSERT INTO helpedit VALUES('903','Asset Receipt Report','Quick Search', '21','Quick Search',"Search through Asset Receipt Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch21GoodsReceiptDeliveryOrderListEntryFixedAsset');
+
+INSERT INTO helpedit VALUES('904','Asset Receipt  Report','Export Reports', '21','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Asset receipt can also be exported.','exportReports21');
+
+#shashi Nandan kumar 12th may 2015
+
+INSERT INTO helpedit VALUES('905','Asset Purchase Invoice','Order No', '15','Order No','Purchase Order number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('906','Asset Purchase Invoice','Order Date', '15','Order Date','Select the transaction date.',"invoiceDate15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('907','Asset Purchase Invoice','Vendor', '15','Vendor',"Select the vendor with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('908','Asset Purchase Invoice','Memo', '15','Memo','Provide the comments about the transaction.',"memo15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('909','Asset Purchase Invoice','Currency', '15','Currency',"Vendor's currency will be auto-populated.","currency15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('910','Asset Purchase Invoice','Product-wise Tax', '15','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('911','Asset Purchase Invoice','Save', '15','Save','Click on save to record the transaction.',"save15fixedassetgoodsreceipt");
+
+INSERT INTO helpedit VALUES('912','Asset Disposal Invoice','Order No', '2','Order No','Purchase Order number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('913','Asset Disposal Invoice','Order Date', '2','Order Date','Select the transaction date.',"invoiceDate2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('914','Asset Disposal Invoice','Customer', '2','Customer',"Select the vendor with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('915','Asset Disposal Invoice','Memo', '2','Memo','Provide the comments about the transaction.',"memo2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('916','Asset Disposal Invoice','Currency', '2','Currency',"Vendor's currency will be auto-populated.","currency2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('917','Asset Disposal Invoice','Product-wise Tax', '2','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('918','Asset Disposal Invoice','Save', '2','Save','Click on save to record the transaction.',"save2fixedassetInvoice");
+
+INSERT INTO helpedit VALUES('919','Create Lease Invoice','Order No', '2','Order No','Lease number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('920','Create Lease Invoice','Order Date', '2','Order Date','Select the transaction date.',"invoiceDate2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('921','Create Lease Invoice','Customer', '2','Customer',"Select the vendor with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('922','Create Lease Invoice','Memo', '2','Memo','Provide the comments about the transaction.',"memo2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('923','Create Lease Invoice','Currency', '2','Currency',"Vendor's currency will be auto-populated.","currency2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('924','Create Lease Invoice','Product-wise Tax', '2','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('925','Create Lease Invoice','Save', '2','Save','Click on save to record the transaction.',"save2LeasefixedassetInvoice");
+
+INSERT INTO helpedit VALUES('926','Create Lease Order','Order No', '11','Order No','Lease number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('927','Create Lease Order','Order Date', '11','Order Date','Select the transaction date.',"invoiceDate11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('928','Create Lease Order','Customer', '11','Customer',"Select the Customer with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('929','Create Lease Order','Memo', '11','Memo','Provide the comments about the transaction.',"memo11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('930','Create Lease Order','Currency', '11','Currency',"customer's currency will be auto-populated.","currency11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('931','Create Lease Order','Product-wise Tax', '11','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('932','Create Lease Order','Save', '11','Save','Click on save to record the transaction.',"save11fixedassetleasesalesorder");
+
+INSERT INTO helpedit VALUES('933','Create Lease Quotation','Order No', '34','Order No','Lease number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo34leasequotationnull");
+
+INSERT INTO helpedit VALUES('934','Create Lease Quotation','Order Date', '34','Order Date','Select the transaction date.',"invoiceDate34leasequotationnull");
+
+INSERT INTO helpedit VALUES('935','Create Lease Quotation','Customer', '34','Customer',"Select the Customer with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer34leasequotationnull");
+
+INSERT INTO helpedit VALUES('936','Create Lease Quotation','Memo', '34','Memo','Provide the comments about the transaction.',"memo34leasequotationnull");
+
+INSERT INTO helpedit VALUES('937','Create Lease Quotation','Currency', '34','Currency',"customer's currency will be auto-populated.","currency34leasequotationnull");
+
+INSERT INTO helpedit VALUES('938','Create Lease Quotation','Product-wise Tax', '34','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax34leasequotationnull");
+
+INSERT INTO helpedit VALUES('939','Create Lease Quotation','Save', '34','Save','Click on save to record the transaction.',"save34leasequotationnull");
+
+# Vivek Pakmode 13th May 2015  
+# Please mention different subdomains for different client while executing below query
+ALTER TABLE accountbudget ADD COLUMN `year` INT(11) DEFAULT '1970';
+update accountbudget set year=(select firstfyfrom from compaccpreferences where id=(select companyid from company where subdomain="sustenir")) ;
+
+#Suresh 13 May 2015
+alter table company add `ledgerthreadflag` int(1) NOT NULL DEFAULT '0';
+
+#Mayur Pawar 13th March 2015
+##Asset aquired invoice
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('e50e8c26-facd-11e4-ab41-c03fd5632dc7','billno','Acquired Invoice No',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('d9d1f500-facd-11e4-ab41-c03fd5632dc7','entryno','Journal Entry No',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('d50307f8-facd-11e4-ab41-c03fd5632dc7','date','Acquired Invoice Date',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('c9afb61c-facd-11e4-ab41-c03fd5632dc7','duedate','Due Date',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('c438a0ea-facd-11e4-ab41-c03fd5632dc7','personname','Vendor',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('bc5b1416-facd-11e4-ab41-c03fd5632dc7','discount','Discount',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('b317b594-facd-11e4-ab41-c03fd5632dc7','taxamount','Tax Amount',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('a493b338-facd-11e4-ab41-c03fd5632dc7','amount','Total Amount',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('9f2a8bd8-facd-11e4-ab41-c03fd5632dc7','amountinbase','Total Amount (In Base Currency) (SG Dollar (SGD))',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('95269c12-facd-11e4-ab41-c03fd5632dc7','memo','Memo',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('8d45db16-facd-11e4-ab41-c03fd5632dc7','attachdoc','Attach Documents',39,1); 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('615d034e-facd-11e4-ab41-c03fd5632dc7','attachment','Attachments',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('59429480-facd-11e4-ab41-c03fd5632dc7','amountdue','Amount Due',39,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('5019ea5c-facd-11e4-ab41-c03fd5632dc7','aliasname','Vendor Alias Name',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('2ee9f8d6-facd-11e4-ab41-c03fd5632dc7','paymentname','Payment Method',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('2617375a-facd-11e4-ab41-c03fd5632dc7','termamount','Terms Amount',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('1e459134-facd-11e4-ab41-c03fd5632dc7','amountbeforegst','Amount before GST',39,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('114f3c6e-facd-11e4-ab41-c03fd5632dc7','lasteditedby','Last Edited By',39,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('034ea55a-facd-11e4-ab41-c03fd5632dc7','productid','Product',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('fc2ca524-facc-11e4-ab41-c03fd5632dc7','desc','Description',39,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('f25f5096-facc-11e4-ab41-c03fd5632dc7','invlocation','Location',39,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('e9f710d8-facc-11e4-ab41-c03fd5632dc7','invstore','Warehouse',39,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('dc3221ea-facc-11e4-ab41-c03fd5632dc7','quantity','Quantity',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('d477117c-facc-11e4-ab41-c03fd5632dc7','uomid','UOM',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('cabdbece-facc-11e4-ab41-c03fd5632dc7','baseuomrate','Conversion Factor',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('bd2d26e6-facc-11e4-ab41-c03fd5632dc7','baseuomquantity','Base Quantity',39,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('b5054afc-facc-11e4-ab41-c03fd5632dc7','rate','Unit Price',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('ac175fde-facc-11e4-ab41-c03fd5632dc7','discountispercent','Discount Type',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('a432cdda-facc-11e4-ab41-c03fd5632dc7','prdiscount','Discount',39,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('981b6fc0-facc-11e4-ab41-c03fd5632dc7','amount','Amount',39,1,1,1,1);
+
+
+
+##Asset purchase order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('a1bd577a-faca-11e4-ab41-c03fd5632dc7','billno','Asset Order No',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('ac377d7a-faca-11e4-ab41-c03fd5632dc7','date','Asset Order Date',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('bcd5f080-faca-11e4-ab41-c03fd5632dc7','duedate','Due Date',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('c731c69e-faca-11e4-ab41-c03fd5632dc7','personname','Vendor(s)',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('cfff0dcc-faca-11e4-ab41-c03fd5632dc7','discount','Discount',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('d97d7564-faca-11e4-ab41-c03fd5632dc7','taxname','Tax Name',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('e315d17a-faca-11e4-ab41-c03fd5632dc7','taxamount','Tax Amount',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('f24af21a-faca-11e4-ab41-c03fd5632dc7','orderamountwithTax','Total Amount',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('fbe91a2c-faca-11e4-ab41-c03fd5632dc7','memo','Memo',90,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('0580b2b6-facb-11e4-ab41-c03fd5632dc7','status','Status',90,1);
+
+#Asset RFQ 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('21f82532-facb-11e4-ab41-c03fd5632dc7','billno','RFQ No',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('2f3f7ee8-facb-11e4-ab41-c03fd5632dc7','date','RFQ Date',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('34f2401e-facb-11e4-ab41-c03fd5632dc7','duedate','Due Date',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('4274cbe4-facb-11e4-ab41-c03fd5632dc7','personname','Vendor(s)',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('4b130f5e-facb-11e4-ab41-c03fd5632dc7','discount','Discount',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('536e7d6e-facb-11e4-ab41-c03fd5632dc7','memo','Memo',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('5ba5760e-facb-11e4-ab41-c03fd5632dc7','attachdoc','Attach Documents',88,1); 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('63e5191e-facb-11e4-ab41-c03fd5632dc7','attachment','Attachments',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('6d0738b0-facb-11e4-ab41-c03fd5632dc7','aliasname','Vendor Alias Name',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('760cf346-facb-11e4-ab41-c03fd5632dc7','amountbeforegst','Amount before GST',88,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('7f573042-facb-11e4-ab41-c03fd5632dc7','lasteditedby','Last Edited By',88,1);
+
+
+#Purchase Requisition query
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('9a1ab7d2-facb-11e4-ab41-c03fd5632dc7','billno','Asset Purchase Requisition No',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('a7c315f0-facb-11e4-ab41-c03fd5632dc7','date','Asset Purchase Requisition Date',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('afa9555e-facb-11e4-ab41-c03fd5632dc7','duedate','Due Date',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('b748a08a-facb-11e4-ab41-c03fd5632dc7','discount','Discount',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('be7468ee-facb-11e4-ab41-c03fd5632dc7','amount','Estimated Cost',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('c5c1c3d0-facb-11e4-ab41-c03fd5632dc7','orderamountwithTax','Total Amount (In Base Currency)',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('d128c5fc-facb-11e4-ab41-c03fd5632dc7','memo','Memo',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('03690978-facc-11e4-ab41-c03fd5632dc7','PR Approval Status','Status',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('0d7d91d6-facc-11e4-ab41-c03fd5632dc7','attachdoc','Attach Documents',87,1); 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('15790654-facc-11e4-ab41-c03fd5632dc7','attachment','Attachments',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('1cee340e-facc-11e4-ab41-c03fd5632dc7','aliasname','Vendor Alias Name',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('24b15b8a-facc-11e4-ab41-c03fd5632dc7','amountbeforegst','Amount before GST',87,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ('2bdde7f2-facc-11e4-ab41-c03fd5632dc7','lasteditedby','Last Edited By',87,1);
+
+# Kottamidde Naresh - 14th May, 2015
+ALTER TABLE sequenceformat ADD (isactivate CHAR(1) DEFAULT 'T');
+
+#Anand Thakur 14May 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('bdd78567-5c4b-453c-a3a8-b670ec8e653d','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('681b0e6f-8165-4d0a-a086-c33b64521489','Currency Code','currency','currency','currencyid','currencycode','Currency Code','1','22');
+
+
+#Vipin Gupta 15th March 2015
+#Added date format in inventory sequence master
+
+ALTER TABLE `in_seqformat`
+ADD COLUMN `prefix_dateformat`  int(2) NULL AFTER `isdefault`,
+ADD COLUMN `suffix_dateformat`  int(2) NULL AFTER `prefix_dateformat`,
+ADD COLUMN `sep`  varchar(1) NULL AFTER `suffix_dateformat`;
+
+# Amol Dhokale 15th May,2015
+ALTER TABLE quotationversiondetails MODIFY COLUMN description text;
+
+#Pandurang 15 May 2015 
+alter table newbatchserial drop column consignmentapprovalstatus;
+ALTER TABLE newbatchserial DROP FOREIGN KEY newbatchserial_ibfk_2;
+alter table newbatchserial drop column approver;
+
+alter table serialdocumentmapping  
+add column consignmentapprovalstatus int(2) DEFAULT NULL;  
+
+alter table serialdocumentmapping 
+add column approver varchar(255) DEFAULT NULL, 
+ADD CONSTRAINT FOREIGN KEY (`approver`) REFERENCES `users` (`userid`);
+
+#shashi Nandan kumar 16th may 2015
+INSERT INTO helpedit VALUES('940','Initiate RFQ','Vendor', '88','Vendor',"Select the Vendor with whom you are carrying out the transaction. To add a new Vendor, simply click on add new Vendor in the drop down","customer88assetrequestforquotation");
+INSERT INTO helpedit VALUES('941','Initiate RFQ','Memo', '88','Memo','Provide the comments about the transaction.','memo88');
+INSERT INTO helpedit VALUES('942','Initiate RFQ','RFQ Date', '88','RFQ Date','Select the transaction date.','invoiceDate88');
+INSERT INTO helpedit VALUES('943','Initiate RFQ','Save', '88','Submit','Click on submit to record the transaction.','submit88');
+
+#Mohammed Uzair Momin 18th May 2015
+DELETE FROM fieldParams WHERE fieldlabel = 'HS Code';
+
+#Suresh 18th May 2015 - Added index for performance issue in GL
+ALTER TABLE accjedetailcustomdata ADD INDEX `recdetailId_accjedetailcustomdata` (`recdetailId`);
+
+# Amol Dhokale 18th May,2015
+# Invoice Details
+ALTER TABLE invoicedetails ADD COLUMN salesjedid VARCHAR(255) DEFAULT "";
+ALTER TABLE invoicedetails ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# GR Details
+ALTER TABLE grdetails ADD COLUMN purchasejedid VARCHAR(255) DEFAULT "";
+ALTER TABLE grdetails ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# Expense GR Details
+ALTER TABLE expenseggrdetails ADD COLUMN purchasejedid VARCHAR(255) DEFAULT "";
+ALTER TABLE expenseggrdetails ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# Credit Note Details
+ALTER TABLE cndetails ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE cndetails ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# Debit Note Details
+ALTER TABLE dndetails ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE dndetails ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+#Mayur Pawar 18 May 2015
+Alter table extracompanypreferences add defaultmailsenderFlag int(1) Default '0';
+
+#shashi Nandan kumar 19 may 2015
+INSERT INTO helpedit VALUES('944','Request For Quatation','Quick Search', '88','Quick Search',"Search through Request For Quatation easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch88assetRequestForQuotation');
+INSERT INTO helpedit VALUES('945','Request For Quatation','Export Reports', '88','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single Request For Quatation can also be exported.','exportReports88assetRequestForQuotation');
+
+#Pandurang 19 May 2015 Update warehouse for Customers
+insert into customerwarehousemap select UUID(), '633476bb-7b06-4e2a-bada-988744bde10a', id from customer where id NOT 
+IN(SELECT  customer FROM customerwarehousemap) AND company=(SELECT companyid from company where subdomain='olympus');
+
+update inventorywarehouse set name="Main" where id="633476bb-7b06-4e2a-bada-988744bde10a" 
+and company="3003967d-450b-4de9-abb2-48a548b29e94";
+
+#Anand Thakur 19 May 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ab10148f-5acf-4140-864a-f00a66d094e8','Sales Person CNo','salesperson','masteritem','id','contactnumber','Sales Person CNo','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ad2900b4-5e6c-4971-b60e-a699ce4c8182','Sales Person Email','salesperson','masteritem','id','emailid','Sales Person Email','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ab4b9709-5ae1-4fd1-881d-fbc8d0cb5b22','Sales Person Designation','salesperson','masteritem','id','designation','Sales Person Designation','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('f2ce125d-339d-4eaa-8f98-6bc99b6c31b7','Sales Person CNo','salesperson','masteritem','id','contactnumber','Sales Person CNo','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('35fc1b59-508d-4f79-b77a-1832c10a052c','Sales Person Email','salesperson','masteritem','id','emailid','Sales Person Email','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('2a03f6ab-90c4-4242-8ae3-622ff3ee3195','Sales Person Designation','salesperson','masteritem','id','designation','Sales Person Designation','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('98a3b842-dee2-4e76-bc76-f188339c9451','Sales Person CNo','salesperson','masteritem','id','contactnumber','Sales Person CNo','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('453a5fbf-4a78-4cb6-8820-64ad87cf9e90','Sales Person Email','salesperson','masteritem','id','emailid','Sales Person Email','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('770a444f-590b-4554-b897-21124657fee9','Sales Person Designation','salesperson','masteritem','id','designation','Sales Person Designation','1','20');
+
+ALTER table masteritem ADD COLUMN designation VARCHAR(60);
+
+# Vivek Pakmode 21 May 2015
+insert into reportmaster value("Trading_ProfitLoss_With_Budget","Trading And Profit Loss With Budget","View Trading And Profit Loss With Budget","getTradingAndProfitLossWithBudget()",null);
+
+#Vijay Jawale 21st May 2015
+insert into reportmaster value("Monthly_Aged_Payable","Monthly Aged Payable","View Monthly Aged Payable.","callMonthlyAgedPayable()","");
+
+#Ajit Gogawale 21 may 2015
+alter table in_consignment 
+add column createdon datetime null;
+
+alter table in_stocktransfer_approval
+add column createdon datetime null;
+
+alter table in_sa_approval
+add column createdon datetime null;
+
+#for update Existing data
+UPDATE in_sa_approval  saa INNER JOIN in_stockadjustment  sad ON  sad.id = saa.stock_adjustment SET saa.createdon = sad.createdon;
+UPDATE in_consignment ic INNER JOIN srdetails srd ON ic.documentid=srd.id INNER JOIN salesreturn sr ON srd.salesreturn=sr.id SET ic.createdon=sr.orderdate; 
+UPDATE in_stocktransfer_approval ista INNER JOIN in_interstoretransfer ist ON ista.stocktransferid = ist.id SET ista.createdon=ist.createdon;
+UPDATE in_stocktransfer_approval ista INNER JOIN in_goodsrequest igr ON ista.stocktransferid = igr.id SET ista.createdon=igr.modifiedon;
+
+alter table in_consignmentdetails 
+add column modifiedon datetime null;
+
+alter table in_stocktransfer_detail_approval
+add column modifiedon datetime null;
+
+alter table in_sa_detail_approval
+add column modifiedon datetime null;
+
+#for update Existing data
+UPDATE  in_consignmentdetails icd INNER JOIN in_consignment ic on ic.id=icd.consignment SET icd.modifiedon=ic.createdon ;
+UPDATE in_sa_detail_approval isda INNER JOIN in_sa_approval isa ON isda.sa_approval = isa.id SET isda.modifiedon=isa.createdon;
+UPDATE in_stocktransfer_detail_approval istda INNER JOIN in_stocktransfer_approval ista ON istda.stocktransfer_approval = ista.id SET istda.modifiedon=ista.createdon;
+
+
+#Sharad Pawar Thu 21 May 2015
+#customize header was not working properly due to wrong grid config was saved each time.
+truncate table grid_config;
+#column header and dataIndex was wrong due to user was unable to hide/unhide this column.
+update customizereportheader set dataheader='Total Amount (In Base Currency) (SG Dollar (SGD))',dataIndex='amountinbase' where id='c5c1c3d0-facb-11e4-ab41-c03fd5632dc7';
+
+/*Suresh May 21, 2015 ERP-9823 ALFATECH - CURRENCY RATE digit after Decimal for GL report */
+alter table compaccpreferences add `currencyratedigitafterdecimal` int(3) not null DEFAULT 2;
+
+#Pandurang 21 May 2015 
+Alter table sequenceformat 
+add column dateformatinprefix varchar(255) default NULL;
+update sequenceformat set dateformatinprefix='YYYYMMDD' where isdatebeforeprefix='T' and dateformatinprefix is NULL;
+
+# Sagar M 21st May 2015
+ALTER TABLE olympus_importscriptinfo ADD COLUMN subdomain VARCHAR(40) NOT NULL;
+
+#Rushikesh Mandage 21st May 2015
+alter table receiptadvancedetail add column tax varchar(255) default NUll;
+alter table receiptadvancedetail add FOREIGN KEY (tax) REFERENCES tax (id) ;
+alter table receiptadvancedetail add column taxamount double default 0;
+
+# Anand Nimbalkar 22st May, 2015
+insert into reportmaster(id,name,description,method_name) values ('Consignment_Loan_Report','Consignment Loan Report','View Consignment Loan Report','getConsignmentLoanTabView()');
+
+# Mohammed Uzair Momin 22 May 2015
+# Olympus Specific Queries
+INSERT INTO `language` VALUES ('5', 'en', 'OLYMPUS', 'English (Olympus)');
+UPDATE company SET `language` = 5 WHERE companyid = '12345a0c-b44c-11e3-986d-001e68621452';
+
+#Rushikesh Mandage 22nd May 2015
+update currency set currencycode = 'JPY' where currencycode='Yen';
+
+# SagarM 22nd May 2015
+# ERP-10233- [OLYMPUS] Add feature to show custom field details in Reports
+CREATE TABLE `showcustomcolumninreport` (
+`moduleid` varchar(40) NOT NULL, 
+`customcolumninfo` varchar(255) NOT NULL,
+`companyid` varchar(40) NOT NULL,
+UNIQUE KEY (moduleid, companyid)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Deepak Pingale 22th May 2015
+ALTER TABLE invoice ADD COLUMN approvestatuslevel INT(11) DEFAULT 11;
+ALTER TABLE goodsreceipt ADD COLUMN approvestatuslevel INT(11) DEFAULT 11;
+
+# Vaibhav Patil 23rd May, 2015
+# Import Assembly Product
+# Assembly Level Product
+INSERT INTO modules (id, modulename, pojoclasspathfull, primarykey_methodname, uniquekey_methodname, uniquekey_hbmname) VALUES (91, 'Assembly Product', 'com.krawler.hql.accounting.Product', 'ID', 'Productid', 'productid');
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("31a7ea6c-fa3a-11e4-b89f-c03fd5ab06a3","91","Product Type","Producttype",0,0,'T','T',"Producttype","name","ID","ref",null,"type",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("49e4e062-fa3a-11e4-b89f-c03fd5ab06a3","91","Product Name","Name",0,0,'T','T',null,null,null,null,null,"productname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("5a14b3e0-fa3a-11e4-b89f-c03fd5ab06a3","91","Product ID","Productid",0,0,'T','T',null,null,null,null,null,"pid",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("852ecbec-fa3a-11e4-b89f-c03fd5ab06a3","91","Description","Description",0,0,'F','F',null,null,null,null,"","desc",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("8dba99ee-fa3a-11e4-b89f-c03fd5ab06a3","91","Stock UOM","UnitOfMeasure",0,0,'T','F',"UnitOfMeasure","name","ID","ref",null,"uomname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("9b4da3c6-fa3a-11e4-b89f-c03fd5ab06a3","91","Reorder Level","ReorderLevel",0,0,'F','T',null,null,null,"double",0.0,"reorderlevel",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("a40a9276-fa3a-11e4-b89f-c03fd5ab06a3","91","Reorder Quantity","ReorderQuantity",0,0,'F','T',null,null,null,"double",0.0,"reorderquantity",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("ace6c23e-fa3a-11e4-b89f-c03fd5ab06a3","91","Warranty Period (in days)","Warrantyperiod",0,0,'F','F',null,null,null,"integer",-1,"warrantyperiod",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("b8f1a4ea-fa3a-11e4-b89f-c03fd5ab06a3","91","Sales Warranty Period (in days)","Warrantyperiodsal",0,0,'F','F',null,null,null,"integer",-1,"warrantyperiodsal",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("c31025f0-fa3a-11e4-b89f-c03fd5ab06a3","91","Lead Time (in days)","LeadTimeInDays",0,0,'F','T',null,null,null,"integer",0,"leadtime",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("d0a57418-fa3a-11e4-b89f-c03fd5ab06a3","91","Cycle count Interval (indays)","CountInterval",0,0,'F','T',"ProductCyclecount","countInterval","ID","integer",0,"ccountinterval",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("d9777366-fa3a-11e4-b89f-c03fd5ab06a3","91","Cycle count tolerance (%)","Tolerance",0,0,'F','T',"ProductCyclecount","tolerance","ID","integer",0,"ccounttolerance",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("e1def01a-fa3a-11e4-b89f-c03fd5ab06a3","91","Parent Product","Parent",0,0,'F','F',"Product","name","ID","ref",null,"parentid",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("ea1d1478-fa3a-11e4-b89f-c03fd5ab06a3","91","Sales Account","SalesAccount",0,0,'T','F',"Account","name","ID","ref",null,"salesaccountname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("f77fc7d2-fa3a-11e4-b89f-c03fd5ab06a3","91","Sales Return Account","SalesReturnAccount",0,0,'T','F',"Account","name","ID","ref",null,"salesretaccountname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("00cebd66-fa3b-11e4-b89f-c03fd5ab06a3","91","Preferred Vendor","Vendor",0,0,'F','F',"Vendor","name","ID","ref",null,"vendornameid",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("09ea6c9c-fa3b-11e4-b89f-c03fd5ab06a3","91","Purchase Account","PurchaseAccount",0,0,'T','F',"Account","name","ID","ref",null,"purchaseaccountname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("134ffba8-fa3b-11e4-b89f-c03fd5ab06a3","91","Purchase Return Account","PurchaseReturnAccount",0,0,'T','F',"Account","name","ID","ref",null,"purchaseretaccountname",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("1d51e7c4-fa3b-11e4-b89f-c03fd5ab06a3","91","Initial Quantity","Quantity",0,0,'F','T',"Inventory","quantity","ID","double",null,"initialquantity",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("26faed02-fa3b-11e4-b89f-c03fd5ab06a3","91","Initial Purchase Price","Price",0,0,'F','T',"PriceList","price","ID","double",null,"initialprice",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("30d6e204-fa3b-11e4-b89f-c03fd5ab06a3","91","Sales Price","Price",0,0,'F','T',"PriceList","price","ID","double",null,"initialsalesprice",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("3b6189a4-fa3b-11e4-b89f-c03fd5ab06a3","91","Default Location","Location",0,0,'F','T',"InventoryLocation","name","id","ref",null,"locationName",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("44c40c74-fa3b-11e4-b89f-c03fd5ab06a3","91","Default Warehouse","Warehouse",0,0,'F','T',"InventoryWarehouse","name","id","ref",null,"warehouseName",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("4d6bc7d6-fa3b-11e4-b89f-c03fd5ab06a3","91","Make available in other application","Syncable",0,0,'F','T',null,null,null,"boolean",0,"syncable",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("56db845a-fa3b-11e4-b89f-c03fd5ab06a3","91","Multiple UOM","Multiuom",0,0,'F','T',null,null,null,"boolean",'F',"multiuom",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("5f1060e6-fa3b-11e4-b89f-c03fd5ab06a3","91","Currency","Currency",0,0,'F','F',"KWLCurrency","name","currencyID","ref",null,"currencyName",null);
+
+# (BOM) Sub-Product Queries :
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("227de616-fa37-11e4-b89f-c03fd5ab06a3","91","BOM Product ID","BOMProductid",0,0,'T','T',null,null,null,null,null,"bompid",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("689a824a-fa3b-11e4-b89f-c03fd5ab06a3","91","BOM Quantity","BOMQuantity",0,0,'T','T',"Inventory","quantity","ID","double",0,"bomquantity",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("76de66c8-fa3b-11e4-b89f-c03fd5ab06a3","91","BOM Percentage (%)","BOMPercent",0,0,'F','T',"null","null","null","double",100,"bompercent",null);
+
+#Vijay Jawale 23rd May 2015
+update reportmaster set name="Monthly Aged Payables",description="View Monthly Aged Payables." where id="Monthly_Aged_Payable";
+
+#Pandurang 23 rd May 2015
+insert into audit_action values(173,'Serial update',5);
+
+# Anand Nimbalkar 22st May, 2015
+delete from reportmaster where id = 'Consignment_Loan_Report';
+
+# Vivek Pakmode 23rd May 2015
+update activitylist set orderno=1 where activityid="ff80808122f9dba90122fa4888cf00258";
+update activitylist set orderno=2 where activityid="ff80808122f9dba90122fa4888cf00259";
+update activitylist set parent ="ff80808122f9dba90122fa4888cf00258" where activityid="ff80808122f9dba90122fa4888cf00259";
+
+#Shashi Nandan kumar 23 rd May 2015
+ALTER TABLE extracompanypreferences ADD COLUMN systemmanagementflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN mastermanagementflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN accountsreceivablesalesflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN generalledgermanagementflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN accountpayablemanagementflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN assetmanagementflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN statutorymanagementflag INT(1) DEFAULT 1;
+ALTER TABLE extracompanypreferences ADD COLUMN miscellaneousmanagementflag INT(1) DEFAULT 1;
+
+#Mayur Pawar  23rd May, 2015
+alter table salesreturn  ADD COLUMN movementtype varchar(255) DEFAULT NULL;
+ALTER TABLE salesreturn ADD FOREIGN KEY (`movementtype`) REFERENCES `masteritem` (`id`);
+
+#Deepak Pingale 24th May 2015
+alter table serialdocumentmapping ADD COLUMN reusablecount double DEFAULT 0 ;
+
+#Raj Shah 24th May 2015
+ALTER TABLE `in_stockadjustment` ADD COLUMN `memo`  varchar(2048) NULL;
+
+#Ajit Gogawale 24th May 2015
+ALTER TABLE `in_consignment`
+ADD COLUMN `modulerefid`  varchar(50) NULL;
+
+#Shashi Nandan Kumar 25th May 2015
+update currency set symbol= "JPY" where currencyid=23;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN systemmanagementflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN mastermanagementflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN accountsreceivablesalesflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN generalledgermanagementflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN accountpayablemanagementflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN assetmanagementflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN statutorymanagementflag SET DEFAULT 1;
+ALTER TABLE extracompanypreferences
+ALTER COLUMN miscellaneousmanagementflag SET DEFAULT 1;
+
+#Sharad Pawar 25th May 2015
+alter table mailnotification modify company  varchar(255) DEFAULT NULL;
+insert into mailnotification(id,module,fieldid,mailcontent,mailsubject,beforeafter,days) values('577c3cba-fa18-11e4-8975-c03fd5633215',25,'20',"Hello<b> #CustomerName#</b><br/><br/><br/>We have enclosed your Aged Receivable Invoice(s) details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>",'Aged Receivable - #companyname#',0,0);
+insert into mailnotification(id,module,fieldid,mailcontent,mailsubject,beforeafter,days) values('85e717d0-fabf-11e4-80ae-c03fd5633215',26,'20',"Hello<b> #CustomerName#</b><br/><br/><br/>We have enclosed your Aged Payable Invoice(s) details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>",'Aged Payable - #companyname#',0,0);
+
+#Neeraj Dwivedi 25th May2015 -Consignment Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('5a35618c-e769-11e4-8a00-168fds6bsa88ec1','Request type','MovementType','masteritem','id','value','Request type','1','2');
+
+
+#Vipin Gupta 26th May2015 -Consignment rule multiple approver
+
+CREATE TABLE `consignreqapprovermapping` (
+`consignmentrequest`  varchar(255) NOT NULL ,
+`approver`  varchar(255) NOT NULL ,
+FOREIGN KEY (`consignmentrequest`) REFERENCES `consignreqapprovalrules` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`approver`) REFERENCES `users` (`userid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+INSERT INTO consignreqapprovermapping (consignmentrequest, approver) SELECT id, approver FROM consignreqapprovalrules;
+
+CREATE TABLE `serialdocumentapprovermapping` (
+`serialdocumentmapping`  varchar(255) NOT NULL ,
+`approver`  varchar(255) NOT NULL ,
+FOREIGN KEY (`serialdocumentmapping`) REFERENCES `serialdocumentmapping` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`approver`) REFERENCES `users` (`userid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+INSERT INTO serialdocumentapprovermapping (serialdocumentmapping, approver) SELECT id, approver FROM serialdocumentmapping WHERE approver IS NOT NULL;
+
+#Sharad Pawar 28th May 2015  
+#Email functionality for statement of accounts report
+insert into mailnotification(id,module,fieldid,mailcontent,mailsubject,beforeafter,days) values('23b6cb92-043c-11e5-8655-c03fd5633215',34,'20','Hello<b> #CustomerName#</b><br/><br/><br/>We have enclosed your Statement of Account(s) details. <br/><br/>If you have any questions about detail , please phone/mail at <b>#Phone#/#Email#</b> <br/><br/>We would be happy to help.<br/><br/>Thank you for your business. We look forward to working with you.<br/><br/>Sincerely,<br/><br/><b>#FullName#</b><br/><br/>Thank you for your Inquiry. We look forward to work with you.<br/>','Statement of Account(s) - #companyname# - #CustomerName#',0,0);
+
+#Mayur Pawar 27th May 2015
+alter table customerwarehousemap add column isdefault char(1) DEFAULT 'F';
+
+#Anand Thakur 28 May 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('aac5e18b-b673-4af5-b359-11517aa80daf','CurSym','currency','currency','currencyid','symbol','CurSym','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('0b89d67a-4440-45a8-8549-2be70687d793','Vendor Code','vendor','vendor','id','acccode','Vendor Code','1','12');
+
+#Raveesh Pathak 28th May 2015
+ALTER TABLE linkdetailreceipt ADD COLUMN receiptlinkdate BIGINT(20) DEFAULT NULL;
+ALTER TABLE linkdetailpayment ADD COLUMN paymentlinkdate BIGINT(20) DEFAULT NULL;
+
+#Rushikesh Mandage 28th May 2015
+#Query to set otherwise flag = true for those records which were imported from external file
+update creditnote set otherwise = 'T' where isopeningbalencecn = 1;
+update debitnote set otherwise = 'T' where isopeningbalencedn = 1;
+
+#Sharad Pawar 29th may 2015
+update journalentry inner join invoice on invoice.journalentry = journalentry.id set journalentry.createdby = invoice.createdby;
+update journalentry inner join goodsreceipt on goodsreceipt.journalentry = journalentry.id set journalentry.createdby = goodsreceipt.createdby;
+
+#Rushikesh Mandage 29th May 2015
+#Query to update table receiptadvancedetail as per new changes done for ERP-9810
+update receiptadvancedetail rad inner join receipt r on rad.receipt=r.id set rad.tax = r.tax , rad.taxamount= r.taxamount where r.tax is not NULL;
+
+# Vivek Pakmode 29th May 2015
+update account set controlaccounts='T' where name='Opening Stock' and company=(select companyid from company where subdomain='jatindererp3');
+
+#Anand Thakur 02nd June 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('73ee1d3c-35ba-4bfe-bdde-490cdabbfee0','Billing Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person Name','1','20');

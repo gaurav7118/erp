@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.gst.dto.GstReturn" table="gstreturn">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="uploadedon" type="timestamp">
+            <column name="uploadedon"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="companyid" not-null="true"/>
+        <property name="entityID" type="string">
+            <column length="50" name="entityid"/>
+        </property>   
+        <property name="gstr2a" type="string">
+            <column name="gstr2a"/>
+        </property>   
+        <property name="uploadFileName" type="string">
+            <column name="filename"/>
+        </property>   
+        <property name="month" type="integer">
+            <column name="month"/>
+        </property>   
+        <property name="year" type="integer">
+            <column name="year"/>
+        </property>   
+    </class>
+</hibernate-mapping>

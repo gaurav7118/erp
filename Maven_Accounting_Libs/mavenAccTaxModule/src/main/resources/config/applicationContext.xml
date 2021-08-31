@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accTaxDao" class="com.krawler.spring.accounting.tax.accTaxImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    
+<!--    <bean id="accTaxController" class="com.krawler.spring.accounting.tax.accTaxController">
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+    </bean>-->
+        <bean id="accTaxService" class="com.krawler.spring.accounting.tax.service.AccTaxServiceImpl"> 
+        <property name="accTaxDAO">
+            <ref bean="accTaxDao"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+    </bean> 
+</beans>

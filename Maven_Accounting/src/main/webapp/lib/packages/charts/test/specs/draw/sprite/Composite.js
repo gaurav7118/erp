@@ -1,0 +1,1 @@
+describe("Ext.draw.sprite.Composite",function(){var A=Ext.draw.sprite.Text.prototype;describe("destroy",function(){it("should destroy composite's children",function(){var C=new Ext.draw.sprite.Composite({});C.add({type:"text",text:"hello"});C.add({type:"rect"});var B=C.sprites[1];C.destroy();expect(C.sprites.length).toEqual(0);expect(B.isDestroyed).toEqual(true)})})})

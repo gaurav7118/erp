@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Camera",{singleton:true,requires:["Ext.device.Communicator","Ext.device.camera.Cordova","Ext.device.camera.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView){if(A.Cordova){return Ext.create("Ext.device.camera.Cordova")}}return Ext.create("Ext.device.camera.Simulator")}})

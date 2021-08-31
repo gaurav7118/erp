@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SenwanGroupCustomerQuotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000246"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="0.0" lineColor="#010101"/>
+			<topPen lineWidth="0.0" lineColor="#010101"/>
+			<leftPen lineWidth="0.0" lineColor="#010101"/>
+			<bottomPen lineWidth="0.0" lineColor="#010101"/>
+			<rightPen lineWidth="0.0" lineColor="#010101"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" forecolor="#FEFEFE" backcolor="#FEFEFE" fill="Solid" fontName="SansSerif">
+		<pen lineWidth="0.0" lineColor="#010101"/>
+		<box>
+			<pen lineWidth="0.0" lineColor="#010101"/>
+			<topPen lineWidth="0.0" lineColor="#010101"/>
+			<leftPen lineWidth="0.0" lineColor="#010101"/>
+			<bottomPen lineWidth="0.0" lineColor="#010101"/>
+			<rightPen lineWidth="0.0" lineColor="#010101"/>
+		</box>
+	</style>
+	<parameter name="TaxInvoiceSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="TaxInvoiceSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="invno" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="accountNo" class="java.lang.String"/>
+	<field name="subtotal" class="java.lang.String"/>
+	<field name="gst" class="java.lang.String"/>
+	<field name="totalamount" class="java.lang.String"/>
+	<field name="gstpercent" class="java.lang.String"/>
+	<field name="duedate" class="java.lang.String"/>
+	<field name="memo" class="java.lang.String"/>
+	<field name="totalWithoutGst" class="java.lang.String"/>
+	<field name="gstTotal" class="java.lang.String"/>
+	<field name="currencysymbol" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<image isUsingCache="false" onErrorType="Blank">
+				<reportElement x="49" y="13" width="485" height="62"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="153">
+			<staticText>
+				<reportElement x="281" y="87" width="90" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account No.]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="13" y="68" width="227" height="48"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{name}+"<br>"+$F{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="48" width="67" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVOICE TO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="68" width="163" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="41" y="0" width="474" height="29"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TAX INVOICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="106" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="125" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Due Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="68" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoice No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="87" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="106" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="125" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="48" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="68" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="87" width="163" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accountNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="106" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="125" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{duedate}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="50">
+			<staticText>
+				<reportElement x="15" y="14" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="40" width="535" height="2"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="439" y="24" width="95" height="15"/>
+				<textElement textAlignment="Right" markup="html">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currencysymbol}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="10" y="5" width="535" height="2"/>
+			</line>
+			<staticText>
+				<reportElement x="439" y="9" width="95" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="9" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="9" width="77" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tax Amount]]></text>
+			</staticText>
+		</band>
+		<band height="4">
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="529" height="0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TaxInvoiceSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{TaxInvoiceSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="94">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_CH" mode="Transparent" x="443" y="29" width="92" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="271" y="29" width="74" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="275" y="1" width="270" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="270" y="48" width="275" height="1"/>
+			</line>
+			<line>
+				<reportElement x="270" y="50" width="275" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_CH" mode="Transparent" x="354" y="3" width="77" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstTotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_CH" mode="Transparent" x="264" y="3" width="81" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalWithoutGst}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_CH" mode="Transparent" x="442" y="3" width="92" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="275" y="25" width="270" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="45">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="FixRelativeToBottom" x="10" y="16" width="530" height="20"/>
+				<textElement textAlignment="Center" markup="html">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{memo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="41" y="34" width="503" height="12"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[663 Bukit Timah Road Singapore 269783. Tel: +65 6464 7077 Fax: +65 6464 7060 Website: <u>www.hcis.edu.sg</u> Email: <u>admin@hcis.edu.sg</u>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="46" width="472" height="10"/>
+				<textElement>
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[UEN/GST No. 200405080R    Charity Reg. No.: 1800]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="8" width="472" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THIS IS A COMPUTER GENERATED FORM. NO SIGNATURE IS REQUIRED.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="207">
+			<frame>
+				<reportElement x="1" y="0" width="545" height="203"/>
+				<staticText>
+					<reportElement x="41" y="187" width="472" height="10"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[UEN/GST No. 200405080R    Charity Reg. No.: 1800]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="41" y="175" width="503" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="7"/>
+					</textElement>
+					<text><![CDATA[663 Bukit Timah Road Singapore 269783. Tel: +65 6464 7077 Fax: +65 6464 7060 Website: <u>www.hcis.edu.sg</u> Email: <u>admin@hcis.edu.sg</u>]]></text>
+				</staticText>
+				<line>
+					<reportElement x="8" y="11" width="537" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="18" y="16" width="472" height="10"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PAYMENT INSTRUCTIONS:-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="31" width="298" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Payment by cheque should be crossed and made payable to ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="43" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[For payment via electronic transfer, please credit to the following account :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="55" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Account Name : Hwa Chong International School]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="77" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Bank Address : 63 Chulia Street #02-20 OCBC Centre East Singapore 049514]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="100" width="435" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Please email to <u>milliechong@hcis.edu.sg</u> the details of each payment made.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="66" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Bank Name : Overseas-Chinese Banking Corporation Limited]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="270" y="31" width="196" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[“HWA CHONG INTERNATIONAL SCHOOL”.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="112" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Please contact Millie Chong at +65 6427 4609 if you need further clarification.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="100" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[3.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="43" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[2.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="112" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[4.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="31" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[1.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="41" y="149" width="472" height="16"/>
+					<textElement textAlignment="Center">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[THIS IS A COMPUTER GENERATED FORM. NO SIGNATURE IS REQUIRED.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="88" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Bank Code : 7339      Account No. : 591-847819-001      Bank Swift Code : OCBCSGSG]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</lastPageFooter>
+</jasperReport>

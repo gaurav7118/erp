@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+      <class name="com.krawler.hql.accounting.ExpensePOVersionDetails" table="expensepoversiondetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" not-null="true"/>
+        </property>
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount" not-null="false"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount" not-null="true"/>
+        </property>
+        <property name="rateIncludingGst" type="double">
+            <column name="rateIncludingGst" not-null="true" default='0'/>
+        </property>
+        <property name="description" type="string">
+            <column  name="description" />
+        </property>
+        <property name="isdebit" type="true_false">
+            <column name="isdebit"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+        <many-to-one column="expensepoversiondetailcustomdata" class="com.krawler.hql.accounting.ExpensePOVersionDetailCustomData"  name="expensePOVersionDetailCustomData" />
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Discount" name="discount" unique="true"/>
+        <many-to-one class="com.krawler.hql.accounting.PurchaseOrderVersion" column="purchaseorderversion" name="purchaseOrderVersion" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

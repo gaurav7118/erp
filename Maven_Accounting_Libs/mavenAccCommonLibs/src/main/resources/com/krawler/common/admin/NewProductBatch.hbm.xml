@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.NewProductBatch" table="newproductbatch">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="batchname" type="string">
+            <column name="batchname"/>
+        </property>
+        <property name="mfgdate" type="date">
+            <column name="mfgdate"/>
+        </property>
+        <property name="expdate" type="date">
+            <column name="expdate"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="quantitydue" type="double">
+            <column name="quantitydue"/>
+        </property>
+        <property name="isopening" type="true_false">
+            <column default="true" name="isopening" not-null="true"/>
+        </property>
+        <property name="ispurchase" type="true_false">
+            <column default="true" name="ispurchase" not-null="true"/>
+        </property>
+        <property name="transactiontype" type="integer"> <!-- This is Type we can identify where batch can added  1- Product form ,2-GRN ,3 -Delivery Order, 4 - Sales Return ,5 Purchase Return -->
+            <column name="transactiontype"/>
+        </property>
+        <property name="product" type="string">
+            <column name="product"/>
+        </property>
+        <property name="lockquantity" type="double">
+            <column name="lockquantity"/>
+        </property>
+        <property name="isconsignment" type="true_false">
+            <column name="isconsignment" default="'F'" />
+        </property>
+        <property name="isForconsignment" type="true_false">
+            <column name="isForconsignment" default="'F'" />
+        </property>
+        <property name="consignquantity" type="double">
+            <column name="consignquantity"/>
+        </property>
+        <property name="asset" type="string">
+            <column name="asset"/>
+        </property>
+        <property name="wastageQuantityType" type="integer">
+            <column name="wastagequantitytype" default="0"/>
+        </property>
+        <property name="wastageQuantity" type="double">
+            <column name="wastagequantity" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.InventoryLocation" name="location"/>
+        <many-to-one class="com.krawler.common.admin.InventoryWarehouse" name="warehouse"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" name="row"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" name="rack"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" name="bin"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

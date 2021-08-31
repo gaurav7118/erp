@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class  name="com.krawler.common.admin.CustomCurrency" table="customcurrency" >
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column length="100" name="name"/>
+        </property>
+        <property name="systemcurrencysymbol" type="string">
+            <column length="20" name="systemcurrencysymbol"/>
+        </property>
+        <property name="systemcurrencycode" type="string">
+            <column length="20" name="systemcurrencycode"/>
+        </property>
+        <property name="customcurrencysymbol" type="string">
+            <column length="20" name="customcurrencysymbol"/>
+        </property>
+        <property name="customcurrencycode" type="string">
+            <column length="20" name="customcurrencycode"/>
+        </property>
+        <property name="companyid" type="string">
+            <column length="40" name="companyid"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currencyid" name="currencyID" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Form 402" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<parameter name="districtName" class="java.lang.String"/>
+	<parameter name="companyRName" class="java.lang.String"/>
+	<parameter name="districtRName" class="java.lang.String"/>
+	<parameter name="invoiceNo" class="java.lang.String"/>
+	<parameter name="invDate" class="java.lang.String"/>
+	<parameter name="consignerName" class="java.lang.String"/>
+	<parameter name="consigneeName" class="java.lang.String"/>
+	<parameter name="consignerState" class="java.lang.String"/>
+	<parameter name="consignerAddress" class="java.lang.String"/>
+	<parameter name="consigneeAddress" class="java.lang.String"/>
+	<parameter name="consignerRegNo" class="java.lang.String"/>
+	<parameter name="consigneeRegNo" class="java.lang.String"/>
+	<parameter name="consignerRegDate" class="java.lang.String"/>
+	<parameter name="consigneeRegDate" class="java.lang.String"/>
+	<parameter name="consignerCSTRegNo" class="java.lang.String"/>
+	<parameter name="consigneeCSTRegNo" class="java.lang.String"/>
+	<parameter name="consignerCSTRegDate" class="java.lang.String"/>
+	<parameter name="consigneeCSTRegDate" class="java.lang.String"/>
+	<parameter name="consignerTelNo" class="java.lang.String"/>
+	<parameter name="consigneeTelNo" class="java.lang.String"/>
+	<parameter name="consignerFaxNo" class="java.lang.String"/>
+	<parameter name="consigneeFaxNo" class="java.lang.String"/>
+	<parameter name="consignedValue" class="java.lang.String"/>
+	<parameter name="consignerTNo" class="java.lang.String"/>
+	<detail>
+		<band height="709" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="36" width="160" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FORM 402]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="55" width="160" height="20"/>
+				<textElement>
+					<font fontName="Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[(See rule 51)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="36" width="160" height="20"/>
+				<textElement>
+					<font fontName="Serif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORIGINAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="52" width="160" height="20"/>
+				<textElement>
+					<font fontName="Serif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUPLICATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="68" width="160" height="20"/>
+				<textElement>
+					<font fontName="Serif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRIPLICATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Declaration under section 68 of the Gujarat Value Added Tax Act, 2003]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="111" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(For movement of goods within the State or goods moving outside the State)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="146" width="100" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[To,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="161" width="235" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[The officer in charge]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="176" width="187" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Check post]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="214" width="505" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(1) Place from which goods are dispatched "+$P{companyName}+" District "+$P{districtName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="229" width="505" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(2) Place to which goods are dispatched "+$P{companyRName}+" District "+$P{districtRName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="244" width="505" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(3) Details of goods invoice No "+$P{invoiceNo}+" Date "+$P{invDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="50" y="259" width="260" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(4) Consignor’s details :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="64" y="279" width="455" height="127"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="279" width="68" height="127"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="279" width="85" height="127"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="279" width="68" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="279" width="187" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="279" width="85" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="404" y="279" width="115" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="404" y="333" width="115" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="333" width="85" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="352" width="187" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="352" width="68" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="352" width="100" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="404" y="352" width="115" height="35"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="64" y="283" width="68" height="21"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="304" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="357" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Telephone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="390" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Fax No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="283" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  State]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="304" width="93" height="39"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Registration
+Certificate No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="334" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="356" width="93" height="35"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[CST
+registration No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="390" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="414" width="260" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(5) Nature of Transaction :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="430" width="113" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:1: Inter state sale]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="446" width="113" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:3: Depot Transfer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="429" width="202" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:2: Transfer of documents of title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="445" width="202" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:4: Consignment to Branch/Agent
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="461" width="202" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:5: For Job works/Works contract]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="477" width="113" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:6: For export]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="494" width="113" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[:7: Any Other]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="511" width="260" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[(6) Consignee’s details :-]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="246" y="431" width="43" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="246" y="447" width="43" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="246" y="463" width="43" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="246" y="480" width="43" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="476" y="445" width="43" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="476" y="429" width="43" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="526" width="455" height="108"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="298" width="187" height="54"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="387" width="187" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="526" width="187" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="545" width="187" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="580" width="187" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="615" width="187" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="526" width="68" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="64" y="580" width="68" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="526" width="200" height="54"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="561" width="85" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="580" width="85" height="35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="319" y="615" width="85" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="404" y="561" width="115" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="404" y="580" width="115" height="35"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="64" y="619" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Fax No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="585" width="93" height="35"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[CST
+registration No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="531" width="68" height="21"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="552" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="619" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="586" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[  Telephone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="531" width="193" height="21"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Registration Certificate No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="64" y="644" width="260" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Consigned Value Rs.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="137" y="282" width="189" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="530" width="189" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="283" width="115" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerState}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="304" width="189" height="48"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="552" width="189" height="48"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeAddress}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="565" width="68" height="18"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="409" y="304" width="115" height="29"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="545" width="198" height="17"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="336" width="115" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerRegDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="564" width="67" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeRegDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="357" width="115" height="29"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerCSTRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="586" width="115" height="29"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeCSTRegNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="390" width="115" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignerCSTRegDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="619" width="68" height="15"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeCSTRegDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="586" width="182" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeTelNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="619" width="182" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consigneeFaxNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="166" y="644" width="182" height="20"/>
+				<textElement>
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consignedValue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="357" width="180" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{consignerTelNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="391" width="179" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{consignerFaxNo}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="246" y="496" width="43" height="13"/>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>

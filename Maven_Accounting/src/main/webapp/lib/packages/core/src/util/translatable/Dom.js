@@ -1,0 +1,1 @@
+Ext.define("Ext.util.translatable.Dom",{extend:"Ext.util.translatable.Abstract",config:{element:null},applyElement:function(A){if(!A){return }return Ext.get(A)},updateElement:function(){this.refresh()}})

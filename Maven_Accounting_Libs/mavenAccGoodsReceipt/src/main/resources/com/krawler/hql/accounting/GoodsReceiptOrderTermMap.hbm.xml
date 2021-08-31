@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.GoodsReceiptOrderTermMap" table="goodsreceiptordertermmap">
+    <id column="id" name="id" type="string">
+      <generator class="uuid"/>
+    </id>
+    <property name="percentage" type="double">
+      <column default="0" name="percentage"/>
+    </property>
+    <property name="termamount" type="double">
+      <column name="termamount" not-null="true"/>
+    </property>
+    <property name="termtaxamount" type="double">
+        <column name="termTaxamount" not-null="true"/>
+    </property>
+    <property name="termtaxamountinbase" type="double">
+        <column name="termTaxamountinbase" not-null="true"/>
+    </property>
+    <property name="termAmountExcludingTax" type="double">
+        <column name="termamountexcludingtax" not-null="true"/>
+    </property>
+    <property name="termAmountExcludingTaxInBase" type="double">
+        <column name="termamountexcludingtaxinbase" not-null="true"/>
+    </property>
+    <property name="termamountinbase" type="double">
+        <column name="termamountinbase" not-null="true"/>
+    </property>
+    <property name="deleted" type="integer">
+      <column name="deleted"/>
+    </property>
+    <property name="createdOn" type="long">
+      <column name="createdon"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.User" name="creator" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Tax" column="termTax" name="termtax"/>
+    <many-to-one class="com.krawler.hql.accounting.GoodsReceiptOrder" column="goodsreceiptorder" name="goodsReceiptOrder" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.InvoiceTermsSales" column="term" name="term" not-null="true"/>
+  </class>
+</hibernate-mapping>

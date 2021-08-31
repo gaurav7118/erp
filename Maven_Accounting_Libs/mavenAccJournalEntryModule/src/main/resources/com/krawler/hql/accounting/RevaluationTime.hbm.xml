@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.RevaluationTime" table="revaltime">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="accountType" type="integer">
+            <column name="accounttype" not-null="true"/>
+        </property>
+        <property name="month" type="integer">
+            <column  name="month" />
+        </property>
+        <property name="year" type="integer">
+            <column  name="year" />
+        </property>
+        <property name="currencyId" type="integer">
+            <column  name="currencyid" not-null="true"/>
+        </property>
+        <property name="revalDate" type="date">
+            <column name="revaldate" />
+        </property>
+        <property name="revalId" type="string">
+            <column length="255" name="revalid" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" fetch="select" name="userid">
+            <column name="userid"/>
+        </many-to-one>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>
+

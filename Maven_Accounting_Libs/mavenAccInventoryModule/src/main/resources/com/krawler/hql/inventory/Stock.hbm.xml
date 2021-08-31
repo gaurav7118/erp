@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.stock.Stock" table="in_stock" >
+      <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="quantity" type="double">
+      <column name="quantity"/>
+    </property>
+    <property name="pricePerUnit" type="double">
+      <column name="priceperunit" />
+    </property>
+    <property name="batchName" type="string">
+      <column name="batchname" />
+    </property>
+    <property name="serialNames" type="text">
+      <column name="serialnames" />
+    </property>
+    <property name="batchNo" type="long">
+      <column name="batchno" />
+    </property>
+    <property name="createdOn" type="timestamp">
+      <column name="createdon"/>
+    </property>
+    <property name="modifiedOn" type="timestamp">
+      <column name="modifiedon"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.inventory.model.store.Store" column="store" name="store"/>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="row" name="row"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="rack" name="rack"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="bin" name="bin"/>
+    <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

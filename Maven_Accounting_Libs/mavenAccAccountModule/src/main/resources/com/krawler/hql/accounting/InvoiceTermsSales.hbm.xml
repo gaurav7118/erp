@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.InvoiceTermsSales" table="invoicetermssales">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="term" type="string">
+            <column name="term"/>
+        </property>
+        <property name="formula" type="string">
+            <column name="formula"/>
+        </property>
+        <property name="category" type="string">
+            <column name="category"/>
+        </property>
+        <property name="sign" type="integer">
+            <column name="sign"/>
+        </property>
+        <property name="includegst" type="integer">
+            <column name="includegst"/>
+        </property>
+        <property name="includeprofit" type="integer">
+            <column name="includeprofit"/>
+        </property>
+        <property name="supressamount" type="integer">
+            <column name="supressamount"/>
+        </property>
+        <property name="deleted" type="integer">
+            <column name="deleted"/>
+        </property>
+        <property name="createdOn" type="long">
+            <column name="createdon"/>
+        </property>
+        <property name="salesOrPurchase" type="boolean">
+            <column name="salesorpurchase" not-null="false" default="false"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" name="creator" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true" cascade="delete,save-update"/>
+        <property name="percentage" type="double">
+            <column name="percentage" default='0'/>
+        </property>
+        <property name="termAmount" type="double">
+            <column name="termamount" default='0'/>
+        </property>
+        <property name="termType" type="integer">
+            <column name="termtype"/>
+        </property>
+        <property name="formulaids" type="string">
+            <column length="1024" name="formulaids"/>
+        </property>
+        <property name="purchaseValueOrSaleValue" type="double">
+            <column name="purchasevalueorsalevalue" default='0'/>
+        </property>
+        <property name="deductionOrAbatementPercent" type="double">
+            <column name="deductionorabatementpercent" default='0'/>
+        </property>
+        <property name="taxType" type="int">
+            <column name="taxtype" default="1"/>
+        </property>
+        <property name="isDefault" type="true_false" >
+            <column name="isdefault" default="F"/>
+        </property>
+        <property name="termSequence" type="integer">
+            <column name="termsequence"/>
+        </property>
+        <property name="includeInTDSCalculation" type="true_false">
+            <column default="F" name="includeintdscalculation"/>
+        </property>
+       
+          <property name="isTermActive" type="true_false">
+            <column default="true" name="istermactive" />
+        </property>
+    </class>
+</hibernate-mapping>

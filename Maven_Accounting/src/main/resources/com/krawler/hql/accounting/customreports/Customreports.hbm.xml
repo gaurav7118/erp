@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.customreports.Customreports" table="customreports" >
+        <id name="reportno" type="string">
+            <column name="reportno" />
+            <generator class="uuid" />
+        </id>
+        <many-to-one name="usersByUpdatedbyid" class="com.krawler.common.admin.User" fetch="select">
+            <column name="updatedbyid" />
+        </many-to-one>
+        <many-to-one name="usersByCreatedbyid" class="com.krawler.common.admin.User" fetch="select">
+            <column name="createdbyid" />
+        </many-to-one>
+        <property name="reportname" type="string">
+            <column name="reportname" />
+        </property>
+        <property name="reportuniquename" type="string">
+            <column name="reportuniquename" />
+        </property>
+        <property name="summaryflag" type="java.lang.Character">
+            <column name="summaryflag" length="1" />
+        </property>
+        <property name="createdon" type="java.lang.Long">
+            <column name="createdon" />
+        </property>
+        <property name="deleteflag" type="java.lang.Byte">
+            <column name="deleteflag" />
+        </property>
+        <many-to-one name="reportmodulecategory" class="com.krawler.common.admin.ModuleCategory" fetch="select">
+            <column name="reportmodulecategory" />
+        </many-to-one>
+        <many-to-one name="reportmodule" class="com.krawler.common.admin.Modules" fetch="select">
+            <column name="reportmodule" />
+        </many-to-one>
+        <property name="reportjson" type="string">
+            <column name="reportjson" length="65535" />
+        </property>
+        <property name="filterjson" type="string">
+            <column name="filterjson" length="65535" />
+        </property>
+        <property name="groupflag" type="java.lang.Character">
+            <column name="groupflag" length="1" />
+        </property>
+        <property name="ispivot" type="true_false">
+            <column name="ispivotreport" length="1" />
+        </property>
+        <property name="isdefault" type="true_false">
+            <column name="isdefaultreport" length="1" />
+        </property>
+        <property name="reportsql" type="string">
+            <column name="reportsql" length="65535" />
+        </property>
+        <property name="reportdescription" type="string">
+            <column name="reportdescription" length="1024" />
+        </property>
+        <property name="updatedon" type="java.lang.Long">
+            <column name="updatedon" />
+        </property>
+        <property name="companyId" type="string">
+            <column name="companyid" />
+        </property>
+        <property name="widgetURL" type="string">
+            <column name="widgetURL"/>
+        </property>
+        <property name="parentreportid" type="string">
+            <column name="parentreportid"/>
+        </property>
+    </class>
+</hibernate-mapping>

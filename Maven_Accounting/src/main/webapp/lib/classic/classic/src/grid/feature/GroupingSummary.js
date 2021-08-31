@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.feature.GroupingSummary",{extend:"Ext.grid.feature.Grouping",alias:"feature.groupingsummary",showSummaryRow:true,vetoEvent:function(B,D,E,C){var A=this.callParent(arguments);if(A!==false&&C.getTarget(this.summaryRowSelector)){A=false}return A}})

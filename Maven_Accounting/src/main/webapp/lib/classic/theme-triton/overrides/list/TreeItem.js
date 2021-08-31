@@ -1,0 +1,1 @@
+Ext.define("Ext.theme.triton.list.TreeItem",{override:"Ext.list.TreeItem",compatibility:Ext.isIE8,updateFloated:function(B,A){this.callParent([B,A]);this.toolElement.syncRepaint()}})

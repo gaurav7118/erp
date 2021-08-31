@@ -1,0 +1,98 @@
+<settings>
+  <thousands_separator>,</thousands_separator>
+  <decimals_separator>.</decimals_separator>
+ <digits_after_decimal>0</digits_after_decimal>
+  <redraw>1</redraw>
+  <data_type>csv</data_type>
+  <background>
+    <alpha>100</alpha>
+    <border_alpha>70</border_alpha>
+  </background>
+  <plot_area>
+    <margins>
+      <left>116</left>
+      <top>150</top>
+      <bottom>150</bottom>
+    </margins>
+  </plot_area>
+  <grid>
+    <category>
+      <alpha>5</alpha>
+      <dash_length>1</dash_length>
+    </category>
+    <value>
+      <alpha>7</alpha>
+    </value>
+  </grid>
+  <axes>
+    <category>
+      <width>1</width>
+    </category>
+    <value>
+      <width>1</width>
+    </value>
+  </axes>
+  <values>
+    <category>
+      <rotate>90</rotate>
+    </category>
+    <value>
+      <min>0</min>
+    </value>
+  </values>
+  <legend>
+    <spacing>3</spacing>
+  </legend>
+  <column>
+    <type>stacked</type>
+    <width>50</width>
+    <spacing>0</spacing>
+    <balloon_text>{title}: {value}</balloon_text>
+    <grow_time>1</grow_time>
+    <grow_effect>regular</grow_effect>
+  </column>
+  <depth>10</depth>
+  <angle>45</angle>
+  <export_as_image>
+    <color>9966FF</color>
+  </export_as_image>
+  <graphs>
+    <graph gid="0">
+      <title>Paid</title>
+      <color>003366</color>
+      <alpha>97</alpha>
+    </graph>
+    <graph gid="1">
+      <title>Due</title>
+       <color>66CCFF</color>
+      <alpha>28</alpha>
+      <pattern_color>0099CC</pattern_color>
+    </graph>
+  </graphs>
+  <labels>
+    <label lid="0">
+      <text><![CDATA[<b><u>Amount Payable in the Financial Year </u></b>]]></text>
+      <y>25</y>
+      <text_color>003366</text_color>
+      <text_size>16</text_size>
+      <align>center</align>
+    </label>
+    <label lid="1">
+      <text><![CDATA[<b>Amount</b>]]></text>
+      <x>20</x>
+      <y>260</y>
+      <text_color>3399FF</text_color>
+      <text_size>13</text_size>
+      <rotate>1</rotate>
+    </label>
+    <label lid="2">
+      <text><![CDATA[<b>Month</b>]]></text>
+      <x>500</x>
+      <y>520</y>
+      <width>0</width>
+      <text_color>3399FF</text_color>
+      <text_size>13</text_size>
+      <align>center</align>
+    </label>
+  </labels>
+</settings>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.spring.mrp.WorkOrder.WorkOrderComponentDetails" table="workordercomponentdetail">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="blockQuantity" type="double">
+      <column name="blockquantity"/>
+    </property>
+    <property name="blockQuantityUsed" type="double">
+      <column name="blockquantityused"/>
+    </property>
+    <property name="blockQtyUsed" type="true_false">
+            <column name="isblockqtyused" default="'F'" />
+    </property>
+    <property name="blockedFromCA" type="true_false">
+      <column name="isblockedfromca" default="'F'" />
+    </property>
+    <property name="initialPurchasePrice" type="double">
+      <column name="initialpurchaseprice"/>
+    </property>
+    <property name="requiredQuantity" type="double">
+      <column name="requiredquantity"/>
+    </property>
+    <property name="availableQuantity" type="double">
+      <column name="availablequantity"/>
+    </property>
+    <property name="producedQuantity" type="double">
+      <column name="producedquantity"/>
+    </property>
+    <property name="rejectedQuantity" type="double">
+      <column name="rejectedquantity"/>
+    </property>
+    <property name="wastedQuantity" type="double">
+      <column name="wastedquantity"/>
+    </property>
+    <property name="recycledQuantity" type="double">
+      <column name="recycledquantity"/>
+    </property>
+    <property name="minpercent" type="double">
+      <column name="minpercent"/>
+    </property>
+    <property name="consumptionDetails" type="string">
+      <column name="consumptionDetails"/>
+    </property>
+    <property name="taskId" type="string">
+         <column name="taskid" default="null"/>
+    </property>
+        <property name="taskName" type="string" >
+         <column name="taskname" default="null"/>
+    </property>
+    <property name="returnQuantity" type="double">
+      <column name="returnquantity"/>
+    </property>
+    <property name="blockDetails" type="string">
+      <column name="blockdetails"/>
+    </property>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="product" column="product"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="parentProduct" column="parentProduct"/>
+    <many-to-one class="com.krawler.spring.mrp.WorkOrder.WorkOrder" column="workorder" name="workOrder" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventory" name="inventory"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryproduced" name="inventoryProduced"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryreturnedout" name="inventoryReturnedOut"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryreturnedin" name="inventoryReturnedIn"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventorywasteout" name="inventoryWasteOut"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventorywastein" name="inventoryWasteIn"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryrecycleout" name="inventoryRecycleOut"/>
+    <many-to-one class="com.krawler.hql.accounting.Inventory" column="inventoryrecyclein" name="inventoryRecycleIn"/>
+    <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="inventoryjedetail" name="inventoryJEdetail"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.mrp.contractmanagement.MRPContract" table="mrpcontract">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+    
+        <property name="contractid" type="string">
+            <column name="contractid"/>
+        </property>
+    
+        <property name="contractname" type="string">
+            <column name="contractname"/>
+        </property>
+    
+        <property name="creationdate" type="date">
+            <column name="creationdate" />
+        </property>
+      
+        <property name="contractstartdate" type="date">
+            <column name="contractstartdate" />
+        </property>
+    
+        <property name="contractenddate" type="date">
+            <column name="contractenddate" />
+        </property>
+    
+        <property name="contractterm" type="string">
+            <column name="contractterm" />
+        </property>
+      
+        <property name="parentcontractname" type="string">
+            <column name="parentcontractname" />
+        </property>
+      
+        <property name="deleteflag" type="true_false">
+            <column name="deleteflag" default="false"/>
+        </property>
+      
+        <property name="seqnumber" type="integer">
+            <column name="seqnumber" default='0'/>
+        </property>
+      
+        <property name="datepreffixvalue" type="string">
+            <column length="50" name="datepreffixvalue"/>
+        </property>
+      
+        <property name="datesuffixvalue" type="string">
+            <column length="50" name="datesuffixvalue"/>
+        </property>
+        <property name="dateAfterPreffixValue" type="string">
+            <column length="50" name="dateafterpreffixvalue"/>
+        </property>
+        <property name="autogen" type="true_false">
+            <column default="false" name="autogen" not-null="true"/>
+        </property>
+      
+            
+        <property name="accountname" type="string">
+            <column name="accountname" />
+        </property>
+      
+        <property name="detailstype" type="string">
+            <column name="detailstype" />
+        </property>
+      
+        <property name="autopopulate" type="string">
+            <column name="autopopulate" />
+        </property>
+      
+        <property name="shownincsorcp" type="string">
+            <column name="shownincsorcp" />
+        </property>
+      
+        <property name="bankname" type="string">
+            <column name="bankname" />
+        </property>
+      
+        <property name="bankaccountnumber" type="string">
+            <column name="bankaccountnumber" />
+        </property>
+      
+        <property name="bankaddress" type="string">
+            <column name="bankaddress" />
+        </property>
+            
+<!--        <property name="paymenttermdays" type="integer">
+            <column name="paymenttermdays" />
+        </property>-->
+      
+        <property name="paymenttermdate" type="date">
+            <column name="paymenttermdate" />
+        </property>
+        
+        
+      
+        <property name="contractorname" type="string">
+            <column name="contractorname" />
+        </property>
+      
+        <property name="contractorteename" type="string">
+            <column name="contractorteename" />
+        </property>
+      
+        <property name="pannumber" type="string">
+            <column name="pannumber" />
+        </property>
+      
+        <property name="tannumber" type="string">
+            <column name="tannumber" />
+        </property>
+      
+        <property name="dateofaggrement" type="date">
+            <column name="dateofaggrement" />
+        </property>
+            
+        <property name="stateaggrement" type="string">
+            <column name="stateaggrement" />
+        </property>
+      
+        <property name="previouscontractid" type="string">
+            <column name="previouscontractid" />
+        </property>
+      
+        <property name="documentrequiredremarks" type="string">
+            <column name="documentrequiredremarks" />
+        </property>
+      
+        <property name="actualattachment" type="string">
+            <column name="actualattachment" />
+        </property>
+      
+        <set cascade="all" inverse="true" name="rows">
+            <key column="mrpcontract"/>
+            <one-to-many class="com.krawler.spring.mrp.contractmanagement.MRPContractDetails"/>
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" name="customer" column="customer" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="sellertype" column="sellertype"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="contractstatus" column="contractstatus"/>
+        <many-to-one class="com.krawler.spring.mrp.contractmanagement.MRPContract" name="parentcontractid"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="countryaggrement" column="countryaggrement"/>
+        <many-to-one class="com.krawler.hql.accounting.PaymentMethod" name="paymentmethodname" column="paymentmethodname"/>
+        <many-to-one class="com.krawler.hql.accounting.Term" name="paymenttermname" column="paymenttermname"/>
+        <many-to-one class="com.krawler.hql.accounting.SequenceFormat" column="seqformat" name="seqformat"/>
+        <many-to-one class="com.krawler.spring.mrp.contractmanagement.MRPContractCustomData" column="accmrpcontractcustomdataref" name="accMRPContractCustomData"/>
+    </class>
+</hibernate-mapping>

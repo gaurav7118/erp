@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.customreports.CrossModuleJoinDetails" table="crossmodulejoindetails">
+    <id name="id" type="string">
+        <column name="id"/>
+        <generator class="uuid"/>
+    </id>
+    <property name="module" type="string">
+        <column name="module"/>
+    </property>
+    <property name="linkedModule" type="string">
+        <column name="linkedmodule"/>
+    </property>
+    <property name="linkedModuleDBTableName" type="string">
+        <column name="linkedmoduledbtablename"/>
+    </property>
+    <property name="fromTable" type="string">
+        <column name="fromtable"/>
+    </property>
+    <property name="joinTable" type="string">
+        <column name="jointable"/>
+    </property>
+    <property name="mainTable" type="string">
+        <column name="maintable"/>
+    </property>
+</class>
+</hibernate-mapping>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetMaintenanceWorkOrder" table="assetmaintenanceworkorder">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="remark" type="string">
+            <column length="1024" name="remark"/>
+        </property>
+        <property name="workOrderNumber" type="string">
+            <column name="workordernumber"/>
+        </property>
+        <property name="workOrderDate" type="timestamp">
+            <column name="workorderdate"/>
+        </property>
+        <property name="startDate" type="timestamp">
+            <column name="startdate"/>
+        </property>
+        <property name="endDate" type="timestamp">
+            <column name="enddate"/>
+        </property>
+        <set name="maintenanceWorkOrderDetails" cascade="all" inverse="true">
+            <key column="assetmaintenanceworkorder"/>
+            <one-to-many class="com.krawler.hql.accounting.AssetMaintenanceWorkOrderDetail"/>
+        </set>
+        
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="assignedTo" column="assignedto"/>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.AssetMaintenanceScheduler" name="assetMaintenanceScheduler" column="assetmaintenancescheduler"/>
+    </class>
+</hibernate-mapping>

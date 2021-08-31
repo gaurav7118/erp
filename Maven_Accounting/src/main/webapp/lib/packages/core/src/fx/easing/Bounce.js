@@ -1,0 +1,1 @@
+Ext.define("Ext.fx.easing.Bounce",{extend:"Ext.fx.easing.Abstract",config:{springTension:0.3,acceleration:30,startVelocity:0},getValue:function(){var B=Ext.Date.now()-this.getStartTime(),C=(B/this.getAcceleration()),A=C*Math.pow(Math.E,-this.getSpringTension()*C);return this.getStartValue()+(this.getStartVelocity()*A)}})

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.QuotationVersionDetail" table="quotationversiondetails">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="srno" type="integer">
+      <column name="srno" default="0"/>
+    </property>
+    <property name="remark" type="string">
+      <column length="255" name="remark"/>
+    </property>
+    <property name="quantity" type="double">
+      <column name="quantity" not-null="true"/>
+    </property>
+    <property name="vendorquotationdetails" type="string">
+      <column length="255" name="vendorquotationdetails"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+    <property name="baseuomquantity" type="double">
+      <column name="baseuomquantity" default="0" />
+    </property>
+    <property name="baseuomrate" type="double">
+      <column name="baseuomrate" default="1" />
+    </property>
+    <property name="rate" type="double">
+      <column name="rate" not-null="true"/>
+    </property>
+    <property name="discountispercent" type="integer">
+      <column name="discountispercent" not-null="true"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="rowTaxAmount" type="double">
+        <column name="rowtaxamount" not-null="false"/>
+    </property>
+        <property name="dependentType" type="string">
+      <column length="1024" name="dependenttype"/>
+    </property>
+    <property name="showquantity" type="string">
+      <column length="1024" name="showquantity"/>
+    </property>
+    <property name="inouttime" type="string">
+      <column length="1024" name="inouttime"/>
+    </property>
+    <property name="discount" type="double">
+      <column name="discount" not-null="false"/>
+    </property>
+    <property name="invstoreid" type="string">
+       <column  name="invstoreid" default="" length="255"/>
+    </property>
+     <property name="invlocid" type="string">
+       <column  name="invlocid" default="" length="255"/>
+     </property>
+     <property name="rateincludegst" type="double">
+        <column name="rateincludegst"  default="0"/>
+    </property>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.QuotationVersion" column="quotationversion" name="quotationversion" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.QuotationVersionDetailCustomData" column="accquotationdetailscustomdataref" name="quotationDetailCustomData"/>
+    <many-to-one class="com.krawler.hql.accounting.ProductReplacementDetail" column="productreplacementdetail" name="productReplacementDetail"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.inspection.InspectionArea" table="in_inspection_area">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="name" type="string">
+      <column name="name" not-null="true"/>
+    </property>
+    <property name="faults" type="string">
+      <column name="faults"/>
+    </property>
+    <property name="passingValue" type="string">
+      <column name="passingvalue"/>
+    </property>
+    <many-to-one class="com.krawler.inventory.model.inspection.InspectionTemplate" column="inspection_template" name="inspectionTemplate"/>
+  </class>
+</hibernate-mapping>

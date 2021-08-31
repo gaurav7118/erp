@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.cyclecount.CycleCountCalendar" table="in_cyclecount_calendar" >
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="date" type="timestamp">
+            <column name="date"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    
+        <set name="frequencies" cascade="save-update" table="in_cccalendar_frequency">
+            <key column="cc_calendarid"/>
+            <many-to-many column="frequencyid" class="com.krawler.inventory.model.frequency.Frequency"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.stockrequest.StockRequest" table="in_goodsrequest">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="transactionNo" type="string">
+            <column length="50" name="transactionno" not-null="true"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+        <property name="returnReason" type="string">
+            <column length="255" name="returnreason"/>
+        </property>
+        <property name="projectNumber" type="string">
+            <column length="50" name="projectno"/>
+        </property>
+        <property name="parentID" type="string">
+            <column length="50" name="parentid" />
+        </property>
+        <property column="status" name="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.stockrequest.RequestStatus</param>
+            </type>
+        </property>
+        <property name="orderedQty" type="double">
+            <column name="orderedqty"/>
+        </property>
+        <property name="issuedQty" type="double">
+            <column name="issuedqty"/>
+        </property>
+        <property name="deliveredQty" type="double">
+            <column name="deliveredqty"/>
+        </property>
+        <property name="businessDate" type="date">
+            <column name="bussinessdate" not-null="true"/>
+        </property>
+        <property name="requestedOn" type="timestamp">
+            <column name="requestedon" not-null="true"/>
+        </property>
+        <property name="issuedOn" type="timestamp">
+            <column name="issuedon"/>
+        </property>
+        <property name="collectedOn" type="timestamp">
+            <column name="collectedon"/>
+        </property>
+        <property name="issueddate" type="long">
+            <column name="issueddate" not-null="true"/>
+        </property>
+        <property name="collecteddate" type="long">
+            <column name="collecteddate"/>
+        </property>
+        <property name="modifieddate" type="long">
+            <column name="modifieddate"/>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        <property name="returnRequest" type="boolean">
+            <column name="isreturnrequest"/>
+        </property>
+        <property name="istemplate" type="integer">
+            <column default="0" name="istemplate" />
+        </property>
+        <property column="module" name="module">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.stockmovement.TransactionModule</param>
+            </type>
+        </property>
+        <set cascade="all" inverse="true" lazy="true" name="stockRequestDetails" fetch="select">
+            <key column="stockrequest"/>
+            <one-to-many class="com.krawler.inventory.model.stockrequest.StockRequestDetail"/>
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="fromstore" name="fromStore"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="tostore" name="toStore"/>
+<!--    <many-to-one class="com.krawler.inventory.model.location.Location" column="fromlocation" name="fromLocation"/>-->
+<!--    <many-to-one class="com.krawler.inventory.model.location.Location" column="tolocation" name="toLocation"/>-->
+        <many-to-one class="com.krawler.inventory.model.packaging.Packaging" column="packaging" name="packaging"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="uom" name="uom"/>
+        <many-to-one class="com.krawler.common.admin.CostCenter" column="costcenter" name="costCenter"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="requestedby" name="requestedBy" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="issuedby" name="issuedBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="collectedby" name="collectedBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="approvedby" name="approvedBy"/>
+        <many-to-one class="com.krawler.inventory.model.stock.StockCustomData" column="accstockcustomdataref"  name="stockCustomData" />
+        <many-to-one class="com.krawler.inventory.model.stock.StockCustomData" column="accstocklinelevelcustomdataref"  name="stockLineLevelCustomData" />
+    </class>
+</hibernate-mapping>

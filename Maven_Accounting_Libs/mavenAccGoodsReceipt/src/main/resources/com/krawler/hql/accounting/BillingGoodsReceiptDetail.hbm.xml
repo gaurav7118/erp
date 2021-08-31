@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.BillingGoodsReceiptDetail" table="billinggrdetails">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="productDetail" type="string">
+            <column length="255" name="productdetail" not-null="true"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity" not-null="true"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" not-null="true"/>
+        </property>
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount" not-null="false"/>
+        </property>
+        <property name="wasRowTaxFieldEditable" type="boolean">
+            <column name="wasrowtaxfieldeditable" not-null="false"/>
+        </property>
+        <property name="amount" type="double">
+            <column name="amount" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Discount" name="discount" unique="true"/>
+        <many-to-one class="com.krawler.hql.accounting.BillingGoodsReceipt" column="billinggreceipt" name="billingGoodsReceipt" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.BillingPurchaseOrderDetail" column="purchaseorderdetail" name="purchaseOrderDetail"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.JournalEntryDetail" column="crntry" name="debtorEntry"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

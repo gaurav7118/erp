@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.DefaultStateValues" table="defaultstatevalues">
+      <id column="id" name="ID">  
+      <generator class="uuid"/>    
+    </id>
+    <property name="stateName" type="string">
+      <column length="200" name="statename" />
+    </property>
+    <property name="stateCode" type="string">
+      <column length="32" name="statecode"/>
+    </property>
+      <many-to-one class="com.krawler.common.admin.Country" column="country" name="country" not-null="true"/>
+  </class>
+</hibernate-mapping>

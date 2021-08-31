@@ -1,0 +1,747 @@
+#Neeraj Dwivedi-1st July 2014
+Added fields for Invoice,Vendor Invoice,SalesOrder,Customer Quotation,PurchaseOrder,Credit Note,Customer Quotation, Debit Note & Vendor Quotation
+
+# Vivek Pakmode 1 July 2014
+
+1. Different views for Vendor Invoice, Customer Invoice, Cash Sales, Cash Purchase, Sales Order,Purchase Order,
+ Vendor Quotation, Customer Quotation, Purchase Requisition, Make Payment, Receive Payment on Cell Click in all respective reports.
+2. Audit Trial entries for create, edit and deleting the opening Balance
+3. Spliting GRDO into two different terms as GR with VI and DO with CI
+4. disabled copy invoice and copy button if no records are selected
+5. In monthly Trading Report shown the year 2013
+
+# Amol Dhokale 2nd July 2014
+1. Issue : Temporary deleted records are getting loaded while linking into another documents. For SO/PO, CI/VI, GR/DO, PR/SR Modules.
+
+# Raveesh Pathak 2nd July 2014
+1. Not able to save Debit note show "amount can't be greater'  
+
+# Anup Kale 2 July 2014
+Issues:
+1.In Payment Received report, Account Name/Name are not showing for some records in new system. for example: # RR14/0001 and In Payment Made report, Account Name/Name are not showing for some records in new system. for example: # PCV14/0009
+2.Issue 32313 - [Edit MP/RP report]While editing MP/RP, Total Amount field and selection criteria fields are hiding
+
+#[SATS]Hitesh Suryawanshi 1 July 2014
+1 Added "Alias Code" column in Trial Balance Report.
+Issue :
+1.Unable to save credit Note.
+
+#[SATS]Mayur Bhokase 1st July 2014
+Jasper Report for Credit and Debit Note for SATS.  
+
+#[SATS]Mayur Bhokase 4th July 2014
+Tax Invoice Jasper report Alignment Issue (Customer/Vendor Name is not printed Completely in Report).
+
+#Neeraj Dwivedi-2nd July 2014
+
+Enhancement:
+
+Custom Designer - Added following fields for Invoice,Vendor Invoice,SalesOrder,Customer Quotation,PurchaseOrder,Credit Note,Customer Quotation, Debit Note & Vendor Quotation - 
+Customer Billing Address City
+Customer Billing Address State
+Customer Billing Address Country
+Customer Billing Address Postal Code
+Customer Billing Address Phone No
+Customer Billing Address Fax No
+Customer Shipping Address City
+Customer Shipping Address State
+Customer Shipping Address Country
+Customer Shipping Address Postal Code
+Customer Shipping Address Phone No
+Customer Shipping Address Fax No
+Vendor Billing Address City
+Vendor Billing Address State
+Vendor Billing Address Country
+Vendor Billing Address Postal Code
+Vendor Billing Address Phone No
+Vendor Billing Address Fax No
+Vendor Shipping Address City
+Vendor Shipping Address State
+Vendor Shipping Address Country
+Vendor Shipping Address Postal Code
+Vendor Shipping Address Phone No
+Vendor Shipping Address Fax No
+Billing Address Phone No
+Billing Address Fax No
+
+#Custom Designer -  New fields for SO
+1) Credit Term
+2) Due Date
+
+#Custom Designer -  New fields for  CN
+Customer Billing Address2
+Customer Billing Address3
+Customer Shipping Address2
+Customer Shipping Address3
+Customer Phone no
+Customer Email Address
+Customer Fax No
+Company Address
+Company City
+Company State
+Company Zipcode
+Company Fax No
+Company Phone No
+
+#Custom Designer -  New fields for PurchaseOrder
+1) Agent
+
+#Custom Designer -  New fields for Invoice
+Credit Term
+
+#Custom Designer -  Added Shipping address fields for Customer Quotation
+
+Shipping Address City
+Shipping Address State
+Shipping Address Country
+Shipping Address Postal Code
+Shipping Address Phone No
+Shipping Address Fax No
+Shipping Address Email
+
+Added Credit Term to SO,DO & CQ
+Added Debit Term to PO.
+
+#Issue - On focus of textfield it should display in Htmleditor of globalcell of Custom Designer.
+
+#Enhancement:
+1)Repeat Account and Invoice Information in Global cell in Custom Designer Functions.
+
+2) Brought in Comma Separated values:
+Inserted fields 
+Account Name,Account Description,Account Tax,Account Tax Amount,Account Total Amount
+Invoice No,Invoice Date,Invoice Tax,Invoice Amount,Invoice Amount Due,Invoice Enter Amount
+
+# Amol Dhokale 2nd July 2014
+1. Issue : Temporary deleted records are getting loaded while linking into another documents. For SO/PO, CI/VI, GR/DO, PR/SR Modules.
+
+# Raveesh Pathak 2nd July 2014
+1. Not able to save Debit note show "amount can't be greater'  
+
+# Anup Kale 2 July 2014
+Issues:
+1.In Payment Received report, Account Name/Name are not showing for some records in new system. for example: # RR14/0001 and In Payment Made report, Account Name/Name are not showing for some records in new system. for example: # PCV14/0009
+2.Issue 32313 - [Edit MP/RP report]While editing MP/RP, Total Amount field and selection criteria fields are hiding
+
+# Vivek Pakmode 2nd July 2014
+
+In VQ/CQ,when view VQ/CQ and  edit of is open for a record,the copy tab for VQ/CQ does not get open.
+
+# Amol Dhokale 2nd July 2014
+1. Add option Show only Base Currency in Setup Wizard while setup a company and if option is checked, the currency combo should show only Base currency.
+2. Issue : Temporary deleted records are getting loaded while linking into another documents. For SO/PO, CI/VI, GR/DO, PR/SR Modules.
+3. Issue :  Product does not get load while we copy the customer/vendor Quotation.
+
+
+# Amol Dhokale 3rd July 2014
+Enhancement:
+1. Custom Designer - Added following fields for Credit Note and Debit Note:
+
+Credit Note:
+Company website
+Company emailid
+
+Debit Note:
+Company website
+Company emailid
+Company Address
+Company City
+Company State
+Company zipcode
+Company phone no
+Company fax no
+Vendor Code
+
+2. Added functionality to print otherwise case CN/DN. 
+
+#Neeraj Dwivedi 3rd July 2014
+Issue:
+1)Removed unnecessaryfields from CN/DN
+    Memo
+    Product Terms Description
+    Product Terms Total
+    Ship To
+    Tax Amount
+    Sub Total
+    Total Tax
+    Total Discount
+
+2)Amount in Words  is printing for CN/DN
+
+3) Fields are added for 
+#CN
+   .Customer Account No
+   .Credit Terms
+#DN
+    .Vendor Account No
+    . Debit Term 
+4)No possible to generate template if CN otherwise case
+
+#Raveesh Pathak 4th July 2014
+Issue
+1. While making PO/VI or SO/CI, when i am linking some VQ/CQ with it, quotations from all the vendors/customer are 
+getting loaded in number fields where as it should load quotation for selected vendor/customer only
+
+# Anand Nimbalkar 4th July 2014
+1. Issue 32563 - [Sales Purchase term] term are not coming in PO/SO/CI/VI, when some VQ/CQ/PO/SO are linked with it.
+2. [ERP] Budget proposal for each department. Include the Budget Report and Budget Variance Report ]
+
+# Vivek Pakmode 4th July
+   Issues
+  1.  In monthly trading P/L report, default selected year should be current financial year, not the first year in which company are sign up.
+  2.  Remove unwanted text from SO form. 
+  3.  In VQ/CQ,when view VQ/CQ and  edit of is open for a record,the copy tab for VQ/CQ does not get open.  
+
+   Enhancement
+  3.  Different views on cell click for make and receive payment
+      for
+       _payment against customer invoice
+       _payment to customer
+       _payment against GL code
+       _payment from vendor
+       _payment against vendor invoice
+     In
+      _ make payment
+      _Receive Payment
+      _ journal entry report
+      _ Aged payable
+      _ Aged receivable
+      _Finance statement report
+
+#Pandurang 4th Jule 2014
+Sales Schema Commission Report generated to calculate Sales Person Commission Amount . 
+
+#Malhari 7 July
+Added Contract Termination Flow for lease module
+
+# Rushikesh Mandage 7th July
+  Issues
+  1. In vendor management, After adding a new vendor , it is not appearing in its corresponding category. 
+  2. For master configuration window, check boxes are not appeared to checked for some master groups selected. 
+     Also for the master groups having field type = Dimension or Custom field , Master Item Menus(Add,Edit & Delete) are not working
+  3. Creation date of vendor is mismatch in vendor list and vendor List be category form  for the same vendor 
+  4. In customer  management, After adding a new customer , it is not appearing in its corresponding category . 
+
+# Neeraj Dwivedi 7th July 2014
+Implemented Font-functionality in Custom Designer Document in:
+
+1) Print Button and 
+2) Show Sample Preview 
+
+#Mayur Bhokase 7th July 2014
+ERP and CRM Integration- Quotation Jasper Report Issues.
+
+# Vivek Pakmode 8th July 2014
+Issue
+_While closing View Purchase Requisition tab,message pop ups
+
+#Raveesh Pathak 8th July 2014
+Issues:-
+1.pdf of VQ/PO/CQ/SO are not showing term amount in total amount. 
+2.SO/PO, amount in base currency are note including term amount.
+3.Copy of VQ and CQ does not load product
+
+# Anand Nimbalkar 8th July 2014
+1. Add 'View Pending Approval' functionality for 'Good Receipt' Report.
+2. [ERP] - GR approval only after all products from GR are received and serial number from file is matched with serial numbers in GR.
+3. Notification if all serial numbers in GRN are not received in actual delivery. User can edit GRN manually in that case.
+(URL for this is: <context path>/Accounting/a/<company subdomain>/ACCGoodsReceiptCMN/GoodsReceiptApprovalFromFile.do )
+
+# Suhas Chaware 8th July 2014
+1) In PO,SO,CI,VI,CS,CP edit and copy messages not proper
+2) The Entry of Approval transaction are not getting recorded into the audit trail.
+2)  While we reject the approval,then message should be "user has rejected" instead of "user has deleted ".
+4).In Audit Trail , while we delete Cash Purchase , Cash sales (Permanently/ temporary) , then message shown wrong in Audit Trail . it shows User has deleted vendor    invoice , or   User has deleted customer invoice. message should be "User has deleted cash purchase or cash sales "
+5). In Purchase requisition , while deleting purchase requisition  (permanently) , message are not shown proper in Audit trail. 
+6). In Purchase requisition , while editing purchase requisition , message is not shown proper in Audit trail.
+
+#Mayur Bhokase 9th July 2014
+[ERP-CRM sync]- Quotation Jasper report changes for Pacific Tec Company. 
+
+# Suhas Chaware 10th July 2014
+1. In Vendor Quotation , while editing vendor quotation , message is not shown proper in Audit trail.
+2. Remove "For" word   from Audit trail 's message while deleting Vendor Quotation .
+3. Remove the "s" from "products" word  in Audit trail, while deleting  product.In Goods Receipt ,
+4. In Goods Receipt , while editing Goods Receipt , message is not shown proper in Audit trail.
+5. Remove "Order" word from Audit trail's message , while deleting  Goods Receipt .
+6. In Delivery Order , while editing Delivery order, message is not shown proper in Audit trail
+7.In Payments Made Report , while editing MP against vendor invoice then message is not shown proper in Audit trail.
+8. In Payment Made Report , while editing MP Against GL Code then message is not shown proper in Audit trail.
+9. In Payments Received  Report , while editing RP against Customer invoice then message is not shown proper in Audit trail.
+10. In Payments Received  Report , while editing RP against GL Code  then message is not shown proper in Audit trail.
+11. In Credit Note , while creating credit note agains customer invoice ,message is not shown proper in Audit trail.message should be "user has added a credit Note "
+12. In Credit Note , while editing  credit note against customer invoice ,message is not shown proper in Audit trail.message should be "user has updated  a Credit Note.
+13. In Purchase Return , while editing purchase return , message is not shown proper in Audit Trail.
+14. In Sales Return , while editing sales return , message is not shown proper in Audit Trail
+
+#Pandurang 10 Jul 2014
+1.Bank Re-evaluation issue of Realized Entry.
+2.Bank Book Changes for -Balance brought down,Period Balance and Opening Balance.
+
+
+# Vivek Pakmode 10th July 2014
+Issues
+1. (VRnet) Copy option in Payment made report is an edit function not a copy function
+2. (Senwan) Replace contains(str) function used in ERP javascript files with indexOf(str)!=-1
+3.For vendor management opening balance for create new CN,the entry is not shown in audit trail.
+4.For  Customer management opening balance for create new,edit and delete for CI,the entries are not shown in audit trail.
+5.For  Customer management opening balance for create new,edit and delete for RP,the entries are not shown in audit trail.
+6.For Customer management opening balance for create new DN,the entry is not shown in audit trail.
+
+#Amol Dhokale 10th July 2014
+[SMS] While editing CI/VI and change Customer/Vendor then its shows message that "Please enter appropriate value for the field(s) marked in red." though all mandatory fields are filled .
+
+
+# Atul sachan 10 th July 2014
+[VR-Net]Fixed - GST Values should be add and subtract according to transaction nature in GST Report.
+
+#Amol Dhokale 11th July 2014
+[VR Net] Payment Made and Payment Received Report records are not loaded
+[SMS]Increase width of description column in General Ledger Report expander
+
+#Hitesh Suryawanshi 11th July 2014
+Enhancement:
+Default store and location in product creation form and sync this information from and to inventory. 
+
+#Vivek Pakmode 14th July 2014
+Issue-
+ERP-385: There are no space between "invoice and has" word in pop up window, while approving/rejecting transaction 
+
+#Raveesh pathak 14th July 2014
+Issue-
+ERP-408:  Not able to load product list from Product drop down 
+
+#Suhas Chaware 15th July 2014
+Issues - [Internal Issues]
+Jira Id - [ERP383]
+In Journal Entry , message should be "User has added a new journal entry " instead of "user added new journal transaction " in Audit trail , while creating journal entry .
+In Journal Entry , message should be "User has updated journal entry " instead of "user added new journal transaction " in Audit trail ,while editing journal entry .
+In Journal Entry , message should be "User has deleted journal entry " instead of "user journal entry deleted successfully " in Audit trail ,while deleting journal entry .
+In Journal Entry , message should be "User has reversed journal entry " instead of "user added new journal transaction " in Audit trail ,while reversing journal entry .
+In journal entry , while we set recurring JE , No message are getting recorded into the Audit trail.message should be "User has set journal entry as Recursive "
+In Journal Entry Report, while adding Recurring JE ,No message are getting recorded into the Audit trail .message should be "User has added recurring journal entry ."
+In Journal Entry Report, while editing Recurring JE ,No message are getting recorded into the Audit trail .message should be "User has updated recursive journal entry ."
+In COA ,while deleting COA ,message are not shown proper in Audit trail. message should be "User has deleted account ".
+In COA , in Account groups , while adding new account group/editing account group/deleting account group ,message are not proper in audit trail .message should be "User has added a group/updated group/deleted group."
+In COA, while we set the Monthly Budget / Monthly Forecast , No message are getting recorded into the Audit trail. message should be "User has set Monthly Budget/Monthly Forecast "
+While sending mail ,No entry are geeting recorded into the Audit trail.
+In MP/RP Report, While linking Payment to vendor invoice/ linking Receipt to customer invoice , No entry is getting recorded into the Audit trail.
+In DN/CN Report , while linking debit note to vendor invoice/linking credit note to customer invoice , No entry are getting loaded into the Audit trail.
+In REQ , while adding /deleting RFQ , message are not shown proper, message should be "User has added a new RFQ/ User has deleted RFQ."
+In VQ/CQ Report , while we Archive Quotation /Un-Archive Quotation , No entry are getting recorded into the Audit trail.
+while changing pasword of account , No entry are getting recorded into the audit trail.
+while updating profile from My Account , No entry are getting recorded into the Audit trail.
+
+#Rushikesh Mandage 15th July
+Issues-
+ERPS 404 - while saving template during exporting records, 't' of 'Template should be capital',Success message should be "Template has been saved successfully."
+ERP 406- For GR/DO reports, 'Add New' option not working while updating status.
+ERP 404- In Existing Report Templates (Export to Pdf ), Template name should be Unique .
+ERP 397-  " In Master Configuration for  Delivery Order Approval Rule  , while we adding /deleting approval rules then pop up message showing the message "Requisition Approval Rule has been saved /deleted successfully"   
+
+#Vivek Pakmode 16th July
+Issues-
+ERPS-898: Some fields name are getting changed in VQ/CQ while we copying VQ/CQ and doing change Sequence format
+ERPS-899: Some fields name are getting changed in PO/SO/DO/GR , while we editing/copying PO/SO/DO/GR
+ERPS-661: toll tip of both the tabs should be "You can view list of Purchase/Sales Tax(s) applicable on Invoice level"
+ERPS-903: In Payments Made/ Payments Received Report , while creating MP/RP against VI/CI and click on save and create New button ,total Amount Filed showing NaN
+ERPS-487: It is showing System Failure as 'system failure: Cannot delete Goods Receipt as it is used already.' while i am updating the Good Receipt (same problem for PO/ CI etc reports). Go through the attachment.
+ERPS-542: [Invoice]: Update the message which is displayed when Unit Price is not set for a product as : "Price for the product <Product Name in Bold> is not set. Do you want to set it now?". Go through the attachment.
+ERPS-910: Debit Note's Issues .
+ERPS-911: Credit Note's Issues.
+ERPS-902: In MP /RP against VI/CI, Unable to fill the amount in Total Amount filed when If we click on save button without filled amount , again when we go for fill the amount then this issue are coming .
+
+#Mayur Bhokase 16th July 2014
+ERP-370: General Ledger Report - Change export format.
+
+# Atul sachan 16 July 2014
+
+ ERP- 450 -Opening Transactions can be import only before Book Begining Date initialy this check was from Financial Year Start Date.
+
+#Malhari 16 July
+Added Contract Following Flow for lease module
+1.Contract Expiry / Terminate 
+2.Goods Return  
+3.Renew Contract
+
+
+#mayur Pawar 16 July
+1.store customer wise list of all equipment sold, along with their serial number, date of sale, warranty period;
+2.Maintenance order is submitted to accounting for billing.
+3.location and warehouse of the asset should be changed when it is leased
+
+#Hitesh Suryawanshi 16 July
+Enhancement:
+1.Ability to mark up the prices of equipment based on the product category
+2.Ability to mark up prices of parts depending on the cost
+
+
+# Anand Nimbalkar 16th July 2014
+1. [ERP-299] Ability to track which parts have been changed in which machine
+2. [ERP-289] process on how to issue spare parts if the faulty parts are under warranty; In this case no invoice shall be created on replacement
+3. [ERP-402] CRM - Accounting integration requests for Contract details report as per new requirement
+
+# Mayur Bhokase 18th July 2014
+[ERP-462] Create another customer invoice template without 'Delivered to', also squeeze the content on the right top(invoice no, ordered by) 
+
+#Hitesh Suryawanshi 18 July
+Enhancement:
+ERP-287:SO to be assigned to a particular region
+
+#Anand Nimbalkar 18th July 2014
+1. [ERP-421] Consignment changes in vendor invoice 
+    a. Once consignment no linked to VI then same consignment no should not be display.
+    b. Block inventory, Assembly product selection when consignment no is selected in VI
+2. [ERP-353] Send reminder to sales people X months before maintenance contract is due to expire
+3. [ERP-456] Changes in Contract Details Report
+    a. Add Contract Renew Details in Contract Details Report
+    b. Add currency symbol as per required in grid and data view for contract details and customer contract details.
+    c. Add field set view for Contract Details Reports.
+    d. Add Sales Return Details of Contract in Contract Details Report
+4. [ERP-289] process on how to issue spare parts if the faulty parts are under warranty; In this case no invoice shall be created on replacement
+
+#Vivek Pakmode 17th July
+Issue - ERP-467: Select the auto DO option in customer invoice by default.(add an option at the company level whether the auto DO has to be done or not)..same goes for auto GRN (NEW)
+
+#Mayur Bhokase 17th July 2014
+ERP-370: General Ledger Report - Added Multiple Account Print Functionality.
+
+# Sagar M - 17th July 2014
+ERP-447 - Not populating custom field values in Document Designer templates
+
+# Suhas Chaware 18t July2014
+JIRA ID ERP-412
+In User Administration,for Set price amending price permissions,entry should be there in audit trail.
+In Master Configuration,for Master Group,entry should be there in audit trail.
+In Master Configuration,for Payment Method,Unit of Measure,Credit Term,remove "to" from the messages in Audit trail for add and update.
+In Master Configuration,Wrong message for DO approval Rule for add and delete.refer:7.png
+cost center Audit trail entry 
+Transaction approval rule Audit trail entry
+JIRA ID ERP-420
+{Senwan} Fix Email message (Remove BEEN from the sentence "Brenda chan has BEEN approved Delivery Order"
+JIRA ID ERP-447 - Not populating custom field values in Document Designer templates
+
+# Malhari - 18th July 2014
+ERP-476- Customer /vendor account statement, increase the height of the drop down (do it across the system for all drop downs)
+
+#Neeraj Dwivedi 18th July 2014
+  
+ERP-382 : Remove "select subtype" field from custom designer template.
+ Included task:1) Removed 'Edit Label' Button of Global cell in Custom Designer.
+               2) Removed Set Color button from Global cell Table of Custom Designer.
+ERP-391 : Print option functionality for Credit Note/ Debit Note in Custom Designer.
+ERPS-904 : It should not show undefined for select fields on clicking a global cell in Custom Designer.
+
+# Atul sachan 18 July 2014
+
+Added Feature - (ERP-464) Make the default quantity and rate to be blank
+Fixed - (ERP-464) GR Order Not Deleting
+
+#Raveesh Pathak 18th July 2014
+ERP-435 [Sale by Item Report] - Show only 2 digits after the decimal point in the printout of this report
+ERP-330 Currency field not updating the vendor currency in vendor form
+
+# Rushikesh Mandage 18th July 2014
+ERPS-912- 1) User should not be allowed to delete a DO approval rule if higher level approval rule exists.
+          2) User should be allowed to add DO approval rule only if it's immediate lower level rule is available.
+ERPS-913 - Delivery order should be moved to 'pending approvals' if 'Amount' of that DO is exceeding/lacking/equals to that set in DO approval rule
+
+# Vivek Pakmode 18th July 2014
+Issues-
+ERPS-853: [Make Journal Entry]give default memo text when you post JE manually.
+ERPS-513: [Audit Trail]: Value of 'Transaction' field is removed after clicking on the 'Fetch' button
+ERPS-636: [Purchase Requisition]: Quick Search - B of By should be in lowercase (PR list, RFQ)
+
+#Pandurang 18th Jule 2014
+ERP-465 Allow user to save customer invoice with zero amount (NEW)
+
+# Hitesh Suryawanshi 18th July 2014
+Issue
+ERP-446:Show  Error "Fail to make connection with web server" while syncing projects from pm 
+
+# Hitesh Suryawanshi 21th July 2014
+Issue
+ERP-505:[BIT UAT] Email Notification UAT Script, Delivery Order and its Approval flow UAT Script, having some step failed because Data are not getting loaded into the Master Configuration .
+ERP-506:[BIT UAT] Bit Group sets up the Account Preferences in System Menu UAT Script is failed because unable to save the Account Preferences. 
+
+#Rushikesh Mandage 21st July 2014
+Issues
+ERP-428 [Report List] in paging system showing "Displaying records undefined - undefined of undefined"
+ERP-429 [Getting Started Wizard] word "Year" are getting hiding. 
+ERP-488 Space Error in pop up message 
+
+# Amol Dhokale 21st July 2014
+ 1. ERP-549 : [Senwan] Removed unused fields from CoA window.
+
+#Raveesh Pathak 21st July 2014
+
+[ERP-544] Contact person field: data are not getting updated if we open the record again
+[ERP-540] In MP/RP report, Account name are showing instead of Customer/Vendor name.
+[ERP-463] [SMS LSH]Delivery address is missing from customer invoice entry form, sometimes user wants to change the delivery address for that invoice (Usage Issue)
+
+#Mayur Pawar 21st July 2014
+[ERP-471] - Monthly sales report - show one row with total for each month at the bottom 
+
+#Anand Nimbalkar 21st July 2014
+1. Issue of not showing custom fields of contract in contract details report.
+
+#Mayur Pawar
+ 1.[ERP-453] [F1 Creation] Serial no should be add using Base UOM quantity
+
+#Pandurang 22 July 2014
+ERP-318-[VRNet] Customer Account Report – Should have an option to show ledger t account for customers/vendors.
+
+
+
+#Neeraj Dwivedi 22nd July 2014
+ERP -482:- [VRNet] the line items appear on the first line instead of the middle of the box.
+
+#Raveesh pathak 22nd July 2014
+[ERP-544] Contact person field: data are not getting updated if we open the record again
+
+# Amol Dhokale 22nd July 2014
+ERP-379:  I created a VI/CI and uncheck the Generate GR/DO option, now when i edit/copy the same record, Generate GR/DO option are getting true.
+ERP-398:  For Opening Balance , "Successfully  message " does not have sufficient  space  for customer side as well as vendor side  opening balance. 
+ERP-557: There are no space between "saved and successfully" word in pop message while adding/ editing opening vendor invoice.
+ERP-396:  In Purchase Order report ,if we have purchase order with product tax , and we are going to be edit the purchase order , the fields are not populated correctly.
+ERP-399:  For Opening balance ,while editing  MP/RP then message are not shown proper in pop up window.
+ERP-409:  In CN/DN report,when multiple records are selected,the edit button gets enabled.
+ERP-410:  In DO/GR report when an record is deselected,the edit and copy button remains enable.and also when multiple records are selected.
+ERPS-431 [Inventory Report] - 'Purchase/Sale' is shown wrong if the product is sold when Trading Flow is included
+ERPS-432 [Inventory Report] - 'Purchase/Sale' is shown wrong if the product is purchased when Trading Flow is included
+Issue: In Customer/Vendor Management when create/edit customer/vendor audit trial message should be proper.
+Issue: Sales Return Audit trial message is not proper.
+Issue: While deleting Purchase Requisition audit trial message should be proper.
+ERP-371: Increase width of description column in General Ledger Report expander.
+ERP-543: [while save an create new Record ] currency are not getting loaded in new form.
+ 
+#Pandurang 22 July 2014
+ERP-318-[VRNet] Customer Account Report – Should have an option to show ledger t account for customers/vendors.
+
+# Vivek Pakmode 22nd July 2014
+ERP-522: [Initiate RFQ]tab name should be "Initiate RFQ" instead of just "RFQ
+ERP-538: [Create Goods Receipt]: Unable to create a Status while creating a goods receipt. Also, unable to open Master Configuration tab after that
+ERP-553: [Create Credit/Debit Note]: User is getting sign out from the application after clicking on the 'Help' icon (problem is throughout the application)
+ERP-554: [Top & Dormant Customers by Product] - All dormant customers are not shown due to paging issue
+ERP-320: [Pacific Tec] If some Tax account are created from CRM side and used in quotation in CRM, when we are seeing quotation in Accounting, it dont have tax with it. also the same tax are not creating in Accounting side
+ERP-493: CLONE - System should not allow duplicate Taxes. Add check while syncing taxes in the Accounting app too
+
+#Suhas Chaware 22nd July 2014
+ERP-492 : Audit trail - Master Configuration.
+
+# Hitesh Suryawanshi 22th July 2014
+Issue
+ERP-539 : Unable to save cash purchase, vendor invoice after changing the quantity which are linked with GR
+ERP-446 : [MP/RP otherwise]unable to save MP/RP otherwise, system giving empty string exception.
+
+#Mayur Pawar 22 july 2014
+1.[ERP-454]  While creating new company some data mismatch issues
+
+#Neeraj Dwivedi 23rd July 2014
+1) ERP-483 : [VRNet] Distance between the Global cell Table and Line Table is not showing as actually created.
+2) ERP-485 : [VRNet] The global cell arrangement for summary items is not clear with respect to Line Items.
+
+# Suhas Chaware 23 July 2014
+ERP 416- In MP report-delete option issues 
+ERP -417 - In RP report-delete option issues.
+
+# Atul sachan 23 July 2014
+
+(ERP-550) [Senwan] Auto populate GST which are mapped to customer/vendor when it is selected inCQ/VQ/SO/PO/CI/VI.
+
+# Amol Dhokale 23rd July 2014
+ERP-543: [while save an create new Record ] currency are not getting loaded in new form.
+
+#Rushikesh Mandage 24th July 2014
+ERP-548: [Tabs]give tool tip and make it more Descriptive
+
+# Hitesh Suryawanshi 24th July 2014
+ERP-502 : Automatic Syncing of projects from PM
+ERP-541 : [Make payment to customer]two entries are getting posted in analysis report for one MP
+ERP-504 : [PM ERP Integration]: Tasks of PM are not getting synced in the ERP application
+
+#Raveesh Pathak 24th July 2014
+ERP-458: [SMS] Aging report - user should be able to save and reuse the customized aging report
+
+# Amol Dhokale 24th July 2014
+ERP-396: In Purchase Order report ,if we have purchase order with product tax , and we are going to be edit  the purchase order , the fields are not populated correctly.
+ERP-543: [while save and create new Record ] currency are not getting loaded in new form 
+ERP-501: [SMS] - Open GL report when clicked on account link in Balance sheet, P&L etc.
+ERP-381: In VQ,the total amount (in base currency) does not reflect in grid as well as in its pdf,print and csv file, after terms amount is added
+ERP-500: [Senwan] Currency enable/disable not working properly when account type is selected.
+
+# Atul sachan
+[ERP-699] After Editing VQ,both the global as well as inline tax gets added for the record.
+[ERP-700] While changing Vendor in VI both the taxes gets set.
+
+#Mayur Bhokase 25 July 2014.
+ERP-373-[SMS] Multiprint functionality in all reports
+
+#Neeraj Dwivedi 25th July 2014
+ERP-495: [Document Designer] Receive Payment - Print with standard layout
+
+Pandurang 25 july 2014
+ERP-318 [VRNet] Customer Account Report – Should have an option to show ledger t account for customers/vendors.
+ERP-474 [SMS] Monthly sales report - allow user to click on the monthly figure to be able  to see all the sales transactions for that customer and month
+
+# Vivek Pakmode  28th July 2014
+ERP-692: [Custom Layout List]: Icon of 'Create New Template' is looks like a Search icon. It should have the '+' symbol with it
+ERP-457: [SMS] GST details report(1st tab) allow the user to see the report in base currency as well.(check if it can be done / standard practice)
+ERP-499: In PR,SR,GR,DO form and report both, "Receipt Quantity" and "Delivered Quantity" word are given in capital, it should be in small like other column headers.
+ERP-507: [[Master Configuration] Message should be "Selected Rule can not be deleted as higher level Rule are available."
+ERP-602: For Agent field ,Add new does not allow to save [ VI/CP form]
+ERP-611: The edit account and delete account button does not get enable[COA-edit account and delete account]
+ERP-664: [Master Configuration]: Re-size 'Add Dimension' window as all modules should be visible in 1st look . No need of a Vertical Scrollbar.
+ERP-669: [MP/RP against CN/DN]blank text are getting change after selecting the account from Account combo
+ERP-671: [Reverse JE]give memo text to Reverse JE as "Reverse Journal Entry"
+ERP-672: [Edit MP/RP report]While editing MP/RP, Total Amount field and selection criteria fields are hiding.
+ERP-673: Remove "system failure " word and  icon from pop up message  while editing Goods Receipt which is linked with vendor invoice 
+ERP-484: Spelling mistake while creating Debit Note
+
+# Suhas Chaware 28th July 2014
+ERP-658 - Give the space between "successfully and but " in pop up message ,while creating cash purchase[Cash Purchase] 
+ERP-659 - Give the space between "successfully and but " word in pop up message ,while creating purchase order
+ERP-679- Give the space between "successfully and but " word in pop up message while creating Vendor Invoice
+ERP-678 - Give the space between "successfully and but "in pop up message while creating Cash Sales
+ERP-677- Give the space between "successfully and but "in pop up message while creating Sales order
+ERP-676- Give the space between "successfully and but "in pop up message while creating Invoice 
+ERP-675- Give the space between "Select and a " in watermark message while we have dimension on the form.
+ERP-663- Give the space between "Customer and Quotation" in pop up message while deleting CQ
+ERP-662- Give the space between "Vendor and Quotation " in pop up message while deleting VQ
+
+# Amol Dhokale 28th July 2014
+ERP-619 : In Account preferences, Valid till date should not be mandatory as it is not allowing to save other setting without filling it.
+ERP-625 : [While MP/RP against GL code ]When I am including tax , some other account are getting shown along with account name.
+
+#Rushikesh Mandage 28th July 2014
+ERP-387:  1.While saving CN in opening balance,there must be space between the document number and the text.
+          2.While Editing CI in opening balance,there must be space between the words Updated and successfully.Similar for RP in opening balance
+          3.Multiple records do not get selected and deleted in opening balance from both vendor and customer.
+          4.Purchase Requisition form and its edit form does not match.
+          5.In MP against VI/RP against CI,alert message is not proper when tried saving without selecting an invoice.Also for other options of MP/RP.refer:4.png
+ERP-592: Sequence of Level in rule grid should be in descending order
+ERP-593: Lower level rule should not get deleted before higher level rule[Purchase  Requisition Approval flow]
+ERP-594: The combo of rules Levels should not show all the Levels at once[Purchase  Requisition Approval flow]
+ERP-640: Include Warning message in Set Mail Notification rule while deleting a rule
+
+#Raveesh Pathak 28th July 2014
+
+[ERP-329] While making a Manual JE, JE number are not getting updated
+
+Script URL: http://192.168.0.255:9080/Accounting/UpdateOldJESequeceNumber.jsp
+
+#Rushikesh Mandage 29th July 2014
+#ERP-431: [create record]when price of some product are not set for some date. a pop up message are showing. there should be a space between product name and message text.
+#ERP-595: Duplicate Rule with Same Level should be restricted[Purchase  Requisition Approval flow]
+
+#Pandurang 29th Jule 2014
+ERP-698 [VHQ Post] Journal Entry Report - Unable to print individual entry. 
+
+
+#Vaibhav Patil 29th July, 2014
+#ERP - 711 : unable to create  sales order while i am linking   customer quotation to it and taking one product.
+
+#Suhas Chaware 29th July 2014
+ERP-663- Give the space between "Customer and Quotation" in pop up message while deleting CQ
+
+#Raveesh Pathak 29th July 2014
+ERP-683: Opening Transaction are not showing in Customer/Vendor Analysis Report/ Customer/Vendor Account Statement
+
+#Vivek Pakmode 29th july 2014
+ERP-457: [SMS] GST details report(1st tab) allow the user to see the report in base currency as well.(check if it can be done / standard practice)
+
+# Atul sachana 30th july 2014
+
+[ERP-503][Senwan] Opening Balances - Allow user to enter exchange rate from currency to base currency.
+
+# Vivek Pakmode 30th July 2014
+ERP-[Create a record]product are removing off if i enter some quantity.
+
+# Suhas Chaware 30th July 2014
+ERP-674- [CQ linked with SO] CQ are getting updated/ deleted after linked with SO.
+ERP-661- [SO] SO should not be updated /deleted while it linked with PO
+
+# Amol Dhokale 30th July 2014
+ERP-691 : In Sales By Sales Person report are working wrongly.
+
+#Anand Nimbalkar 30th July 2014
+1. [ERP-618] Pending approval Delivery order tab is getting  open while clicking on view pending Approvals  button  in Goods Receipt Report.
+
+#Mayur Bhokase 30th July 2014
+ERP-460-[SMS] Aging - show grand total in sgd and usd at the bottom (Based on Fact report) in PDF
+
+#Raveesh Pathak 30th July 2014
+ERP-803 :[Senwan] Base currency is set on date change even if USD bank is selected for payment method in make/receive payment.
+
+#Vivek Pakmode 31th July 2014
+ERP-710: Have to remove the restriction in the add/edit product screen.
+
+#Hitesh Suryawanshi 31th July 2014
+ERP-688 : Multiple check in CI report for Export PDF Shows same product for different Invoices.
+
+#Neeraj Dwivedi 31st July 2014
+ERP-757:-Invoice tax is not shown in Global section for RP against VI when no tax is included in CI.
+ERP-758:-Exchange rate is not shown proper in Print record for RP against CI.
+ERP-760:-Print record does not work for RP against GL code.
+ERP-495:-[Document Designer] Receive Payment - Print with standard layout
+
+# Suhas Chaware 31st July 2014
+ERP-696- [Custom Layout]An account having two child accounts, but in custom layout only one child are showing P/L and Balance Sheet.
+
+
+#Anup Kale 31th July 2014
+ERP-807 :[Senwan] Date filter not working in GST report.
+ERP-648 :while decreasing the exchange rate, wrong JE are getting posted for MP.
+ERP-650 :while decreasing the exchange rate, wrong JE are getting posted for RP.
+ERP-461 :[SMS] Trial balance (opening, period, closing) format (Based on Fact report).
+
+Rushikesh Mandage 31st July 2014
+ERP-441: [Delete Product] system should not allow deleting product if some GR/DO or anything are made for it.
+ERP-704: Change name for COA tab and Accounts Groups tab Tool tip from Account type to Accounts Groups
+
+#Raveesh Pathak 31th July 2014
+ERP-788 :[MP/RP against VI/CI] "Enter Payment"  is not getting changed while editing Amount from MP /RP Form
+
+#Mayur Pawar 31 July 2014
+ [ERP-734]   [ Account preferences] some account are not getting loaded while we save the account preferences setting . 
+
+#Anand Nimbalkar 31st July 2014
+1.[ERP-403]  Unable to getting generated pdf on  second time at the same time . [Aged Payable/Aged  Receivable]
+
+#Malhari Pawar 31st July 2014
+ERP-761 - In foreign currency exposure report, NaN are showing in the exchange are fields. 
+
+#Mayur Bhokase 24 July 2014
+ERP-373-[SMS] Multiprint functionality in all reports 
+
+#Anand Nimbalkar 26th July 2014
+1. [ERP-494] -a.When Purchase Invoice is linked with GR,the include product Tax automatically sets to yes
+b.[lease Management]While creating Lease r Quotation,with Include Product Tax yes,the tax amount and Amount is shown as NaN.Similarly for Lease Order
+
+
+#Mayur Pawar 28 July 2014
+[ERP-481][F1-Creation] Remove dependency from batch in serial number functionality.
+
+#Anand Nimbalkar 28th July 2014
+1. [ERP-508] The tab name and tool tip name for Lease Quotation report shows Customer Quotation Report.[Lease Order Management]
+2. [ERP-509] The tab name and tool tip name for Lease Quotation report shows Customer Quotation Report[Lease Order Management]
+3. [ERP-510] The Tab name and tool tip name for create Lease Quotation shows Customer Quotation and Copy customer Quotation respectively[Lease Order Management]
+4. [ERP-511] While editing Lease Customer Quotation,the asset group in product grid is not shown[Lease Order Management]
+5. [ERP-512] When edited lease customer Quotation,the record disappears from the Lease Customer Quotation report[Lease Order Management]
+6. [ERP-514] In contract,when duplicate contract ID number is entered,the error message is wrong[Lease Order Management]
+7. [ERP-519] Unable to edit lease Sales invoice:[Lease Order Management]
+8. [ERP-613] Accounting - CRM  integration requests handle for Product Replacement/Maintenance.
+9. [ERP-513] While editing Lease Customer Quotation,the product combo does not show Asset group.[Lease Order Management]
+10. [ERP-515] n contract,when duplicate contract ID  number is entered,after that the form is reset again[Lease Order Management]
+11. [ERP-516] The tab name for edit of contract should be edit contract.[Lease Model Management]
+12. [ERP-517] While editing Contract the lease order number is not shown[Lease Order Management]
+13. [ERP-518] In lease DO report for record in grid when expanded does not show the lease order number.and also the column name is wrong[Lease Order Management]
+14. [ERP-520] While editing Sales return,the Asset serial number details shows N/A for location and warehouse[Lease Order Management]
+
+#Mayur Pawar 29 July 2014
+  1. ERP-621 [F1 Creation] Duplicate serial number in Copy of GR
+  2. ERP-622 [F1 Creation] Duplicate batch names are shown in DO serial number details
+  3. ERP-623[F1 Creation] Duplicate serial number in Copy of DO 
+
+#Pandurang 31 July 2014 
+ERP-818 [F1creation] Handled Service Date when Contract Edited.

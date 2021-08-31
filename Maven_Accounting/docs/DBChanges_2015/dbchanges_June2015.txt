@@ -1,0 +1,631 @@
+# Anand Nimbalakar 1st June, 2015
+delete from reportmaster where id = 'Stock_Avl_by_Warehouse_List';
+
+alter table extracompanypreferences 
+add column `defaultwarehouse` varchar(255) DEFAULT NULL;
+
+#Pandurang 1st June 2015
+drop table consignreqapprovermapping;
+
+CREATE TABLE `consignreqapprovermapping` (
+`id` VARCHAR(255) NOT NULL,
+`consignmentrequest`  varchar(255) NOT NULL ,
+`approver`  varchar(255) NOT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`consignmentrequest`) REFERENCES `consignreqapprovalrules` (`id`) ,
+FOREIGN KEY (`approver`) REFERENCES `users` (`userid`)
+)
+ENGINE=InnoDB DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+INSERT INTO consignreqapprovermapping (SELECT UUID(),id, approver FROM consignreqapprovalrules where approver is not null);
+
+# Basaprabhu Ajur 1st June 2015
+
+UPDATE customerwarehousemap SET isdefault='T' WHERE warehouse=(SELECT id FROM inventorywarehouse WHERE `name`='Main' AND company=(SELECT companyid FROM company WHERE subdomain='olympus'));
+UPDATE customerwarehousemap SET isdefault='T' WHERE warehouse=(SELECT id FROM inventorywarehouse WHERE `name`='Main' AND company=(SELECT companyid FROM company WHERE subdomain='olympus2'));
+
+# Basaprabhu Ajur 2nd June 2015
+ALTER TABLE `serialdocumentmapping` ADD COLUMN `rejectedby`  varchar(255)  DEFAULT NULL ;
+
+#Kottamidde Naresh - 3rd June, 2015
+UPDATE compaccpreferences SET quantitydigitafterdecimal=2 WHERE id="c2bd7883-b8e5-48e9-be90-a1cf669fdfbc";
+
+#Mayur Bhokase 3rd June 2015
+update bankreconciliationdetail brd, bankreconciliation br set brd.reconciledate=br.clearancedate where brd.bankReconciliation=br.id and brd.reconciledate is NULL;
+
+# Ajit Ankalle 3rd June 2015,  ERP-10400
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `gstbaddebtreleifpurchaseaccount`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `gstbaddebtrecoverpurchaseaccount`  varchar(255) NULL DEFAULT NULL;
+
+update extracompanypreferences set gstbaddebtreleifpurchaseaccount=gstbaddebtreleifaccount;
+update extracompanypreferences set gstbaddebtrecoverpurchaseaccount=gstbaddebtrecoveraccount;
+
+# Amol Dhokale 3rd June 2015,  ERP-10462
+DELETE FROM fieldParams WHERE fieldlabel="X Field" AND companyid="408cf2e6-2fb0-4299-9549-89f9af7d76fa";
+DELETE FROM fieldParams WHERE companyid="408cf2e6-2fb0-4299-9549-89f9af7d76fa" AND fieldlabel="PO Reference No" AND moduleid=2;
+
+#Rushikesh Mandage 3rd June 2015
+# Adding new column in tables
+alter table paymentdetailotherwise add column gstapplied varchar(255) default NUll;
+alter table paymentdetailotherwise add FOREIGN KEY (gstapplied) REFERENCES tax (id) ;
+alter table receiptdetailotherwise add column gstapplied varchar(255) default NUll;
+alter table receiptdetailotherwise add FOREIGN KEY (gstapplied) REFERENCES tax (id) ;
+
+# Updating old records for these newly added columns
+update paymentdetailotherwise pdo set pdo.gstapplied = pdo.tax;
+update receiptdetailotherwise rdo set rdo.gstapplied = rdo.tax;
+
+update paymentdetailotherwise pdo inner join tax t on t.account=pdo.account set pdo.gstapplied = t.id where pdo.tax is NULL;
+update receiptdetailotherwise rdo inner join tax t on t.account=rdo.account set rdo.gstapplied = t.id where rdo.tax is NULL;
+
+#basaprabhu Ajur 4th June 2015
+
+ALTER TABLE `in_consignment` ADD COLUMN `unitprice`  double(50,0) NOT NULL DEFAULT 0 ;
+
+#Deepak Pingale 
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('db1f51f8-0aab-11e5-a6c0-1697f925ec7b','NET Credit Term','term','creditterm','termid','termname','NET Credit Term','1','22');
+
+#Pandurang 4th June 2015
+ALTER TABLE `serialdocumentapprovermapping` DROP FOREIGN KEY `serialdocumentapprovermapping_ibfk_1`;
+
+ALTER TABLE `serialdocumentapprovermapping` ADD CONSTRAINT `serialdocumentapprovermapping_ibfk_1` FOREIGN KEY (`serialdocumentmapping`) REFERENCES `serialdocumentmapping` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `serialdocumentapprovermapping` DROP FOREIGN KEY `serialdocumentapprovermapping_ibfk_2`;
+
+ALTER TABLE `serialdocumentapprovermapping` ADD CONSTRAINT `serialdocumentapprovermapping_ibfk_2` FOREIGN KEY (`approver`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+#Mohammed Uzair Momin 4th June 2015
+#SBI : Client specific query for comserve subdomain
+update exchangeratedetails set applydate='2015-04-01 15:00:00', todate='2015-05-01 15:00:00' where company=(select companyid from company where subdomain = 'comserve') and applydate='2015-04-01';
+
+
+
+
+# Raj Shah 5th June 2015
+
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('4f52f9615e344a50a7e1c8c6a51ded39','stockrequest','Stock Request',42);
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('394ca219569d412e92317a164be46321','issuenote','Issue Note',43);
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('bd7ef07de36f443aaeb8f56c3550fa85','stockadjustment','Stock Adjustment',44);
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('e0729e3ae07847cba2ee04d3823100dc','interstorestocktransfer','Inter Store Stock Transfer',45);
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('01156a6e8f6649cfb885d78b7a1ab6d1','interlocationstocktransfer','Inter Location Stock Transfer',46);
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('98c6d3ec64fb4dbb97dfa269e599ffb6','qa','QA',47);
+
+# Stock Request
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('bfce585be66c4997b03fb4230450e6de', 'createstockreq', 'Create', '1', null, '4f52f9615e344a50a7e1c8c6a51ded39') ,
+('7f7e63b7589b4de4b9ae13b804f6cfb9', 'viewstockreq', 'View', '2', null, '4f52f9615e344a50a7e1c8c6a51ded39') ,
+('1bc39d2fb2e04911aeac61ee9eef5a98', 'issuestockreq', 'Issue Stock', '3', '7f7e63b7589b4de4b9ae13b804f6cfb9', '4f52f9615e344a50a7e1c8c6a51ded39') ,
+('6835afb53f3b43ad946e32af419edcf9', 'collectstockreq', 'Collect Stock', '4', '7f7e63b7589b4de4b9ae13b804f6cfb9', '4f52f9615e344a50a7e1c8c6a51ded39') ,
+('e5c73219f867429c856ec0c6d2f88099', 'printstockreq', 'Print', '5', '7f7e63b7589b4de4b9ae13b804f6cfb9', '4f52f9615e344a50a7e1c8c6a51ded39') ,
+('ec9f2a27ac254e1298792216c7d5a39c', 'exportstockreq', 'Export', '6', '7f7e63b7589b4de4b9ae13b804f6cfb9', '4f52f9615e344a50a7e1c8c6a51ded39') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('4f52f9615e344a50a7e1c8c6a51ded39', '1', '63');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('4f52f9615e344a50a7e1c8c6a51ded39', '2', '63');
+
+# Issue Note
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('94648230c0af4c3bb22a3195a9d745cd', 'createissuenote', 'Create', '1', null, '394ca219569d412e92317a164be46321') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('394ca219569d412e92317a164be46321', '1', '1');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('394ca219569d412e92317a164be46321', '2', '1');
+
+# Stock Adjustment
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('22fdbbe5620d47c08fdbe4e61a5f0475', 'createstockadj', 'Create', '1', null, 'bd7ef07de36f443aaeb8f56c3550fa85') ,
+('efc3c2f2763046afbc282d27213c619a', 'viewstockadj', 'View', '2', null, 'bd7ef07de36f443aaeb8f56c3550fa85') ,
+('638047ff81ec40589f578817743c77c3', 'exportstockadj', 'Export', '3', 'efc3c2f2763046afbc282d27213c619a', 'bd7ef07de36f443aaeb8f56c3550fa85') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('bd7ef07de36f443aaeb8f56c3550fa85', '1', '7');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('bd7ef07de36f443aaeb8f56c3550fa85', '2', '7');
+
+# Inter store transfer
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('16b53b8f20054d1daff9dfdf7e6cc780', 'createistreq', 'Create', '1', null, 'e0729e3ae07847cba2ee04d3823100dc') ,
+('c952be57dfff48afa471a24a51a66490', 'viewistreq', 'View', '2', null, 'e0729e3ae07847cba2ee04d3823100dc') ,
+('bf2d588efdef4cbe98deab5d0781166f', 'acceptistreq', 'Accept IST Request', '3', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ,
+('b3da6d53e81745c9bea72ea587427da3', 'rejectistreq', 'Reject IST Request', '4', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ,
+('e89a7854cd1245f09b59b0b2bd81fb3d', 'printistreq', 'Print', '5', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ,
+('8dc0aba1b9f043549365476cc65132b5', 'exportisteq', 'Export', '6', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('e0729e3ae07847cba2ee04d3823100dc', '1', '63');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('e0729e3ae07847cba2ee04d3823100dc', '2', '63');
+
+# Inter location transfer
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('088600e381f14663a5b3d7d83dedf642', 'createinterlocationtransferreq', 'Create', '1', null, '01156a6e8f6649cfb885d78b7a1ab6d1') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('01156a6e8f6649cfb885d78b7a1ab6d1', '1', '1');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('01156a6e8f6649cfb885d78b7a1ab6d1', '2', '1');
+
+# QA approval
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('c6480c495bf14e7aa5dd7f80608d6c61', 'viewqa', 'View', '1', null, '98c6d3ec64fb4dbb97dfa269e599ffb6') ,
+('887ca58b95f44dbdafec1061e5d211d2', 'approverejectqa', 'Approve / Reject', '2','c6480c495bf14e7aa5dd7f80608d6c61', '98c6d3ec64fb4dbb97dfa269e599ffb6') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('98c6d3ec64fb4dbb97dfa269e599ffb6', '1', '3');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('98c6d3ec64fb4dbb97dfa269e599ffb6', '2', '3');
+
+#Neeraj Dwivedi 5th June 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('7cefe0b8-0b49-11e5-a6c0-1697f925ec7b','CurSym','currency','currency','currencyid','symbol','CurSym','1','10');
+
+delete from default_header where defaultHeader="Customer name" and module=10;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('ebc9cbd2-0b64-11e5-a6c0-1697f925ec7b','Customer','customer','customer','id','name','Customer','1','10');
+
+delete from default_header where defaultHeader="Vendor name" and module=12;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('0c0cfa90-0b79-11e5-a6c0-1697f925ec7b','Vendor','vendor','vendor','id','name','Vendor','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('db19cb20-0b82-11e5-a6c0-1697f925ec7b','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('db19cb20-0b82-11e5-a6c0-1697345925ec7b','Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','18');
+
+# Raj Shah 5th June 2015
+
+UPDATE in_stockadjustment  sa1 
+SET sa1.adjustment_type=IF(sa1.quantity >=0 ,'Stock IN','Stock Out') WHERE  sa1.adjustment_type IS NULL OR sa1.adjustment_type="";
+
+UPDATE in_stockadjustment  sa1 
+SET sa1.quantity=abs(sa1.quantity),sa1.finalquantity=abs(sa1.finalquantity) WHERE  sa1.quantity < 0 OR sa1.finalquantity < 0;
+
+#Pandurang 6th June 2015
+alter table consignreqapprovalrules 
+add column approvaltype int(2) default 0;
+
+# Raj Shah 8th June 2015
+
+DELETE FROM activitylist where feature='e0729e3ae07847cba2ee04d3823100dc' AND parent IS NOT NULL;
+DELETE FROM activitylist where feature='e0729e3ae07847cba2ee04d3823100dc';
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('16b53b8f20054d1daff9dfdf7e6cc780', 'createistreq', 'Create', '1', null, 'e0729e3ae07847cba2ee04d3823100dc') ,
+('c952be57dfff48afa471a24a51a66490', 'viewistreq', 'View', '2', null, 'e0729e3ae07847cba2ee04d3823100dc') ,
+('bf2d588efdef4cbe98deab5d0781166f', 'acceptrejectistreq', 'Accept / Reject Request', '3', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ,
+('e89a7854cd1245f09b59b0b2bd81fb3d', 'printistreq', 'Print', '4', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ,
+('8dc0aba1b9f043549365476cc65132b5', 'exportisteq', 'Export', '5', 'c952be57dfff48afa471a24a51a66490', 'e0729e3ae07847cba2ee04d3823100dc') ;
+
+UPDATE userpermission SET permissioncode=31 where feature ='e0729e3ae07847cba2ee04d3823100dc' and permissioncode=63;
+
+
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('8aa257b02afc4f04875d1a54810257fd','inventoryreports','Inventory Reports',48);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('3346576f47ad41c7a7b5c1e8d7f1ec93', 'stockavailabilitybywarehouse', 'Stock Availability By Warehouse', '1', null, '8aa257b02afc4f04875d1a54810257fd') ,
+('7adb6a622f124129af6e23b9b26cbaf7', 'batchwisestocktracking', 'Batchwise Stock Tracking', '2', null, '8aa257b02afc4f04875d1a54810257fd') ,
+('ee38e3affabd48179023bfb3f8342e1d', 'materialinoutregister', 'Material In/Out Register', '3', null, '8aa257b02afc4f04875d1a54810257fd') ,
+('bd01dd3c2e3b4dc3a3c1c809eb4399ba', 'stockmovementregister', 'Stock Movement Register', '4', null, '8aa257b02afc4f04875d1a54810257fd');
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('8aa257b02afc4f04875d1a54810257fd', '1', '15');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('8aa257b02afc4f04875d1a54810257fd', '2', '15');
+
+# Vivek Pakmode 8th June 2015
+
+INSERT INTO helpedit VALUES('1001','Monthly Aged Receivables Summary','Quick Search', '93','Quick Search',"Search through Monthly Aged Receivables Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch93');
+
+INSERT INTO helpedit VALUES('1002','Monthly Aged Receivables Summary','Export Reports', '93','Export Reports','Export reports in convenient formats.','exportReports93');
+
+INSERT INTO helpedit VALUES('1003','Monthly Aged Receivables Details','Quick Search', '94','Quick Search',"Search through Monthly Aged Receivables Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch94');
+
+INSERT INTO helpedit VALUES('1004','Monthly Aged Receivables Details','Export Reports', '94','Export Reports','Export reports in convenient formats.','exportReports94');
+
+#Vipin Gupta 8th June 2015
+insert into audit_action values(174,'Stock Request Added',5);
+insert into audit_action values(175,'Stock Request Issued',5);
+insert into audit_action values(176,'Stock Request Collected',5);
+
+# Basaprabhu Ajur 9th June 2015
+ALTER TABLE `in_consignmentdetails` ADD COLUMN `inspector`  varchar(50) NULL DEFAULT NULL ;
+
+# Raj Shah 9th June 2015
+
+CREATE  VIEW temp as (SELECT DISTINCT roleUserMapping FROM userpermission WHERE roleUserMapping IS NOT NULL);
+
+DELETE FROM userpermission where feature IN ('4f52f9615e344a50a7e1c8c6a51ded39','394ca219569d412e92317a164be46321','bd7ef07de36f443aaeb8f56c3550fa85','e0729e3ae07847cba2ee04d3823100dc','01156a6e8f6649cfb885d78b7a1ab6d1','98c6d3ec64fb4dbb97dfa269e599ffb6','8aa257b02afc4f04875d1a54810257fd') AND roleUserMapping IS NOT NULL;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT '4f52f9615e344a50a7e1c8c6a51ded39', '2', '63', roleUserMapping FROM temp;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT '394ca219569d412e92317a164be46321', '2', '1',roleUserMapping FROM temp;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT 'bd7ef07de36f443aaeb8f56c3550fa85', '2', '7',roleUserMapping FROM temp;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT 'e0729e3ae07847cba2ee04d3823100dc', '2', '31',roleUserMapping FROM temp;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT '01156a6e8f6649cfb885d78b7a1ab6d1', '2', '1',roleUserMapping FROM temp;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT '98c6d3ec64fb4dbb97dfa269e599ffb6', '2', '3',roleUserMapping FROM temp;
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT '8aa257b02afc4f04875d1a54810257fd', '2', '15',roleUserMapping FROM temp;
+
+DROP  VIEW temp;
+
+#Vipin Gupta 9th June 2015
+insert into audit_action values(177,'Issue Note Added',5);
+insert into audit_action values(178,'Inter Store Request Added',5);
+insert into audit_action values(179,'Inter Store Request Accepted',5);
+insert into audit_action values(180,'Inter Store Request Rejected',5);
+insert into audit_action values(181,'Inter Location Request Added',5);
+
+#Vipin Gupta 10th June 2015
+insert into audit_action values(182,'Stock Adjustment Added',5);
+insert into audit_action values(183,'QA Inspection',5);
+insert into audit_action values(184,'Sequence Format Inventory',5);
+
+# Dipak Dorkar 10th June 2015
+ALTER TABLE cntaxentry MODIFY COLUMN description text;
+
+#Vipin Gupta 10th June 2015
+insert into audit_action values(185,'Product Threshold',5);
+
+#Vipin Gupta 11th June 2015 for showing assembly in stock movement
+ALTER TABLE `in_stockmovement` ADD COLUMN `assembled_product`  varchar(50) NULL;
+
+#Neeraj Dwivedi 11th June 2015 -Cash sales
+update invoice set termid="" where cashtransaction=1; 
+
+#Vipin Gupta 11th June 2015
+insert into audit_action values(186,'Store Master',5);
+
+#Rushikesh Mandage 11th June 2015
+# Added new column . Some companies have tax code modified with tax percentage appended with tax code (e.g. GuanChong). 
+# This caused wrong data shown in GST TAP return file
+# Newly added column will be considered hereafter for GST TAP return file/detail view
+
+Alter table tax add column taxcodewithoutpercentage varchar(50) not NULL;
+
+# Data copied from column 'taxcode' into 'taxcodewithoutpercentage'
+Update tax set taxcodewithoutpercentage = taxcode;
+
+# Set 'taxcodewithoutpercentage' as default tax code values.
+
+Update tax set taxcodewithoutpercentage = 'GST(TX-E43)' where taxcodewithoutpercentage = 'GST(TX-E43)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(RS)' where taxcodewithoutpercentage = 'GST(RS)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(TX)' where taxcodewithoutpercentage = 'GST(TX)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(TX-N43)' where taxcodewithoutpercentage = 'GST(TX-N43)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(OP)' where taxcodewithoutpercentage = 'GST(OP)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(DS)' where taxcodewithoutpercentage = 'GST(DS)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(ZRL)' where taxcodewithoutpercentage = 'GST(ZRL)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(GS)' where taxcodewithoutpercentage = 'GST(GS)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(ES43)' where taxcodewithoutpercentage = 'GST(ES43)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(ZRE)' where taxcodewithoutpercentage = 'GST(ZRE)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(IS)' where taxcodewithoutpercentage = 'GST(IS)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(AJS)' where taxcodewithoutpercentage = 'GST(AJS)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(IM)' where taxcodewithoutpercentage = 'GST(IM)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(AJP)' where taxcodewithoutpercentage = 'GST(AJP)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(NR)' where taxcodewithoutpercentage = 'GST(NR)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(ES)' where taxcodewithoutpercentage = 'GST(ES)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(SR)' where taxcodewithoutpercentage = 'GST(SR)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(GP)' where taxcodewithoutpercentage = 'GST(GP)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(BL)' where taxcodewithoutpercentage = 'GST(BL)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(TX-RE)' where taxcodewithoutpercentage = 'GST(TX-RE)@6%' ;
+Update tax set taxcodewithoutpercentage = 'GST(ZP)' where taxcodewithoutpercentage = 'GST(ZP)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(EP)' where taxcodewithoutpercentage = 'GST(EP)@0%' ;
+Update tax set taxcodewithoutpercentage = 'GST(OS)' where taxcodewithoutpercentage = 'GST(OS)@0%' ;
+
+#Mayur Pawar 11th June 2015
+
+INSERT INTO featurelist (featureid,featurename,displayfeaturename,orderno) VALUES ('f8989a5ee8f11e59471eca86bff9ae1','inventorymasters','Inventory Masters',49);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('258e9cb00e9111e59471eca86bff9ae1', 'storemaster', 'Store Master', '1', null, 'f8989a5ee8f11e59471eca86bff9ae1') ,
+('304870ea0e9111e59471eca86bff9ae1', 'locationmaster', 'Location Master', '2', null, 'f8989a5ee8f11e59471eca86bff9ae1');
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('f8989a5ee8f11e59471eca86bff9ae1', '1', '3');
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES ('f8989a5ee8f11e59471eca86bff9ae1', '2', '3');
+
+
+CREATE  VIEW temp as (SELECT DISTINCT roleUserMapping FROM userpermission WHERE roleUserMapping IS NOT NULL);
+
+DELETE FROM userpermission where feature='f8989a5ee8f11e59471eca86bff9ae1' AND roleUserMapping IS NOT NULL;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`,`roleUserMapping`)  SELECT 'f8989a5ee8f11e59471eca86bff9ae1', '2', '3', roleUserMapping FROM temp;
+
+DROP  VIEW temp;
+
+#Vipin Gupta 12th June 2015
+insert into audit_action values(187,'Location Master',5);
+insert into audit_action values(188,'Inspection Template',5);
+
+# Amol Dhokale 12th June 2015
+# For Payment Details
+ALTER TABLE paymentdetail ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE advancedetail ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE creditnotpayment ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE paymentdetailotherwise ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE paymentdetailotherwise ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+# For Receipt Details
+ALTER TABLE receiptdetails ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE receiptadvancedetail ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE debitnotepayment ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE receiptdetailotherwise ADD COLUMN totaljedid VARCHAR(255) DEFAULT "";
+ALTER TABLE receiptdetailotherwise ADD COLUMN gstjedid VARCHAR(255) DEFAULT "";
+
+# shashi nandan kumar 12th June 2015
+alter table salesreturn add column isassignsrnumberntocn char(1) DEFAULT 'F';
+
+# shashi nandan kumar 17th June 2015
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('ff80808122f9dba90122fa4888cf00628', 'printproducts', 'Print', '13', 'ff80808122f9dba90122fa4c54f60037', 'ff80808122f9dba90122fa4827210030') ,
+('ff80808122f9dba90122fa4888cf00429', 'exportproducts', 'Export', '14', 'ff80808122f9dba90122fa4c54f60037', 'ff80808122f9dba90122fa4827210030') ;
+update userpermission set permissioncode='16383' where feature='ff80808122f9dba90122fa4827210030';
+
+#Pandurang 17th June 2015 
+ALTER TABLE extracompanypreferences ADD COLUMN showcustomerupdate CHAR(1) DEFAULT 'T';
+ALTER TABLE extracompanypreferences ADD COLUMN showvendorupdate CHAR(1) DEFAULT 'T';
+ALTER TABLE extracompanypreferences ADD COLUMN showproductupdate CHAR(1) DEFAULT 'T';
+
+#Deepak Pingale 18th June 2015
+ALTER TABLE inventorywarehouse ADD COLUMN `isactive`  bit NULL DEFAULT b'1';
+
+#Ajit Ankalle 18th June 2015
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("a4559854-166c-11e5-8f93-c03fd5632dc7",'createdby','Created By',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("b1e8accc-166c-11e5-8f93-c03fd5632dc7",'lasteditedby','Last Edited By',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("ba45f1e0-166c-11e5-8f93-c03fd5632dc7",'billno','Lease Order No',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("c4300a42-166c-11e5-8f93-c03fd5632dc7",'date','Lease Order Date',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("d0903c6c-166c-11e5-8f93-c03fd5632dc7",'duedate','Due Date',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("d9c37a7e-166c-11e5-8f93-c03fd5632dc7",'personname','Customer',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("e37f3ee0-166c-11e5-8f93-c03fd5632dc7",'discount','Discount',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("ecb1bf4c-166c-11e5-8f93-c03fd5632dc7",'taxname','Tax Name',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("f6b81cd4-166c-11e5-8f93-c03fd5632dc7",'taxamount','Tax Amount',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("febb25de-166c-11e5-8f93-c03fd5632dc7",'orderamountwithTax','Total Amount',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("06ce2ae6-166d-11e5-8f93-c03fd5632dc7",'memo','Memo',36,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES ("171ebe74-166d-11e5-8f93-c03fd5632dc7",'status','Status',36,1);
+
+#Raveesh Pathak 19th June 2015 (Address Merged Code)
+
+CREATE TABLE vendoraddressdetails (
+   id VARCHAR(255) NOT NULL,
+   aliasname VARCHAR(225) DEFAULT '',
+   address VARCHAR(1024) DEFAULT '',
+   city VARCHAR(225) DEFAULT '',
+   state VARCHAR(225) DEFAULT '',
+   country VARCHAR(225) DEFAULT '',
+   postalcode VARCHAR(225) DEFAULT '',
+   phone VARCHAR(225) DEFAULT '',
+   mobilenumber VARCHAR(225) DEFAULT '',
+   fax VARCHAR(225) DEFAULT '',
+   emailid VARCHAR(225) DEFAULT '',
+   contactperson VARCHAR(225) DEFAULT '',
+   contactpersonnumber VARCHAR(225) DEFAULT '',
+   isbillingaddress char(1) default 'F',
+   isdefaultaddress char(1) default 'F',
+   vendorid VARCHAR(255) NOT NULL,
+   company VARCHAR(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (vendorid) REFERENCES vendor(id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE customeraddressdetails (
+   id VARCHAR(255) NOT NULL,
+   aliasname VARCHAR(225) DEFAULT '',
+   address VARCHAR(1024) DEFAULT '',
+   city VARCHAR(225) DEFAULT '',
+   state VARCHAR(225) DEFAULT '',
+   country VARCHAR(225) DEFAULT '',
+   postalcode VARCHAR(225) DEFAULT '',
+   phone VARCHAR(225) DEFAULT '',
+   mobilenumber VARCHAR(225) DEFAULT '',
+   fax varchar(225) DEFAULT '',
+   emailid VARCHAR(225) DEFAULT '',
+   contactperson VARCHAR(225) DEFAULT '',
+   contactpersonnumber VARCHAR(225) DEFAULT '',
+   shippingroute varchar(255) DEFAULT '',
+   isbillingaddress char(1) default 'F',
+   isdefaultaddress char(1) default 'F',
+   customerid VARCHAR(255) NOT NULL,
+   company VARCHAR(225) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (company) REFERENCES company (companyid),
+  FOREIGN KEY (customerid) REFERENCES customer(id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+delete from default_header where module='09508488-c1d2-102d-b048-001e58a64cb6' and defaultHeader='Customer Address';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("b5038d40-0dad-11e5-a664-c03fd5633215","09508488-c1d2-102d-b048-001e58a64cb6","Billing Alias Name","BillingAliasName",0,255,'F','F',null,null,null,null,null,"billingAliasName",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("dbfe5ad2-0dae-11e5-a664-c03fd5633215","09508488-c1d2-102d-b048-001e58a64cb6","Shipping Alias Name","ShippingAliasName",0,255,'F','F',null,null,null,null,null,"shippingAliasName",null);
+
+update default_header set dataindex='billingAddress',pojomethodname='BillingAddress' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Address'; 
+update default_header set dataindex='billingCity',pojomethodname='BillingCity' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing City'; 
+update default_header set dataindex='billingState',pojomethodname='BillingState' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing State'; 
+update default_header set dataindex='billingCountry',pojomethodname='BillingCountry' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Country'; 
+update default_header set dataindex='billingPostalCode',pojomethodname='BillingPostalCode' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Postal Code'; 
+update default_header set dataindex='billingPhone',pojomethodname='BillingPhone' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Phone'; 
+update default_header set dataindex='billingMobileNumber',pojomethodname='BillingMobile' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Mobile'; 
+update default_header set dataindex='billingFax',pojomethodname='BillingFax' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Fax'; 
+update default_header set dataindex='billingEmailID',pojomethodname='BillingEmail' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Email'; 
+update default_header set dataindex='billingContactPerson',pojomethodname='BillingContactPerson' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Contact Person'; 
+update default_header set dataindex='billingContactPersonNumber',pojomethodname='BillingContactPersonNumber' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Billing Contact Person Number';
+
+update default_header set dataindex='shippingAddress',pojomethodname='ShippingAddress' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Address'; 
+update default_header set dataindex='shippingCity',pojomethodname='ShippingCity' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping City'; 
+update default_header set dataindex='shippingState',pojomethodname='ShippingState' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping State'; 
+update default_header set dataindex='shippingCountry',pojomethodname='ShippingCountry' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Country'; 
+update default_header set dataindex='shippingPostalCode',pojomethodname='ShippingPostalCode' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Postal Code'; 
+update default_header set dataindex='shippingPhone',pojomethodname='ShippingPhone' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Phone'; 
+update default_header set dataindex='shippingMobileNumber',pojomethodname='ShippingMobile' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Mobile'; 
+update default_header set dataindex='shippingFax',pojomethodname='ShippingFax' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Fax'; 
+update default_header set dataindex='shippingEmailID',pojomethodname='ShippingEmail' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Email'; 
+update default_header set dataindex='shippingContactPerson',pojomethodname='ShippingContactPerson' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Contact Person'; 
+update default_header set dataindex='shippingContactPersonNumber',pojomethodname='ShippingContactPersonNumber' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Shipping Contact Person Number';
+
+delete from default_header where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Vendor Address';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("5988c12a-0dc0-11e5-a664-c03fd5633215","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Alias Name","BillingAliasName",0,255,'F','F',null,null,null,null,null,"billingAliasName",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("65b1741a-0dc0-11e5-a664-c03fd5633215","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Alias Name","ShippingAliasName",0,255,'F','F',null,null,null,null,null,"shippingAliasName",null);
+
+update default_header set dataindex='billingAddress',pojomethodname='BillingAddress' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Address'; 
+update default_header set dataindex='billingCity',pojomethodname='BillingCity' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing City'; 
+update default_header set dataindex='billingState',pojomethodname='BillingState' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing State'; 
+update default_header set dataindex='billingCountry',pojomethodname='BillingCountry' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Country'; 
+update default_header set dataindex='billingPostalCode',pojomethodname='BillingPostalCode' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Postal Code'; 
+update default_header set dataindex='billingPhone',pojomethodname='BillingPhone' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Phone'; 
+update default_header set dataindex='billingMobileNumber',pojomethodname='BillingMobile' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Mobile'; 
+update default_header set dataindex='billingFax',pojomethodname='BillingFax' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Fax'; 
+update default_header set dataindex='billingEmailID',pojomethodname='BillingEmail' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Email'; 
+update default_header set dataindex='billingContactPerson',pojomethodname='BillingContactPerson' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Contact Person'; 
+update default_header set dataindex='billingContactPersonNumber',pojomethodname='BillingContactPersonNumber' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Billing Contact Person Number';
+
+update default_header set dataindex='shippingAddress',pojomethodname='ShippingAddress' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Address'; 
+update default_header set dataindex='shippingCity',pojomethodname='ShippingCity' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping City'; 
+update default_header set dataindex='shippingState',pojomethodname='ShippingState' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping State'; 
+update default_header set dataindex='shippingCountry',pojomethodname='ShippingCountry' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Country'; 
+update default_header set dataindex='shippingPostalCode',pojomethodname='ShippingPostalCode' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Postal Code'; 
+update default_header set dataindex='shippingPhone',pojomethodname='ShippingPhone' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Phone'; 
+update default_header set dataindex='shippingMobileNumber',pojomethodname='ShippingMobile' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Mobile'; 
+update default_header set dataindex='shippingFax',pojomethodname='ShippingFax' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Fax'; 
+update default_header set dataindex='shippingEmailID',pojomethodname='ShippingEmail' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Email'; 
+update default_header set dataindex='shippingContactPerson',pojomethodname='ShippingContactPerson' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Contact Person'; 
+update default_header set dataindex='shippingContactPersonNumber',pojomethodname='ShippingContactPersonNumber' where module="b8bd81b0-c500-102d-bb0b-001e58a64cb6" and defaultHeader='Shipping Contact Person Number';
+
+Alter table customer add column createdinvendor char(1) default 'F';
+Alter table vendor add column createdincustomer char(1) default 'F';
+
+#Ajit Ankalle 19th June 2015
+#for Asset "Computers & Accounting Software" with (Opening) Document No. "FA001".
+update inventory set baseuomquantity =1,quantity =1 where product = "ff8080814dd32ea2014ddc1517f0000a" and baseuomquantity=0 and company="9a791d1c-46a1-43d4-84ff-0ed310a964be";
+
+# Vivek Pakmode 20th June 2015
+alter table extracompanypreferences 
+add column `showallaccountsinbs` char(1) default 'F';
+
+# Raj Shah 22nd June 2015
+ALTER TABLE `in_stockadjustment`
+ADD COLUMN `adjustmentreason`  varchar(255) default '' ;
+
+#Neeraj Dwivedi 23rd June 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('3e1562cb8-5db9-43c6-bc35-25c79f1bdf9f','Billing Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','billingMobile','Billing Address Mobile No','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('b9728c48-c912-4397-9680-6bcbdd58b14a','Shipping Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','shippingMobile','Shipping Address Mobile No','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('75136cc0-1968-11e5-b60b-1697f925ec7b','NET Credit Term','termid','creditterm','termid','termname','NET Credit Term','1','2');
+
+# Suhas Chaware 23rd June 2015
+ALTER TABLE `journalentry`
+ADD COLUMN `customer`  varchar(255) NULL DEFAULT NULL;
+
+insert into reportmaster value("LMS Journal Entry","LMS Journal Entry","View LMS Journal Entry from here.","getJournalEntryByCustomerTab()",null);
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `liabilityAccountForLMS`  varchar(255) NULL DEFAULT NULL;
+
+#Anand Thakur 23rd june 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('afe7aab9-3c6c-4f9d-9dfc-2c71f57fea2c','Shipping Address Mobile No','billingshippingaddresses','billingshippingaddresses','id','shippingmobile','Shipping Address Mobile No','1','18');
+
+#Mayur Pawar 24th june 2015
+alter table extracompanypreferences  add column barcdleftmargin varchar(5) default '20';
+
+#Akshay Gujar 25th june 2015
+update helpedit set compid="receiptNo9receiptwindow" where id="48";
+update helpedit set compid="date9receiptwindow" where id="49";
+update helpedit set compid="currency9receiptwindow" where id="50";
+update helpedit set compid="account9receiptwindow" where id="51";
+update helpedit set compid="paymentMethod9receiptwindow" where id="52";
+update helpedit set compid="amount9receiptwindow" where id="53";
+update helpedit set compid="save9receiptwindow" where id="56";
+
+#Sharad Pawar 25 June 2015
+update vendor inner join compaccpreferences on compaccpreferences.id=vendor.company set vendor.createdon=compaccpreferences.firstfyfrom where vendor.createdon is null;
+
+#Vaibhav Patil 25th june 2015
+alter table journalentry add isOneTimeReverse char(1) NOT NULL default 'F';
+
+#Raveesh Pathak 26th June 2015
+ALTER TABLE customeraddressdetails ADD COLUMN recipientname VARCHAR(225) DEFAULT "" AFTER emailid;
+ALTER TABLE vendoraddressdetails ADD COLUMN recipientname VARCHAR(225) DEFAULT "" AFTER emailid;
+ALTER TABLE billingshippingaddresses ADD COLUMN billingrecipientname VARCHAR(225) DEFAULT "" AFTER billingphone;
+ALTER TABLE billingshippingaddresses ADD COLUMN shippingrecipientname VARCHAR(225) DEFAULT "" AFTER shippingphone;
+
+#Neeraj Dwivedi 26th June 2015-(ERP-10873)
+#Reverse the value in db 
+UPDATE datafilteringmodules  SET customerinvoice=IF(customerinvoice='T', 'F', 'T');
+UPDATE datafilteringmodules  SET salesorder=IF(salesorder='T', 'F', 'T');
+UPDATE datafilteringmodules  SET customerquotation=IF(customerquotation='T', 'F', 'T');
+
+#Setting default value
+ALTER TABLE datafilteringmodules ALTER COLUMN customerinvoice SET DEFAULT 'T';
+ALTER TABLE datafilteringmodules ALTER COLUMN salesorder SET DEFAULT 'T';
+ALTER TABLE datafilteringmodules ALTER COLUMN customerquotation SET DEFAULT 'T';
+
+#Mohammed Uzair Momin 26th June 2015
+update helpedit set compid='quickSearch55salesCommissionStmt' where modeid=55 and id='315';
+update helpedit set compid='exportReports55undefined' where modeid=55 and id='316';
+
+# Vivek Pakmode 26th June 2015
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `profitlossaccountid`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `openingstockaccountid`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `closingstockaccountid`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `stockinhandaccountid`  varchar(255) NULL DEFAULT NULL;
+
+
+#Anand Thakur 26th June 2015
+
+update exchangeratedetails set applydate='2014-12-30 00:00:00'  where company=(select companyid from company where subdomain = 'arksg') and applydate='2014-12-31 15:00:00' and exchangeratelink=22; 
+
+#Vaibhav Patil 26th June 2015
+alter table repeatedje add isactivate char(1) NOT NULL default 'T';
+
+#Raveesh Pathak 27th June 2015
+ALTER TABLE vendoraddressdetails 
+MODIFY aliasname VARCHAR(255) DEFAULT "",
+MODIFY city VARCHAR(255) DEFAULT "",
+MODIFY state VARCHAR(255) DEFAULT "",
+MODIFY country VARCHAR(255) DEFAULT "",
+MODIFY postalcode VARCHAR(255) DEFAULT "",
+MODIFY phone VARCHAR(255) DEFAULT "",
+MODIFY mobilenumber VARCHAR(255) DEFAULT "",
+MODIFY fax VARCHAR(255) DEFAULT "",
+MODIFY emailid VARCHAR(255) DEFAULT "",
+MODIFY recipientname VARCHAR(255) DEFAULT "",
+MODIFY contactperson VARCHAR(255) DEFAULT "",
+MODIFY contactpersonnumber VARCHAR(255) DEFAULT "",
+MODIFY company VARCHAR(255) NOT NULL;
+
+ALTER TABLE customeraddressdetails  
+MODIFY aliasname VARCHAR(255) DEFAULT "",
+MODIFY city VARCHAR(255) DEFAULT "",
+MODIFY state VARCHAR(255) DEFAULT "",
+MODIFY country VARCHAR(255) DEFAULT "",
+MODIFY postalcode VARCHAR(255) DEFAULT "",
+MODIFY phone VARCHAR(255) DEFAULT "",
+MODIFY mobilenumber VARCHAR(255) DEFAULT "",
+MODIFY fax VARCHAR(255) DEFAULT "",
+MODIFY emailid VARCHAR(255) DEFAULT "",
+MODIFY recipientname VARCHAR(255) DEFAULT "",
+MODIFY contactperson VARCHAR(255) DEFAULT "",
+MODIFY contactpersonnumber VARCHAR(255) DEFAULT "",
+MODIFY company VARCHAR(255) NOT NULL;
+
+ALTER TABLE billingshippingaddresses 
+MODIFY billingrecipientname VARCHAR(255) DEFAULT "",
+MODIFY shippingrecipientname VARCHAR(255) DEFAULT "";
+
+#Anand Thakur 30th june 2015
+update exchangeratedetails set applydate='2013-12-31 00:00:00'  where company=(select companyid from company where subdomain = 'rahulerp1') and applydate='2014-01-01 12:30:00' and exchangeratelink=22 ; 
+
+#Dipak Dorkar 30th June 2015
+# To Add Salesperson Column in deliveryorder.
+ALTER TABLE deliveryorder ADD salesperson varchar(255) DEFAULT NULL;
+ALTER TABLE deliveryorder ADD CONSTRAINT fk_sp FOREIGN KEY(salesperson) REFERENCES masteritem(id);
+# To Add Master Agent Column in grorder.
+ALTER TABLE grorder ADD masteragent varchar(255) DEFAULT NULL;
+ALTER TABLE grorder ADD CONSTRAINT fk_masterAgent FOREIGN KEY(masteragent) REFERENCES masteritem(id);

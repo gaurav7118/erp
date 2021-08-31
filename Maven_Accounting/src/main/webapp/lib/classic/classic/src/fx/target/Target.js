@@ -1,0 +1,1 @@
+Ext.define("Ext.fx.target.Target",{isAnimTarget:true,constructor:function(A){this.target=A;this.id=this.getId()},getId:function(){return this.target.id},remove:function(){Ext.destroy(this.target)}})

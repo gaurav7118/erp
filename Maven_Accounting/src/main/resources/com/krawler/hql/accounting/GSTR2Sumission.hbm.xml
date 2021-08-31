@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.gst.dto.GSTR2Submission" table="gstr2submission">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="transactionJson" type="string">
+            <column name="transactionjson"  />
+        </property>
+        <property name="jsonToBeUploaded" type="string">
+            <column name="jsontobeuploaded"  />
+        </property>
+        <property name="flag" type="string">
+            <column name="flag" length="1"/>
+        </property>
+        <property name="creationDate" type="date">
+            <column name="creationdate" not-null="true"/>
+        </property>
+        <property name="supplierInvoiceNo" type="string">
+            <column name="supplierinvoicenumber" />
+        </property>
+        <property name="type" type="int">
+            <column name="type" default= "0" />
+        </property>
+        <property name="systemTransaction" type="true_false">
+            <column name="issystemtransaction" default="'F'" />
+        </property>
+        <property name="month" type="int">
+            <column name="month" default= "0" />
+        </property>
+        <property name="year" type="int">
+            <column name="year" default= "0" />
+        </property>
+        <property name="invoiceid" type="string">
+            <column name="invoiceid" />
+        </property>
+        <property name="gstRegNumber" type="string">
+            <column name="gstregnumber" />
+        </property>
+        <property name="entityid" type="string">
+            <column name="entityid" />
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

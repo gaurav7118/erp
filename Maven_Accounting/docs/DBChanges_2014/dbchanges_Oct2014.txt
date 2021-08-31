@@ -1,0 +1,1076 @@
+# SagarM - stored amountdue value at customer invoice table 
+
+ALTER TABLE `invoice` ADD COLUMN `invoiceamountdue`  double NULL DEFAULT 0.0;
+
+# SagarM 07th Oct 2014 - company level flag to get invoice amount due from runtime calculation or records level
+ALTER TABLE company ADD COLUMN storeinvoiceamountdue char(1) DEFAULT 'T';
+
+# SagarM 07th Oct 2014 - stored amountdue value at vendor invoice table 
+ALTER TABLE `goodsreceipt` ADD COLUMN `invoiceamountdue`  double NULL DEFAULT 0.0;
+
+# Atul sachan 7-oct-2014
+
+ALTER TABLE `contract`
+ADD COLUMN `isnormalcontract`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `productreplacement`
+ADD COLUMN `issalescontractreplacement`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `maintenance`
+ADD COLUMN `issalescontractmaintenance`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `activatesalescontrcatmanagement` char(1) DEFAULT 'F';
+
+# Atul sachan 7-oct-2014
+
+ALTER TABLE `quotation`
+ADD COLUMN `quotationtype`  int NULL DEFAULT 0;
+
+# Malhari Pawar 8-oct-2014
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `amountdigitafterdecimal`  int(3) NULL DEFAULT 2 AFTER `isSerialCompulsory`;
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `quantitydigitafterdecimal`  int(3) NULL DEFAULT 4 AFTER `amountdigitafterdecimal`;
+
+update compaccpreferences set amountdigitafterdecimal=3,quantitydigitafterdecimal=4 where id in (select companyid from company where subdomain like '%sats%');
+
+
+
+#Hitesh 10 oct
+CREATE TABLE `rfqcustomdata` (
+  `rfqid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`rfqid`),
+  KEY `company` (`company`),
+  CONSTRAINT `rfqcustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `requestforquotation`
+ADD COLUMN `accrfqcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+CREATE TABLE `purchaserequisitiondetailcustomdata` (
+  `purchaserequisitiondetailid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`purchaserequisitiondetailid`),
+  KEY `FKpurchaserequisitiondetailcustom` (`company`),
+  CONSTRAINT `FKpurchaserequisitiondetailcustom` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `purchaserequisitiondetail`
+ADD COLUMN `accpurchaserequisitiondetailcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+
+CREATE TABLE `requestforquotationdetailcustomdata` (
+  `requestforquotationdetailid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`requestforquotationdetailid`),
+  KEY `FKrequestforquotationdetailcustom` (`company`),
+  CONSTRAINT `FKrequestforquotationdetailcustom` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `requestforquotationdetail`
+ADD COLUMN `accrequestforquotationdetailcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+
+
+
+# Atul sachan 10 Oct-2014
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('AJS','Any adjustment made to Output Tax','AJS',6,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('GS','Disregarded supplies','GS',0,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('RS','Relief supply under GST','RS',0,137);
+
+
+# Suhas Chaware 10-Oct-2014
+ALTER TABLE quotation ADD COLUMN maintenance VARCHAR(255) DEFAULT NULL;
+
+# Atul Sachan 11-Oct-2014
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `iscapitalgoodsacquired`  int(1) NULL DEFAULT 0;
+
+
+
+#Atul sachan 13-Oct-2014 
+
+ALTER TABLE  product CHANGE name name VARCHAR(200);
+
+ALTER TABLE  product MODIFY column  productid VARCHAR(1024);
+
+#mayur Pawar 13 oct 2014
+update product set warrantyperiod=0 where warrantyperiod=-1;
+update product set warrantyperiodsal=0 where warrantyperiodsal=-1;
+
+#Anup Kale 13th Oct 2014
+UPDATE `reportmaster` SET `description`='View Outstanding SO(s) which are not Invoiced yet.' WHERE (`id`='Outstanding_Orders_Report') LIMIT 1;
+
+#Mayur Bhokase 14th October 2014
+alter TABLE journalentry add createdby VARCHAR(225);
+
+#Hitesh Suryawanshi 16 Oct
+alter table quotationdetails add column `vendorquotationdetails` varchar(255) default NULL;
+
+#Neeraj Dwivedi 16th October 2014
+#delete entry from Make Payment
+DELETE from default_header where module=14 and defaultHeader="Total Amount";
+DELETE from default_header where module=14 and defaultHeader="Sub Total";
+DELETE from default_header where module=14 and defaultHeader="Total Tax";
+DELETE from default_header where module=14 and defaultHeader="Total Discount";
+DELETE from default_header where module=14 and defaultHeader="Vendor";
+DELETE from default_header where module=14 and defaultHeader="Advance Amount";
+
+#Insert into Default Header for Invoice & Purchase Order
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Contact Person','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person','1','18');
+
+#Rushikesh Mandage 17th Oct 2014
+#Journal Entry Approval Flow
+alter table journalentry add column `approvestatuslevel` int(11) DEFAULT '11';
+alter table multilevelapprovalrule modify column `rule` varchar(25) default '';
+alter table `multilevelapprovalrule` ADD COLUMN `appliedupon` int(2) DEFAULT 0;
+update multilevelapprovalrule set appliedupon = 1 where rule !="";
+alter table `multilevelapprovalrule` ADD COLUMN `creator` varchar(255) DEFAULT '';
+
+#Vijay Jawale 17th Oct 2014
+   alter table `purchaserequisition` ADD COLUMN `printedflag` int(1) DEFAULT 0;
+   alter table `purchaserequisition` ADD COLUMN `favouriteflag` int(1) DEFAULT 0;
+   alter table `requestforquotation` ADD COLUMN `favouriteflag` int(1) DEFAULT 0;
+
+# Anand Nimbalkar 20th Oct 2014
+alter table `sodetails` ADD COLUMN `purchaseorderdetailid` varchar(255) DEFAULT NULL;
+
+
+#Vijay Jawale 21th Oct 2014
+
+INSERT INTO helpedit VALUES('301','Purchase Requisition','Purchase Requisition Number', '51','Purchase Requisition Number','Purchase Requisition Number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.','invoiceNo51');
+
+INSERT INTO helpedit VALUES('302','Purchase Requisition','Purchase Requisition Date', '51','Purchase Requisition Date','Select the transaction date.','invoiceDate51');
+
+INSERT INTO helpedit VALUES('303','Purchase Requisition','Memo', '51','Memo','Provide the comments about the transaction.','memo51');
+
+INSERT INTO helpedit VALUES('304','Purchase Requisition','Currency', '51','Currency','Select the Currency for transaction.','currency51');
+
+INSERT INTO helpedit VALUES('305','Purchase Requisition','Submit', '51','Submit','Click on submit to record the transaction.','submit51');
+ 
+INSERT INTO helpedit VALUES('306','Delivery Order Report','Quick Search', '52','Quick Search',"Search through Delivery Order easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch52');
+
+INSERT INTO helpedit VALUES('307','Delivery Order Report','Export Reports', '52', 'Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports52');
+
+INSERT INTO helpedit VALUES('308','Delivery Order Report','View', '52','View','Select reports from the drop-down menu that you want to view.','view52');
+
+INSERT INTO helpedit VALUES('309','Purchase Return Report','Quick Search', '53','Quick Search',"Search through Purchase Return easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch53');
+
+INSERT INTO helpedit VALUES('310','Purchase Return Report','Export Reports', '53','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports53');
+
+INSERT INTO helpedit VALUES('311','Purchase Return Report','View', '53','View','Select reports from the drop-down menu that you want to view.','view53');
+ 
+INSERT INTO helpedit VALUES('312','Sales Return Report','Quick Search', '54','Quick Search',"Search through Sales Return easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch54');
+
+INSERT INTO helpedit VALUES('313','Sales Return Report','Export Reports', '54','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports54');
+
+INSERT INTO helpedit VALUES('314','Sales Return Report','View', '54','View','Select reports from the drop-down menu that you want to view.','view54');
+ 
+INSERT INTO helpedit VALUES('315','Sales Commission Statement','Quick Search', '55','Quick Search',"Search through Invoice easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch55');
+
+INSERT INTO helpedit VALUES('316','Sales Commission Statement','Export Reports', '55','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports55');
+ 
+INSERT INTO helpedit VALUES('317','Sales Commission Statement','Quick Search', '56','Quick Search',"Search through Customer Name easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch56');
+
+INSERT INTO helpedit VALUES('318','Sales Commission Statement','Export Reports', '56','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportCustomerLists656');
+ 
+INSERT INTO helpedit VALUES('319','Sales Commission Statement','Quick Search', '57','Quick Search',"Search through Purchase Requisition Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch57');
+
+INSERT INTO helpedit VALUES('320','Sales Commission Statement','Export Reports', '57','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports57');
+
+
+
+update helpedit set compid="quickSearch57PurchaseRequisitionList",compname="quicksearch",modulename="purchase requisition report" where id='319';
+update helpedit set compid="exportReports57PurchaseRequisitionList",compname="exportreports",modulename="purchase requisition report" where id='320';
+update helpedit set compid="quickSearch52DeliveryOrderList" where id='306';
+
+
+update helpedit set compid="exportReports55undefined" where id='315';
+update helpedit set compid="quickSearch55salesCommissionStmt" where id='316';
+
+INSERT INTO helpedit VALUES('427','Account forecast report','Account Name', '70','Account Name','Select account name over here to view Account forecast report','accountIdForCombo70');
+INSERT INTO helpedit VALUES('428','Account forecast report','Export Reports', '70','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates.','exportReports70');
+
+INSERT INTO helpedit VALUES('429','Account forecast report','Account Name', '71','Account Name','Select account name over here to view Account forecast report','accountIdForCombo71');
+INSERT INTO helpedit VALUES('430','Account forecast report','Export Reports', '71','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates.','exportReports71');
+
+INSERT INTO helpedit VALUES('431','Account forecast report','Account Name', '72','Account Name','Select account name over here to view Account forecast report','accountIdForCombo72');
+INSERT INTO helpedit VALUES('432','Account forecast report','Export Reports', '72','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates.','exportReports72');
+
+ 
+ 
+INSERT INTO reportmaster VALUES('Reorder_Analysis_Report','Reorder Analysis Report','view Reorder Analysis Report','getReorderAnalysisMainTabView()');
+ 
+
+INSERT INTO reportmaster VALUES('Customer_Revenue_Report','Customer Revenue','View Customer Revenue ','getCustRevenueView()');
+
+#Raveesh Pathak 21st Oct 2014
+alter table extracompanypreferences 
+add column `vigenerationmail` char(1) default 'F';
+
+alter table extracompanypreferences 
+add column `cigenerationmail` char(1) default 'F'; 
+  
+#Hitesh Suryawanshi 21 Oct
+ALTER TABLE `deliveryorder`
+ADD COLUMN `isautogenerateddo` char(1) DEFAULT 'F';
+
+ALTER TABLE `grorder`
+ADD COLUMN `isautogeneratedgro` char(1) DEFAULT 'F';
+
+#Rushikesh Mandage 20th Oct 2014
+ALTER TABLE `creditnote` ADD COLUMN `costcenter` varchar(255) default NULL, ADD  FOREIGN KEY (`costcenter`) REFERENCES `costcenter` (`id`);
+ALTER TABLE `debitnote` ADD COLUMN `costcenter` varchar(255) default NULL, ADD  FOREIGN KEY (`costcenter`) REFERENCES `costcenter` (`id`);
+
+#Pandurang 21th Oct 2014
+Alter table product add column recyclequantity double DEFAULT 0;
+Alter table product add column isrecyclable char(1) DEFAULT '0';
+Alter table productassembly add column percentage double DEFAULT 0;
+Alter table productassembly add column actualquantity double DEFAULT 0;
+Alter table productassembly add column inventoryquantity double DEFAULT 0;
+Alter table productassembly add column remainingquantity double DEFAULT 0;
+Alter table productassembly add column recyclequantity double DEFAULT 0;
+
+Alter table pbdetails add column percentage double DEFAULT 0;
+Alter table pbdetails add column actualquantity double DEFAULT 0;
+Alter table pbdetails add column inventoryquantity double DEFAULT 0;
+Alter table pbdetails add column remainingquantity double DEFAULT 0;
+Alter table pbdetails add column recyclequantity double DEFAULT 0;
+
+ 
+#Neeraj Dwivedi 28th Oct 2014
+DELETE from default_header where defaultHeader="Paid To" and module=14;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8af39d04-5ea0-11e4-aa15-123b93f75cba','Paid To','paidto','masteritem','id','value','Paid To','1','14');
+
+#Hitesh Suryawanshi 28th Oct
+CREATE TABLE `openingbalanceinvoicecustomdata` (
+  `openingbalanceinvoiceid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`openingbalanceinvoiceid`),
+  KEY `company` (`company`),
+  CONSTRAINT `openingbalanceinvoicecustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `invoice`
+ADD COLUMN `accopeningbalanceinvoicecustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+CREATE TABLE `openingbalancevendorinvoicecustomdata` (
+  `openingbalancevendorinvoiceid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`openingbalancevendorinvoiceid`),
+  KEY `company` (`company`),
+  CONSTRAINT `openingbalancevendorinvoicecustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `accopeningbalancevendorinvoicecustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+CREATE TABLE `openingbalancemakepaymentcustomdata` (
+  `openingbalancemakepaymentid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`openingbalancemakepaymentid`),
+  KEY `company` (`company`),
+  CONSTRAINT `openingbalancemakepaymentcustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `payment`
+ADD COLUMN `accopeningbalancemakepaymentcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+CREATE TABLE `openingbalancereceiptcustomdata` (
+  `openingbalancereceiptid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`openingbalancereceiptid`),
+  KEY `company` (`company`),
+  CONSTRAINT `openingbalancereceiptcustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `receipt`
+ADD COLUMN `accopeningbalancereceiptcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+CREATE TABLE `openingbalancecreditnotecustomdata` (
+  `openingbalancecreditnoteid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`openingbalancecreditnoteid`),
+  KEY `company` (`company`),
+  CONSTRAINT `openingbalancecreditnotecustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `creditnote`
+ADD COLUMN `accopeningbalancecreditnotecustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+
+CREATE TABLE `openingbalancedebitnotecustomdata` (
+  `openingbalancedebitnoteid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `deleted` char(1) DEFAULT 'F',
+  `moduleId` int(11) DEFAULT '1',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`openingbalancedebitnoteid`),
+  KEY `company` (`company`),
+  CONSTRAINT `openingbalancedebitnotecustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `debitnote`
+ADD COLUMN `accopeningbalancedebitnotecustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+#Pandurang 29th Oct 2014
+ALTER TABLE salesreturn add column createdby varchar(40) default null;
+ALTER TABLE salesreturn add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE salesreturn add column modifiedby varchar(40) default null;
+ALTER TABLE salesreturn add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE salesreturn add column updatedon bigint(20) default null;
+
+update salesreturn sr set createdby=(select creator from company c where c.companyid=sr.company );
+update salesreturn sr set modifiedby=(select creator from company c where c.companyid=sr.company );
+
+update salesreturn set updatedon = UNIX_TIMESTAMP(orderdate)*1000;
+
+ALTER TABLE purchasereturn add column createdby varchar(40) default null;
+ALTER TABLE purchasereturn add FOREIGN KEY (createdby)  REFERENCES users(userid);
+ALTER TABLE purchasereturn add column modifiedby varchar(40) default null;
+ALTER TABLE purchasereturn add FOREIGN KEY (modifiedby)  REFERENCES users(userid);
+ALTER TABLE purchasereturn add column createdon bigint(20) default null;
+ALTER TABLE purchasereturn add column updatedon bigint(20) default null;
+
+update purchasereturn pr set createdby=(select creator from company c where c.companyid=pr.company );
+update purchasereturn pr set modifiedby=(select creator from company c where c.companyid=pr.company );
+
+update purchasereturn set createdon = UNIX_TIMESTAMP(orderdate)*1000, updatedon = UNIX_TIMESTAMP(orderdate)*1000;
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',20,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',22,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',23,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',18,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',2,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',4,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',6,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid) VALUES (UUID(),'lasteditedby','Last Edited By',8,1);
+
+# Amol Dhokale 29th Oct 2014
+ALTER TABLE compaccpreferences add COLUMN  editLinkedTransactionQuantity char(1) DEFAULT 'F' after editTransaction ;
+ALTER TABLE compaccpreferences add COLUMN  editLinkedTransactionPrice char(1) DEFAULT 'F' after editLinkedTransactionQuantity;
+UPDATE compaccpreferences SET editLinkedTransactionQuantity=editLinkedTransaction;
+UPDATE compaccpreferences SET editLinkedTransactionPrice=editLinkedTransaction;
+ALTER TABLE compaccpreferences DROP COLUMN editLinkedTransaction;
+
+# Amol Dhokale 31st Oct 2014
+ALTER TABLE `fieldParams`
+ADD COLUMN `fieldtooltip`  VARCHAR(255);
+
+#mayur Pawar 31st Oct 2014
+insert into reportmaster(id,name,description,method_name) values ('VenProd_ExpDetailReport','Vendor Product Expiry Detail Report','View Vendor Product Expiry Status Report','getProductExpiryTabView()');
+
+update reportmaster set id="CustProd_ExpDetailReport",name="Customer Product Expiry Detail Report",description="View Customer Product Expiry Detail Report" where method_name="getSerialNoTabView()";
+
+
+#Anup Kale 31th Oct 2014
+UPDATE `reportmaster` SET `description`='View recurred Invoices from here.' WHERE (`id`='Outstanding_Orders_Report') LIMIT 1;

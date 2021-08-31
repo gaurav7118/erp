@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.inspection.InspectionForm" table="in_inspection_form">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="inspectionDate" type="date">
+            <column name="inspectiondate" not-null="true"/>
+        </property>
+        <property name="modelName" type="string">
+            <column length="255" name="modelname"/>
+        </property>
+        <property name="customerName" type="string">
+            <column length="255" name="customername"/>
+        </property>
+        <property name="department" type="string">
+            <column length="255" name="department"/>
+        </property>
+        <property name="consignmentReturnNo" type="string">
+            <column length="255" name="consignmentreturnno"/>
+        </property>
+        <set cascade="all" inverse="true" name="rows">
+            <key column="inspectionformid"/>
+            <one-to-many class="com.krawler.inventory.model.inspection.InspectionFormDetails"/>
+        </set>
+    </class>
+</hibernate-mapping>

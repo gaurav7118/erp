@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ExportCompanypref" table="exportcompanypref">
+        <id column="id" name="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="displayname" type="string">
+            <column name="displayname" not-null="true"/>
+        </property>
+        <property name="colnumname" type="string">
+            <column name="colnumname"/>
+        </property>
+        <property name="gettermethod_name" type="string">
+            <column name="gettermethod_name"/>
+        </property>
+        <property name="isfromextraorcomapnypref" type="true_false">
+            <column default="false" name="isfromextraorcomapnypref" not-null="true"/>
+        </property>
+        <property name="namepasstosavefunction" type="string">
+            <column name="namepasstosavefunction" not-null="true"/>
+        </property>
+        <property name="accountfield" type="true_false">
+            <column default="false" name="accountfield" not-null="true"/>
+        </property>
+        <property name="dataindex" type="string">
+            <column name="dataindex"/>
+        </property> 
+        <property name="validatetype" type="string">
+            <column name="validatetype" />
+        </property>
+        <property name="fullclassname" type="string">
+            <column name="fullclassname"/>
+        </property> 
+        <property name="exportclassgetter" type="string">
+            <column name="exportclassgetter"/>
+        </property> 
+        <property name="importclassgetter" type="string">
+            <column name="importclassgetter"/>
+        </property>
+    </class>
+</hibernate-mapping>

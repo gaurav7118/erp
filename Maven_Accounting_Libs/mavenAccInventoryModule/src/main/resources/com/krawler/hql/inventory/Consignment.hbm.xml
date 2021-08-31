@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.approval.consignment.Consignment" table="in_consignment">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="transactionNo" type="string">
+            <column length="50" name="transactionno" not-null="true"/>
+        </property>
+        <property name="returnQuantity" type="double">
+            <column name="returnquantity"/>
+        </property>
+        <property name="fromDate" type="timestamp">
+            <column name="fromdate" />
+        </property>
+        <property name="toDate" type="timestamp">
+            <column name="todate" />
+        </property>
+        <property name="documentid" type="string">
+            <column name="documentid"/>
+        </property>
+        <property name="moduleRefId" type="string">
+            <column length="50" name="modulerefid"/>
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="createdon"/>
+        </property>
+         <property name="unitPrice" type="double">
+            <column name="unitprice"/>
+        </property>
+        <property column="approval_status" name="approvalStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.approval.ApprovalStatus</param>
+            </type>
+        </property>
+        <set name="consignmentApprovalDetails" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="consignment"  />
+            <one-to-many class="com.krawler.inventory.model.approval.consignment.ConsignmentApprovalDetails" />
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="store" name="store"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="uom" name="uom"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" column="customer" name="customer"/>
+        <many-to-one class="com.krawler.common.admin.CostCenter" name="costcenter"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.data.field.Boolean",{extend:"Ext.data.field.Field",alias:["data.field.bool","data.field.boolean"],isBooleanField:true,trueRe:/^\s*(?:true|yes|on|1)\s*$/i,convert:function(A){if(typeof A==="boolean"){return A}if(this.allowNull&&(A===undefined||A===null||A==="")){return null}return this.trueRe.test(String(A))},getType:function(){return"bool"}})

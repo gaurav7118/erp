@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accDepreciationDao" class="com.krawler.spring.accounting.depreciation.accDepreciationImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="accDepreciationController" class="com.krawler.spring.accounting.depreciation.accDepreciationController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accDepreciationDAO">
+            <ref bean="accDepreciationDao"/>
+        </property>
+        <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+</beans>

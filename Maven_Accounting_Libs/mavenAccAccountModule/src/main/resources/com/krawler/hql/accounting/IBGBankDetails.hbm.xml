@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.IBGBankDetails" table="ibgbankdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        
+        <property name="ibgbank" type="integer">
+            <column name="ibgbank"/>
+        </property>
+        
+        <property name="bankCode" type="string">
+            <column length="255" name="bankcode"/>
+        </property>
+        
+        <property name="branchCode" type="string">
+            <column length="255" name="branchcode"/>
+        </property>
+        
+        <property name="accountNumber" type="string">
+            <column length="255" name="accountnumber"/>
+        </property>
+        
+        <property name="accountName" type="string">
+            <column length="255" name="accountname"/>
+        </property>
+        
+        <property name="sendersCompanyID" type="string">
+            <column length="255" name="senderscompanyid"/>
+        </property>
+        
+        <property name="bankDailyLimit" type="double">
+            <column name="bankdailylimit"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="account"/>
+    </class>
+</hibernate-mapping>

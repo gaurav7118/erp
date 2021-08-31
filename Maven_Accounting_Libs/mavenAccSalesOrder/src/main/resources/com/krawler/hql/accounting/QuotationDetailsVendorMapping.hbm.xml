@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.QuotationDetailsVendorMapping" table="quotationdetailsvendormapping">
+    <id column="id" name="ID">
+      <generator class="assigned"/>
+    </id>
+    <property name="unitcost" type="double">
+      <column name="unitcost" not-null="true"/>
+    </property>
+    <property name="exchangerate" type="double">
+      <column name="exchangerate" not-null="true"/>
+    </property>
+    <property name="totalcost" type="double">
+      <column name="totalcost" not-null="true"/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Vendor" column="vendor" name="vendor" />
+  </class>
+</hibernate-mapping>

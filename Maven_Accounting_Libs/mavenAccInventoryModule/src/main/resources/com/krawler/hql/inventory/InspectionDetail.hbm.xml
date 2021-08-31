@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.approval.InspectionDetail" table="in_inspection_detail" >
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="referenceNo" type="string">
+            <column name="reference_no"/>
+        </property>
+        <property name="customerPONo" type="string">
+            <column name="customer_po_no"/>
+        </property>
+        <property name="hospital" type="string">
+            <column name="hospital"/>
+        </property>
+        <property name="department" type="string">
+            <column name="department"/>
+        </property>
+        <property name="modelname" type="string">
+            <column name="modelname"/>
+        </property>
+        
+        <set name="inspectionCriteriaDetailSet" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="inspection_detail"  />
+            <one-to-many class="com.krawler.inventory.model.approval.InspectionCriteriaDetail" />
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+    </class>
+</hibernate-mapping>

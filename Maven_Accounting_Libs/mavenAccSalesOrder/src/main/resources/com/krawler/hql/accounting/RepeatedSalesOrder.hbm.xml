@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   <class name="com.krawler.hql.accounting.RepeatedSalesOrder" table="repeatedsalesorders">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="intervalUnit" type="integer">
+            <column name="intervalunit" default="0"/>
+        </property>
+        <property name="intervalType" type="string">
+            <column name="intervaltype" length="32"/>
+        </property>
+         <property name="NoOfSOpost" type="integer">
+         <column name="noofsopost" default="0"/>
+        </property>
+        <property name="NoOfRemainSOpost" type="integer">
+            <column name="noofremainsopost" default="0"/>
+        </property>
+        <property name="startDate" type="date">
+            <column name="startdate" not-null="true"/>
+        </property>
+        <property name="nextDate" type="date">
+            <column name="nextdate" not-null="true"/>
+        </property>
+        <property name="expireDate" type="date">
+            <column name="expiredate"/>
+        </property>
+        <property name="isActivate" type="true_false">
+            <column name="isactivate" not-null="true"/>
+        </property>
+        <property name="ispendingapproval" type="true_false">
+            <column name="ispendingapproval" not-null="false"/>
+        </property>
+        <property name="approver" type="string">
+            <column length="50" name="approver" not-null="true"/>
+        </property>
+        <property name="prevDate" type="date">
+            <column name="prevDate" not-null="false"/>
+        </property>
+  </class>
+</hibernate-mapping>

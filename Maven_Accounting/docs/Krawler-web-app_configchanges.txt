@@ -1,0 +1,238 @@
+#Prathamesh Sheth 19th Feb 2014
+#Make stand alone property false in krawler-web-app.xml
+
+<property>
+    <name>standalone</name>
+    <value>false</value>
+</property>
+
+<property>
+    <name>base_urlformat_unprotected</name>
+    <value>http://192.168.0.210:8080/Accounting/b/%s/</value>
+</property>
+
+#Mayur Bhokase 15th May 2014
+
+<property>
+    <name>LSH_CompanyId</name>
+    <value>04575a03-b33c-11e3-986d-001e670e1450</value>
+</property>
+
+<property>
+    <name>VHQ_CompanyId</name>
+    <value>04575a03-b33c-11e3-986d-001e670e1452</value>
+</property>
+
+# Atul Sachan 10 June 2014 // it will be false for integration with other projects.
+
+    <property>
+        <name>standalone</name>
+        <value>false</value>
+    </property>
+#Mayur Bhokase 10th June 2014
+#Added multiple company ids for Singapore, Malaysia and Indonesia company.
+
+<property>
+    <name>VHQ_CompanyId</name>
+    <value>35d351cf-c932-47de-9df6-0ef88d80c9bd,a364ecb0-e90d-43ca-b567-f8f49ab6ac6f,e40c8068-10c1-4a8f-b9a7-85bc5cb8b135</value>
+</property>
+
+# Vivek Pakmode 1st Sept 2014
+#Cash Flow statement Report as per COA
+      <property>
+            <name>VHQPOSTMY_CompanyId</name>
+            <value>a364ecb0-e90d-43ca-b567-f8f49ab6ac6f</value>
+      </property>
+
+# Malhari Pawar 12 Sept 2014
+#Sats related changes merged
+<property>
+	<name>SATS_CompanyId</name>
+		<value>4766f302-d281-40d0-9f82-d7faf36fb69f,60388a50-f0df-430c-8e3e-b6c8ca2e3027,04575a0c-b33c-11e3-986d-001e670e1424</value>
+</property>
+
+#Neeraj Dwivedi 13th June 2014
+
+    <property>        
+        <name>inventoryURL</name>
+        <value>http://192.168.0.111:8084/inventory-management/</value>				
+    </property> 
+
+
+
+# Anand Nimbalkar 8th July 2014
+<property>
+    <name>GoodsReceiptOrderApprovalListStorePath</name>
+    <value>/home/krawler/store/Accounting/goods_receipt_list_for_approval.csv</value>
+</property>
+
+# Sagar M 1st Oct 2014 To send mail when any company invoice amount due is not matched with one calculated runtime
+    <property>
+        <name>superuseremailid</name>
+        <value>sagmahamuni@gmail.com</value>
+    </property>
+
+# Vivek Pakmode 20th Oct 2014
+   <property>
+            <name>SMS_CompanyIds</name>
+            <value>31ab37e4-ca04-4506-bae4-2b3dcf47d953</value>
+    </property>
+
+# Vivek Pakmode 20th Nov 2014
+    <property>
+            <name>VHQPOST_Subdomains</name>
+            <value>vhqpostmy,vhqpostch,vhqpostsg,vhqpostvi,vhqpostin</value>
+    </property>
+
+# Sagar M 22th April 2014
+    <property>
+            <name>OlympusSubdomain</name>
+            <value>olympus</value>
+    </property>
+
+#Rushikesh Mandage 22nd May 2015
+<property>
+        <name>API_Key_JSONRATES</name>
+        <value>jr-c8828253c8630269f3a86251aed03a0f</value>
+</property>
+
+#Vijay Jawale 25th May 2015
+     <property>
+            <name>SBI_CompanyId</name>
+            <value>408cf2e6-2fb0-4299-9549-89f9af7d76fa</value>
+    </property> 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint39 created on 24th Sept 2015 10:30AM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint40 created on 7th Oct 2015 02:30PM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint44 created on 28th Oct 2015 11:30AM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint47 created on 19th Nov 2015 10:30AM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint49 created on 08th Dec 2015 11:30AM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt2 created on 5th Jan 2016 8:00AM ---------------------------------------------- =======
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt3 created on 14th Jan 2016 9:00AM ---------------------------------------------- =======
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt5 created on 28th Jan 2016 11:00AM ---------------------------------------------- =======
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt12 created on 15th Mar 2016 11:15AM ---------------------------------------------- =======
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt20 created on 09th May 2016 08:00PM ---------------------------------------------- 
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt24 created on 06th June 2016 07:30PM ----------------------------------------------=======
+
+# Pandurang 1 Jule 2016 - PM URL for Rest
+  <property>
+        <name>pmURL</name>
+        <value>http://192.168.0.208:8080/stagingpm/</value>
+  </property>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt30 created on 20th July 2016 09:45AM ----------------------------------------------=======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt38 created on 22nd Sept 2016 10:00AM ----------------------------------------------
+
+#Shrinath Shinde 8 Nov 2016 - US Server Check
+<property>
+      <name>isUSServer</name>
+      <value>false</value>
+</property> 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt47 created on 22nd Nov 2016 08:00PM ----------------------------------------------
+#Vaibhav Patil 01st Dec. 2016 - This folder should be shared on Production
+    <property>
+        <name>SharedDocStorePath0</name>
+        <value>/home/krawler/shareddocs/</value>
+    </property> 
+
+#Neeraj Dwivedi 2nd Dec2016
+    <property>
+        <name>platformURL</name>
+        <value>http://192.168.0.21:8080/ondemand/</value>
+    </property>
+
+#Vaibhav Patil 19th Jan. 2017
+    <property>
+        <name>jasperImageURL</name>
+        <value>http://192.168.0.113:8084/JasperImageConverter/</value>
+    </property>
+    <property>
+        <name>jasperImageURLRestVersion</name>
+        <value>v1</value>
+    </property>
+
+#Bhushan Chitte 8th Feb 2017(Rest Config changes)
+
+    <property>
+        <name>pmURLRestVersion</name>
+        <value>v1</value>
+    </property>
+    <property>
+        <name>crmURL</name>
+        <value>http://192.168.0.35:8080/HQLCrm/</value>
+    </property>
+    <property>
+        <name>crmURLRestVersion</name>
+        <value>v1</value>
+    </property>    
+
+    <property>
+        <name>platformURLRestVersion</name>
+        <value>v1</value>
+    </property>
+
+    <property>
+        <name>accURLRestVersion</name>
+        <value>v1</value>
+    </property>
+    
+    <property>
+        <name>eclaimURL</name>
+        <value>http://192.168.0.208:8080/stagingeclaims/</value>
+    </property>
+    <property>
+        <name>eclaimURLRestVersion</name>
+        <value>v1</value>
+    </property>  
+    <property>
+        <name>lmsURL</name>
+        <value>http://192.168.0.208:8080/staginglms1/</value>
+    </property>
+    <property>
+        <name>lmsURLRestVersion</name>
+        <value>v1</value>
+    </property>  
+
+    <property>
+        <name>clientid</name>
+        <value>7Ao_TKQIzgwynlFSdQE1EA</value>
+    </property>
+    <property>
+        <name>clientsecret</name>
+        <value>Zkl2iPZVTIfLIF-PBN1GM-aKaRlpMaOstyAjneZIKH8</value>
+    </property>  
+    <property>
+      <name>restauthapply</name>
+        <value>1</value>
+    </property>  
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu8 created on 24th Feb 2017 07:06PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu21 created on 22nd May 2017 08:45PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu27 created on 4th July 2017 12:15PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu43 created on 25th Oct 2017 8:00PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu49 created on 18th Dec 2017 7:10PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv4 created on 24th Jan 2018 7:35PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv10 created on 9 March 2018 7:10PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv21 created on 24rd May 2018 4:55PM ----------------------------------------------
+Aman Shah 31st Jul 2018(Deskera Proxy Call Config)
+<property>
+    <name>deskeraProxyURL</name>
+    <value>http://localhost:8084/Accounting/</value>
+</property>
+<property>
+    <name>deskeraProxyURLRestVersion</name>
+    <value>v1</value>
+</property>

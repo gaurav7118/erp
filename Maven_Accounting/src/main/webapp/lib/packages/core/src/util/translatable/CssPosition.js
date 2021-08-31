@@ -1,0 +1,1 @@
+Ext.define("Ext.util.translatable.CssPosition",{extend:"Ext.util.translatable.Dom",doTranslate:function(A,C){var B=this.getElement().dom.style;if(typeof A=="number"){B.left=A+"px"}if(typeof C=="number"){B.top=C+"px"}},destroy:function(){var A=this.getElement().dom.style;A.left=null;A.top=null;this.callParent()}})

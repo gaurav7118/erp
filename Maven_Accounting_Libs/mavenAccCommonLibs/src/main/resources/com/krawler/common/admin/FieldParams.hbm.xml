@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.FieldParams" table="fieldparams">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="maxlength" type="int">
+            <column name="maxlength" not-null="true"/>
+        </property>
+        <property name="isessential" type="int">
+            <column name="isessential"/>
+        </property>
+        <property name="fieldtype" type="int">
+            <column name="fieldtype" not-null="true"/>
+        </property>
+        <property name="validationtype" type="int">
+            <column name="validationtype" not-null="true"/>
+        </property>
+        <property name="customregex" type="string">
+            <column length="1024" name="customregex" not-null="true"/>
+        </property>
+        <property name="fieldname" type="string">
+            <column name="fieldname"/>
+        </property>
+        <property name="fieldlabel" type="string">
+            <column name="fieldlabel"/>
+        </property>
+        <property name="fieldtooltip" type="string">
+            <column name="fieldtooltip"/>
+        </property>
+        <property name="companyid" type="string">
+            <column name="companyid"/>
+        </property>
+        <property name="moduleid" type="int">
+            <column name="moduleid"/>
+        </property>
+        <property name="iseditable" type="string">
+            <column length="20" name="iseditable"/>
+        </property>
+        <property name="comboname" type="string">
+            <column length="50" name="comboname"/>
+        </property>
+        <property name="comboid" type="string">
+            <column length="36" name="comboid"/>
+        </property>
+        <property name="moduleflag" type="int">
+            <column default="0" name="moduleflag"/>
+        </property>
+        <property name="colnum" type="int">
+            <column default="0" name="colnum"/>
+        </property>
+        <property name="refcolnum" type="int">
+            <column default="0" name="refcolnum"/>
+        </property>
+        <property name="startingnumber" type="int">
+            <column default="0" name="startingnumber"/>
+        </property>
+        <property name="prefix" type="string">
+            <column default=" " name="prefix"/>
+        </property>
+        <property name="suffix" type="string">
+            <column default=" " name="suffix"/>
+        </property>
+        <property name="oldid" type="int">
+            <column default="0" name="oldid"/>
+        </property>
+        <property name="sendNotification" type="int">
+            <column default="0" name="sendNotification"/>
+        </property>
+        <property name="isforproject" type="int">
+            <column default="0" name="isforproject"/>
+        </property>
+        <property name="isforeclaim" type="int">
+            <column default="0" name="isforeclaim"/>
+        </property>
+        <property name="isfortask" type="int">
+            <column default="0" name="isfortask"/>
+        </property>
+        <property name="notificationDays" type="string">
+            <column length="255" name="notificationDays"/>
+        </property>
+        <property name="customfield" type="int">
+            <column name="customfield" default="0"/>
+        </property>
+        <property name="customcolumn" type="int">
+            <column name="customcolumn" default="0"/>
+        </property>
+        <property name="relatedmoduleid" type="string">
+            <column name="relatedmoduleid"/>
+        </property>
+        <property name="relatedmodulepdfwidth" type="string">
+            <column name="relatedmodulepdfwidth"/>
+        </property>
+        <property name="parentid" type="string">
+            <column name="parentid"/>
+        </property>
+        <property name="mapwithtype" type="int">
+            <column name="mapwithtype"/>
+        </property>
+        <property name="isActivated"  type="integer">
+            <column name="isactivated" default="1"/>
+        </property>
+         <property name="defaultValue"  type="string">
+            <column name="defaultvalue" />
+        </property>
+        <property name="sequence" type="int">
+            <column name="sequence" default="0"/>
+        </property>
+<!--        <property name="isForMultiEntity" type="boolean">
+            <column name="isformultientity"/>
+        </property>-->
+        <property name="isForSalesCommission" type="boolean">
+            <column name="isforsalescommission"/>
+        </property>
+        <property name="isAutoPopulateDefaultValue" type="boolean">
+            <column name="isautopopulatedefaultvalue" default="0"/>
+        </property>
+        <property name="isForKnockOff" type="boolean">
+            <column name="isforknockoff" default="0"/>
+        </property>
+<!--        <property name="isForGSTRuleMapping" type="boolean">
+            <column name="isforgstrulemapping" default="0"/>
+        </property>-->
+        <property name="GSTMappingColnum" type="int">
+            <column default="0" name="gstmappingcolnum"/>
+        </property>
+        <property name="GSTConfigType" type="int">
+            <column default="0" name="gstconfigtype"/>
+        </property>
+         <property name="relatedModuleIsAllowEdit" type="int">
+            <column name="relatedmoduleisallowedit" default="1" />
+        </property>
+         <property name="allowInDocumentDesigner" type="int">
+            <column name="allowindocumentdesigner" default="1" />
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="companyid" insert="false" name="company" update="false"/>
+        <many-to-one class="com.krawler.common.admin.FieldParams" column="parentid" insert="false" name="parent" update="false" />
+        <many-to-one class="com.krawler.common.admin.FieldParams" name="propagatedfieldparamID"  column="propagatedid"  />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Account" table="account">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="name" type="string">
+      <column length="255" name="name" not-null="true"/>
+    </property>
+    <property name="openingBalance" type="double">
+      <column name="openingbalance" not-null="true"/>
+    </property>
+    <property name="custMinBudget" type="double">
+      <column name="custminbudget" not-null="true"/>
+    </property>
+    <property name="deleted" type="true_false">
+      <column name="deleteflag" not-null="true"/>
+    </property>
+    <property name="eliminateflag" type="true_false">
+      <column name="eliminateflag" not-null="true"/>
+    </property>
+    <property name="headeraccountflag" type="true_false">
+      <column name="isheaderaccount" not-null="true"/>
+    </property>
+    <set cascade="all" inverse="true" name="children">
+      <key column="parent"/>
+      <one-to-many class="com.krawler.hql.accounting.Account"/>
+    </set>
+    <property name="creationDate" type="timestamp">
+      <column name="creationdate" not-null="true"/>
+    </property>
+    <property name="life" type="double">
+      <column name="life"/>
+    </property>
+    <property name="salvage" type="double">
+      <column default="0" name="salvage" not-null="true"/>
+    </property>
+    <property name="presentValue" type="double">
+      <column name="presentvalue" not-null="true"/>
+    </property>
+    <property name="budget" type="double">
+      <column default="0" name="budget"/>
+    </property>
+    <property name="taxid" type="string">
+      <column length="255" name="taxid"/>
+    </property>
+    <property name="crmaccountid" type="string">
+      <column length="255" name="crmaccountid"/>
+    </property>
+    <property name="acccode" type="string">
+      <column length="50" name="acccode"/>
+    </property>
+    <property name="installation" type="string">
+      <column length="255" name="installation" default=""/>
+    </property>
+    <property name="depreciable" type="boolean">
+      <column length="1" name="isdepreciable"/>
+    </property>
+    <property name="templatepermcode" type="long">
+      <column name="templatepermcode"/>
+    </property>
+    <property name="intercompanyflag" type="true_false">
+      <column name="intercompanyflag"/>
+    </property>
+     <property name="accounttype" type="integer">
+      <column name="accounttype"/>
+    </property>
+     <property name="mastertypevalue" type="integer">
+      <column name="mastertypeid"/>
+    </property>
+    <property name="controlAccounts" type="true_false">
+      <column name="controlaccounts" default="false"/>
+    </property>
+    <property name="wantToPostJe" type="true_false">
+      <column name="wanttopostje" not-null="true"/>
+    </property>    
+    <property name="usedIn" type="string">
+      <column name="usedin"/>
+    </property>
+    <property name="ifsccode" type="string">
+      <column length="255" name="ifsccode" />
+    </property>
+    <property name="micrcode" type="string">
+      <column length="100" name="micrcode" />
+    </property>
+    <property name="MVATCode" type="string">
+      <column length="255" name="mvatcode" />
+    </property>
+    <property name="IBGBank" type="true_false">
+      <column name="ibgbank" default="false"/>
+    </property>
+    <property name="activate" type="true_false">
+      <column name="activate" default="true"/>
+    </property>
+    <property name="aliascode" type="string">
+      <column length="50" name="aliascode"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="ibgBankType" type="integer">
+      <column name="ibgbanktype" default='0'/>
+    </property>
+    <!--  ==================== Used for INDIA Country ========================= -->
+    <property name="purchaseType" type="string">
+      <column name="purchasetype" default=''/>
+    </property>
+    <property name="salesType" type="string">
+      <column name="salestype" default=''/>
+    </property>
+    <property name="bsrcode" type="integer">
+        <column name="bsrcode" />
+    </property>
+    <property name="pincode" type="integer">
+        <column name="pincode" />
+    </property>
+    <property name="bankbranchname" type="string">
+        <column name="bankbranchname" />
+    </property>
+    <property name="accountno" type="string">
+        <column name="accountno" />
+    </property>
+    <property name="bankbranchaddress" type="string">
+        <column name="bankbranchaddress"/>
+    </property>
+    <property name="defaultaccountID" type="string">
+        <column name="defaultaccountid" default=''/>
+    </property>
+    <!--  ==================== ======================== ========================= -->
+    <!--<many-to-one class="com.krawler.hql.accounting.Account" name="depreciationAccont"/>-->
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Group" column="groupname" name="group" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="parent"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="category"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="intercompanytype"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="department"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="location"/>
+    <many-to-one class="com.krawler.common.admin.State" name="branchstate"/>
+    <many-to-one class="com.krawler.common.admin.User" name="user"/>
+    <many-to-one class="com.krawler.common.admin.CostCenter" name="costcenter"/>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="propagatedAccountID" column="propagatedaccountid"/>
+    <many-to-one column="accaccountcustomdataref" class="com.krawler.hql.accounting.AccountCustomData"  name="accAccountCustomData" />
+  </class>
+</hibernate-mapping>

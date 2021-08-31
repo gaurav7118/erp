@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Tax" table="tax">
+    <id column="id" name="ID">
+      <generator class="assigned"/>
+    </id>
+    <property name="name" type="string">
+      <column length="50" name="name" not-null="true"/>
+    </property>
+    <property name="taxtype" type="integer">
+      <column name="taxtype" default="0"/>
+    </property>
+    <property name="extrataxtype" type="integer">
+      <column name="extrataxtype" default="0"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description" not-null="false"/>
+    </property>
+    <property name="taxCode" type="string">
+      <column length="50" name="taxcode" not-null="true"/>
+    </property>
+    <property name="deleted" type="true_false">
+      <column name="deleteflag" not-null="true"/>
+    </property>
+    <property name="inputCredit" type="true_false">
+      <column name="isinputcredit" not-null="true"/>
+    </property>
+    <property name="taxCodeWithoutPercentage" type="string">
+        <column name = "taxcodewithoutpercentage" not-null="true"/>
+    </property>
+    <property name="activated" type="boolean">
+        <column name="activated" default="1"/>
+    </property>
+    <property name="defaulttax" type="string">
+        <column name="defaulttax" />
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.Account" name="account" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

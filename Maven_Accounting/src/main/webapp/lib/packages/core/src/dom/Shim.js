@@ -1,0 +1,1 @@
+Ext.define("Ext.dom.Shim",{extend:"Ext.dom.Underlay",cls:Ext.baseCSSPrefix+"shim",constructor:function(A){this.callParent([A]);this.elementConfig={tag:"iframe",cls:this.cls,role:"presentation",frameBorder:"0",src:Ext.SSL_SECURE_URL,tabindex:"-1"}},getInsertionTarget:function(){var A=this.shadow;return(A&&A.el)||this.target}})

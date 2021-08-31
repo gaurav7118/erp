@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccounts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000279"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="StatementOfAccountsSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="StatementOfAccountsSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="imagePath" class="java.lang.String"/>
+	<parameter name="imagePath2" class="java.lang.String"/>
+	<parameter name="imagePath3" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="companyRegNo" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<image isUsingCache="false" onErrorType="Blank">
+				<reportElement x="49" y="13" width="485" height="62"/>
+				<imageExpression><![CDATA[$P{imagePath}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="10">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{StatementOfAccountsSubReportData}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{StatementOfAccountsSubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="41" y="18" width="503" height="12"/>
+				<textElement markup="html">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[663 Bukit Timah Road Singapore 269783. Tel: +65 6464 7077 Fax: +65 6464 7060 Website: <u>www.hcis.edu.sg</u> Email: <u>admin@hcis.edu.sg</u>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="30" width="472" height="10"/>
+				<textElement>
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[UEN/GST No. 200405080R    Charity Reg. No.: 1800]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="199">
+			<frame>
+				<reportElement positionType="Float" x="10" y="0" width="545" height="199"/>
+				<staticText>
+					<reportElement x="41" y="179" width="472" height="10"/>
+					<textElement>
+						<font fontName="SansSerif" size="7" isBold="false"/>
+					</textElement>
+					<text><![CDATA[UEN/GST No. 200405080R    Charity Reg. No.: 1800]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="41" y="167" width="503" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="7"/>
+					</textElement>
+					<text><![CDATA[663 Bukit Timah Road Singapore 269783. Tel: +65 6464 7077 Fax: +65 6464 7060 Website: <u>www.hcis.edu.sg</u> Email: <u>admin@hcis.edu.sg</u>]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="18" y="16" width="472" height="10"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Note :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="54" width="298" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Cheque should be crossed and made payable to]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="66" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[For Electronic Transfer, please credit to the following account:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="78" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Account Name : Hwa Chong International School]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="112" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Bank Code : 7339      Account No. : 591-847819-001      Bank Swift Code : OCBCSGSG]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="124" width="435" height="12"/>
+					<textElement markup="html">
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Please e-mail your payment advice to <u>milliechong@hcis.edu.sg</u>]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="90" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Bank Name : Overseas-Chinese Banking Corporation Limited]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="227" y="54" width="196" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[“HWA CHONG INTERNATIONAL SCHOOL”.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="136" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Please contact Millie Chong at +65 6427 4609 if you need further clarification.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="124" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[5.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="66" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[4.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="136" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[6.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="54" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[3.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="30" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[This statement will be considered correct unless you notify us of any errors within 7 days.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="52" y="42" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Any payment received after the statement date will be shown on the following month.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="42" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[2.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="30" width="11" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[1.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="101" width="435" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8"/>
+					</textElement>
+					<text><![CDATA[Bank Address : 63 Chulia Street #02-20 OCBC Centre East Singapore 049514]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</lastPageFooter>
+</jasperReport>

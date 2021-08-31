@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report6" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JournalEntryReportDTO1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JournalEntryReportDTO2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<frame>
+				<reportElement isPrintRepeatedValues="false" x="0" y="2" width="555" height="395">
+					<printWhenExpression><![CDATA[$P{JournalEntryReportDTO1}.getRecordCount()!=0]]></printWhenExpression>
+				</reportElement>
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="395"/>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JournalEntryReportDTO1}.getData())]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport}]]></subreportExpression>
+				</subreport>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="405" width="555" height="395">
+					<printWhenExpression><![CDATA[$P{JournalEntryReportDTO2}.getRecordCount()!=0]]></printWhenExpression>
+				</reportElement>
+				<subreport>
+					<reportElement x="0" y="0" width="555" height="395">
+						<printWhenExpression><![CDATA[$P{JournalEntryReportDTO2}!=null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JournalEntryReportDTO2}.getData())]]></dataSourceExpression>
+					<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport}]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

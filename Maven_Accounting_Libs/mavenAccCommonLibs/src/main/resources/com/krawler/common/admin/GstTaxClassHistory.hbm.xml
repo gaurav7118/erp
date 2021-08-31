@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.GstTaxClassHistory" table="gsttaxclasshistory">
+    <id column="id" name="id" type="string">
+      <generator class="uuid"/>
+    </id>
+    <property name="productTaxClass" type="string">
+      <column name="producttaxclass"/>
+    </property>
+    <property name="refDocId" type="string">
+      <column name="refdocid" not-null="true"/>
+    </property>
+    <property name="moduleId" type="int">
+      <column default="0" name="moduleid"/>
+    </property>
+  </class>
+</hibernate-mapping>

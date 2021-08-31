@@ -1,0 +1,86 @@
+<tr><td>
+#if($isDetailsTable)
+    #if($taskTableHeader.length() > 0)
+        #if($taskTableHeader.get(0) != "")
+            <TABLE border="0" id = "$detailsTableId" bordertype="border1"  class ="" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+                <tbody>
+                    <tr><td style="background-color:black;color:white;text-align:center;font-weight: bold;">$taskTableHeader.get(0)</td></tr>
+                </tbody>
+            </TABLE>
+        #end
+    #end
+    #if ($isroundborder) 
+        <TABLE border="0" id = "$detailsTableId" class ="lineitembordereffect1 tableroundborder lineitemtablewrap" bordertype="border1" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #else
+        <TABLE border="0" id = "$detailsTableId" bordertype="border1"  class ="" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #end
+#end
+<thead>    
+    <TR>
+        #foreach( $header1 in $tableHeader )  
+            <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style">$header1.data</TH>  
+        #end  
+    </TR>
+</thead>    
+<tbody>  
+    #set($tableCount=0)
+    #set($rowCount=0)
+    #set($tablesCompleted=0)
+    #foreach( $prod in $prodList )  
+        #if($tablesCompleted == 0 && $taskBreak.length() > 0)
+            #if($taskBreak.get($tableCount) == $rowCount)
+                </tbody>
+                </TABLE> 
+                #set($rowCount=0)
+                #set($tableCount=$tableCount+1)
+                #if($taskBreak.length() == $tableCount)
+                    #set($tablesCompleted = 1)
+                #end
+                #if($isDetailsTable)
+                    #if($taskTableHeader.length() > 0 && $tableCount < $taskTableHeader.length())
+                        <TABLE border="0" id = "$detailsTableId" bordertype="border1"  class ="" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+                            <tbody>
+                                <tr><td style="border:0px none;"></td></tr>
+                                #if($taskTableHeader.get($tableCount) != "")
+                                    <tr><td style="background-color:black;color:white;text-align:center;font-weight: bold;">$taskTableHeader.get($tableCount)</td></tr>
+                                #end
+                            </tbody>
+                        </TABLE>
+                    #else
+                        <TABLE border="0" id = "$detailsTableId" bordertype="border1"  class ="" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+                            <tbody>
+                                <tr><td style="border:0px none;"></td></tr>
+                            </tbody>
+                        </TABLE>
+                    #end
+                    #if ($isroundborder) 
+                        <TABLE border="0" id = "$detailsTableId" class ="lineitembordereffect1 tableroundborder lineitemtablewrap" bordertype="border1" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+                    #else
+                        <TABLE border="0" id = "$detailsTableId" bordertype="border1"  class ="" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+                    #end
+                #end
+                <thead>    
+                    <TR>
+                        #foreach( $header1 in $tableHeader )  
+                            <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style">$header1.data</TH>  
+                        #end  
+                    </TR>
+                </thead>    
+                <tbody>  
+            #end
+        #end
+
+        <TR style="padding: 4px;">  
+        #foreach( $CustomDesignLineItemProp in $prod )  
+            #if ($isroundborder) 
+                <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;font-size:13px" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+            #else
+                <TD style="border:1px solid; padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;font-size:13px" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+            #end
+        #end  
+        </TR> 
+        #set($rowCount=$rowCount+1)
+    #end 
+</tbody>
+</TABLE> 
+</td></tr>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- alternate XML view resolver, invoked if view returned from controller matches views.xml mapping -->
+    <bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="1" /> 
+    </bean>
+    <!--<import resource="jasperviews.xml"/>-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.JstlView</value>
+        </property>
+    </bean>
+
+    <bean id="pdfJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/JEReport.jrxml"/>
+
+    </bean>
+    
+    <bean id="pdfJournalEntryLandscape"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/JEReport_Landscape.jrxml"/>
+
+    </bean>
+    
+    <bean id="landPlusPdfJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/LandPlusJEReport.jrxml"/>
+    </bean>
+    
+    <bean id="landPlusPdfJournalEntryLandscape"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/LandPlusJEReport_Landscape.jrxml"/>
+    </bean>
+
+    <bean id="satsPdfJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/JEReport_3DeciAmount.jrxml"/>
+
+    </bean>
+    
+    <bean id="satsPdfJournalEntryLandscape"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/JEReport_Landscape_3DeciAmount.jrxml"/>
+
+    </bean>
+    
+    <bean id="BITpdfJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/BITJEReport.jrxml"/>
+
+    </bean>
+    
+    <bean id="TIDJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/TIDJEReport.jrxml"/>
+    </bean>
+    
+    <bean id="GCJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="jrxml/GuanChongJournalVoucher.jrxml"/>
+        <!--        <property name="url" value="jrxml/GuanChongJournalVoucherMainReport.jrxml"/> //Commented as per the discussion with refer to ticket ERP-4153-->
+    </bean>
+
+    <bean id="VHQJE_Landscape"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/VHQJEReportLandscape.jrxml"/>
+    </bean>
+    
+    <bean id="VHQJournalEntry"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report_v1.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/VHQJEReport.jrxml"/>
+    </bean>
+    
+    <bean id="primePartnersJournalEntryLandscape"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
+        <property name="headers" value="Content-Disposition : attachment; filename=Journal_Entry_Report.pdf;"/>
+        <property name="reportDataKey" value="datasource"/>
+        <property name="url" value="classpath:com/krawler/jasper/PrimePartners_Landscape.jrxml"/>
+
+    </bean>
+    <bean id="openSessionInViewInterceptor" name="openSessionInViewInterceptor"
+          class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory" />
+        </property>
+        <property name="flushMode">
+            <bean
+                id="org.springframework.orm.hibernate3.HibernateAccessor.FLUSH_AUTO"
+                class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+        </property>
+    </bean>
+</beans>

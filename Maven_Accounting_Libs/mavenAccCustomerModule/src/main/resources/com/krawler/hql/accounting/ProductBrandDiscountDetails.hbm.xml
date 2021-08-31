@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ProductBrandDiscountDetails" table="productbranddiscountdetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="applicableDate" type="date">
+            <column name="applicabledate"/>
+        </property>
+        <property name="isCustomerCategory" type="true_false">
+            <column default="false" name="iscustomercategory"/>
+        </property>
+        <property name="discountType" type="string">
+            <column length="255" name="discounttype"/>
+        </property>
+        <property name="discountValue" type="double">
+            <column name="discountvalue" default='0'/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.PricingBandMaster" column="pricingbandmaster" name="pricingBandMaster"/>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" name="customer" column="customer"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="customerCategory" column="customercategory"/>
+        <many-to-one class="com.krawler.common.admin.FieldComboData" name="productBrand" column="productbrand"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.device.connection.Abstract",{extend:"Ext.Evented",mixins:["Ext.mixin.Observable"],config:{online:false,type:null},UNKNOWN:"Unknown connection",ETHERNET:"Ethernet connection",WIFI:"WiFi connection",CELL_2G:"Cell 2G connection",CELL_3G:"Cell 3G connection",CELL_4G:"Cell 4G connection",NONE:"No network connection",isOnline:function(){return this.getOnline()}})

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.spring.mrp.routingmanagement.RoutingTemplateMachineMapping" table="routingtemplate_machine_mapping">
+          <id name="id" column="id">
+            <generator class="uuid" />
+        </id> 
+        <many-to-one class="com.krawler.spring.mrp.routingmanagement.RoutingTemplate" name="routingtemplate" column="routingtemplateid"/>     
+        <many-to-one class="com.krawler.spring.mrp.machinemanagement.Machine" name="machineid" column="machineid"/>     
+    </class> 
+</hibernate-mapping>

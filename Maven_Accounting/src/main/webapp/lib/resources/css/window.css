@@ -1,0 +1,203 @@
+.x-window {
+	zoom: 1;
+}
+.x-window .x-resizable-handle {
+	opacity: 0;
+	filter: alpha(opacity=0);
+
+	-moz-opacity: 0;
+}
+.x-window-proxy {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 12000;
+	display: none;
+	overflow: hidden;
+	border: 1px solid #99bbe8;
+	background: #c7dffc;
+	opacity: .5;
+	filter: alpha(opacity=50);
+
+	-moz-opacity: .5;
+}
+.x-window-header {
+	overflow: hidden;
+	zoom: 1;
+}
+.x-window-bwrap {
+	position: relative;
+	z-index: 1;
+	zoom: 1;
+}
+.x-window-tl .x-window-header {
+	padding: 5px 0 4px 0;
+	color: #15428b;
+	font: bold 11px tahoma, arial, verdana, sans-serif;
+}
+.x-window-header-text {
+	cursor: pointer;
+}
+.x-window-tc {
+	overflow: hidden;
+	background: transparent url(../images/default/window/top-bottom.png) repeat-x 0 0;
+	zoom: 1;
+}
+.x-window-tl {
+	position: relative;
+	z-index: 1;
+	padding-left: 6px;
+	background: transparent url(../images/default/window/left-corners.png) no-repeat 0 0;
+	zoom: 1;
+}
+.x-window-tr {
+	padding-right: 6px;
+	background: transparent url(../images/default/window/right-corners.png) no-repeat right 0;
+}
+.x-window-bc {
+	background: transparent url(../images/default/window/top-bottom.png) repeat-x 0 bottom;
+	zoom: 1;
+}
+.x-window-bc .x-window-footer {
+	padding-bottom: 6px;
+	font-size: 0;
+	line-height: 0;
+	zoom: 1;
+}
+.x-window-bl {
+	padding-left: 6px;
+	background: transparent url(../images/default/window/left-corners.png) no-repeat 0 bottom;
+	zoom: 1;
+}
+.x-window-br {
+	padding-right: 6px;
+	background: transparent url(../images/default/window/right-corners.png) no-repeat right bottom;
+	zoom: 1;
+}
+.x-window-mc {
+	margin: 0;
+	padding: 0;
+	border: 1px solid #99bbe8;
+	background: #dfe8f6;
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+}
+.x-window-ml {
+	padding-left: 6px;
+	background: transparent url(../images/default/window/left-right.png) repeat-y 0 0;
+	zoom: 1;
+}
+.x-window-mr {
+	padding-right: 6px;
+	background: transparent url(../images/default/window/left-right.png) repeat-y right 0;
+	zoom: 1;
+}
+.x-panel-nofooter .x-window-bc {
+	height: 6px;
+}
+.x-window-body {
+	overflow: hidden;
+}
+.x-window-bwrap {
+	overflow: hidden;
+}
+.x-window-maximized .x-window-bl,
+.x-window-maximized .x-window-br,
+.x-window-maximized .x-window-ml,
+.x-window-maximized .x-window-mr,
+.x-window-maximized .x-window-tl,
+.x-window-maximized .x-window-tr {
+	padding: 0;
+}
+.x-window-maximized .x-window-footer {
+	padding-bottom: 0;
+}
+.x-window-maximized .x-window-tc {
+	padding-right: 3px;
+	padding-left: 3px;
+	background-color: white;
+}
+.x-window-maximized .x-window-mc {
+	border-right: 0 none;
+	border-left: 0 none;
+}
+.x-window-tbar .x-toolbar,
+.x-window-bbar .x-toolbar {
+	border-right: 0 none;
+	border-left: 0 none;
+}
+.x-window-bbar .x-toolbar {
+	border-top: 1px solid #99bbe8;
+	border-bottom: 0 none;
+}
+.x-window-draggable,
+.x-window-draggable .x-window-header-text {
+	cursor: move;
+}
+.x-window-maximized .x-window-draggable,
+.x-window-maximized .x-window-draggable .x-window-header-text {
+	cursor: default;
+}
+.x-window-body {
+	background: transparent;
+}
+.x-panel-ghost .x-window-tl {
+	border-bottom: 1px solid #99bbe8;
+}
+.x-panel-collapsed .x-window-tl {
+	border-bottom: 1px solid #84a0c4;
+}
+.x-window-maximized-ct {
+	overflow: hidden;
+}
+.x-window-maximized .x-resizable-handle {
+	display: none;
+}
+.x-window-sizing-ghost ul {
+	border: 0 none !important;
+}
+.x-dlg-focus {
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	outline: 0 none;
+
+	-moz-outline: 0 none;
+}
+.x-dlg-mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	display: none;
+	background-color: #ccc;
+	opacity: .50;
+	filter: alpha(opacity=50);
+
+	-moz-opacity: 0.5;
+}
+body.wtf-ie6.x-body-masked select {
+	visibility: hidden;
+}
+body.wtf-ie6.x-body-masked .x-window select {
+	visibility: visible;
+}
+.x-window-plain .x-window-mc {
+	border-top: 1px solid #a3bae9;
+	border-right: 1px solid #dfe8f6;
+	border-bottom: 1px solid #dfe8f6;
+	border-left: 1px solid #a3bae9;
+	background: #cad9ec;
+}
+.x-window-plain .x-window-body {
+	border-top: 1px solid #dfe8f6;
+	border-right: 1px solid #a3bae9;
+	border-bottom: 1px solid #a3bae9;
+	border-left: 1px solid #dfe8f6;
+	background: transparent !important;
+}
+body.x-body-masked .x-window-plain .x-window-mc {
+	background: #c7d6e9;
+}

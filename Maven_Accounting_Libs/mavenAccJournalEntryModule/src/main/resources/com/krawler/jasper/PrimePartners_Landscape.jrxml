@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testRpt" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.652892561983471"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<field name="entryNumber" class="java.lang.String"/>
+	<field name="entryDate" class="java.lang.String"/>
+	<field name="memo" class="java.lang.String"/>
+	<field name="accountName" class="java.lang.String"/>
+	<field name="debitAmount" class="java.lang.Double"/>
+	<field name="creditAmount" class="java.lang.Double"/>
+	<field name="transactionID" class="java.lang.String"/>
+	<field name="transactionDetails" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="accountCode" class="java.lang.String"/>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="reference" class="java.lang.String"/>
+	<field name="debitAmountInBase" class="java.lang.Double"/>
+	<field name="creditAmountInBase" class="java.lang.Double"/>
+	<field name="currencyCode" class="java.lang.String"/>
+	<field name="exchangeRate" class="java.lang.String"/>
+	<field name="customField" class="java.lang.String"/>
+	<field name="customFiled2" class="java.lang.String"/>
+	<field name="customFiled1" class="java.lang.String"/>
+	<field name="customFiled3" class="java.lang.String"/>
+	<field name="bank" class="java.lang.String"/>
+	<field name="cheque" class="java.lang.String"/>
+	<variable name="debitSum" class="java.lang.Double" resetType="Group" resetGroup="entryno" calculation="Sum">
+		<variableExpression><![CDATA[$F{debitAmount}]]></variableExpression>
+	</variable>
+	<variable name="creditSum" class="java.lang.Double" resetType="Group" resetGroup="entryno" calculation="Sum">
+		<variableExpression><![CDATA[$F{creditAmount}]]></variableExpression>
+	</variable>
+	<variable name="debitSumInBase" class="java.lang.Double" resetType="Group" resetGroup="entryno" calculation="Sum">
+		<variableExpression><![CDATA[$F{debitAmountInBase}]]></variableExpression>
+	</variable>
+	<variable name="creditSumInBase" class="java.lang.Double" resetType="Group" resetGroup="entryno" calculation="Sum">
+		<variableExpression><![CDATA[$F{creditAmountInBase}]]></variableExpression>
+	</variable>
+	<group name="entryno" isStartNewPage="true" isReprintHeaderOnEachPage="true" footerPosition="StackAtBottom">
+		<groupExpression><![CDATA[$F{entryNumber}]]></groupExpression>
+		<groupHeader>
+			<band height="164">
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="-1" y="0" width="804" height="164" isPrintInFirstWholeBand="true"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="609" y="77" width="180" height="30"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="5.0"/>
+						<rightPen lineWidth="5.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionID}.equals("")?$F{entryNumber}:$F{transactionID}]]></textFieldExpression>	
+                                        </textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="2" y="3" width="565" height="20"/>
+					<textElement>
+						<font size="14" isBold="true" isItalic="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="2" y="34" width="413" height="72"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="5.0"/>
+						<rightPen lineWidth="5.0"/>
+					</box>
+					<rectangle>
+						<reportElement mode="Opaque" x="0" y="24" width="411" height="23"/>
+					</rectangle>
+					<textField isStretchWithOverflow="true">
+						<reportElement x="113" y="51" width="293" height="16"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{memo}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="7" y="5" width="104" height="16"/>
+						<textElement>
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Batch / Entry :         ]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="113" y="28" width="293" height="16"/>
+						<textElement>
+							<font size="9" isItalic="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{entryDate}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="7" y="51" width="104" height="16"/>
+						<textElement>
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Entry Description :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="113" y="5" width="293" height="16"/>
+						<textElement>
+							<font size="9" isItalic="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{entryNumber}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="7" y="28" width="104" height="16"/>
+						<textElement>
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Date :]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement positionType="FixRelativeToBottom" mode="Transparent" x="1" y="127" width="802" height="37"/>
+					<rectangle>
+						<reportElement mode="Transparent" x="0" y="0" width="801" height="37"/>
+					</rectangle>
+					<rectangle>
+						<reportElement mode="Transparent" x="127" y="0" width="158" height="37"/>
+					</rectangle>
+					<rectangle>
+						<reportElement mode="Transparent" x="369" y="0" width="45" height="37"/>
+					</rectangle>
+					<rectangle>
+						<reportElement mode="Transparent" x="568" y="0" width="155" height="37"/>
+					</rectangle>
+					<rectangle>
+						<reportElement mode="Transparent" x="414" y="0" width="309" height="17"/>
+					</rectangle>
+					<rectangle>
+						<reportElement mode="Transparent" x="491" y="17" width="77" height="20"/>
+					</rectangle>
+					<rectangle>
+						<reportElement mode="Transparent" x="646" y="17" width="77" height="20"/>
+					</rectangle>
+					<staticText>
+						<reportElement x="646" y="21" width="77" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Credit
+                ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="414" y="21" width="77" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Debit
+                ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="2" y="4" width="56" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Account]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="127" y="4" width="157" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Description
+                ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="285" y="4" width="83" height="31" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Exchange
+Rate]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="369" y="4" width="45" height="31" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Cur
+Code]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="491" y="21" width="77" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Credit
+                ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="569" y="21" width="77" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Debit
+                ]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="414" y="4" width="154" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Source Currency]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="569" y="4" width="154" height="15" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Functional Currency]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="723" y="4" width="78" height="31" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Project]]></text>
+					</staticText>
+					<rectangle>
+						<reportElement mode="Transparent" x="58" y="0" width="23" height="37"/>
+					</rectangle>
+					<staticText>
+						<reportElement x="62" y="4" width="15" height="31" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[CS / CF]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="83" y="4" width="41" height="31" forecolor="#010101"/>
+						<textElement textAlignment="Center">
+							<font size="8" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Onshore / Offshore]]></text>
+					</staticText>
+				</frame>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="609" y="34" width="180" height="30"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="5.0"/>
+						<rightPen lineWidth="5.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="788" y="33" width="4" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement x="608" y="63" width="5" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" x="608" y="106" width="5" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement x="788" y="76" width="4" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement x="414" y="33" width="4" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="FixRelativeToBottom" x="1" y="105" width="4" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<frame>
+					<reportElement x="421" y="58" width="182" height="49">
+						<printWhenExpression><![CDATA[!$P{title}.equalsIgnoreCase("GL Voucher")]]></printWhenExpression>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="5.0"/>
+						<rightPen lineWidth="5.0"/>
+					</box>
+					<rectangle>
+						<reportElement mode="Opaque" x="0" y="0" width="180" height="23"/>
+					</rectangle>
+					<textField isStretchWithOverflow="true">
+						<reportElement x="55" y="27" width="122" height="16"/>
+						<textElement>
+							<font size="9" isBold="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{cheque}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="55" y="6" width="124" height="16"/>
+						<textElement>
+							<font size="9" isItalic="false"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{bank}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="7" y="27" width="64" height="16"/>
+						<textElement>
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Cheque:]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="7" y="5" width="64" height="16"/>
+						<textElement>
+							<font size="9" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Bank:]]></text>
+					</staticText>
+				</frame>
+				<rectangle>
+					<reportElement x="602" y="57" width="4" height="4"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="88">
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="804" height="86" isPrintInFirstWholeBand="true"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="286" y="0" width="438" height="18"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="415" y="0" width="77" height="18"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="569" y="0" width="78" height="18"/>
+				</rectangle>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement x="570" y="3" width="77" height="15"/>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{debitSumInBase}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement x="647" y="3" width="77" height="15"/>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{creditSumInBase}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="286" y="3" width="127" height="15"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total      ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="71" width="145" height="15"/>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Prepared By]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="72" width="145" height="15"/>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Checked By]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="632" y="72" width="145" height="15">
+						<printWhenExpression><![CDATA[false]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Send out on :]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="632" y="39" width="145" height="33">
+						<printWhenExpression><![CDATA[false]]></printWhenExpression>
+					</reportElement>
+				</rectangle>
+				<line>
+					<reportElement x="295" y="71" width="100" height="1"/>
+				</line>
+				<line>
+					<reportElement x="10" y="70" width="100" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="-1" width="803" height="1"/>
+				</line>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement x="415" y="3" width="77" height="15"/>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{debitSum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement x="492" y="3" width="77" height="15"/>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{creditSum}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="555" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="128" width="58" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="128" y="128" width="158" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="286" y="128" width="84" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="370" y="128" width="45" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="415" y="128" width="77" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="492" y="128" width="77" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="569" y="128" width="78" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="647" y="128" width="77" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="724" y="128" width="78" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="59" y="128" width="23" height="423"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="82" y="128" width="46" height="423"/>
+			</rectangle>
+		</band>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="128" y="0" width="158" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accountName}+($F{description}.equals("")?"":"\n"+$F{description})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="570" y="0" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{debitAmountInBase}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="647" y="0" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{creditAmountInBase}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="3" y="0" width="56" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{accountCode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="370" y="0" width="45" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currencyCode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="492" y="0" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{creditAmount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="415" y="0" width="77" height="15"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{debitAmount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="286" y="0" width="84" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exchangeRate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="724" y="0" width="78" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customFiled3}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="61" y="0" width="23" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customFiled1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="84" y="1" width="44" height="15"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customFiled2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

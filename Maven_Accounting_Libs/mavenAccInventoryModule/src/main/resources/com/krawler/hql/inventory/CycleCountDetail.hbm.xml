@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.cyclecount.CycleCountDetail" table="in_cc_detail" >
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="batchName" type="string">
+      <column length="50" name="batchname"/>
+    </property>
+    <property name="actualSerials" type="string">
+            <column sql-type="text" name="countedserials"/>
+    </property>
+    <property name="systemSerials" type="string">
+            <column sql-type="text" name="systemserials"/>
+    </property>
+    <property name="actualSerialsSku" type="string">
+            <column sql-type="text" name="countedserialssku"/>
+    </property>
+    <property name="systemSerialsSku" type="string">
+            <column sql-type="text" name="systemserialssku"/>
+    </property>
+    <property name="actualQuantity" type="double">
+      <column name="stockuom_count"/>
+    </property>
+    <property name="systemQuantity" type="double">
+      <column name="systemqty"/>
+    </property>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="row" name="row"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="rack" name="rack"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="bin" name="bin"/>
+        <many-to-one class="com.krawler.inventory.model.cyclecount.CycleCount" column="cyclecount" name="cycleCount" not-null="true"/>
+
+  </class>
+</hibernate-mapping>

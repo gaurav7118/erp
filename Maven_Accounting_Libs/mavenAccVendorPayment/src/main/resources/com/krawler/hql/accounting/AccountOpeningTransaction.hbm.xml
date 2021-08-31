@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.AccountOpeningTransaction" table="accountopeningtransaction">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="memo" type="string">
+      <column length="2048" name="memo"/>
+    </property>
+    <property name="transactionNumber" type="string">
+      <column length="50" name="transactionnumber" not-null="true"/>
+    </property>
+    <property name="externalCurrencyRate" type="double">
+      <column default="0" name="externalcurrencyrate" not-null="true"/>
+    </property>
+    <property name="creationDate" type="date">
+      <column name="creationdate"/>
+    </property>
+    <property name="createdon" type="long">
+      <column name="createdon" not-null="true"/>
+    </property>
+    <property name="updatedon" type="long">
+      <column name="updatedon" not-null="true"/>
+    </property>
+    <property name="depositAmount" type="double">
+      <column name="depositamount"/>
+    </property>
+    <property name="depositamountinbase" type="double">
+      <column default="0" name="depositamountinbase"/>
+    </property>
+    <property name="isPayment" type="boolean">
+        <column name="ispayment"/>
+    </property>
+    <property name="exchangeRateForOpeningTransaction" type="double">
+        <column  name="exchangerateforopeningtransaction"/>
+    </property>
+    <property name="conversionRateFromCurrencyToBase" type="boolean">
+        <column  name="isconversionratefromcurrencytobase"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency" not-null="true"/>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.PayDetail" column="paydetail" name="payDetail" unique="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Account" column="account" name="account"/>
+    <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>
+    <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+  </class>
+</hibernate-mapping>

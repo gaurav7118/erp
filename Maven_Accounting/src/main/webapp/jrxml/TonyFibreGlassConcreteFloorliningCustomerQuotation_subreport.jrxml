@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TonyFibreGlassCustomerQuotation_subreport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.771561000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="charactersList" class="java.util.List"/>
+	<field name="Treatment_Area" class="java.lang.String"/>
+	<field name="Area" class="java.lang.String"/>
+	<field name="Product_Name" class="java.lang.String"/>
+	<field name="Price_Double" class="java.lang.Double"/>
+	<field name="AmountCurrency" class="java.lang.String"/>
+	<variable name="Price_Double_1" class="java.lang.Double" resetType="Group" resetGroup="Treatment Area" calculation="Sum">
+		<variableExpression><![CDATA[$F{Price_Double}]]></variableExpression>
+	</variable>
+	<variable name="cntUser" class="java.lang.Integer" incrementType="Group" incrementGroup="Treatment Area">
+		<variableExpression><![CDATA[($V{Treatment Area_COUNT} == 1) ? $V{cntUser} + 1 : $V{cntUser}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<group name="Treatment Area">
+		<groupExpression><![CDATA[$F{Treatment_Area}]]></groupExpression>
+		<groupHeader>
+			<band height="64">
+				<textField>
+					<reportElement x="56" y="10" width="259" height="20"/>
+					<textElement markup="html">
+						<font fontName="DejaVu Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" <U>"+$F{Treatment_Area}+"</u>"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="24" y="30" width="531" height="20"/>
+					<textElement>
+						<font fontName="DejaVu Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Area : "+$F{Area}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="1" y="10" width="55" height="20"/>
+					<textElement>
+						<font fontName="DejaVu Serif" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Item "+$V{cntUser}+")"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="24" y="50" width="44" height="14" printWhenGroupChanges="Treatment Area"/>
+					<textElement>
+						<font fontName="DejaVu Serif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Price :]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="21">
+				<textField pattern="#,##0.00">
+					<reportElement x="270" y="0" width="100" height="20"/>
+					<textElement>
+						<font fontName="DejaVu Serif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{Price_Double_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="141" y="0" width="98" height="20"/>
+					<textElement>
+						<font fontName="DejaVu Serif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sub total  :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="240" y="0" width="30" height="20"/>
+					<textElement textAlignment="Right" markup="html">
+						<font fontName="DejaVu Serif" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AmountCurrency}+" "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="300" y="0" width="100" height="16"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{Price_Double}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="202" height="16"/>
+				<textElement>
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Product_Name}+" :"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="0" width="30" height="16"/>
+				<textElement textAlignment="Right" markup="html">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AmountCurrency}+" "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="65" height="16"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Serif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{charactersList}.get(($V{Treatment Area_COUNT}-1)%26)+")"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

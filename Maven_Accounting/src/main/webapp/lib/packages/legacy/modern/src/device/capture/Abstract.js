@@ -1,0 +1,1 @@
+Ext.define("Ext.device.capture.Abstract",{alternateClassName:"Ext.device.capture.Simulator",captureAudio:Ext.emptyFn,captureVideo:Ext.emptyFn})

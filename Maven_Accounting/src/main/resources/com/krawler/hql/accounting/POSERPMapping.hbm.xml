@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.pos.POSERPMapping" table="erp_pos_mapping">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="walkinCustomer" type="string">
+            <column length="50" name="walkincustomer" not-null="true"/>
+        </property>
+        <property name="cashOutAccountId" type="string">
+            <column length="50" name="cashoutaccount" not-null="true"/>
+        </property>
+        <property name="paymentMethodId" type="string">
+            <column default="" length="50" name="paymentmethod"/>
+        </property>
+        <property name="depositAccountId" type="string">
+            <column length="50" name="depositaccount"/>
+        </property>
+        <property name="storeid" type="string">
+            <column default="" length="50" name="storeid" not-null="true"/>
+        </property>
+        <property name="creditnoteSequenceFormat" type="string">
+            <column default="" length="50" name="cnsequenceformat"/>
+        </property>
+        <property name="salesreturnSequenceFormat" type="string">
+            <column default="" length="50" name="srsequenceformat"/>
+        </property>
+        <property name="invoiceSequenceFormat" type="string">
+            <column default="" length="50" name="invoicesequenceformat"/>
+        </property>
+        <property name="salesOrderSequenceFormat" type="string">
+            <column default="" length="50" name="salesordersequenceformat"/>
+        </property>
+        <property name="deliveryOrderSequenceFormat" type="string">
+            <column default="" length="50" name="dosequenceformat"/>
+        </property>
+        <property name="makePaymentSequenceFormat" type="string">
+            <column default="" length="50" name="makepaymentsequenceformat"/>
+        </property>
+        <property name="receivePaymentSequenceFormat" type="string">
+            <column default="" length="50" name="receiveapaymentsequenceformat"/>
+        </property>
+        <property name="isCloseRegisterMultipleTimes" type="true_false">
+            <column name="iscloseregistermultipletimes" default="false"/>   
+        </property>
+        <property name="updatedon" type="long">
+            <column name="updatedon" not-null="true"/>
+        </property>
+        <property name="createdon" type="long">
+            <column name="createdon" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="userid"/>
+    </class>
+</hibernate-mapping>

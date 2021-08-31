@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 1, 2009 3:40:56 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.Rolelist" table="rolelist" >
+        <id name="roleid" type="string">
+            <column name="roleid" />
+            <generator class="assigned" />
+        </id>
+        <property name="rolename" type="string">
+            <column name="rolename" length="100"  />
+        </property>
+        <property name="displayrolename" type="string">
+            <column name="displayrolename"  />
+        </property>
+         <property name="description" type="string">
+            <column name="description"/>
+        </property>
+         <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

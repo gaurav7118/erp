@@ -1,0 +1,35 @@
+.x-progress-wrap {
+	overflow: hidden;
+	border: 1px solid #6593cf;
+}
+.x-progress-inner {
+	position: relative;
+	height: 18px;
+	background: #e0e8f3 url(../images/default/qtip/bg.gif) repeat-x;
+}
+.x-progress-bar {
+	float: left;
+	width: 0;
+	height: 18px;
+	border-top: 1px solid #d1e4fd;
+	border-right: 1px solid #7fa9e4;
+	border-bottom: 1px solid #7fa9e4;
+	background: #9cbfee url(../images/default/progress/progress-bg.gif ) repeat-x left center;
+}
+.x-progress-text {
+	position: absolute;
+	left: 0;
+	overflow: hidden;
+	padding: 1px 5px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	font-size: 11px;
+}
+.x-progress-text-back {
+	color: #396095;
+	line-height: 16px;
+}
+.wtf-ie .x-progress-text-back {
+	line-height: 15px;
+}

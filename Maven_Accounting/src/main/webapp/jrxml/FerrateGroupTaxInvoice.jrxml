@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SenwanGroupCustomerQuotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000057"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="279"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#73ACEA"/>
+			<topPen lineColor="#73ACEA"/>
+			<leftPen lineColor="#73ACEA"/>
+			<bottomPen lineColor="#73ACEA"/>
+			<rightPen lineColor="#73ACEA"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" forecolor="#FEFEFE" backcolor="#C4D8EA" fill="Solid" fontName="SansSerif">
+		<pen lineWidth="1.0" lineColor="#73ACEA"/>
+		<box>
+			<pen lineWidth="0.75" lineColor="#73ACEA"/>
+			<topPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<leftPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<bottomPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<rightPen lineWidth="0.75" lineColor="#73ACEA"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<pen lineWidth="1.0" lineColor="#73ACEA"/>
+		<box>
+			<pen lineWidth="0.75" lineColor="#73ACEA"/>
+			<topPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<leftPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<bottomPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<rightPen lineWidth="0.75" lineColor="#73ACEA"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#010101">
+		<box>
+			<pen lineWidth="1.0" lineColor="#010101"/>
+			<topPen lineWidth="1.0" lineColor="#010101"/>
+			<leftPen lineWidth="1.0" lineColor="#010101"/>
+			<bottomPen lineWidth="1.0" lineColor="#010101"/>
+			<rightPen lineWidth="1.0" lineColor="#010101"/>
+		</box>
+	</style>
+	<style name="table_CH_1" mode="Opaque" forecolor="#FEFEFE" backcolor="#ACCDEC" fill="Solid" fontName="SansSerif">
+		<pen lineWidth="1.0" lineColor="#73ACEA"/>
+		<box>
+			<pen lineWidth="0.75" lineColor="#73ACEA"/>
+			<topPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<leftPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<bottomPen lineWidth="0.75" lineColor="#73ACEA"/>
+			<rightPen lineWidth="0.75" lineColor="#73ACEA"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 2">
+		<field name="sno" class="java.lang.String"/>
+		<field name="description" class="java.lang.String"/>
+		<field name="code" class="java.lang.String"/>
+		<field name="volume" class="java.lang.String"/>
+		<field name="unitprice" class="java.lang.String"/>
+		<field name="amount" class="java.lang.String"/>
+		<field name="currency" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="CommercialInvoiceSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="header" class="java.lang.String"/>
+	<parameter name="footer" class="java.lang.String"/>
+	<field name="terms" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="invno" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="subtotal" class="java.lang.String"/>
+	<field name="gst" class="java.lang.String"/>
+	<field name="totalamount" class="java.lang.String"/>
+	<field name="currencyname" class="java.lang.String"/>
+	<field name="gstpercent" class="java.lang.String"/>
+	<field name="donumber" class="java.lang.String"/>
+	<field name="duedate" class="java.lang.String"/>
+	<field name="poref" class="java.lang.String"/>
+	<field name="attn" class="java.lang.String"/>
+	<field name="contact" class="java.lang.String"/>
+	<field name="currencysymbol" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="116" splitType="Stretch">
+			<staticText>
+				<reportElement x="279" y="9" width="266" height="26"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ferrate Water Treatment Pte Ltd]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="31" width="255" height="14"/>
+				<textElement textAlignment="Left">
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[38 Sungei Kadut Street 2, Singapore 729245.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="45" width="255" height="13"/>
+				<textElement textAlignment="Left">
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Tel: (65) 6364 0338  Fax: (65) 6268 2122]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="58" width="255" height="15"/>
+				<textElement textAlignment="Left">
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Co. Registration No.: 201315490G]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="11" y="13" width="198" height="45"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="82" width="555" height="23"/>
+				<imageExpression><![CDATA[$P{header}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="194">
+			<staticText>
+				<reportElement x="281" y="37" width="90" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVOICE DATE]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="88" y="29" width="184" height="117"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{name}+"<br>"+$F{address}+"<br>"+$F{phone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="29" width="67" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVOICE TO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="419" y="9" width="136" height="29"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="277" y="9" width="142" height="29"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TAX INVOICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="70" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[D/O NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="89" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAYMENT TERMS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="108" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DUE DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="127" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CURRENCY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="146" width="90" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO REF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="146" width="67" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ATTN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="165" width="67" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel/Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="37" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="70" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="89" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="108" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="127" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="146" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="29" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="146" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="165" width="10" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="37" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="89" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{terms}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="70" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{donumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="108" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{duedate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="127" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{currencyname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="146" width="163" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{poref}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="146" width="184" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{attn}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="88" y="165" width="184" height="20"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{contact}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band>
+			<componentElement>
+				<reportElement key="table" mode="Opaque" x="11" y="0" width="534" height="0"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 2">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{CommercialInvoiceSubReportData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="43">
+						<jr:columnHeader style="table_CH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="43" height="23" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[No.]]></text>
+							</staticText>
+							<genericElement>
+								<reportElement mode="Transparent" x="0" y="0" width="0" height="23">
+									<property name="controlParameter" value="true"/>
+								</reportElement>
+								<genericElementType namespace="http://jasperreports.sourceforge.net/jasperreports" name="sort"/>
+								<genericElementParameter name="sortColumnName">
+									<valueExpression><![CDATA["sno"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortColumnType">
+									<valueExpression><![CDATA["Field"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerHorizontalAlign">
+									<valueExpression><![CDATA["Right"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerVerticalAlign">
+									<valueExpression><![CDATA["Middle"]]></valueExpression>
+								</genericElementParameter>
+							</genericElement>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="43" height="17" isPrintWhenDetailOverflows="true"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Trebuchet MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{sno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="187">
+						<jr:columnHeader style="table_CH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="187" height="23" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DESCRIPTION]]></text>
+							</staticText>
+							<genericElement>
+								<reportElement mode="Transparent" x="0" y="0" width="0" height="23">
+									<property name="controlParameter" value="true"/>
+								</reportElement>
+								<genericElementType namespace="http://jasperreports.sourceforge.net/jasperreports" name="sort"/>
+								<genericElementParameter name="sortColumnName">
+									<valueExpression><![CDATA["description"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortColumnType">
+									<valueExpression><![CDATA["Field"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerHorizontalAlign">
+									<valueExpression><![CDATA["Right"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerVerticalAlign">
+									<valueExpression><![CDATA["Middle"]]></valueExpression>
+								</genericElementParameter>
+							</genericElement>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="187" height="17" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Trebuchet MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59">
+						<jr:columnHeader style="table_CH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="23" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[CODE]]></text>
+							</staticText>
+							<genericElement>
+								<reportElement mode="Transparent" x="0" y="0" width="0" height="23">
+									<property name="controlParameter" value="true"/>
+								</reportElement>
+								<genericElementType namespace="http://jasperreports.sourceforge.net/jasperreports" name="sort"/>
+								<genericElementParameter name="sortColumnName">
+									<valueExpression><![CDATA["code"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortColumnType">
+									<valueExpression><![CDATA["Field"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerHorizontalAlign">
+									<valueExpression><![CDATA["Right"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerVerticalAlign">
+									<valueExpression><![CDATA["Middle"]]></valueExpression>
+								</genericElementParameter>
+							</genericElement>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="59" height="17" isPrintWhenDetailOverflows="true"/>
+								<box leftPadding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font fontName="Trebuchet MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="61">
+						<jr:columnHeader style="table_CH" height="23" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="61" height="23" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[QTY]]></text>
+							</staticText>
+							<genericElement>
+								<reportElement mode="Transparent" x="0" y="0" width="0" height="23">
+									<property name="controlParameter" value="true"/>
+								</reportElement>
+								<genericElementType namespace="http://jasperreports.sourceforge.net/jasperreports" name="sort"/>
+								<genericElementParameter name="sortColumnName">
+									<valueExpression><![CDATA["volume"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortColumnType">
+									<valueExpression><![CDATA["Field"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerHorizontalAlign">
+									<valueExpression><![CDATA["Right"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerVerticalAlign">
+									<valueExpression><![CDATA["Middle"]]></valueExpression>
+								</genericElementParameter>
+							</genericElement>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="61" height="17" isPrintWhenDetailOverflows="true"/>
+								<box rightPadding="3"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="Trebuchet MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{volume}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="77">
+						<jr:columnHeader style="table_CH" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="77" height="23" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+									<font fontName="SansSerif" size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["UNIT PRICE ("+$F{currency}+")"]]></textFieldExpression>
+							</textField>
+							<genericElement>
+								<reportElement mode="Transparent" x="0" y="0" width="0" height="23">
+									<property name="controlParameter" value="true"/>
+								</reportElement>
+								<genericElementType namespace="http://jasperreports.sourceforge.net/jasperreports" name="sort"/>
+								<genericElementParameter name="sortColumnName">
+									<valueExpression><![CDATA["unitprice"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortColumnType">
+									<valueExpression><![CDATA["Field"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerHorizontalAlign">
+									<valueExpression><![CDATA["Right"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerVerticalAlign">
+									<valueExpression><![CDATA["Middle"]]></valueExpression>
+								</genericElementParameter>
+							</genericElement>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="77" height="17" isPrintWhenDetailOverflows="true"/>
+								<box rightPadding="3"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font fontName="Trebuchet MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{unitprice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="108">
+						<jr:columnHeader style="table_CH" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="108" height="23" forecolor="#010101"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+									<font fontName="SansSerif" size="8" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["TOTAL PRICE ("+$F{currency}+")"]]></textFieldExpression>
+							</textField>
+							<genericElement>
+								<reportElement mode="Transparent" x="0" y="0" width="0" height="23">
+									<property name="controlParameter" value="true"/>
+								</reportElement>
+								<genericElementType namespace="http://jasperreports.sourceforge.net/jasperreports" name="sort"/>
+								<genericElementParameter name="sortColumnName">
+									<valueExpression><![CDATA["amount"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortColumnType">
+									<valueExpression><![CDATA["Field"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerHorizontalAlign">
+									<valueExpression><![CDATA["Right"]]></valueExpression>
+								</genericElementParameter>
+								<genericElementParameter name="sortHandlerVerticalAlign">
+									<valueExpression><![CDATA["Middle"]]></valueExpression>
+								</genericElementParameter>
+							</genericElement>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="17" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="108" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+								<box rightPadding="3"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+									<font fontName="Trebuchet MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="179">
+			<rectangle>
+				<reportElement style="table_CH" x="438" y="0" width="108" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement style="table_CH" x="438" y="34" width="108" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement style="table_TD" x="438" y="17" width="108" height="17"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#73ACEA"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="336" y="17" width="98" height="17" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Add GST "+$F{gstpercent}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="336" y="34" width="98" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TOTAL "+$F{currencysymbol}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="336" y="0" width="98" height="17" isPrintWhenDetailOverflows="true" forecolor="#010101"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SUBTOTAL "+$F{currencysymbol}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="438" y="0" width="108" height="17" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="438" y="34" width="108" height="17" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalamount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="438" y="17" width="108" height="17" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gst}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="6" width="325" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="8"/>
+				</textElement>
+				<text><![CDATA[All cheques should be crossed and made payable to " Ferrate Water Treatment Pte.Ltd."]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="18" width="323" height="34"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="8"/>
+				</textElement>
+				<text><![CDATA[Interest at the rate of  1.5% per month will be charged on accounts outstanding after maturity date.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="64" width="113" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Or TT to ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="78" width="113" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ACCOUNT NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="92" width="113" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ACCOUNT NO (SGD)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="106" width="113" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[SWIFT CODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="120" width="113" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[BANKCODE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="78" width="204" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FERRATE WATER TREATMENT PTE.LTD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="92" width="204" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[450-309-574-7 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="106" width="204" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[UOVBSG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="64" width="204" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[UOB BANK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="120" width="204" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[7375]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="120" width="5" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="106" width="5" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="92" width="5" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="78" width="5" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="64" width="5" height="17"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="0" width="555" height="31"/>
+				<imageExpression><![CDATA[$P{footer}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="11" y="37" width="127" height="19"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ferrate Water Treatment Pte. Ltd. |]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="37" width="443" height="19"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="7"/>
+				</textElement>
+				<text><![CDATA[No.38 Sungei kadut St 2 Singapore (729245)|T:(65) 6286 3388 | F:(65) 6286 2122 |  www.ferrategroup.com | Co. reg. No. 201315490G]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="109">
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="47" width="555" height="31"/>
+				<imageExpression><![CDATA[$P{footer}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="11" y="87" width="127" height="22"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ferrate Water Treatment Pte. Ltd. |]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="126" y="87" width="443" height="22"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="7"/>
+				</textElement>
+				<text><![CDATA[No.38 Sungei kadut St 2 Singapore (729245)|T:(65) 6286 3388 | F:(65) 6286 2122 |  www.ferrategroup.com | Co. reg. No. 201315490G]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="47" width="41" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[E.&O.E.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="46" width="240" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FERRATE WATER TREATMENT PTE.LTD.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="315" y="45" width="240" height="1"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>

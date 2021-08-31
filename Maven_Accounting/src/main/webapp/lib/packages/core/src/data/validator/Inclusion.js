@@ -1,0 +1,1 @@
+Ext.define("Ext.data.validator.Inclusion",{extend:"Ext.data.validator.List",alias:"data.validator.inclusion",type:"inclusion",config:{message:"Is not in the list of acceptable values"},constructor:function(){this.callParent(arguments);if(!this.getList()){Ext.raise("validator.Inclusion requires a list")}},inclusion:true})

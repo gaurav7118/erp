@@ -1,0 +1,364 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 15, 2015, 6:45:57 PM
+    Author     : sagar
+*/
+.lineTable_pageBreak {
+/*    page-break-inside: avoid  !important;*/
+}
+.separatelineitem > table{
+    page-break-after: always !important;
+}
+.separatelineitem > table:last-child{
+    page-break-after: avoid !important;
+}
+
+page[size="A4"] {
+    background: white;
+    width: 21cm;
+    height: 29.7cm;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+
+@media print {
+    body, page[size="A4"] {
+        margin: 0;
+        box-shadow: 0;
+    }
+}
+
+.x-border-box, .x-border-box * {
+    -moz-box-sizing: border-box;
+}
+
+.extendedRow > td{
+   border-bottom: 1px solid;
+   border-left:  1px solid;
+}
+
+.extendedRow > td:last-child {
+    border-right: 1px solid;
+}
+
+.extendedRowBorder1 > td{
+    border: 1px solid !important;
+}
+
+.extendedRowBorder2 > td{
+    border-top: 1px solid !important;
+    border-bottom: 1px solid;
+}
+
+.extendedRowBorder3 > td{
+    border: none;
+    border-top: 1px solid !important;
+    border-bottom: 1px solid;
+}
+
+.extendedRowBorder3 > td:first-child{
+    border-left: 1px solid;
+}
+
+.extendedRowBorder3 > td:last-child{
+    border-right: 1px solid;
+}
+
+.extendedRowBorder4 > td{
+    border:none;
+}
+
+.extendedRowBorder5 > td{
+    border:none;
+    border-bottom:  1px solid;
+}
+
+.extendedRowBorder6 > td{
+    border:none;
+    border-bottom: 1px solid;
+}
+.extendedRowBorder6 > td:first-child{
+    border-left: 1px solid;
+}
+.extendedRowBorder6 > td:last-child{
+    border-right: 1px solid;
+}
+
+.extendedRowBorder7 > td{
+    border:none;
+    border-bottom: 1px solid;
+}
+
+.extendedRowBorder8 > td{
+    border:none;
+}
+
+.extendedRowBorder9 > td{
+    border:none;
+    border-bottom: 1px solid;
+}
+
+
+
+.x-panel-body-default{
+    background: none ;
+    border-color: '';
+    border-style: none;
+    border-width: '';
+    color:'';
+    font-size: '';
+}
+.globaltable {
+    margin-bottom: 0px;
+}
+.sectionclass_element {
+    padding : 0px;
+    min-height: 25px;
+    overflow: hidden;
+    display: block;
+    height : auto !important;
+}
+
+.section_left_margin {
+    padding-left : 5px;
+    padding-right : 0px;
+    padding-top : 0px;
+    padding-bottom : 0px;
+    
+}
+
+.sectionclass_parent {
+    margin: 5px;
+}
+
+.sectionclass_field_container {
+    /*margin: 5px;*/
+    padding: 0px;
+    display: block !important;
+    height: auto !important;
+}
+
+.sectionclass_table_container {
+    /*margin: 0 5px 5px;*/
+    /*padding: 0 5px 5px;*/
+}
+
+.sectionclass_field {
+    -moz-box-sizing: border-box;
+    border : none;
+    padding : 0px;
+}
+
+.classTextAligment_left {
+    margin-top: 0px;
+    text-align: left;
+}
+
+.sectionclass_field_container div {
+    border-width: 0px !important;
+    display: inline-block !important;
+    page-break-inside: avoid;
+    height: auto !important;
+}
+
+.sectionclass_field_container .selectfield{ /*ERP-19850*/
+    display: block !important;
+    page-break-inside: unset;
+}
+
+.selectfield { /*ERP-19850*/
+
+}
+
+/* remove CSS done for make image selected (inline alignment) - Ashish Mohite */
+.sectionclass_field_container_inline div{
+    border-width: 0px !important;
+    padding: 0px;
+}
+
+/****remove CSS done for make global table selected****/
+.sectionclass_table_container div{
+    border-width: 0px !important;
+    padding: 0px;
+}
+
+.sectionclass_repeat_table_container div{ /*CSS for repeate row table page break*/
+    page-break-inside: unset;
+    display: inline !important;
+}
+
+table, td {
+    /*border-collapse:collapse;*/
+    border-spacing: 0px;
+    font-size: 12px;
+}
+
+
+.sectionclass_parent .x-panel-body {
+    /*min-height: 25px !important;*/
+    overflow:hidden ; 
+/*    display: block;*/
+    height: auto !important;
+    
+}
+
+#itemlistcontainer table {
+    width : 100% !important; 
+}
+
+.classzeropadding {
+    padding:0px;
+}
+
+thead .sectionclass_parent {
+    margin-bottom: 5px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+thead .sectionclass_field{
+    padding-left: 5px;
+}
+
+.sectionclass_parent {
+    margin-left : 0px;
+    margin-right : 0px;
+    margin-bottom : 0px;
+    margin-top : 0px;
+    display: block;
+}
+
+.sectionclass_parent > div > span {
+    display:table-row !important;
+    height: auto !important;
+}
+.sectionclass_parent > div > span > div {
+    height: auto !important;
+}
+
+.sectionclass_parent .sectionclass_element .x-panel-body {
+    display:  table-row !important;
+    height: auto !important;
+}
+
+.fieldItemDivBorder {
+    border: none;
+    padding: 0px;
+ }
+ 
+ 
+
+.tableroundborder thead tr:first-child th:first-child {
+    border-top-left-radius: 10px !important;
+}
+.tableroundborder thead tr:first-child th:last-child {
+    border-top-right-radius:  10px !important;
+}
+.tableroundborder > tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+
+.tableroundborder > tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+.tableroundborder > tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius: 10px !important;
+}
+
+.tableroundborder > tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius:  10px !important;
+}
+
+.tableroundborder tr:first-child th:first-child,
+.tableroundborder > tr:first-child td:first-child {
+    border-top-left-radius: 0px !important;
+}
+.tableroundborder tr:first-child th:last-child,
+.tableroundborder > tr:first-child td:last-child {
+    border-top-right-radius:  0px !important;
+}
+.tableroundborder tr:last-child th:first-child,
+.tableroundborder > tr:last-child td:first-child {
+    border-bottom-left-radius: 0px !important;
+}
+.tableroundborder tr:last-child th:last-child,
+.tableroundborder > tr:last-child td:last-child {
+    border-bottom-right-radius:  0px !important;
+}
+
+.lineitembordereffect1 tbody tr:first-child th,
+.lineitembordereffect1 > tbody > tr:first-child > td {
+    border-top: none !important;
+}
+
+.lineitembordereffect3 tbody tr:first-child th,
+.lineitembordereffect3 > tbody > tr:first-child > td {
+    border-top: none !important;
+}
+
+.lineitembordereffect6 tbody tr:first-child th,
+.lineitembordereffect6 > tbody > tr:first-child > td {
+    border-bottom: none !important;
+    border-top: none  !important;
+}
+.lineitembordereffect6 tbody tr:last-child th,
+.lineitembordereffect6 > tbody > tr:last-child > td {
+    border-bottom: 1px solid !important;
+}
+.lineitembordereffect10 tbody tr:first-child th,
+.lineitembordereffect10 > tbody > tr:first-child > td {
+    border-bottom: none !important;
+    border-top: none !important;
+}
+
+.lineitembordereffect10 tbody tr:last-child th,
+.lineitembordereffect10 > tbody > tr:last-child > td {
+    border-bottom: 1px solid !important;
+}
+
+.joinpreviouscolumn > div > span > div {
+    border-right: medium none !important;
+}
+/**
+ * Browser specific change.
+ * If Mozilla version is from 55 to below 57 then border collapse property changes for Border Type 1. ----- ERP-36234
+ */
+.newborder1 tr > td {
+    border-top: 0px none !important;
+    border-right: 0px none !important;
+}
+
+.newborder1 tr > td:last-child {
+    border-right: 1px solid !important;
+}
+
+.newborder1 tr > th {
+    border-right: 0px none !important;
+}
+
+.newborder1 tr > th:last-child {
+    border-right: 1px solid !important;
+}
+
+/*For repeat row table with header
+Set table header corners as round*/
+.repeatRowGlobalTableRoundBorder > thead > tr:first-child th:first-child {
+    border-top-left-radius: 10px !important;
+}
+.repeatRowGlobalTableRoundBorder > thead > tr:first-child th:last-child {
+    border-top-right-radius:  10px !important;
+}
+/*Unset round corners of first row of table body*/
+.repeatRowGlobalTableRoundBorder > tbody > tr:first-child td:first-child {
+    border-top-left-radius: unset !important;
+}
+.repeatRowGlobalTableRoundBorder > tbody > tr:first-child td:last-child {
+    border-top-right-radius: unset !important;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.PriceType" table="pricetype">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="value" type="string">
+      <column length="50" name="value" not-null="true"/>
+    </property>    
+     <property name="type" type="integer">
+      <column name="type" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+  </class>
+</hibernate-mapping>

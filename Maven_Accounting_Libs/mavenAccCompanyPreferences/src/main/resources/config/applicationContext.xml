@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accCompanyPreferencesDao" class="com.krawler.spring.accounting.companypreferances.accCompanyPreferencesImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="companyReportConfigurationdao" class="com.krawler.spring.accounting.companypreferances.CompanyReportConfigurationImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+    </bean>
+    <bean id="accCompanyPreferencesService" class="com.krawler.hql.accounting.companypreferenceservice.AccCompanyPreferencesServiceImpl"> 
+        <property name= "integrationCommonService" ref="integrationCommonService"/> 
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property> 
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="profileHandlerDAO">
+            <ref bean="profileHandlerdao"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+	<property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+    </bean>
+    <bean id="companyReportConfigurationService" class="com.krawler.hql.accounting.companypreferenceservice.CompanyReportConfigurationServiceImpl"> 
+        <property name="companyReportConfigurationdao">
+            <ref bean="companyReportConfigurationdao"/>
+        </property> 
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accAccountDAOobj">
+            <ref bean="accAccountDao"/>
+        </property>
+    </bean>
+    <bean id="accCompanyPreferencesController" class="com.krawler.spring.accounting.companypreferances.accCompanyPreferencesController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="exportMPXDAOImpl">  
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accCompanyPreferencesService">
+            <ref bean="accCompanyPreferencesService"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+</beans>

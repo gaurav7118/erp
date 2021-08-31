@@ -1,0 +1,559 @@
+# Amol Dhokale 1st Sept, 2017
+# SDP-11784 : Opening Balance of Income is not reflecting in P&L
+update accgroup set isacostofgoodssoldgroup='F' where nature!=2 and isacostofgoodssoldgroup='T';
+
+#Nitesh Kumar 1st September 2017
+update default_header set iscustomreport='F' where id ='b772a4a8-818e-4841-84d4-80aed73d69bd';
+
+#Prashant Kamble 1st September 2017
+#SDP-11271 :item height and length not able to be imported
+#To change validate type for Item Height and Item Length field
+update default_header set validatetype='double' where id='25262774-5e42-4d3e-977f-ad8f85823834' and defaultheader='Item Length';
+update default_header set validatetype='double' where id='eb67f551-79eb-479f-b6c4-43387d996200' and defaultheader='Item Height';
+
+#Sample file for Other than india
+ update samplefiledata set  filedata_json='[{"Product ID":" PID0003","Product Name":" BOTTLE","Product Type":" Inventory Part","Purchase Account":" Foreign Exchange","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","HS Code":"","Initial Purchase Price":"3","Initial Quantity":"12","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" F","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"4","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 2","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"FIFO"},{"Product ID":" PID0006","Product Name":" CHARGER","Product Type":" Inventory Part","Purchase Account":" Expenses","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","HS Code":"","Initial Purchase Price":"3","Initial Quantity":"0","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" T","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"5","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"6","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 1","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"FIFO"},{"Product ID":" PID0002","Product Name":" PEN","Product Type":" Inventory Part","Purchase Account":" Foreign Exchange","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" BALL PEN","Description in foreign language":"","HS Code":"","Initial Purchase Price":"2","Initial Quantity":"8","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" T","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"2.5","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" ","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"Moving Average"},{"Product ID":" PID0004","Product Name":" PEN DRIVE","Product Type":" Inventory Part","Purchase Account":" Electricity","Purchase Return Account":" Electricity","Sales Account":" Salary Expense","Sales Return Account":" Salary Expense","Stock UOM":" Pkt","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","HS Code":"","Initial Purchase Price":"5","Initial Quantity":"9","Inner UOM":" Bx","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" T","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"6","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"4","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 1","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"LIFO"}] ' 
+,header_json='[{"title":"Product ID,Product Name,Product Type,Purchase Account,Purchase Return Account,Sales Account,Sales Return Account,Stock UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account,As Of Date ,Activate Batch,Activate Bin,Activate Location,Activate Rack,Activate Row,Activate Serial No,Activate Warehouse,Additional Description,Additional Free Text,Alternative Products,Bar code,Block Loose Sell,Casing UOM,Casing UoM Value,catalog No,Currency,Customer Part Number,Default Location,Default Warehouse,Description,Description in foreign language,HS Code,Initial Purchase Price,Initial Quantity,Inner UOM,Inner UoM Value,Inventory Offset P&L A/c,Is Active,Is Kitting Item,Is Recyclable,Item Color,Item Group/ Subgroup,item Purchase Length,Item Purchase Width,Item Sales Height,item Sales Volume,Item Sales Width,Item Volume,Item Width,Item Height,Item Length,Lead Time (in days),License Code,Make available in other application,Multiple UOM,Ordering UOM,Parent Product,Part Number,Preferred Vendor,Price List,product weight,Purchase Manufacturing,Purchase UOM,QA Approval Flow,QA Lead Time(in days),Re-usability Count,Reorder Level,Reorder Quantity,Sales Price,Sales UOM,Sales Warranty Period (in days),Shipping type,Stock UoM Value,Supplier Part Number,Transfer UOM,UOM Schema,Warranty Period (in days),WIP Offset P&L A/c,Valuation Method "},{"header":"Product ID,Product Name,Product Type,Purchase Account,Purchase Return Account,Sales Account,Sales Return Account,Stock UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account,As Of Date ,Activate Batch,Activate Bin,Activate Location,Activate Rack,Activate Row,Activate Serial No,Activate Warehouse,Additional Description,Additional Free Text,Alternative Products,Bar code,Block Loose Sell,Casing UOM,Casing UoM Value,catalog No,Currency,Customer Part Number,Default Location,Default Warehouse,Description,Description in foreign language,HS Code,Initial Purchase Price,Initial Quantity,Inner UOM,Inner UoM Value,Inventory Offset P&L A/c,Is Active,Is Kitting Item,Is Recyclable,Item Color,Item Group/ Subgrop,item Purchase Length,Item Purchase Width,Item Sales Height,item Sales Volume,Item Sales Width,Item Volume,Item Width,Item Height,Item Length,Lead Time (in days),License Code,Make available in other application,Multiple UOM,Ordering UOM,Parent Product,Part Number,Preferred Vendor,Price List,product weight,Purchase Manufacturing,Purchase UOM,QA Approval Flow,QA Lead Time(in days),Re-usability Count,Reorder Level,Reorder Quantity,Sales Price,Sales UOM,Sales Warranty Period (in days),Shipping type,Stock UoM Value,Supplier Part Number,Transfer UOM,UOM Schema,Warranty Period (in days),WIP Offset P&L A/c,Valuation Method "},{"align":"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}] '
+ where modulename='Product'  and id='1a508c34-e03a-11e5-9dd4-c03fd5632e9b';
+
+#Sample file for India
+update samplefiledata set  filedata_json=' [{"Product ID":" PID0003","Product Name":" BOTTLE","Product Type":" Inventory Part","Purchase Account":" Foreign Exchange","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","Initial Purchase Price":"3","Initial Quantity":"12","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" F","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"4","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 2","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Accounting code (Service)":"","As of Date":"2014-12-05","RCM Applicable":"T","Inventory Account":"Inventory","Cost of Goods Sold Account":"Cost of Goods Sold","Stock Adjustment Account":"Inventory"}] '
+,header_json='[{"title":"Product ID,Product Name,Product Type,Purchase Account,Purchase Return Account,Sales Account,Sales Return Account,Stock UOM,Activate Batch,Activate Bin,Activate Location,Activate Rack,Activate Row,Activate Serial No,Activate Warehouse,Additional Description,Additional Free Text,Alternative Products,Bar code,Block Loose Sell,Casing UOM,Casing UoM Value,catalog No,Currency,Customer Part Number,Default Location,Default Warehouse,Description,Description in foreign language,Initial Purchase Price,Initial Quantity,Inner UOM,Inner UoM Value,Inventory Offset P&L A/c,Is Active,Is Kitting Item,Is Recyclable,Item Color,Item Group/ Subgroup,item Purchase Length,Item Purchase Width,Item Sales Height,item Sales Volume,Item Sales Width,Item Volume,Item Width,Item Height,Item Length,Lead Time (in days),License Code,Make available in other application,Multiple UOM,Ordering UOM,Parent Product,Part Number,Preferred Vendor,Price List,product weight,Purchase Manufacturing,Purchase UOM,QA Approval Flow,QA Lead Time(in days),Re-usability Count,Reorder Level,Reorder Quantity,Sales Price,Sales UOM,Sales Warranty Period (in days),Shipping type,Stock UoM Value,Supplier Part Number,Transfer UOM,UOM Schema,Warranty Period (in days),WIP Offset P&L A/c,Accounting code (Service),As of Date,RCM Applicable,Inventory Account,Cost of Goods Sold Account,Stock Adjustment Account"},{"header":"Product ID,Product Name,Product Type,Purchase Account,Purchase Return Account,Sales Account,Sales Return Account,Stock UOM,Activate Batch,Activate Bin,Activate Location,Activate Rack,Activate Row,Activate Serial No,Activate Warehouse,Additional Description,Additional Free Text,Alternative Products,Bar code,Block Loose Sell,Casing UOM,Casing UoM Value,catalog No,Currency,Customer Part Number,Default Location,Default Warehouse,Description,Description in foreign language,Initial Purchase Price,Initial Quantity,Inner UOM,Inner UoM Value,Inventory Offset P&L A/c,Is Active,Is Kitting Item,Is Recyclable,Item Color,Item Group/ Subgroup,item Purchase Length,Item Purchase Width,Item Sales Height,item Sales Volume,Item Sales Width,Item Volume,Item Width,Item Height,Item Length,Lead Time (in days),License Code,Make available in other application,Multiple UOM,Ordering UOM,Parent Product,Part Number,Preferred Vendor,Price List,product weight,Purchase Manufacturing,Purchase UOM,QA Approval Flow,QA Lead Time(in days),Re-usability Count,Reorder Level,Reorder Quantity,Sales Price,Sales UOM,Sales Warranty Period (in days),Shipping type,Stock UoM Value,Supplier Part Number,Transfer UOM,UOM Schema,Warranty Period (in days),WIP Offset P&L A/c,Accounting code (Service),As of Date,RCM Applicable,Inventory Account,Cost of Goods Sold Account,Stock Adjustment Account"},{"align":"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none"}]' 
+where modulename='Product'  and  id='30a01bcb-2e20-11e6-837b-14dda9792858';
+
+#Abhinav Pathak 1st September 2017
+ALTER TABLE in_stocktransfer_detail_approval add inspectionformid varchar(255); 
+
+#Vinod Gharge 4th September 2017
+
+INSERT INTO defaultcustomfields VALUES ('0dc703e4-913c-11e7-b4a3-708bcdaa1403', '105', null, '100', '4', 'Unit Quantity Code', '30', '0', '1', '999', 'F', '1', '0','0','0','2');
+
+DROP TABLE IF EXISTS `defaultfieldcombovalues`;
+CREATE TABLE `defaultfieldcombovalues` (
+  `id` varchar(255) NOT NULL,
+  `defaultcustomfields` varchar(255) NOT NULL, 
+  `fieldcombovalue` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `defaultcustomfields` (`defaultcustomfields`),
+  FOREIGN KEY (`defaultcustomfields`) REFERENCES `defaultcustomfields` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into defaultfieldcombovalues values('497fc108-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BAG-BAGS');
+insert into defaultfieldcombovalues values('5f9247d6-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BAL-BALE');
+insert into defaultfieldcombovalues values('6b503e48-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BDL-BUNDLES');
+insert into defaultfieldcombovalues values('73ac87ea-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BKL-BUCKLES');
+insert into defaultfieldcombovalues values('7ce63fa4-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BOU-BILLION OF UNITS');
+insert into defaultfieldcombovalues values('86e255f6-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BOX-BOX');
+insert into defaultfieldcombovalues values('906c94ec-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BTL-BOTTLES');
+insert into defaultfieldcombovalues values('99c6447a-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','BUN-BUNCHES');
+insert into defaultfieldcombovalues values('a2d73e84-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','CAN-CANS');
+insert into defaultfieldcombovalues values('abed9856-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','CBM-CUBIC METERS');
+insert into defaultfieldcombovalues values('bc8ce630-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','CCM-CUBIC CENTIMETERS');
+insert into defaultfieldcombovalues values('c5be612a-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','CMS-CENTIMETERS');
+insert into defaultfieldcombovalues values('d1283a90-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','CTN-CARTONS');
+insert into defaultfieldcombovalues values('d87d195a-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','DOZ-DOZENS');
+insert into defaultfieldcombovalues values('e117b7aa-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','DRM-DRUMS');
+insert into defaultfieldcombovalues values('eb2c06ce-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','GGK-GREAT GROSS');
+insert into defaultfieldcombovalues values('f2eb20de-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','GMS-GRAMMES');
+insert into defaultfieldcombovalues values('fda98a1a-915c-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','GRS-GROSS');
+insert into defaultfieldcombovalues values('12508c5c-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','GYD-GROSS YARDS');
+insert into defaultfieldcombovalues values('1a1a4856-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','KGS-KILOGRAMS');
+insert into defaultfieldcombovalues values('2139d34a-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','KLR-KILOLITRE');
+insert into defaultfieldcombovalues values('2a94dcd2-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','KME-KILOMETRE');
+insert into defaultfieldcombovalues values('313a7de4-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','MLT-MILILITRE');
+insert into defaultfieldcombovalues values('3ab642f4-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','MTR-METERS');
+insert into defaultfieldcombovalues values('445251ea-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','MTS-METRIC TON');
+insert into defaultfieldcombovalues values('4d9868e8-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','NOS-NUMBERS');
+insert into defaultfieldcombovalues values('56bfc222-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','PAC-PACKS');
+insert into defaultfieldcombovalues values('5e501c3a-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','PCS-PIECES');
+insert into defaultfieldcombovalues values('655d448a-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','PRS-PAIRS');
+insert into defaultfieldcombovalues values('6cb18f20-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','QTL-QUINTAL');
+insert into defaultfieldcombovalues values('7a85963c-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','ROL-ROLLS');
+insert into defaultfieldcombovalues values('83eb1846-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','SET-SETS');
+insert into defaultfieldcombovalues values('8c4f04fc-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','SQF-SQUARE FEET');
+insert into defaultfieldcombovalues values('95194e8a-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','SQM-SQUARE METERS');
+insert into defaultfieldcombovalues values('9db73d72-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','SQY-SQUARE YARDS');
+insert into defaultfieldcombovalues values('aabfe974-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','TBS-TABLETS');
+insert into defaultfieldcombovalues values('b3652044-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','TGM-TEN GROSS');
+insert into defaultfieldcombovalues values('bd7ca3d6-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','THD-THOUSANDS');
+insert into defaultfieldcombovalues values('c4ef76c0-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','TON-TONNES');
+insert into defaultfieldcombovalues values('cd674b5c-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','TUB-TUBES');
+insert into defaultfieldcombovalues values('d53fe1f4-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','UGS-US GALLONS');
+insert into defaultfieldcombovalues values('de0cd3e6-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','UNT-UNITS');
+insert into defaultfieldcombovalues values('e6745ebe-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','YDS-YARDS');
+insert into defaultfieldcombovalues values('ef3f5fee-915d-11e7-91c9-14dda9792823','0dc703e4-913c-11e7-b4a3-708bcdaa1403','OTH-OTHERS');
+
+#Swapnesh Kulkarni 4th Sept 2017
+#Insert New master - (GST Customer/ Vendor Type)
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) values('e41d586f-8d30-11e7-b941-6045cb6f9ab5','Export (WOPAY)',63,105);
+
+#Insert New master for Existing company - (GST Customer/ Vendor Type)
+INSERT INTO masteritem (id,mastergroup,activated,company,value,defaultmasteritem) SELECT UUID(),63,'T',companyid,'Export (WOPAY)','e41d586f-8d30-11e7-b941-6045cb6f9ab5' FROM company WHERE country = 105 and companyid 
+not in (select company from masteritem  WHERE `value` ='Export (WOPAY)');
+
+#Update existing (GST Customer/ Vendor Type)- Export as Export (WOPAY)
+UPDATE defaultmasteritem SET `value`='Export (WPAY)' WHERE id='ac09adba-58b9-11e7-8ead-c03fd5658535' and country =105;
+
+UPDATE masteritem SET `value`='Export (WPAY)'  where defaultmasteritem='ac09adba-58b9-11e7-8ead-c03fd5658535' ;
+
+#Ashish Mohite 7th Sep 2017
+# Work Order module fields
+# Work Order Name
+update default_header set dbcolumnname='workordername', reftablename='workorder', dummyvalue='WorkOrderName', allowindocumentdesigner='T' where module='1105' and id='074b6eae-27f4-11e6-b137-c03fd5632e9b';
+# Work Order ID
+update default_header set dbcolumnname='workorderid', reftablename='workorder', dummyvalue='WorkOrderID', allowindocumentdesigner='T' where module='1105' and id='074c3154-27f4-11e6-b137-c03fd5632e9b';
+# Customer
+update default_header set dbcolumnname='customer', reftablename='customer', reftablefk='id', reftabledatacolumn='name', dummyvalue='Customer Name', allowindocumentdesigner='T' where module='1105' and id='074c9928-27f4-11e6-b137-c03fd5632e9b';
+# Product
+update default_header set dbcolumnname='productid', reftablename='product', reftablefk='id', reftabledatacolumn='name', dummyvalue='Product Name', allowindocumentdesigner='T' where module='1105' and id='074d0f8e-27f4-11e6-b137-c03fd5632e9b';
+# BOM
+update default_header set dbcolumnname='bomid', reftablename='bomdetail', reftablefk='id', reftabledatacolumn='bomname', dummyvalue='BOM Name', allowindocumentdesigner='T' where module='1105' and id='074d7d66-27f4-11e6-b137-c03fd5632e9b';
+# Routing Template
+update default_header set dbcolumnname='routetemplate', reftablename='routing_template', reftablefk='id', reftabledatacolumn='name', dummyvalue='Routing Template Name', allowindocumentdesigner='T' where module='1105' and id='074e0718-27f4-11e6-b137-c03fd5632e9b';
+# Work Order Date
+update default_header set dbcolumnname='workorderdate', reftablename='workorder', dummyvalue='WorkOrderDate', allowindocumentdesigner='T' where module='1105' and id='0750142c-27f4-11e6-b137-c03fd5632e9b';
+# Date of Delivery
+update default_header set dbcolumnname='dateofdelivery', reftablename='workorder', dummyvalue='DateOfDelivery', allowindocumentdesigner='T' where module='1105' and id='0750ad88-27f4-11e6-b137-c03fd5632e9b';
+# Work Order Type
+update default_header set dbcolumnname='workordertype', reftablename='masteritem', reftablefk='id', reftabledatacolumn='value', dummyvalue='Work Order Type', allowindocumentdesigner='T' where module='1105' and id='07520fe8-27f4-11e6-b137-c03fd5632e9b';
+
+# Warehouse
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('fa5792a4-8d50-11e7-8fed-c03fd5658531','Warehouse','orderwarehouse','inventorywarehouse','id','name','Warehouse','1','1105','T');
+# Location
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('01652912-8d51-11e7-8fed-c03fd5658531','Location','orderlocation','inventorylocation','id','name','Location','1','1105','T');
+# Quantity
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('06dfad22-8d51-11e7-8fed-c03fd5658531','Quantity','quantity','workorder','Quantity','1','1105','T');
+
+#Aman Shah 7th September 2017
+ALTER TABLE grdetails ADD COLUMN tdsInterestRateAtPaymentTime double DEFAULT 0;
+ALTER TABLE expenseggrdetails ADD COLUMN tdsInterestRateAtPaymentTime double DEFAULT 0;
+ALTER TABLE advancedetail ADD COLUMN tdsInterestRateAtPaymentTime double DEFAULT 0;
+
+#Ajay Motwani 7th Sep 2017
+ALTER TABLE `creditterm` ADD COLUMN `applicabledays`  int(3) DEFAULT -1;
+ALTER TABLE `creditterm` ADD COLUMN `discountname`  varchar(50) DEFAULT NULL;
+ALTER TABLE `creditterm` ADD FOREIGN KEY (`discountname`) REFERENCES `discountmaster` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `receiptdetails` ADD COLUMN `discountamount`  double DEFAULT 0;
+
+#Prashant Kamble 7th Sept 2017
+alter table users add column employeeid varchar(100);
+
+#Nitesh Kumar 8th September 2017
+#Disable GST Number and Company UEN for Purchase Requisition
+update default_header set iscustomreport = 'F'  where id in('262ea3b0-bac1-433c-9393-44baa9b7727b','93b97fe2-ca91-49dd-a66c-6dcbac1f4354');
+#Product Description with correct mappings
+delete from default_header where id ='40695cbd-9e79-4083-b378-3d5146978054';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) VALUES ('40695cbd-9e79-4083-b378-3d5146978054','Product Description','product','purchaserequisitiondetail','purchaserequisitiondetail','id','productdescription','Product Description','1','32','T','F','T');
+
+#Total Amount 
+INSERT INTO `customreportsmeasuresfields`(`measurefieldid`,`measurefieldname`,`measurefielddisplayname`,`xtype`,`measurefieldmodulecategory`,`measurefieldmodule`,`dataindex`,`isreadonly`,`iscustomreport`)
+VALUES
+('d97d4d7d-3eed-4f36-9697-25e9f27da002','Total Amount','Total Amount','2','72ee172d-7a81-4424-bd15-7354e58aaa58','32','amount','T','T');
+
+INSERT INTO `customreportsmeasuresfieldsmapping`(`id`,`measurefieldid`,`defaultheaderid`,`isDataIndex`)
+VALUES
+('4be9652d-d4dc-4d01-b537-f1c1e9a89736','d97d4d7d-3eed-4f36-9697-25e9f27da002','aed4b3ef-b05a-49aa-b186-f7f1a44d2d76',1);
+
+#Raveesh Pathak 8th Sept 2017
+ALTER TABLE invoice ADD COLUMN roundingadjustmententry VARCHAR(40) DEFAULT NULL;
+ALTER TABLE invoice ADD CONSTRAINT `FK_invoice_roundingadjustmententry` FOREIGN KEY (roundingadjustmententry) REFERENCES jedetail(id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE invoice ADD COLUMN isroundingadjustmentapplied CHAR(1) DEFAULT 'F';
+
+ALTER TABLE goodsreceipt ADD COLUMN roundingadjustmententry VARCHAR(40) DEFAULT NULL;
+ALTER TABLE goodsreceipt ADD CONSTRAINT `FK_goodsreceipt_roundingadjustmententry` FOREIGN KEY (roundingadjustmententry) REFERENCES jedetail(id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE goodsreceipt ADD COLUMN isroundingadjustmentapplied CHAR(1) DEFAULT 'F';
+
+#Rahul A. Bhawar 8th Sep, 2017
+
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) VALUES('33c26e6c-9173-11e7-abc4-cec278b6b50a','Deemed Export','63','105');
+
+update defaultmasteritem set value = 'SEZ' where id = 'ac09adba-58b9-11e7-8ead-c03fd5658537';
+
+UPDATE masteritem SET value='SEZ'  where defaultmasteritem='ac09adba-58b9-11e7-8ead-c03fd5658537' ;
+
+INSERT INTO masteritem (id,mastergroup,activated,company,value,defaultmasteritem) SELECT UUID(),63,'T',companyid,'Deemed Export','33c26e6c-9173-11e7-abc4-cec278b6b50a' FROM company WHERE country = 105 and companyid not in (select company from masteritem  WHERE `value` ='Deemed Export');
+
+#Neeraj Dwivedi 8th September 2017
+ALTER TABLE quotation ADD COLUMN roundingadjustmentamount  double DEFAULT 0.0;
+ALTER TABLE quotation ADD COLUMN roundingadjustmentamountinbase  double DEFAULT 0.0;
+ALTER TABLE quotation ADD COLUMN isroundingadjustmentapplied CHAR(1) DEFAULT 'F';
+
+ALTER TABLE vendorquotation ADD COLUMN roundingadjustmentamount  double DEFAULT 0.0;
+ALTER TABLE vendorquotation ADD COLUMN roundingadjustmentamountinbase  double DEFAULT 0.0;
+ALTER TABLE vendorquotation ADD COLUMN isroundingadjustmentapplied CHAR(1) DEFAULT 'F';
+
+ALTER TABLE purchaseorder ADD COLUMN roundingadjustmentamount  double DEFAULT 0.0;
+ALTER TABLE purchaseorder ADD COLUMN roundingadjustmentamountinbase  double DEFAULT 0.0;
+ALTER TABLE purchaseorder ADD COLUMN isroundingadjustmentapplied CHAR(1) DEFAULT 'F';
+
+ALTER TABLE salesorder ADD COLUMN roundingadjustmentamount  double DEFAULT 0.0;
+ALTER TABLE salesorder ADD COLUMN roundingadjustmentamountinbase  double DEFAULT 0.0;
+ALTER TABLE salesorder ADD COLUMN isroundingadjustmentapplied CHAR(1) DEFAULT 'F';
+
+#Abhinav Pathak 8th Sept 2017
+ALTER TABLE in_sa_detail_approval add inspectionformid varchar(255);
+ALTER TABLE in_consignmentdetails add inspectionformid varchar(255);
+
+#Shrinath Shinde 12th Sept 2017
+ALTER TABLE templatepnl ADD COLUMN dontshowmsg CHAR(1) DEFAULT 'F';
+
+#Abhinav Pathak 12th Sept 2017
+UPDATE product SET isbinforproduct='F', israckforproduct='F', isrowforproduct='F' where company='709354c5-88db-4fa4-b0f7-55ec09b50940';
+
+#Shubham Singh 13th September 2017
+insert into reportmaster(id, name, description, method_name, Grouped_Under, moduleid) values ('GST Input Rule Report','GST Input Rule Report','View GST Input Rule Report','callGSTInputRuleReport()','GST Input Rule Report',1200);
+insert into reportmaster(id, name, description, method_name, Grouped_Under, moduleid) values ('GST Output Rule Report','GST Output Rule Report','View GST Output Rule Report','callGSTOutputRuleReport()','GST Output Rule Report',1200);
+
+# Shubham Pal 13th September 2017
+alter table packingdetails add column packagenumber varchar(255) default null;
+
+CREATE TABLE upspackagedetails (
+  id varchar(255) NOT NULL,
+  packing varchar(255) NOT NULL,
+  srno int(10),
+  packagenumber varchar(255),
+  packagingtype varchar(10),
+  packageweight double,
+  packagedimensions varchar(30),
+  declaredvalue double,
+  deliveryconfirmationtype varchar(10),
+  additionalhandling varchar(1),
+  trackingnumber varchar(30),
+  shippinglabel text,
+  PRIMARY KEY (id),
+  FOREIGN KEY (packing) REFERENCES packing (id)  ON DELETE CASCADE  ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table packing drop column upsshipmentnumber;
+alter table packing drop column upsresponsejson;
+
+alter table itemdetail drop column upstrackingnumber;
+alter table itemdetail drop column upsshippinglabel;
+
+#Shrinath Shinde 15th September 2017
+#Sales ORDER
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='9fa5e2b53-2fd4-4e56-a76d23-210d8f1');
+#Purchase Order
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='9fa5e2b53-2fd4-4e89-a76d23-210d8f2');
+#Purchase Requisition
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='40695cbd-9e79-4083-b378-3d5146978052');
+#Sales Return
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='02f052ca-48bf-11e6-be69-c03fd5aad962');
+#Delivery Order
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='0654f4c0-1e6c-11e6-a70e-eca86bfcd770');
+#Goods Receipt Order
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='0654f4c0-1e6c-11e6-a70e-eca86bfcd169');
+#Purchase Return
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='8c07a28c-54b0-11e6-b223-c03fd5aad962');
+#Customer Quotation
+UPDATE `default_header` SET `allowadvancesearch`='T' WHERE (`id`='02dc3590-36ab-11e6-aa97-eca86bfcd415');
+
+#AmolEdewar 18th Sep 2017
+alter table salesreturn add column ispayment char(1) DEFAULT 'F';
+alter table payment add column salesreturn varchar(100);
+ALTER TABLE payment ADD CONSTRAINT `fk_payment_salesreturn` FOREIGN KEY (`salesreturn`) REFERENCES `salesreturn` (`id`);
+
+# Suhas Chaware 19 Sept 2017
+update fieldcombodata set valuetype=3 where valuetype=0 and value="Product @ 0%" and fieldid in (select id from fieldparams where fieldlabel="Product Tax Class");
+
+#Rahul Ajgar 19 Sept 2017
+INSERT INTO default_header(id,module,defaultHeader,xtype,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("37f019d3-4cf5-46dc-aa7d-c0840c81c69d","30","Product Weight Per Stock Uom",2,"Product Weight Per Stock Uom",0,0,'F','F',null,null,null,'double',null,"productweightperstockuom",null);
+
+
+INSERT INTO default_header(id,module,defaultHeader,xtype,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype)
+VALUES ("9f1e389f-9d8d-4243-aa32-aa1634516a2d","30","Product Weight Including Pakaging Per Stock Uom",2,"Product Weight Including Pakaging Per Stock Uom",0,0,'F','F',null,null,null,'double',null,"productweightincludingpakagingperstockuom",null);
+
+#Update sample file
+update samplefiledata set header_json = '[{"title":"Product ID,Product Name,Product Type,Purchase Account,Purchase Return Account,Sales Account,Sales Return Account,Stock UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account,As Of Date ,Activate Batch,Activate Bin,Activate Location,Activate Rack,Activate Row,Activate Serial No,Activate Warehouse,Additional Description,Additional Free Text,Alternative Products,Bar code,Block Loose Sell,Casing UOM,Casing UoM Value,catalog No,Currency,Customer Part Number,Default Location,Default Warehouse,Description,Description in foreign language,HS Code,Initial Purchase Price,Initial Quantity,Inner UOM,Inner UoM Value,Inventory Offset P&L A/c,Is Active,Is Kitting Item,Is Recyclable,Item Color,Item Group/ Subgroup,item Purchase Length,Item Purchase Width,Item Sales Height,item Sales Volume,Item Sales Width,Item Volume,Item Width,Item Height,Item Length,Lead Time (in days),License Code,Make available in other application,Multiple UOM,Ordering UOM,Parent Product,Part Number,Preferred Vendor,Price List,product weight,Purchase Manufacturing,Purchase UOM,QA Approval Flow,QA Lead Time(in days),Re-usability Count,Reorder Level,Reorder Quantity,Sales Price,Sales UOM,Sales Warranty Period (in days),Shipping type,Stock UoM Value,Supplier Part Number,Transfer UOM,UOM Schema,Warranty Period (in days),WIP Offset P&L A/c,Valuation Method ,Product Weight Per Stock Uom,Product Weight Including Pakaging Per Stock Uom"},{"header":"Product ID,Product Name,Product Type,Purchase Account,Purchase Return Account,Sales Account,Sales Return Account,Stock UOM,Cost of Goods Sold Account,Inventory Account,Stock Adjustment Account,As Of Date ,Activate Batch,Activate Bin,Activate Location,Activate Rack,Activate Row,Activate Serial No,Activate Warehouse,Additional Description,Additional Free Text,Alternative Products,Bar code,Block Loose Sell,Casing UOM,Casing UoM Value,catalog No,Currency,Customer Part Number,Default Location,Default Warehouse,Description,Description in foreign language,HS Code,Initial Purchase Price,Initial Quantity,Inner UOM,Inner UoM Value,Inventory Offset P&L A/c,Is Active,Is Kitting Item,Is Recyclable,Item Color,Item Group/ Subgrop,item Purchase Length,Item Purchase Width,Item Sales Height,item Sales Volume,Item Sales Width,Item Volume,Item Width,Item Height,Item Length,Lead Time (in days),License Code,Make available in other application,Multiple UOM,Ordering UOM,Parent Product,Part Number,Preferred Vendor,Price List,product weight,Purchase Manufacturing,Purchase UOM,QA Approval Flow,QA Lead Time(in days),Re-usability Count,Reorder Level,Reorder Quantity,Sales Price,Sales UOM,Sales Warranty Period (in days),Shipping type,Stock UoM Value,Supplier Part Number,Transfer UOM,UOM Schema,Warranty Period (in days),WIP Offset P&L A/c,Valuation Method ,Product Weight Per Stock Uom,Product Weight Including Pakaging Per Stock Uom"},{"align":"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none"}]',
+filedata_json = '[{"Product ID":" PID0003","Product Name":" BOTTLE","Product Type":" Inventory Part","Purchase Account":" Foreign Exchange","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","HS Code":"","Initial Purchase Price":"3","Initial Quantity":"12","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" F","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"4","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 2","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"FIFO","Product Weight Per Stock Uom" = "0","Product Weight Including Pakaging Per Stock Uom" = "0"},{"Product ID":" PID0006","Product Name":" CHARGER","Product Type":" Inventory Part","Purchase Account":" Expenses","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","HS Code":"","Initial Purchase Price":"3","Initial Quantity":"0","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" T","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"5","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"6","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 1","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"FIFO","Product Weight Per Stock Uom" = "0","Product Weight Including Pakaging Per Stock Uom" = "0"},{"Product ID":" PID0002","Product Name":" PEN","Product Type":" Inventory Part","Purchase Account":" Foreign Exchange","Purchase Return Account":" Foreign Exchange","Sales Account":" Computer Equipment","Sales Return Account":" Computer Equipment","Stock UOM":" Unit","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" BALL PEN","Description in foreign language":"","HS Code":"","Initial Purchase Price":"2","Initial Quantity":"8","Inner UOM":" Pkt","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" T","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"2.5","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"2","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" ","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"Moving Average","Product Weight Per Stock Uom" = "0","Product Weight Including Pakaging Per Stock Uom" = "0"},{"Product ID":" PID0004","Product Name":" PEN DRIVE","Product Type":" Inventory Part","Purchase Account":" Electricity","Purchase Return Account":" Electricity","Sales Account":" Salary Expense","Sales Return Account":" Salary Expense","Stock UOM":" Pkt","Cost of Goods Sold Account":"Accounting & Audit Fees","Inventory Account":"Accounting & Audit Fees","Stock Adjustment Account":"Accounting & Audit Fees","As Of Date":"1/1/2015","Activate Batch":" T","Activate Bin":" F","Activate Location":" T","Activate Rack":" F","Activate Row":" F","Activate Serial No":" T","Activate Warehouse":" T","Additional Description":"","Additional Free Text":" ","Alternative Products":"","Bar code":" ","Block Loose Sell":" F","Casing UOM":" ","Casing UoM Value":"0","catalog No":"","Currency":" SG Dollar (SGD)","Customer Part Number":" ","Default Location":" Default Location","Default Warehouse":" MWH","Description":" ","Description in foreign language":"","HS Code":"","Initial Purchase Price":"5","Initial Quantity":"9","Inner UOM":" Bx","Inner UoM Value":"1","Inventory Offset P&L A/c":"","Is Active":" T","Is Kitting Item":" F","Is Recyclable":" F","Item Color":" ","Item Group/ Subgroup":" ","item Purchase Length":"0","Item Purchase Width":"0","Item Sales Height":"0","item Sales Volume":"0","Item Sales Width":"0","Item Volume":"0","Item Width":"0","Item Height":"0","Item Length":"0","Lead Time (in days)":"0","License Code":" ","Make available in other application":" F","Multiple UOM":" T","Ordering UOM":" Pkt","Parent Product":" ","Part Number":" ","Preferred Vendor":" ","Price List":" ","product weight":"0","Purchase Manufacturing":" ","Purchase UOM":" ","QA Approval Flow":" F","QA Lead Time(in days)":"0","Re-usability Count":"0","Reorder Level":"0","Reorder Quantity":"0","Sales Price":"6","Sales UOM":" ","Sales Warranty Period (in days)":"0","Shipping type":" ","Stock UoM Value":"4","Supplier Part Number":" ","Transfer UOM":"","UOM Schema":" SCHEMA 1","Warranty Period (in days)":"0","WIP Offset P&L A/c":"","Valuation Method":"LIFO","Product Weight Per Stock Uom" = "0","Product Weight Including Pakaging Per Stock Uom" = "0"}]'
+where modulename='Product';
+
+#Ashish Mohite 21st Sept 2017
+# Work Order Name
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('074b6eae-27f4-11e6-b137-c03fd5632e9b','Work Order Name','workordername','workorder',NULL,NULL,'Work Order Name','1','1105','T');
+# Work Order ID
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('074c3154-27f4-11e6-b137-c03fd5632e9b','Work Order ID','workorderid','workorder',NULL,NULL,'Work Order ID','1','1105','T');
+# Customer
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('074c9928-27f4-11e6-b137-c03fd5632e9b','Customer','customer','customer','id','name','Customer Name','4','1105','T');
+# Product
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('074d0f8e-27f4-11e6-b137-c03fd5632e9b','Product','productid','product','id','name','Product Name','4','1105','T');
+# BOM
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('074d7d66-27f4-11e6-b137-c03fd5632e9b','BOM','bomid','bomdetail','id','bomname','BOM Name','4','1105','T');
+# Routing Template
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('074e0718-27f4-11e6-b137-c03fd5632e9b','Routing Template','routetemplate','routing_template','id','name','Routing Template Name','4','1105','T');
+# Work Order Date
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('0750142c-27f4-11e6-b137-c03fd5632e9b','Work Order Date','workorderdate','workorder',NULL,NULL,'Work Order Date','3','1105','T');
+# Date of Delivery
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('0750ad88-27f4-11e6-b137-c03fd5632e9b','Date of Delivery','dateofdelivery','workorder',NULL,NULL,'Date Of Delivery','3','1105','T');
+# Work Order Type
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('07520fe8-27f4-11e6-b137-c03fd5632e9b','Work Order Type','workordertype','masteritem','id','value','Work Order Type','4','1105','T');
+#Tax Code
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,dbtabletame,dbcolumnname)
+VALUES ("92a15502-9e01-11e7-abc4-cec278b6b50a","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Tax Code","TaxIDNumber",0,255,'F','F',null,null,null,'string',null,"taxcode",null,'vendor','taxidnumber');
+
+#Suhas Chaware 21 Sept 2017
+alter table journalentry add column gstrtype int default 0;
+
+CREATE TABLE `receiptinvoicejemapping` (
+  `id` varchar(255) NOT NULL,
+  `invoice` varchar(255) default NULL,
+  `receipt` varchar(255) default NULL,
+  `invoiceamountdue` double default 0,
+  `invoiceamountdueinbase` double default 0,
+  `journalentry` varchar(255) default NULL,
+  `gstadjustment` varchar(255) default NULL,
+  `company` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`invoice`) REFERENCES `invoice` (`id`),
+  FOREIGN KEY (`receipt`) REFERENCES `receipt` (`id`),
+  FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`),
+  FOREIGN KEY (`gstadjustment`) REFERENCES `journalentry` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Shrinath Shinde 21st Sept 2017
+alter table SAVED_SEARCH_QUERY add column customreportid varchar(50) DEFAULT NULL;
+
+#Arshad 22nd Sept 2017
+
+insert into default_header (id,defaultHeader, module,dbtabletame,dbcolumnname,reftablename,reftablefk)
+VALUES
+('d2ea318c-8ca3-11e7-87de-eca86bfcd415','Grdetails&InventoryMapping',6,'grdetails','id','inventory','id');
+
+update default_header set dbtabletame='inventory', dbcolumnname='product' , reftablename='product' ,reftablefk='id' ,reftabledatacolumn='productid' , isdefaultfieldmappings=1 where id= '155529a9-dccf-4f08-84af-f67edbcedcd1';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('668930ed-8ca4-11e7-87de-eca86bfcd415','155529a9-dccf-4f08-84af-f67edbcedcd1','d2ea318c-8ca3-11e7-87de-eca86bfcd415',0);
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('a5995210-8e10-11e7-9217-eca86bfcd415','9fa5e2b53-2fd4-4e89-a76d23-210d8f2','9fa52b53-22d4-4e53278d-2e0fc210d8f2',0);
+
+update default_header set dbtabletame='inventory', dbcolumnname='product' , reftablename='product' ,reftablefk='id' ,reftabledatacolumn='name' , isdefaultfieldmappings=1 where id= '37ea1563-a51a-43c2-b5b3-82c30597bce4';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('668930ed-8ca4-11e7-87de-eca86bfcd417','37ea1563-a51a-43c2-b5b3-82c30597bce4','d2ea318c-8ca3-11e7-87de-eca86bfcd415',0);
+
+delete from customreportsdefaultfieldsmapping where id='b8f154f9-e0f4-490a-9545-4060b62e7896';
+
+#Product Name of Purchase Order
+update default_header set dbcolumnname= 'product',dbtabletame='podetails' ,reftablename='product', reftablefk='id' ,reftabledatacolumn='name', isdefaultfieldmappings='1' where id='9fa52b53-2fd4-4e57-a76d-2e0fc210d8f2';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('2f8c9dfa-92d8-11e7-9c8a-eca86bfcd415','9fa52b53-2fd4-4e57-a76d-2e0fc210d8f2','9fa5b53-2fd4-4e90-a76d-2e0fc210d8f2',0);
+
+#product type of purchaseOrder
+
+update default_header set dbcolumnname= 'producttype',dbtabletame='product' ,reftablename='producttype', reftablefk='id' ,reftabledatacolumn='name', isdefaultfieldmappings='1' where id='9fa5e2b53-2fd4-4e56-a76d23-210d3f1';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('262ea3b0-bac1-433c-9393-44baa9b7727b','Company UEN','companyuen','compaccpreferences','','','Company UEN','1','32');
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('ee5aad8e-92e5-11e7-9c8a-eca86bfcd415','9fa5e2b53-2fd4-4e56-a76d23-210d3f1','9fa5b53-2fd4-4e90-a76d-2e0fc210d8f2',0);
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('ee5aad8e-92e5-11e7-9c8a-eca86bfcd416','9fa5e2b53-2fd4-4e56-a76d23-210d3f1','9fa52b53-2fd4-4e57-a76d-2e0fc210d8f2',0);
+
+#Product type of Vendor Invoice
+update default_header set dbtabletame='product', dbcolumnname='producttype' , reftablename='producttype' ,reftablefk='id' ,reftabledatacolumn='name' , isdefaultfieldmappings=1 where id= 'ceabaf13-8cf0-43b4-adc7-aa8d72f504ec';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('70b527ba-939c-11e7-8d36-eca86bfcd416','ceabaf13-8cf0-43b4-adc7-aa8d72f504ec','d2ea318c-8ca3-11e7-87de-eca86bfcd415',0);
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('70b527ba-939c-11e7-8d36-eca86bfcd417','ceabaf13-8cf0-43b4-adc7-aa8d72f504ec','37ea1563-a51a-43c2-b5b3-82c30597bce4',0);
+
+#Customer Invoice
+update default_header set  dbtabletame='inventory' ,dbcolumnname= 'product' , reftablename='product', reftablefk= 'id', reftabledatacolumn= 'productid' ,isdefaultfieldmappings=1 where id='f920a3dc-bcca-4ed6-a5dc-f1c74af74907';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('668930ed-8ca4-11e7-87de-eca86bfcd420','f920a3dc-bcca-4ed6-a5dc-f1c74af74907','f8a4d6f3-9125-426e-8e91-75fe478f892b',0);
+
+update default_header set  dbtabletame='inventory' ,dbcolumnname= 'product' , reftablename='product', reftablefk= 'id', reftabledatacolumn= 'name' ,isdefaultfieldmappings=1 where id='07b8cd44-ee98-43b3-ab9c-4d416aaae1d7';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('668930ed-8ca4-11e7-87de-eca86bfcd421','07b8cd44-ee98-43b3-ab9c-4d416aaae1d7','f8a4d6f3-9125-426e-8e91-75fe478f892b',0);
+
+delete from customreportsdefaultfieldsmapping where id='b8f154f9-e0f4-490a-9545-4060b62e7895';
+
+update default_header set dbtabletame='product', dbcolumnname='producttype' , reftablename='producttype' ,reftablefk='id' ,reftabledatacolumn='name' , isdefaultfieldmappings=1 where id= 'e123e806-13ee-4c22-8ac7-381ac79b0ce9';
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('668930ed-8ca4-11e7-87de-eca86bfcd422','e123e806-13ee-4c22-8ac7-381ac79b0ce9','f8a4d6f3-9125-426e-8e91-75fe478f892b',0);
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex)
+values
+('668930ed-8ca4-11e7-87de-eca86bfcd423','e123e806-13ee-4c22-8ac7-381ac79b0ce9','07b8cd44-ee98-43b3-ab9c-4d416aaae1d7',0);
+
+
+delete from default_header where defaultHeader='Tax Code' and id='92a15502-9e01-11e7-abc4-cec278b6b50a' and module='b8bd81b0-c500-102d-bb0b-001e58a64cb6';
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype,dbtabletame,dbcolumnname,reftablename,reftablefk)
+VALUES ("92a15502-9e01-11e7-abc4-cec278b6b50a","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Tax Code","Taxid",0,255,'F','F',null,null,null,'custom',null,"taxid",null,'vendor','taxid','tax','id');
+
+# Suhas Chaware 25 Sept 2017
+ALTER TABLE `receiptadvancedetail` ADD COLUMN `product`  varchar(50) DEFAULT NULL;
+ALTER TABLE `receiptadvancedetail` ADD FOREIGN KEY (`product`) REFERENCES `product` (`id`);
+
+#Neeraj Dwivedi 26th Sept 2017
+alter table groupcompany_companylist add column `parentcompany` varchar(255) DEFAULT ''; 
+update groupcompany_companylist set parentcompany=(select companyid from company where subdomain='zg') where subdomain in('hh','zg','sgg','hf');
+
+
+#Swapnil D. Khandre 26th September, 2017
+
+ALTER TABLE advancedetail ADD productid VARCHAR(255) DEFAULT NULL;
+
+ALTER TABLE payment ADD advancetovendor CHAR(1) DEFAULT 'F';
+
+ALTER TABLE  defaultterms ADD oppositeterm  VARCHAR(255) DEFAULT NULL;
+
+update defaultterms set oppositeterm = '00efbbfa-5f34-11e7-907b-a6006ad3dba0' where id = '00efad22-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efbd8a-5f34-11e7-907b-a6006ad3dba0' where id = '00efb196-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efbf06-5f34-11e7-907b-a6006ad3dba0' where id = '00efb45c-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efc0aa-5f34-11e7-907b-a6006ad3dba0' where id = '00efb75e-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efc226-5f34-11e7-907b-a6006ad3dba0' where id = '00efba42-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efad22-5f34-11e7-907b-a6006ad3dba0' where id = '00efbbfa-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efb196-5f34-11e7-907b-a6006ad3dba0' where id = '00efbd8a-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efb45c-5f34-11e7-907b-a6006ad3dba0' where id = '00efbf06-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efb75e-5f34-11e7-907b-a6006ad3dba0' where id = '00efc0aa-5f34-11e7-907b-a6006ad3dba0';
+
+update defaultterms set oppositeterm = '00efba42-5f34-11e7-907b-a6006ad3dba0' where id = '00efc226-5f34-11e7-907b-a6006ad3dba0';
+
+ALTER TABLE linkdetailpayment ADD linkedgstje VARCHAR(255) DEFAULT NULL;
+
+#Ajay Motwani 27th sept 2017
+update customizereportheader set ismanadatoryfield=1 where id='3f8c1236-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='3f8c1236-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='489ae406-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='489ae406-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='50c247d2-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='50c247d2-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='586f84c2-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='586f84c2-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='1fa73efe-2b8a-11e5-a43b-c03fd5632dc7';
+delete from customizereportmapping where customizereportheader='1fa73efe-2b8a-11e5-a43b-c03fd5632dc7';
+
+update customizereportheader set ismanadatoryfield=1 where id='681aa96a-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='681aa96a-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='6f71899a-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='6f71899a-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='772c99b8-d6ad-11e3-93a5-001cc066e9f0';
+delete from customizereportmapping where customizereportheader='772c99b8-d6ad-11e3-93a5-001cc066e9f0';
+
+update customizereportheader set ismanadatoryfield=1 where id='c338c692-e738-11e3-ac4d-eca86bfbb906';
+delete from customizereportmapping where customizereportheader='c338c692-e738-11e3-ac4d-eca86bfbb906';
+
+update customizereportheader set ismanadatoryfield=1 where id='c3a05820-e738-11e3-ac4d-eca86bfbb906';
+delete from customizereportmapping where customizereportheader='c3a05820-e738-11e3-ac4d-eca86bfbb906';
+
+update customizereportheader set ismanadatoryfield=1 where id='c40614e4-e738-11e3-ac4d-eca86bfbb906';
+delete from customizereportmapping where customizereportheader='c40614e4-e738-11e3-ac4d-eca86bfbb906';
+
+update customizereportheader set ismanadatoryfield=1 where id='c46e8b1e-e738-11e3-ac4d-eca86bfbb906';
+delete from customizereportmapping where customizereportheader='c46e8b1e-e738-11e3-ac4d-eca86bfbb906';
+
+update customizereportheader set ismanadatoryfield=1 where id='a80a5c7e-be7c-11e5-9912-ba0be0483c18';
+delete from customizereportmapping where customizereportheader='a80a5c7e-be7c-11e5-9912-ba0be0483c18';
+
+update customizereportheader set ismanadatoryfield=1 where id='52b73a3c-0885-11e6-b512-3e1d05defe78';
+delete from customizereportmapping where customizereportheader='52b73a3c-0885-11e6-b512-3e1d05defe78';
+
+update customizereportheader set ismanadatoryfield=1 where id='b7577f1d-0ed3-11e7-ae5d-14dda97926b6';
+delete from customizereportmapping where customizereportheader='b7577f1d-0ed3-11e7-ae5d-14dda97926b6';
+
+update customizereportheader set ismanadatoryfield=1 where id='3054c65e-b554-11e6-92b5-14dda9792840';
+delete from customizereportmapping where customizereportheader='3054c65e-b554-11e6-92b5-14dda9792840';
+
+update customizereportheader set ismanadatoryfield=1 where id='a32ca9f9-b55d-11e6-9a35-c03fd5632dc7';
+delete from customizereportmapping where customizereportheader='a32ca9f9-b55d-11e6-9a35-c03fd5632dc7';
+
+update customizereportheader set ismanadatoryfield=1 where id='e32a59e6-c68f-11e6-89ef-c03fd5632e9b';
+delete from customizereportmapping where customizereportheader='e32a59e6-c68f-11e6-89ef-c03fd5632e9b';
+
+update customizereportheader set ismanadatoryfield=1 where id="64081b48-d1a2-11e6-9b58-4ccc6a2d6a4d";
+delete from customizereportmapping where customizereportheader="64081b48-d1a2-11e6-9b58-4ccc6a2d6a4d";
+
+update customizereportheader set ismanadatoryfield=1 where id="7fb7fea4-cda7-11e6-b63f-4ccc6a2d6a4d";
+delete from customizereportmapping where customizereportheader="7fb7fea4-cda7-11e6-b63f-4ccc6a2d6a4d";
+
+update customizereportheader set ismanadatoryfield=1 where id="26c7c152-f01b-11e6-a359-4ccc6a2d6a4d";
+delete from customizereportmapping where customizereportheader="26c7c152-f01b-11e6-a359-4ccc6a2d6a4d";
+
+#Rahul A. Bhawar 26 September 2017
+#Update Default Custom field data for HSN/ SAC Code 
+update  defaultcustomfields set isessential=1 where countryid=105 and fieldlabel='HSN/SAC Code';
+
+#Update existing Custom field data for HSN/ SAC Code 
+update  fieldparams set isessential=1  where moduleid in(30,42) and companyid in(select companyid from company where country=105) and fieldname='Custom_HSN/SAC Code';
+
+#Rahul Ajgar 28 September 2017
+ALTER TABLE product MODIFY supplier VARCHAR(255);
+
+#Dipak Dorkar 28th Sept 2017
+delete from samplefiledata where id='91298488-4bdc-11e6-a2ce-eca86bfcd415';
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`, `countryid`) VALUES ('91298488-4bdc-11e6-a2ce-eca86bfcd415', '[{\"title\":\"T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L,L\"},{\"header\":\"T1,T2,T3,T4,T5,T6,T7,T9,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22,T23,T24,T25,T26,T27,T28,T29,T30,T31,T32,T33,T34,T35,L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23\"},{\"align\":\"none,date,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none,date,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,date,none,none,none,none,none\"}]', '[{\"T1\":\"Cash Sales Number\",\"T2\":\"Cash Sales Date\",\"T3\":\"PO Reference Number\",\"T4\":\"Delivery Date\",\"T5\":\"Cost Center\",\"T6\":\"Customer Code\",\"T7\":\"Customer Name\",\"T9\":\"Sales Person\",\"T10\":\"Currency\",\"T11\":\"Memo\",\"T12\":\"Ship Via\",\"T13\":\"FOB\",\"T14\":\"Generate Delivery Order\",\"T15\":\"Delivery Order Number\",\"T16\":\"Including GST\",\"T17\":\"Include Product Tax\",\"T18\":\"Include Total Tax\",\"T19\":\"Tax Code\",\"T20\":\"Payment Method\",\"T21\":\"Cashier\'s Cheque/Cheque Number\",\"T22\":\"Bank Name\",\"T23\":\"Cheque Date\",\"T24\":\"Payment Status\",\"T25\":\"Clearance Date\",\"T26\":\"Reference Number/ Description\",\"T27\":\"Cash Sales Check List\",\"T28\":\"Cash Sales Text Field\",\"T29\":\"Cash Sales Numeric Field\",\"T30\":\"Cash Sales Date Field\",\"T31\":\"Cash Sales Check Box\",\"T32\":\"Cash Sales Text Area\",\"T33\":\"Multi Select Drop Down\",\"T34\":\"Cash Sales Drop Down\",\"T35\":\"Export Declaration No.\",\"L1\":\"Product Code\",\"L2\":\"Quantity\",\"L3\":\"UOM\",\"L4\":\"Unit Price Including GST\",\"L5\":\"Unit Price\",\"L6\":\"Discount Type\",\"L7\":\"Discount\",\"L8\":\"Product Tax\",\"L9\":\"Tax Amount\",\"L10\":\"Warehouse\",\"L11\":\"Location\",\"L12\":\"Batch\",\"L13\":\"Batch Quantity\",\"L14\":\"Serial\",\"L15\":\"Row\",\"L16\":\"Rack\",\"L17\":\"Bin\",\"L18\":\"Product Date Field\",\"L19\":\"Product Text Area\",\"L20\":\"Product Text Field\",\"L21\":\"Product Numeric Field\",\"L22\":\"Product Drop Down\",\"L23\":\"Product Multi Select Drop Down\"},{\"T1\":\"CS000000\",\"T2\":\"07/07/16\",\"T3\":\"Test PO\",\"T4\":\"08/25/16\",\"T5\":\"Cost Center\",\"T6\":\"Customer Code\",\"T7\":\"Customer Name\",\"T9\":\"SalesPerson Name\",\"T10\":\"US Dollars (USD)\",\"T11\":\"Test Import Memo\",\"T12\":\"Test Ship Via\",\"T13\":\"Test FOB\",\"T14\":\"TRUE\",\"T15\":\"DO000001\",\"T16\":\"TRUE\",\"T17\":\"Yes\",\"T18\":\"No\",\"T19\":\"\",\"T20\":\"Cash\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"100;200;300;400;500\",\"T28\":\"Test Field\",\"T29\":10,\"T30\":\"10/03/16\",\"T31\":\"TRUE\",\"T32\":\"Text Area Test\",\"T33\":\"A;C\",\"T34\":\"A\",\"T35\":\"ExportDeclarationNo-01\",\"L1\":\"PID1\",\"L2\":1,\"L3\":\"Unit\",\"L4\":200,\"L5\":168.22,\"L6\":\"Percentage\",\"L7\":10,\"L8\":\"GST(DS)@7.00%\",\"L9\":11.78,\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"10/03/16\",\"L19\":\"Test  Product Textarea\",\"L20\":\"Test\",\"L21\":10,\"L22\":\"A\",\"L23\":\"A;B\"},{\"T1\":\"CS000001\",\"T2\":\"07/07/16\",\"T3\":\"Test PO\",\"T4\":\"08/25/16\",\"T5\":\"Cost Center\",\"T6\":\"Customer Code\",\"T7\":\"Customer Name\",\"T9\":\"SalesPerson Name\",\"T10\":\"US Dollars (USD)\",\"T11\":\"Test Import Memo\",\"T12\":\"Test Ship Via\",\"T13\":\"Test FOB\",\"T14\":\"TRUE\",\"T15\":\"DO000002\",\"T16\":\"FALSE\",\"T17\":\"Yes\",\"T18\":\"No\",\"T19\":\"\",\"T20\":\"Cash\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"200;300;400;500\",\"T28\":\"Test Field\",\"T29\":10,\"T30\":\"10/03/16\",\"T31\":\"TRUE\",\"T32\":\"Text Area Test\",\"T33\":\"A;C\",\"T34\":\"A\",\"T35\":\"ExportDeclarationNo-02\",\"L1\":\"PID2\",\"L2\":1,\"L3\":\"Unit\",\"L4\":\"\",\"L5\":200,\"L6\":\"Percentage\",\"L7\":10,\"L8\":\"GST(DS)@7.00%\",\"L9\":12.6,\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"10/03/16\",\"L19\":\"Test  Product Textarea\",\"L20\":\"Test\",\"L21\":10,\"L22\":\"A\",\"L23\":\"A;B\"},{\"T1\":\"CS000002\",\"T2\":\"07/07/16\",\"T3\":\"Test PO\",\"T4\":\"08/25/16\",\"T5\":\"Cost Center\",\"T6\":\"Customer Code\",\"T7\":\"Customer Name\",\"T9\":\"SalesPerson Name\",\"T10\":\"SG Dollar (SGD)\",\"T11\":\"Test Import Memo\",\"T12\":\"Test Ship Via\",\"T13\":\"Test FOB\",\"T14\":\"TRUE\",\"T15\":\"DO000003\",\"T16\":\"FALSE\",\"T17\":\"No\",\"T18\":\"Yes\",\"T19\":\"GST(DS)@7.00%\",\"T20\":\"Bank\",\"T21\":1,\"T22\":\"American Express Bank Ltd.\",\"T23\":\"07/07/16\",\"T24\":\"Uncleared\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"100;200;300;400\",\"T28\":\"Test Field\",\"T29\":30,\"T30\":\"10/03/16\",\"T31\":\"FALSE\",\"T32\":\"Text Area Test\",\"T33\":\"B\",\"T34\":\"B\",\"T35\":\"ExportDeclarationNo-03\",\"L1\":\"PID3\",\"L2\":2,\"L3\":\"Unit\",\"L4\":\"\",\"L5\":200,\"L6\":\"Flat\",\"L7\":5,\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"10/03/16\",\"L19\":\"Test  Product Textarea\",\"L20\":\"Test\",\"L21\":22,\"L22\":\"B\",\"L23\":\"C\"},{\"T1\":\"\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"Note:\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"1. If Cash Sales Number belongs to any Sequence Format then that Sequence Format automatically assigned by system to transaction othrwise \'NA\' will be assigned.\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"2. If Cash Sales having multiple product details then add multiple rows having same \'Default Global Items\'/\'Global Custom Items\' Data and different as per your details of \'Default Line Items\'/\'Line Level Custom Items\'.\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"3. Import file must have first row with having column header \'T\'/\'L\' (\'T\' -  \'Default Global Items\'/\'Global Custom Items\' and \'L\' - \'Default Line Items\'/\'Line Level Custom Items\'.\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"4. If Custom Field Item having \'Multi-Select Drop Down\' then the values should differentiate by semicolon (;).\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"5. If Custom Field Item having \'Check List\' then the values should differentiate by semicolon (;).\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"6. If Custom Field Item having \'Check Box\' then values should be \'true\'/\'false\'.\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"},{\"T1\":\"7. In import wizard pick the right matching  \'Date Format\'.\",\"T2\":\"\",\"T3\":\"\",\"T4\":\"\",\"T5\":\"\",\"T6\":\"\",\"T7\":\"\",\"T9\":\"\",\"T10\":\"\",\"T11\":\"\",\"T12\":\"\",\"T13\":\"\",\"T14\":\"\",\"T15\":\"\",\"T16\":\"\",\"T17\":\"\",\"T18\":\"\",\"T19\":\"\",\"T20\":\"\",\"T21\":\"\",\"T22\":\"\",\"T23\":\"\",\"T24\":\"\",\"T25\":\"\",\"T26\":\"\",\"T27\":\"\",\"T28\":\"\",\"T29\":\"\",\"T30\":\"\",\"T31\":\"\",\"T32\":\"\",\"T33\":\"\",\"T34\":\"\",\"T35\":\"\",\"L1\":\"\",\"L2\":\"\",\"L3\":\"\",\"L4\":\"\",\"L5\":\"\",\"L6\":\"\",\"L7\":\"\",\"L8\":\"\",\"L9\":\"\",\"L10\":\"\",\"L11\":\"\",\"L12\":\"\",\"L13\":\"\",\"L14\":\"\",\"L15\":\"\",\"L16\":\"\",\"L17\":\"\",\"L18\":\"\",\"L19\":\"\",\"L20\":\"\",\"L21\":\"\",\"L22\":\"\",\"L23\":\"\"}]', 'Cash Sales', 'sample_cash_sales_list', '_v1', 'T', '0');
+
+#Aditya Nagpal 28th Sept 2017
+alter table in_ist_detail add column expdate text;
+
+#Swapnil D. Khandre 28th Sept 2017
+
+update defaultcustomfields set moduleid = "1200,30,16,42,14" where id = '4d645365-6156-11e7-b079-708bcdaa1403';
+
+#Shubham Pal 28th September 2017
+alter table upsintegrationcredentials add column restserviceurl varchar(255);
+
+#Swapnesh Kulkarni 29th September 2017
+#Insert New master - (GST Customer/ Vendor Type)
+INSERT INTO defaultmasteritem (id,value,mastergroup,country) values('dc9ff578-a05a-11e7-b9d0-6045cb6f9ab5','SEZ (WOPAY)',63,105);
+
+#Insert New master for Existing company - (GST Customer/ Vendor Type)
+INSERT INTO masteritem (id,mastergroup,activated,company,value,defaultmasteritem) SELECT UUID(),63,'T',companyid,'SEZ (WOPAY)','dc9ff578-a05a-11e7-b9d0-6045cb6f9ab5' FROM company WHERE country = 105 and companyid not in (select company from masteritem  WHERE `value` ='SEZ (WOPAY)' and country=105);
+
+#Update existing (GST Customer/ Vendor Type)- SEZ
+UPDATE defaultmasteritem SET `value`='SEZ (WPAY)' WHERE id='ac09adba-58b9-11e7-8ead-c03fd5658537' and country =105;
+
+UPDATE masteritem SET `value`='SEZ (WPAY)'  where defaultmasteritem='ac09adba-58b9-11e7-8ead-c03fd5658537';
+
+#Mohammed Uzair Momin 29th Sep 2017
+update salesorder set totalShippingCost=0 where totalShippingCost is null;

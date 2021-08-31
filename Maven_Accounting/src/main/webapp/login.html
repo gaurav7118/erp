@@ -1,0 +1,85 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="noindex,nofollow" />
+        <title>Login - Deskera ERP</title>
+        <link rel="stylesheet" type="text/css" href="../../style/base.css" />
+        <link rel="shortcut icon" href="../../images/favicon.png" />
+        <script type="text/javascript" src="../../lib/jquery-1.2.2.min.js"></script>
+        <script type="text/javascript" src="../../scripts/core/42.js"></script>
+        <script type="text/javascript" src="../../scripts/belongToUs.js?v=4"></script>
+        <!--/* Delete this function call to restore regular signup */-->
+        <script>
+            //doDirectLogin();
+        </script>
+    </head>
+    <body onload="checkCookie();
+        formFocus();">
+        <div class="appcontainer">
+            <div class="maincontainer">
+                <div class="form-wrapper">
+                    <div class="unitwrapper form-header">
+                        <h1 class="companylogo">
+                            <img id="deskeraimageq" src="../../images/Deskera-financials-logo.png" />
+                        </h1>
+                    </div>
+                    <form action="javascript:lValidateEmpty();" name="loginForm" id="loginForm">
+                        <div class="unitwrapper form-title">
+                            <p><strong>Sign In</strong> with Application Account</p>
+                        </div>
+                        <div class="form-content">
+                            <div class="unitwrapper">
+                                <label for="UserName" id="UserNameLabel" class="labels">
+                                    Username:
+                                </label>
+                                <input name="UserName" type="text" placeholder="Username" id="UserName" />
+                                <span id="UserNameRequired" class="errorprompt" title="Username is required.">Required</span>
+                            </div>
+                            <div class="unitwrapper">
+                                <label for="Password" id="PasswordLabel" class="labels">
+                                    Password:
+                                </label>
+                                <input name="Password" type="password" placeholder="Password" id="Password" />
+                                <span id="PasswordRequired" class="errorprompt" title="Password is required.">Required</span>
+                            </div>
+                            <div class="unitwrapper form-footer">
+                                <input type="submit" name="LoginButton" value="Login" id="LoginButton" />
+                                <span id="usrFeedback"></span>
+                                <!--div class="extra">
+                                    <a id="ResetPwdLnk" class="prompt eml" href="forgotpasswd.html">Forgot username/password?</a>
+                                </div-->
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function callSignupForm_form() {
+                window.location = "signupmain.html";
+            }
+
+            function gup(name) {
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regexS = "[\\?&]" + name + "=([^&#]*)";
+                var regex = new RegExp(regexS);
+                var results = regex.exec(window.location.href);
+                if (results == null)
+                    return "";
+                else
+                    return results[1];
+            }
+            var demo = gup('demo');
+            if (demo == "true") {
+                document.forms['loginForm'].elements['UserName'].value = "demo";
+                document.forms['loginForm'].elements['Password'].value = "demo";
+                document.getElementById("deskeraimageq").src = "../../images/deskera-accounting-big.jpg";
+                javascript: lValidateEmpty();
+
+            }
+        </script>
+    </body>
+</html>

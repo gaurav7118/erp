@@ -1,0 +1,375 @@
+#Mayur Bhokase 2nd May 2014
+Set rate to default product price when invoice is created using DO/GR.
+
+# Atul sachan 2nd May 2014
+
+1.Handled edit feature in for CN/DN included in MP/RP. Fixed
+2.Edit CN/DN against Vendor/Customer 3rd option. Fixed
+3.only unpaid invoices will be shown in invoice grid combo while creating new CN/DN. Fixed
+4.while making DN/CN, remove two empty cells and show only one cell.
+
+#Raveesh Pathak 02 May 2014
+
+1. Email notification when POand PR approve (Procurement Team)
+2. Hiding alert of asking to fill address .
+3. Saving default address if user does not give any address detail. default address will be Customer/Vendor 1st Billing and shipping address.
+4. Added shipping Address detail  in create vendor form. 
+
+#Raveesh Pathak 05 May 2014
+1.Added setting in company account preference to send approval notification
+
+#Neeraj Dwivedi 05 May 2014
+1. To show only selected product items on the Order Entry page - Set Product as default to the vendor and show them as a list of items in the product list
+2. Need to maintain a list of vendors & all the list of products they are supplying
+
+#Amol Dhokale 05 May 2014
+1. Report Level : Add printed or not printed column in grid of report level for CI/VI, CN/DN, SO/PO, CQ/VQ, DO/GRO, Payment/Receipt
+2. In CN/DN Report for otherwise case shows the Message i.e. Otherwise case is not implemented yet.
+3. Report Level : Multiple records print functionality in following modules CI/VI, CN/DN, SO/PO, CQ/VQ, DO/GRO, Payment/Receipt
+4. Issue-32849 :Deibt Note - Changed the window size to regular window size - Senwan  
+5. Issue-32851 :Cheque number column added in Make Payment report Screen and filter records on Cheque Number- Senwan 
+6. Issue-32870 :Added Description field in Sales by Product report - VRNet 
+
+#Mayur Bhokase 05th May 2014
+Layout changes for VHQ in CN,DN,DO,GR,PV and PR report.
+
+#Anup Kale 06th May 2014
+Enhancement:
+1.Edit functionality for MP/RP with/without advance payment.
+2.Delete for advance payment. 
+
+#Neeraj Dwivedi 06 May 2014
+1. To show only selected product items on the Order Entry page - Set Product as default to the customer and show them as a list of items in the product list
+2. Need to maintain a list of customers & all the list of products they are supplying.
+
+# Sagar M 06 May 2014
+1. Define Mail Notification rule on default date field 
+Implemented for Due date in CI/VI/Journal Entry
+2. Define Mail Notification rule on custom date field at global and line level
+Implemented for CI/VI/CQ/VQ
+
+#Mayur Bhokase 07th May 2014
+Sales Order Jasper Report For VHQ Post Media.
+
+#Raveesh Pathak 07th May 2014
+Temporary Hiding send copy to field in company account preferences 
+
+Mayur Pawar 07 may 2014
+1.Unable to delete Product, system giving wrong error "no product available for sync"
+2.Open SO & PO details in Sales order screen
+3.Added the delete query from taxentry table from both debit note and credit note
+4.Invoice are getting deleted even when DN/CN is made against it.
+5.Prompt for Memo is still appearing - Senwan
+6.Only Balance sheet related items should appear in the drop down list of Customer and Vendor Master while tagging the GL Account.
+7.Customer Invoices are not shown in customer invoices report.(for Lower case)
+8.Available Quantity is shown as '0'. It should show the sold quantity.(for Lower case)
+9.Sold Quantity is shown as '0' in Inventory Report in ERP side(for Lower case)
+
+
+Hitesh Suryawanshi 07th May 2014
+Enhancement:
+1.Option to create the Deliver order in Cash Invoice.
+2.Option to create the Goods Receipt in Vendor Invoice and Cash Purchase.
+3.Add check box of Invoices with GR/DO in Account Preferences.
+
+# [SATS]Atul sachan 7th May 2014
+1.Fixed opening balance edit issue.
+
+#[SATS] Raveesh pathak 8th may 2014
+Issue- journal entry report shows account name instead of customer/vendor name payment
+
+#[SATS] Mayur Bhokase 13th May 2014
+Jasper Report for Tax Invoice and Its Types.
+
+
+# Atul sachan 08th May 2014
+
+1. Added Functionality For Make Payment/Receive Payment Against opening Credit Note/Debit Note.
+2. Fixed - Normal Credit Note/Debit Note and Opening Credit Note/Debit Note Should not be delete which are linked with Make Payment/Receive Payment.
+3. Added option to give Price Amendment permission to only Selected users.
+
+
+# Atul sachan 09th May 2014
+1. Fixed - Those opening CN/DN are still showing in the grid, against which payment are already being made/received.
+
+#Mayur Bhokase 09th May 2014
+Customer Quotation Jasper Report For VHQ Post Media.
+
+#Pandurang 09 May 2014
+Account Re-evaluation issue regarding JE Post.
+
+# Atul sachan 09th May 2014
+1. Fixed - In row expander of records, some id are displaying instead of value of dimension given in line level.[For Combo type]
+
+# Amol Dhokale 09th May 2014
+1.  Add Product Description in Sales by product report , sales by customer report, sales by item details report, sales by sales person report.
+
+# Atul sachan 10th May 2014
+
+1. Customize Hide/Show Transaction Form Fields For CI/CP/VI/CS/PO/SO/CQ/VQ Forms.
+
+# Sagar M 10th May 2014
+
+1. Auto populate custom field values if linked to other module and field having same name.
+
+#Mayur Bhokase 10th May 2014
+Tax Invoice, Purchase Order, Delivery Order, Customer Quotation Jasper Report For Pacific Tec
+
+#Anup 10th May 2014
+Added Custom Field Functionality In Purchase Requisition.
+
+# Sagar M - 12th May 2014
+
+multi level DO approval flow
+
+#Anup 12th May 2014
+Issue:
+Journal entry report showing blank.
+
+#Raveesh Pathak 13th May 2014
+
+Changing decimal Point from 2 to 3 for price in ERP .
+
+# Amol Dhokale  13th May 2014
+1. Added Notification Rules for SO/PO,DO/GRO, SR/PR, Customer/Vendor and send mail according to due date/ other date( custom / Line ) values.
+2. Added Invoice date while linking debit note.
+
+# Atul sachan
+
+1. Fixed - Old CN/DN creation form was opening while clicking on links available on Navigation Panel.
+2. Added Hide/show Form field feature for following modules -
+        a) Purchase Return
+        b) Sales Return
+        c) Goods Receipt
+        d) Delivery Order
+
+#Pandurang 13 may 2014
+Re-evaluation changes after multi currency payment.
+
+#Neeraj Dwivedi 13th May 2014-For Pacific Tec
+1.Created an extra column in table compaccprefrences for displaying quantity in decimal or integer format.
+2.Quantity display in Integer format for a specific company for Tax Invoice, Purchase Order, Delivery Order, Customer Quotation.
+
+#Mayur Bhokase 14 May 2014
+To Remove dependency of Company logo and Jasper Reports for All companies in Redesign Checkout.
+# Raveesh Pathak 15th May 2014
+Issues related to conversion of decimal point from 2 to 3 digit for price.
+
+#Anup 14th May 2014
+Enhancement:
+1.Delete for Party journal with CN/DN.
+Issue:
+1.Customer and vendor name not showing in party journal.
+2.Failure file not generating after import Customer/Vendor.
+3.In Tax Report  for the sales tax , calculation is going to be wrong .for total sales , total amount , sales tax receivables ,means tax amount is not getting add.
+
+#[SATS] Mayur Bhokase 15th May 2014
+Added Water Sale Tax Invoice in Invoice Type and Its Jasper Report.
+
+#Neeraj Dwivedi-16th May 2014
+CRM Account Quotation Sync with ERP option
+
+#Anup 16th May 2014
+1.Transaction rate in Invoice,MP/RP,JE can now be set in two ways 
+    1.base to foreign.
+    2.foreign to base.
+Issue:
+1.Je created from MP/RP,CN/DN,CI/VI getting edited and reversed.
+
+#Raveesh Pathak 16th May 2014
+Issues-
+1.In Vendor Invoice and cash purchase report , In Grid when expand the column then for some columns ,alignment is not in proper place
+2.While saving a CN, it should be alert or system failure message
+
+# Amol Dhokale  16th May 2014
+1. Field name should be "Send a copy to:" instead of "Email"
+2. In notification template for SR/PR, it should be "Creation Date" instead of "Order Date"
+
+# Atul sachan 16th May 2014
+
+1. In Invoice report on expanding a row, line Line Level Dimension/customfield combo was showing ids of their values.
+
+
+#Hitesh Suryawanshi 16th May 2014
+1.Added Recurring Journal Entry functionality.
+2.Added Custom Line item in Vendor Invoice for Expense Grid.
+
+# Amol Dhokale 17th May 2014
+1. Added export functionality for Product list by Category in Product Management.
+2. In Purchase return report, When we link purchase return to goods receipt then for single record print shows goods receipt number.
+3. While editing a Vendor/Customer, tab name are changed as "Edit Customer/Vendor" and tooltips with respect to that.
+4. In General Ledger Report, corrected the spelling of "T Report".
+
+#Raveesh Pathak 17th May
+1.Rounding issue in calculating total tax amount
+
+#Neeraj Dwivedi 19th May
+(1)Added an extra column "Exceeded credit amount" in customer defaultlist of Report List; 
+
+#[SATS]Mayur Bhokase 19th May 2014
+Payment Voucher against Vendor Invoice Jasper Report.
+
+#[SATS] Raveesh Pathak 19th May 2014
+Issue: In stock status report grid(for sale and purchase order),Quantity on hand takes up price of product after making goods receipt
+
+
+#Raveesh Pathak 20th May
+Issues:
+1.Product are getting created with out giving unit of measure and cycle count 0
+2.When we click on new button in RFQ Report It opens PO create form instead of RFQ Form.
+3.Unable to save a RFQ, syatem showing error "Please enter appropriate value for the field(s) marked in red."when all the required values are actually filled.
+
+# Amol Dhokale 21st May 2014
+#Issue:
+1. When we create reverse JE for main JE and attempt to delete the main JE before Reverse JE it should show message as JE has reverse JE so can not be deleted.
+
+#Neeraj Dwivedi 21th May
+(1)Added Apply BorderColor option for select field and edit BorderColor option.
+(2) Drawbox on update should show the change value
+(3) Report view of Aged Receivable was not showing.Showing message for flash plugin.
+
+# Atul sachan 22nd May 2014
+
+1. Fixed Issue - I am unable to delete opening CN/DN after importing it
+
+#Anup Kale 22th May
+Enhancement:
+1.Added a functionality for Revenue recognition upon Delivery Order raise.(Edit Case Yet To handle)
+Issues:
+1.While MP/RP against foreign invoices, wrong JE are getting posted for payment and realized gain/loss both.
+
+#Sagar Ahire 22th May
+Enhancement:
+Trial Balance account to always show all accounts even if I filter the date. And to show a zero if the period doesn???t use that account.
+
+#Mayur Pawar 22 May 2014
+added the functionality of serial no  and warehouses in DO and GRN and product creation
+
+#Mayur Bhokase 23 May 2014
+Japer report layout changes for Pacific tec.
+
+#Raveesh Pathak 23rd May 2014
+Issue:
+1.Data is not coming in Report View of Aged Payable 
+
+# Anup Kale 23 May 2014
+Issue:
+Unable to save DO if Sales Revenue Recognition Account Not saved in Product.
+
+# Anand Nimbalkar 24th May 2014
+1. Ability to track consignment cost.
+2. Add 'Unit Price' grid cell, 'Currency',show 'Amount' in grid cell for each product combo 
+and on link filter apply currency filter   in following report: 
+    a. Goods Receipt 
+    b. Delivery Order 
+    c. Purchase Return 
+    d. Sales Return
+3. Add configuration option for 'Due Date depend on Ship Date' in 'Account Preferences' 
+and apply changes in respective configuration.
+4. Add configuration option in 'Account Preferences' for 'Unit Price' should be displayed in GR/DO/PR/SR or not.
+5. Add Script of Update Currency and Rate of existing records for GR/PR/DO/SR 
+Exicute as following sequence:
+    a. http://192.168.0.208:8080/newstagingaccounting/UpdateCurrencyAndRateOfExistingRecordsForGR.jsp
+    b. http://192.168.0.208:8080/newstagingaccounting/UpdateCurrencyAndRateOfExistingRecordsForPR.jsp
+    c. http://192.168.0.208:8080/newstagingaccounting/UpdateCurrencyAndRateOfExistingRecordsForDO.jsp
+    d. http://192.168.0.208:8080/newstagingaccounting/UpdateCurrencyAndRateOfExistingRecordsForSR.jsp
+
+#Hitesh Suryawanshi 24th May 2014
+Enhancement:
+1.Functionality to post no of Recurring JE with memo.
+2.Functionality to create template of JE.And can create multiple JE from Template.
+3.Revenue Recognition Report.
+Issue:
+1.While editing text field custom field not able to save max length of field.
+
+# Amol Dhokale 24th May 2014
+# Issue:
+Multiple record print button in all report not working the print window shows only header of line items.
+
+#Hitesh Suryawanshi 24th May 2014
+Enhancement:
+1.Inactive Customer List Report.
+
+#Raveesh Pathak 23rd May 2014
+Issue:
+1.Data is not coming properly in  Aged Payable and receivable report
+
+#Neeraj Dwivedi-26th May 2014
+1.Setting Default Border Color for Select Fields in Edit Mode when unchecking "Apply Border Color field" in PropertiesBox
+2.Showing message when there are no templates in Custom Designer.
+
+#Mayur Bhokase 27th May 2014
+Stock Ledger Japer report. 
+
+#Mayur Pawar 28 May 2014
+1)Batch should not be duplicate.
+2)Do not allow if batch and serial no is not entered 3
+3)if batch is not selectted then donot show the serial no.
+4)Multiple checks for serial no functionality
+
+
+
+#Hitesh Suryawanshi 28th May 2014
+Issues:
+1.It should be "Defaulter Customer List" instead of "Customer Default list" refer 
+2.Unable to edit a VI in which we have kept generate GR option true from accounts preferences.  in this case all associated GR should be edited accordingly, the way its working in CI side.
+3.New GR number are not showing while copying a old VI/CI in which generate GR/DO option was true. 
+4.Generate GR/DO option are showing unchecked while editing a old VI/CI in which generate GR/DO option was true.
+5.Cumulative Recognisd Revenue are showing two times in report
+
+#Neeraj Dwivedi -28thMay 2014
+1. Multiselect option for select field in Global cell property implementing in Custom Designer.
+2. Replacing the function in Custom Design Handler to avoid the bordercolor for select field,
+    insert Text in pdf format.
+
+#Anup Kale-28th May 2014
+Enhancement:
+1.Iphone,Android Integration login functionality.
+Issues:
+1.Product dropdowns of sales were showing all the accounts.Now Sales Accounts only shows Income and Purchase only shows Expense accounts.  
+
+#Sager Ahire -28th May 2014
+Enhancement:
+1.Stock valuation in financial reports can be shown or kept hidden by the flag given in Account preferences.
+
+#[SATS]Mayur Bhokase 28 May 2014
+changes in jasper reports for sats. 
+
+#[SATS]Mayur Bhokase 29 May 2014
+Added Customer Code in Invoice Report for Customer Account Number Label.
+
+#[SATS]Raveesh Pathak 29th May 2014
+Issues-
+1.Billing Shipping address not coming in edit coming in edit invoice and corresponding pdf
+
+# Amol Dhokale 29th May 2014
+Issues:
+ 1. Product cost are showing wrong while creating an assembly product. ,
+ 2. Product cost are showing wrong while building an assembly product.
+ 3. Closing stock calculation in trading p/l statement are getting wrong when we are building a assembly product.
+ 4. Assembly product are getting deleted when we are actually unbuilding it.
+ 5. Unbuliding an assembly product just means returning of bill of material to its respective inventories. BOM list should not get removed off.
+ 6. While editing an unbuild product, list of BOM should be updated.
+ 7. While editing an build product, BOM should get updated and inventory of used products should get updated.
+ 8. Cycle count and tollerence are not getting loading up while editing an assembly product.
+
+#Neeraj Dwivedi -29th May 2014
+1. Added border style with only header border in lineitems of Custom Designer.
+2. Show preview functionality for Custom Designer.
+
+#Neeraj Dwivedi--30th May 2014
+Issue :-
+Insert Text field can't edit border successfully.
+
+#Hitesh Suryawanshi -30th May 2014
+Issue:
+1.After selecting a dimension in ???payment made via GL??? or ???vendor invoice???, save and create new, the selected dimension in previous record get propagated to the new record.
+2.Customer are not displaying after one month or more than month even when there is no transaction are yet made.
+
+#Anup Kale-31th May 2014
+Senwan Issues:
+Please refer to JE000228 or vendor debit note no 2344 (Hock Wah), it is not listed in GST report.
+The GST report extracted is not in 2 decimal place. 
+
+#Vijay Jawale 5th Mar 2015
+ ERP-6336    GST info is not getting printed in Purchase Order

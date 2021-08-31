@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean name="proxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames">
+            <list>
+                <value>*Controller</value>
+                <value>*ControllerCMN</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>sessionvalidator</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="proxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"/>
+    
+</beans>

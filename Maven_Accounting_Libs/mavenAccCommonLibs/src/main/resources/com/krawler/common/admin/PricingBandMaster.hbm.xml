@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.PricingBandMaster" table="pricingbandmaster">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        
+        <property name="name" type="string">
+            <column length="255" name="name"/>
+        </property>
+        
+        <property name="defaultToPOS" type="true_false">
+            <column default="false" name="defaulttopos"/>
+        </property>
+        
+        <property name="pricePolicyValue" type="integer">
+            <column name="pricepolicyid"/>
+        </property>
+        
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        
+        <property name="volumeDiscount" type="true_false">
+            <column default="false" name="volumediscount"/>
+        </property>
+        
+        <property name="isIncludingGST" type="true_false">
+            <column default="false" name="isincludinggst"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

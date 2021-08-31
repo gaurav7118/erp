@@ -1,0 +1,908 @@
+# Atul sachan - Fixed Asset Issues 1 July 2014
+
+ALTER TABLE `assetdetail`
+ADD COLUMN `iscreatedfromopeningform`  int(1) NULL DEFAULT 0;
+
+#Vivek Pakmode 1 July 2014 Split the "Invoice with GR/DO" into two option as "VI with GR" and "CI with DO"
+
+ALTER TABLE compaccpreferences ADD DOSetting char(1) DEFAULT 'F';
+ALTER TABLE compaccpreferences ADD GRSetting char(1) DEFAULT 'F';
+
+
+#Neeraj Dwivedi 2nd July 2014
+#DO
+
+DELETE from default_header where defaultHeader="Billing Address" and module=27;
+
+DELETE from default_header where defaultHeader="Billing Address City" and module=27;
+
+DELETE from default_header where defaultHeader="Billing Address State" and module=27;
+
+DELETE from default_header where defaultHeader='Billing Address Country'and module=27;
+
+DELETE from default_header where defaultHeader='Billing Address Postal Code'and module=27;
+
+DELETE from default_header where defaultHeader='Billing Address Email' and module=27;
+
+#CQ
+DELETE from default_header where defaultHeader='Customer Quotation Date' and module=22;
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Quotation Date','quotationdate','quotation','','','Customer Quotation Date','3','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','22');
+
+#Invoice
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Credit Term','termid','creditterm','termid','termdays','Credit Term','1','2');
+
+#PurchaseOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Agent','masteragent','masteritem','id','value','Agent','1','18');
+
+#SalesOrder
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Credit Term','termid','creditterm','termid','termdays','Credit Term','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Due Date','duedate','salesorder','','','Due Date','3','20');
+
+#Credit Note
+#Account Information
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Account Code','account','account','id','acccode','Account Code','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Account Name','account','account','id','name','Account Name','1','12');
+
+DELETE from default_header where defaultHeader='Account Name' and module=12;
+DELETE from default_header where defaultHeader='Account Code' and module=12;
+
+#Customer Information
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Code','customer','customer','id','acccode','Customer Code','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Billing Address2','customer','customer','id','billingaddress2','Customer Billing Address2','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Billing Address3','customer','customer','id','billingaddress3','Customer Billing Address3','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Shipping Address2','customer','customer','id','shippingaddress2','Customer Shipping Address2','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Shipping Address3','customer','customer','id','shippingaddress3','Customer Shipping Address3','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Phone no','customer','customer','id','contactno','Customer Phone no','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Email Address','customer','customer','id','email','Customer Email Address','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Fax No','customer','customer','id','fax','Customer Fax No','1','12');
+
+#Company Information
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Address','company','company','companyid','address','Company Address','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company City','company','company','companyid','city','Company City','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company State','company','company','companyid','state','Company State','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Zipcode','company','company','companyid','zipcode','Company Zipcode','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Fax No','company','company','companyid','faxno','Company Fax No','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Phone No','company','company','companyid','phoneno','Company Phone No','1','12');
+
+#SO
+#Inserting shippingaddress details
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Fax No','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax No','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','20');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','20');
+
+#PO
+#Inserting shippingaddress details
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Fax No','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax No','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','18');
+
+#Tax Invoice
+#Inserting shippingaddress details
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Fax No','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax No','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','2');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','2');
+
+#Vendor Invoice
+#Inserting shippingaddress details
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Fax No','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax No','1','6');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','6');
+
+#VQ
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Fax No','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax No','1','23');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','23');
+
+#Neeraj Dwivedi 2nd July 2014
+#CQ
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address','billingshippingaddresses','billingshippingaddresses','id','shippingaddress','Shipping Address','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address City','billingshippingaddresses','billingshippingaddresses','id','shippingcity','Shipping Address City','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address State','billingshippingaddresses','billingshippingaddresses','id','shippingstate','Shipping Address State','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Country','billingshippingaddresses','billingshippingaddresses','id','shippingCountry','Shipping Address Country','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Email','billingshippingaddresses','billingshippingaddresses','id','shippingemail','Shipping Address Email','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Fax No','billingshippingaddresses','billingshippingaddresses','id','shippingfax','Shipping Address Fax No','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Phone No','billingshippingaddresses','billingshippingaddresses','id','shippingphone','Shipping Address Phone No','1','22');
+
+#PO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Debit Term','term','creditterm','termid','termdays','Debit Term','1','18');
+
+#SO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Credit Term','term','creditterm','termid','termdays','Credit Term','1','20');
+
+#DO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Credit Term','term','creditterm','termid','termdays','Credit Term','1','20');
+
+#CQ
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Credit Term','term','creditterm','termid','termdays','Credit Term','1','22');
+
+# Atul sachan - 2nd July 2014
+
+ALTER TABLE `salesorder`
+ADD COLUMN `isreplacementso`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `docontractmapping`
+ADD COLUMN `productreplacement`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `docontractmapping` ADD FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Amol Dhokale 2nd July 2014
+alter table extracompanypreferences 
+add column `onlybasecurrency` char(1) default 'F';
+
+
+# Amol Dhokale 3rd July 2014
+# Deleted the repeated fields for CN/DN Modules
+
+DELETE from default_header where defaultHeader="Company State" and module=10;
+DELETE from default_header where defaultHeader="Company City" and module=10;
+DELETE from default_header where defaultHeader="Company Address" and module=10;
+DELETE from default_header where defaultHeader="Company emailid" and module=10;
+DELETE from default_header where defaultHeader="Company zipcode" and module=10;
+DELETE from default_header where defaultHeader="Company Fax No" and module=10;
+DELETE from default_header where defaultHeader="Company Phone No" and module=10;
+DELETE from default_header where defaultHeader="Company website" and module=10;
+DELETE from default_header where defaultHeader="Vendor Code" and module=10;
+
+DELETE from default_header where defaultHeader="Company emailid" and module=12;
+DELETE from default_header where defaultHeader="Company website" and module=12;
+
+# Added following fields in CN/DN 
+# Credit Note:
+ 
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company website','company','company','companyid','website','Company website','1','12');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company emailid','company','company','companyid','emailid','Company emailid','1','12');
+
+# Debit Note: 
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company website','company','company','companyid','website','Company website','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company emailid','company','company','companyid','emailid','Company emailid','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Address','company','company','companyid','address','Company Address','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company City','company','company','companyid','city','Company City','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company State','company','company','companyid','state','Company State','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company zipcode','company','company','companyid','zipcode','Company zipcode','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Fax No','company','company','companyid','faxno','Company Fax No','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Phone No','company','company','companyid','phoneno','Company Phone No','1','10');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor Code','vendor','vendor','id','acccode','Vendor Code','1','10');
+
+
+DELETE from default_header  where defaultHeader = 'Customer Billing Address2' and module=12;
+DELETE from default_header  where defaultHeader = 'Customer Billing Address3' and module=12;
+DELETE from default_header  where defaultHeader = 'Customer Shipping Address2' and module=12;
+DELETE from default_header  where defaultHeader = 'Customer Shipping Address3' and module=12;
+DELETE from default_header  where defaultHeader = 'Customer Email Address'  and module=12;
+DELETE from default_header  where defaultHeader = 'Customer Fax No'  and module=12; 
+DELETE from default_header  where defaultHeader = 'Customer Phone no'  and module=12;
+
+# Atul sachan Fixed Asset Issue 4th July
+
+ALTER TABLE `assetdetail`
+ADD COLUMN `costinforeigncurrency`  double NULL DEFAULT 0,
+ADD COLUMN `salvagevalueinforeigncurrency`  double NULL DEFAULT 0;
+
+#Pandurang 4th Jule 2014
+
+CREATE TABLE  salescomissionscehma (
+  id varchar(255) NOT NULL DEFAULT '',
+  lowerlimit int(11) DEFAULT '0',
+  upperlimit int(11) DEFAULT '0',
+  percentagetype int(11) DEFAULT '0',
+  amount int(11) DEFAULT '0',
+  company varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (company) REFERENCES company (companyid) 
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE salescomissionscehma ADD COLUMN schemaitem VARCHAR(255) DEFAULT NULL;
+
+insert into reportmaster value("Sales_Commission_Report","Sales Commission Report","View Sales Commission Report From here.","SalesCommissionReport()");
+
+# Hitesh Suryawanshi 4th July 2014
+update fieldParams set parentid=NULL where parentid='';
+ALTER TABLE fieldParams  change parentid parentid varchar(255) DEFAULT NULL;
+
+# Anand Nimbalkar 4th July 2014
+
+CREATE TABLE `accountforecast` (
+  `id` varchar(255) NOT NULL,  
+  `account` varchar(255) NOT NULL,
+  `jan` double default -1,
+  `feb` double default -1,
+  `march` double default -1,
+  `april` double default -1,
+  `may` double default -1,
+  `june` double default -1,
+  `july` double default -1,
+  `aug` double default -1,
+  `sept` double default -1,
+  `oct` double default -1,
+  `nov` double default -1,
+  `december` double default -1,
+  PRIMARY KEY  (`id`),  
+  KEY `FK_accountforecast_acc` (`account`),
+  CONSTRAINT `FK_accountforecast_acc` FOREIGN KEY (`account`) REFERENCES `account` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into reportmaster(id,name,description,method_name) values ('Account_Forecast_Report','Account Forecast Report','View Account Forecast Report','AccountForecastReportDetails()');
+
+
+# Atul sachan 7 July 2014
+
+ALTER TABLE quotation ADD COLUMN isleasequotation INT(1) NULL DEFAULT 0;
+
+ALTER TABLE `quotationdetails`
+ADD COLUMN `productreplacementdetail`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `quotationdetails` ADD FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Anand Nimbalkar 8th July 2014
+alter table grorder add column `approvestatuslevel` int(11) NOT NULL DEFAULT '0';
+update grorder set approvestatuslevel = 11;
+
+# Atul sachan 8th July 2014
+
+ALTER TABLE salesreturn ADD COLUMN isleasesalesreturn INT(1) NULL DEFAULT 0;
+
+# Mayur Pawar 8 july
+alter table product add column `location`  varchar(255) NULL ;
+alter table product add column `warehouse`  varchar(255) NULL; 
+
+ALTER TABLE `product` ADD CONSTRAINT `product_location_fk1` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `product` ADD CONSTRAINT `product_warehouse_fk1` FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE inventorylocation ADD COLUMN isdefault INT(1) DEFAULT 0;
+ALTER TABLE inventorywarehouse ADD COLUMN isdefault INT(1) DEFAULT 0;
+
+insert into reportmaster values("SerialNO_Status_Report","Serial No. Status Report","View Serial No. Status Report","getSerialNoTabView()"); 
+
+
+# Hitesh Suryawanshi 11th July 2014
+alter table product add column `location`  varchar(255) NULL ;
+alter table product add column `warehouse`  varchar(255) NULL;
+
+ALTER TABLE `product` ADD  FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `product` ADD  FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+# Raveesh Pathak 14th July 2014
+
+update compaccpreferences set showprodserial='F';
+
+#Neeraj Dwivedi 18th July 2014
+#for Credit Note-3rd condition
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor name','vendor','vendor','id','name','Vendor name','1','12');
+
+#for Debit Note-3rd condition
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer name','customer','customer','id','name','Customer name','1','10');
+
+#PO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','18');
+
+
+#Raveesh Pathak 18th July
+
+alter table vendor add column currency varchar(255);
+alter table vendor add CONSTRAINT  FK_vendor_currency FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+
+alter table customer add column currency varchar(255);
+alter table customer add CONSTRAINT  FK_customer_currency FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+
+update vendor INNER JOIN account on account.id=vendor.account
+set vendor.currency=account.currency;
+
+update customer INNER JOIN account on account.id=customer.account
+set customer.currency=account.currency;
+
+#Hitesh Suryawanshi 18th July
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `lastsyncwithpm` datetime DEFAULT NULL;
+
+#Neeraj Dwivedi 18th July 2014
+#CQ - Adding Billing Contact Person and Shipping Contact Person
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person Name','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person Name','1','22');
+
+#Hitesh Suryawanshi 21 July
+
+update defaultaccount set companytype=NULL where name="Unrealised Gain/Loss";
+
+ALTER TABLE `defaultcap`
+ADD COLUMN `unrealisedglaccount`  varchar(255) NULL DEFAULT NULL AFTER `vendoraccount`;
+
+ALTER TABLE `defaultcap` ADD CONSTRAINT  FOREIGN KEY (`unrealisedglaccount`) REFERENCES `defaultaccount` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+update defaultcap set unrealisedglaccount='4028805041a768df0141bbe0c2610132';
+
+
+#Pandurang Customer vendor T Ledger 22 Jule 2014
+insert into reportmaster(id,name,description,method_name) values ('customer_Vendor_T_Ledger','Customer Vendor Analysis T Report','View T shape Customer and Vendor Analysis Report','callCustomerVendorTLedgerReport()');
+
+#Mayur Pawar 23 July 
+#0 - Asset, 1 - Liability, 2 - Expense, 3 - Income
+#Profit and Loss
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 0 where accgroup.nature in (2, 3);
+#Balance Sheet
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 1 where accgroup.nature in (0, 1);
+
+
+#Hitesh Suryawanshi 24th July
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `mslastsyncwithpm` datetime DEFAULT NULL;
+
+#Neeraj Dwivedi 25th July 2014
+#Receive Payment
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Received From','receivedfrom','masteritem','id','value','Received From','1','16');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer','customer','customer','id','name','Customer','1','16');
+
+DELETE  from default_header where  defaultHeader="Vendor" and module=16;
+DELETE  from default_header where  defaultHeader="Advance Amount" and module=16;
+
+
+#Raveesh Pathak 28th July 2014
+
+alter table sequenceformat add column isdefaultformat char(1) default 'F';
+update sequenceformat set isdefaultformat='T' where name='JE000000' and moduleid=24;
+
+#Mayur Pawar 30 July 
+// Update Master Type 1 - GL, 2 - Cash, 3 - Bank, 4 - Normal GST
+update account set mastertypeid=1;
+update account inner join accgroup on account.groupname=accgroup.id set mastertypeid=2 where accgroup.name='Cash' or account.groupname in(select id from accgroup where parent=23) or account.name='Cash in hand';
+update account inner join accgroup on account.groupname=accgroup.id set mastertypeid=3 where accgroup.name='Bank' or account.groupname in(select id from accgroup where parent=9);
+update account set mastertypeid=4 where  account.name like '%GST%';
+
+#Atul sachan 30th July 2014
+
+ALTER TABLE `invoice`
+ADD COLUMN `isconversionratefromcurrencytobase`  int(1) NULL DEFAULT 1;
+
+UPDATE invoice SET isconversionratefromcurrencytobase=0;
+
+ALTER TABLE `receipt`
+ADD COLUMN `isconversionratefromcurrencytobase`  int(1) NULL DEFAULT 1;
+
+UPDATE receipt SET isconversionratefromcurrencytobase=0;
+
+ALTER TABLE `creditnote`
+ADD COLUMN `isconversionratefromcurrencytobase`  int(1) NULL DEFAULT 1;
+
+UPDATE creditnote SET isconversionratefromcurrencytobase=0;
+
+ALTER TABLE `debitnote`
+ADD COLUMN `isconversionratefromcurrencytobase`  int(1) NULL DEFAULT 1;
+
+UPDATE debitnote SET isconversionratefromcurrencytobase=0;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `isconversionratefromcurrencytobase`  int(1) NULL DEFAULT 1;
+
+UPDATE goodsreceipt SET isconversionratefromcurrencytobase=0;
+
+ALTER TABLE `payment`
+ADD COLUMN `isconversionratefromcurrencytobase`  int(1) NULL DEFAULT 1;
+
+UPDATE payment SET isconversionratefromcurrencytobase=0;
+
+# Suhas Chaware on 31st July 2014
+UPDATE compaccpreferences SET showchild="T" WHERE  id IN (select companyid from company where subdomain="swt");
+
+# Atul sachan - 2nd July 2014
+
+ALTER TABLE `salesorder`
+ADD COLUMN `isreplacementso`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `docontractmapping`
+ADD COLUMN `productreplacement`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `docontractmapping` ADD FOREIGN KEY (`productreplacement`) REFERENCES `productreplacement` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Amol Dhokale 2nd July 2014
+alter table extracompanypreferences 
+add column `onlybasecurrency` char(1) default 'F';
+
+#Pandurang 4th Jule 2014
+
+CREATE TABLE  salescomissionscehma (
+  id varchar(255) NOT NULL DEFAULT '',
+  lowerlimit int(11) DEFAULT '0',
+  upperlimit int(11) DEFAULT '0',
+  percentagetype int(11) DEFAULT '0',
+  amount int(11) DEFAULT '0',
+  company varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (company) REFERENCES company (companyid) 
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE salescomissionscehma ADD COLUMN schemaitem VARCHAR(255) DEFAULT NULL;
+
+insert into reportmaster value("Sales_Commission_Report","Sales Commission Report","View Sales Commission Report From here.","SalesCommissionReport()");
+
+# Atul sachan 7 July 2014
+
+ALTER TABLE quotation ADD COLUMN isleasequotation INT(1) NULL DEFAULT 0;
+
+ALTER TABLE `quotationdetails`
+ADD COLUMN `productreplacementdetail`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `quotationdetails` ADD FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+# Anand Nimbalkar 8th July 2014
+alter table grorder add column `approvestatuslevel` int(11) NOT NULL DEFAULT '0';
+update grorder set approvestatuslevel = 11;
+
+# Atul sachan 8th July 2014
+
+ALTER TABLE salesreturn ADD COLUMN isleasesalesreturn INT(1) NULL DEFAULT 0;
+
+# Atul sachan 14th July 2014
+
+alter table servicedetails add column status int(1) null default 0;
+
+ALTER TABLE `fixedassetopening`
+MODIFY COLUMN `creationdate`  datetime NULL DEFAULT NULL;
+
+
+ALTER TABLE extracompanypreferences ADD COLUMN leasemanagementflag INT(1) DEFAULT 0;
+
+# Raveesh Pathak 14th July 2014
+
+update compaccpreferences set showprodserial='F';
+
+
+# Atul sachan 15th July 2014
+
+ALTER TABLE `quotation`
+ADD COLUMN `contract`  varchar(255) NULL;
+
+ALTER TABLE `quotation` ADD FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+#Added Contract Contract Expiry / Terminate,Goods Return,Renew Contract Flow for lease module Malhari 16 July
+
+ALTER TABLE `contract` DROP FOREIGN KEY `contract_ibfk_3`;
+ALTER TABLE `contract` DROP COLUMN `cstatus`;
+ALTER TABLE `contract` ADD COLUMN `cstatus`  tinyint(3) NULL DEFAULT 1;
+ALTER TABLE `contract` ADD COLUMN `srstatus`  tinyint(3) NULL DEFAULT 1;
+
+CREATE TABLE `contractdates` (
+`id`  varchar(255) NOT NULL ,
+`startdate`  datetime NULL DEFAULT NULL ,
+`enddate`  datetime NULL DEFAULT NULL ,
+`contract`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `contractdates_contract_FK` FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE `contract`
+MODIFY COLUMN `cstatus`  tinyint(3) NULL DEFAULT 1 AFTER `contractcustomdataref`,
+MODIFY COLUMN `srstatus`  tinyint(3) NULL DEFAULT 1 AFTER `cstatus`;
+
+
+# Mayur Pawar 8 july
+alter table product add column `location`  varchar(255) NULL ;
+alter table product add column `warehouse`  varchar(255) NULL; 
+
+ALTER TABLE `product` ADD CONSTRAINT `product_location_fk1` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `product` ADD CONSTRAINT `product_warehouse_fk1` FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE inventorylocation ADD COLUMN isdefault INT(1) DEFAULT 0;
+ALTER TABLE inventorywarehouse ADD COLUMN isdefault INT(1) DEFAULT 0;
+
+insert into reportmaster values("SerialNO_Status_Report","Serial No. Status Report","View Serial No. Status Report","getSerialNoTabView()"); 
+
+#Hitesh Suryawanshi 16th July 2014
+CREATE TABLE `productpricerule` (
+  `id` varchar(255) NOT NULL DEFAULT '',
+  `lowerlimit` int(11) DEFAULT '0',
+  `upperlimit` int(11) DEFAULT '0',
+  `percentagetype` int(11) DEFAULT '0',
+  `ruletype` int(11) DEFAULT '0',
+  `pricetype` int(11) DEFAULT '0',
+  `increamentordecreamenttype` int(11) DEFAULT '0',
+  `category` varchar(255) DEFAULT NULL,
+  `amount` int(11) DEFAULT '0',
+  `company` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company` (`company`),
+  CONSTRAINT `productpricefk1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  CONSTRAINT `productpricefk2` FOREIGN KEY (`category`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#Hitesh Suryawanshi 18th July 2014
+CREATE TABLE `contractcustomdata` (
+  `contractid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) DEFAULT 'false',
+  `col1037` varchar(255) DEFAULT 'false',
+  `col1038` varchar(255) DEFAULT 'false',
+  `col1039` varchar(255) DEFAULT 'false',
+  `col1040` varchar(255) DEFAULT 'false',
+  `col1041` varchar(255) DEFAULT 'false',
+  `col1042` varchar(255) DEFAULT 'false',
+  `col1043` varchar(255) DEFAULT 'false',
+  `col1044` varchar(255) DEFAULT 'false',
+  `col1045` varchar(255) DEFAULT 'false',
+  `company` varchar(255) DEFAULT NULL,
+  `moduleId` int(11) DEFAULT '1',
+  `deleted` char(1) DEFAULT 'F',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`contractid`),
+  KEY `contractcustomdata_fk_1` (`company`),
+  CONSTRAINT `contractcustomdata_fk_1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `contract`
+ADD COLUMN  `contractcustomdataref` varchar(255) DEFAULT NULL;
+
+# Anand Nimbalkar 18th July 2014
+alter table masteritem add column emailid varchar(255) default null;
+alter table mailnotification add column mailtosalesperson char(1) default 0;
+
+alter table salesreturn add column contract varchar(255) default null;
+alter table salesreturn add constraint FK_contract foreign key(contract) references contract(id);
+
+#Pandurang Customer vendor T Ledger 22 Jule 2014
+insert into reportmaster(id,name,description,method_name) values ('customer_Vendor_T_Ledger','Customer Vendor Analysis T Report','View T shape Customer and Vendor Analysis Report','callCustomerVendorTLedgerReport()');
+
+#Mayur Pawar 17th July 2014 
+ALTER TABLE `compaccpreferences` ADD COLUMN `isBatchCompulsory` char(1) default 'T';
+
+alter table batchserial add column `company`  varchar(255) NULL ;
+ALTER TABLE `batchserial` ADD CONSTRAINT `serial_company_fk1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ alter table batchserial add column `product`  varchar(255) NULL;
+ALTER TABLE `batchserial` ADD CONSTRAINT `serial_product_fk1`  FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+alter table batchserial add ispurchase char(1) NOT NULL default 'T';
+alter table batchserial add transactiontype int(11) DEFAULT 1;
+
+
+#Neeraj Dwivedi 18th July 2014
+#for Credit Note-3rd condition
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor name','vendor','vendor','id','name','Vendor name','1','12');
+
+#for Debit Note-3rd condition
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer name','customer','customer','id','name','Customer name','1','10');
+
+#PO
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Phone No','billingshippingaddresses','billingshippingaddresses','id','billingphone','Billing Address Phone No','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Fax No','billingshippingaddresses','billingshippingaddresses','id','billingfax','Billing Address Fax No','1','18');
+
+
+#Raveesh Pathak 18th July
+
+alter table vendor add column currency varchar(255);
+alter table vendor add FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+
+alter table customer add column currency varchar(255);
+alter table customer add FOREIGN KEY (currency) REFERENCES  currency(currencyid);
+
+update vendor INNER JOIN account on account.id=vendor.account
+set vendor.currency=account.currency;
+
+update customer INNER JOIN account on account.id=customer.account
+set customer.currency=account.currency;
+
+#Hitesh Suryawanshi 18th July
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `lastsyncwithpm` datetime DEFAULT NULL;
+
+#Neeraj Dwivedi 18th July 2014
+#CQ - Adding Billing Contact Person and Shipping Contact Person
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Billing Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','billingcontactperson','Billing Address Contact Person Name','1','22');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Shipping Address Contact Person Name','billingshippingaddresses','billingshippingaddresses','id','shippingcontactperson','Shipping Address Contact Person Name','1','22');
+
+#Hitesh Suryawanshi 21 July
+
+update defaultaccount set companytype=NULL where name="Unrealised Gain/Loss";
+
+ALTER TABLE `defaultcap`
+ADD COLUMN `unrealisedglaccount`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `defaultcap` ADD CONSTRAINT  FOREIGN KEY (`unrealisedglaccount`) REFERENCES `defaultaccount` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+update defaultcap set unrealisedglaccount='4028805041a768df0141bbe0c2610132';
+
+
+#Pandurang Customer vendor T Ledger 22 Jule 2014
+insert into reportmaster(id,name,description,method_name) values ('customer_Vendor_T_Ledger','Customer Vendor Analysis T Report','View T shape Customer and Vendor Analysis Report','callCustomerVendorTLedgerReport()');
+
+#Mayur Pawar 23 July 
+//0 - Asset, 1 - Liability, 2 - Expense, 3 - Income
+//Profit and Loss
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 0 where accgroup.nature in (2, 3);
+//Balance Sheet
+Update account inner join accgroup on accgroup.id = account.groupname set account.accounttype = 1 where accgroup.nature in (0, 1);

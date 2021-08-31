@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.Template_Config" table="templatefieldinfo">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <many-to-one class="com.krawler.common.admin.Projreport_Template" fetch="select" name="templateId">
+      <column name="templateId"/>
+    </many-to-one>
+     <property name="fieldAttribJson" type="string">
+      <column  name="fieldAttribJson"/>
+    </property>
+  </class>
+</hibernate-mapping>

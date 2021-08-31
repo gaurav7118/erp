@@ -1,0 +1,1 @@
+Ext.define("Ext.overrides.GlobalEvents",{override:"Ext.GlobalEvents",deprecated:{5:{methods:{addListener:function(D,G,H,I,C,B,E){var A,F;if(D==="ready"){F=G}else{if(typeof D!=="string"){for(A in D){if(A==="ready"){F=D[A]}}}}if(F){Ext.log.warn("Ext.on('ready', fn) is deprecated.  Please use Ext.onReady(fn) instead.");Ext.onReady(F)}this.callParent([D,G,H,I,C,B,E])}}}}})

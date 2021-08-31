@@ -1,0 +1,1 @@
+Ext.define("Ext.fx.easing.Abstract",{config:{startTime:0,startValue:0},isEasing:true,isEnded:false,constructor:function(A){this.initConfig(A);return this},applyStartTime:function(A){if(!A){A=Ext.Date.now()}return A},updateStartTime:function(A){this.reset()},reset:function(){this.isEnded=false},getValue:Ext.emptyFn})

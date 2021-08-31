@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.stockmovement.StockMovement" table="in_stockmovement" >
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+        <property name="transactionNo" type="string">
+            <column length="50" name="transactionno"/>
+        </property>
+        <property name="moduleRefId" type="string">
+            <column length="50" name="modulerefid"/>
+        </property>
+         <property name="memo" type="string">
+            <column  name="memo"/>
+        </property>
+        <property name="moduleRefDetailId" type="string">
+            <column length="50" name="modulerefdetailid"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="pricePerUnit" type="double">
+            <column name="priceperunit" />
+        </property>
+        <property name="stock_management_flag" type="integer">
+            <column name="stock_management_flag" default="0"/>
+        </property>
+        <property name="transactionDate" type="timestamp">
+            <column name="transaction_date"/>
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="createdon"/>
+        </property>
+        <property column="transaction_type" name="transactionType">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.stockmovement.TransactionType</param>
+            </type>
+        </property>
+        <property column="transaction_module" name="transactionModule">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.stockmovement.TransactionModule</param>
+            </type>
+        </property>
+        <property name="autoSeq" type="long">
+            <column name="auto_sequence"/>
+        </property>
+        <set name="stockMovementDetails" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="stockmovement"  />
+            <one-to-many class="com.krawler.inventory.model.stockmovement.StockMovementDetail" />
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="store" name="store"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="stockuom" name="stockUoM"/>
+        <many-to-one class="com.krawler.common.admin.CostCenter" column="costcenter" name="costCenter"/>
+        <many-to-one class="com.krawler.hql.accounting.Vendor" column="vendor" name="vendor"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" column="customer" name="customer"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="assembled_product" name="assembledProduct"/>
+
+    </class>
+</hibernate-mapping>

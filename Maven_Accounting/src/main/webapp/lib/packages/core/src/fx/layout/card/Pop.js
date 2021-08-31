@@ -1,0 +1,1 @@
+Ext.define("Ext.fx.layout.card.Pop",{extend:"Ext.fx.layout.card.Style",alias:"fx.layout.card.pop",config:{duration:500,inAnimation:{type:"pop",easing:"ease-out"},outAnimation:{type:"pop",easing:"ease-in",out:true}},updateDuration:function(D){var C=D/2,B=this.getInAnimation(),A=this.getOutAnimation();B.setDelay(C);B.setDuration(C);A.setDuration(C)}})

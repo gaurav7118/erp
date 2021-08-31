@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetMaintenanceWorkOrderDetail" table="assetmaintenanceworkorderdetail">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">inventory</param>
+            </generator>    
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" default="0"/>
+        </property>
+        <property name="remark" type="string">
+            <column length="255" name="remark"/>
+        </property>
+<!--        <property name="actualQuantity" type="double">
+            <column name="actualquantity"/>
+        </property>-->
+        <property name="deliveredQuantity" type="double">
+            <column name="deliveredquantity"/>
+        </property>
+        <property name="baseuomquantity" type="double">
+            <column name="baseuomquantity"/>
+        </property>
+        <property name="baseuomdeliveredquantity" type="double">
+            <column name="baseuomdeliveredquantity"/>
+        </property>
+        <property name="baseuomrate" type="double">
+            <column name="baseuomrate" default="1" />
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        
+        <one-to-one class="com.krawler.hql.accounting.Inventory" constrained="true" name="inventory"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.ProductBatch" name="batch"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+        <many-to-one class="com.krawler.hql.accounting.AssetMaintenanceWorkOrder" name="assetMaintenanceWorkOrder" column="assetmaintenanceworkorder"/>
+    </class>
+</hibernate-mapping>

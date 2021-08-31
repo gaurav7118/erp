@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.ProjectFeature" table="featurelist">
+    <id column="featureid" name="featureID">
+      <generator class="uuid"/>
+    </id>
+    <property name="featureName" type="string">
+      <column length="50" name="featurename" not-null="true" unique="true"/>
+    </property>
+    <property name="displayFeatureName" type="string">
+      <column length="50" name="displayfeaturename" not-null="true"/>
+    </property>
+    <property name="orderNo" type="int">
+      <column name="orderno" not-null="true" default='0'/>
+    </property>
+    <set cascade="all" inverse="true" name="activities">
+      <key column="feature"/>
+      <one-to-many class="com.krawler.common.admin.ProjectActivity"/>
+    </set>
+    <set cascade="all" inverse="true" name="permissions">
+      <key column="feature"/>
+      <one-to-many class="com.krawler.common.admin.UserPermission"/>
+    </set>
+  </class>
+</hibernate-mapping>

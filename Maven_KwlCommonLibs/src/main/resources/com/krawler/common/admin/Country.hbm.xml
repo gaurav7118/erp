@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.Country" table="country">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="countryName" type="string">
+      <column length="200" name="countryname" not-null="true"/>
+    </property>
+    <property name="countryCode" type="string">
+      <column length="32" name="countrycode"/>
+    </property>
+    <property name="timezoneid" type="string">
+        <column length="255" name="timezoneid" not-null="false"/>
+    </property>
+    <set cascade="all" inverse="true" name="states">
+        <key column="country"/>
+        <one-to-many class="com.krawler.common.admin.State"/>
+    </set>
+  </class>
+</hibernate-mapping>

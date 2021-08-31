@@ -1,0 +1,67 @@
+<tr><td>
+#if($isDetailsTable)
+    #if ($isroundborder) 
+        <TABLE border="0" id = "idLineitemTabel" class ="lineitembordereffect1 tableroundborder lineitemtablewrap" bordertype="border1" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #else
+    <TABLE border="0" id = "$detailsTableId" bordertype="border1"  class ="" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #end
+#else
+    #if ($isroundborder) 
+        <TABLE border="0" id = "idLineitemTabel" class ="lineitembordereffect1 tableroundborder lineitemtablewrap" bordertype="border1" style="margin:$margin; width:$tablewidth%;border-collapse:collapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #else
+        <TABLE border="0" id = "idLineitemTabel" bordertype="border1"  class ="lineitemtablewrap $extraClassName" style="margin:$margin; width:$tablewidth%;$borderCollapse;font-family:$fontfamily;" cellspacing="0" cellpadding="4">  
+    #end
+#end
+ <thead>    
+<TR>
+        #foreach( $header1 in $tableHeader )  
+            <TH width="$header1.width" bgcolor="$bordercolor" align="$align" style="$header1.style">$header1.data</TH>  
+        #end  
+        </TR>
+ </thead>    
+<tbody>  
+
+        #if ( $isFirstRowPresent) 
+            $lineItemFirstRowHTML
+        #end
+        #foreach( $prod in $prodList )  
+          <TR style="padding: 4px;">  
+            #foreach( $CustomDesignLineItemProp in $prod )  
+                #if ($isroundborder) 
+                    <TD style="padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;font-size:13px" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                #else
+                    <TD style="border:1px solid; padding: 0 4px;vertical-align:$CustomDesignLineItemProp.valign;border-color:$tablebordercolor !important;font-size:13px" align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                #end
+            #end  
+          </TR>  
+        #end 
+        #if ($isLastRowPresent)
+         $lineItemLastRowHTML
+        #end
+
+        #if ( $showtotal ) 
+            #foreach( $prod in $totalList )  
+            <TR style="padding: 4px" id="totalrow">  
+                #foreach( $CustomDesignLineItemProp in $prod )  
+                    #if($CustomDesignLineItemProp.data)
+                        <TD style="padding: 4px ; border:1px solid; border-color:$tablebordercolor;font-weight: bold;font-size:13px"  align="$CustomDesignLineItemProp.align">$CustomDesignLineItemProp.data</TD>  
+                    #end
+                #end  
+            </TR>  
+            #end 
+       #end 
+
+       #if ( $issummarytable ) 
+            #foreach( $prod in $summaryTable )  
+            <TR style="padding: 4px">  
+                #foreach( $SummaryTableCellProperty in $prod )  
+                    <TD style="$SummaryTableCellProperty.style" rowspan="$SummaryTableCellProperty.rowspan" colspan="$SummaryTableCellProperty.colspan" >$SummaryTableCellProperty.data</TD>  
+                #end  
+            </TR>  
+            #end 
+       #end 
+</tbody>
+    </TABLE> 
+</td></tr>
+
+

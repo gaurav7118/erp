@@ -1,0 +1,632 @@
+# Atul sachan 1st April 2014
+
+ALTER TABLE `creditnote`
+ADD COLUMN `isopeningbalencecn`  int(1) NULL DEFAULT 0,
+ADD COLUMN `iscnforcustomer`  int(1) NULL DEFAULT 1,
+ADD COLUMN `openingbalanceamountdue`  double NULL DEFAULT 0,
+ADD COLUMN `isnormalcn`  int(1) NULL DEFAULT 1,
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `narration`  text NULL,
+ADD COLUMN `exchangerateforopeningtransaction`  double NULL DEFAULT 1;
+
+ALTER TABLE `creditnote`
+MODIFY COLUMN `journalentry`  varchar(255) NULL;
+
+ALTER TABLE `creditnote`
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `creditnote` ADD FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `debitnote`
+ADD COLUMN `isopeningbalencedn`  int(1) NULL DEFAULT 0,
+ADD COLUMN `isdnforvendor`  int(1) NULL DEFAULT 1,
+ADD COLUMN `openingbalanceamountdue`  double NULL DEFAULT 0,
+ADD COLUMN `isnormaldn`  int(1) NULL DEFAULT 1,
+ADD COLUMN `creationdate`  datetime NULL DEFAULT NULL,
+ADD COLUMN `narration`  text NULL,
+ADD COLUMN `exchangerateforopeningtransaction`  double NULL DEFAULT 1;
+
+ALTER TABLE `debitnote`
+MODIFY COLUMN `journalentry`  varchar(255) NULL;
+
+ALTER TABLE `debitnote`
+ADD COLUMN `account`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `debitnote` ADD FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+#Hitesh P. Suryawanshi Apr 02,2014
+
+insert into reportmaster value("Missing_Auto_Sequence_Number_Report","Missing Auto Sequence Number Report","View Missing Auto Generated Sequence Numbers from here.","callMissingAutoSequenceNumberWindow()");
+
+#Mayur Pawar 2 April 2014 spelling mistake issue
+update notetype set name = 'Quantity Descrepancy' where id = '2';
+
+#Set Template type for senwan company and farrate Malhari 4 Aplil 2014
+update company set templateflag=2 where subdomain="swt";
+update company set templateflag=3 where subdomain="fwt";
+
+#Mayur Pawar 2 April 2014 spelling mistake issue
+update notetype set name = 'Quantity Descrepancy' where id = '2';
+
+
+#Amol Dhokale Apr 03,2014
+
+ALTER TABLE customdesigntemplate ADD COLUMN pagefootersqlquery VARCHAR(4000);
+ALTER TABLE customdesigntemplate ADD COLUMN pagefooterjson text;
+ALTER TABLE customdesigntemplate ADD COLUMN pagefooterhtml LONGTEXT;
+
+#Set Template type for senwan company and farrate Malhari 4 Aplil 2014
+update company set templateflag=2 where subdomain="swt";
+update company set templateflag=3 where subdomain="fwt";
+
+
+#Anup Kale 4 April 2014
+ALTER TABLE `journalentry`
+ADD COLUMN `partlyjeentrywithcndn` int(5) NULL DEFAULT '0';
+
+UPDATE journalentry je inner join creditnote c on c.journalentry=je.id inner join debitnote d on d.journalentry=je.id set partlyjeentrywithcndn=1 where je.typevalue=2;
+update notetype set name = 'Quantity Descrepancy' where id = '2';
+
+#Mayur Pawar 8 april 2014 Make account code madnatory
+update default_header set ismandatory="T" where defaultHeader="Account Code";
+update default_header set defaultHeader="Group" where defaultHeader="Account group";
+
+# Atul sachan 9th April 2014 - Added opening balance feature in PO/SO
+
+ALTER TABLE purchaseorder
+ADD COLUMN `isopeningbalencepo` int(1) NULL DEFAULT 0;
+
+ALTER TABLE salesorder
+ADD COLUMN `isopeningbalenceso` int(1) NULL DEFAULT 0;
+
+
+# Pandurang 11 April 2014 - Vendor Code/Customer Code Mandatory while Import
+UPDATE default_header set ismandatory='T'  WHERE   id="67826d86-195b-11e3-8a99-001e670e1459" and defaultHeader="Vendor Code";
+
+UPDATE default_header set ismandatory='T'  WHERE   id="6781f4e6-195b-11e3-8a99-001e670e1459" and defaultHeader="Customer Code";
+
+
+#Amol Dhokale Apr 11,2014  - added one column to fetch fields allowed for custom designer interface
+
+ALTER TABLE default_header ADD COLUMN allowincustomtemplate CHAR(1) DEFAULT 1;
+
+#Amol Dhokale Apr 11,2014
+
+#Customer Module: 25
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer email','email','customer','','','Customer email','1','25');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Contact No','contactno','customer','','','Customer Contact No','1','25');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Bank Acc No','bankaccountno','customer','','','Customer Bank Acc No','1','25');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Acc Code','acccode','customer','','','Customer Acc Code','1','25');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer fax No','fax','customer','','','Customer fax No','1','25');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Billing Address','billingaddress','customer','','','Customer Billing Address','1','25');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Customer Shipping Address','shippingaddress','customer','','','Customer Shipping Address','1','25');
+
+#Vendor Module:26
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor email','email','vendor','','','Vendor email','1','26');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor Contact No','contactno','vendor','','','Vendor Contact No','1','26');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor Bank Acc No','bankaccountno','vendor','','','Vendor Bank Acc No','1','26');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor Acc Code','acccode','vendor','','','Vendor Acc Code','1','26');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor fax No','fax','vendor','','','Vendor fax No','1','26');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor Contact Person','contactperson','vendor','','','Vendor Contact Person','1','26');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Vendor Billing Address','address','vendor','','','Vendor Billing Address','1','26');
+
+#Tax- 41
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Tax Code','taxcode','tax','','','Tax Code','1','41');
+
+#Company- 42
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Address','address','company','','','Company Address','1','42');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Contact No','phoneno','company','','','Company Contact No','1','42');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company email','emailid','company','','','Company email','1','42');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES (UUID(),'Company Fax No','faxno','company','','','Company Fax No','1','42');
+
+
+#Anand Nimbalkar  15 April 2014
+
+#Permission for View Goods Receipt Report
+INSERT INTO `featurelist` VALUES ('4d5cb414b35411e3abe3001cc066e9f0', 'goodsreceiptreport', 'Goods Receipt Report', '30');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('9cf983c8b35711e3abe3001cc066e9f0', 'creatgr', 'Create', '1', null, '4d5cb414b35411e3abe3001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('408a4e1eb35811e3abe3001cc066e9f0', 'viewgr', 'View', '2', null, '4d5cb414b35411e3abe3001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('8d7e75d6b35a11e39a00001cc066e9f0', 'editgr', 'Modify', '3', '408a4e1eb35811e3abe3001cc066e9f0', '4d5cb414b35411e3abe3001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('ba29c95ab35a11e39a00001cc066e9f0', 'removegr', 'Delete', '4', '408a4e1eb35811e3abe3001cc066e9f0', '4d5cb414b35411e3abe3001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('c64c2214b35a11e39a00001cc066e9f0', 'exportdatagr', 'Export', '5', '408a4e1eb35811e3abe3001cc066e9f0', '4d5cb414b35411e3abe3001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('d62caafab35a11e39a00001cc066e9f0', 'printgr', 'Print', '6', '408a4e1eb35811e3abe3001cc066e9f0', '4d5cb414b35411e3abe3001cc066e9f0');
+INSERT INTO `userpermission` VALUES ('4d5cb414b35411e3abe3001cc066e9f0', '1', '63', NULL);
+
+#Permission for View Delivery Order Report
+INSERT INTO `featurelist` VALUES ('f487fea4b35b11e39a00001cc066e9f0', 'deliveryreport', 'Delivery Order Report', '31');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('6eb27b28b35c11e39a00001cc066e9f0', 'creatdo', 'Create', '1', null, 'f487fea4b35b11e39a00001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('7a6d0d5cb35c11e39a00001cc066e9f0', 'viewdo', 'View', '2', null, 'f487fea4b35b11e39a00001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('87bc17dcb35c11e39a00001cc066e9f0', 'editdo', 'Modify', '3', '7a6d0d5cb35c11e39a00001cc066e9f0', 'f487fea4b35b11e39a00001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('94c84874b35c11e39a00001cc066e9f0', 'removedo', 'Delete', '4', '7a6d0d5cb35c11e39a00001cc066e9f0', 'f487fea4b35b11e39a00001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('9fdd70ccb35c11e39a00001cc066e9f0', 'exportdatado', 'Export', '5', '7a6d0d5cb35c11e39a00001cc066e9f0', 'f487fea4b35b11e39a00001cc066e9f0');
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) 
+VALUES ('af4bcb08b35c11e39a00001cc066e9f0', 'printdo', 'Print', '6', '7a6d0d5cb35c11e39a00001cc066e9f0', 'f487fea4b35b11e39a00001cc066e9f0');
+INSERT INTO `userpermission` VALUES ('f487fea4b35b11e39a00001cc066e9f0', '1', '63', NULL);
+
+#validdate fields for quotation
+alter table vendorquotation add validdate datetime default NULL;
+alter table quotation add validdate datetime default NULL;
+
+#cashtransaction field for CP and CS
+ALTER TABLE `goodsreceipt` ADD COLUMN `cashtransaction`  int(1) NULL DEFAULT 0;
+ALTER TABLE `invoice` ADD COLUMN `cashtransaction`  int(1) NULL DEFAULT 0;
+
+#modules entry for product import log
+INSERT INTO modules (id,modulename,pojoclasspathfull,primarykey_methodname) VALUES ("30", "Product", "com.krawler.hql.accounting.Product", "ID");
+
+
+
+#Mayur Pawar 14 april 2014  default account for customer and vendor.
+update defaultaccount set companytype=NULL,country=NULL where name like '%Trade%';
+
+#Mayur Pawar 15 april 2014 delete currency header for the vendor import
+ delete from default_header where defaultHeader="currency" and module="b8bd81b0-c500-102d-bb0b-001e58a64cb6";
+ update default_header set defaultHeader="Group" where defaultHeader="Account group";
+
+# Atul sachan 22 April 2014
+
+CREATE TABLE `cntaxentry` (
+`id`  varchar(255) NOT NULL ,
+`taxjedid`  varchar(255) NULL ,
+`amount`  double NULL DEFAULT 0 ,
+`taxamount`  double NULL DEFAULT 0 ,
+`description`  varchar(255) NULL ,
+`isdebit`  char(1) NULL DEFAULT 'F' ,
+`tax`  varchar(255) NULL ,
+`account`  varchar(255) NULL ,
+`creditnote`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`tax`) REFERENCES `tax` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`creditnote`) REFERENCES `creditnote` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dntaxentry` (
+`id`  varchar(255) NOT NULL ,
+`taxjedid`  varchar(255) NULL ,
+`amount`  double NULL DEFAULT 0 ,
+`taxamount`  double NULL DEFAULT 0 ,
+`description`  varchar(255) NULL ,
+`isdebit`  char(1) NULL DEFAULT 'F' ,
+`tax`  varchar(255) NULL ,
+`account`  varchar(255) NULL ,
+`debitnote`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`tax`) REFERENCES `tax` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`debitnote`) REFERENCES `debitnote` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#Anup 23 April 2014
+
+ALTER TABLE `paymentdetail`
+ADD COLUMN `fromcurrency` varchar(255) default NULL,
+ADD COLUMN `tocurrency` varchar(255) default NULL,
+ADD COLUMN `exchangeratefortransaction`  double NULL DEFAULT 1,
+ADD FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`),
+ADD FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`);
+
+ALTER TABLE `receiptdetails`
+ADD COLUMN `fromcurrency` varchar(255) default NULL,
+ADD COLUMN `tocurrency` varchar(255) default NULL,
+ADD COLUMN `exchangeratefortransaction`  double NULL DEFAULT 1,
+ADD FOREIGN KEY (`fromcurrency`) REFERENCES `currency` (`currencyid`),
+ADD FOREIGN KEY (`tocurrency`) REFERENCES `currency` (`currencyid`);
+# malhari - 23 April 2014 Product Import problem for vrnet
+UPDATE product SET description = REPLACE(description, '
+  ','><td');
+
+
+UPDATE product SET description = REPLACE(description, 'border-collapse:
+ collapse','');
+
+UPDATE product SET description = REPLACE(description, ', etc',' etc')
+
+update default_header set hbmnotnull='F' where module='09508488-c1d2-102d-b048-001e58a64cb6' and defaultHeader='Email Address';
+
+update default_header set hbmnotnull='F' where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Email Address';
+
+
+#Raveesh pathak 23rd April 2014  DB Changes for Address Field Breakdown
+
+CREATE TABLE billingshippingaddresses(
+id VARCHAR(255) NOT NULL,
+billingaddress VARCHAR(1024) DEFAULT NULL,
+billingcountry VARCHAR(255) DEFAULT NULL,
+billingstate VARCHAR(255) DEFAULT NULL,
+billingcity VARCHAR(255) DEFAULT NULL,
+billingpostal VARCHAR(255) DEFAULT NULL,
+billingemail VARCHAR(255) DEFAULT NULL,
+billingfax VARCHAR(255) DEFAULT NULL,
+billingmobile VARCHAR(255) DEFAULT NULL,
+billingphone VARCHAR(255) DEFAULT NULL,
+billingcontactperson VARCHAR(255) DEFAULT NULL,
+billingcontactpersonnumber VARCHAR(255) DEFAULT NULL,
+billingaddresstype VARCHAR(255) DEFAULT NULL,
+shippingaddress VARCHAR(1024) DEFAULT NULL,
+shippingCountry VARCHAR(255) DEFAULT NULL,
+shippingstate VARCHAR(255) DEFAULT NULL,
+shippingcity VARCHAR(255) DEFAULT NULL,
+shippingpostal VARCHAR(255) DEFAULT NULL,
+shippingemail VARCHAR(255) DEFAULT NULL,
+shippingfax VARCHAR(255) DEFAULT NULL,
+shippingmobile VARCHAR(255) DEFAULT NULL,
+shippingphone VARCHAR(255) DEFAULT NULL,
+shippingcontactpersonnumber VARCHAR(255) DEFAULT NULL,
+shippingcontactperson VARCHAR(255) DEFAULT NULL,
+shippingaddresstype VARCHAR(255) DEFAULT NULL,
+company VARCHAR(255) NOT NULL,
+PRIMARY KEY (id),
+KEY FK_company_billingshippingaddresses (company),
+CONSTRAINT FK_company_billingshippingaddresses FOREIGN KEY (company) REFERENCES company (companyid)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE customeraddresses(
+id VARCHAR(255) NOT NULL,
+billingAddress1 VARCHAR(500) DEFAULT NULL,
+billingAddress2 VARCHAR(500) DEFAULT NULL,
+billingAddress3 VARCHAR(500) DEFAULT NULL,
+billingCity1 VARCHAR(255) DEFAULT NULL,
+billingCity2 VARCHAR(255) DEFAULT NULL,
+billingCity3 VARCHAR(255) DEFAULT NULL,
+billingContactNumber1 VARCHAR(255) DEFAULT NULL,
+billingContactNumber2 VARCHAR(255) DEFAULT NULL,
+billingContactNumber3 VARCHAR(255) DEFAULT NULL,
+billingContactPerson1 VARCHAR(255) DEFAULT NULL,
+billingContactPerson2 VARCHAR(255) DEFAULT NULL,
+billingContactPerson3 VARCHAR(255) DEFAULT NULL,
+billingCountry1 VARCHAR(255) DEFAULT NULL,
+billingCountry2 VARCHAR(255) DEFAULT NULL,
+billingCountry3 VARCHAR(255) DEFAULT NULL,
+billingEmail1 VARCHAR(255) DEFAULT NULL,
+billingEmail2 VARCHAR(255) DEFAULT NULL,
+billingEmail3 VARCHAR(255) DEFAULT NULL,
+billingFax1 VARCHAR(255) DEFAULT NULL,
+billingFax2 VARCHAR(255) DEFAULT NULL,
+billingFax3 VARCHAR(255) DEFAULT NULL,
+billingMobile1 VARCHAR(255) DEFAULT NULL,
+billingMobile2 VARCHAR(255) DEFAULT NULL,
+billingMobile3 VARCHAR(255) DEFAULT NULL,
+billingPhone1 VARCHAR(255) DEFAULT NULL,
+billingPhone2 VARCHAR(255) DEFAULT NULL,
+billingPhone3 VARCHAR(255) DEFAULT NULL,
+billingPostal1 VARCHAR(255) DEFAULT NULL,
+billingPostal2 VARCHAR(255) DEFAULT NULL,
+billingPostal3 VARCHAR(255) DEFAULT NULL,
+billingState1 VARCHAR(255) DEFAULT NULL,
+billingState2 VARCHAR(255) DEFAULT NULL,
+billingState3 VARCHAR(255) DEFAULT NULL,
+shippingAddress1 VARCHAR(500) DEFAULT NULL,
+shippingAddress2 VARCHAR(500) DEFAULT NULL,
+shippingAddress3 VARCHAR(500) DEFAULT NULL,
+shippingCity1 VARCHAR(255) DEFAULT NULL,
+shippingCity2 VARCHAR(255) DEFAULT NULL,
+shippingCity3 VARCHAR(255) DEFAULT NULL,
+shippingContactNumber1 VARCHAR(255) DEFAULT NULL,
+shippingContactNumber2 VARCHAR(255) DEFAULT NULL,
+shippingContactNumber3 VARCHAR(255) DEFAULT NULL,
+shippingContactPerson1 VARCHAR(255) DEFAULT NULL,
+shippingContactPerson2 VARCHAR(255) DEFAULT NULL,
+shippingContactPerson3 VARCHAR(255) DEFAULT NULL,
+shippingCountry1 VARCHAR(255) DEFAULT NULL,
+shippingCountry2 VARCHAR(255) DEFAULT NULL,
+shippingCountry3 VARCHAR(255) DEFAULT NULL,
+shippingEmail1 VARCHAR(255) DEFAULT NULL,
+shippingEmail2 VARCHAR(255) DEFAULT NULL,
+shippingEmail3 VARCHAR(255) DEFAULT NULL,
+shippingFax1 VARCHAR(255) DEFAULT NULL,
+shippingFax2 VARCHAR(255) DEFAULT NULL,
+shippingFax3 VARCHAR(255) DEFAULT NULL,
+shippingMobile1 VARCHAR(255) DEFAULT NULL,
+shippingMobile2 VARCHAR(255) DEFAULT NULL,
+shippingMobile3 VARCHAR(255) DEFAULT NULL,
+shippingPhone1 VARCHAR(255) DEFAULT NULL,
+shippingPhone2 VARCHAR(255) DEFAULT NULL,
+shippingPhone3 VARCHAR(255) DEFAULT NULL,
+shippingPostal1 VARCHAR(255) DEFAULT NULL,
+shippingPostal2 VARCHAR(255) DEFAULT NULL,
+shippingPostal3 VARCHAR(255) DEFAULT NULL,
+shippingState1 VARCHAR(255) DEFAULT NULL,
+shippingState2 VARCHAR(255) DEFAULT NULL,
+shippingState3 VARCHAR(255) DEFAULT NULL,
+company VARCHAR(255) NOT NULL,
+PRIMARY KEY (id),
+KEY FK_company_customeraddresses (company),
+CONSTRAINT FK_company_customeraddresses FOREIGN KEY (company) REFERENCES company (companyid)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE vendoraddresses(
+id VARCHAR(255) NOT NULL,
+billingAddress1 VARCHAR(500)DEFAULT NULL,
+billingAddress2 VARCHAR(500)DEFAULT NULL,
+billingAddress3 VARCHAR(500)DEFAULT NULL,
+billingCity1 VARCHAR(255) DEFAULT NULL,
+billingCity2 VARCHAR(255) DEFAULT NULL,
+billingCity3 VARCHAR(255) DEFAULT NULL,
+billingContactNumber1 VARCHAR(255) DEFAULT NULL,
+billingContactNumber2 VARCHAR(255) DEFAULT NULL,
+billingContactNumber3 VARCHAR(255) DEFAULT NULL,
+billingContactPerson1 VARCHAR(255) DEFAULT NULL,
+billingContactPerson2 VARCHAR(255) DEFAULT NULL,
+billingContactPerson3 VARCHAR(255) DEFAULT NULL,
+billingCountry1 VARCHAR(255) DEFAULT NULL,
+billingCountry2 VARCHAR(255) DEFAULT NULL,
+billingCountry3 VARCHAR(255) DEFAULT NULL,
+billingEmail1 VARCHAR(255) DEFAULT NULL,
+billingEmail2 VARCHAR(255) DEFAULT NULL,
+billingEmail3 VARCHAR(255) DEFAULT NULL,
+billingFax1 VARCHAR(255) DEFAULT NULL,
+billingFax2 VARCHAR(255) DEFAULT NULL,
+billingFax3 VARCHAR(255) DEFAULT NULL,
+billingMobile1 VARCHAR(255) DEFAULT NULL,
+billingMobile2 VARCHAR(255) DEFAULT NULL,
+billingMobile3 VARCHAR(255) DEFAULT NULL,
+billingPhone1 VARCHAR(255) DEFAULT NULL,
+billingPhone2 VARCHAR(255) DEFAULT NULL,
+billingPhone3 VARCHAR(255) DEFAULT NULL,
+billingPostal1 VARCHAR(255) DEFAULT NULL,
+billingPostal2 VARCHAR(255) DEFAULT NULL,
+billingPostal3 VARCHAR(255) DEFAULT NULL,
+billingState1 VARCHAR(255) DEFAULT NULL,
+billingState2 VARCHAR(255) DEFAULT NULL,
+billingState3 VARCHAR(255) DEFAULT NULL,
+company VARCHAR(255) NOT NULL,
+PRIMARY KEY (id),
+KEY FK_company_vendoraddresses (company),
+CONSTRAINT FK_company_vendoraddresses FOREIGN KEY (company) REFERENCES company (companyid)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+alter table customer add column customeraddresses VARCHAR(255);
+alter table customer add constraint FK_customeraddresses foreign key(customeraddresses) references customeraddresses(id);
+
+alter table vendor add column vendoraddresses VARCHAR(255);
+alter table vendor add constraint FK_vendoraddresses foreign key(vendoraddresses) references vendoraddresses(id);
+
+alter table goodsreceipt add column billingshippingaddresses VARCHAR(255);
+alter table goodsreceipt add constraint FK_billingshippingaddresses foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+alter table goodsreceipt modify billfrom VARCHAR(255) DEFAULT NULL;
+alter table goodsreceipt modify shipfrom VARCHAR(255) DEFAULT NULL;
+
+alter table purchaseorder add column billingshippingaddresses VARCHAR(255);
+alter table purchaseorder add constraint FK_billingshippingaddresses_puchaseorder foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+alter table vendorquotation add column billingshippingaddresses VARCHAR(255);
+alter table vendorquotation add constraint FK_billingshippingaddresses_vendorquotation foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+alter table invoice add column billingshippingaddresses VARCHAR(255);
+alter table invoice add constraint FK_billingshippingaddresses_invoice foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+alter table invoice modify billto VARCHAR(255) DEFAULT NULL;
+alter table invoice modify shipto VARCHAR(255) DEFAULT NULL;
+
+alter table salesorder add column billingshippingaddresses VARCHAR(255);
+alter table salesorder add constraint FK_billingshippingaddresses_salesorder foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+alter table quotation add column billingshippingaddresses VARCHAR(255);
+alter table quotation add constraint FK_billingshippingaddresses_quotation foreign key(billingshippingaddresses) references billingshippingaddresses(id);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Customer Address","CustomerAddress",0,250,'F','F',"CustomerAddress","ID","ID","ref",null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing City","BillingCity1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing State","BillingState1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Country","BillingCountry1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Postal Code","BillingPostalCode1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Phone","BillingPhone1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Mobile","BillingMobile1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Fax","BillingFax1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Email","BillingEmail1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Contact Person","BillingContactPerson1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Billing Contact Person Number","BillingContactNumber1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping City","ShippingCity1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping State","ShippingState1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Country","ShippingCountry1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Postal Code","ShippingPostalCode1",
+0,50,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Phone","ShippingPhone1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Mobile","ShippingMobile1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Fax","ShippingFax1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Email","ShippingEmail1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Contact Person","ShippingContactPerson1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"09508488-c1d2-102d-b048-001e58a64cb6","Shipping Contact Person Number","ShippingContactNumber1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Vendor Address","VendorAddress",0,250,'F','F',"VendorAddress","ID","ID","ref",null);
+
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing City","BillingCity1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing State","BillingState1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Country","BillingCountry1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Postal Code","BillingPostalCode1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Phone","BillingPhone1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Mobile","BillingMobile1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Fax","BillingFax1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Email","BillingEmail1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Contact Person","BillingContactPerson1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES (UUID(),"b8bd81b0-c500-102d-bb0b-001e58a64cb6","Billing Contact Person Number","BillingContactNumber1",
+0,255,'F','F',null,null,null,null,null);
+
+update default_header set pojomethodname='ShippingAddress1'where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader="Shipping Address";
+
+update default_header set defaultHeader='Billing Address' where module="09508488-c1d2-102d-b048-001e58a64cb6" and defaultHeader='Address';  
+
+update default_header set pojomethodname='BillingAddress1' where module="09508488-c1d2-102d-b048-001e58a64cb6" and pojomethodname='BillingAddress';
+
+delete from default_header where module='09508488-c1d2-102d-b048-001e58a64cb6' and defaultHeader='Email Address';
+delete from default_header where module='09508488-c1d2-102d-b048-001e58a64cb6' and defaultHeader='Contact Number';
+delete from default_header where module='09508488-c1d2-102d-b048-001e58a64cb6' and defaultHeader='Alternate Contact Number';
+delete from default_header where module='09508488-c1d2-102d-b048-001e58a64cb6' and defaultHeader='Fax';
+
+delete from default_header where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Email Address';
+delete from default_header where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Contact Number';
+delete from default_header where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Alternate Contact Number';
+delete from default_header where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Fax';
+
+update default_header set defaultHeader='Billing Address' where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader='Address'; 
+update default_header set pojomethodname='BillingAddress1' where module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and pojomethodname='Address';
+
+#Anand Nimbalkar (24 April 2014) - Agent from master data in vendor and invoice
+insert into mastergroup (id, groupname) values (20, "Agent");
+
+ALTER TABLE `goodsreceipt` ADD COLUMN `masteragent`  varchar(255) CHARACTER SET utf8 NULL DEFAULT NULL;
+ALTER TABLE `goodsreceipt` ADD FOREIGN KEY (`masteragent`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `purchaseorder` ADD COLUMN `masteragent`  varchar(255) CHARACTER SET utf8 NULL DEFAULT NULL;
+ALTER TABLE `purchaseorder` ADD FOREIGN KEY (`masteragent`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `vendorquotation` ADD COLUMN `masteragent`  varchar(255) CHARACTER SET utf8 NULL DEFAULT NULL;
+ALTER TABLE `vendorquotation` ADD FOREIGN KEY (`masteragent`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+#Hitesh Suryawanshi 24 April 2014
+
+CREATE TABLE `amendingPrice` (
+ `id` varchar(255) NOT NULL,
+  `userid` varchar(250) NOT NULL,
+ `companyid` varchar(250) NOT NULL,
+  `CInvoice` char(1) DEFAULT 'F',
+`VInvoice` char(1) DEFAULT 'F',
+`SalesOrder` char(1) DEFAULT 'F',
+`PurchaseOrder` char(1) DEFAULT 'F',
+`VendorQuotation` char(1) DEFAULT 'F',
+`CustomerQuotation` char(1) DEFAULT 'F',
+PRIMARY KEY (`id`),
+  KEY `userid_fk1` (`userid`),
+  KEY `company_fk2` (`companyid`),
+  CONSTRAINT `userid_fk1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `company_fk2` FOREIGN KEY (`companyid`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 
+
+# Atul sachan 24 April 2014
+
+ALTER TABLE `customer`
+ADD COLUMN `taxid`  varchar(255) NULL;
+
+ALTER TABLE `vendor`
+ADD COLUMN `taxid`  varchar(255) NULL;
+
+# Atul sachan 28 April 2014
+
+ALTER TABLE `creditnote`
+ADD COLUMN `isoldrecord`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `debitnote`
+ADD COLUMN `isoldrecord`  int(1) NULL DEFAULT 0;
+
+#Anup Kale 28 Apr 2014
+insert into reportmaster value("Customer_Default_List","Customer Default List","View Inactive Customer list from here.","callCustomerDefaultReportList(true)");
+
+# Atul sachan 30 April 2014
+
+UPDATE debitnote SET isoldrecord=TRUE WHERE (dntype=1 OR  dntype=3) AND id IN (SELECT debitNote FROM dndetails WHERE goodsReceiptRow IS NOT NULL);
+
+UPDATE creditnote SET isoldrecord=TRUE WHERE (cntype=1 OR  cntype=3) AND id IN (SELECT creditNote FROM cndetails WHERE invoiceRow IS NOT NULL);
+

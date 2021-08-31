@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ProductReplacement" table="productreplacement">
+        <id name="id" column="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="replacementRequestNumber" type="string">
+            <column name="replacementrequestnumber"/>
+        </property>
+        <property name="closed" type="boolean">
+            <column name="isclosed"/>
+        </property>
+        <property name="salesContractReplacement" type="boolean">
+            <column name="issalescontractreplacement"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        
+        <set inverse="true" cascade="all" name="productReplacementDetails">
+            <key column="productreplacement"/>
+            <one-to-many class="com.krawler.hql.accounting.ProductReplacementDetail"/>
+        </set>
+        
+        <many-to-one name="company" column="company" class="com.krawler.common.admin.Company"/>
+        <many-to-one name="customer" column="customer" class="com.krawler.hql.accounting.Customer"/>
+        <many-to-one name="contract" column="contract" class="com.krawler.hql.accounting.Contract"/>
+    </class>
+</hibernate-mapping>

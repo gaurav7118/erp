@@ -1,0 +1,410 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #dbdbdb;
+    font-family: arial, helvetica, sans-serif;
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+.errCls {
+    color: #f00;
+    font-weight: bold;
+    font-size: .7em !important;
+    font-family: Tahoma;
+}
+.infoCls {
+    color: #00689d;
+    font-weight: bold;
+    font-size: .7em !important;
+    font-family: Tahoma;
+}
+a {
+    padding: 1px;
+    color: #353535;
+    text-decoration: none;
+}
+a:hover {
+    color: #9e0206;
+    text-decoration: underline;
+}
+a img {
+    border: 0;
+}
+#bookmarkheader {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 100%;
+    color: black;
+}
+.appcontainer {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+.appcontainer.overlay:before {
+    position: fixed;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background:    -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,.2) 0%, rgba(0,0,0,.8) 100%); /* ff3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,.2)), color-stop(100%, rgba(0,0,0,.8))); /* safari4+,chrome */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,.2) 0%, rgba(0,0,0,.8) 100%); /* safari5.1+,chrome10+ */
+    background:      -o-radial-gradient(center, ellipse cover, rgba(255,255,255,.2) 0%, rgba(0,0,0,.8) 100%); /* opera 11.10+ */
+    background:     -ms-radial-gradient(center, ellipse cover, rgba(255,255,255,.2) 0%, rgba(0,0,0,.8) 100%); /* ie10+ */
+    background:         radial-gradient(ellipse at center, rgba(255,255,255,.2) 0%, rgba(0,0,0,.8) 100%); /* w3c */
+    content: '';
+}
+.appcontainer.overlay:after {
+    position: fixed;
+    top: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    background: transparent url('../images/ID-Tab.jpg') center center no-repeat;
+    -webkit-background-size: 100%;
+    -webkit-background-size: cover;
+       -moz-background-size: 100%;
+       -moz-background-size: cover;
+            background-size: 100%;
+            background-size: cover;
+    content: '';
+    -webkit-transition: all .5s;
+       -moz-transition: all .5s;
+            transition: all .5s;
+}
+.maincontainer {
+    position: relative;
+    margin: 15% auto 0;
+    padding: 0;
+    width: 380px;
+    height: 100%;
+}
+.unitwrapper {
+    position: relative;
+    padding: 5px 20px 7px;
+    vertical-align: middle;
+    font-size: 12px;
+}
+.unitwrapper .labels {
+    width: 100px;
+    color: #d6d3ce;
+    vertical-align: middle;
+}
+.unitwrapper.separator {
+    margin: -20px 0;
+    padding: .5em 0 .5em;
+    width: 100%;
+    color: #646464;
+    text-align: center;
+}
+.unitwrapper.separator .supplementary-text {
+    font-size: 1.3em;
+}
+.unitwrapper.separator .supplementary-text:before,
+.unitwrapper.separator .supplementary-text:after {
+    position: absolute;
+    top: 27px;
+    width: 40%;
+    height: 1px;
+    border-bottom: 1px solid #d2d2d2;
+    content: '';
+}
+.unitwrapper.separator .supplementary-text:before {
+    left: 5%;
+}
+.unitwrapper.separator .supplementary-text:after {
+    right: 5%;
+}
+.form-wrapper {
+    position: relative;
+    margin: 0 auto 0;
+    min-width: 280px;
+    border: 1px solid #b1b1b1;
+    border-top: 3px solid #d40d12;
+    border-radius: 2px;
+    border-radius: 5px;
+    background-color: #f2f1ef;
+    background-color: rgba(242, 241, 239, .85);
+}
+.form-wrapper form,
+.form-container {
+}
+.form-header {
+    text-align: center;
+}
+.companylogo {
+    margin: 0;
+    padding: 25px 0 10px;
+}
+.companylogo img {
+    max-width: 100%;
+    max-height: 80px;
+}
+.form-content {
+    margin: 0;
+}
+.form-title {
+    margin: 0;
+    color: #646464;
+    text-align: center;
+}
+#loginForm .form-title {
+    display: none;
+}
+#forgotPwdForm .form-title {
+}
+.form-title strong {
+    display: block;
+    font-size: 22px;
+}
+.social-wrapper {
+    position: absolute;
+    top: 20%;
+    right: 0;
+    padding: 8px 10px;
+    color: #353535;
+    text-align: right;
+}
+.social-wrapper p {
+    margin: 0;
+}
+.oauth {
+    display: inline-block;
+    margin: 5px 5px 5px -2px;
+    width: 20px;
+    height: 20px;
+}
+.oauth span {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background: transparent url('../images/oauth.png') no-repeat 0 0;
+}
+.oauth span.twee {
+    background-position: 0 0;
+}
+.oauth span.yhoo {
+    background-position: -21px 0;
+}
+.oauth span.liin {
+    background-position: -42px 0;
+}
+.oauth span.goog {
+    background-position: -63px 0;
+}
+.oauth:hover span,
+.oauth span:hover {
+    background-position-y: -21px;
+}
+.form-footer {
+    margin: 10px 0 0;
+    border-top: 1px solid #dadada;
+    background: #fff;
+    background: rgba(255, 255, 255, .4);
+    text-align: center;
+}
+#loginForm .form-footer {
+    text-align: left;
+}
+.errorprompt {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    visibility: hidden;
+    margin: 0;
+    color: #ee0b0b;
+    font-weight: bold;
+    font-size: .8em;
+}
+#loginForm input[type='text'],
+#loginForm input[type='password'],
+#forgotPwdForm input[type='text'] {
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #d6d3ce;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 20px;
+    transition: border-color .2s ease;
+}
+#forgotPwdForm input[type='text'] {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+
+    xpadding: 5px;
+}
+#loginForm input[type='text']:focus,
+#loginForm input[type='password']:focus,
+#forgotPwdForm input[type='text']:focus {
+    outline: 0;
+    border-color: #a2a2a2;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);
+}
+#loginForm .labels {
+    display: none;
+    color: #d6d3ce;
+}
+#forgotPwdForm .labels {
+    display: none;
+    width: 85px;
+    color: #646464;
+    text-align: right;
+}
+#forgotPwdForm .errorprompt {
+    top: 12px;
+}
+#LoginButton,
+#SubmitButton {
+    margin: 10px 10px 5px 0;
+    padding: 10px 20px;
+    border: 1px solid #d40d12;
+    border-radius: 3px;
+    background-color: #d40d12;
+    color: #fff;
+    font-size: 18px;
+
+    -webkit-appearance: none;
+}
+#LoginButton:focus,
+#SubmitButton:focus {
+    outline: none;
+    box-shadow: 0 4px 14px -5px #719dc8;
+    color: #a8ddfa;
+}
+#LoginButton:hover,
+#SubmitButton:hover {
+    outline: none;
+    border-color: #9e0206;
+    background-color: #9e0206;
+    -webkit-transition: all .5s;
+       -moz-transition: all .5s;
+            transition: all .5s;
+}
+#usrFeedback {
+    display: inline-block;
+    margin: 5px -20px 5px 0;
+    max-width: 50%;
+    width: auto;
+    vertical-align: middle;
+    line-height: 1.4;
+}
+#ResetPwdLnk,
+#loginpagePath {
+    display: block;
+    margin: 0 0 10px;
+}
+.extra #ResetPwdLnk,
+.extra #loginpagePath {
+    display: inline-block;
+}
+.loadingFB {
+    padding: 5px 20px;
+    background: url('../images/loading.gif') no-repeat left center;
+}
+.errorFB {
+    color: #be0606;
+}
+.infoFB {
+    color: #2dac05;
+}
+#main-footer {
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+    width: 100%;
+    border-top: 1px solid #222;
+    background-color: #222;
+    background-color: rgba(34, 34, 34, .5);
+    color: #b5b4b4;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+#main-footer a {
+    color: #b5b4b4;
+}
+/* Switched box model for IE7 and lesser */
+html.old-ie .unitwrapper {
+    margin: 0 0 15px 20px;
+    padding: 0;
+}
+html.old-ie .unitwrapper.separator {
+    margin: -20px;
+}
+html.old-ie .form-wrapper form,
+html.old-ie .form-container {
+    padding: 0 20px 0 30px;
+}
+html.old-ie .form-title {
+    margin: 0 -20px 0 -30px;
+    padding: 5px 20px;
+}
+html.old-ie .form-footer {
+    margin: 10px -20px 0 -30px;
+    padding: 5px 20px 0;
+}
+html.old-ie .errorprompt {
+    top: 20px;
+    right: 10px;
+}
+html.old-ie #loginForm input[type='text'],
+html.old-ie #loginForm input[type='password'],
+html.old-ie #forgotPwdForm input[type='text'] {
+    margin: 0 0 0 -30px;
+}
+html.old-ie #forgotPwdForm input[type='text'] {
+    margin: 10px 0;
+    padding: 8px;
+    width: 240px;
+}
+html.old-ie #forgotPwdForm .labels {
+    margin: 0 5px 0 -30px;
+    width: 75px;
+}
+html.old-ie #forgotPwdForm .errorprompt {
+    top: 19px;
+}
+html.old-ie #usrFeedback {
+    vertical-align: baseline;
+}
+/* Responsive Design */
+/* 1280px and above */
+@media (min-width: 1281px) {
+    .maincontainer {
+        width: 400px;
+    }
+}
+/* upto 1024px */
+@media screen and (max-width: 1024px) {
+}
+/* upto 768px */
+@media screen and (max-width: 768px) {
+    .maincontainer {
+        margin: 6% auto 0;
+    }
+}
+/* upto 480px */
+@media screen and (max-width: 480px) {
+    .maincontainer {
+        margin: 2% auto 0;
+        max-width: 96%;
+    }
+}
+/* upto 380px */
+@media screen and (max-width: 380px) {
+    .maincontainer {
+        margin: 1% auto 0;
+        min-width: 300px;
+        max-width: 98%;
+        width: 98%;
+    }
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DealerExciseTerms" table="dealerexciseterm">
+    <id name="id" column="id" type="string">
+        <generator class="uuid"/>
+    </id>
+    <property name="percentage" type="double">
+        <column name="percentage" default="0"/>
+    </property>
+    <property name="dutyAmount" type="double">
+        <column name="dutyamount" default="0"/>
+    </property>
+    <property name="manuImpDutyAmount" type="double">
+        <column name="manuimpdutyamount" default="0"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+    <many-to-one class="com.krawler.hql.accounting.DealerExciseDetails" column="dealerexcisedetails" name="dealerExciseDetails"/>
+    <many-to-one class="com.krawler.hql.accounting.LineLevelTerms" column="term" name="lineLevelTerm"/>
+    </class>
+</hibernate-mapping>
+

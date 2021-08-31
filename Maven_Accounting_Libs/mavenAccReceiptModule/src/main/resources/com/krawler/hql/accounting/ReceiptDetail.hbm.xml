@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ReceiptDetail" table="receiptdetails">
+    <id column="id" name="ID">
+      <generator class="assigned"/>
+    </id>
+    <property name="srno" type="integer">
+      <column name="srno" default="0"/>
+    </property>
+    <property name="amount" type="double">
+      <column name="amount" not-null="true"/>
+    </property>
+    <property name="exchangeRateForTransaction" type="double">
+      <column name="exchangeratefortransaction" default="1"/>
+    </property>
+    <property name="gstCurrencyRate" type="double">
+      <column  name="gstcurrencyrate" default="0"/>
+    </property>
+    <property name="amountInInvoiceCurrency" type="double">
+      <column name="amountininvoicecurrency" default="0"/>
+    </property>
+    <property name="amountDueInInvoiceCurrency" type="double">
+      <column name="amountdueininvoicecurrency" default="0"/>
+    </property>
+    <property name="amountDueInPaymentCurrency" type="double">
+      <column name="amountdueinpaymentcurrency" default="0"/>
+    </property>
+    <property name="amountInBaseCurrency" type="double">
+      <column name="amountinbasecurrency" default="0"/>
+    </property>
+    <property name="amountDueInBaseCurrency" type="double">
+      <column name="amountdueinbasecurrency" default="0"/>
+    </property>
+    <property name="exchangeRateCurrencyToBase" type="double">
+      <column name="exchangeratecurrencytobase" default="1"/>
+    </property>
+     <property name="description" type="string">
+      <column  name="description"/>
+    </property>
+    <property name="srNoForRow" type="integer">
+        <column name="srnoforrow" default='0'/>
+    </property>
+    <property name="discountAmount" type="double">
+      <column name="discountamount" default="0"/>
+    </property>
+    <property name="discountAmountInBase" type="double">
+      <column name="discountamountinbase" default="0"/>
+    </property>
+    <property name="discountFieldEdited" type="boolean">
+        <column name="discountfieldedited" default="false"/>
+    </property>
+    <property name="discountAmountInInvoiceCurrency" type="double">
+        <column name="discountamountininvoicecurrency" default="0"/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Receipt" column="receipt" name="receipt" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Invoice" name="invoice" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" name="goodsReceipt" not-null="false"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="fromcurrency" name="fromCurrency"/>
+    <many-to-one class="com.krawler.common.admin.KWLCurrency" column="tocurrency" name="toCurrency"/>
+    <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="totaljedid" name="totalJED"/>
+  </class>
+</hibernate-mapping>

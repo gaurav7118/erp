@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accTermcontroller" class="com.krawler.spring.accounting.term.accTermController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accTermDAO">
+            <ref bean="accTermDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id="accTermDao" class="com.krawler.spring.accounting.term.accTermImpl" parent="baseDAO" />
+    <!-- Term NET-->
+    <bean id="accTermService" class="com.krawler.spring.accounting.term.service.AccTermServiceImpl"> 
+        <property name="accTermDAO">
+            <ref bean="accTermDao"/>
+        </property>
+    </bean>
+</beans>

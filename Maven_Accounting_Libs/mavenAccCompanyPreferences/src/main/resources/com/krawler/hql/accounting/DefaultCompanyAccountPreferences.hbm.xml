@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.DefaultCompanyAccountPreferences" table="defaultcap">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="cashAccount" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="discountGiven" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="discountReceived" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="shippingCharges"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="otherCharges" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="foreignExchange" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="depereciationAccount" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="salaryExpense" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="salaryPayable" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="roundingDifference" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="customeraccount" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="vendoraccount" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DefaultAccount" name="unrealisedglaccount" not-null="true"/>
+    </class>
+</hibernate-mapping>

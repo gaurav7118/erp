@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.LocationBatchDocumentMapping" table="locationbatchdocumentmapping">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="transactiontype" type="integer"> <!-- This is Type we can identify where batch can added  1- Product form ,2-GRN ,3 -Delivery Order, 4 - Sales Return ,5 Purchase Return -->
+            <column name="transactiontype"/>
+        </property>
+        <property name="documentid" type="string">
+            <column name="documentid"/>
+        </property>
+        <property name="selectedsequence" type="integer">
+            <column name="selectedsequence"/>
+        </property>
+        <property name="mfgdate" type="date">
+            <column name="mfgdate"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="expdate" type="date">
+            <column name="expdate"/>
+        </property>
+         <property name="ispurchasereturn" type="true_false">
+            <column default="false" name="ispurchasereturn" not-null="true"/>
+        </property>
+        <property name="isconsignment" type="true_false">
+            <column name="isconsignment" default="'F'" />
+        </property>
+         <property name="approvedQuantity" type="double">
+            <column name="approvedbasequantity"/>
+        </property>
+        <property name="rejectedQuantity" type="double">
+            <column name="rejectedbasequantity"/>
+        </property>
+         <property name="stockType" type="integer"> <!-- This is Type we can identify where batch can added  1- Product form ,2-GRN ,3 -Delivery Order, 4 - Sales Return ,5 Purchase Return -->
+            <column name="stocktype"/>
+        </property>
+        <property column="consignmentapprovalstatus" name="requestApprovalStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.admin.RequestApprovalStatus</param>
+            </type>
+        </property> 
+        <set cascade="all,delete-orphan" name="approverSet" table="locationbatchdocumentapprovermapping">
+            <key column="locationmapping"/>
+            <many-to-many class="com.krawler.common.admin.User" column="approver"/>
+        </set>
+<!--        <set cascade="all,delete-orphan" name="rejectedBySet" table="locationbatchdocumentrejectermapping">
+            <key column="locationmapping"/>
+            <many-to-many class="com.krawler.common.admin.User" column="approver"/>
+        </set>-->
+         <set cascade="all" inverse="true" name="rejectedBy">
+            <key column="locationDocumentMapping"/>
+            <one-to-many class="com.krawler.common.admin.LocationBatchRejectorMapping"/>
+        </set>
+        
+        <many-to-one class="com.krawler.common.admin.NewProductBatch" name="batchmapid"/>
+    </class>
+</hibernate-mapping>

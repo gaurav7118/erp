@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.stockout.StockAdjustmentDraft" table="in_stockadjustmentdraft">
+    
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column length="50" name="name" />
+        </property>
+        <property name="description" type="string">
+            <column  name="description"/>
+        </property>
+        <property name="businessDate" type="timestamp">
+            <column name="bussinessdate"/>
+        </property>
+        <set name="stockAdjustments" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="draft"  />
+            <one-to-many class="com.krawler.inventory.model.stockout.StockAdjustment" />
+        </set>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.inventory.model.store.Store" column="store" name="store" not-null="true" />
+    </class>
+</hibernate-mapping>

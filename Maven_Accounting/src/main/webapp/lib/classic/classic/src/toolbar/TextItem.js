@@ -1,0 +1,1 @@
+Ext.define("Ext.toolbar.TextItem",{extend:"Ext.toolbar.Item",requires:["Ext.toolbar.Toolbar","Ext.XTemplate"],alias:"widget.tbtext",alternateClassName:"Ext.Toolbar.TextItem",text:"",baseCls:Ext.baseCSSPrefix+"toolbar-text",ariaRole:null,beforeRender:function(){var A=this.text;this.callParent();if(A){this.html=A}},setText:function(A){this.update(A)}})

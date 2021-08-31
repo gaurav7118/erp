@@ -1,0 +1,760 @@
+# Atul sachan 1st August
+
+ALTER TABLE `journalentry`
+ADD COLUMN `cheque`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `journalentry` ADD FOREIGN KEY (`cheque`) REFERENCES `cheque` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Vivek Pakmode 2nd August 2014
+
+# Help Contents
+# Purchase Requisition
+
+INSERT INTO helpedit VALUES('301','Purchase Requisition','Purchase Requisition Number', '51','Purchase Requisition Number','Purchase Requisition Number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.','invoiceNo51');
+
+INSERT INTO helpedit VALUES('302','Purchase Requisition','Purchase Requisition Date', '51','Purchase Requisition Date','Select the transaction date.','invoiceDate51');
+
+INSERT INTO helpedit VALUES('303','Purchase Requisition','Memo', '51','Memo','Provide the comments about the transaction.','memo51');
+
+INSERT INTO helpedit VALUES('304','Purchase Requisition','Currency', '51','Currency','Select the Currency for transaction.','currency51');
+
+INSERT INTO helpedit VALUES('305','Purchase Requisition','Submit', '51','Submit','Click on submit to record the transaction.','submit51');
+
+# Delivery Order Report
+
+INSERT INTO helpedit VALUES('306','Delivery Order Report','Quick Search', '52','Quick Search',"Search through Delivery Order easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch52');
+
+INSERT INTO helpedit VALUES('307','Delivery Order Report','Export Reports', '52', 'Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports52');
+
+INSERT INTO helpedit VALUES('308','Delivery Order Report','View', '52','View','Select reports from the drop-down menu that you want to view.','view52');
+
+# Purchase return Report
+
+INSERT INTO helpedit VALUES('309','Purchase Return Report','Quick Search', '53','Quick Search',"Search through Purchase Return easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch53');
+
+INSERT INTO helpedit VALUES('310','Purchase Return Report','Export Reports', '53','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports53');
+
+INSERT INTO helpedit VALUES('311','Purchase Return Report','View', '53','View','Select reports from the drop-down menu that you want to view.','view53');
+
+# Sales Return Report
+
+INSERT INTO helpedit VALUES('312','Sales Return Report','Quick Search', '54','Quick Search',"Search through Sales Return easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch54');
+
+INSERT INTO helpedit VALUES('313','Sales Return Report','Export Reports', '54','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports54');
+
+INSERT INTO helpedit VALUES('314','Sales Return Report','View', '54','View','Select reports from the drop-down menu that you want to view.','view54');
+
+# Sales Commission Statement Report
+
+INSERT INTO helpedit VALUES('315','Sales Commission Statement','Quick Search', '55','Quick Search',"Search through Invoice easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch55');
+
+INSERT INTO helpedit VALUES('316','Sales Commission Statement','Export Reports', '55','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports55');
+
+# Default Customer List Report
+
+INSERT INTO helpedit VALUES('317','Sales Commission Statement','Quick Search', '56','Quick Search',"Search through Customer Name easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch56');
+
+INSERT INTO helpedit VALUES('318','Sales Commission Statement','Export Reports', '56','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportCustomerLists656');
+
+# Purchase Requisition Report
+
+INSERT INTO helpedit VALUES('319','Sales Commission Statement','Quick Search', '57','Quick Search',"Search through Purchase Requisition Report easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch57');
+
+INSERT INTO helpedit VALUES('320','Sales Commission Statement','Export Reports', '57','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports57');
+
+#Rushikesh Mandage 2nd August
+ alter table vendor modify column title varchar(255) DEFAULT NULL;
+ alter table customer modify column title varchar(255) DEFAULT NULL;
+
+# Hitesh Suryawanshi 6th Aug
+
+ALTER TABLE `pricelist`
+ADD COLUMN `currency` varchar(255) DEFAULT NULL;
+
+ALTER TABLE pricelist
+ADD CONSTRAINT  FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`);
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `productpriceinmultiplecurrency` char(1) DEFAULT 'F';
+
+CREATE TABLE `productpricerule` (
+  `id` varchar(255) NOT NULL DEFAULT '',
+  `lowerlimit` int(11) DEFAULT '0',
+  `upperlimit` int(11) DEFAULT '0',
+  `percentagetype` int(11) DEFAULT '0',
+  `ruletype` int(11) DEFAULT '0',
+  `pricetype` int(11) DEFAULT '0',
+  `increamentordecreamenttype` int(11) DEFAULT '0',
+  `category` varchar(255) DEFAULT NULL,
+  `amount` int(11) DEFAULT '0',
+  `company` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company` (`company`),
+  CONSTRAINT `productpricefk1` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  CONSTRAINT `productpricefk2` FOREIGN KEY (`category`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `productpricerule`
+ADD COLUMN `currency` varchar(255) DEFAULT NULL;
+
+ALTER TABLE productpricerule
+ADD CONSTRAINT  FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`);
+
+#Query for old records:
+UPDATE pricelist pl set pl.currency=(select cpy.currency from company  cpy where cpy.companyid=pl.company);
+
+
+# Atul sachan 7 August 2014
+
+ALTER TABLE `cheque`
+ADD COLUMN `company`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `cheque` ADD FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+UPDATE cheque INNER JOIN paydetail ON cheque.id=paydetail.cheque SET cheque.company=paydetail.company;
+
+ALTER TABLE `cheque`
+ADD COLUMN `createdfrom` int NULL DEFAULT 1;
+
+UPDATE cheque INNER JOIN paydetail pd ON pd.cheque = cheque.id INNER JOIN receipt rp ON rp.paydetail=pd.id SET createdfrom=2;
+
+
+ALTER TABLE `cheque`
+ADD COLUMN `sequencenumber`  int NULL DEFAULT 0;
+
+ALTER TABLE `cheque`
+ADD COLUMN `ischequenoautogenetated`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `cheque`
+ADD COLUMN `deleteflag`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `cheque`
+ADD COLUMN `bankaccount` varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `cheque` ADD FOREIGN KEY (`bankaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+UPDATE cheque INNER JOIN paydetail pd ON pd.cheque = cheque.id INNER JOIN paymentmethod pm ON pm.id=pd.paymentMethod SET bankaccount=pm.account;
+
+
+CREATE TABLE `chequesequenceformat` (
+`id`  varchar(255) NOT NULL ,
+`numberofdigits`  int NULL DEFAULT 0 ,
+`startfrom`  int NULL DEFAULT 1 ,
+`isshowleadingzero`  int(1) NULL DEFAULT 1 ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+`bankaccount`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`bankaccount`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+# Vivek Pakmode 7th August 2014
+
+# Edit Payment Receipt
+
+INSERT INTO helpedit VALUES('321','Edit Payment Receipt','Receipt No', '58','Receipt No','Receipt number will be auto-generated, if it is set in Account Preferences or else you can also enter the Receipt Number.',"receiptNo58EditReceivePayment");
+
+INSERT INTO helpedit VALUES('322','Edit Payment Receipt','Date', '58','Date','Select the transaction date.',"date58EditReceivePayment");
+
+INSERT INTO helpedit VALUES('324','Edit Payment Receipt','Currency', '58','Currency',"Customers currency will be auto-populated.","currency58EditReceivePayment");
+
+INSERT INTO helpedit VALUES('325','Edit Payment Receipt','Account', '58','Account','Select the customer from whom you are receiving payment. To add a new customer, simply click on add new customer in the drop down',"account58EditReceivePayment");
+
+INSERT INTO helpedit VALUES('326','Edit Payment Receipt','Payment Method', '58','Payment Method','Add multiple payment types such as cash, cheque and also through Debit/Credit Card. You can add details for payment through cheque and card as well.',"paymentMethod58EditReceivePayment");
+
+INSERT INTO helpedit VALUES('327','Edit Payment Receipt','Amount', '58','Amount','For the selected customer, total pending amount is displayed. You can enter the amount that is applicable for a particular transaction',"amount58EditReceivePayment");
+
+INSERT INTO helpedit VALUES('328','Edit Payment Receipt','Save', '58','Save','Click on save to record the transaction.',"save58EditReceivePayment");
+
+# Edit Payment made
+
+INSERT INTO helpedit VALUES('329','Edit Payment made','Payment No', '59','Payment No','Payment number will be auto-generated, if it is set in Account Preferences or else you can also enter the Payment Number.',"receiptNo59EditPaymentMade");
+
+INSERT INTO helpedit VALUES('330','Edit Payment made','Date', '59','Date','Select the transaction date.',"date59EditPaymentMade");
+INSERT INTO helpedit VALUES('331','Edit Payment made','Currency', '59','Currency','Vendors currency will be auto-populated.',"currency59EditPaymentMade");
+
+INSERT INTO helpedit VALUES('333','Edit Payment made','Account', '59','Account','Select the vendor to whom you are making payment. To add a new vendor, simply click on add new vendor in the drop down',"account59EditPaymentMade");
+
+INSERT INTO helpedit VALUES('334','Edit Payment made','Payment Method', '59','Payment Method','Add multiple payment types such as cash, cheque and also through Debit/Credit Card. You can add details for payment through cheque and card as well.',"paymentMethod59EditPaymentMade");
+
+INSERT INTO helpedit VALUES('335','Edit Payment made','Amount', '59','Amount','For the selected vendor, total pending amount is displayed. You can enter the amount that is applicable for a particular transaction',"amount59EditPaymentMade");
+
+INSERT INTO helpedit VALUES('336','Edit Payment made','Save', '59','Save','Click on save to record the transaction.',"save59EditPaymentMade");
+
+# Receive Payment
+
+update helpedit set compid="receiptNo9Receipt" where id='48';
+
+update helpedit set compid="date9Receipt" where id='49';
+
+update helpedit set compid="currency9Receipt" where id='50';
+
+update helpedit set compid="account9Receipt" where id='51';
+
+update helpedit set compid="paymentMethod9Receipt" where id='52';
+
+update helpedit set compid="amount9Receipt" where id='53';
+
+update helpedit set compid="save9Receipt" where id='56';
+
+# Make Payment
+
+update helpedit set compid="receiptNo10payment" where id='57';
+
+update helpedit set compid="date10payment" where id='58';
+
+update helpedit set compid="currency10payment" where id='59';
+
+update helpedit set compid="account10payment" where id='60';
+
+update helpedit set compid="paymentMethod10payment" where id='61';
+
+update helpedit set compid="amount10payment" where id='62';
+
+update helpedit set compid="save10payment" where id='65';
+
+# Create Vendor Invoice  8th August 2014
+
+update helpedit set compid="currency15goodsreceipt" where id='100';
+
+update helpedit set compid="includeprotax15goodsreceipt" where id='105';
+
+update helpedit set compid="includetax15goodsreceipt" where id='106';
+
+update helpedit set compid="tax15goodsreceipt" where id='107';
+
+update helpedit set compid="save15goodsreceipt" where id='108';
+
+update helpedit set compid="linkToOrder15goodsreceipt" where id='92';
+
+update helpedit set compid="poNumberID15goodsreceipt" where id='93';
+
+# Create Customer Invoice
+
+update helpedit set compid="poNumberID2Invoice" where id='10';
+
+update helpedit set compid="invoiceNo2Invoice" where id='11';
+
+update helpedit set compid="invoiceDate2Invoice" where id='12';
+
+update helpedit set compid="customer2Invoice" where id='13';
+
+update helpedit set compid="creditTerm2Invoice" where id='14';
+
+update helpedit set compid="linkToOrder15goodsreceipt" where id='15';
+
+update helpedit set compid="currency2Invoice" where id='16';
+
+update helpedit set compid="currency15goodsreceipt" where id='17';
+
+update helpedit set compid="includeprotax15goodsreceipt" where id='18';
+
+update helpedit set compid="includetax15goodsreceipt" where id='19';
+
+update helpedit set compid="discount2Invoice" where id='20';
+
+update helpedit set compid="includeprotax2Invoice" where id='21';
+
+update helpedit set compid="includetax2Invoice" where id='22';
+
+update helpedit set compid="tax2Invoice" where id='23';
+
+update helpedit set compid="save2Invoice" where id='24';
+
+update helpedit set compid="linkToOrder2Invoice" where id='9';
+
+# Create Customer Quotation
+
+update helpedit set compid="invoiceNo34quotationundefined" where id='200';
+
+update helpedit set compid="invoiceDate34quotationundefined" where id='201';
+
+update helpedit set compid="customer34quotationundefined" where id='202';
+
+update helpedit set compid="memo34quotationundefined" where id='203';
+
+update helpedit set compid="currency34quotationundefined" where id='204';
+
+update helpedit set compid="includeprotax34quotationundefined" where id='205';
+
+update helpedit set compid="includetax34quotationundefined" where id='206';
+
+update helpedit set compid="save34quotationundefined" where id='207';
+
+#Anand Nimbalkar 8th August 2014
+insert into reportmaster values("Stock_Valuation_Summary_Report","Stock Valuation Summary Report","View Stock Valuation Summary Report","getLocationSummaryReportTabView()");
+insert into reportmaster values("Stock_Valuation_Detail_Report","Stock Valuation Detail Report","View Stock Valuation Detail Report","getStockValuationDetailsReport()");
+
+# Vivek Pakmode 9th August 2014
+
+# Create Vendor Quotation 
+
+INSERT INTO helpedit VALUES('337','Create Vendor Quotation','Quotation number', '60','Quotation number','Quotation number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('338','Create Vendor Quotation','Quotation Date', '60','Quotation Date','Select the transaction date.',"invoiceDate60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('339','Create Vendor Quotation','Customer', '60','Customer',"Select the Vendor with whom you are carrying out the transaction. To add a new Vendor, simply click on add new Vendor in the drop down","customer60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('340','Create Vendor Quotation','Memo', '60','Memo','Provide the comments about the transaction.',"memo60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('341','Create Vendor Quotation','Currency', '60','Currency','Customer currency will be auto-populated.',"currency60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('342','Create Vendor Quotation','Include Product Tax', '60','Include Product Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('343','Create Vendor Quotation','Include Total Tax', '60','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax60vendorquotationundefined");
+
+INSERT INTO helpedit VALUES('344','Create Vendor Quotation','Save', '60','Save','Click on save to record the transaction.',"save60vendorquotationundefined");
+
+# Create Cash Sales
+
+update helpedit set compid="invoiceNo8salesreceipt" where id='39';
+
+update helpedit set compid="invoiceDate8salesreceipt" where id='40';
+
+update helpedit set compid="customer8salesreceipt" where id='41';
+
+update helpedit set compid="discount8salesreceipt" where id='42';
+
+update helpedit set compid="currency8salesreceipt" where id='43';
+
+update helpedit set compid="includeprotax8salesreceipt" where id='44';
+
+update helpedit set compid="includetax8salesreceipt" where id='45';
+
+update helpedit set compid="tax8salesreceipt" where id='46';
+
+update helpedit set compid="save8salesreceipt" where id='47';
+
+# Create Cash Purchase
+
+update helpedit set compid="invoiceNo33purchasereceipt" where id='178';
+
+update helpedit set compid="invoiceDate33purchasereceipt" where id='179';
+
+update helpedit set compid="customer33purchasereceipt" where id='180';
+
+update helpedit set compid="discount33purchasereceipt" where id='181';
+
+update helpedit set compid="memo33purchasereceipt" where id='182';
+
+update helpedit set compid="currency33purchasereceipt" where id='183';
+
+update helpedit set compid="includetax8salesreceipt" where id='184';
+
+update helpedit set compid="perdiscount33purchasereceipt" where id='185';
+
+update helpedit set compid="includeprotax33purchasereceipt" where id='186';
+
+update helpedit set compid="includetax33purchasereceipt" where id='187';
+
+update helpedit set compid="tax33purchasereceipt" where id='188';
+
+update helpedit set compid="save33purchasereceipt" where id='189';
+
+# Edit Vendor Invoice
+
+INSERT INTO helpedit VALUES('388','Edit Vendor Invoice','Currency', '66','Currency',"Vendor's currency will be auto-populated.","currency66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+INSERT INTO helpedit VALUES('389','Edit Vendor Invoice','Product-wise Tax', '66','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+INSERT INTO helpedit VALUES('390','Edit Vendor Invoice','Include Tax', '66','Include Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+INSERT INTO helpedit VALUES('391','Edit Vendor Invoice','Tax', '66','Tax','Select the tax as applicable from the drop-down menu. To configure a new tax, simply click on "Add New" in the drop down or click on the add new tax icon.',"tax66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+INSERT INTO helpedit VALUES('392','Edit Vendor Invoice','Save', '66','Save','Click on save to record the transaction.',"save66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+INSERT INTO helpedit VALUES('393','Edit Vendor Invoice','Link to Purchase Order, Good Receipt, Vendor Quotation', '66','Link to Purchase Order, Good Receipt, Vendor Quotation','You can link the Purchase Order, Good Receipt, Vendor Quotation with Invoice.',"linkToOrder66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+INSERT INTO helpedit VALUES('394','Edit Vendor Invoice','PO Number', '66','PO Number','Select the Purchase Order Number from drop down menu.',"poNumberID66Editff80808147b42d290147b434ff1f001aGoodsReceipt");
+
+# Edit Customer Invoice
+
+INSERT INTO helpedit VALUES('395','Edit Customer Invoice','Link to Sales Order, Delivery Order, Customer Quotation', '67','Link to Sales Order, Delivery Order, Customer Quotation','You can link the Sales Order, Delivery Order, Customer Quotation with Invoice.',"linkToOrder67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('396','Edit Customer Invoice','SO Number', '67','SO Number','Select the Sales Order Number from drop down menu.',"poNumberID67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('397','Edit Customer Invoice','Customer Invoice No', '67','Customer Invoice No',"Invoice number will be auto-generated, if it is set in Account Preferences or else you can also enter the Invoice Number.","invoiceNo67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('398','Edit Customer Invoice','Customer Invoice Date', '67','Customer Invoice Date','Select the transaction date.',"invoiceDate67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('399','Edit Customer Invoice','Customer', '67','Customer',"Select the customer with whom you are carrying out the transaction. To add a new customer, simply click on add new customer in the drop down","customer67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('400','Edit Customer Invoice','Credit Term', '67','Credit Term','Select Credit terms to indicate when you expect to receive payment from a customer. For example choose "Due upon receipt" when payment is due immediately. Terms are added to the Invoice Date to automatically calculate the Due Date on an invoice.',"creditTerm67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('401','Edit Customer Invoice','Discount', '67','Discount','Add discount terms either as flat amount or on a percentage basis.',"discount67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('402','Edit Customer Invoice','Currency', '67','Currency',"Customer's currency will be auto-populated.","currency67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('403','Edit Customer Invoice','Item Type', '67','Item Type','Select the Item Type as  - Service/Inventory Part/Inventory Assembly/Non-Inventory Part',"includeprotax64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('404','Edit Customer Invoice','Item Code', '67','Item Code','Item Code as set will be displayed.',"includetax64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('405','Edit Customer Invoice','Incorporate Product Details', '67','Incorporate Product Details','You can give information about products or services for which you are receiving payment. If you find yourself invoicing the same things time after time, simply choose products from the drop-down. Description and product price is automatically added as so',"tax64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('406','Edit Customer Invoice','Discount %', '67','Discount %','You can provide  item wise discount',"perdiscount67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('407','Edit Customer Invoice','Product-wise Tax', '67','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('408','Edit Customer Invoice','Include Total Tax', '67','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('409','Edit Customer Invoice','Tax', '67','Tax','Select the tax as applicable from the drop-down menu. To configure a new tax, simply click on "Add New" in the drop down or click on the add new tax icon.',"tax67Editff80808147b42d290147b4374ed40026Invoice");
+
+INSERT INTO helpedit VALUES('410','Edit Customer Invoice','Save', '67','Save','Click on save to record the transaction.',"save67Editff80808147b42d290147b4374ed40026Invoice");
+
+# Edit Customer Quotation
+
+INSERT INTO helpedit VALUES('345','Edit Customer Quotation','Quotation number', '61','Quotation number','Quotation number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo61quotationnull");
+
+INSERT INTO helpedit VALUES('346','Edit Customer Quotation','Quotation Date', '61','Quotation Date','Select the transaction date.',"invoiceDate61quotationnull");
+
+INSERT INTO helpedit VALUES('347','Edit Customer Quotation','Customer', '61','Customer',"Select the Vendor with whom you are carrying out the transaction. To add a new Vendor, simply click on add new Vendor in the drop down","customer61quotationnull");
+
+INSERT INTO helpedit VALUES('348','Edit Customer Quotation','Memo', '61','Memo','Provide the comments about the transaction.',"memo61quotationnull");
+
+INSERT INTO helpedit VALUES('349','Edit Customer Quotation','Currency', '61','Currency','Customer currency will be auto-populated.',"currency61quotationnull");
+
+INSERT INTO helpedit VALUES('350','Edit Customer Quotation','Include Product Tax', '61','Include Product Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax61quotationnull");
+
+INSERT INTO helpedit VALUES('351','Edit Customer Quotation','Include Total Tax', '61','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax61quotationnull");
+
+INSERT INTO helpedit VALUES('352','Edit Customer Quotation','Save', '61','Save','Click on save to record the transaction.',"save61quotationnull");
+
+# Edit Vendor Quotation
+
+INSERT INTO helpedit VALUES('353','Edit Vendor Quotation','Quotation number', '62','Quotation number','Quotation number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('354','Edit Vendor Quotation','Quotation Date', '62','Quotation Date','Select the transaction date.',"invoiceDate62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('355','Edit Vendor Quotation','Customer', '62','Customer',"Select the Vendor with whom you are carrying out the transaction. To add a new Vendor, simply click on add new Vendor in the drop down",	"customer62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('356','Edit Vendor Quotation','Memo', '62','Memo','Provide the comments about the transaction.',"memo62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('357','Edit Vendor Quotation','Currency', '62','Currency','Customer currency will be auto-populated.',"currency62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('358','Edit Vendor Quotation','Include Product Tax', '62','Include Product Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('359','Edit Vendor Quotation','Include Total Tax', '62','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax62vendorquotationnull");
+
+INSERT INTO helpedit VALUES('360','Edit Vendor Quotation','Save', '62','Save','Click on save to record the transaction.',"save62vendorquotationnull");
+
+# Edit Cash Sales
+
+INSERT INTO helpedit VALUES('361','Edit Cash Sales','Sales Receipt No', '63','Sales Receipt No','Cash Receipt number will be auto-generated, if it is set in Account Preferences or else you can also enter the Invoice Number.',"invoiceNo63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('363','Edit Cash Sales','Sales Receipt Date', '63','Sales Receipt Date','Select the transaction date.',"invoiceDate63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('364','Edit Cash Sales','Customer', '63','Customer',"Select the customer with whom you are carrying out the transaction. To add a new customer, simply click on add new customer in the drop down",	"customer63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('365','Edit Cash Sales','Discount', '63','Discount','Add discount terms either as flat amount or on a percentage basis.',"memo63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('366','Edit Cash Sales','Currency', '63','Currency',"Customer's currency will be auto-populated.","currency63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('367','Edit Cash Sales','Product-wise Tax', '63','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('368','Edit Cash Sales','Include Total Tax', '63','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('369','Edit Cash Sales','Tax', '63','Tax','Select the tax as applicable from the drop-down menu. To configure a new tax, simply click on "Add New" in the drop down or click on the add new tax icon.',"tax63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('370','Edit Cash Sales','Save', '63','Save','Click on save to record the transaction.',"save63Editff80808147b42d290147b437b4ff002cCashSales");
+
+# Edit Cash Purchase
+
+INSERT INTO helpedit VALUES('371','Edit Cash Purchase','Receipt Number', '64','Receipt Number','Receipt number will be auto-generated, if it is set in Account Preferences or else you can also enter it.',"invoiceNo64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('372','Edit Cash Purchase','Receipt Date', '64','Receipt Date','Select the transaction date.',"invoiceDate64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('373','Edit Cash Purchase','Vendor', '64','Vendor',"Select the vendor with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('374','Edit Cash Purchase','Discount', '64','Discount','Add discount terms either as flat amount or on a percentage basis.',"discount64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('375','Edit Cash Purchase','Memo', '64','Memo',"Add comments about the transaction.","memo64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('376','Edit Cash Purchase','Currency', '64','Currency',"Vendor's currency will be auto-populated.",	"currency64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('377','Edit Cash Purchase','Incorporate Product Details', '63','Incorporate Product Details','You can view information about products or services that are under consideration. If you find yourself invoicing the same things time after time, simply choose products from the drop-down. Description and product price is automatically added as soon as you choose a product.',"includetax63Editff80808147b42d290147b437b4ff002cCashSales");
+
+INSERT INTO helpedit VALUES('378','Edit Cash Purchase','Discount %', '64','Discount %','You can provide item wise discount',"perdiscount64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('379','Edit Cash Purchase','Product-wise Tax', '64','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('380','Edit Cash Purchase','Include Total Tax', '64','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('381','Edit Cash Purchase','Tax', '64','Tax','Select the tax as applicable from the drop-down menu. To configure a new tax, simply click on "Add New" in the drop down or click on the add new tax icon.',"tax64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+INSERT INTO helpedit VALUES('382','Edit Cash Purchase','Save', '64','Save','Click on save to record the transaction.',"save64Editff80808147b42d290147b430342f0007PaymentReceipt");
+
+# Edit Purchase Requisition
+
+INSERT INTO helpedit VALUES('383','Edit Purchase Requisition','Purchase Requisition Number', '65','Purchase Requisition Number','Purchase Requisition Number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.','invoiceNo65');
+
+INSERT INTO helpedit VALUES('384','Edit Purchase Requisition','Purchase Requisition Date', '65','Purchase Requisition Date','Select the transaction date.','invoiceDate65');
+
+INSERT INTO helpedit VALUES('385','Edit Purchase Requisition','Memo', '65','Memo','Provide the comments about the transaction.','memo65');
+
+INSERT INTO helpedit VALUES('386','Edit Purchase Requisition','Currency', '65','Currency','Select the Currency for transaction.','currency65');
+
+INSERT INTO helpedit VALUES('387','Edit Purchase Requisition','Submit', '65','Submit','Click on submit to record the transaction.','submit65');
+
+# Create Sales Order
+
+update helpedit set compid="invoiceNo11salesorder" where id='66';
+
+update helpedit set compid="invoiceDate11salesorder" where id='67';
+
+update helpedit set compid="invoiceNo11salesorder" where id='68';
+
+update helpedit set compid="memo11salesorder" where id='69';
+
+update helpedit set compid="currency11salesorder" where id='70';
+
+update helpedit set compid="includeprotax11salesorder" where id='74';
+
+update helpedit set compid="includetax11salesorder" where id='75';
+
+update helpedit set compid="save11salesorder" where id='76';
+
+# Create purchase Order
+
+update helpedit set compid="invoiceNo12purchaseorder" where id='77';
+
+update helpedit set compid="invoiceDate12purchaseorder" where id='78';
+
+update helpedit set compid="customer12purchaseorder" where id='79';
+
+update helpedit set compid="memo12purchaseorder" where id='80';
+
+update helpedit set compid="currency12purchaseorder" where id='81';
+
+update helpedit set compid="includeprotax12purchaseorder" where id='85';
+
+update helpedit set compid="includetax12purchaseorder" where id='86';
+
+update helpedit set compid="save12purchaseorder" where id='87';
+
+# Edit Sales Order
+
+INSERT INTO helpedit VALUES('411','Edit Sales Order','Order No', '68','Order No','Sales Order number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('412','Edit Sales Order','Order Date', '68','Order Date','Select the transaction date.',"invoiceDate68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('413','Edit Sales Order','Customer', '68','Customer',"Select the customer with whom you are carrying out the transaction. To add a new customer, simply click on add new customer in the drop down","customer68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('414','Edit Sales Order','Memo', '68','Memo','Provide the comments about the transaction.',"memo68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('415','Edit Sales Order','Currency', '68','Currency',"Customer's currency will be auto-populated.",	"currency68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('416','Edit Sales Order','Product-wise Tax', '68','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('417','Edit Sales Order','Include Total Tax', '68','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax68ff80808147b42d290147b435a39c001c");
+
+INSERT INTO helpedit VALUES('418','Edit Sales Order','Save', '68','Save','Click on save to record the transaction.',"save68ff80808147b42d290147b435a39c001c");
+
+# Edit Purchase Order
+
+INSERT INTO helpedit VALUES('419','Edit Purchase Order','Order No', '69','Order No','Purchase Order number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.',"invoiceNo69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('420','Edit Purchase Order','Order Date', '69','Order Date','Select the transaction date.',"invoiceDate69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('421','Edit Purchase Order','Customer', '69','Customer',"Select the vendor with whom you are carrying out the transaction. To add a new vendor, simply click on add new vendor in the drop down","customer69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('422','Edit Purchase Order','Memo', '69','Memo','Provide the comments about the transaction.',"memo69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('423','Edit Purchase Order','Currency', '69','Currency',"Vendor's currency will be auto-populated.","currency69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('424','Edit Purchase Order','Product-wise Tax', '69','Product-wise Tax','Allows you to apply tax on individual product. Select "Yes" or "No" from the drop-down to apply tax on the individual product.',"includeprotax69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('425','Edit Purchase Order','Include Total Tax', '69','Include Total Tax','Allows you to apply tax on total amount of the transaction. Select "Yes" or "No" from the drop-down to apply tax on the transaction.',"includetax69ff80808147b42d290147b4342998000f");
+
+INSERT INTO helpedit VALUES('426','Edit Purchase Order','Save', '69','Save','Click on save to record the transaction.',"save69ff80808147b42d290147b4342998000f");
+
+# Amol Dhokale 11th August
+# Added fields - GST Number/Company UEN
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('0796ad1c-1c5b-92e4-1ac2-001e670e1450','GST Number','gstnumber','compaccpreferences','','','Company GST Number','1','43');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('0796ad1c-1c5b-92e4-1ac2-001e670e1451','Company UEN','companyuen','compaccpreferences','','','Company UEN','1','43');
+
+#Anup Kale 11 Aug
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `gstincluded` char(1) DEFAULT 'F';
+ALTER TABLE `invoice`
+ADD COLUMN `gstincluded` char(1) DEFAULT 'F';
+ALTER TABLE `purchaseorder`
+ADD COLUMN `gstincluded` char(1) DEFAULT 'F';
+ALTER TABLE `vendorquotation`
+ADD COLUMN `gstincluded` char(1) DEFAULT 'F';
+ALTER TABLE `salesorder`
+ADD COLUMN `gstincluded` char(1) DEFAULT 'F';
+ALTER TABLE `quotation`
+ADD COLUMN `gstincluded` char(1) DEFAULT 'F';
+
+# Anup Kale 18 August 2014
+UPDATE compaccpreferences SET showchild="T" WHERE  id IN (select companyid from company where subdomain="techjeet103");
+
+# Atul sachan 21 August 2014
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `isshowautogeneratedchequenumber`  int(1) NULL DEFAULT 0;
+
+update extracompanypreferences set isshowautogeneratedchequenumber=1 where id in ((SELECT companyid FROM company WHERE subdomain='sms' or subdomain='sms1'));
+
+# Atul sachan 22 August 2014
+
+ALTER TABLE `cheque`
+MODIFY COLUMN `sequencenumber`  bigint NULL DEFAULT 0;
+
+ALTER TABLE `chequesequenceformat`
+MODIFY COLUMN `startfrom`  bigint NULL DEFAULT 1;
+
+#Raveesh Pathak 22nd August 2014
+
+insert into reportmaster(id,name,description,method_name) values ('Bank_Book_Summary_Report','Bank Book Summary','View Bank Book Summay Report','callBankBookSummaryReport()');
+
+#Pandurang 22 August 2014 Added Malaysian GST
+
+ALTER TABLE `defaultgst`
+ADD COLUMN `country`  varchar(255) CHARACTER SET utf8 NULL DEFAULT NULL;
+
+ALTER TABLE `defaultgst` ADD FOREIGN KEY (`country`) REFERENCES `country` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('TX','Purchases with GST incurred at 6% and directly attributable to taxable supplies','TX',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('IM','Import of goods with GST incurred','IM',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('IS','Imports under special scheme with no GST incurred (e.g. Approved Trader Scheme, ATMS Scheme)','IS',0.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('BL','Purchases with GST incurred but not claimable (Disallowance of Input Tax) (e.g. medical expenses for staff)','BL',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('NR','Purchase from non GST-registered supplier with no GST incurred','NR',0.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('ZP','Purchase from GST-registered supplier with no GST incurred. (e.g. supplier provides transportation of goods that qualify as international services)','ZP',0.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('EP','Purchases exempted from GST. E.g. purchase of residential property or financial services','EP',0.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('OP','Purchase transactions which is out of the scope of GST legislation (e.g. purchase of goods overseas)','OP',0.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('TX-E43','Purchase with GST incurred directly attributable to incidental exempt supplies','TX-E43 ',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('TX-N43','Purchase with GST incurred directly attributable to non-incidental exempt supplies','TX-N43',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('TX-RE','Purchase with GST incurred that is not directly attributable to taxable or exempt supplies','TX-RE',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('GP','Purchase transactions which disregarded under GST legislation (e.g. purchase within GST group registration)','GP',00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('AJP','Any adjustment made to Input Tax e.g.: Bad Debt Relief & other input tax adjustment','AJP',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('SR','Standard-rated supplies with GST Charged','SR',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('ZRL','Local supply of goods or services which are subject to zero rated supplies','ZRL',00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('ZRE','Exportation of goods or services which are subject to zero rated supplies','ZRE',00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('ES43','Purchase transactions which disregarded under GST legislation (e.g. purchase within GST group registration)','ES43',00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('DS','Deemed supplies (e.g. transfer or disposal of business assets without consideration)','DS',6.00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('OS','Out-of-scope supplies','OS',00,137);
+
+INSERT INTO defaultgst (name,description,taxcode,percent,country) VALUES('ES','Exempt supplies under GST','ES',00,137);
+
+# Vivek Pakmode 22th August 2014
+
+CREATE TABLE `widgetmanagement` (
+`id` varchar(36),
+`user`  varchar(36),
+`widgetstate` varchar(2048),
+`modifiedOn` long,
+PRIMARY KEY  (`id`),
+FOREIGN KEY (`user`) REFERENCES users(userid)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `compaccpreferences`
+ADD COLUMN `viewdashboard`  int(3) NULL DEFAULT 0;
+
+#Mayur Bhokase 23th August 2014
+CREATE TABLE `chequelayout`(
+`id` VARCHAR(255) NOT NULL,
+`paymentmethod` VARCHAR(255) NOT NULL UNIQUE,
+`coordinateinfo` LONGTEXT, 
+PRIMARY KEY (`id`),
+FOREIGN KEY (`paymentmethod`) REFERENCES `paymentmethod` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+# Anup Kale 27 Aug 2014
+ALTER TABLE defaultaccount ADD controlaccounts char(1) DEFAULT 'F';
+ALTER TABLE account ADD controlaccounts char(1) DEFAULT 'F';
+
+# groupname :Liability-'20' Asset-'19' 
+    INSERT INTO defaultaccount VALUES (UUID(),'Net Profit/Loss',0,'20',NULL,'1',Now(),5,0,0,NULL,NULL,'T');
+    #INSERT INTO defaultaccount VALUES (UUID(),'Retained Earning',0,'20',NULL,'1',Now(),5,0,0,NULL,NULL,'T');
+#BS(groupname-Liability-'20' Asset-'19')
+    #INSERT INTO defaultaccount VALUES (UUID(),'Opening Stock',0,'20',NULL,'1',Now(),5,0,0,NULL,NULL,'T');
+    #INSERT INTO defaultaccount VALUES (UUID(),'Closing Stock',0,'19',NULL,'1',Now(),5,0,0,NULL,NULL,'T');
+#P&L(groupname-Expense-'7' Income-'5')
+    #INSERT INTO defaultaccount VALUES (UUID(),'Opening Stock',0,'7',NULL,'1',Now(),5,0,0,NULL,NULL,'T');
+    #INSERT INTO defaultaccount VALUES (UUID(),'Closing Stock',0,'5',NULL,'1',Now(),5,0,0,NULL,NULL,'T');
+insert into account values(UUID(),'Net Profit/Loss',0,'F',(select companyid from company where subdomain='swt'),'20',NULL,(select currency from company where subdomain='swt'),Now(),0,0,0,NULL,NULL,NULL,0,'','','F',NULL,'F',NULL,NULL,NULL,NULL,0,NULL,'F',NULL,0,NULL,NULL,1,1,'T');
+CREATE TABLE `closingaccountbalance` (
+`id`  varchar(255) NOT NULL ,
+`account`  varchar(255) NULL ,
+`amount`  double NULL DEFAULT 0 ,
+`creationdate` date NULL,
+`company`  varchar(255) NULL ,
+`yearlock`  varchar(255) NULL ,
+`yearid`  int(10) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`account`) REFERENCES `account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`yearlock`) REFERENCES `yearlock` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+#Raveesh Pathak 28th August 2014
+
+alter table default_header add column dataindex varchar(255);
+alter table default_header add column renderertype varchar(255);
+
+# Vivek Pakmode 30th August 2014
+insert into reportmaster values("Cash_Flow_Statement_As_Per_COA","Cash Flow Statement as per COA","View Cash Flow Statement as per COA available in Deskera","getCashFlowStatementAsPerCOATabView()");
+
+#pandurang 7 augast 2014 
+ALTER TABLE customer ADD COLUMN crmaccountid VARCHAR(255) DEFAULT NULL ;
+
+
+#Mayur Pawar 8 Aug 2014
+
+RENAME TABLE templateFieldInfo TO templatefieldinfo;
+delete from default_header where defaultHeader="Credit Term" and module=20;
+ 
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)VALUES (UUID(),'Credit Term','term','creditterm','termid','termname','Credit Term','1','20');
+);
+
+#pandurang 8 augast 2014 
+ALTER TABLE vendor ADD COLUMN crmaccountid VARCHAR(255) DEFAULT NULL ;
+
+#Hitesh Suryawanshi 12th Aug
+alter table customer add column isonetime char(1) DEFAULT 'F';
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',2,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',4,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',20,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',22,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',27,1,1,0);
+INSERT INTO customizereportheader VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',29,1,1,0);
+
+# Amol Dhokale 21st August,2014
+UPDATE company SET templateflag=0 WHERE subdomain='henggaun';
+UPDATE company SET templateflag=0 WHERE subdomain='henggauntest';
+
+#Rushikesh Mandage 21st August 2014
+ alter table vendor modify column title varchar(255) DEFAULT NULL;
+ alter table customer modify column title varchar(255) DEFAULT NULL;
+
+#Rushikesh Mandage 28th August 2014
+ALTER TABLE `productbatch` MODIFY COLUMN `mfgdate`  datetime NULL DEFAULT NULL AFTER `name`,
+MODIFY COLUMN `expdate`  datetime NULL DEFAULT NULL AFTER `mfgdate`;
+
+ALTER TABLE `batchserial` MODIFY COLUMN `expfromdate`  datetime NULL DEFAULT NULL AFTER `name`,
+MODIFY COLUMN `exptodate`  datetime NULL DEFAULT NULL AFTER `expfromdate`;

@@ -1,0 +1,1 @@
+Ext.define("Ext.draw.sprite.Square",{extend:"Ext.draw.sprite.Rect",alias:"sprite.square",inheritableStatics:{def:{processors:{size:"number"},defaults:{size:4},triggers:{size:"size"},updaters:{size:function(A){var C=A.size,B=A.lineWidth/2;this.setAttributes({x:A.x-C-B,y:A.y-C,height:2*C,width:2*C})}}}}})

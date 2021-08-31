@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Notification",{singleton:true,requires:["Ext.device.Communicator","Ext.device.notification.Cordova","Ext.device.notification.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView){if(A.Cordova){return Ext.create("Ext.device.notification.Cordova")}}return Ext.create("Ext.device.notification.Simulator")}})

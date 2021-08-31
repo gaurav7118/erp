@@ -1,0 +1,1 @@
+Ext.define("Ext.layout.container.HBox",{extend:"Ext.layout.container.Box",alias:"layout.hbox",alternateClassName:"Ext.layout.HBoxLayout",type:"hbox",vertical:false})

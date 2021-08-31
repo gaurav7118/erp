@@ -1,0 +1,1525 @@
+#Rushikesh Mandage 1st Jan 2015
+alter table advancedetail add column description varchar(255) default NULL;
+alter table creditnotpayment add column description varchar(255) default NULL;
+
+# Anand Nimbalkar 1st Jan 2014
+alter table `deliveryorder` add column `driver` varchar(255) DEFAULT NULL, ADD FOREIGN KEY (`driver`) REFERENCES `masteritem` (`id`);
+insert into reportmaster value("Drivers_Tracking_Report","Driver's Tracking Report","View Driver's Tracking Report From here.","getDriversTrackingReportTabView()");
+
+
+#Nitin Narkhede 02 Jan 2015
+
+update reportmaster set name='Log. Driver - Monthly Summary' where id='Driver_Delivery_Summary_Report';
+update reportmaster set name='Log. Driver - Monthly Individual Details' where id='Individual_Driver_Delivery_Report';
+update reportmaster set name='Log. Driver - Daily Individual Details' where id='Individual_Driver_DO_PO_Report';
+update reportmaster set name='Log. Vehicle - Monthly Summary' where id='Vehicle_Delivery_Summary_Report';
+update reportmaster set name='Log. Vehicle - Monthly Individual Details' where id='Individual_Vehicle_Delivery_Report';
+update reportmaster set name='Log. Vehicle - Daily Individual Details' where id='Individual_Vehicle_DO_PO_Report';
+
+# Vivek Pakmode 2nd Jan 2015
+# Initiate RFQ 
+
+INSERT INTO helpedit VALUES('801','Initiate RFQ ','RFQ Number', '81','Purchase Requisition Number','Purchase Requisition Number will be auto-generated, if it is set in Account Preferences or else you can also enter the Order Number.','invoiceNo81');
+
+INSERT INTO helpedit VALUES('802','Initiate RFQ','RFQ Date', '81','Purchase Requisition Date','Select the transaction date.','invoiceDate81');
+
+INSERT INTO helpedit VALUES('803','Initiate RFQ','Memo', '81','Memo','Provide the comments about the transaction.','memo81');
+
+INSERT INTO helpedit VALUES('804','Initiate RFQ','Currency', '81','Currency','Select the Currency for transaction.','currency81');
+
+INSERT INTO helpedit VALUES('805','Initiate RFQ','Submit', '81','Submit','Click on submit to record the transaction.','submit81');
+
+# Amol Dhokale 3rd Jan,2015
+ALTER TABLE extracompanypreferences ADD COLUMN outstandinginvoiceforcustomerflag CHAR(1) DEFAULT 'F';
+ALTER TABLE extracompanypreferences ADD COLUMN minmaxorderingflag CHAR(1) DEFAULT 'F';
+ALTER TABLE product ADD COLUMN minorderingquantity DOUBLE DEFAULT 0.0;
+ALTER TABLE product ADD COLUMN maxorderingquantity DOUBLE DEFAULT 0.0;
+
+#Rushikesh Mandage 5th Jan 2015
+alter table receiptadvancedetail add column description varchar(255) default NULL;
+alter table debitnotepayment add column description varchar(255) default NULL;
+alter table receiptdetails add column description varchar(255) default NULL;
+
+# Vivek Pakmode 6th Jan 2015 
+update activitylist set orderno='204' where activityid='ff80808122f3cb640122f46014a90041';
+update activitylist set orderno='203' where activityid='ff80808122f3cb640122f45fcc510040';
+update activitylist set orderno='202' where activityid='ff80808122f9dba90122fa4888cf0089';
+update featurelist set orderno='22' where featureid='ff80808122f9dba90122fa4888cf0057';
+
+# Anand Nimbalkar 7th Jan 2015
+alter table pricingbandmaster add column `defaulttopos` char(1) DEFAULT 'F';
+
+# shashi nandan kumar 6th Jan 2015 
+alter table reportmaster add column Grouped_Under varchar(150);
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Customer_Revenue_Report';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Inactive_customer_List';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Monthly_Revenue';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Monthly_Sales_Report';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Outstanding_Orders_Report';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Sales_By_Customer';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Sales_By_Item_Report';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Sales_By_Product';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Sales_By_Sales_Person';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Top_and_Dormant_Customers_By_Products';
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Top_and_Dormant_Products_By_Customers';
+update reportmaster set Grouped_Under='Accounts Payable - Purchases' where id='Top_and_Dormant_Vendors_By_Products';
+update reportmaster set Grouped_Under='General Ledger/Cash/Bank' where id='Bank_Book_Summary_Report';
+update reportmaster set Grouped_Under='General Ledger/Cash/Bank' where id='Cash_Flow_WorkSheet';
+update reportmaster set Grouped_Under='General Ledger/Cash/Bank' where id='General_Ledger_Report';
+update reportmaster set Grouped_Under='General Ledger/Cash/Bank' where id='Monthly Balance Sheet';
+update reportmaster set Grouped_Under='General Ledger/Cash/Bank' where id='Monthly_Trading_&_Profit/Loss';
+update reportmaster set Grouped_Under='Statutory' where id='view_gst_report';
+
+# Atul sachan 08 jan 2015
+
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `enablegst`  char(1) NULL DEFAULT 'T',
+ADD COLUMN `gsteffectivedate`  datetime NULL;
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `gstaccountforbaddebt`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `gstbaddebtreleifaccount`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `gstbaddebtrecoveraccount`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `gstbaddebtsuspenseaccount`  varchar(255) NULL DEFAULT NULL;
+
+
+ALTER TABLE `invoice`
+ADD COLUMN `baddebttype`  int NULL DEFAULT 0;
+
+ALTER TABLE `invoice`
+ADD COLUMN `claimedperiod` int NULL DEFAULT 0;
+
+ALTER TABLE `invoice`
+ADD COLUMN `debtclaimeddate` datetime NULL DEFAULT NULL;
+
+
+ALTER TABLE `journalentry`
+ADD COLUMN `isbaddebtje`  int(1) NULL DEFAULT 0;
+
+
+CREATE TABLE `baddebtinvoicemapping` (
+`id`  varchar(255) NOT NULL ,
+`baddebttype`  int NULL DEFAULT 0 ,
+`invoice`  varchar(255) NULL DEFAULT NULL ,
+`journalentry`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `INV_FK10122014` FOREIGN KEY (`invoice`) REFERENCES `invoice` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT `JE_FK10122014` FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT `COMP_FK10122014` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `baddebtpurchaseinvoicemapping` (
+`id`  varchar(255) NOT NULL ,
+`baddebttype`  int NULL DEFAULT 0 ,
+`goodsreceipt`  varchar(255) NULL DEFAULT NULL ,
+`journalentry`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `INV_FK210122014` FOREIGN KEY (`goodsreceipt`) REFERENCES `goodsreceipt` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT `JE_FK210122014` FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+CONSTRAINT `COMP_FK210122014` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE `receipt`
+ADD COLUMN `taxamount`  double NULL DEFAULT 0,
+ADD COLUMN `tax` varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `receipt` ADD FOREIGN KEY (`tax`) REFERENCES `tax` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `baddebttype`  int NULL DEFAULT 0;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `claimedperiod` int NULL DEFAULT 0;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `debtclaimeddate` datetime NULL DEFAULT NULL;
+
+
+ALTER TABLE `receipt`
+ADD COLUMN `linkedtoclaimedinvoice`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `payment`
+ADD COLUMN `linkedtoclaimedinvoice`  int(1) NULL DEFAULT 0;
+
+
+
+UPDATE defaultgst SET `name`="GST(TX)", taxcode="GST(TX)" WHERE `name`="TX" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(IM)", taxcode="GST(IM)" WHERE `name`="IM" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(IS)", taxcode="GST(IS)" WHERE `name`="IS" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(BL)", taxcode="GST(BL)" WHERE `name`="BL" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(NR)", taxcode="GST(NR)" WHERE `name`="NR" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(ZP)", taxcode="GST(ZP)" WHERE `name`="ZP" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(EP)", taxcode="GST(EP)" WHERE `name`="EP" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(OP)", taxcode="GST(OP)" WHERE `name`="OP" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(TX-E43)", taxcode="GST(TX-E43)" WHERE `name`="TX-E43" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(TX-N43)", taxcode="GST(TX-N43)" WHERE `name`="TX-N43" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(TX-RE)", taxcode="GST(TX-RE)" WHERE `name`="TX-RE" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(GP)", taxcode="GST(GP)" WHERE `name`="GP" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(AJP)", taxcode="GST(AJP)" WHERE `name`="AJP" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(SR)", taxcode="GST(SR)" WHERE `name`="SR" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(ZRL)", taxcode="GST(ZRL)" WHERE `name`="ZRL" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(ZRE)", taxcode="GST(ZRE)" WHERE `name`="ZRE" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(ES43)", taxcode="GST(ES43)" WHERE `name`="ES43" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(DS)", taxcode="GST(DS)" WHERE `name`="DS" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(OS)", taxcode="GST(OS)" WHERE `name`="OS" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(ES)", taxcode="GST(ES)" WHERE `name`="ES" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(AJS)", taxcode="GST(AJS)" WHERE `name`="AJS" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(GS)", taxcode="GST(GS)" WHERE `name`="GS" AND country=137;
+
+UPDATE defaultgst SET `name`="GST(RS)", taxcode="GST(RS)" WHERE `name`="RS" AND country=137;
+
+
+ALTER TABLE `baddebtinvoicemapping`
+ADD COLUMN `baddebtamtrecovered`  double NULL DEFAULT 0,
+ADD COLUMN `badamtdebtgstamtrecovered`  double NULL DEFAULT 0;
+
+ALTER TABLE `baddebtinvoicemapping`
+ADD COLUMN `baddebtamtclaimed`  double NULL DEFAULT 0,
+ADD COLUMN `baddebtgstamtclaimed`  double NULL DEFAULT 0;
+
+ALTER TABLE `baddebtpurchaseinvoicemapping`
+ADD COLUMN `baddebtamtrecovered`  double NULL DEFAULT 0,
+ADD COLUMN `badamtdebtgstamtrecovered`  double NULL DEFAULT 0;
+
+
+ALTER TABLE `baddebtinvoicemapping`
+ADD COLUMN `baddebtclaimeddate` datetime NULL DEFAULT NULL;
+
+ALTER TABLE `baddebtinvoicemapping`
+ADD COLUMN `baddebtrecovereddate` datetime NULL DEFAULT NULL;
+
+ALTER TABLE `baddebtpurchaseinvoicemapping`
+ADD COLUMN `baddebtclaimeddate` datetime NULL DEFAULT NULL;
+
+ALTER TABLE `baddebtpurchaseinvoicemapping`
+ADD COLUMN `baddebtrecovereddate` datetime NULL DEFAULT NULL;
+
+ALTER TABLE `baddebtpurchaseinvoicemapping`
+ADD COLUMN `baddebtamtclaimed`  double NULL DEFAULT 0,
+ADD COLUMN `baddebtgstamtclaimed`  double NULL DEFAULT 0;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `isimportservice`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `cntaxentry`
+ADD COLUMN `reason`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `cntaxentry` ADD FOREIGN KEY (`reason`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `dntaxentry`
+ADD COLUMN `reason`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `dntaxentry` ADD FOREIGN KEY (`reason`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+# Pandurang 08 jan 2015 Custom Report
+insert into reportmaster value("CustomColumnDetailReport","Custom Column Detail Report","View Custom Column Detail Report from here.","CustomColumnDetailReportList()",null);
+insert into reportmaster value("CustomColumnSummaryReport","Custom Column Summary Report","View Custom Column Summary Report from here.","CustomColumnSummaryReportList()",null);
+
+#Raveesh Pathak 8th Dec 2014
+alter table paymentmethod add column autopopulateincpcs char(1) default 'T';
+alter table invoice add column paydetail varchar(255) DEFAULT NULL;
+alter table invoice add FOREIGN KEY (paydetail) REFERENCES paydetail (id) ;
+alter table goodsreceipt add column paydetail varchar(255) DEFAULT NULL;
+alter table goodsreceipt add FOREIGN KEY (paydetail) REFERENCES paydetail (id) ;
+
+#Anand Thakur 8th jan 2015
+alter table customdesigntemplate modify column html longtext;
+alter table customdesigntemplate modify column json longtext;
+
+#Nitin Narkhede 08 Jan 2015
+alter table newbatchserial add column skufield varchar(255) default null;
+alter table product add column barcodefield int(1) default 0;
+alter table extracompanypreferences
+add column generatebarcodeparm char(1) default 'F',
+add column skufieldparm char(1) default 'F',
+add column barcodetype varchar(20) default '';
+
+# Anand Nimbalkar 09th Jan 2015
+alter table pricingbandmasterdetails add column `applicabledate` datetime DEFAULT NULL;
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("3ea30968-9725-11e4-b1df-eca86bfcd415","09508488-c1d2-102d-b048-001e58a64cb6","Price List - Band","PricingBandMaster",0,0,'F','F',"PricingBandMaster","name","ID","ref",null,"pricingBandName",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("793a4948-9729-11e4-b1df-eca86bfcd415","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Price List - Band","PricingBandMaster",0,0,'F','F',"PricingBandMaster","name","ID","ref",null,"pricingBandName",null);
+
+# Suhas Chaware 9th Jan 2015
+ALTER TABLE `extracompanypreferences` ADD COLUMN `isPOSIntegration` char(1) DEFAULT 'F';
+ALTER TABLE `extracompanypreferences` ADD COLUMN `customerForPOS` varchar(255) DEFAULT NULL;
+
+#Sagar M - 11th Jan 2015 Queries to release Payment Redesign 
+update payment set paymentwindowtype = 3 where id in (select payment from paymentdetailotherwise);
+update receipt set paymentwindowtype = 3 where id in (select receipt from receiptdetailotherwise);
+update payment set paymentwindowtype = 1 where paymentwindowtype=0;
+update receipt set paymentwindowtype = 1 where paymentwindowtype=0;
+
+
+update paymentdetail set amountingrcurrency = ROUND((amount/exchangeratefortransaction),2) where payment in (select id from payment) and exchangeratefortransaction!=0 and exchangeratefortransaction!=1;
+
+update receiptdetails set amountininvoicecurrency = ROUND((amount/exchangeratefortransaction),2) where receipt in (select id from receipt) and exchangeratefortransaction!=0 and exchangeratefortransaction!=1;
+
+update receiptdetails set exchangeratefortransaction=1 where exchangeratefortransaction = 0;
+update receiptdetails set amountininvoicecurrency = amount where exchangeratefortransaction = 1;
+
+update paymentdetail set exchangeratefortransaction=1 where exchangeratefortransaction = 0;
+update paymentdetail set amountingrcurrency = amount where exchangeratefortransaction = 1;
+
+# Vivek Pakmode 12th Jan 2015
+
+CREATE TABLE `quotationversion` (
+  `id` varchar(255) NOT NULL,
+  `quotationnumber` varchar(50) NOT NULL,
+  `autogen` char(1) NOT NULL,
+  `quotationdate` datetime NOT NULL,  
+  `duedate` datetime NOT NULL,  
+  `memo` varchar(255) default NULL,
+  `deleteflag` char(1) NOT NULL,
+  `customer` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,  
+  `tax` varchar(255) default NULL,
+  `discount` DOUBLE default 0,
+  `perdiscount`char(1) default 'F',
+  `archieve` int(1) NOT NULL default 0,
+  `crmquoteid` varchar(255),
+  `currency` varchar(255),
+  `templateid`  varchar(255) DEFAULT 'ff80808140a555fe0140a588bcee0007',
+  `favouriteflag`  int(1) NULL DEFAULT 0,
+  `posttext`  longtext NULL DEFAULT NULL ,
+  `accquotationcustomdataref`  varchar(255) NULL DEFAULT NULL,
+  `gstincluded` char(1) DEFAULT 'F',
+  `contract`  varchar(255) NULL,
+  `shiplength`  double DEFAULT 1,
+  `invoicetype`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `shipvia` varchar(255),
+  `fob` varchar(255),
+  `shipdate` datetime,
+  `validdate` datetime,
+  `istemplate` char(1) default 0,
+  `shipto` varchar(255),
+  `billto` varchar(255),
+  `createdby` varchar(40) default null,
+  `modifiedby` varchar(40) default null,
+  `createdon` bigint(20) default null,
+  `updatedon` bigint(20) default null,
+  `seqnumber` int(11) default 0,
+  `seqformat` varchar(40)  default null,
+  `salesperson` varchar(255) default null, 
+  `billingshippingaddresses` VARCHAR(255),
+  `printedflag` int(1) default 0,
+  `isleasequotation` int(1) default 0,
+  `replacementrequestnumber` varchar(255),
+  `linkflag` int(2) default 0,
+  `quotationtype` int(11) default 0,
+  `maintenance` varchar(255),
+  `externalcurrencyrate` double default 0,
+  `approvestatuslevel` int(11) default 11,
+  `quotation` varchar(255)  NOT NULL,
+  `version` varchar(255)  default null, 
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`customer`) REFERENCES `customer` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),
+  FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`),
+  FOREIGN KEY (`contract`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (`createdby`)  REFERENCES `users`(`userid`),
+  FOREIGN KEY (`modifiedby`)  REFERENCES `users`(`userid`),
+  FOREIGN KEY (`seqformat`)  REFERENCES `sequenceformat`(`id`),
+  FOREIGN KEY (`salesperson`)  REFERENCES `masteritem`(`id`),
+  foreign key(`billingshippingaddresses`) references `billingshippingaddresses`(`id`),
+  FOREIGN KEY (`quotation`)  REFERENCES `quotation`(`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `quotationversiondetails` (
+  `id` varchar(255) NOT NULL,
+  `remark` varchar(255) default NULL,
+  `quantity` double NOT NULL,
+  `uom`  varchar(255) NULL ,
+  `product` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `baseuomquantity`double default 0,
+  `baseuomrate` double default 1,
+  `rate` double NOT NULL,
+  `quotationversion` varchar(255) NOT NULL,
+  `srno` int(11) default 0,
+  `tax` varchar(255) default NULL,
+  `discount` DOUBLE default 0,
+  `discountispercent` int(1),
+  `rowdiscount` varchar(255) default NULL,
+  `description` varchar(1024) default NULL,
+  `accquotationdetailscustomdataref`  varchar(255) NULL DEFAULT NULL,
+  `rowtaxamount` double default 0,
+  `productreplacementdetail`  varchar(255) NULL DEFAULT NULL,
+  `showquantity`  varchar(255) default '',
+  `dependenttype`  varchar(255) default '',
+  `inouttime` varchar(255) default '',
+  `replacementrequestnumber`  varchar(255) NULL,
+  `vendorquotationdetails`  varchar(255) NULL,
+ `invstoreid`  varchar(255) NULL,
+ `invlocid`  varchar(255) NULL,
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  FOREIGN KEY (`uom`) REFERENCES `uom` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  FOREIGN KEY (`quotationversion`) REFERENCES `quotationversion` (`id`),
+  FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),
+  FOREIGN KEY (`rowdiscount`) REFERENCES `discount` (`id`),
+  FOREIGN KEY (`productreplacementdetail`) REFERENCES `productreplacementdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `quotationversiondetailscustomdata` (
+  `quotationdetailsid` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`quotationdetailsid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+CREATE TABLE `quotationversioncustomdata` (
+  `quotationid` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`quotationid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+alter table extracompanypreferences 
+add column `versionslist` char(1) default 'F';
+
+#shashi nandan kumar 12th jan 2015 
+update reportmaster set Grouped_Under='Accounts Receivable - Sales' where id='Default_Customer_List';
+
+# VIjay Jawale 13th Jan 2015
+
+INSERT INTO helpedit VALUES('806','RFQ List','Quick Search', '82','Quick Search',"Search through RFQ List easily from 'Quick' search, which allows you to filter results as soon as you type them.",'quickSearch82RequestForQuotation');
+INSERT INTO helpedit VALUES('807','RFQ List','Export Reports', '82','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports82RequestForQuotation');
+ 
+# Amol Dhokale 13th Jan,2015 
+# DELETE QUERIES : Vendor module - Deleted duplicate entries 
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Address";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping City";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping State";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Country";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Postal Code";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Phone";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Mobile";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Fax";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Email";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Contact Person";
+DELETE FROM default_header WHERE module='b8bd81b0-c500-102d-bb0b-001e58a64cb6' and defaultHeader="Shipping Contact Person Number";
+
+# INSERT QUERIES : Vendor module - Inserted new entries 
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("21a014b0-d1d4-12e3-9d55-001cc066e9f1","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Address","ShippingAddress1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("31a014b0-d1d4-12e3-9d55-001cc066e9f2","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping City","ShippingCity1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("41a014b0-d1d4-12e3-9d55-001cc066e9f3","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping State","ShippingState1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("51a014b0-d1d4-12e3-9d55-001cc066e9f4","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Country","ShippingCountry1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("61a014b0-d1d4-12e3-9d55-001cc066e9f5","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Postal Code","ShippingPostalCode1",
+0,50,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("71a014b0-d1d4-12e3-9d55-001cc066e9f6","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Phone","ShippingPhone1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("81a014b0-d1d4-12e3-9d55-001cc066e9f7","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Mobile","ShippingMobile1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("91a014b0-d1d4-12e3-9d55-001cc066e9f8","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Fax","ShippingFax1",0,50,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("41a014b0-d1d4-12e3-9d55-001cc066e9f9","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Email","ShippingEmail1",0,255,'F','F',null,null,
+null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("51a014b0-d1d4-12e3-9d55-001cc066e9a1","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Contact Person","ShippingContactPerson1",
+0,255,'F','F',null,null,null,null,null);
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue) VALUES ("71a014b0-d1d4-12e3-9d55-001cc066e9a2","b8bd81b0-c500-102d-bb0b-001e58a64cb6","Shipping Contact Person Number","ShippingContactNumber1",
+0,255,'F','F',null,null,null,null,null);
+
+#Nitin Narkhede 14th jan 15
+alter table extracompanypreferences add column barcodedpi varchar(3) default 96, add column barcodeheight varchar(2) default 12;
+
+#Pandurang Mukhekar 14th jan 2015 
+alter table extracompanypreferences add column
+productoptimizedflag char(1) DEFAULT 'F' after deliveryplanner;
+
+#Mayur Pawar 14th Jan,2015 
+update mastergroup set groupname="Customer Shipping Route" where id=28; 
+
+#Neeraj Dwivedi 14thjan2015
+#PO  Currency Symbol
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('8c655861-c448-4908-a8d4-d0e9ecfd30e1','CurSym','currency','currency','currencyid','symbol','CurSym','1','18');
+
+#Pandurang Mukhekar 15th jan 2015 
+update currency set name="New Tiawan Dollar (TWD)" where currencyid=14;
+
+#Need to execute the update Query if output following not match for fromcurrency
+
+select * from exchangerate where id=162;     
+#  fromcurrency output=6 
+select * from defaultexchangerate where id=162;    
+#shows fromcurrency output=5 and expected=6
+
+#then following queries need to Execute
+
+update defaultexchangerate set fromcurrency=1 where id=158;
+update defaultexchangerate set fromcurrency=2 where id=159;
+update defaultexchangerate set fromcurrency=3 where id=160;
+update defaultexchangerate set fromcurrency=5 where id=161;
+update defaultexchangerate set fromcurrency=6 where id=162;
+update defaultexchangerate set fromcurrency=7 where id=163;
+update defaultexchangerate set fromcurrency=8 where id=164;
+update defaultexchangerate set fromcurrency=9 where id=165;
+update defaultexchangerate set fromcurrency=10 where id=166;
+update defaultexchangerate set fromcurrency=11 where id=167;
+update defaultexchangerate set fromcurrency=12 where id=168;
+update defaultexchangerate set fromcurrency=13 where id=169;
+
+
+# Vivek Pakmode 15th Jan 2015
+
+# Fixed Asset
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('1b1570e29bb411e4b5cbeca86bff8e7d', 'fixedassetnew', 'Fixed Asset',32);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('e8923f209bb711e48d2eeca86bff8e7d', 'viewfa', 'View Fixed Asset Groups', '1', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('f25519889bb711e48d2eeca86bff8e7d', 'createfa', 'Create', '2', 'e8923f209bb711e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('fc021cb09bb711e48d2eeca86bff8e7d', 'editfa', 'Edit', '3', 'e8923f209bb711e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('03125e2a9bb811e48d2eeca86bff8e7d', 'deletefa', 'Delete', '4', 'e8923f209bb711e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('67f013889bb711e4b5cbeca86bff8e7d', 'createacqinv', 'Create Acquired Invoice', '5', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('7b45ddbe9bb711e4b5cbeca86bff8e7d', 'viewacqinv', 'View Acquired Invoice', '6', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('8af321d69bb711e4b5cbeca86bff8e7d', 'editacqinv', 'Edit', '7', '7b45ddbe9bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('938481789bb711e4b5cbeca86bff8e7d', 'deleteacqinv', 'Delete', '8', '7b45ddbe9bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('9c99f7669bb711e4b5cbeca86bff8e7d', 'exportacqinv', 'Export', '9', '7b45ddbe9bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('a6ca0d2a9bb711e4b5cbeca86bff8e7d', 'printacqinv', 'Print', '10', '7b45ddbe9bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('aeb02ec09bb711e4b5cbeca86bff8e7d', 'createdispinv', 'Create Disposal Invoice', '11', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('b6e1ce829bb711e4b5cbeca86bff8e7d', 'viewdispinv', 'View Disposal Invoice', '12', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('c31ee8a69bb711e48d2eeca86bff8e7d', 'editdispinv', 'Edit', '13', 'b6e1ce829bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('cc4da7469bb711e48d2eeca86bff8e7d', 'deletedispinv', 'Delete', '14', 'b6e1ce829bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('d5d0a44e9bb711e48d2eeca86bff8e7d', 'exportdispinv', 'Export', '15', 'b6e1ce829bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('ded60e769bb711e48d2eeca86bff8e7d', 'printdispinv', 'Print', '16', 'b6e1ce829bb711e4b5cbeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('0ce856b69bb811e48d2eeca86bff8e7d', 'createfagr', 'Create Fixed Asset Goods Receipt', '17', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('177f2c309bb811e48d2eeca86bff8e7d', 'veiwfagr', 'View Fixed Asset Goods Receipt', '18', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('1f488cc29bb811e48d2eeca86bff8e7d', 'editfagr', 'Edit', '19', '177f2c309bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('26b311629bb811e48d2eeca86bff8e7d', 'deletefagr', 'Delete', '20', '177f2c309bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('2f483f6e9bb811e48d2eeca86bff8e7d', 'exportfagr', 'Export', '21', '177f2c309bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('360ba9b29bb811e48d2eeca86bff8e7d', 'printfagr', 'Print', '22', '177f2c309bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('3f13c30a9bb811e48d2eeca86bff8e7d', 'createfado', 'Create Fixed Asset Delivery Order', '23', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('645c75269bb811e48d2eeca86bff8e7d', 'viewfado', 'View Fixed Asset Delivery Order', '24', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('6bd106829bb811e48d2eeca86bff8e7d', 'editfado', 'Edit', '25', '645c75269bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('73e151889bb811e48d2eeca86bff8e7d', 'deletefado', 'Delete', '26', '645c75269bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('7b5afdb09bb811e48d2eeca86bff8e7d', 'exportfado', 'Export', '27', '645c75269bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('826982029bb811e48d2eeca86bff8e7d', 'printfado', 'Print', '28', '645c75269bb811e48d2eeca86bff8e7d', '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('88fc61029bb811e48d2eeca86bff8e7d', 'genfadep', 'Generate Fixed Asset Depreciation', '29', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('90e752be9bb811e48d2eeca86bff8e7d', 'createfamain', 'Create Asset Maintenance Schedule', '30', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('98623ac29bb811e48d2eeca86bff8e7d', 'updatefamain', 'Update Asset Maintenance Schedule', '31', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('a10a9b609bb811e48d2eeca86bff8e7d', 'viewfamain', 'View Asset Maintenance Schedule', '32', null, '1b1570e29bb411e4b5cbeca86bff8e7d') ,
+('ac409d229bb811e48d2eeca86bff8e7d', 'viewmainworkorder', 'View Maintenance Work Order', '33', null, '1b1570e29bb411e4b5cbeca86bff8e7d');
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('1b1570e29bb411e4b5cbeca86bff8e7d', '1', '8589934591');
+
+# Purchase Return
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('a528df089bd711e4bbfeeca86bff8e7d', 'purchasereturn', 'Purchase Return',33);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('0d17ec089bd811e4bbfeeca86bff8e7d', 'createpret', 'Create Purchase Return', '1', null, 'a528df089bd711e4bbfeeca86bff8e7d') ,
+('151e5ab89bd811e4bbfeeca86bff8e7d', 'viewpret', 'View Purchase Return', '2', null, 'a528df089bd711e4bbfeeca86bff8e7d') ,
+('1c8a32ea9bd811e4bbfeeca86bff8e7d', 'editpret', 'Edit', '3', '151e5ab89bd811e4bbfeeca86bff8e7d', 'a528df089bd711e4bbfeeca86bff8e7d') ,
+('26647c1c9bd811e4bbfeeca86bff8e7d', 'deletepret', 'Delete', '4', '151e5ab89bd811e4bbfeeca86bff8e7d', 'a528df089bd711e4bbfeeca86bff8e7d') ,
+('2deb44709bd811e4bbfeeca86bff8e7d', 'exportpret', 'Export', '5', '151e5ab89bd811e4bbfeeca86bff8e7d', 'a528df089bd711e4bbfeeca86bff8e7d') ,
+('371d2db09bd811e4bbfeeca86bff8e7d', 'printpret', 'Print', '6', '151e5ab89bd811e4bbfeeca86bff8e7d', 'a528df089bd711e4bbfeeca86bff8e7d') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('a528df089bd711e4bbfeeca86bff8e7d', '1', '63');
+
+# Sales Return
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('e092295a9bd711e4bbfeeca86bff8e7d', 'salesreturn', 'Sales Return',34);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('41dc91509bd811e4bbfeeca86bff8e7d', 'createsret', 'Create Sales Return', '1', null, 'e092295a9bd711e4bbfeeca86bff8e7d') ,
+('4a888d049bd811e4bbfeeca86bff8e7d', 'viewsret', 'View Sales Return', '2', null, 'e092295a9bd711e4bbfeeca86bff8e7d') ,
+('533ea9389bd811e4bbfeeca86bff8e7d', 'editsret', 'Edit', '3', '4a888d049bd811e4bbfeeca86bff8e7d', 'e092295a9bd711e4bbfeeca86bff8e7d') ,
+('5b971eb29bd811e4bbfeeca86bff8e7d', 'deletesret', 'Delete', '4', '4a888d049bd811e4bbfeeca86bff8e7d', 'e092295a9bd711e4bbfeeca86bff8e7d') ,
+('6437e4fc9bd811e4bbfeeca86bff8e7d', 'exportsret', 'Export', '5', '4a888d049bd811e4bbfeeca86bff8e7d', 'e092295a9bd711e4bbfeeca86bff8e7d') ,
+('6d6eef169bd811e4bbfeeca86bff8e7d', 'printsret', 'Print', '6', '4a888d049bd811e4bbfeeca86bff8e7d', 'e092295a9bd711e4bbfeeca86bff8e7d') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('e092295a9bd711e4bbfeeca86bff8e7d', '1', '63');
+
+#Vijay Jawale 15th Jan 2014
+
+update helpedit set compid='exportReports35QuotationListEntry' where modeid=35 and id='210';
+update helpedit set compid='gridmsg35QuotationListEntry' where modeid=35 and id='209';
+update helpedit set compid='exportReports17PurchaseOrderListEntry' where modeid=17 and id='117';
+update helpedit set compid='gridmsg17PurchaseOrderListEntry' where modeid=17 and id='114';
+update helpedit set compid='quickSearch17PurchaseOrderListEntry' where modeid=17 and id='115'; 
+
+#shashi nandan kumar 16th Jan 2014
+insert into currency (currencyid,name,htmlcode,symbol,afterdecimalname,currencycode) values ('19','South Korean Won (KRW)','KRW','₩','chon','KRW');
+insert into currency (currencyid,name,htmlcode,symbol,afterdecimalname,currencycode) values ('20',' Emirati Dirham (AED)','AED','د.إ','fil','AED');
+insert into currency (currencyid,name,htmlcode,symbol,afterdecimalname,currencycode) values ('21','Brunei Dollar (BND)','BND','$','sen','BND');
+insert into defaultexchangerate values ('290','1','19');
+insert into defaultexchangerate values ('291','2','19');
+insert into defaultexchangerate values ('292','3','19');
+insert into defaultexchangerate values ('293','5','19');
+insert into defaultexchangerate values ('294','6','19');
+insert into defaultexchangerate values ('295','7','19');
+insert into defaultexchangerate values ('296','8','19');
+insert into defaultexchangerate values ('297','9','19');
+insert into defaultexchangerate values ('298','10','19');
+insert into defaultexchangerate values ('299','11','19');
+insert into defaultexchangerate values ('300','12','19');
+insert into defaultexchangerate values ('301','13','19');
+insert into defaultexchangerate values ('302','14','19');
+insert into defaultexchangerate values ('303','15','19');
+insert into defaultexchangerate values ('304','16','19');
+insert into defaultexchangerate values ('305','17','19');
+insert into defaultexchangerate values ('306','18','19');
+insert into defaultexchangerate values ('324','19','19');
+
+insert into defaultexchangerate values ('307','19','18');
+insert into defaultexchangerate values ('308','19','16');
+insert into defaultexchangerate values ('309','19','15');
+insert into defaultexchangerate values ('310','19','14');
+insert into defaultexchangerate values ('311','19','13');
+insert into defaultexchangerate values ('312','19','1');
+insert into defaultexchangerate values ('313','19','2');
+insert into defaultexchangerate values ('314','19','3');
+insert into defaultexchangerate values ('315','19','5');
+insert into defaultexchangerate values ('316','19','6');
+insert into defaultexchangerate values ('317','19','7');
+insert into defaultexchangerate values ('318','19','8');
+insert into defaultexchangerate values ('319','19','9');
+insert into defaultexchangerate values ('320','19','10');
+insert into defaultexchangerate values ('321','19','11');
+insert into defaultexchangerate values ('322','19','12');
+insert into defaultexchangerate values ('323','19','17');
+
+insert into exchangerate values ('290','1','19');
+insert into exchangerate values ('291','2','19');
+insert into exchangerate values ('292','3','19');
+insert into exchangerate values ('293','5','19');
+insert into exchangerate values ('294','6','19');
+insert into exchangerate values ('295','7','19');
+insert into exchangerate values ('296','8','19');
+insert into exchangerate values ('297','9','19');
+insert into exchangerate values ('298','10','19');
+insert into exchangerate values ('299','11','19');
+insert into exchangerate values ('300','12','19');
+insert into exchangerate values ('301','13','19');
+insert into exchangerate values ('302','14','19');
+insert into exchangerate values ('303','15','19');
+insert into exchangerate values ('304','16','19');
+insert into exchangerate values ('305','17','19');
+insert into exchangerate values ('306','18','19');
+insert into exchangerate values ('324','19','19');
+
+insert into exchangerate values ('307','19','18');
+insert into exchangerate values ('308','19','16');
+insert into exchangerate values ('309','19','15');
+insert into exchangerate values ('310','19','14');
+insert into exchangerate values ('311','19','13');
+insert into exchangerate values ('312','19','1');
+insert into exchangerate values ('313','19','2');
+insert into exchangerate values ('314','19','3');
+insert into exchangerate values ('315','19','5');
+insert into exchangerate values ('316','19','6');
+insert into exchangerate values ('317','19','7');
+insert into exchangerate values ('318','19','8');
+insert into exchangerate values ('319','19','9');
+insert into exchangerate values ('320','19','10');
+insert into exchangerate values ('321','19','11');
+insert into exchangerate values ('322','19','12');
+insert into exchangerate values ('323','19','17');
+
+insert into defaultexchangeratedetails values ('290','2015-01-01 00:00:00','0.0009','290');
+insert into defaultexchangeratedetails values ('291','2015-01-01 00:00:00','0.0006','291');
+insert into defaultexchangeratedetails values ('292','2015-01-01 00:00:00','0.0008','292');
+insert into defaultexchangeratedetails values ('293','2015-01-01 00:00:00','0.0572','293');
+insert into defaultexchangeratedetails values ('294','2015-01-01 00:00:00','0.0012','294');
+insert into defaultexchangeratedetails values ('295','2015-01-01 00:00:00','0.0033','295');
+insert into defaultexchangeratedetails values ('296','2015-01-01 00:00:00','0.4984','296');
+insert into defaultexchangeratedetails values ('297','2015-01-01 00:00:00','2.6877','297');
+insert into defaultexchangeratedetails values ('298','2015-01-01 00:00:00','0.0011','298');
+insert into defaultexchangeratedetails values ('299','2015-01-01 00:00:00','0.0011','299');
+insert into defaultexchangeratedetails values ('300','2015-01-01 00:00:00','0.0057','300');
+insert into defaultexchangeratedetails values ('301','2015-01-01 00:00:00','11.6290','301');
+insert into defaultexchangeratedetails values ('302','2015-01-01 00:00:00','0.0294','302');
+insert into defaultexchangeratedetails values ('303','2015-01-01 00:00:00','0.0304','303');
+insert into defaultexchangeratedetails values ('304','2015-01-01 00:00:00','0.0413','304');
+insert into defaultexchangeratedetails values ('305','2015-01-01 00:00:00','0.0012','305');
+insert into defaultexchangeratedetails values ('306','2015-01-01 00:00:00','0.0008','306');
+insert into defaultexchangeratedetails values ('307','2015-01-01 00:00:00','1220.9378','307');
+insert into defaultexchangeratedetails values ('308','2015-01-01 00:00:00','24.1975','308');
+insert into defaultexchangeratedetails values ('309','2015-01-01 00:00:00','32.9111','309');
+insert into defaultexchangeratedetails values ('310','2015-01-01 00:00:00','34.0310','310');
+insert into defaultexchangeratedetails values ('311','2015-01-01 00:00:00','0.0862','311');
+insert into defaultexchangeratedetails values ('312','2015-01-01 00:00:00','1076.9550','312');
+insert into defaultexchangeratedetails values ('313','2015-01-01 00:00:00','1645.8271','313');
+insert into defaultexchangeratedetails values ('314','2015-01-01 00:00:00','1263.8765','314');
+insert into defaultexchangeratedetails values ('315','2015-01-01 00:00:00','17.4401','315');
+insert into defaultexchangeratedetails values ('316','2015-01-01 00:00:00','815.5451','316');
+insert into defaultexchangeratedetails values ('317','2015-01-01 00:00:00','302.6701','317');
+insert into defaultexchangeratedetails values ('318','2015-01-01 00:00:00','2.0075','318');
+insert into defaultexchangeratedetails values ('319','2015-01-01 00:00:00','0.3727','319');
+insert into defaultexchangeratedetails values ('320','2015-01-01 00:00:00','910.6922','320');
+insert into defaultexchangeratedetails values ('321','2015-01-01 00:00:00','890.5617','321');
+insert into defaultexchangeratedetails values ('322','2015-01-01 00:00:00','174.1886','322');
+insert into defaultexchangeratedetails values ('323','2015-01-01 00:00:00','845.8791','323');
+insert into defaultexchangeratedetails values ('324','2015-01-01 00:00:00','1.00','324');
+
+insert into defaultexchangerate values ('325','1','20');
+insert into defaultexchangerate values ('326','2','20');
+insert into defaultexchangerate values ('327','3','20');
+insert into defaultexchangerate values ('328','5','20');
+insert into defaultexchangerate values ('329','6','20');
+insert into defaultexchangerate values ('330','7','20');
+insert into defaultexchangerate values ('331','8','20');
+insert into defaultexchangerate values ('332','9','20');
+insert into defaultexchangerate values ('333','10','20');
+insert into defaultexchangerate values ('334','11','20');
+insert into defaultexchangerate values ('335','12','20');
+insert into defaultexchangerate values ('336','13','20');
+insert into defaultexchangerate values ('337','14','20');
+insert into defaultexchangerate values ('338','15','20');
+insert into defaultexchangerate values ('339','16','20');
+insert into defaultexchangerate values ('340','17','20');
+insert into defaultexchangerate values ('341','18','20');
+insert into defaultexchangerate values ('342','19','20');
+insert into defaultexchangerate values ('343','20','20');
+
+insert into defaultexchangerate values ('344','20','1');
+insert into defaultexchangerate values ('345','20','2');
+insert into defaultexchangerate values ('346','20','3');
+insert into defaultexchangerate values ('347','20','5');
+insert into defaultexchangerate values ('348','20','6');
+insert into defaultexchangerate values ('349','20','7');
+insert into defaultexchangerate values ('350','20','8');
+insert into defaultexchangerate values ('351','20','9');
+insert into defaultexchangerate values ('352','20','10');
+insert into defaultexchangerate values ('353','20','11');
+insert into defaultexchangerate values ('354','20','12');
+insert into defaultexchangerate values ('355','20','13');
+insert into defaultexchangerate values ('356','20','14');
+insert into defaultexchangerate values ('357','20','15');
+insert into defaultexchangerate values ('358','20','16');
+insert into defaultexchangerate values ('359','20','17');
+insert into defaultexchangerate values ('360','20','18');
+insert into defaultexchangerate values ('361','20','19');
+
+insert into exchangerate values ('325','1','20');
+insert into exchangerate values ('326','2','20');
+insert into exchangerate values ('327','3','20');
+insert into exchangerate values ('328','5','20');
+insert into exchangerate values ('329','6','20');
+insert into exchangerate values ('330','7','20');
+insert into exchangerate values ('331','8','20');
+insert into exchangerate values ('332','9','20');
+insert into exchangerate values ('333','10','20');
+insert into exchangerate values ('334','11','20');
+insert into exchangerate values ('335','12','20');
+insert into exchangerate values ('336','13','20');
+insert into exchangerate values ('337','14','20');
+insert into exchangerate values ('338','15','20');
+insert into exchangerate values ('339','16','20');
+insert into exchangerate values ('340','17','20');
+insert into exchangerate values ('341','18','20');
+insert into exchangerate values ('342','19','20');
+insert into exchangerate values ('343','20','20');
+
+insert into exchangerate values ('344','20','1');
+insert into exchangerate values ('345','20','2');
+insert into exchangerate values ('346','20','3');
+insert into exchangerate values ('347','20','5');
+insert into exchangerate values ('348','20','6');
+insert into exchangerate values ('349','20','7');
+insert into exchangerate values ('350','20','8');
+insert into exchangerate values ('351','20','9');
+insert into exchangerate values ('352','20','10');
+insert into exchangerate values ('353','20','11');
+insert into exchangerate values ('354','20','12');
+insert into exchangerate values ('355','20','13');
+insert into exchangerate values ('356','20','14');
+insert into exchangerate values ('357','20','15');
+insert into exchangerate values ('358','20','16');
+insert into exchangerate values ('359','20','17');
+insert into exchangerate values ('360','20','18');
+insert into exchangerate values ('361','20','19');
+
+insert into defaultexchangeratedetails values ('325','2015-01-01 00:00:00','0.272255','325');
+insert into defaultexchangeratedetails values ('326','2015-01-01 00:00:00','0.179414','326');
+insert into defaultexchangeratedetails values ('327','2015-01-01 00:00:00','0.234112','327');
+insert into defaultexchangeratedetails values ('328','2015-01-01 00:00:00','16.848737 ','328');
+insert into defaultexchangeratedetails values ('329','2015-01-01 00:00:00','0.360458','329');
+insert into defaultexchangeratedetails values ('330','2015-01-01 00:00:00','0.970350','330');
+insert into defaultexchangeratedetails values ('331','2015-01-01 00:00:00','143.925','331');
+insert into defaultexchangeratedetails values ('332','2015-01-01 00:00:00','777.790','332');
+insert into defaultexchangeratedetails values ('333','2015-01-01 00:00:00','0.32516','333');
+insert into defaultexchangeratedetails values ('334','2015-01-01 00:00:00','0.33183','334');
+insert into defaultexchangeratedetails values ('335','2015-01-01 00:00:00','1.66336','335');
+insert into defaultexchangeratedetails values ('336','2015-01-01 00:00:00','3,394.63','336');
+insert into defaultexchangeratedetails values ('337','2015-01-01 00:00:00','8.63562','337');
+insert into defaultexchangeratedetails values ('338','2015-01-01 00:00:00','8.90158','338');
+insert into defaultexchangeratedetails values ('339','2015-01-01 00:00:00','12.1299','339');
+insert into defaultexchangeratedetails values ('340','2015-01-01 00:00:00','0.35062','340');
+insert into defaultexchangeratedetails values ('341','2015-01-01 00:00:00','0.26120','341');
+insert into defaultexchangeratedetails values ('342','2015-01-01 00:00:00','292.772','342');
+insert into defaultexchangeratedetails values ('343','2015-01-01 00:00:00','1.00000','343');
+
+insert into defaultexchangeratedetails values ('344','2015-01-01 00:00:00','3.67285','344');
+insert into defaultexchangeratedetails values ('345','2015-01-01 00:00:00','5.58773','345');
+insert into defaultexchangeratedetails values ('346','2015-01-01 00:00:00','4.30315','346');
+insert into defaultexchangeratedetails values ('347','2015-01-01 00:00:00','0.05930','347');
+insert into defaultexchangeratedetails values ('348','2015-01-01 00:00:00','2.75990','348');
+insert into defaultexchangeratedetails values ('349','2015-01-01 00:00:00','1.02936','349');
+insert into defaultexchangeratedetails values ('350','2015-01-01 00:00:00','0.00665','350');
+insert into defaultexchangeratedetails values ('351','2015-01-01 00:00:00','0.00125','351');
+insert into defaultexchangeratedetails values ('352','2015-01-01 00:00:00','3.07452','352');
+insert into defaultexchangeratedetails values ('353','2015-01-01 00:00:00','3.01266','353');
+insert into defaultexchangeratedetails values ('354','2015-01-01 00:00:00','0.59968','354');
+insert into defaultexchangeratedetails values ('355','2015-01-01 00:00:00','0.00029','355');
+insert into defaultexchangeratedetails values ('356','2015-01-01 00:00:00','0.11565','356');
+insert into defaultexchangeratedetails values ('357','2015-01-01 00:00:00','0.11198','357');
+insert into defaultexchangeratedetails values ('358','2015-01-01 00:00:00','0.08212','358');
+insert into defaultexchangeratedetails values ('359','2015-01-01 00:00:00','2.85072','359');
+insert into defaultexchangeratedetails values ('360','2015-01-01 00:00:00','3.82063','360');
+insert into defaultexchangeratedetails values ('361','2015-01-01 00:00:00','0.00341','361');
+
+insert into defaultexchangerate values ('362','1','21');
+insert into defaultexchangerate values ('363','2','21');
+insert into defaultexchangerate values ('364','3','21');
+insert into defaultexchangerate values ('365','5','21');
+insert into defaultexchangerate values ('366','6','21');
+insert into defaultexchangerate values ('367','7','21');
+insert into defaultexchangerate values ('368','8','21');
+insert into defaultexchangerate values ('369','9','21');
+insert into defaultexchangerate values ('370','10','21');
+insert into defaultexchangerate values ('371','11','21');
+insert into defaultexchangerate values ('372','12','21');
+insert into defaultexchangerate values ('373','13','21');
+insert into defaultexchangerate values ('374','14','21');
+insert into defaultexchangerate values ('375','15','21');
+insert into defaultexchangerate values ('376','16','21');
+insert into defaultexchangerate values ('377','17','21');
+insert into defaultexchangerate values ('378','18','21');
+insert into defaultexchangerate values ('379','19','21');
+insert into defaultexchangerate values ('380','20','21');
+insert into defaultexchangerate values ('381','21','21');
+
+insert into defaultexchangerate values ('382','21','1');
+insert into defaultexchangerate values ('383','21','2');
+insert into defaultexchangerate values ('384','21','3');
+insert into defaultexchangerate values ('385','21','5');
+insert into defaultexchangerate values ('386','21','6');
+insert into defaultexchangerate values ('387','21','7');
+insert into defaultexchangerate values ('388','21','8');
+insert into defaultexchangerate values ('389','21','9');
+insert into defaultexchangerate values ('390','21','10');
+insert into defaultexchangerate values ('391','21','11');
+insert into defaultexchangerate values ('392','21','12');
+insert into defaultexchangerate values ('393','21','13');
+insert into defaultexchangerate values ('394','21','14');
+insert into defaultexchangerate values ('395','21','15');
+insert into defaultexchangerate values ('396','21','16');
+insert into defaultexchangerate values ('397','21','17');
+insert into defaultexchangerate values ('398','21','18');
+insert into defaultexchangerate values ('399','21','19');
+insert into defaultexchangerate values ('400','21','20');
+
+insert into exchangerate values ('362','1','21');
+insert into exchangerate values ('363','2','21');
+insert into exchangerate values ('364','3','21');
+insert into exchangerate values ('365','5','21');
+insert into exchangerate values ('366','6','21');
+insert into exchangerate values ('367','7','21');
+insert into exchangerate values ('368','8','21');
+insert into exchangerate values ('369','9','21');
+insert into exchangerate values ('370','10','21');
+insert into exchangerate values ('371','11','21');
+insert into exchangerate values ('372','12','21');
+insert into exchangerate values ('373','13','21');
+insert into exchangerate values ('374','14','21');
+insert into exchangerate values ('375','15','21');
+insert into exchangerate values ('376','16','21');
+insert into exchangerate values ('377','17','21');
+insert into exchangerate values ('378','18','21');
+insert into exchangerate values ('379','19','21');
+insert into exchangerate values ('380','20','21');
+insert into exchangerate values ('381','21','21');
+
+insert into exchangerate values ('382','21','1');
+insert into exchangerate values ('383','21','2');
+insert into exchangerate values ('384','21','3');
+insert into exchangerate values ('385','21','5');
+insert into exchangerate values ('386','21','6');
+insert into exchangerate values ('387','21','7');
+insert into exchangerate values ('388','21','8');
+insert into exchangerate values ('389','21','9');
+insert into exchangerate values ('390','21','10');
+insert into exchangerate values ('391','21','11');
+insert into exchangerate values ('392','21','12');
+insert into exchangerate values ('393','21','13');
+insert into exchangerate values ('394','21','14');
+insert into exchangerate values ('395','21','15');
+insert into exchangerate values ('396','21','16');
+insert into exchangerate values ('397','21','17');
+insert into exchangerate values ('398','21','18');
+insert into exchangerate values ('399','21','19');
+insert into exchangerate values ('400','21','20');
+
+insert into defaultexchangeratedetails values ('362','2015-01-01 00:00:00','0.74344','362');
+insert into defaultexchangeratedetails values ('363','2015-01-01 00:00:00','0.48858','363');
+insert into defaultexchangeratedetails values ('364','2015-01-01 00:00:00','0.63444','364');
+insert into defaultexchangeratedetails values ('365','2015-01-01 00:00:00','45.9393','365');
+insert into defaultexchangeratedetails values ('366','2015-01-01 00:00:00','0.98889','366');
+insert into defaultexchangeratedetails values ('367','2015-01-01 00:00:00','2.64823','367');
+insert into defaultexchangeratedetails values ('368','2015-01-01 00:00:00','393.019','368');
+insert into defaultexchangeratedetails values ('369','2015-01-01 00:00:00','2,123.93','369');
+insert into defaultexchangeratedetails values ('370','2015-01-01 00:00:00','0.88792','370');
+insert into defaultexchangeratedetails values ('371','2015-01-01 00:00:00','0.90613','371');
+insert into defaultexchangeratedetails values ('372','2015-01-01 00:00:00','4.54218','372');
+insert into defaultexchangeratedetails values ('373','2015-01-01 00:00:00','9,269.79','373');
+insert into defaultexchangeratedetails values ('374','2015-01-01 00:00:00','23.5815','374');
+insert into defaultexchangeratedetails values ('375','2015-01-01 00:00:00','24.3078','375');
+insert into defaultexchangeratedetails values ('376','2015-01-01 00:00:00','33.1233','376');
+insert into defaultexchangeratedetails values ('377','2015-01-01 00:00:00','0.95744','377');
+insert into defaultexchangeratedetails values ('378','2015-01-01 00:00:00','0.71328','378');
+insert into defaultexchangeratedetails values ('379','2015-01-01 00:00:00','799.480','379');
+insert into defaultexchangeratedetails values ('380','2015-01-01 00:00:00','2.73054','380');
+insert into defaultexchangeratedetails values ('381','2015-01-01 00:00:00','1.00000','381');
+
+insert into defaultexchangeratedetails values ('382','2015-01-01 00:00:00','1.30240','382');
+insert into defaultexchangeratedetails values ('383','2015-01-01 00:00:00','1.98142','383');
+insert into defaultexchangeratedetails values ('384','2015-01-01 00:00:00','1.52590','384');
+insert into defaultexchangeratedetails values ('385','2015-01-01 00:00:00','0.02103','385');
+insert into defaultexchangeratedetails values ('386','2015-01-01 00:00:00','0.97867','386');
+insert into defaultexchangeratedetails values ('387','2015-01-01 00:00:00','0.36501','387');
+insert into defaultexchangeratedetails values ('388','2015-01-01 00:00:00','0.00236','388');
+insert into defaultexchangeratedetails values ('389','2015-01-01 00:00:00','0.00044','389');
+insert into defaultexchangeratedetails values ('390','2015-01-01 00:00:00','1.09023','390');
+insert into defaultexchangeratedetails values ('391','2015-01-01 00:00:00','1.06829','391');
+insert into defaultexchangeratedetails values ('392','2015-01-01 00:00:00','0.21265','392');
+insert into defaultexchangeratedetails values ('393','2015-01-01 00:00:00','0.00010','393');
+insert into defaultexchangeratedetails values ('394','2015-01-01 00:00:00','0.04101','394');
+insert into defaultexchangeratedetails values ('395','2015-01-01 00:00:00','0.03971','395');
+insert into defaultexchangeratedetails values ('396','2015-01-01 00:00:00','0.02912','396');
+insert into defaultexchangeratedetails values ('397','2015-01-01 00:00:00','1.01087','397');
+insert into defaultexchangeratedetails values ('398','2015-01-01 00:00:00','1.35480','398');
+insert into defaultexchangeratedetails values ('399','2015-01-01 00:00:00','0.00121','399');
+insert into defaultexchangeratedetails values ('400','2015-01-01 00:00:00','0.35458','400');
+
+# Amol Dhokale 16th Jan,2015 
+ALTER TABLE quotation ADD COLUMN shippingterm VARCHAR(255) DEFAULT "";
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('56a054b0-d3d4-52e6-2d58-301cc066e1a1','shippingterm','Shipping Term',22,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('56a054b0-d3d4-52e6-2d58-601cc066e2a2','shippingterm','Shipping Term',22,1,0,0,0);
+
+# Anand Nimbalkar 16th Jan 2015
+ALTER TABLE `pricingbandmaster` ADD COLUMN `pricepolicyid` int(1) DEFAULT 1;
+ALTER TABLE `pricingbandmaster` ADD COLUMN `description` varchar(512) DEFAULT NULL;
+ALTER TABLE `pricingbandmaster` ADD COLUMN `volumediscount` char(1) DEFAULT 'F';
+
+ALTER TABLE `pricingbandmasterdetails` ADD COLUMN `minimumqty` int DEFAULT '0';
+ALTER TABLE `pricingbandmasterdetails` ADD COLUMN `maximumqty` int DEFAULT '0';
+
+ALTER TABLE `invoicedetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `grdetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `purchaserequisitiondetail` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `vendorquotationdetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `quotationdetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `podetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+ALTER TABLE `sodetails` ADD COLUMN `pricesource` varchar(255) DEFAULT NULL;
+
+
+#Mayur Pawar 19th Jan,2015 
+delete from activitylist where activityid="ff80808122f9dba90122fa4888cf0098";
+
+#Raveesh Pathak 21st Jan 2015
+alter table fieldParams add column isactivated tinyint(3) default 1;
+
+# Atul sachan 21th Jan 2015
+
+ALTER TABLE `contract`
+ADD COLUMN `invoicefrequency` varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `numberofperiods` int NULL DEFAULT 1;
+
+ALTER TABLE `contractdetails`
+ADD COLUMN `unitpriceperinvoice`  double NULL DEFAULT 0;
+
+#Vijay Jawale 21st Jan 2015   
+INSERT INTO helpedit VALUES('221','Vendor Quotation list','Quick Search', '35','Quick Search','Expand  ','quickSearch35VendorQuotationListEntry');
+INSERT INTO helpedit VALUES('222','Vendor Quotation list','Export Reports', '35','Export Reports','Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.','exportReports35VendorQuotationListEntry');
+update helpedit set compid='exportReports18SalesOrderListEntry' where modeid=18 and id='121';
+update helpedit set compid='quickSearch18SalesOrderListEntry' where modeid=18 and id='119'; 
+update helpedit set compid='exportReports21GRListEntry' where modeid=21 and id='133';
+update helpedit set compid='quickSearch21GRListEntry' where modeid=21 and id='132'; 
+update helpedit set compid='exportReports16InvoiceListEntry' where modeid=16 and id='112';
+update helpedit set compid='quickSearch16InvoiceListEntry' where modeid=16 and id='111';
+
+# Atul sachan 22 Jan 2015
+
+ALTER TABLE `masteritem`
+ADD COLUMN `code`  varchar(255) NULL DEFAULT NULL;
+
+insert into reportmaster values("view_paymentTermsalesCommissionreport","Sales Commission On Payment Term","View Sales Commission On Payment Term Report.","PaymentTermSalesCommissionReport()",null); 
+
+# vivek Pakmode 23rd Jan 2015
+
+update activitylist set  orderno=11 where activityid="ff80808122f9dba90122fa4888cf0097";
+update activitylist set  orderno=12 where activityid="ff80808122f9dba90122fa4888cf1000";
+update activitylist set  orderno=100 where activityid="ff80808122f9dba90122fa4888cf0048";
+update activitylist set  orderno=199 where activityid="ff80808122f9dba90122fa4888cf00268";
+update activitylist set  orderno=200 where activityid="ff80808122f3cb640122f45e2010003c";
+update activitylist set  orderno=300 where activityid="ff80808122f3cb640122f45ef38b003e";
+update activitylist set  orderno=400 where activityid="ff80808122f3cb640122f45e8128003d";
+
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('b1b84ae8a1f811e489a8eca86bff8e7d', 'editsalesquotation', 'Edit', '13', 'ff80808122f9dba90122fa4888cf1000', 'ff80808122f3cb640122f44c9db10012') ,
+('bf470884a1f811e489a8eca86bff8e7d', 'deletesalesquotation', 'Delete', '14', 'ff80808122f9dba90122fa4888cf1000', 'ff80808122f3cb640122f44c9db10012') ,
+('cc1a6588a1f811e489a8eca86bff8e7d', 'exportsalesquotation', 'Export', '15', 'ff80808122f9dba90122fa4888cf1000', 'ff80808122f3cb640122f44c9db10012') ,
+('d772fd32a1f811e489a8eca86bff8e7d', 'printsalesquotation', 'Print', '16', 'ff80808122f9dba90122fa4888cf1000', 'ff80808122f3cb640122f44c9db10012') ;
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('6dafbedea1f911e489a8eca86bff8e7d', 'importsalesinvoice', 'Import Sales Invoice', '198', null, 'ff80808122f3cb640122f44c9db10012');
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('7f6b5cfaa1f911e489a8eca86bff8e7d', 'importreceivepayments', 'Import Receive Payments', '299', null, 'ff80808122f3cb640122f44c9db10012');
+
+update activitylist set  orderno=99 where activityid="8122f9dba90122fa4888cf0069";
+update activitylist set  orderno=199 where activityid="ff80808122f9dba90122fa4888cf00267";
+update activitylist set  orderno=200 where activityid="ff80808122f9dba90122fa4888cf0075";
+update activitylist set  orderno=300 where activityid="8122f9dba90122fa4888cf0085";
+update activitylist set  orderno=400 where activityid="ff80808122f9dba90122fa4888cf0080";
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('d88fd4fea2cc11e4adaceca86bff8e7d', 'importpurchaseinvoice', 'Import Purchase Invoices', '198', null, 'ff80808122f9dba90122fa4888cf0054');
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('eb214daaa2cc11e4adaceca86bff8e7d', 'importmakepayment', 'Import Make Payments', '299', null, 'ff80808122f9dba90122fa4888cf0054');
+
+# Vendor Quotation 
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('84499f72a2ce11e4adaceca86bff8e7d', 'createvendorquotation', 'Create Vendor Quotation', '1', null, 'ff80808122f9dba90122fa4888cf0054') ,
+('906b2334a2ce11e4adaceca86bff8e7d', 'viewvendorquotation', 'View Vendor Quotation', '2', null, 'ff80808122f9dba90122fa4888cf0054') ,
+('a4495344a2ce11e4adaceca86bff8e7d', 'editvendorquotation', 'Edit', '3', '906b2334a2ce11e4adaceca86bff8e7d', 'ff80808122f9dba90122fa4888cf0054') ,
+('b0130314a2ce11e4adaceca86bff8e7d', 'deletevendorquotation', 'Delete', '4', '906b2334a2ce11e4adaceca86bff8e7d', 'ff80808122f9dba90122fa4888cf0054') ,
+('bc732742a2ce11e4adaceca86bff8e7d', 'exportvendorquotation', 'Export', '5', '906b2334a2ce11e4adaceca86bff8e7d', 'ff80808122f9dba90122fa4888cf0054') ,
+('c891c0d8a2ce11e4adaceca86bff8e7d', 'printvendorquotation', 'Print', '6', '906b2334a2ce11e4adaceca86bff8e7d', 'ff80808122f9dba90122fa4888cf0054') ;
+
+# Suhas Chaware 23rd Jan 2015
+CREATE TABLE `serialcustomdata` (
+  `serialdocumentmappingid` varchar(40) NOT NULL,
+  `col1` varchar(255) default NULL,
+  `col2` varchar(255) default NULL,
+  `col3` varchar(255) default NULL,
+  `col4` varchar(255) default NULL,
+  `col5` varchar(255) default NULL,
+  `col6` varchar(255) default NULL,
+  `col7` varchar(255) default NULL,
+  `col8` varchar(255) default NULL,
+  `col9` varchar(255) default NULL,
+  `col10` varchar(255) default NULL,
+  `col101` varchar(255) default NULL,
+  `col102` varchar(255) default NULL,
+  `col103` varchar(255) default NULL,
+  `col104` varchar(255) default NULL,
+  `col105` varchar(255) default NULL,
+  `col106` varchar(255) default NULL,
+  `col107` varchar(255) default NULL,
+  `col108` varchar(255) default NULL,
+  `col109` varchar(255) default NULL,
+  `col110` varchar(255) default NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` varchar(255) default 'false',
+  `col1037` varchar(255) default 'false',
+  `col1038` varchar(255) default 'false',
+  `col1039` varchar(255) default 'false',
+  `col1040` varchar(255) default 'false',
+  `col1041` varchar(255) default 'false',
+  `col1042` varchar(255) default 'false',
+  `col1043` varchar(255) default 'false',
+  `col1044` varchar(255) default 'false',
+  `col1045` varchar(255) default 'false',
+  `company` varchar(255) default NULL,
+  `deleted` char(1) default 'F',
+  `moduleId` int(11) default '1',
+  `col111` varchar(255) default NULL,
+  `col112` varchar(255) default NULL,
+  `col113` varchar(255) default NULL,
+  `col114` varchar(255) default NULL,
+  `col115` varchar(255) default NULL,
+  `col11` varchar(255) default NULL,
+  `col12` varchar(255) default NULL,
+  `col13` varchar(255) default NULL,
+  `col14` varchar(255) default NULL,
+  `col15` varchar(255) default NULL,
+  PRIMARY KEY  (`serialdocumentmappingid`),
+  KEY `FKserialcustomdata` (`company`),
+  CONSTRAINT `FKserialcustomdata` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+
+ALTER TABLE `serialdocumentmapping`
+ADD COLUMN `accserialcustomdataref`  varchar(255) NULL DEFAULT NULL;
+
+# Vivek Pakmode 23rd Jan 2015 
+
+# Aged Receivable
+
+delete from activitylist where activityname="chartagedreceivable";
+delete from activitylist where activityname="exportdataagedreceivable";
+delete from activitylist where activityname="printagedreceivable";
+delete from activitylist where activityname="viewagedreceivable";
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('1b3e04c4a2f011e4adaceca86bff8e7d', 'agedreceivable', 'Aged Receivable',35);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('49be97bea2f011e4adaceca86bff8e7d', 'viewagedreceivable', 'View Aged Receivable Report', '1', null, '1b3e04c4a2f011e4adaceca86bff8e7d') ,
+('5f561f48a2f011e4adaceca86bff8e7d', 'chartagedreceivable', 'Charts', '2', '49be97bea2f011e4adaceca86bff8e7d', '1b3e04c4a2f011e4adaceca86bff8e7d') ,
+('69f6e8baa2f011e4adaceca86bff8e7d', 'exportdataagedreceivable', 'Export', '3', '49be97bea2f011e4adaceca86bff8e7d', '1b3e04c4a2f011e4adaceca86bff8e7d') ,
+('74986b7ca2f011e4adaceca86bff8e7d', 'printagedreceivable', 'Print', '4', '49be97bea2f011e4adaceca86bff8e7d', '1b3e04c4a2f011e4adaceca86bff8e7d') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('1b3e04c4a2f011e4adaceca86bff8e7d', '1', '15');
+
+# Aged Payable
+
+delete from activitylist where activityname="chartagedpayable";
+delete from activitylist where activityname="exportdataagedpayable";
+delete from activitylist where activityname="printagedpayable";
+delete from activitylist where activityname="viewagedpayable";
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('e71503d6a2f011e4adaceca86bff8e7d', 'agedpayable', 'Aged Payable',36);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('1b64fb0ea2f211e4adaceca86bff8e7d', 'viewagedpayable', 'View Aged Payable Report', '1', null, 'e71503d6a2f011e4adaceca86bff8e7d') ,
+('317e3388a2f211e4adaceca86bff8e7d', 'chartagedpayable', 'Charts', '2', '1b64fb0ea2f211e4adaceca86bff8e7d', 'e71503d6a2f011e4adaceca86bff8e7d') ,
+('3f5577a0a2f211e4adaceca86bff8e7d', 'exportdataagedpayable', 'Export', '3', '1b64fb0ea2f211e4adaceca86bff8e7d', 'e71503d6a2f011e4adaceca86bff8e7d') ,
+('4999124ea2f211e4adaceca86bff8e7d', 'printagedpayable', 'Print', '4', '1b64fb0ea2f211e4adaceca86bff8e7d', 'e71503d6a2f011e4adaceca86bff8e7d') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('e71503d6a2f011e4adaceca86bff8e7d', '1', '15');
+
+# Credit Note
+
+delete from activitylist where activityname="createcn";
+delete from activitylist where activityname="removecn";
+delete from activitylist where activityname="exportdatacn";
+delete from activitylist where activityname="printcn";
+delete from activitylist where activityname="viewcn";
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('ac4d34fea2f411e4adaceca86bff8e7d', 'creditnote', 'Credit Note',37);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('da606dc0a2f411e4adaceca86bff8e7d', 'importcreditnote', 'Import Credit Note', '1', null, 'ac4d34fea2f411e4adaceca86bff8e7d') ,
+('e57c1ecaa2f411e4adaceca86bff8e7d', 'createcn', 'Create Credit Note', '2', null, 'ac4d34fea2f411e4adaceca86bff8e7d') ,
+('f126f86ca2f411e4adaceca86bff8e7d', 'viewcn', 'View Credit Note', '3', null, 'ac4d34fea2f411e4adaceca86bff8e7d') ,
+('128960e4a2f511e4adaceca86bff8e7d', 'editcn', 'Edit', '4', 'f126f86ca2f411e4adaceca86bff8e7d', 'ac4d34fea2f411e4adaceca86bff8e7d') ,
+('2074e6e2a2f511e4adaceca86bff8e7d', 'removecn', 'Delete', '5', 'f126f86ca2f411e4adaceca86bff8e7d', 'ac4d34fea2f411e4adaceca86bff8e7d') ,
+('2b264d7ea2f511e4adaceca86bff8e7d', 'exportdatacn', 'Export', '6', 'f126f86ca2f411e4adaceca86bff8e7d', 'ac4d34fea2f411e4adaceca86bff8e7d') ,
+('34d00e6ea2f511e4adaceca86bff8e7d', 'printcn', 'Print', '7', 'f126f86ca2f411e4adaceca86bff8e7d', 'ac4d34fea2f411e4adaceca86bff8e7d') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('ac4d34fea2f411e4adaceca86bff8e7d', '1', '127');
+
+# Debit Note
+
+delete from activitylist where activityname="createdn";
+delete from activitylist where activityname="removedn";
+delete from activitylist where activityname="exportdatadn";
+delete from activitylist where activityname="printdn";
+delete from activitylist where activityname="viewdn";
+
+INSERT INTO `featurelist` (`featureid`, `featurename`, `displayfeaturename`,`orderno`) VALUES
+('485b1f96a2f511e4adaceca86bff8e7d', 'debitnote', 'Debit Note',38);
+
+INSERT INTO `activitylist` (activityid,activityname,displayactivityname,orderno,parent,feature ) VALUES 
+('6849e5a8a2f511e4adaceca86bff8e7d', 'importdebitnote', 'Import Debit Note', '1', null, '485b1f96a2f511e4adaceca86bff8e7d') ,
+('72f5ef60a2f511e4adaceca86bff8e7d', 'createdn', 'Create Debit Note', '2', null, '485b1f96a2f511e4adaceca86bff8e7d') ,
+('80cd4ad4a2f511e4adaceca86bff8e7d', 'viewdn', 'View Debit Note', '3', null, '485b1f96a2f511e4adaceca86bff8e7d') ,
+('72d50938a2f711e4adaceca86bff8e7d', 'editdn', 'Edit', '4', '80cd4ad4a2f511e4adaceca86bff8e7d', '485b1f96a2f511e4adaceca86bff8e7d') ,
+('8431d080a2f711e4adaceca86bff8e7d', 'removedn', 'Delete', '5', '80cd4ad4a2f511e4adaceca86bff8e7d', '485b1f96a2f511e4adaceca86bff8e7d') ,
+('8fe6e7a8a2f711e4adaceca86bff8e7d', 'exportdatadn', 'Export', '6', '80cd4ad4a2f511e4adaceca86bff8e7d', '485b1f96a2f511e4adaceca86bff8e7d') ,
+('9db0390ca2f711e4adaceca86bff8e7d', 'printdn', 'Print', '7', '80cd4ad4a2f511e4adaceca86bff8e7d', '485b1f96a2f511e4adaceca86bff8e7d') ;
+
+INSERT INTO `userpermission` (`feature`,`role`,`permissioncode`) VALUES
+('485b1f96a2f511e4adaceca86bff8e7d', '1', '127');
+
+#Anup Kale 20th Jan 2014
+ALTER TABLE `invoice`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `invoicedetails`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+
+ALTER TABLE `goodsreceipt`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `grdetails`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+
+ALTER TABLE `paymentdetail`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `receiptdetails`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+
+ALTER TABLE `debitnotepayment`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `creditnotpayment`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+
+ALTER TABLE `dntaxentry`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `cntaxentry`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+
+ALTER TABLE `journalentry`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `jedetail`
+ADD COLUMN `gstcurrencyrate` double NULL DEFAULT 0.0;
+ALTER TABLE `jedetail`
+ADD COLUMN `forexgainloss` double NULL DEFAULT 0.0;
+ALTER TABLE `jedetail`
+ADD COLUMN `paymenttype` int(1) NULL DEFAULT 0;
+
+# Vivek pakmode 27th Jan 2015
+update activitylist set orderno=200 where activityname='createje';
+delete from activitylist where activityname="createfamain";
+delete from activitylist where activityname="updatefamain";
+delete from activitylist where activityname="viewfamain";
+delete from activitylist where activityname="viewmainworkorder";
+
+#Raveesh Pathak 27th Jan 2014
+update currency set symbol='&#8361;' where currencyid='19';
+update currency set name='United Arab Emirates Dirham (AED)', symbol='AED' where currencyid='20';
+update currency set symbol='BND' where currencyid='21';
+
+#Raveesh Pathak 28th Jan 2014
+update currency set name='Swiss Franc (CHF)' where currencyid='18';
+
+#Rushikesh Mandage 28th Jan 2015
+# Increasing size of description
+
+# Make payment
+alter table paymentdetail modify column description varchar(1000) default NULL;
+alter table paymentdetailotherwise modify column description varchar(1000) default NULL;
+alter table advancedetail modify column description varchar(1000) default NULL;
+alter table creditnotpayment modify column description varchar(1000) default NULL;
+
+#Receive payment
+alter table receiptdetails modify column description varchar(1000) default NULL;
+alter table receiptdetailotherwise  modify column description varchar(1000) default NULL;
+alter table receiptadvancedetail  modify column description varchar(1000) default NULL;
+alter table debitnotepayment modify column description varchar(1000) default NULL;
+
+#Journal entry details
+alter table jedetail modify column description varchar(1000) default NULL;
+
+# Vivek Pakmode 28th Jan 2015
+delete from activitylist where activityname="createrfq";
+update activitylist set activityname="viewcoa" where activityid="ff80808122f3cb640122f457015b0026";
+
+#Mayur Pawar 29 Jan 2015
+ALTER TABLE extracompanypreferences ADD COLUMN consignmentSalesManagementFlag INT(1) DEFAULT 0;
+ALTER TABLE extracompanypreferences ADD COLUMN consignmentPurchaseManagementFlag INT(1) DEFAULT 0;
+alter table purchaseorder add column isconsignment char(1) DEFAULT 'F';
+
+# Vivek Pakmode 29th Jan 2015
+update activitylist set activityname="createcoa" where activityid="ff80808122f3cb640122f45dd370003b";
+
+#Anand Thakur 29 Jan 2015
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('28f354ac-d80a-4781-a8fe-bd918f7dc844','Shipping Address Postal Code','billingshippingaddresses','billingshippingaddresses','id','shippingpostal','Shipping Address Postal Code','1','18');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('c61e092b-8502-4917-9643-2b4458849f1d','Approved By','approver','users','userid','fname','Approved By','1','18');
+
+#Mayur Bhokase 29th Jan 2014
+update company set templateflag=19 where subdomain="diamondaviation";
+
+# Anand Nimbalkar 30th Jan 2015
+ALTER TABLE `pricingbandmasterdetails` ADD COLUMN `discounttype` varchar(255) DEFAULT NULL;
+ALTER TABLE `pricingbandmasterdetails` ADD COLUMN `usecommondiscount` char(1) DEFAULT 'F';
+ALTER TABLE `pricingbandmasterdetails` ADD COLUMN `discountvalue`  double DEFAULT 0;
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('b40e3b5c-a60a-11e4-bf85-eca86bfcd415','priceSource','Price Source',2,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('b4188a06-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',6,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('bf05f28c-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',4,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('c65289ba-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',8,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('d0bc1ccc-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',18,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('d8ddae3e-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',20,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('df6f3844-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',22,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('e5ed5ba6-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',23,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('ed03498c-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('f3bfb850-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('f9c2d5fc-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES ('ff1fdb80-a60c-11e4-bf85-eca86bfcd415','priceSource','Price Source',31,1,1,1,0);
+
+
+# Atul sachan 30 Jan 2015
+
+ALTER TABLE `dodetails`
+ADD COLUMN `tax`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `rowtaxamount`  double NULL DEFAULT 0;
+
+ALTER TABLE `deliveryorder`
+ADD COLUMN `isappliedfortax`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `invoice`
+ADD COLUMN `islinkedwithtaxapplieddo`  int(1) NULL DEFAULT 0;
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `inputtaxadjustmentaccount`  varchar(255) NULL DEFAULT NULL,
+ADD COLUMN `outputtaxadjustmentaccount`  varchar(255) NULL DEFAULT NULL;
+
+CREATE TABLE `taxadjustment` (
+`id`  varchar(255) NOT NULL ,
+`documentno`  varchar(255) NULL ,
+`creationdate`  datetime NULL ,
+`amount`  double NULL DEFAULT 0 ,
+`taxamount`  double NULL DEFAULT 0 ,
+`isinputadjustment`  int(1) NULL DEFAULT 0 ,
+`reason`  varchar(255) NULL ,
+`tax`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+`journalentry`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`reason`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`tax`) REFERENCES `tax` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`journalentry`) REFERENCES `journalentry` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+ALTER TABLE `journalentry`
+ADD COLUMN `istaxadjustmentje`  int(1) NULL DEFAULT 0;
+

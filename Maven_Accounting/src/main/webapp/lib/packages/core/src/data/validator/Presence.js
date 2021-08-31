@@ -1,0 +1,1 @@
+Ext.define("Ext.data.validator.Presence",{extend:"Ext.data.validator.Validator",alias:"data.validator.presence",type:"presence",config:{message:"Must be present",allowEmpty:false},validate:function(B){var A=!(B===undefined||B===null);if(A&&!this.getAllowEmpty()){A=!(B==="")}return A?true:this.getMessage()}})

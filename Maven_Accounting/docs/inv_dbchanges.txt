@@ -1,0 +1,1177 @@
+# 30-Oct-2014 - Vipin Gupta
+
+CREATE TABLE `in_storemaster` (
+`id`  varchar(50) NOT NULL ,
+`abbrev`  varchar(50) NOT NULL ,
+`description`  varchar(255) NULL ,
+`type`  int(2) NOT NULL ,
+`address`  varchar(512) NULL ,
+`contactno`  varchar(50) NULL ,
+`faxno`  varchar(50) NULL ,
+`isactive`  bit NULL DEFAULT b'1' ,
+`createdon`  datetime NOT NULL ,
+`modifiedon`  datetime NOT NULL ,
+`createdby`  varchar(50) NULL ,
+`modifiedby`  varchar(50) NULL ,
+`company`  varchar(50) NOT NULL ,
+`lastdayofweek`  int(2) NOT NULL DEFAULT 0 ,
+`ccdateallow`  bit NULL DEFAULT b'0' ,
+`smccallow`  bit NULL DEFAULT b'0',
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 31-Oct-2014 - Vipin Gupta
+
+CREATE TABLE `in_goodsrequest` (
+`id`  varchar(50) NOT NULL ,
+`transactionno`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`fromstore`  varchar(50) NULL ,
+`tostore`  varchar(50) NULL ,
+`uom`  varchar(50) NULL ,
+`status`  int NOT NULL ,
+`remark`  varchar(255) NULL ,
+`returnreason`  varchar(255) NULL ,
+`projectno`  varchar(50) NULL ,
+`costcenter`  varchar(50) NULL ,
+`orderedqty`  double NULL DEFAULT 0 ,
+`issuedqty`  double NULL DEFAULT 0 ,
+`deliveredqty`  double NULL DEFAULT 0 ,
+`company`  varchar(50) NOT NULL ,
+`bussinessdate`  datetime NOT NULL ,
+`requestedon`  datetime NOT NULL ,
+`modifiedon`  datetime NOT NULL ,
+`issuedon`  datetime NULL ,
+`collectedon`  datetime NULL ,
+`requestedby`  varchar(50) NOT NULL ,
+`issuedby`  varchar(50) NULL ,
+`collectedby`  varchar(50) NULL ,
+`approvedby`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 4-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_interstoretransfer` (
+`id`  varchar(50) NOT NULL ,
+`transactionno`  varchar(255) NULL ,
+`fromstore`  varchar(50) NOT NULL ,
+`tostore`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`uom`  varchar(50) NULL ,
+`orderedqty`  double NULL DEFAULT 0 ,
+`status`  int(2) NULL ,
+`remark`  varchar(512) NULL ,
+`company`  varchar(50) NOT NULL ,
+`createdon`  datetime NOT NULL ,
+`modifiedon`  datetime NULL ,
+`businessdate` datetime NOT NULL ,
+`createdby`  varchar(50) NOT NULL ,
+`modifiedby`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+
+# 5-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_stockadjustmentdraft` (
+`id`  varchar(50) NOT NULL ,
+`name`  varchar(100) NULL ,
+`description`  varchar(255) NULL ,
+`bussinessdate`  datetime NOT NULL ,
+`store`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_stockadjustment` (
+`id`  varchar(50) NOT NULL ,
+`seqno`  varchar(50) NULL ,
+`store`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`amount`  double NULL DEFAULT 0 ,
+`bussinessdate`  datetime NOT NULL ,
+`createdon`  datetime NOT NULL ,
+`modifiedon`  datetime NULL ,
+`createdby`  varchar(50) NOT NULL ,
+`modifiedby`  varchar(50) NULL ,
+`remark`  varchar(255) NULL ,
+`reason`  varchar(255) NULL ,
+`costcenter`  varchar(50) NULL ,
+`uom`  varchar(50) NULL ,
+`draft`  varchar(50) NULL ,
+`company`  varchar(50) NOT NULL ,
+`status`  int(2) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 6-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_stock` (
+`id`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`store`  varchar(50) NOT NULL ,
+`batchno`  bigint NOT NULL DEFAULT 0 ,
+`quantity`  double NULL DEFAULT 0 ,
+`priceperunit`  double NULL DEFAULT 0 ,
+`createdon`  datetime NOT NULL ,
+`modifiedon`  datetime NULL ,
+`company`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_sr_stockbuffer` (
+`id`  varchar(50) NOT NULL ,
+`stockrequest`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`priceperunit`  double NULL DEFAULT 0 ,
+`batchno`  bigint NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_inventoryconfig` (
+`id`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`createdby`  varchar(50) NULL ,
+`modifiedby`  varchar(50) NULL ,
+`createdon`  datetime NULL ,
+`modifiedon`  datetime NULL ,
+`negative_inventory_check`  int(2) NULL DEFAULT 0 ,
+`stock_update_batchtype`  int(2) NULL DEFAULT 0 ,
+`enable_stockadj_approvalflow`  bit NULL DEFAULT b'0' ,
+`enable_stockreq_approvalflow`  bit NULL DEFAULT b'0' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 11-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_seqmodule` (
+`id`  int(2) NOT NULL ,
+`name`  varchar(100) NOT NULL ,
+`isactive`  bit NULL DEFAULT b'1' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+INSERT INTO in_seqmodule(id, `name`) VALUES 
+(0, "Stock Request"),
+(1, "Issue Note"),
+(2, "Inter Store Transfer"),
+(3, "Stock Adjustment");
+
+
+CREATE TABLE `in_seqformat` (
+`id`  varchar(50) NOT NULL ,
+`seqmodule`  int(2) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`prefix`  varchar(10) NULL ,
+`suffix`  varchar(10) NULL ,
+`no_of_digits`  int(10) NOT NULL ,
+`startfrom`  bigint(20) NOT NULL DEFAULT 0 ,
+`isactive`  bit NULL DEFAULT b'1' ,
+`isdefault`  bit NULL DEFAULT b'0', 
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_seqnumber` (
+`id`  varchar(50) NOT NULL ,
+`seqformat`  varchar(50) NOT NULL ,
+`serial_number`  bigint NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_ist_stockbuffer` (
+`id`  varchar(50) NOT NULL ,
+`istrequest`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`priceperunit`  double NULL DEFAULT 0 ,
+`batchno`  bigint NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 17-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_location` (
+`id`  varchar(50) NOT NULL ,
+`name`  varchar(100) NOT NULL ,
+`isactive`  bit NULL DEFAULT b'1',
+`isdefault`  bit NULL DEFAULT b'0',
+`company`  varchar(50) NOT NULL ,
+`createdby`  varchar(50) NOT NULL ,
+`modifiedby`  varchar(50) NULL ,
+`createdon`  datetime NOT NULL ,
+`modifiedon`  datetime NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_store_location` (
+`storeid`  varchar(50) NOT NULL ,
+`locationid`  varchar(50) NOT NULL ,
+PRIMARY KEY (`storeid`, `locationid`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_store_user` (
+`storeid`  varchar(50) NOT NULL ,
+`userid`  varchar(50) NOT NULL ,
+PRIMARY KEY (`storeid`, `userid`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+ALTER TABLE `in_storemaster`
+ADD COLUMN `isdefault`  bit NULL DEFAULT b'0' AFTER `faxno`;
+
+
+
+# 18-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_packaging` (
+`id`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`casinguom`  varchar(50) NULL ,
+`casinguom_value`  double NULL DEFAULT 1 ,
+`inneruom`  varchar(50) NULL ,
+`inneruom_value`  double NULL DEFAULT 1 ,
+`stockuom`  varchar(50) NULL ,
+`stockuom_value`  double NULL DEFAULT 1 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+ALTER TABLE `in_goodsrequest`
+ADD COLUMN `fromlocation`  varchar(50) NULL AFTER `tostore`,
+ADD COLUMN `tolocation`  varchar(50) NULL AFTER `fromlocation`,
+ADD COLUMN `packaging`  varchar(50) NULL AFTER `tolocation`;
+
+ALTER TABLE `in_interstoretransfer`
+ADD COLUMN `fromlocation`  varchar(50) NULL AFTER `tostore`,
+ADD COLUMN `tolocation`  varchar(50) NULL AFTER `fromlocation`,
+ADD COLUMN `packaging`  varchar(50) NULL AFTER `product`;
+
+ALTER TABLE `in_stockadjustment`
+ADD COLUMN `location`  varchar(50) NULL AFTER `store`,
+ADD COLUMN `packaging`  varchar(50) NULL AFTER `costcenter`;
+
+ALTER TABLE `in_stock`
+ADD COLUMN `location`  varchar(50) NULL AFTER `store`;
+
+
+
+# 18-Nov-2014 - Vipin Gupta
+
+ALTER TABLE `in_stockadjustment`
+ADD COLUMN `inventoryref`  varchar(50) NULL AFTER `draft`;
+
+
+
+# 20-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_frequency` (
+`id`  int(2) NOT NULL ,
+`name`  varchar(50) NOT NULL ,
+`description`  varchar(255) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+INSERT INTO in_frequency VALUES 
+(0, 'Daily', 'Count per day'),
+(1, 'Weekly', 'Count per week, atleast 7 days'),
+(2, 'Forthnight', 'Count in 15 days'),
+(3, 'Monthly', 'Count in a month');
+
+
+CREATE TABLE `in_product_frequency` (
+`productid`  varchar(50) NOT NULL ,
+`frequencyid`  int(2) NOT NULL ,
+PRIMARY KEY (`productid`, `frequencyid`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_stockmovement` (
+`id`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`store`  varchar(50) NULL ,
+`location`  varchar(50) NULL ,
+`stockuom`  varchar(50) NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`priceperunit`  double NULL DEFAULT 0 ,
+`transactionno`  varchar(50) NULL ,
+`transaction_date`  datetime NOT NULL ,
+`transaction_type`  int(2) NOT NULL ,
+`transaction_module`  int(2) NULL ,
+`modulerefid`  varchar(50) NULL ,
+`remark`  varchar(255) NULL ,
+`costcenter`  varchar(50) NULL ,
+`vendor`  varchar(50) NULL ,
+`customer`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+
+# 21-Nov-2014 - Shah Raj
+
+
+ALTER TABLE `product`
+ADD COLUMN `additionaldesc`  varchar(400) NULL,
+ADD COLUMN `barcode`  varchar(50) NULL AFTER `additionaldesc`,
+ADD COLUMN `descinforeign`  varchar(400) NULL AFTER `barcode`,
+ADD COLUMN `itemgroup`  varchar(50) NULL AFTER `descinforeign`,
+ADD COLUMN `pricelist`  varchar(50) NULL AFTER `itemgroup`,
+ADD COLUMN `shippingtype`  varchar(50) NULL AFTER `pricelist`,
+ADD COLUMN `isactive`  char(1)  NULL DEFAULT 'F'  AFTER `shippingtype`,
+ADD COLUMN `isknittingitem`  char(1)  NULL DEFAULT 'F' AFTER `isactive`,
+ADD COLUMN `itempurchaseheight`  double NULL DEFAULT 0  AFTER `isknittingitem`,
+ADD COLUMN `itempurchaselength`  double NULL DEFAULT 0  AFTER `itempurchaseheight`,
+ADD COLUMN `itempurchasewidth`  double NULL DEFAULT 0  AFTER `itempurchaselength`,
+ADD COLUMN `itempurchasevolume`  double NULL DEFAULT 0  AFTER `itempurchasewidth`,
+ADD COLUMN `purchasemfg`  varchar(50) NULL AFTER `itempurchasevolume`,
+ADD COLUMN `catalogno`  varchar(50) NULL AFTER `purchasemfg`,
+ADD COLUMN `itemsalesheight`  double NULL DEFAULT 0  AFTER `catalogno`,
+ADD COLUMN `itemsaleslength`  double NULL DEFAULT 0  AFTER `itemsalesheight`,
+ADD COLUMN `itemsaleswidth`  double NULL DEFAULT 0  AFTER `itemsaleslength`,
+ADD COLUMN `itemsalesvolume`  double NULL DEFAULT 0  AFTER `itemsaleswidth`,
+ADD COLUMN `salesGL`  varchar(50) NULL AFTER `itemsalesvolume`,
+ADD COLUMN `alternateproduct`  varchar(50) NULL AFTER `salesGL`,
+ADD COLUMN `itemheight`  double NULL DEFAULT 0  AFTER `alternateproduct`,
+ADD COLUMN `itemlength`  double NULL DEFAULT 0  AFTER `itemheight`,
+ADD COLUMN `itemwidth`  double NULL DEFAULT 0  AFTER `itemlength`,
+ADD COLUMN `itemvolume`  double NULL DEFAULT 0  AFTER `itemwidth`,
+ADD COLUMN `itemcolor`  varchar(50) NULL AFTER `itemvolume`,
+ADD COLUMN `additionalfreetext`  varchar(50) NULL AFTER `itemcolor`,
+ADD COLUMN `valuationmethod`  int(2) NULL  DEFAULT 0 AFTER `additionalfreetext`,
+ADD COLUMN `itemcost`  double NULL DEFAULT 0  AFTER `valuationmethod`,
+ADD COLUMN `wipoffset`  varchar(50) NULL AFTER `itemcost`,
+ADD COLUMN `inventoryoffset`  varchar(50) NULL AFTER `wipoffset`,
+ADD COLUMN `orderinguom`  varchar(50) NULL AFTER `inventoryoffset`,
+ADD COLUMN `transferuom`  varchar(50) NULL AFTER `orderinguom`,
+ADD COLUMN `packaging`  varchar(50) NULL AFTER `transferuom`;
+
+
+ALTER TABLE `product`
+ADD COLUMN `purchaseuom`  varchar(50) NULL AFTER `orderinguom`,
+ADD COLUMN `salesuom`  varchar(50) NULL AFTER `purchaseuom`;
+
+# 24-Nov-2014 - Vipin Gupta
+
+ALTER TABLE `in_interstoretransfer`
+ADD COLUMN `costcenter`  varchar(50) NULL AFTER `businessdate`;
+
+
+# 25-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_cyclecount_calendar` (
+`id`  varchar(50) NOT NULL ,
+`date`  date NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_cccalendar_frequency` (
+`cc_calendarid`  varchar(50) NOT NULL ,
+`freaquencyid`  int(2) NOT NULL ,
+PRIMARY KEY (`cc_calendarid`, `freaquencyid`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_cyclecountdraft` (
+`id`  varchar(50) NOT NULL ,
+`businessdate`  datetime NOT NULL ,
+`store`  varchar(50) NOT NULL ,
+`location`  varchar(50) NULL ,
+`company`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_cyclecount` (
+`id`  varchar(50) NOT NULL ,
+`transactionno` varchar(20) NOT NULL,
+`product`  varchar(255) NOT NULL ,
+`store`  varchar(50) NOT NULL ,
+`location`  varchar(50) NULL ,
+`businessdate`  datetime NOT NULL ,
+`stystemqty`  double NULL DEFAULT 0 ,
+`packaging`  varchar(50) NULL ,
+`casinguom_count`  double NULL DEFAULT 0 ,
+`inneruom_count`  double NULL DEFAULT 0 ,
+`stockuom_count`  double NULL DEFAULT 0 ,
+`createdon`  datetime NOT NULL ,
+`createdby`  varchar(50) NOT NULL ,
+`modifiedon`  datetime NOT NULL ,
+`modifiedby`  varchar(50) NOT NULL ,
+`ccdraft`  varchar(50) NULL ,
+`status`  int(2) NULL ,
+`inventoryref`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+INSERT INTO in_seqmodule (id, `name`) VALUES (4, 'Cycle Count');
+
+
+
+# 26-Nov-2014 - Vipin Gupta
+
+CREATE TABLE `in_attachedserial` (
+`id`  varchar(50) NOT NULL ,
+`serial`  varchar(50) NOT NULL ,
+`attachedbatch`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_attachedbatch` (
+`id`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`batch`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_sr_attachedbatch` (
+`id`  varchar(50) NOT NULL ,
+`stockrequest`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_ist_attachedbatch` (
+`id`  varchar(50) NOT NULL ,
+`istrequest`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_sa_attachedbatch` (
+`id`  varchar(50) NOT NULL ,
+`stockadjustment`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_sm_attachedbatch` (
+`id`  varchar(50) NOT NULL ,
+`stockmovement`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_cc_attachedbatch` (
+`id`  varchar(50) NOT NULL ,
+`cyclecount`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 29-Nov-2014 - Raj Shah
+
+ALTER TABLE `product`
+DROP COLUMN `itemcost`,
+MODIFY COLUMN `wipoffset`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `valuationmethod`;
+
+
+# 10-Dec-2014 - Ajit Gogawale
+
+ALTER TABLE `in_cccalendar_frequency`
+CHANGE COLUMN `freaquencyid` `frequencyid`  int(2) NOT NULL AFTER `cc_calendarid`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`cc_calendarid`, `frequencyid`);
+
+
+
+ALTER TABLE `in_cyclecount`
+ADD COLUMN `remark`  varchar(255) NULL AFTER `inventoryref`;
+
+
+ALTER TABLE `in_cyclecount`
+CHANGE COLUMN `stystemqty` `systemqty`  double NULL DEFAULT 0 AFTER `businessdate`;
+
+ALTER TABLE `in_cyclecount`
+ADD COLUMN `company`  varchar(50) NOT NULL AFTER `remark`;
+
+#Pandurang 31 Dec 2014 Product Import Functionality
+#Removed the Cycle Counts Fields from Import/Export and added Sales Asset GL Account
+DELETE FROM default_header WHERE id IN ("582fcfaa-3d99-11e4-bc4a-c03fd5633215","583199f2-3d99-11e4-bc4a-c03fd5633215");
+
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,
+hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,
+defaultvalue,dataindex,renderertype) VALUES (UUID(),"30","Sales GL","sellAssetGLAccount",0,0,
+'F','F',"Account","name","ID","ref",null,"sellassetglaccount",null); 
+
+#Pandurang 22 Jan 2014
+
+CREATE TABLE `uomschematype` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `stockuom` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `stockuom` (`stockuom`),
+  KEY `company` (`company`),
+  CONSTRAINT `uomschematype_ibfk_1` FOREIGN KEY (`stockuom`) REFERENCES `uom` (`id`),
+  CONSTRAINT `uomschematype_ibfk_2` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `uomschema` (
+  `id` varchar(255) NOT NULL,
+  `baseuomrate` double DEFAULT '1',
+  `purchaseuom` varchar(255) DEFAULT NULL,
+  `salesuom` varchar(255) DEFAULT NULL,
+  `uomschematype` varchar(255) NOT NULL,
+  `uomnature` int(2) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `purchaseuom` (`purchaseuom`),
+  KEY `salesuom` (`salesuom`),
+  KEY `uomschematype` (`uomschematype`),
+  KEY `company` (`company`),
+  CONSTRAINT `uomschema_ibfk_1` FOREIGN KEY (`purchaseuom`) REFERENCES `uom` (`id`),
+  CONSTRAINT `uomschema_ibfk_2` FOREIGN KEY (`salesuom`) REFERENCES `uom` (`id`),
+  CONSTRAINT `uomschema_ibfk_3` FOREIGN KEY (`uomschematype`) REFERENCES `uomschematype` (`id`),
+  CONSTRAINT `uomschema_ibfk_4` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+Alter table uomschema
+ADD column baseuom varchar(255) DEFAULT NULL,
+ADD FOREIGN KEY (`baseuom`) REFERENCES `uom` (`id`);
+
+Alter table product
+ADD column uomschematype varchar(255) DEFAULT NULL,
+ADD FOREIGN KEY (`uomschematype`) REFERENCES `uomschematype` (`id`);
+
+Alter table uomschema
+ADD column rateperuom double DEFAULT '0';
+
+#For Removing Foregin key constraint from Product Table.
+ALTER table productcyclecount DROP FOREIGN KEY FK1D3706188E4485CF;
+
+
+
+
+# 4-Feb-2015 - Vipin Gupta
+# Description - Restructure modules
+
+CREATE TABLE `in_sr_detail` (
+`id`  varchar(50) NOT NULL ,
+`stockrequest` varchar(50) NOT NULL,
+`issued_location`  varchar(50) NULL ,
+`batchname`  varchar(255) NULL ,
+`issued_serialnames`  text NULL ,
+`issuedqty`  double NULL DEFAULT 0 ,
+`delivered_location`  varchar(50) NULL ,
+`delivered_serialnames`  text NULL ,
+`deliveredqty`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_ist_detail` (
+`id`  varchar(50) NOT NULL ,
+`istrequest`  varchar(50) NOT NULL ,
+`batchname`  varchar(255) NULL ,
+`issued_location`  varchar(50) NULL ,
+`issued_serialnames`  text NULL ,
+`issuedqty`  double NULL DEFAULT 0 ,
+`delivered_location`  varchar(50) NULL ,
+`delivered_serialnames`  text NULL ,
+`deliveredqty`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_sa_detail` (
+`id`  varchar(50) NOT NULL ,
+`stockadjustment`  varchar(50) NOT NULL ,
+`location`  varchar(50) NULL ,
+`batchname`  varchar(255) NULL ,
+`serialnames`  text NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_sm_detail` (
+`id`  varchar(50) NOT NULL ,
+`stockmovement`  varchar(50) NOT NULL ,
+`location`  varchar(50) NULL ,
+`batchname`  varchar(255) NULL ,
+`serialnames`  text NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# 4-Feb-2015  Raj Shah
+# Description - added location field
+
+ALTER TABLE `in_sr_stockbuffer`
+ADD COLUMN `location`  varchar(50) NOT NULL AFTER `batchno`;
+
+ALTER TABLE `in_sr_stockbuffer`
+MODIFY COLUMN `stockrequest`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`,
+ADD COLUMN `srdetail`  varchar(50) NULL AFTER `location`;
+
+
+ALTER TABLE `in_stockmovement`
+ADD COLUMN `createdon`  datetime NULL AFTER `priceperunit`;
+
+ALTER TABLE `in_ist_stockbuffer`
+ADD COLUMN `location`  varchar(50) NOT NULL AFTER `batchno`,
+ADD COLUMN `istrequestdetail`  varchar(50) NULL AFTER `location`;
+
+ALTER TABLE `in_ist_stockbuffer`
+MODIFY COLUMN `istrequest`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `id`;
+
+
+# 4-Feb-2015  Vipin Gupta
+# Description - added location field
+
+ALTER TABLE `in_stock`
+ADD COLUMN `batchname`  varchar(255) NULL DEFAULT '' AFTER `location`;
+
+ALTER TABLE `in_stock`
+ADD COLUMN `serialnames`  text NULL AFTER `batchname`;
+
+
+CREATE TABLE `in_cc_detail` (
+`id`  varchar(50) NOT NULL ,
+`cyclecount`  varchar(50) NULL ,
+`location`  varchar(50) NULL ,
+`batchname`  varchar(255) NULL ,
+`countedserials`  text NULL ,
+`systemserials`  text NULL,
+`casinguom_count`  double NULL DEFAULT 0,
+`inneruom_count`  double NULL DEFAULT 0,
+`stockuom_count`  double NULL DEFAULT 0,
+`systemqty` double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+ALTER TABLE `in_interstoretransfer`
+ADD COLUMN `acceptedqty`  double NULL DEFAULT 0 AFTER `orderedqty`;
+
+UPDATE in_interstoretransfer SET acceptedqty =  orderedqty WHERE `status` = 1;
+
+
+
+#Ajit 4-Feb-2015
+
+ALTER TABLE `in_packaging`
+MODIFY COLUMN `id`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL FIRST ;
+
+ALTER TABLE `product`
+MODIFY COLUMN `packaging`  varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `transferuom`;
+
+
+# Raj 4-Feb-2015
+# Description - divide detail data in all modules. 
+
+INSERT INTO in_sr_detail (id,stockrequest,issued_location,batchname,issued_serialnames,issuedqty) SELECT UUID(),sr.id,sr.tolocation,'','',sr.issuedqty  from  in_goodsrequest sr LEFT JOIN in_sr_detail  srd ON  sr.id = srd.stockrequest WHERE sr.id NOT  IN (select  DISTINCT ss.stockrequest from in_sr_detail  ss)  AND sr.status = 2; 
+
+INSERT INTO in_sr_detail (id,stockrequest,issued_location,batchname,issued_serialnames,issuedqty,delivered_location,delivered_serialnames,deliveredqty) SELECT UUID(),sr.id,sr.tolocation,'','',sr.issuedqty,sr.fromlocation,'',sr.deliveredqty  from  in_goodsrequest sr LEFT JOIN in_sr_detail  srd ON  sr.id = srd.stockrequest WHERE sr.id NOT  IN (select  DISTINCT ss.stockrequest from in_sr_detail  ss)  AND sr.status  = 4  AND sr.requestedon <> sr.modifiedon;
+
+INSERT INTO in_sr_detail (id,stockrequest,issued_location,batchname,issued_serialnames,issuedqty,delivered_location,delivered_serialnames,deliveredqty) SELECT UUID(),sr.id,sr.fromlocation,'','',sr.issuedqty,sr.tolocation,'',sr.deliveredqty  from  in_goodsrequest sr LEFT JOIN in_sr_detail  srd ON  sr.id = srd.stockrequest WHERE sr.id NOT  IN (select  DISTINCT ss.stockrequest from in_sr_detail  ss)  AND sr.status  = 4 AND  sr.requestedon = sr.modifiedon;
+
+INSERT INTO in_sm_detail (id,stockmovement,location,batchname,serialnames,quantity) SELECT UUID(),sm.id,sm.location,'','',sm.quantity  from  in_stockmovement sm LEFT JOIN in_sm_detail  smd ON  sm.id = smd.stockmovement WHERE sm.id NOT  IN (select  DISTINCT ss.stockmovement from in_sm_detail  ss) ;
+
+INSERT INTO in_sa_detail (id,stockadjustment,location,batchname,serialnames,quantity) SELECT UUID(),sa.id,sa.location,'','',sa.quantity  from  in_stockadjustment sa LEFT JOIN in_sa_detail  sad ON  sa.id = sad.stockadjustment WHERE sa.id NOT  IN (select  DISTINCT ss.stockadjustment from in_sa_detail  ss) ;
+
+INSERT INTO in_ist_detail (id,istrequest,batchname,issued_location,issued_serialnames,issuedqty) SELECT UUID(),ist.id,'',ist.fromlocation,'',ist.orderedqty  from  in_interstoretransfer ist LEFT JOIN in_ist_detail  istd ON ist.id = istd.istrequest WHERE ist.id NOT  IN (select  DISTINCT ss.istrequest from in_ist_detail  ss)  AND ist.status  IN(0,2,3);
+
+INSERT INTO in_ist_detail (id,istrequest,batchname,issued_location,issued_serialnames,issuedqty,delivered_location,delivered_serialnames,deliveredqty) SELECT UUID(),ist.id,'',ist.fromlocation,'',ist.orderedqty,ist.tolocation,'',ist.acceptedqty  from  in_interstoretransfer ist LEFT JOIN in_ist_detail  istd ON  ist.id = istd.istrequest WHERE ist.id NOT  IN (select  DISTINCT ss.istrequest from in_ist_detail  ss)  AND ist.status =1;
+
+
+# Vipin 4-Feb-2015 - 
+# Description - Data migration scripts for old existing data for store location and stock
+# Scripts - Run Following Script for old existing data.
+# 1 - DataMigrationForInventoryStoreLocation.jsp
+# 2 - DataMigrationForInventoryStock.jsp
+
+
+# Vipin 20-Feb-2015 - Adding Foreign Key
+
+
+DELETE FROM in_stock WHERE product NOT IN (SELECT id FROM product);
+
+ALTER TABLE `in_seqnumber` Add FOREIGN KEY (`seqformat`) REFERENCES `in_seqformat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_sr_detail` Add FOREIGN KEY (`stockrequest`) REFERENCES `in_goodsrequest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_sa_detail` Add FOREIGN KEY (`stockadjustment`) REFERENCES `in_stockadjustment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_ist_detail` Add FOREIGN KEY (`istrequest`) REFERENCES `in_interstoretransfer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_sm_detail` Add FOREIGN KEY (`stockmovement`) REFERENCES `in_stockmovement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_cc_detail` Add FOREIGN KEY (`cyclecount`) REFERENCES `in_cyclecount` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_sr_stockbuffer` Add FOREIGN KEY (`stockrequest`) REFERENCES `in_goodsrequest` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_ist_stockbuffer` Add FOREIGN KEY (`istrequest`) REFERENCES `in_interstoretransfer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_cyclecount` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_stock` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_goodsrequest` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_interstoretransfer` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_stockadjustment` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `in_stockmovement` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+# Raj 25-Feb-2015
+# Description - added fields in product master  
+
+ALTER TABLE `product`
+ADD COLUMN `itemreusability`  int(2) NULL  DEFAULT 0 AFTER `isknittingitem`,
+ADD COLUMN `reusabilitycount`  int NULL DEFAULT 0 AFTER `itemreusability`;
+
+# description -Deleted column SalesGL
+
+ALTER TABLE `product`
+DROP COLUMN `salesGL`,
+MODIFY COLUMN `alternateproduct`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL AFTER `itemsalesvolume`;
+
+# Vipin Gupta 26-Feb-2015
+# Description - added Inter location stock transfer module
+ 
+INSERT INTO in_seqmodule(id, `name`) VALUES (5, "Inter Location Transfer");
+
+
+# Raj 26-Feb-2015
+# Description - added field in product master  
+
+ALTER TABLE `product`
+ADD COLUMN `qaleadtimeindays`  int(11) NULL DEFAULT 0 AFTER `leadtimeindays`;
+
+
+# Vipin Gupta 26-Feb-2015
+# Description - added Product threshold module.
+
+CREATE TABLE `in_product_threshold` (
+`id`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`store`  varchar(50) NOT NULL ,
+`threshold_limit`  double NULL DEFAULT 0 ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+ALTER TABLE `in_product_threshold` Add FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+# Ajit Gogawale 03-Mar-2015
+# Description - added  approvedby column in IST.
+
+ALTER TABLE `in_interstoretransfer`
+ADD COLUMN `approvedby`  varchar(50) NULL AFTER `modifiedby`;
+
+# Ajit Gogawale 03-Mar-2015
+# Description - added  store executive field in store.
+
+CREATE TABLE `in_store_executive` (
+`storeid`  varchar(50) NOT NULL ,
+`userid`  varchar(50) NOT NULL ,
+PRIMARY KEY (`storeid`, `userid`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+#Raj 4-March-2015  Query to Update Cycle Count Frequency for Existing Products
+CREATE VIEW temp_tbl as (select id,0 from product where id NOT IN(SELect  productid from in_product_frequency));
+insert into in_product_frequency SELECT * from temp_tbl;
+DROP VIEW temp_tbl;
+
+
+# Raj 9-Mar-2015
+# Description - added field in product master  
+
+ALTER TABLE `product`
+ADD COLUMN `licensetype`  int(2) NULL DEFAULT 0 AFTER `reusabilitycount`,
+ADD COLUMN `licensecode`  varchar(50) NULL  AFTER `licensetype`;
+
+UPDATE product SET licensetype = 0 WHERE licensetype IS NULL; 
+
+
+# Vipin Gupta 09-Mar-2015
+# Description - added  approval flow
+
+ALTER TABLE `in_stockadjustment` ADD COLUMN `finalquantity`  double NULL DEFAULT 0 AFTER `quantity`;
+
+UPDATE in_stockadjustment SET finalquantity = quantity WHERE `status` IN (2,3);
+
+ALTER TABLE `in_sa_detail`
+ADD COLUMN `finalserialnames`  text NULL AFTER `quantity`,
+ADD COLUMN `finalquantity`  double NULL DEFAULT 0 AFTER `finalserialnames`;
+
+UPDATE in_sa_detail sad, in_stockadjustment sa SET sad.finalquantity = sad.quantity , sad.finalserialnames = sad.serialnames WHERE sa.id = sad.stockadjustment AND sa.`status` IN (2,3);
+
+
+CREATE TABLE `in_sa_approval` (
+`id`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`approval_type`  int(2) NULL DEFAULT 0 ,
+`approval_status`  int(2) NULL DEFAULT 0 ,
+`stock_adjustment`  varchar(50) NULL ,
+`inspector`  varchar(50) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`stock_adjustment`) REFERENCES `in_stockadjustment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_sa_detail_approval` (
+`id`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`serialname`  varchar(100) NULL ,
+`approval_status`  int(2) NULL DEFAULT 0 ,
+`sa_approval`  varchar(50) NULL ,
+`stock_adjustment_detail`  varchar(50) NULL ,
+`inspection_detail`  varchar(50) NULL ,
+`inspector`  varchar(50) NULL,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`stock_adjustment_detail`) REFERENCES `in_sa_detail` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_inspection_detail` (
+`id`  varchar(50) NOT NULL ,
+`reference_no`  varchar(100) NULL ,
+`customer_po_no`  varchar(100) NULL ,
+`hospital`  varchar(100) NULL ,
+`department`  varchar(100) NULL ,
+`company`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_inspection_criteria_detail` (
+`id`  varchar(50) NOT NULL ,
+`inspection_area`  varchar(100) NULL ,
+`faults`  text NULL ,
+`acceptable`  bit NULL ,
+`inspection_detail`  varchar(50) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`inspection_detail`) REFERENCES `in_inspection_detail` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+# Raj 9-Mar-2015
+# Description - added field in product master  
+
+ALTER TABLE `product`
+ADD COLUMN `totalissuecount`  double NULL DEFAULT 0 AFTER `blockloosesell`;
+
+
+# Vipin Gupta 09-Mar-2015
+# Description - added  approval flow
+
+ALTER TABLE `in_inventoryconfig`
+ADD COLUMN `enable_stockout_approvalflow`  bit(1) NULL DEFAULT b'0' AFTER `enable_stockreq_approvalflow`,
+ADD COLUMN `enable_ist_return_approvalflow`  bit(1) NULL DEFAULT b'0' AFTER `enable_stockout_approvalflow`;
+
+
+# Vipin Gupta 10-Mar-2015
+# Description - added  stock transfer approval flow
+
+CREATE TABLE `in_stocktransfer_approval` (
+`id`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0,
+`stocktransferid`  varchar(100) NULL ,
+`approval_type`  int(2) NULL ,
+`approval_status`  int(2) NULL ,
+`transaction_module`  int(2) NULL ,
+`inspector`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+
+CREATE TABLE `in_stocktransfer_detail_approval` (
+`id`  varchar(50) NOT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`stocktransfer_detail_id`  varchar(50) NULL ,
+`serialname`  text NULL ,
+`approval_status`  int(2) NULL ,
+`stocktransfer_approval`  varchar(50) NULL ,
+`inspector`  varchar(50) NULL ,
+`inspection_detail`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+ALTER TABLE `in_stocktransfer_detail_approval` ADD FOREIGN KEY (`stocktransfer_approval`) REFERENCES `in_stocktransfer_approval` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+# Vipin Gupta 10-Mar-2015
+# Description - added product booking feature
+
+CREATE TABLE `in_stockbooking` (
+`id`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`company`  varchar(50) NOT NULL ,
+`bookingfor`  varchar(100) NULL ,
+`referenceno`  varchar(100) NULL ,
+`requested_qty`  double NULL DEFAULT 0 ,
+`booking_qty`  double NULL DEFAULT 0 ,
+`fromdate`  datetime NOT NULL ,
+`todate`  datetime NOT NULL ,
+`booking_status`  int(2) NULL ,
+`requestedby`  varchar(50) NULL ,
+`updatedby`  varchar(50) NULL ,
+`requestedon`  datetime NULL ,
+`updatedon`  datetime NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_stockbooking_detail` (
+`id`  varchar(50) NOT NULL ,
+`quantity`  double NULL ,
+`batchname`  varchar(100) NULL ,
+`serialnames`  text NULL ,
+`store`  varchar(50) NULL ,
+`location`  varchar(50) NULL ,
+`stockbooking`  varchar(50) NOT NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`stockbooking`) REFERENCES `in_stockbooking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+# Vipin Gupta 10-Mar-2015
+# Description - stock request return approvalflow
+
+ALTER TABLE `in_inventoryconfig`
+ADD COLUMN `enable_sr_return_approvalflow`  bit(1) NULL DEFAULT 0 AFTER `enable_ist_return_approvalflow`;
+
+
+# Vipin Gupta 11-Mar-2015
+# Description - stock sales dropdown
+
+ALTER TABLE `in_stockadjustment`
+ADD COLUMN `adjustment_type`  varchar(100) NULL AFTER `status`;
+
+
+# Basaprabhu Ajur 11-Mar-2015
+# Description - added  modelname column in in_inspection_detail
+
+ALTER TABLE `in_inspection_detail` ADD COLUMN `modelname`  varchar(50) NULL AFTER `company`;
+ALTER TABLE `in_stocktransfer_detail_approval` ADD FOREIGN KEY (`stocktransfer_approval`) REFERENCES `in_stocktransfer_approval` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+# Basaprabhu Ajur 13-Mar-2015
+# Description - modified 'acceptable' data type
+
+ALTER TABLE `in_inspection_criteria_detail` MODIFY COLUMN `acceptable`  integer(11) NULL DEFAULT NULL AFTER `faults`;
+
+# Basaprabhu Ajur 15-Mar-2015
+# Description - created table consignment
+
+CREATE TABLE `in_consignment` (
+`id`  varchar(50) NOT NULL ,
+`transactionno`  varchar(50) NOT NULL ,
+`returnquantity`  double(50,0) NOT NULL ,
+`fromdate`  datetime NULL ,
+`todate`  datetime NULL ,
+`product`  varchar(50) NULL ,
+`store`  varchar(50) NULL ,
+`uom`  varchar(50) NULL ,
+`approval_status`  int(2) NULL ,
+`company`  varchar(50) NULL ,
+`consignmentapproval`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+CREATE TABLE `in_consignmentdetails` (
+`id`  varchar(50) NOT NULL ,
+`serialName`  varchar(50) NULL ,
+`quantity`  double NULL ,
+`approval_status`  int(2) NULL ,
+`location`  varchar(50) NULL ,
+`inspection_detail`  varchar(50) NULL ,
+`consignment`  varchar(50) NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+ALTER TABLE `in_consignmentdetails` ADD COLUMN `batchName`  varchar(50) NULL AFTER `consignment`;
+ALTER TABLE `in_consignmentdetails` ADD COLUMN `purchaseSerialId`  varchar(50) NULL AFTER `batchName`;
+
+ALTER TABLE `in_consignment` ADD COLUMN `customer`  varchar(50) NULL AFTER `consignmentapproval`;
+ALTER TABLE `in_consignment` ADD COLUMN `documentid`  varchar(50) NULL AFTER `customer`;
+
+
+# Raj 15-Mar-2015
+# Description - added new table for storing stockadjustmentdetail data temporarily 
+
+
+CREATE TABLE `in_temp_stockadjustmentdetail` (
+`id`  varchar(50) NOT NULL ,
+`product`  varchar(50) NOT NULL ,
+`store`  varchar(50) NOT NULL ,
+`location`  varchar(50) NOT NULL ,
+`batchname`  varchar(50) NULL ,
+`serialname`  varchar(50) NULL ,
+`mfgdate`  date NULL ,
+`expdate`  date NULL ,
+`warrantyexpfromdate`  date NULL ,
+`warrantyexptodate`  date NULL 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+;
+
+ALTER TABLE `in_temp_stockadjustmentdetail`
+ADD COLUMN `used`  int NOT NULL DEFAULT 0 AFTER `warrantyexptodate`;
+
+
+# Raj 17-Mar-2015
+# Description - removed one license type so will now Local=0 & Overseas=1 in enum,so updated old records
+
+update product  SET licensetype=0 WHERE licensetype=1;
+update product  SET licensetype=1 WHERE licensetype=2;
+
+
+# Raj 18-Mar-2015
+# Description - (olympus task) Set cycle count frequency as monthly bydefault for all products
+
+CREATE VIEW temptbl as (select id,3 from product where id NOT IN(SELECT  productid FROM in_product_frequency) AND company=(SELECT companyid from company where subdomain='olympus'));
+insert into in_product_frequency SELECT * from temptbl;
+DROP VIEW temptbl;
+
+UPDATE  in_product_frequency AS freq INNER JOIN product AS prod  ON  freq.productid=prod.id  SET  freq.frequencyid=3 where prod.company=(SELECT companyid from company where subdomain='olympus');
+
+
+#Basaprabhu Ajur 26th March 2015
+
+ALTER TABLE `in_storemaster`
+ADD COLUMN `defaultlocation`  varchar(50) NULL DEFAULT NULL AFTER `movementtype`;
+
+#Ajit Gogawale 27th March 2015
+
+ALTER TABLE `in_storemaster`
+ADD COLUMN `movementtype`  varchar(255) NULL AFTER `defaultlocation`;
+
+ALTER TABLE `inventorywarehouse`
+ADD COLUMN `movementtype`  varchar(255) NULL AFTER `parentid`;
+

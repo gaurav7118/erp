@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.stockmovement.StockMovementDetail" table="in_sm_detail" >
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="batchName" type="string">
+            <column length="50" name="batchname"/>
+        </property>
+        <property name="serialNames" type="string">
+            <column sql-type="text" name="serialnames"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" column="row" name="row"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" column="rack" name="rack"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" column="bin" name="bin"/>
+        <many-to-one class="com.krawler.inventory.model.stockmovement.StockMovement" column="stockmovement" name="stockMovement" />
+
+    </class>
+</hibernate-mapping>

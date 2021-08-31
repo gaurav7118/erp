@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Product" table="product">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column length="150" name="name" not-null="true"/>
+        </property>
+        <property name="supplier" type="string">
+            <column length="255" name="supplier" />
+        </property>
+        <property name="coilcraft" type="string">
+            <column length="50" name="coilcraft" />
+        </property>
+        <property name="interplant" type="string">
+            <column length="50" name="interplant" />
+        </property>
+        <property name="productid" type="string">
+            <column length="50" name="productid" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="industryCodeId" type="string">
+            <column name="industrycodeid"/>
+        </property>
+        <property name="reorderLevel" type="double">
+            <column name="reorderlevel" not-null="true"/>
+        </property>
+        <property name="reorderQuantity" type="double">
+            <column name="reorderquantity" not-null="true"/>
+        </property>
+        <property name="minOrderingQuantity" type="double">
+            <column name="minorderingquantity" default="0"/>
+        </property>
+        <property name="maxOrderingQuantity" type="double">
+            <column name="maxorderingquantity" default="0"/>
+        </property>
+        <property name="availableQuantity" type="double">
+            <column name="availablequantity" default="0"/>
+        </property>
+        <property name="recycleQuantity" type="double">
+            <column name="recyclequantity" />
+        </property>
+        <property name="leadTimeInDays" type="integer">
+            <column name="leadtimeindays" not-null="true"/>
+        </property>
+        <property name="QALeadTimeInDays" type="integer">
+            <column name="qaleadtimeindays" default='0'/>
+        </property>
+        <property name="warrantyperiod" type="integer">
+            <column name="warrantyperiod" not-null="true"/>
+        </property>
+        <property name="warrantyperiodsal" type="integer">
+            <column name="warrantyperiodsal" not-null="true"/>
+        </property>
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        <property name="syncable" type="true_false">
+            <column default="false" name="syncable" not-null="true"/>
+        </property>
+        <property name="recyclable" type="true_false">
+            <column default="false" name="isrecyclable" />
+        </property>
+        <property name="multiuom" type="true_false">
+            <column default="false" name="multiuom"/>
+        </property>
+        <property name="blockLooseSell" type="true_false">
+            <column name="blockloosesell"/>
+        </property>
+        <property name="fromInventory" type="integer">
+            <column name="frominventory" default=""/>
+        </property>
+        <property name="isImport" type="integer">
+            <column name="isImport" default="0"/>
+        </property>
+        <property name="qaenable" type="true_false">
+            <column default="false" name="qaenable" />
+        </property>
+        <property name="asset" type="boolean">
+            <column name="isasset" />
+        </property>
+        <property name="depreciable" type="boolean">
+            <column name="isdepreciable" />
+        </property>
+        <property name="depreciationMethod" type="integer">
+            <column name="depreciationmethod"/>
+        </property>
+        <property name="depreciationRate" type="double">
+            <column name="depreciationrate"/>
+        </property>
+        <property name="depreciationCostLimit" type="integer">
+            <column name="depreciationcostlimit"/>
+        </property>
+        <property name="seqnumber" type="integer">
+            <column name="seqnumber" default='0'/>
+        </property>
+        <property name="datePreffixValue" type="string">
+            <column length="50" name="datepreffixvalue"/>
+        </property>
+        <property name="dateSuffixValue" type="string">
+            <column length="50" name="datesuffixvalue"/>
+        </property>
+        <property name="dateAfterPreffixValue" type="string">
+            <column length="50" name="dateafterpreffixvalue"/>
+        </property>
+        <property name="revenueRecognitionProcess" type="true_false">
+            <column name="revenuerecognitionprocess" default="'F'" />
+        </property>
+        <property name="timeinterval" type="integer">
+            <column name="timeinterval" default=""/>
+        </property>
+        <property name="productweight" type="double">
+            <column name="productweight" default="0"/>
+        </property>
+        <property name="productWeightPerStockUom" type="double">
+            <column name="productweightperstockuom" default="0"/>
+        </property>
+        <property name="productWeightIncludingPakagingPerStockUom" type="double">
+            <column name="productweightincludingpakagingperstockuom" default="0"/>
+        </property>
+        <property name="noofquqntity" type="integer">
+            <column name="noofquqntity" default=""/>
+        </property>
+        <property name="noofqtyvalue" type="string">
+            <column length="200" name="noofqtyvalue" />
+        </property>
+        <property name="intervalfield" type="true_false">
+            <column default="false" name="intervalfield" not-null="true"/>
+        </property>
+        <property name="addshiplentheithqty" type="true_false">
+            <column default="false" name="addshiplentheithqty" not-null="true"/>
+        </property>
+        <property name="isBatchForProduct" type="true_false">
+            <column name="isBatchForProduct" default="true"/>
+        </property>
+        <property name="islocationforproduct" type="true_false">
+            <column name="islocationforproduct" default="true"/>
+        </property>
+        <property name="iswarehouseforproduct" type="true_false">
+            <column name="iswarehouseforproduct" default="true"/>
+        </property>
+        <property name="isSerialForProduct" type="true_false">
+            <column name="isSerialForProduct" default="true"/>
+        </property>
+        <property name="isSKUForProduct" type="true_false">
+            <column name="isSKUForProduct" default="false"/>
+        </property>
+        <property name="createdon" type="long">
+            <column name="createdon"/>
+        </property>
+        <property name="asOfDate" type="date">
+            <column name="asofdate"/>
+        </property>
+        <property name="autoAssembly" type="true_false">
+            <column default="false" name="autoassembly"/>
+        </property>
+        <property name="barcodefield" type="integer">
+            <column name="barcodefield" default='0'/>
+        </property>
+
+        <property name="activateProductComposition" type="true_false">
+            <column name="activateproductcomposition" default="'F'" />
+        </property>
+        <property name="isrowforproduct" type="true_false">
+            <column name="isrowforproduct" default="true"/>
+        </property>
+        <property name="israckforproduct" type="true_false">
+            <column name="israckforproduct" default="true"/>
+        </property>
+        <property name="isbinforproduct" type="true_false">
+            <column name="isbinforproduct" default="true"/>
+        </property>
+    
+ <!--    <new properties      INV_ACC_MERGE   >-->    
+ 
+        <property name="additionalDesc" type="string">
+            <column name="additionaldesc"/>
+        </property>
+        <property name="barcode" type="string">
+            <column name="barcode"/>
+        </property>
+        <property name="descInForeign" type="string">
+            <column name="descinforeign"/>
+        </property>
+        <property name="itemGroup" type="string">
+            <column name="itemgroup"/>
+        </property>
+        <property name="priceList" type="string">
+            <column name="pricelist"/>
+        </property>
+        <property name="shippingType" type="string">
+            <column name="shippingtype"/>
+        </property>
+        <property name="isActive" type="true_false">
+            <column name="isactive" default="true"/>
+        </property>
+        <property name="isKnittingItem" type="true_false">
+            <column name="isknittingitem" default="false"/>
+        </property>
+   
+        <property name="itemReusability" column="itemreusability">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.util.ItemReusability</param>
+            </type>       
+        </property>
+    
+        <property name="reusabilityCount" type="integer">
+            <column name="reusabilitycount" default='0'/>
+        </property>
+    
+        <property name="licenseType" column="licensetype">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.util.LicenseType</param>
+            </type>       
+        </property>
+    
+        <property name="licenseCode" type="string">
+            <column name="licensecode" />
+        </property>
+    
+        <property name="customerCategory" type="string">
+            <column name="customercategory" />
+        </property>
+        
+        <property name="tariffName" type="string">
+            <column name="tariffname" />
+        </property>
+        
+        <property name="HSNCode" type="string">
+            <column name="hsncode" />
+        </property>
+        
+        <property name="natureofStockItem" type="string">
+            <column length="255" name="natureofstockitem"/>
+        </property>
+        
+        <property name="reportinguom" type="string">
+            <column name="reportinguom" />
+        </property>
+        
+        <property name="serviceTaxCode" type="string">
+            <column name="servicetaxcode" />
+        </property>
+        
+<!--        <property name="abatementRate" type="double">
+            <column name="abatementrate" default='0'/>
+        </property>-->
+    <!--<many-to-one class="com.krawler.hql.accounting.MasterItem" column="customercategory" name="customerCategory"/>-->
+    
+        <property name="totalIssueCount" type="double">
+            <column name="totalissuecount" default='0'/>
+        </property>
+    
+        <property name="itemPurchaseHeight" type="double">
+            <column name="itempurchaseheight"/>
+        </property>
+        <property name="itemPurchaseLength" type="double">
+            <column name="itempurchaselength"/>
+        </property>
+        <property name="itemPurchaseWidth" type="double">
+            <column name="itempurchasewidth"/>
+        </property>
+        <property name="itemPurchaseVolume" type="double">
+            <column name="itempurchasevolume"/>
+        </property>
+        <property name="purchaseMfg" type="string">
+            <column name="purchasemfg"/>
+        </property>
+        <property name="catalogNo" type="string">
+            <column name="catalogno"/>
+        </property>
+    
+    
+
+        <property name="itemSalesHeight" type="double">
+            <column name="itemsalesheight"/>
+        </property>
+        <property name="itemSalesLength" type="double">
+            <column name="itemsaleslength"/>
+        </property>
+        <property name="itemSalesWidth" type="double">
+            <column name="itemsaleswidth"/>
+        </property>
+        <property name="itemSalesVolume" type="double">
+            <column name="itemsalesvolume"/>
+        </property>
+   
+        <property name="alternateProduct" type="string">
+            <column name="alternateproduct"/>
+        </property>
+    
+    
+        <property name="itemHeight" type="double">
+            <column name="itemheight"/>
+        </property>
+        <property name="itemLength" type="double">
+            <column name="itemlength"/>
+        </property>
+        <property name="itemWidth" type="double">
+            <column name="itemwidth"/>
+        </property>
+        <property name="itemVolume" type="double">
+            <column name="itemvolume"/>
+        </property>
+        <property name="productVolumePerStockUom" type="double">
+            <column name="productvolumeperstockuom" default="0"/>
+        </property>
+        <property name="productVolumeIncludingPakagingPerStockUom" type="double">
+            <column name="productvolumeincludingpakagingperstockuom" default="0"/>
+        </property>
+        <property name="itemColor" type="string">
+            <column name="itemcolor"/>
+        </property> 
+    
+    
+        <property name="additionalFreeText" type="string">
+            <column name="additionalfreetext"/>
+        </property> 
+    
+
+        <property name="valuationMethod" column="valuationmethod">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.common.util.ValuationMethod</param>
+            </type>       
+        </property>
+<!--    <property name="itemCost" type="double">
+      <column name="itemcost"/>
+    </property>-->
+        <property name="WIPOffset" type="string">
+            <column name="wipoffset"/>
+        </property> 
+        <property name="InventoryOffset" type="string">
+            <column name="inventoryoffset"/>
+        </property>
+        <property name="wastageApplicable" type="true_false">
+            <column default="false" name="iswastageapplicable" />
+        </property>
+        <property name="countable" type="true_false">
+            <column default="false" name="countable" />
+        </property>
+        <property name="productCreatedOnAvalara" type="true_false">
+            <column name="productcreatedonavalara" default="'F'" />
+        </property>
+        <property name="substituteQty" type="double">
+            <column name="substituteqty"/>
+        </property>
+        <property name="purchasetaxid" type="string">
+            <column length="40" name="purchasetaxid"/>
+        </property>
+         <property name="salestaxid" type="string">
+            <column length="40" name="salestaxid"/>
+        </property>
+      
+<!--      <end new Properties>-->
+        <set cascade="all" inverse="true" name="rows">
+            <key column="product"/>
+            <one-to-many class="com.krawler.hql.accounting.ProductComposition"/>
+        </set>       
+        
+        <many-to-one class="com.krawler.hql.accounting.SequenceFormat" column="seqformat" name="seqformat"/>
+        <set cascade="all" inverse="true" name="children">
+            <key column="parent"/>
+            <one-to-many class="com.krawler.hql.accounting.Product"/>
+        </set>
+        <many-to-one column="accproductcustomdataref" class="com.krawler.hql.accounting.AccProductCustomData"  name="productCustomData" />
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="unitOfMeasure"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" name="uomSchemaType" column="uomschematype"/>
+        <many-to-one class="com.krawler.common.admin.PriceType" name="dependenttype"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="purchaseAccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="itcAccount" column="itcaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStatePurchaseAccount" column="interstatepurchaseaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStatePurchaseAccountCForm" column="interstatepuracccform"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStatePurchaseReturnAccount" column="interstatepurchasereturnaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStatePurchaseReturnAccountCForm" column="interstatepurchaseretacccform"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="inputVAT" column="inputvat"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="cstVAT" column="cstvat"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="cstVATattwo" column="cstvatattwo"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="salesAccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStateSalesAccount" column="interstatesalesaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStateSalesAccountCForm" column="interstatesalesacccform"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStateSalesReturnAccount" column="interstatesalesreturnaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="interStateSalesReturnAccountCForm" column="interstatesalesretacccform"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="inputVATSales" column="inputvatsales"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="cstVATSales" column="cstvatsales"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="cstVATattwoSales" column="cstvatattwosales"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="purchaseReturnAccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="salesReturnAccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="salesRevenueRecognitionAccount" column="salesrevenuerecognitionaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="parent"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Producttype" name="producttype" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Vendor" name="vendor"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="depreciationGLAccount" column="depreciationglaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="depreciationProvisionGLAccount" column="depreciationprovisionglaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="sellAssetGLAccount" column="sellassetglaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="writeOffAssetAccount" column="writeoffassetaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.ShelfLocation" name="shelfLocation"/>
+        <many-to-one class="com.krawler.common.admin.ProductBatch" name="batch"/>
+        <many-to-one class="com.krawler.common.admin.InventoryLocation" name="location"/>
+        <many-to-one class="com.krawler.common.admin.InventoryWarehouse" name="warehouse"/>
+    
+<!--    <new properties      INV_ACC_MERGE       >-->
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="purchaseUOM" column="purchaseuom"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="displayUoM" column="displayUoM"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="salesUOM" column="salesuom"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="orderingUOM" column="orderinguom"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="transferUOM" column="transferuom"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" name="reportingSchemaType" column="reportingschematype"/>
+        <many-to-one class="com.krawler.inventory.model.packaging.Packaging" name="packaging" column="packaging"/>
+    
+        <many-to-one class="com.krawler.hql.accounting.Product" name="propagatedProductID" column="propagatedproductid"/>
+        <many-to-one class="com.krawler.inventory.model.inspection.InspectionTemplate" name="inspectionTemplate" column="inspection_template"/>
+        <many-to-one class="com.krawler.common.admin.KWLCurrency" column="currency" name="currency"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="wastageAccount" column="wastageaccount" />
+        
+<!--        Master Item Reference -->
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="vatcommoditycode" column="vatcommoditycode" />
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="productBrand" column="productbrand" />
+        
+        
+        <set name="cycleCountFrequencies" cascade="all, save-update" table="in_product_frequency">
+            <key column="productid"/>
+            <many-to-many column="frequencyid" class="com.krawler.inventory.model.frequency.Frequency"/>
+        </set>
+        
+        <set name="lccategoryid" cascade="all,save-update" table="productid_landingcostcategoryid">
+            <key column="productid"/>
+            <many-to-many column="lccategoryid" class="com.krawler.common.admin.LandingCostCategory"/>
+        </set>        
+     
+        <property name="HSCode" type="string">
+            <column name="hscode"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Product" column = "substituteproduct" name="substituteProduct"/>
+        <property name="excisemethodmain" type="string">
+            <column name="excisemethodmain" />
+        </property>
+        <property name="excisemethodsubtype" type="string">
+            <column name="excisemethodsubtype" />
+        </property>
+        <property name="exciserate" type="double">
+            <column name="exciserate" default='0'/>
+        </property>
+        <property name="vatonmrp" type="true_false">
+            <column name="vatonmrp" default='F'/>
+        </property>
+        <property name="mrprate" type="double">
+            <column name="mrprate" />
+        </property>
+        <property name="vatAbatementRate" type="double">
+            <column name="vatabatementrate" default='0'/>
+        </property>
+        <property name="vatAbatementPeriodFromDate" type="date">
+            <column name="vatabatementperiodfromdate"/>
+        </property>
+        <property name="vatAbatementPeriodToDate" type="date">
+            <column name="vatabatementperiodtodate"/>
+        </property>
+        <property name="vatMethodType" type="string">
+            <column name="vatmethodtype" />
+        </property>
+        <property name="reportinguomVAT" type="string">
+            <column name="reportinguomvat" />
+        </property>
+        <property name="openingBalanceAmount" type="double">
+            <column name="openingbalanceamount"/>
+        </property>
+        <property name="openingBalanceAmountInBase" type="double">
+            <column name="openingbalanceamountinbase"/>
+        </property>
+        <property name="exchangerateforopeningbalanceamount" type="double">
+            <column name="exchangerateforopeningbalanceamount"/>
+        </property>
+        <property name="SAC" type="string">
+            <column name="sac"/>
+        </property>
+        <property name="itcType" type="integer">
+            <column name="itctype" default="1"/>
+        </property>
+        <property name="rcmApplicable" type="true_false">
+            <column default="false" name="rcmapplicable" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" name="reportingSchemaTypeVAT" column="reportingschemavat"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="inventoryAccount" column="inventoryaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="stockAdjustmentAccount" column="stockadjustmentaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="costOfGoodsSoldAccount" column="cogsaccount"/>
+<!--     < end new properties>-->
+    </class>
+</hibernate-mapping>

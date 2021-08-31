@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class  name="com.krawler.common.admin.DefaultHeaderModuleJoinReference" table="default_header_modulejoinref">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="module" type="string">
+      <column name="module"/>
+    </property>
+    <property name="refModule" type="string">
+      <column name="refmodule"/>
+    </property>
+    <property name="refModuleTableName" type="string">
+      <column name="refmoduletablename"/>
+    </property>
+    <property name="joinQuery" type="string">
+      <column name="query"/>
+    </property>
+    <property name="parentRefModule" type="string">
+      <column name="parentrefmodule"/>
+    </property>
+    <property name="parentRefModuleTableName" type="string">
+      <column name="parentrefmoduletablename"/>
+    </property>
+  </class>    
+</hibernate-mapping>

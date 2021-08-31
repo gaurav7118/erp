@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ReplacementProductBatchDetailsMapping" table="replacementproductbatchdetailsmapping">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+    
+        <many-to-one name="batchSerial" column="batchserial" class="com.krawler.common.admin.NewBatchSerial"/>
+        <many-to-one name="company" column="company" class="com.krawler.common.admin.Company"/>
+        <many-to-one name="productReplacement" column="productreplacement" class="com.krawler.hql.accounting.ProductReplacement"/>
+        <many-to-one name="productReplacementDetail" column="productreplacementdetail" class="com.krawler.hql.accounting.ProductReplacementDetail"/>
+    </class>
+</hibernate-mapping>

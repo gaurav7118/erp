@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.MasterItem" table="masteritem">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="value" type="string">
+      <column length="50" name="value" not-null="true"/>
+    </property>
+    <property name="code" type="string">
+      <column name="code"/>
+    </property>
+    <property name="contactNumber" type="string">
+      <column name="contactnumber"/>
+    </property>
+    <property name="address" type="string">
+      <column name="address"/>
+    </property>
+    <property name="ibgActivated" type="boolean">
+        <column name="isibgactivated"/>
+    </property>
+    <property name="emailID" type="string">
+      <column length="50" name="emailid"/>
+    </property>
+    <property name="custVendCategoryType" type="integer">
+        <column name="custvendcategorytype" default='-1'/>
+    </property>
+    <property name="designation" type="string">
+      <column length="1024" name="designation"/>
+    </property>
+     <property name="defaultToPOS" type="true_false">
+      <column default="false" name="defaulttopos"/>
+     </property>
+     <property name="accID" type="string">
+      <column name="accid"/>
+    </property>
+     <property name="industryCodeId" type="string">
+      <column name="industrycodeid"/>
+    </property>
+      <property name="activated" type="true_false">
+            <column name="activated" default="true"/>
+        </property>
+    <property name="variancePercentage" type="double">
+        <column name="variancepercentage" default="0"/>
+    </property>
+    <property name="vatcommoditycode" type="string">
+        <column name="vatcommoditycode" default=''/>
+    </property>
+    <property name="vatscheduleno" type="string">
+        <column name="vatscheduleno" default=''/>
+    </property>
+    <property name="vatscheduleserialno" type="string">
+        <column name="vatscheduleserialno" default=''/>
+    </property>
+    <property name="vatnotes" type="string">
+        <column name="vatnotes" default=''/>
+    </property>
+    <set cascade="all" inverse="true" name="children">
+      <key column="parent"/>
+      <one-to-many class="com.krawler.hql.accounting.MasterItem"/>
+    </set>
+    <property name="lcallocationid" column="lcallocationid">
+        <type name="org.hibernate.type.EnumType">
+            <param name="enumClass">com.krawler.common.util.LandingCostAllocationType</param>
+        </type>
+    </property>
+    <property name="BICCode" type="string">
+        <column name="biccode"/>
+    </property>       
+    <property name="bankCode" type="string">
+        <column name="bankcode"/>
+    </property>
+    <property name="branchCode" type="string">
+        <column name="branchcode"/>
+    </property>   
+    <property name="isAppendBranchCode" type="boolean">
+        <column name="isappendbranchcode"/>
+    </property>
+    <many-to-one class="com.krawler.common.admin.LandingCostCategory" name="lccategoryid"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterGroup" name="masterGroup"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="parent"/>
+    <many-to-one class="com.krawler.common.admin.User" name="user"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="driver"/>
+    <many-to-one class="com.krawler.hql.accounting.DefaultMasterItem" column="defaultmasteritem" name="defaultMasterItem"/>
+    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="propagatedMasteritemID" column="parentcomasteritemid"/>
+  </class>
+</hibernate-mapping>

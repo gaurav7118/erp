@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="com.krawler.hql.accounting.DefaultTDSRate" table="default_tds_rate">
+        <id column="id" name="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="natureOfPayment" type="string">
+            <column name="natureofpayment"/>
+        </property>
+        <property name="residentialStatus" type="string">
+            <column  name="residentialstatus"/>
+        </property>
+        <property name="defaultMasterDeducteetype" type="string">
+            <column  name="defaultmasterdeducteetype"/>
+        </property>
+        <property name="fromDate" type="date">
+            <column  name="fromdate"/>
+        </property>
+        <property name="toDate" type="date">
+            <column  name="todate"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate"/>
+        </property>
+        <property name="basicExemptionPerTransaction" type="double">
+            <column name="basicexemptionpertransaction"/>
+        </property>
+        <property name="basicexEmptionPerAnnum" type="double">
+            <column name="basicexemptionperannum"/>
+        </property>
+    </class>
+</hibernate-mapping>

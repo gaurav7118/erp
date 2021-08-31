@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ExchangeRateDetails" table="exchangeratedetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="applyDate" type="date">
+            <column name="applydate" not-null="true"/>
+        </property>
+        <property name="toDate" type="date">
+            <column name="todate"/>
+        </property>
+        <property name="exchangeRate" type="double">
+            <column name="exchangerate" not-null="true"/>
+        </property>
+        <property name="exchangeorder" type="long">
+            <column name="exchangeorder" not-null="true"/>
+        </property>
+        <property name="foreignToBaseExchangeRate" type="double">
+            <column name="foreigntobaseexchangerate" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.ExchangeRate" name="exchangeratelink" not-null="true"/>
+    </class>
+</hibernate-mapping>

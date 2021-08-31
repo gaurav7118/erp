@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>                
+                <prop key="ACCImportTransaction/*.do">TransactionController</prop>
+                <prop key="/ACCCompanyPref/*.do">accCompanyPreferencesController</prop>
+                <prop key="/ACCCompanyPrefCMN/*.do">accCompanyPreferencesControllerCMN</prop>
+                <prop key="/ACCAccount/*.do">accAccountController</prop>
+                <prop key="/ACCAccountCMN/*.do">accAccountControllerCMN</prop>
+                <prop key="/ACCDocumentCMN/*.do">accDocumentDetailsController</prop>
+                <prop key="/ACCCustomer/*.do">accCustomerController</prop>
+                <prop key="/ACCCustomerCMN/*.do">accCustomerControllerCMN</prop>
+                <prop key="/ACCLoanCMN/*.do">accLoanDisbursmentControllerCMN</prop>
+                <prop key="/ACCVendor/*.do">accVendorController</prop>
+                <prop key="/ACCVendorCMN/*.do">accVendorControllerCMN</prop>
+                <prop key="/ACCInvoice/*.do">accInvoiceController</prop>
+                <prop key="/ACCInvoiceCMN/*.do">accInvoiceControllerCMN</prop>
+                <prop key="/ACCSalesReturnCMN/*.do">accSalesReturnControllerCMN</prop>
+                <prop key="/ACCRepeateInvoice/*.do">accRepeateInvoice</prop>
+                <prop key="/ACCRepeateVendorInvoice/*.do">accRepeateVendorInvoice</prop>
+                <prop key="/ACCSalesOrder/*.do">accSalesOrderController</prop>
+                <prop key="/ACCSalesOrderCMN/*.do">accSalesOrderControllerCMN</prop>
+                <prop key="/ACCContract/*.do">accContractController</prop>
+                <prop key="/ACCCreditNote/*.do">accCreditNoteController</prop>
+                <prop key="/ACCCreditNoteCMN/*.do">accCreditNoteControllerCMN</prop>
+                <prop key="/ACCReceipt/*.do">accReceiptController</prop>
+                <prop key="/ACCReceiptNew/*.do">accReceiptControllerNew</prop>
+                <prop key="/ACCReceiptCMN/*.do">accReceiptControllerCMN</prop>
+                <prop key="/ACCJournal/*.do">accJEController</prop>
+                <prop key="/ACCJournalCMN/*.do">accJEControllerCMN</prop>
+                <prop key="/ACCPurchaseOrder/*.do">accPOController</prop>
+                <prop key="/ACCPurchaseOrderCMN/*.do">accPOControllerCMN</prop>
+                <prop key="/ACCGoodsReceipt/*.do">accGoodsReceiptController</prop>
+                <prop key="/ACCGoodsReceiptCMN/*.do">accGoodsReceiptControllerCMN</prop>
+                <prop key="/ACCDebitNote/*.do">accDebitNoteController</prop>
+                <prop key="/ACCDebitNoteCMN/*.do">accDebitNoteControllerCMN</prop>
+                <prop key="/ACCVendorPayment/*.do">accVendorPaymentController</prop>
+                <prop key="/ACCVendorPaymentNew/*.do">accVendorPaymentControllerNew</prop>
+                <prop key="/ACCVendorPaymentCMN/*.do">accVendorPaymentControllerCMN</prop>
+                <prop key="/ACCProduct/*.do">accProductcontroller</prop>
+                <prop key="/ACCProductCMN/*.do">accProductControllerCMN</prop>
+                <prop key="/ACCUoM/*.do">accUomController</prop>
+                <prop key="/ACCTax/*.do">accTaxcontroller</prop>
+                <prop key="/ACCMaster/*.do">accMasterItemsController</prop>
+                <prop key="/ACCCurrency/*.do">accCurrencycontroller</prop>
+                <prop key="/ACCCurrencyExchange/*.do">accTaxCurrencyExchangeController</prop>
+                <prop key="/ACCTerm/*.do">accTermcontroller</prop>
+                <prop key="/ACCPaymentMethods/*.do">accPaymentController</prop>
+                <prop key="/ACCDepreciation/*.do">accDepreciationController</prop>
+                <prop key="/ACCReconciliation/*.do">accBankReconciliationController</prop>
+                <prop key="/ACCReports/*.do">accReportsController</prop>
+                <prop key="/ACCRevalReports/*.do">accReevaluationReportController</prop>
+                <prop key="/ACCOtherReports/*.do">accOtherReportsController</prop>
+                <prop key="/ACCCombineReports/*.do">accReportsCombineController</prop>
+                <prop key="/ACCDashboard/*.do">accDashboardController</prop>
+                <prop key="/ACCWidgetDashboard/*.do">accWidgetDashboardController</prop>
+                <prop key="/CommonFunctions/*.do">commonFunctions</prop>
+                <prop key="/ACCLinkData/*.do">accLinkDataController</prop>
+                <prop key="/ACCChart/*.do">accChartControllerCMN</prop>
+                <prop key="/ACCExportRecord/*.do">accExportRecordController</prop>
+                <prop key="/ACCExportInvoice/*.do">accExportInvoiceController</prop>
+                <prop key="/ImportRecords/*.do">importcontroller</prop>
+                <prop key="/ACCCommon/*.do">accCommonController</prop>
+                <prop key="/ACCCompanySetup/*.do">newCompanySetupController</prop>
+                <prop key="/ACCDeliveryPlanner/*.do">accDeliveryPlannerController</prop>
+                <prop key="/ACCBarcodeCMN/*.do">accBarcodeGeneratorController</prop>    
+                <prop key="/ACCWriteOff/*.do">accWriteOffController</prop>    
+                <prop key="/ACCFieldSetup/*.do">accFieldSetupController</prop>
+                <!-- Common -->
+                <prop key="/CostCenter/*.do">accCostCenterController</prop>
+                <prop key="/CustomDesign/*.do">customDesignController</prop>
+                <prop key="/kwlCommonTables/*.do">kwlCommonTablesController</prop>
+                <prop key="/ProfileHandler/*.do">profileHandlerController</prop>
+                <prop key="/PermissionHandler/*.do">permissionHandlercontroller</prop>
+                <prop key="/AuthHandler/*.do">authHandlercontroller</prop>
+                <prop key="/AdvanceSearch/*.do">SavedSearchController</prop>
+                <prop key="/CompanyDetails/*.do">companyDetailsController</prop>
+                <prop key="/ACCAudit/*.do">accAuditTrailCMN</prop>
+                <prop key="/ExportPDF/*.do">exportPdfTemplateController</prop>
+                <prop key="/EditHelp/*.do">EditHelpController</prop>
+                <prop key="error.do">errorMessagecontroller</prop>
+                <prop key="/General/*.do">generalController</prop>
+                <prop key="/MailNotification/*.do">accMailNotificationController</prop> 
+                <prop key="/MailNotify/*.do">AccMailNotifyController</prop>
+                <prop key="/MultiLevelApprovalRule/*.do">accMultiLevelApprovalController</prop> 
+                <prop key="/MultiLevelApprovalControllerCMN/*.do">accMultiLevelApprovalControllerCMN</prop> 
+                <prop key="/accPeriodSettings/*.do">accPeriodSettingsController</prop>
+                <prop key="/Integration/*.do">integrationController</prop>
+                <!-- Locale Implementation -->
+                <prop key="/msgs/*.js">props2jsController</prop>
+                <prop key="/keys/*.js">props2jsController</prop>
+                <prop key="/wtf-lang-locale.js">localejsController</prop>
+                
+                <!-- MRP Controller-->
+                <prop key="/ACCMachineMaster/*.do">accMachineManagementController</prop>
+<!--                <prop key="/ACCMachineMasterCMN/*.do">accMachineManagementControllerCMN</prop>-->
+                <prop key="/ACCContractMasterCMN/*.do">accContractManagementControllerCMN</prop>
+                <prop key="/ACCContractMaster/*.do">accContractManagementController</prop>
+                <prop key="/ACCTaskProgressCMN/*.do">accTaskProgressManagementControllerCMN</prop>
+                
+                <!-- Inventory Controllers-->
+                <prop key="/INVStore/*.do">storeController</prop>
+                <prop key="/INVGoodsTransfer/*.do">goodsTransferController</prop>
+                <prop key="/INVImport/*.do">importDataController</prop>
+                <prop key="/INVStockAdjustment/*.do">stockAdjustmentController</prop>
+                <prop key="/INVStockLevel/*.do">stockController</prop>
+                <prop key="/INVConfig/*.do">inventoryConfigController</prop>
+                <prop key="/INVCycleCount/*.do">cycleCountController</prop>
+                <prop key="/INVSeq/*.do">seqController</prop>
+                <prop key="/DocumentDesignController/*.do">idDocumentDesignController</prop>
+                <prop key="/INVLocation/*.do">locationController</prop>
+                <prop key="/INVThreshold/*.do">thresholdController</prop>
+                <prop key="/INVApproval/*.do">approvalController</prop>
+                <prop key="/INVBooking/*.do">bookingController</prop>
+                <prop key="/INVCommon/*.do">invCommonController</prop>
+                <prop key="/INVTemplate/*.do">templateController</prop>
+                <prop key="/olympusdataimport/*.do">olympusDataImportcontroller</prop>
+                <prop key="/ACCRemote/*.do">RemoteApicontroller</prop>
+                <prop key="/INVPackaging/*.do">packagingController</prop>
+                <prop key="/ACCExportPrintCMN/*.do">accExportInventoryTemplateController</prop>
+                <prop key="/INVActiveDeactive/*.do">inventoryActiveDeactiveController</prop>
+                <prop key="/AccGST/*.do">accGstController</prop>
+                <prop key="/AccEntityGST/*.do">accEntityGstController</prop>
+                <prop key="/ACCCreateCustomReport/*.do">accCustomReportContorller</prop>
+                <prop key="/ACCLabourCMN/*.do">accLabourControllerCMN</prop>
+                <prop key="/ACCWorkOrder/*.do">AccWorkOrderController</prop>
+                <prop key="/ACCWorkOrderCMN/*.do">AccWorkOrderControllerCMN</prop>
+                <prop key="/ACCWorkCentreCMN/*.do">AccWorkCentreControllerCMN</prop>
+                <prop key="/ACCJobWorkController/*.do">accJobWorkController</prop>
+                <prop key="/ACCRoutingManagement/*.do">accRoutingManagementController</prop>
+                <prop key="/ACCScript/*.do">accScriptController</prop>
+                <prop key="/ACCUSDashboard/*.do">accUSDashboardContorller</prop>
+                <prop key="/AccSalesCommission/*.do">accSalesCommissionReportController</prop>
+                <prop key="/AccDiscountController/*.do">accDiscountController</prop>
+                <prop key="/AccGroupCompany/*.do">accGroupCompanyController</prop>
+                <prop key="/AccPOSInterface/*.do">accPOSInterfaceController</prop>
+                <prop key="/ACCAsset/*.do">accAssetController</prop>
+                <prop key="/GenerateOrder/*.do">generateOrder</prop>
+                <prop key="/CommonExportController/*.do">CommonExportController</prop>
+                <prop key="signOut.do">signOutController</prop>
+                <!--Philippines Compliance Controller-->
+                <prop key="/ACCPhilippinesCompliance/*.do">AccPhilippinesComplianceController</prop>
+                <!--Indonesia Compliance Controller-->
+                <prop key="/ACCIndonesiaCompliance/*.do">AccIndonesiaComplianceController</prop>
+                
+            </props>
+        </property>
+        <property name="interceptors">
+            <list>
+                <ref bean="openSessionInViewInterceptor" />
+            </list>
+        </property>    
+    </bean>
+
+</beans>

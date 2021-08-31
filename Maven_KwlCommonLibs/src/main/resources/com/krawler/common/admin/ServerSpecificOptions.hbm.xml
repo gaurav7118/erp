@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.ServerSpecificOptions" table="serverspecificoptions">
+        <id column="caseid" name="caseId">
+<!--            <generator class="uuid"/>-->
+        </id>
+        <property name="deployedAppDetails" type="string">
+            <column name="deployedappdetails"/>
+        </property>
+       
+       
+  
+<!--    <many-to-one class="com.krawler.hql.accounting.MasterItem" name="cstatus" column="cstatus"/>-->
+<!--     <many-to-one class="com.krawler.common.admin.BillingShippingAddresses" column="billingshippingaddresses" name="billingShippingAddresses"/>-->
+    </class>    
+    
+</hibernate-mapping>

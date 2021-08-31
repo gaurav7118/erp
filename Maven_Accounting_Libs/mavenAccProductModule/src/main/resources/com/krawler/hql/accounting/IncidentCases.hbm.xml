@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.IncidentCases" table="incidentcases">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="report" type="string">
+            <column name="report"/>
+        </property>
+        <property name="incidentDate" type="date">
+            <column name="incidentdate"/>
+        </property>
+        <property name="incidenttime" type="string">
+            <column name="incidenttime"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="attatchment" type="string">
+            <column name="attatchment"/>
+        </property>
+        <property name="resolution" type="string">
+            <column name="resolution"/>
+        </property>
+        <property name="location" type="string">
+            <column name="location"/>
+        </property>
+        <property name="latitude" type="string">
+            <column name="latitude"/>
+        </property>
+        
+        <property name="longitude" type="string">
+            <column name="longitude"/>
+        </property>
+        
+        <property name="createdon" type="long">
+            <column name="createdon" not-null="true"/>
+        </property>
+        <property name="updatedon" type="long">
+            <column name="updatedon" not-null="true"/>
+        </property>
+        
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        
+        <many-to-one class="com.krawler.hql.accounting.Customer" column="customer" name="customer"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>    
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedby"/>
+        
+    </class>
+</hibernate-mapping>

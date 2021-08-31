@@ -1,0 +1,328 @@
+#Raveesh Pathak 2nd June 2014
+1.Opening balance transactions information added in aged report
+2.Script for merging address in transactions(VI,CI,SO,PO) where address are missing   
+
+#[SATS]Mayur Bhokase 2nd June 2014
+Product Level changes in Marine tax Invoice Jasper Report.
+
+#[SATS]Mayur Bhokase 4th June 2014
+Layout Changes in Tax Invoice jasper Report for SATS.
+
+#[SATS] Amol Dhokale 6th June 2014
+ 1.[CI/VI Report] Opening Balance Record(s) filter is not working with other filters  SATS.
+
+#[SATS] Amol Dhokale 13th June 2014
+1. Product details grid render according Customer/Vendor in CI/VI respectively.
+2. In  Purchase Return, don't  show GR Number in Export Record(s).
+3. In  Sales Return, don't  show  do/ci Number in Export Record(s).
+4. While making SO/PO/CI/VI if we provide order date before currency rate of selected currency it shows null message. 
+
+
+#Neeraj D-2nd June 2014
+Image display of fourth button of LineItems in Custom Designer
+
+#Mayur Bhokase 3rd June 2014
+Added a Functionality to display linked reference numbers of CQ,SO,CI,DO,VQ,PO,VI,GRO in Document Designer as per selected module (CI,DO,VI,GRO). 
+
+#Mayur Pawar 4th June 2014
+Enhancement:-
+1. Give Pop-up to select Batch and serial no for sub product while creating Assembly build
+2.Edit and Delete case if some serial no of product used in some delivery order then it should not be deleted. and we cannot edit it
+
+Issues:
+1.Entire logic of serial number are given on Actual quantity where as it should be on Received Quantity in GR and Delivered Quantity in DO.
+2.While editing GR/DO, wrong serial number are showing in pop up window. 
+3.Change the message which are coming while making DO having two quantity selected but only one serial number are given.
+4.While making DO for two items having two different serial numbers, only item are getting minus from Product and services list for that product
+
+# Anand Nimbalkar 5th June 2014
+1. Stock Ageing report and change product inventory valuation on product opening, GR and SR.
+2. While making a VI and linking consignment number of other currency getting wrong calculation of 'Stock Ledger' Report.
+4. Give an alert message as when deleting VI used as consignment number in other invoice.
+5. When Purchase Return is created linked to vendor invoice,after saving and then editing the same PR,the link to field does not show the text vendor invoice. Similar for Sales Return.
+
+#Mayur Bhokase 5th June 2014
+Jasper Report Code Merged into Redesign branch. 
+
+#Raveesh Pathak 2nd June 2014
+1.Giving option to add multiple mail Id for pending approval in company account preferences
+
+# Amol Dhokale 9th June,2014
+1. [Sequence Format] When we added many records in sequence format, the  grid is not scrollable.
+
+#Mayur Bhokase 9th June 2014
+changes in Layout of all jasper report for address field.
+
+#Malhari Pawar 10th June 2014
+Added Serial No functionality for Sales Return and Purchase Return Module
+
+#Raveesh Pathak 10th June 2014
+Issue: 
+
+1.Filter issue in Aged Receivable  Aged Payable. (Both filters )  (Fixed).
+2.Amount due is not matching in vendor List and Aged Payable  Amount due is not matching in customer List and Aged Receivable    (Fixed).
+3.Opening balance records filter is not working in CI and VI report while selecting vendor   (Fixed).
+4.In cost center report the credit amount for ''FACILITIES'' differs from the credit amount in its respective csv,pdf and print file.   (Fixed).
+5.In journal entry report,export to pdf file does not generate. (Fixed).
+6.In Summary view of Aged Payable/Receivable Total amount due not matching with base currency if transaction is in foreign currency 
+7.when we click click on edit button on vendor opening invoice/payment it opens customer/receipt edit window 
+8.rounding off issue in amount due in vendor list customer list   (Fixed).
+9.amount due not coming in customer/vendor list in case of quick search.
+10.Purchase Sequence number not shows in company account preferences event after creating Format
+
+# Amol Dhokale 10th June 2014
+1. [ERP] - Negative Stock check while build assembly product 
+2. [Master Configuration] Add,Edit,Delete Master items button should be in menu list.
+3. Pop up windows should not be allowed to dragged above the application screen area as its not possible to relocate it afterwards. especially in MP/RP/CN/DN, master items, currency exchange popups. Need to test
+4. In Newly created company, default JE number should be there in Journal Entry Field in Accounts Preferences.
+5. In foreign currency exposure report, NaN are showing in the exchange are fields.
+6. In GST report, column header name should be "Purchases/Sales Value" since we are using same grid for purchases gst and sales gst.
+7. Issue - In  Purchase Return, don't  show GR/VI Number in Export Record(s).
+8. Issue - In  Sales Return, don't  show  DO/CI Number in Export Record(s) .
+
+#Mayur Bhokase 10th June 2014
+Finance Details Jasper Report layout Issue (Exporting Incomplete Bank Name in PDF).
+
+#Hitesh Suryawanshi -10th June 2014
+Issue:
+While creating a custom fields, "Create in form" setting are not getting saved.
+
+#Hitesh Suryawanshi -10th June 2014
+Issue:
+Grid is not refresh after sync with PM in Master Configuration.
+
+#Anup Kale 11th June 2014
+Enhancement:
+1.Android integration to get Dashboard Updates and Default Form Fields for all modules.
+2.Added Amount Without tax for GST Report.
+Issues:
+1.Tax Report showing all taxes on both sales and purchase side.
+2.Edit does not work,GR report,charts of accounts,vendor invoice report.
+3.In purchase requisition report,while editing the record, extra field 'debit term' occurs in the form
+4.In customer and vendor analysis report,the vendor account section account name filter does not work.similar for customer account report.In aged payables, the >180 days column appears two times.
+5.Unable to load even 130 records in account payable/receivable report.
+6.While MP/RP, payment account's currency are not reflecting properly. we need to reselect the payment method to have its currency in effect. refer 3.png, 5.png. accounting effect are gets wrong due to this.
+7.In MP/RP form, remove double colon from payment account name field.
+8.In Defaulter Customer List Report, it should be "Defaulter" instead of "Default" in both report name and tab name.
+9.In Defaulter Customer List Report, remove tool bar as it serve no purpose here.
+10.In GST Report, It should be "Purchase/Sales Value" instead of "Purchase Value" as a common grid are being used for both purchase and sale gst.
+11.In Summarized view of GST report pdf, headers are interchanged.
+12.In Summarized view of GST report pdf,few values are missing.
+13.Make payment against Debit Note are not getting recorded into Vendor and Customer analysis.
+14.Receive payment against Credit Note are not getting recorded into Vendor and Customer analysis
+15.Transaction id and Description of Credit note against vendor are not saving in JE report. While opening Purchase Requisition, Purchase Return form are getting open
+
+# Sagar M 11th June 2014
+Week wise cash flow statement and cash flow forecast based on unpaid invoices for customers and vendors
+
+#Neeraj Dwivedi 12th June 2014
+ Issue:
+1) TableProperties and PageFooter storage format in json. 
+
+#Hitesh Suryawanshi -12th June 2014
+Enhancement:
+1.Functionality to create child Dimension from Previously created Parent Dimension.
+2.Sync Project details and Task details with  PM.
+
+#Mayur Bhokase - 13th June 2014
+Jasper Report for Stock Ageing Report.  
+
+#Anup Kale - 13th June 2014
+1.While MP/RP, payment account's currency are not reflecting properly. we need to reselect the payment method to have its currency in effect,
+  refer accounting effect are gets wrong due to this. 
+
+# Atul sachan - 13th June 2014
+1. Fixed Client issue of Linking CN/DN 2nd time with invoice.
+2. Fixed - Opening invoice amount due was not updating while deleting make payment/receive Payment linked ti it.
+
+#Neeraj Dwivedi -13th June 2014
+1) Edit functionality for Setting headerproperty in lineitems.
+
+#Raveesh Pathak -13th June 2014
+Issue:-
+1.In General Ledger when searched on account code wrong opening balance coming
+
+# Atul sachan - 16 June 2014
+1. Added Fixed Asset Feature.
+
+# Atul sachan - 17 June 2014
+Added Contract Create form
+
+# Anand Nimbalkar - 17th June 2014
+1. On Invoice Screen - "Add New Sales Person" doesn't really work.
+
+#Raveesh Pathak -17th June 2014
+Issue:- 
+1. Inter company field is not getting reloaded in case of editing 
+
+# Anand Nimbalkar -19th June 2014
+1. Consignment cost calculation logic changed in stock ledger report.
+
+# Amol Dhokale 19th June 2014
+1. Notification in case of some stock is not moving. - Notification will be set from product purchase date and notify serial numbers which are not sold from configured period in notification.
+2. Issue - Master  Items  for -Customize Template logo,Customize Pdf Template , Sales Commission , Delivery order Approval Rule, Template For Records , Sales Terms inventory setup 
+   these Pop up windows should not be allowed to dragged above the application screen area.
+3. Issue - Opening balance records filter is not working in CI and VI report while selecting customer/vendor.
+4. [Vendor invoice ], while  create vendor invoice link with purchase order , then include product tax goes to be set automatically "yes" even we don't chose include product tax "yes" option in purchase order at the time of creation.
+5. [Purchase requisition Report], Purchase requisition are displaying in pending approval tab and in main tab both. it should be in main tab only after getting approved.
+6. Issue - Customer/Vendor option missing in Missing Auto Sequence Number Format Report.
+7. Option to set number of days in master configuration from which Valid Till field gets populated in quotation form.
+
+#Raveesh Pathak -19th June 2014
+Issue:- 
+1. while editing transaction with NA sequence format sequence number is not editable
+2. while editing transaction new records creates in SO,PO,CI,VI,CP,CP,Create Vendor,create Customer,VQ,CQ,PR
+
+#Anup Kale -19th June 2014
+Issue:- 
+1.Optimization of Vendor INvoice Report.
+2.Transaction exchange rate column in journal ledger report
+3.Vendor Invoice Round Off Issue for amount containing (0.5) in them.
+4.PY0000003 issue for senwan.
+5.VRnet Issue- while doing the reevaluation the amount diff getting wrong.
+6.Duplicate PY0000618 issue for senwan.Solved but we have to update it tomorrow from the UI.
+7.Vendor Invoice Round Off Issue when exchange rate from the bottom links are changed.
+ 
+#Pandurang 20 June 2014
+1.Reevaluation for OPening Balance Invoice.
+2.OPtion to Select Unrealised Account from Company Preferences
+
+#Hitesh Suryawanshi -20th June 2014
+Enhancement:
+1.OutStanding Order Report
+2.Post no of Recurring Invoices with memo.
+3.Post no of Recurring Sales Orders with memo.
+
+#Raveesh  -21th June 2014
+Issue:- 
+1. while editing transaction with NA sequence format sequence number is not editable
+2. while editing transaction new records creates in MP,RP.
+
+#Raveesh Pathak -24th June 2014
+Issue:-
+1.In copy of VQ product grid is not loaded
+
+#Mayur Bhokase - 21th June 2014
+A.Statement of Account jasper report
+B.Payment Voucher Jasper Report
+  i)Make Payment Against Vendor Invoice.
+  ii)Make Payment Against GL Code.
+  iii)Make Payment Against Credit Note.
+C.Payment Receipt Jasper Report
+  i)Receive Payment Against Customer Invoice. 
+  ii)Receive Payment Against GL Code.
+  iii)Receive Payment Against Debit Note.
+
+#Raveesh  -21th June 2014
+Issue:- 
+1. while editing transaction with NA sequence format sequence number is not editable
+2. while editing transaction new records creates in MP,RP.
+
+#Raveesh Pathak -24th June 2014
+Issue:-
+1.In copy of VQ product grid is not loaded
+
+# Sagar M 25th June 2014
+Document Designer - 
+Added 2 fields - GST & UEN Number
+
+#Neeraj Dwivedi 25th June 2014
+Added Product Code,Customer Billing Address,Customer Shipping Address,Vendor Billing Address,Vendor Shipping Address & Company Post Text
+Done for Modules:
+1)Customer: Invoice,SalesOrder,Receive Payment,DeliveryOrder,Customer Quotation,Credit Note
+2)Vendor: Invoice,PurchaseOrder,Make Payment,GoodsReceiptOrder,Vendor Quotation,Debit Note
+
+Added Debit term and Duedate for Purchase Order in Custom Designer.
+Added Credit Term,Valid Till and DueDate for Customer Quotation. 
+
+# Sagar M 25th June 2014
+Document Designer - 
+Added 2 fields - GST & UEN Number
+
+# Amol Dhokale - 26th June 2014
+1. Issue: In purchase order report , pdf template does not create.
+
+#Raveesh Pathak -26th June 2014
+Issues
+1. Duplicate check of number generation in DO.
+2. Allow to edit number in case of sequence format is NA in DO && GR.
+3. DO save with duplicate number .
+
+#Anup Kale -26th June 2014
+1.Copy MP/RP.
+
+#Hitesh Suryawanshi -26th June 2014
+Issues
+ 1.If we block the negative stock from accounts preferences. Generate DO option should be false and disabled in both of Accounts preferences and in Invoice/cash sale creation.
+ 2.New GR number are not showing while copying a old VI/CI in which generate GR/DO option was true
+ 3.In master configuration , master group , when we add the master item for Bank Names then its template is showing agent template . 
+
+#Sagar A - 27th June 2014
+Internal Issue - Some account's entries are not displayed in balance sheet.
+VRNet Issue - Not able to edit custom balance sheet and P&L report.
+VRNet - Removed inter company ledger report and its option in customer and vendor form as requirement not clear
+
+#Sagar A - 27th June 2014
+VRNet - Show only income / expense types of accounts and nature filter with All option in Monthly Revenue report.
+
+
+#Hitesh Suryawanshi -30th June 2014
+CI/CS are showing in main tab even when there is an approval rule set for it. Accounting effect are also not coming into effect if it in the main tab.
+Remove unwanted text while creating a custom layout. 
+
+#Raveesh Pathak -30th June 2014
+
+Enhancement :-
+1.Not allow to change account if transaction is made with payment method 
+
+Issues :-
+1. Duplicate check on number generation in DN,CN,SR,PR
+2. Allow to edit number in case of sequence format is NA in DN,CN,SR,PR 
+Added Credit Term,DueDate and ValidTill field for Customer Quotation in Custom Designer 
+
+# Amol Dhokale - 26th June 2014
+1. Issue: In purchase order report , pdf template does not create.
+
+#Raveesh Pathak -26th June 2014
+Issues
+1. Duplicate check of number generation in DO.
+2. Allow to edit number in case of sequence format is NA in DO && GR.
+3. DO save with duplicate number .
+
+#Anup Kale -26th June 2014
+1.Copy MP/RP.
+
+#Hitesh Suryawanshi -26th June 2014
+Issues
+ 1.If we block the negative stock from accounts preferences. Generate DO option should be false and disabled in both of Accounts preferences and in Invoice/cash sale creation.
+ 2.New GR number are not showing while copying a old VI/CI in which generate GR/DO option was true
+ 3.In master configuration , master group , when we add the master item for Bank Names then its template is showing agent template . 
+
+#Sagar A - 27th June 2014
+Internal Issue - Some account's entries are not displayed in balance sheet.
+VRNet Issue - Not able to edit custom balance sheet and P&L report.
+VRNet - Removed inter company ledger report and its option in customer and vendor form as requirement not clear
+
+#Sagar A - 27th June 2014
+VRNet - Show only income / expense types of accounts and nature filter with All option in Monthly Revenue report.
+
+#Hitesh Suryawanshi -30th June 2014
+CI/CS are showing in main tab even when there is an approval rule set for it. Accounting effect are also not coming into effect if it in the main tab.
+Remove unwanted text while creating a custom layout. 
+
+#Raveesh Pathak -30th June 2014
+
+Enhancement :-
+1.Not allow to change account if transaction is made with payment method 
+
+Issues :-
+1. Duplicate check on number generation in DN,CN,SR,PR
+2. Allow to edit number in case of sequence format is NA in DN,CN,SR,PR
+
+#Pandurang 30 June 2014
+1.Auto Populate Mapped Products in form Grid for User in PO/SO/CS/CP/CQ,VQ,VI,CI.
+
+#Deepak Singh 1st july 2016
+[ERP-23994]:Debit note- Link Opening balance Credit note for Vendor- In link information extra columns are shown.
+[ERP-24744]:[Credit Note Report] Link Information Detail are showing wrong.
+[ERP-24905]:[Ledger T Report]: In export From Export Date is not displaying.

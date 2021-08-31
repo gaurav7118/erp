@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.RepeatedJEChequeDetail" table="repeatedjechequedetail">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="RepeatedJEID" type="string">
+            <column name="repeatedjeid" length="255"/>
+        </property>
+        <property name="count" type="integer">
+            <column name="count" default="0"/>
+        </property>
+        <property name="chequeDate" type="date">
+            <column name="chequedate" not-null="true"/>
+        </property>
+        <property name="chequeNumber" type="string">
+            <column name="chequenumber" length="255"/>
+        </property>
+    </class>
+</hibernate-mapping>

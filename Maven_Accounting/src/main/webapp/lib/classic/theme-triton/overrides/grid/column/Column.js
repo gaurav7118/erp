@@ -1,0 +1,1 @@
+Ext.define("Ext.theme.triton.grid.column.Column",{override:"Ext.grid.column.Column",compatibility:Ext.isIE8,onTitleMouseOver:function(){var A=this.triggerEl;this.callParent(arguments);if(A){A.syncRepaint()}}})

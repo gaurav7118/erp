@@ -1,0 +1,896 @@
+@import "template-editor.css";
+
+.designer{
+    
+}
+
+.x-panel.selected .x-panel-body-default
+{
+    border-color: #FFA500;
+ 
+
+}
+.x-component.selected 
+{
+    border-color: #FFA500;
+}
+.selected {
+    border-color: #FFA500;
+}
+
+/****CSS for make global table selected****/
+.global_table_container{
+    border: 1px solid rgb(192,192,192);
+    padding: 2px;
+}
+
+.repeaterowTableContainer{
+    display: block;
+    page-break-inside: unset;
+}
+
+.fieldItemDivBorder {
+    border: 1px solid #B8CAD4;
+    padding: 2px;
+ }
+.fieldItemDivBorderForLineTable {
+    border: 1px solid #B8CAD4 !important;
+    padding: 2px;
+ }
+.tmpboldclass{
+
+    
+}
+
+
+.ulbigcircle li{
+    list-style-image: url(../images/designer/circle15.png);
+}
+.removeAllObjBtn > span{
+    background-image: url(../images/designer/remove-objects.png);
+    background-size: cover;
+    background-position: center;
+    height: 65px !important;
+    width:55px !important;
+}
+
+.addWatermarkBtnIcon > span {
+    background-image: url(../images/designer/watermark-icon.png);
+    background-size: cover;
+    background-position: center;
+    height: 65px !important;
+    /*width:50px !important;*/
+}
+
+.watermarkFields {
+    margin-bottom: 5px;
+}
+
+.previewCanvas {
+    background-color: #ffffff;
+    margin-top: 6px;
+    box-shadow: 5px 5px 5px grey;
+    display: inline-block;
+}
+
+.watermark {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+
+.insertRowBtn > span{
+    background-image: url(../images/designer/insert-row.png);
+    background-size: cover;
+    background-position: center;
+    height: 65px !important;
+    width:55px !important;
+}
+
+.editlineitem > span{
+    background-image: url(../images/designer/editlineitem.png);
+    background-size: cover;
+    background-position: center;
+    height: 65px !important;
+    width:55px !important;
+}
+
+.extlineitem > span{
+    background-image: url(../images/designer/extlineitem.png);
+    background-size: cover;
+    background-position: center;
+    height: 65px !important;
+    width:55px !important;
+}
+
+.remsummtable > span{
+    background-image: url(../images/designer/remsummtable.png);
+    background-size: cover;
+    background-position: center;
+    height: 65px !important;
+    width:55px !important;
+}
+
+.globaltable {
+/*    width: 100%;*/
+    margin-bottom: 5px;
+    border-collapse: collapse;
+    border:none;
+}
+
+.copyrowbtn {
+   background-image: url(../images/designer/copyRow.png); 
+   background-position: center;
+   background-size: cover;
+   height: 45px !important;
+   width:43px !important;
+}
+
+.globaltable .tr {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.globaltable > tbody {         
+    border-color: inherit;  
+} 
+
+.globaltable > tbody tr {      
+    border-color: inherit; 
+    page-break-inside: avoid;
+}
+
+.globaltable .td{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.editdiv {
+    float: right;
+    /*top: 10px;*/
+    z-index: 999999;
+    height: 0px !important;
+    position: relative;
+}
+.editdiv img {
+    z-index: 9999;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 13px;
+    height: 13px;
+    /*margin-top: 5px;*/
+    /*margin-right: 5px;*/
+}
+.editdiv img:hover {
+    cursor: pointer;
+}
+/*Suresh - 3rd July, 2015 ERP-11685*/
+
+#idMainPanel, #idMainPanel-body {
+    width: 100% !important;
+    height: 100% !important;/*In Editor screen, not displaying full height for height=auto*/
+}
+
+/*Main section container*/
+.sectionclass_parent {
+    margin : 3px;
+    min-height: 25px;
+    overflow:hidden;
+    height : auto !important;
+}
+
+.sectionclass_parent > div > span > div{
+    height : auto !important;
+}
+
+/*Main section container and subcontainer*/
+.sectionclass_parent .x-panel-body {
+    /*min-height: 25px !important;*/
+    overflow:hidden ; 
+    display: table;
+    height: 100% !important;
+    
+}
+.ageingtable {
+    width:100%;
+}
+.ageingtable tr td {
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+.ageingtable tr td:last-child {
+    border-right: 1px solid;
+}
+.ageingtable tr:last-child td {
+    border-bottom: 1px solid;
+}
+/*Main section element*/
+.sectionclass_element {
+    padding : 3px;
+    min-height: 25px;
+    overflow: hidden;
+    display: table;
+    height : 100% !important;
+}
+
+.sectionclass_data_element > div {
+    width: 100%;
+}
+
+.sectionclass_lineitem_Field_Container {
+    padding : 3px;
+    min-height: 25px;
+    overflow: hidden;
+    display: table;
+    height : 100% !important;
+}
+
+.sectionclass_lineitem_Field_Container .x-panel-body {
+    width : 100% !important;
+    height: 100% !important;
+}
+
+.sectionclass_lineitem_Field_Container > div > span > div {
+    display: list-item !important;
+}
+.sectionclass_element_inline {
+    display: inline-table !important;
+}
+
+/*Section fields container*/
+.sectionclass_field_container {
+    padding: 5px;
+    padding-bottom: 0px;
+    display : inline-table !important;
+    width : 100% !important;
+}
+
+.sectionclass_table_container {
+    display : block !important;
+}
+
+.sectionclass_repeat_table_container { /*CSS for repeate row table page break*/
+    display : block !important;
+}
+
+.sectionhorizontalRuler {
+    width : 100% !important;
+}
+
+.sectionclass_field_container_inline {
+    /*padding: 5px; ERP-36744 - Remove extra padding from all sides of container*/
+    padding-bottom: 0px;
+    display: inline-table !important;
+    width : 100% !important; /*ERP-19922 : Image when chose inline and then clicked on column changes size. - Ashish Mohite*/
+}
+
+.sectionclass_field_container_inline .x-panel-body, .sectionclass_element {
+    width : 100% !important;
+}
+
+.sectionclass_element {
+    width : 100% !important;
+}
+
+.sectionclass_element > div > span {
+    height:auto !important;
+}
+
+.sectionclass_element_100 {
+    width : 100%;
+}
+
+.sectionclass_element_50 {
+    width : 50% !important;
+}
+
+.sectionclass_element_33 {
+    width : 33.3% !important;
+}
+
+.sectionclass_element_25 {
+    width : 25% !important;
+}
+
+.sectionclass_element_20 {
+    width : 20% !important;
+}
+.sectionclass_element_10 {
+    width : 10% !important;
+}
+
+.sectionclass_element_30 {
+    width : 30% !important;
+}
+
+.sectionclass_element_40 {
+    width : 40% !important;
+}
+
+.sectionclass_element_60 {
+    width : 60% !important;
+}
+
+.sectionclass_element_70 {
+    width : 70% !important;
+}
+
+.sectionclass_element_80 {
+    width : 80% !important;
+}
+
+.sectionclass_element_90 {
+    width : 90% !important;
+}
+
+/*Section fields*/
+.sectionclass_field {
+    border: 1px solid #B5B8C8;
+    /*margin-left: 5px;*/
+    margin-bottom: 5px;
+    /*display : inherit;*/
+    -moz-box-sizing: border-box;
+}
+
+
+.sectionclass_field_inline {
+    display: inline-table !important;
+}
+.sectionclass_field_block {
+    display : block !important;
+}
+
+/*Section fields container*/
+/*.sectionclass_field_container {
+    padding-bottom:5px;
+}*/
+
+.selectdefaultpadding{
+    margin: 10px 10px 10px 10px;
+    overflow: auto
+        /*     alignment-adjust: central*/
+}
+
+.sectionclass_parent  .x-panel-body {
+    width : 100% !important;
+}
+
+.classTextAligment_left{
+    text-align:  left;
+    /*margin-left: 5px;*/
+    /*margin-top: 5px;*/
+    padding: 2px;
+}
+.classTextAligment_center{
+    text-align: center;
+    /*    property to align the component to center*/
+    display: block;    
+    margin-left: auto;
+    margin-right: auto;
+    /*margin-top: 5px;*/
+    padding: 2px;
+}
+.classTextAligment_right{
+    text-align: right;
+    /*margin-right: 5px;
+    margin-top: 5px;*/
+    padding: 2px;
+}
+
+.elementBorder {
+    border : 1px solid;
+}
+
+.elementBorderRound {
+    border-radius: 10px;
+}
+
+/*Image Class*/
+
+.sectionclass_field_without_border {
+    /*margin: 5px;*/
+    display : inherit;
+  }
+
+
+.imagesectionclass_field_inline {
+    display: inline-table !important;
+}
+.imagesectionclass_field_block {
+    display : inline-block !important;
+}
+
+.image_auto_width_inlinecls {
+    display: inline-table !important;
+    max-width: 100%;
+}
+.image_auto_width_blockcls {
+    display : inline-block !important;
+    max-width: 100%;
+}
+.image_auto_width_new_inlinecls {
+    display: inline-table !important;
+    border: 1px solid #B5B8C8;
+    padding: 2px;
+    max-width: 100%;
+}
+.image_auto_width_new_inlinecls img {
+    display: inline-table !important;
+    max-width: 100%;
+    width: 100% !important;
+}
+.image_auto_width_new_blockcls {
+    display : inline-block !important;
+    border: 1px solid #B5B8C8;
+    padding: 2px;
+    width:100% !important;
+    max-width: 100%;
+}
+.image_auto_width_new_blockcls img{
+    display : block !important;
+    max-width: 100%;
+}
+
+.imageshiftcenter {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imageshiftleft {
+    margin-left: 5px;
+    margin-right: auto;
+}
+
+.imageshiftright{
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+
+/*Suresh - Global Table Properties*/
+
+.globaltable td{
+    padding : 5px;
+    /*position: relative;*/
+}
+/* Used To set only Vertical Borders For Table */
+.verticalbordertable {
+/*    width: 100%;*/
+    border-top: none;
+    border-bottom: none;
+}
+
+.removehorizontalborder{
+    border: 1px solid;
+    border-bottom: none;
+    border-top: none;
+    border-right: 0px none;  /*ERP-19470*/
+}
+
+.removehorizontalborder:last-child{ /*ERP-19470*/
+    border-right: 1px solid;
+}
+
+.removeallborder {
+    border: none;
+}
+
+/* Used To set only Horizontal Borders For Table */
+.horizontalbordertable {
+/*    width: 100%;*/
+    border-left:  none;
+    border-right: none;
+}
+
+.removeverticalborder{
+    border: 1px solid;
+    border-left:  none;
+    border-right: none;
+}
+/* Used To set only Header Horizontal Border of Table */
+.headerhorizontalbordertable{
+/*    width: 100%;*/
+    border-left:  none;
+    border-right: none;
+}
+.removeallborderofcell{
+    border-left:  none;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+}
+.onlytopborderofcell{
+    border: 1px solid;
+    border-left:  none;
+    border-right: none;
+    border-bottom: none;
+}
+.onlybottomborderofcell{
+    border: 1px solid;
+    border-left:  none;
+    border-right: none;
+    border-top: none;
+}
+.onlyleftborderofcell{
+    border: 1px solid;
+    border-right: none;
+    border-top:  none;
+    border-bottom: none;
+}
+.onlyrightborderofcell{
+    border: 1px solid;
+    border-left:  none;
+    border-top: none;
+    border-bottom: none;
+}
+
+#idMainPanel-body table, #idMainPanel-body td {
+    border-collapse:collapse;
+    border-spacing:0px;
+    font-size: 12px;
+} 
+
+/*Font-Families*/
+
+.fontSansSerif{
+    font-family:sans-serif !important;
+}
+
+.fontArial{
+    font-family:Arial !important;
+}
+.fontTohama{
+    font-family:Tahoma !important;
+}
+.fontVerdana{
+    font-family:Verdana !important;
+}
+.fontTimesNewRoman{
+    font-family:'Times New Roman' !important;
+}
+.fontHelvetica{
+    font-family:Helvetica !important;
+}
+
+.fontTrebuchetMS{
+    font-family:'Trebuchet MS' !important;
+}
+
+.fontLiberationSans{
+    font-family:Liberation Sans!important;
+}
+
+
+.classzeropadding {
+    padding:0px;
+}
+
+.globaltablerepeat {
+/*    width: 100%;*/
+    margin-bottom: 5px;
+    border-collapse: collapse;
+}
+
+.borderseparate{
+    border-collapse: separate;
+}
+
+.globaltablerepeat .tr {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.globaltablerepeat .td{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.rightalignedcolon {
+    top:0;
+    right:0;
+    float:right;
+    height:10px;
+/*    margin-top:3px;*/
+    position:relative;
+}
+
+.colonwiththetext {
+    height:10px;
+    margin-top:3px;
+    display:inline;
+    padding-right:5px;
+    padding-left:5px;
+}
+
+.sectionclass_data_element_inline{
+    display: inline-table !important;
+}
+
+.rightalignedcolonwithoutmargin {
+    top:0;
+    right:0;
+    float:right;
+    height:10px;
+    position:absolute;
+}
+
+.colonwiththetextwithoutmargin {
+    height:10px;
+    display:inline;
+    padding-right:5px;
+    padding-left:5px;
+}
+
+
+.globaltablebordereffect1 {
+    border-collapse: separate !important;
+}
+
+ .globaltablebordereffect1 tr th,
+ .globaltablebordereffect1 tr td {
+    position: relative ;
+    border-top: none ;
+    border-left: 1px solid ;
+    border-right: none ;
+    border-bottom: 1px solid ;
+    
+}
+.globaltablebordereffect1 tr th:last-child,
+.globaltablebordereffect1 tr td:last-child {
+    border-right: 1px solid ;
+}
+ .globaltablebordereffect1 tr:first-child th,
+ .globaltablebordereffect1 tr:first-child td {
+    border-top: 1px solid ;
+}
+
+.globaltableonlytableborderEffect tr td{
+    border: 0px none ;
+}
+
+.globaltableonlytableborderEffect tr:first-child td {
+    border-top: 1px solid ;
+}
+
+.globaltableonlytableborderEffect tr:last-child td {
+    border-bottom: 1px solid ;
+}
+
+.globaltableonlytableborderEffect tr td:first-child {
+    border-left: 1px solid ;
+}
+
+.globaltableonlytableborderEffect tr td:last-child {
+    border-right: 1px solid ;
+}
+
+ .lineitembordereffect1 {
+    border-collapse: separate !important;
+}
+
+ .lineitembordereffect1 tr th,
+ .lineitembordereffect1 tr td {
+    border-top: none ;
+    border-left: 1px solid ;
+    border-right: none ;
+    border-bottom: 1px solid ;
+    
+}
+.lineitembordereffect1 tr th:last-child,
+.lineitembordereffect1 tr td:last-child {
+    border-right: 1px solid ;
+}
+ .lineitembordereffect1 tr:first-child th,
+ .lineitembordereffect1 tr:first-child td {
+    border-top: 1px solid ;
+}
+
+
+
+.lineitembordereffect3 {
+    border-collapse: separate !important;
+}
+
+ .lineitembordereffect3 tr th,
+ .lineitembordereffect3 tr td {
+    border-top: none ;
+    border-left: none ;
+    border-right: none ;
+    border-bottom: 1px solid ;
+    
+}
+.lineitembordereffect3 tr th:first-child,
+.lineitembordereffect3 tr td:first-child {
+    border-left: 1px solid ;
+}
+.lineitembordereffect3 tr th:last-child,
+.lineitembordereffect3 tr td:last-child {
+    border-right: 1px solid ;
+}
+ .lineitembordereffect3 tr:first-child th,
+ .lineitembordereffect3 tr:first-child td {
+    border-top: 1px solid ;
+}
+
+
+.lineitembordereffect6 {
+    border-collapse: separate !important;
+}
+
+ .lineitembordereffect6 tr th,
+ .lineitembordereffect6 tr td {
+    border-top: none ;
+    border-left: none ;
+    border-right: none ;
+    border-bottom: none ;
+    
+}
+.lineitembordereffect6 tr th:first-child,
+.lineitembordereffect6 tr td:first-child {
+    border-left: 1px solid ;
+}
+.lineitembordereffect6 tr th:last-child,
+.lineitembordereffect6 tr td:last-child {
+    border-right: 1px solid ;
+}
+
+.lineitembordereffect6 tr:last-child th,
+.lineitembordereffect6 tr:last-child td {
+    border-bottom: 1px solid ;
+}
+
+.lineitembordereffect6 tr:first-child th,
+.lineitembordereffect6 tr:first-child td {
+    border-bottom: 1px solid ;
+    border-top: 1px solid ;
+}
+
+.lineitembordereffect10 {
+    border-collapse: separate !important;
+}
+
+.lineitembordereffect10 tr th,
+.lineitembordereffect10 tr td {
+    border-top: none ;
+    border-left: 1px solid ;
+    border-right: none ;
+    border-bottom: none ;
+    
+}
+
+.lineitembordereffect10 tr th:last-child,
+.lineitembordereffect10 tr td:last-child {
+    border-right: 1px solid ;
+}
+
+.lineitembordereffect10 tr:last-child th,
+.lineitembordereffect10 tr:last-child td {
+    border-bottom: 1px solid ;
+}
+
+.lineitembordereffect10 tr:first-child th,
+.lineitembordereffect10 tr:first-child td {
+    border-bottom: 1px solid ;
+    border-top: 1px solid ;
+}
+
+
+.tableroundborder tr:first-child th:first-child {
+    border-top-left-radius: 10px !important;
+}
+.tableroundborder tr:first-child th:last-child {
+    border-top-right-radius:  10px !important;
+}
+.tableroundborder tr:last-child th:first-child,
+.tableroundborder > tbody > tr:last-child > td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+.tableroundborder tr:last-child th:last-child,
+.tableroundborder > tbody > tr:last-child > td:last-child {
+    border-bottom-right-radius:  10px !important;
+}
+
+/*For repeat row table with header
+Set round corner of table in template design window - (In design their is no <thead> available)*/
+.repeatRowGlobalTableRoundBorder > tbody > tr:first-child td:first-child {
+    border-top-left-radius: 10px !important;
+}
+.repeatRowGlobalTableRoundBorder > tbody > tr:first-child td:last-child {
+    border-top-right-radius:  10px !important;
+}
+/*Set last row corners of table as round*/
+.repeatRowGlobalTableRoundBorder > tbody > tr:last-child td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+.repeatRowGlobalTableRoundBorder > tbody > tr:last-child td:last-child {
+    border-bottom-right-radius:  10px !important;
+}
+
+.globaltableroundborder > tbody > tr:first-child td:first-child {
+    border-top-left-radius: 10px !important;
+}
+.globaltableroundborder > tbody > tr:first-child td:last-child {
+    border-top-right-radius:  10px !important;
+}
+.globaltableroundborder > tbody > tr:last-child td:first-child {
+    border-bottom-left-radius: 10px !important;
+}
+.globaltableroundborder > tbody > tr:last-child td:last-child {
+    border-bottom-right-radius:  10px !important;
+}
+
+.edit-table-property-icon{
+    background: url(../images/edit-table-property-icon.gif) no-repeat 100% 40% !important;
+/*    padding: 0 0 0 0 !important;*/
+}
+
+.joinnextrow {
+    margin-bottom: -3px !important;
+}
+
+.joinnextrow div.repeaterowTableContainer {
+    padding: 0px !important;
+}
+
+.joinnextrow div.repeaterowTableContainer > .globaltablerepeat {
+    margin: 0px !important;
+}
+
+.joinpreviouscolumn {
+    padding-right: 0px !important;
+}
+.joinpreviouscolumn + div {
+    padding-left: 0px !important;
+}
+
+.lineitemtablewrap td div{
+    word-wrap:break-word;
+    table-layout: fixed;
+}
+
+/* CSS for Formula Builder window */
+
+#formulaText-inputEl{
+    height: 70px;
+}
+
+.buttons-spacing > span > div > a {
+    margin: 7px !important;
+}
+
+
+/****************CSS for Formula Builder end*******************/
+
+/**************CSS for Grouping Summary table start****************/
+
+.groupingsummarytable {
+    width:100%;
+}
+.groupingsummarytable tr td {
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+.groupingsummarytable tr td:last-child {
+    border-right: 1px solid;
+}
+.groupingsummarytable tr:last-child td {
+    border-bottom: 1px solid;
+}
+
+/**************CSS for Grouping Summary table end****************/
+
+.formHelpButton {
+	background: url(../images/help-12.gif) no-repeat !important;
+}

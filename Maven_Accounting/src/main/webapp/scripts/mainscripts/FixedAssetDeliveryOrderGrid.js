@@ -1,0 +1,2707 @@
+/*
+ * Copyright (C) 2012  Krawler Information Systems Pvt Ltd
+ * All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+Wtf.account.FixedAssetDeliveryOrderGrid=function(config){
+    this.parentCmpID=config.parentCmpID;
+    this.isFixedAsset=(config.isFixedAsset)?config.isFixedAsset:false;
+    this.isLeaseFixedAsset=(config.isLeaseFixedAsset)?config.isLeaseFixedAsset:false;
+    this.isGRCreatedByLinkingWithPI=false;
+    this.isCustomer=config.isCustomer;
+    this.productOptimizedFlag=Wtf.account.companyAccountPref.productOptimizedFlag;
+    if(this.productOptimizedFlag!= undefined || this.productOptimizedFlag==Wtf.Show_all_Products){
+        this.productComboStore=(this.isFixedAsset)?Wtf.FixedAssetStore:(this.isCustomer?((this.isLeaseFixedAsset)?Wtf.FixedAssetAndProductLeaseStore:Wtf.productStoreSales):Wtf.productStore);
+    }else if(this.productOptimizedFlag==Wtf.Products_on_type_ahead || this.productOptimizedFlag==Wtf.Products_on_Submit){
+        this.productComboStore=(this.isFixedAsset)?Wtf.FixedAssetStoreOptimized:(this.isCustomer?((this.isLeaseFixedAsset)?Wtf.FixedAssetAndProductLeaseStoreOptimized:Wtf.productStoreSales):Wtf.productStore);
+    }
+    this.isPILinkedInGR=config.isPILinkedInGR?config.isPILinkedInGR:false;
+    this.currencyid=config.currencyid;
+    this.productID=null;
+    this.id=config.id;
+    this.tempStore = new Wtf.data.Store({
+        reader: new Wtf.data.KwlJsonReader({
+            root: "data"
+        },Wtf.productRec)
+    });
+//    this.isOrder=config.isOrder;
+    this.isEdit=config.isEdit;
+    this.record=config.record;
+    this.billDate=(this.isEdit && this.record.data.date != undefined)? this.record.data.date :new Date();
+    this.dateChange=false;
+    this.isNegativeStock=false;
+    this.pronamearr=[];
+    this.fromPO=config.fromPO;
+    this.readOnly=config.readOnly;
+//    this.copyInv=config.copyInv;
+    this.editTransaction=config.editTransaction;
+    this.copyTrans=config.copyTrans;
+    this.noteTemp=config.noteTemp;
+    this.editLinkedTransactionQuantity= Wtf.account.companyAccountPref.editLinkedTransactionQuantity;
+    this.editLinkedTransactionPrice= Wtf.account.companyAccountPref.editLinkedTransactionPrice;
+    this.fromOrder=config.fromOrder;
+    this.moduleid = config.moduleid;
+    this.CUSTOM_KEY = "customfield";
+    this.gridConfigId="";
+      this.isDeferredRevenueRecognition=Wtf.account.companyAccountPref.isDeferredRevenueRecognition&&this.isCustomer;
+//    if(config.isNote!=undefined)
+//        this.isNote=config.isNote;
+//    else
+//        this.isNote=false;
+//    this.isCN=config.isCN;
+//    this.isViewCNDN=config.isViewCNDN;
+//    this.isQuotation=config.isQuotation;
+    this.createStore();
+    this.createComboEditor();
+    this.createColumnModel();
+    this.loadPriceStore();
+    var colModelArray = [];
+    colModelArray = GlobalColumnModel[this.moduleid];
+    if(colModelArray) {
+        colModelArray.concat(GlobalColumnModelForProduct[this.moduleid]);
+    }
+    WtfGlobal.updateStoreConfig(colModelArray, this.store);
+    Wtf.account.FixedAssetDeliveryOrderGrid.superclass.constructor.call(this,config);
+    this.addEvents({
+        'datachanged':true,
+        'pricestoreload':true,
+        'productdeleted':true
+    });
+    this.on('populateDimensionValue',this.populateDimensionValueingrid,this);
+}
+Wtf.extend(Wtf.account.FixedAssetDeliveryOrderGrid,Wtf.grid.EditorGridPanel,{
+    clicksToEdit:1,
+    stripeRows :true,
+    rate:1,
+    symbol:null,
+    layout:'fit',
+    viewConfig:{forceFit:true},
+    forceFit:true,
+    loadMask:true,
+    onRender:function(config){
+         Wtf.account.FixedAssetDeliveryOrderGrid.superclass.onRender.call(this,config);
+         this.isValidEdit = true;
+         
+         if(Wtf.userds)
+             Wtf.userds.load();
+         if(Wtf.locationStore)
+            Wtf.locationStore.load();
+         if(Wtf.detartmentStore)
+            Wtf.detartmentStore.load();
+         
+         
+//         this.on('render',this.addBlankRow,this);
+        WtfGlobal.getGridConfig(this,this.moduleid,true,false);
+        if(this.productOptimizedFlag!=Wtf.Products_on_Submit){
+            this.on('afteredit',this.updateRow,this);
+        } else {
+            this.on('afteredit',this.callupdateRowonProductLoad,this);
+        }
+        this.on('validateedit',this.checkRow,this);
+        this.on('rowclick',this.handleRowClick,this);
+        this.on('cellclick',this.RitchTextBoxSetting,this);
+        this.on('render', function () {
+            new Wtf.util.DelayedTask().delay(Wtf.GridStateSaveDelayTimeout, function () {
+                this.on('statesave', this.saveGridStateHandler, this);
+            }, this);
+        }, this);
+        this.on('beforeedit',function(e){
+            if(this.isLeaseFixedAsset){
+                if(this.fromPO == undefined || this.fromPO == null || !this.fromPO){
+                    e.cancel=true;
+                    WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.information"),WtfGlobal.getLocaleText("acc.fixed.asset.do.lease") ], 4);
+                    return;
+                }
+            }
+              
+        if((this.isFixedAsset || this.isLeaseFixedAsset) && this.fromPO){
+            if(this.store.getCount()-1==e.row){// if last row then don't allow edition, and appending row in case of linking'
+                e.cancel=true;
+                return;
+            }
+        }
+             
+        if(e.field == "productid" && e.grid.colModel.config[3].dataIndex=="productid"){
+            if(Wtf.account.companyAccountPref.invAccIntegration && !this.isCustomer){                
+                var store = e.grid.colModel.config[3].editor.field.store;
+                if(store!=undefined && store.data.length>0){                    
+                    this.tempStore.removeAll();
+                    this.tempStore.add(store.getRange());                
+                    this.tempStore.each(function(record){
+                        if(record.data.isStopPurchase==true){
+                            this.tempStore.remove(record);                                    
+                        }
+                    },this);                                
+                    e.grid.colModel.config[3].editor.field.store=this.tempStore;
+                }                
+            }                        
+         } 
+        
+             var isRateFieldEditable = true;
+             if(!this.isValidEdit){ // Fixed Bug[13888]: Overlaping text box on validation alert messages. [on TAB key navigation]
+                 e.cancel= true;
+                 this.isValidEdit = true;
+             }
+             if((e.field == "rate")&& ((e.record.data.isNewRecord =="" && !this.isEdit ) ||(e.record.data.linkid !="" && this.isEdit))){//isNewRecord for nornal records is "0"
+                 if(this.editLinkedTransactionPrice && (this.fromOrder||(this.isEdit && this.fromOrder==false))){  
+                      e.cancel = true;
+                      isRateFieldEditable = false;
+                 }
+             }
+             if(e.field == "rate" && isRateFieldEditable){	// rate editable for product type "Service"
+           	var beforeEditRecord=this.productComboStore.getAt(this.productComboStore.find('productid',e.record.data.productid));
+                //when asset GR created with multiple Asset Group then productid found both 'productComboStore' and 'this.store'
+            	if((beforeEditRecord == undefined || beforeEditRecord == null) && (this.isFixedAsset || this.isLeaseFixedAsset)){ 
+                    beforeEditRecord=WtfGlobal.searchRecordIndex(this.store, e.record.data.productid, 'productid');
+                }
+                if(beforeEditRecord == undefined || beforeEditRecord == null){
+                      e.cancel = true;
+            	 }                 
+             }
+             else  if(e.field == "description" && Wtf.account.companyAccountPref.ishtmlproddesc){
+                e.cancel=true;
+                if(e.record.data.productid!="")
+                    this.getPostTextEditor(e);
+                   return; 
+             }
+             var isQuantityFieldEditable = true;
+             if((e.field == "quantity")&& ((e.record.data.isNewRecord =="" && !this.isEdit ) ||(e.record.data.linkid !="" && this.isEdit))){//isNewRecord for normal records is "0"
+                 if(this.editLinkedTransactionQuantity && (this.fromOrder||(this.isEdit && this.fromOrder==false))){  
+                      e.cancel = true;
+                      isQuantityFieldEditable = false;
+                 }
+             }
+             
+             if (e.field == "quantity" && isQuantityFieldEditable) {
+                var beforeEditRecord = this.productComboStore.getAt(this.productComboStore.find('productid', e.record.data.productid));
+                if (beforeEditRecord == undefined || beforeEditRecord == null) {
+                    if (e.record.data == undefined || e.record.data.productid == undefined || e.record.data.productid == "") {
+                        e.cancel = true;
+                    }
+                }
+            }
+             
+//         if(this.isDeferredRevenueRecognition){ // Fixed Bug[13888]: Overlaping text box on validation alert messages. [on TAB key navigation]
+//                 e.cancel= true;                 
+//             }    
+             
+         },this); 
+         WtfGlobal.hideShowCustomizeLineFields(this,this.moduleid);
+         /*
+          * Hide column Product tax class and tax , for indian country 
+          */
+         if(WtfGlobal.isIndiaCountryAndGSTApplied()){
+//	         if(this.record == null || this.record == undefined && this.getColumnModel().getColumnById(this.id+"prtaxid").hidden == undefined && this.getColumnModel().getColumnById(this.id+"taxamount").hidden == undefined){
+	         if(this.record == null || this.record == undefined && this.getColumnModel().isHidden(this.getColumnModel().findColumnIndex("prtaxid")) == undefined && this.getColumnModel().isHidden(this.getColumnModel().findColumnIndex("taxamount")) == undefined){
+                         this.getColumnModel().setHidden(this.getColumnModel().findColumnIndex("prtaxid"), true);				// 21241   If statement added bcos could not use the event destroy for column model
+	        	 this.getColumnModel().setHidden(this.getColumnModel().findColumnIndex("taxamount"), true);							// and also could not call the createColumnModel() method from onRender
+	         }
+         } 
+     },
+    saveGridStateHandler: function(grid,state){
+        if(!this.readOnly){
+            WtfGlobal.saveGridStateHandler(this,grid,state,this.moduleid,this.gridConfigId,true);
+        }
+    }, 
+     populateDimensionValueingrid: function(rec) {
+        WtfGlobal.populateDimensionValueingrid(this.moduleid, rec, this);
+     },
+       getPostTextEditor: function(e)
+    {
+        var _tw=new Wtf.EditorWindowQuotation({
+            val:e.record.data.description
+        });
+    	
+        _tw.on("okClicked", function(obj){
+            var postText = obj.getEditorVal().textVal;
+            var styleExpression  =  new RegExp("<style.*?</style>");
+            postText=postText.replace(styleExpression,"");
+            e.record.set("description",postText);
+                 
+             
+        }, this);
+        _tw.show();
+    },
+     createStore:function(){         
+         
+         this.taxRec = new Wtf.data.Record.create([
+           {name: 'prtaxid',mapping:'taxid'},
+           {name: 'prtaxname',mapping:'taxname'},
+           {name: 'taxdescription'},
+           {name: 'percent',type:'float'},
+           {name: 'taxcode'},
+           {name: 'accountid'},
+           {name: 'accountname'},
+           {name: 'hasAccess'},
+           {name: 'applydate', type:'date'}
+
+        ]);
+        this.taxStore = new Wtf.data.Store({
+            reader: new Wtf.data.KwlJsonReader({
+                root: "data"
+            },this.taxRec),
+    //        url: Wtf.req.account + 'CompanyManager.jsp',
+            url : "ACCTax/getTax.do",
+            baseParams:{
+                mode:33
+            }
+        });
+//        if(this.readOnly)
+            this.taxStore.load();
+
+        this.transTax= new Wtf.form.ExtFnComboBox({
+            hiddenName:'prtaxid',
+            anchor: '100%',
+            store:this.taxStore,
+            valueField:'prtaxid',
+            forceSelection: true,
+            displayField:'prtaxname',
+//            addNewFn:this.addTax.createDelegate(this),
+            scope:this,
+            displayDescrption:'taxdescription',
+            selectOnFocus:true,
+            typeAhead: true,
+            mode: 'remote',
+            minChars:0,
+            extraFields: [],
+            isTax: true,
+            listeners: {
+                'beforeselect': {
+                    fn: function (combo, record, index) {
+                        return validateSelection(combo, record, index);
+                    },
+                    scope: this
+                }
+            }
+        });
+        
+        this.transTaxAmount=new Wtf.form.NumberField({
+            allowBlank: true,
+            allowNegative: false,
+            defaultValue:0,
+            decimalPrecision:Wtf.AMOUNT_DIGIT_AFTER_DECIMAL
+        });
+         
+        this.rowDiscountTypeStore = new Wtf.data.SimpleStore({
+            fields: [{name:'typeid',type:'int'}, 'name'],
+            data :[[1,'Percentage'],[0,'Flat']]
+        });
+        this.rowDiscountTypeCmb = new Wtf.form.ComboBox({
+            store: this.rowDiscountTypeStore,
+            name:'typeid',
+            displayField:'name',
+            valueField:'typeid',
+            mode: 'local',
+            triggerAction: 'all',
+            selectOnFocus:true
+        });
+         
+      this.deleteRec = new Wtf.data.Record.create([
+        {
+            name: 'productid'
+        },
+
+        {
+            name: 'productname'
+        },
+
+        {
+            name: 'productquantity'
+        },
+        {
+            name: 'productbaseuomrate'
+        },
+        {
+            name: 'productbaseuomquantity'
+        },
+        {
+            name: 'productuomid'
+        },
+        {
+            name: 'productinvstore'
+        },
+        {
+            name: 'productinvlocation'
+        },
+        {
+            name: 'productrate'
+        }
+        ]);
+        this.deleteStore = new Wtf.data.Store({
+            reader: new Wtf.data.KwlJsonReader({
+                root: "data"
+            },this.deleteRec)                
+        });
+        
+        this.priceRec = Wtf.data.Record.create ([
+            {name:'productid'},
+            {name:'productname'},
+            {name:'desc'},
+            {name:'uomid'},
+            {name:'uomname'},
+            {name: 'multiuom'},
+            {name: 'blockLooseSell'},
+            {name:'parentid'},
+            {name:'parentname'},
+            {name:'purchaseaccountid'},
+            {name:'salesaccountid'},
+            {name:'purchaseretaccountid'},
+            {name:'salespricedatewise'},
+            {name:'purchasepricedatewise'},
+            {name:'salesretaccountid'},
+            {name:'reorderquantity'},
+            {name:'pricedatewise'},
+            {name:'quantity'},
+            {name:'reorderlevel'},
+            {name:'leadtime'},
+            {name:'purchaseprice'},
+            {name:'saleprice'},
+            {name:'lockquantity'},
+            {name: 'leaf'},
+            {name: 'type'},
+            {name:'prtaxid'},
+            {name:'taxamount'},
+            {name:'prtaxpercent'},
+            {name:'prtaxname'},        
+            {name: 'level'},
+            {name: 'initialquantity',mapping:'initialquantity'},
+            {name: 'initialprice'},
+            {name: 'producttype'},
+            {name:'shelfLocation'},
+            {name:'supplierpartnumber'},
+            {name:'isAsset',type:'boolean'}
+        ]);
+
+        this.priceStore = new Wtf.data.Store({        
+            url:"ACCProduct/getProductsForCombo.do",
+            baseParams:{mode:22,isFixedAsset:this.isFixedAsset
+                },
+            reader: new Wtf.data.KwlJsonReader({
+                root: "data"
+            },this.priceRec)
+        });
+        this.priceStore.on('load',this.setGridProductValues,this);
+        
+        this.storeRec = Wtf.data.Record.create([
+            {name:'rowid'},
+            {name:'productname',mapping:(this.isViewCNDN)?'productdetail':null},
+            {name:'billid'},
+            {name:'billno'},
+            {name:'productid'},
+            {name:'description'},
+            {name:'shelfLocation'},
+            {name:'partno'},
+            {name:'quantity',defValue:1},
+            {name:'dquantity',defValue:1},
+            {name:'baseuomquantity',defValue:1.00},
+            {name:'rate',defValue:0},
+            {name:'amount',defValue:0},
+            {name:'uomname'},
+            {name:'uomid'},
+            {name:'baseuomrate',defValue:1.00},
+            {name:'copyquantity'},
+            {name:'invstore'},
+            {name:'invlocation'},
+            {name:'copybaseuomrate',mapping:'baseuomrate'},//for handling inventory updation 
+//            {name:'copyquantity',mapping:'quantity'},
+//            {name:'rate'},
+//            {name:'rateinbase'},
+//            {name:'discamount'},
+            {name:'discount'},
+            {name:'discountispercent',defValue:1},
+            {name:'prdiscount',defValue:0},
+            {name:'prtaxid'},
+            {name:'prtaxname'},
+            {name:'prtaxpercent'},
+            {name:'taxamount',defValue:0},
+//            {name:'amount'},
+            {name:'amountwithtax'},
+//            {name:'taxpercent'},
+            {name:'remark'},
+            {name:'transectionno'},
+            {name:'remquantity'},
+            {name:'remainingquantity'},
+            {name:'oldcurrencyrate'},
+            {name: 'currencysymbol',defValue:this.symbol},
+            {name: 'currencyrate'},
+            {name: 'externalcurrencyrate'},
+            {name:'orignalamount'},
+            {name:'typeid',defValue:0},
+            {name:'isNewRecord',defValue:"0"},
+            {name: 'changedQuantity'},
+            {name:'producttype'},
+            {name:'permit'},
+            {name:'linkto'},
+            {name:'linkid'},
+            {name:'linkDate'},//To get date of linked document.
+            {name:'linktype'},
+            {name:'savedrowid'},
+            {name:'originalTransactionRowid'},
+            {name:'batchdetails'},
+            {name:'lockquantity'},
+            {name:'islockQuantityflag'},
+            {name:'customfield'},
+            {name:'productcustomfield'},
+            {name:'assetDetails'},
+            {name:'isAsset',type:'boolean'},
+            {name:'supplierpartnumber'},
+            {name:'pid'},
+            {name:'priceSource'},
+            {name:'pricingbandmasterid'},
+            {name: 'srno', isForSequence:true},
+            {name:'hasAccess'},
+            {name: 'isLocationForProduct'},
+            {name: 'isWarehouseForProduct'},
+            {name: 'isBatchForProduct'},
+            {name: 'isSerialForProduct'},           
+            {name:'lineleveltermamount',defValue:0},
+            {name:'recTermAmount'},
+            {name:'OtherTermNonTaxableAmount'},
+            {name:'LineTermdetails'},
+            {name:'taxclass'},
+            {name:'prodtype'},
+            {name:'taxclasshistoryid'}
+           // {name:'linkid'}
+//            {name:'deliveredquantity'},
+                          
+        ]);
+        var url=Wtf.req.account+((this.fromOrder||this.readOnly)?((this.isCustomer)?'CustomerManager.jsp':'VendorManager.jsp'):((this.isCN)?'CustomerManager.jsp':'VendorManager.jsp'));
+        if(this.fromOrder)
+           url=Wtf.req.account+(this.isCustomer?'CustomerManager.jsp':'VendorManager.jsp');
+        this.store = new Wtf.data.Store({
+            url:url,
+//            sortInfo:{
+//                field:'srno',
+//                direction:'ASC'
+//            },
+            reader: new Wtf.data.KwlJsonReader({
+                root: "data"
+            },this.storeRec)
+        });
+        this.store.on('load',this.loadPOProduct,this);
+ //       chkProductPriceload();                    
+    },
+    createComboEditor:function(){
+       this.pricingBandMasterRec = Wtf.data.Record.create([
+            {name: 'pricingbandmasterid', mapping: 'id'},
+            {name: 'pricingbandmastername', mapping: 'name'},
+            {name: 'currencyID'}
+        ]);
+
+        this.pricingBandMasterStore = new Wtf.data.Store({
+            url: "ACCMaster/getPricingBandItems.do",
+            reader: new Wtf.data.KwlJsonReader({
+                totalProperty: "totalCount",
+                root: "data"
+            }, this.pricingBandMasterRec)
+        });
+        this.pricingBandMasterStore.load();
+
+        this.pricingBandMasterEditor = new Wtf.form.FnComboBox({
+            hiddenName: 'pricingbandmaster',
+            triggerAction: 'all',
+            mode: 'local',
+            lastQuery: '',
+            name: 'pricingbandmaster',
+            store: this.pricingBandMasterStore, //Wtf.productStore Previously, now changed bcos of addition of Inventory Non sale product type
+            typeAhead: true,
+            selectOnFocus: true,
+            valueField: 'pricingbandmasterid',
+            displayField: 'pricingbandmastername',
+            scope: this,
+            forceSelection: true
+        });
+        this.productId= new Wtf.form.TextField({
+            name:'pid'
+        });
+        this.productComboStore.on('beforeload',function(s,o){
+                if(!o.params)o.params={};
+                var currentBaseParams = this.productComboStore.baseParams;
+                currentBaseParams.getSOPOflag=true;
+                currentBaseParams.startdate = WtfGlobal.convertToGenericDate(WtfGlobal.getDates(true));
+                currentBaseParams.enddate = WtfGlobal.convertToGenericDate(WtfGlobal.getDates(false));         
+                currentBaseParams.searchProductString = (this.productOptimizedFlag==Wtf.Products_on_Submit && !this.isProductLoad)? this.productId.getValue():"";
+                currentBaseParams.isFreeTextSearching = (this.productOptimizedFlag==Wtf.Products_on_Submit);
+                this.productComboStore.baseParams=currentBaseParams; 
+                if(this.ProductloadingMask==undefined){
+                this.ProductloadingMask = new Wtf.LoadMask(document.body,{
+                    msg : WtfGlobal.getLocaleText("acc.msgbox.57")
+                });
+                    this.ProductloadingMask.show();
+                }
+            },this); 
+            
+        this.productComboStore.on("load", function() {
+            if (this.ProductloadingMask) {
+                this.ProductloadingMask.hide();
+            }
+//          this.getView().refresh();    //ERP-24142 and ERP-24136 : due this line if typehead option true from System Control 1st time product was not added.
+        }, this);
+        this.productComboStore.on("loadexception",function(){
+            if(this.ProductloadingMask)
+                this.ProductloadingMask.hide();
+        },this);
+        if(this.productOptimizedFlag== undefined || this.productOptimizedFlag==Wtf.Show_all_Products){    
+        this.isCustomer ? chkproductSalesload() : chkproductload() ;
+        this.productEditor=new Wtf.form.ExtFnComboBox({
+            name:(this.isLeaseFixedAsset)? 'pid' : 'productname',
+            store:this.productComboStore,       //Wtf.productStore Previously, now changed bcos of addition of Inventory Non sale product type
+            typeAhead: true,
+            selectOnFocus:true,
+            isProductCombo: true,
+            maxHeight:250,
+            listAlign:"bl-tl?",//[ERP-5149] To expand list of combobox always on top. 
+            valueField:'productid',
+            displayField:'pid',
+            extraFields:(this.isLeaseFixedAsset)?['productname','type']:['productname','type'],
+            extraComparisionField:'pid',// type ahead search on acccode as well.
+            listWidth:400,
+            lastQuery:'',
+            extraComparisionField:'pid',// type ahead search on pid as well.
+            //editable:false,
+            scope:this,
+            hirarchical:true,
+           // addNewFn:this.openProductWindow.createDelegate(this),
+            forceSelection:true,
+            isProductCombo:true
+        });
+        }else{         
+            this.productEditor=new Wtf.form.ExtFnComboBox({
+                name:(this.isLeaseFixedAsset)? 'pid' : 'productname',
+                store:this.productComboStore,       //Wtf.productStore Previously, now changed bcos of addition of Inventory Non sale product type
+                typeAhead: true,
+                isProductCombo: true,
+                selectOnFocus:true,
+                maxHeight:250,
+             //   lastQuery: '',
+                 listAlign:"bl-tl?",//[ERP-5149] To expand list of combobox always on top. 
+                 valueField:'productid',
+                 displayField:(this.isLeaseFixedAsset)? 'pid' : 'pid',
+                 extraFields:(this.isLeaseFixedAsset)?['productname','type']:['pid','type'],
+                extraComparisionField:'pid',// type ahead search on acccode as well.
+                listWidth:400,
+                scope:this,
+                hirarchical:true,
+                mode:'remote',
+                hideTrigger:true,
+                triggerAction : 'all',
+                editable : true,
+                minChars : 2,
+                hideAddButton : true,//Added this Flag to hide AddNew  Button  
+                addNewFn:this.openProductWindow.createDelegate(this),
+                forceSelection:true,
+                isProductCombo:true
+            });
+        }
+        this.productEditor.on('beforeselect', function(combo, record, index) {
+                return validateSelection(combo, record, index);
+        }, this);
+        if(this.productOptimizedFlag!=Wtf.Products_on_Submit){
+            this.productEditor.on("blur",function(e,a,b){
+                if(Wtf.account.companyAccountPref.invAccIntegration && !this.isCustomer){
+                    e.store=this.productComboStore;
+                }    
+            },this);
+        }
+//        if(!WtfGlobal.EnableDisable(Wtf.UPerm.product, Wtf.Perm.product.edit))
+//            this.productEditor.addNewFn=this.openProductWindow.createDelegate(this);
+        
+        chkUomload();
+        this.uomEditor=new Wtf.form.FnComboBox({
+            name:'uomname',
+            store:Wtf.uomStore,       //Wtf.productStore Previously, now changed bcos of addition of Inventory Non sale product type
+            typeAhead: true,
+            selectOnFocus:true,
+            valueField:'uomid',
+            displayField:'uomname',
+            scope:this,
+            forceSelection:true
+        });
+        if(!WtfGlobal.EnableDisable(Wtf.UPerm.uom, Wtf.Perm.uom.edit))
+            this.uomEditor.addNewFn=this.showUom.createDelegate(this);
+
+        this.productComboStore.on("load",this.loadPriceAfterProduct,this);
+        this.remark= new Wtf.form.TextField({
+            name:'remark'
+        });        
+        
+        this.inventoryStores = new Wtf.form.ComboBox({
+            store: Wtf.inventoryStore,
+            name:'storeid',
+            displayField:'storedescription',
+            valueField:'storeid',
+            mode: 'local',
+            triggerAction: 'all',
+            selectOnFocus:true
+        });
+        
+        this.inventoryLocation = new Wtf.form.ComboBox({
+            store: Wtf.inventoryLocation,
+            name:'locationid',
+            displayField:'locationname',
+            valueField:'locationid',
+            mode: 'local',
+            triggerAction: 'all',
+            selectOnFocus:true
+        });
+        
+        this.partno= new Wtf.form.TextField({
+            name:'partno',
+            maxLength : 255
+        });
+
+        this.actQuantity=new Wtf.form.NumberField({
+            allowBlank: false,            
+            defaultValue:0,
+            allowNegative: false,
+            maxLength:10,
+            maskRe: /[0-9]+(\.[0-9]+)?$/,
+//            decimalPrecision:Wtf.QUANTITY_DIGIT_AFTER_DECIMAL
+            allowDecimals:false
+        });
+        
+        this.deliQuantity=new Wtf.form.NumberField({
+            allowBlank: false,            
+            defaultValue:0,
+            allowNegative: false,
+            maxLength:10,
+            maskRe: /[0-9]+(\.[0-9]+)?$/,
+//            decimalPrecision:Wtf.QUANTITY_DIGIT_AFTER_DECIMAL
+            allowDecimals:false
+        });                                 
+        this.transBaseuomrate=new Wtf.form.NumberField({
+            allowBlank: false,
+            allowNegative: false,
+            maxLength:10
+        });
+        this.editprice = new Wtf.form.NumberField({
+            allowBlank: false,
+            allowNegative: false,
+            maxLength:14
+        });
+    },
+    showUom:function(){
+       callUOM('uomReportWin');
+       Wtf.getCmp('uomReportWin').on('update', function(){
+           Wtf.uomStore.reload();
+       }, this);
+    },
+    openProductWindow:function(){
+        this.stopEditing();
+        createFixedAsset();    //    ERP-12587
+//        callProductWindow(false, null, "productWin");
+       // this.productStore.on('load',function(){this.productStore.})
+//        Wtf.getCmp("productWin").on("update",function(obj,productid){this.productID=productid;},this);
+    },
+
+    createColumnModel:function(){                
+        this.summary = new Wtf.ux.grid.GridSummary();
+        this.rowno=(this.isNote)?new Wtf.grid.CheckboxSelectionModel():new Wtf.grid.RowNumberer();
+        var columnArr =[];
+        if(!this.readOnly){
+            columnArr.push(this.rowno);
+        }            
+        columnArr.push({
+            dataIndex:'rowid',
+            hidelabel:true,
+            hidden:true
+        },{
+            dataIndex:'billid',
+            hidelabel:true,
+            hidden:true
+        });
+        columnArr.push({
+            header:WtfGlobal.getLocaleText("acc.invoice.lineItemSequence"),//"Sequence",
+            width:65,
+            align:'center',
+//            dataIndex:'srno',
+            name:'srno',
+            renderer: Wtf.applySequenceRenderer
+        });
+        var headerdata =(this.isLeaseFixedAsset)?WtfGlobal.getLocaleText("acc.product.gridProductID"):WtfGlobal.getLocaleText("erp.fixedasset.assetgroupid") ;//// "Produt ID" : "Asset Group",
+        if(this.productOptimizedFlag!=Wtf.Products_on_Submit){
+            columnArr.push({
+                header:headerdata,
+                width:250,
+                dataIndex:(this.isLeaseFixedAsset)? (this.readOnly||this.productOptimizedFlag==Wtf.Products_on_type_ahead?'pid':'productid') : (this.readOnly ||this.productOptimizedFlag==Wtf.Products_on_type_ahead)? 'pid' : 'productid',
+                editor:(this.isNote||this.readOnly)?"":this.productEditor,
+                renderer:(this.productOptimizedFlag==Wtf.Products_on_type_ahead)?(this.readOnly?"":this.getComboNameRenderer(this.productEditor)):(this.readOnly?"":Wtf.comboBoxRenderer(this.productEditor))
+            });
+        } else {
+            columnArr.push({
+                header:headerdata, 
+                width:250,
+                dataIndex: 'pid',
+                editor:(this.isNote||this.readOnly||this.productOptimizedFlag!=Wtf.Products_on_Submit)?"":this.productId
+            });
+        }
+        columnArr.push({
+            header: this.isLeaseFixedAsset?WtfGlobal.getLocaleText("acc.invoiceList.expand.pName"):WtfGlobal.getLocaleText("erp.fixedasset.assetgroupname"), // "Product Name",
+            dataIndex: 'productname',
+//            hidden: this.isFixedAsset
+        },{
+            header:this.isCN?WtfGlobal.getLocaleText("acc.invoice.gridInvNo"):WtfGlobal.getLocaleText("acc.invoice.gridVenInvNo"),//"Invoice No.":"Vendor Invoice No.",
+            width:150,
+            dataIndex:this.noteTemp?'transectionno':'billno',
+            hidden:!this.isNote
+        },{
+             header:WtfGlobal.getLocaleText("acc.do.partno"),//"Part No",
+             dataIndex:"partno",
+             width:250,
+             hidden:true,
+             editor:(this.readOnly)?"":this.partno
+         },{
+             header:this.isLeaseFixedAsset?WtfGlobal.getLocaleText("acc.saleByItem.gridProdDesc"):WtfGlobal.getLocaleText("erp.field.AssetDesciption"),//"Description",
+             dataIndex:"description",
+             hidden:this.isNote,
+             width:250,
+             editor:(this.isNote||this.readOnly)?"":this.remark,
+             renderer:this.descriptionRenderer //ERP-13792 [SJ]
+         });
+        columnArr = WtfGlobal.appendCustomColumn(columnArr,GlobalColumnModelForProduct[this.moduleid],undefined,undefined,this.readOnly);
+        columnArr = WtfGlobal.appendCustomColumn(columnArr,GlobalColumnModel[this.moduleid],undefined,undefined,this.readOnly);
+         columnArr.push({
+             header:WtfGlobal.getLocaleText("acc.product.supplier"),//"Supplier Part Number",
+             dataIndex:"supplierpartnumber",
+             hidden:!(Wtf.account.companyAccountPref.invAccIntegration && Wtf.account.companyAccountPref.partNumber && !this.isCustomer),
+             width:150
+         },{
+             header:WtfGlobal.getLocaleText("acc.field.InventoryStore"), 
+             dataIndex:'invstore',
+             hidden:!(Wtf.account.companyAccountPref.invAccIntegration && Wtf.account.companyAccountPref.isUpdateInvLevel),
+                 //&& (Wtf.account.companyAccountPref.withinvupdate && (this.isCashType||this.isCN))),
+             width:150,
+             renderer:Wtf.comboBoxRenderer(this.inventoryStores),
+             editor:(this.readOnly)?"":this.inventoryStores
+         },{
+             header:WtfGlobal.getLocaleText("acc.field.ShelfLocation"),
+             dataIndex:"shelfLocation",
+             hidden:!(!this.isCustomer&&Wtf.account.companyAccountPref.invAccIntegration),
+             width:250,
+             editor:(this.readOnly)?"":new Wtf.form.TextField()    
+         },{
+             header:WtfGlobal.getLocaleText("acc.field.InventoryLocation"), 
+             dataIndex:'invlocation',
+             hidden:!(Wtf.account.companyAccountPref.invAccIntegration && Wtf.account.companyAccountPref.isUpdateInvLevel),
+                 //&& (Wtf.account.companyAccountPref.withinvupdate && (this.isCashType||this.isCN))),
+             width:150,
+             renderer:Wtf.comboBoxRenderer(this.inventoryLocation),
+             editor:(this.readOnly)?"":this.inventoryLocation
+         },{
+             header:WtfGlobal.getLocaleText("acc.field.ActualQuantity"),
+             dataIndex:"quantity",             
+             align:'right',
+             width:200,
+             editor:(this.readOnly)?"":this.actQuantity,
+             renderer:this.quantityRenderer
+//             renderer:this.storeRenderer(this.productComboStore,"productid","uomname")
+        },{
+             header:this.isCustomer ? WtfGlobal.getLocaleText("acc.accPref.deliQuant") : WtfGlobal.getLocaleText("acc.field.ReceivedQuantity"),
+             dataIndex:"dquantity",
+             align:'right',
+             width:100,
+             editor:(this.readOnly)?"":this.deliQuantity,
+             renderer:this.quantityRenderer
+//             renderer:this.storeRenderer(this.productComboStore,"productid","uomname")
+         },{
+             header: '',
+             align:'center',
+             renderer:function(a,b,c){
+                var isAsset=c.data.isAsset;
+                if(isAsset){
+                    return viewRenderer();
+                }else if(Wtf.account.companyAccountPref.isBatchCompulsory || Wtf.account.companyAccountPref.isSerialCompulsory){
+                    return serialRenderer();  
+                }
+                
+            },
+//             hidden:!(Wtf.account.companyAccountPref.showprodserial),
+             width:40
+        },{
+            header:WtfGlobal.getLocaleText("acc.invoice.gridUOM"),//"UOM",
+            width:100,
+            hidden:(this.isFixedAsset ||this.isLeaseFixedAsset),
+            dataIndex:this.readOnly?'uomname':'uomid',
+            renderer:this.readOnly?"":Wtf.comboBoxRenderer(this.uomEditor),
+            editor:(this.isNote||this.readOnly)?"":this.uomEditor
+        },{
+             header:WtfGlobal.getLocaleText("acc.invoice.gridRateToBase"),//Base UOM Rate
+             dataIndex:"baseuomrate",
+             hidden:this.isFixedAsset,
+             align:'left',
+             width:100,
+             renderer:this.conversionFactorRenderer(this.productComboStore,"productid","uomname"),
+             editor:(this.isNote||this.readOnly)?"":this.transBaseuomrate
+         },{
+             header:WtfGlobal.getLocaleText("acc.invoice.gridQtyInBase"),//Base UOM Quantity
+             dataIndex:"baseuomquantity",
+             align:'right',
+             hidden:this.isFixedAsset,
+             width:50,
+             renderer:this.storeRenderer(this.productComboStore,"productid","uomname")
+//             editor:(this.isNote||this.readOnly)?"":this.transQuantity
+         },{
+            header:WtfGlobal.getLocaleText("acc.invoice.gridUnitPrice"), // "Unit Price",
+            dataIndex: "rate",
+            align:'right',
+            width:150,
+            renderer:WtfGlobal.withoutRateCurrencySymbol,
+            editor:(this.isNote||this.readOnly) ? "" : this.editprice,
+            editable:true,
+            hidden: !(this.isCustomer?Wtf.account.companyAccountPref.unitPriceInDO:Wtf.account.companyAccountPref.unitPriceInGR)
+        },{
+            header: WtfGlobal.getLocaleText("acc.field.DiscountType"),
+            width:150,
+            dataIndex:'discountispercent',
+            id:this.id+"discountispercent",
+            fixed:true,
+            hidden:!(this.isCustomer?Wtf.account.companyAccountPref.unitPriceInDO:Wtf.account.companyAccountPref.unitPriceInGR),
+            renderer:Wtf.comboBoxRenderer(this.rowDiscountTypeCmb),
+            editor:""
+        },{
+             header: WtfGlobal.getLocaleText("acc.invoice.gridDiscount"),//"Discount",
+             dataIndex:"prdiscount",
+             id:this.id+"prdiscount",
+             align:'right',
+             fixed:true,
+             width:150,
+             hidden:!(this.isCustomer?Wtf.account.companyAccountPref.unitPriceInDO:Wtf.account.companyAccountPref.unitPriceInGR),
+             renderer:function(v,m,rec){
+                 if(rec.data.discountispercent) {
+                     v= v + "%";
+                 } else {
+                     var symbol = WtfGlobal.getCurrencySymbol();
+                     if(rec.data['currencysymbol']!=undefined && rec.data['currencysymbol']!=""){
+                         symbol = rec.data['currencysymbol'];
+                     }
+                     
+                     v= WtfGlobal.conventInDecimal(v,symbol)
+                 }
+                 return'<div class="currency">'+v+'</div>';
+             },
+             editor:""
+         },{
+             header: WtfGlobal.getLocaleText("acc.invoice.proTax"),//"Product Tax",
+             dataIndex:"prtaxid",
+             id:this.id+"prtaxid",
+             fixed:true,
+             width:150,
+             hidden:!(this.isCustomer?Wtf.account.companyAccountPref.unitPriceInDO:Wtf.account.companyAccountPref.unitPriceInGR),// show this column inly for DO
+             renderer:Wtf.comboBoxRenderer(this.transTax),
+             editor:""//(this.isCustomer && Wtf.account.companyAccountPref.countryid=='137'?this.transTax:"")// DO can be applied for tax in Malaysia after 21 days so editor is necessary at here
+        },{
+             header: WtfGlobal.getLocaleText("acc.invoice.gridTaxAmount"),//"Tax Amount",
+             dataIndex:"taxamount",
+             id:this.id+"taxamount",
+             fixed:true,
+             //align:'right',
+             width:150,
+             editor:"",//this.transTaxAmount,
+             hidden:!(this.isCustomer?Wtf.account.companyAccountPref.unitPriceInDO:Wtf.account.companyAccountPref.unitPriceInGR),// show this column inly for DO
+             renderer:this.setTaxAmountWithotExchangeRate.createDelegate(this)
+        },{
+             header: WtfGlobal.getLocaleText("acc.invoice.gridAmount"), // "Amount",
+             dataIndex:"amount",
+             align:'right',
+             width:200,
+             renderer:(this.isNote?WtfGlobal.withoutRateCurrencySymbol:this.calAmountWithoutExchangeRate.createDelegate(this)),
+             hidden: !(this.isCustomer?Wtf.account.companyAccountPref.unitPriceInDO:Wtf.account.companyAccountPref.unitPriceInGR)
+        },{
+                header:WtfGlobal.getLocaleText("acc.field.Remarks"),  //"Remark",
+                dataIndex:"remark",
+                editor:(this.readOnly)?"":this.Description=new Wtf.form.TextArea({
+                    maxLength:200,
+                    allowBlank: false,
+                    xtype:'textarea'
+                })
+        });
+        if(Wtf.account.companyAccountPref.isLineLevelTermFlag){
+            columnArr.push({
+                header:WtfGlobal.getLocaleText("acc.invoicegrid.TaxAmount"),//"Total Tax Amount",
+                dataIndex:"recTermAmount",
+                //hidden : this.isRFQ || this.isRequisition ? true : false,
+                align:'right',
+                width:100,
+                renderer: WtfGlobal.withoutRateCurrencySymbol
+            },{
+                header: WtfGlobal.getLocaleText("acc.invoicegrid.tax"), 
+                align: 'center',                
+                width: 40,
+                dataIndex:"LineTermdetails",
+                renderer:this.addRenderer.createDelegate(this),
+                //hidden:  this.isRFQ || this.isRequisition ? true : false 
+            });
+        }
+        if(!this.isNote && !this.readOnly) {
+            columnArr.push({
+                header:WtfGlobal.getLocaleText("acc.invoice.gridAction"),//"Action",
+                align:'center',
+                width:40,
+                hidden:this.readOnly,
+                renderer: this.deleteRenderer.createDelegate(this)
+            });
+        }
+       /* if(this.isFixedAsset || this.isLeaseFixedAsset) {
+            columnArr.push({
+                header:WtfGlobal.getLocaleText("acc.fixed.asset.view"),
+                align:'center',
+                width:40,
+                renderer: this.viewRenderer.createDelegate(this)
+            });
+        }*/
+        this.cm=new Wtf.grid.ColumnModel(columnArr);
+    },
+    quantityRenderer:function(val,m,rec){
+       return (val=="NaN"?0:val);    //return (parseFloat(getRoundofValue(val)).toFixed(Wtf.QUANTITY_DIGIT_AFTER_DECIMAL)=="NaN")?parseFloat(0).toFixed(Wtf.QUANTITY_DIGIT_AFTER_DECIMAL):parseFloat(getRoundofValue(val)).toFixed(Wtf.QUANTITY_DIGIT_AFTER_DECIMAL);
+    },
+    serialRenderer:function(v,m,rec){
+        return "<div  wtf:qtip=\""+WtfGlobal.getLocaleText("acc.serial.desc")+"\" wtf:qtitle='"+WtfGlobal.getLocaleText("acc.serial.desc.title")+"' class='"+getButtonIconCls(Wtf.etype.serialgridrow)+"'></div>";
+    },
+    deleteRenderer:function(v,m,rec){
+        return "<div class='"+getButtonIconCls(Wtf.etype.deletegridrow)+"'></div>";
+    },
+    viewRenderer:function(v,m,rec){
+        return "<div class='view pwnd view-gridrow'  title='View Asset Details '></div>";
+    },
+    handleRowClick:function(grid,rowindex,e){
+        if(!this.readOnly && e.target.className == "pwndBar2 shiftrowupIcon") {
+            moveSelectedRowFormasterItems(grid,0,rowindex);
+        }
+        if(!this.readOnly && e.target.className == "pwndBar2 shiftrowdownIcon") {
+            moveSelectedRowFormasterItems(grid,1,rowindex);
+        }
+        if(e.getTarget(".delete-gridrow")){
+            Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"), WtfGlobal.getLocaleText("acc.nee.48"), function(btn){
+                if(btn!="yes") return;
+                var store=grid.getStore();
+                var total=store.getCount();
+                var record = store.getAt(rowindex);
+                if(record.data.copyquantity!=undefined){                    
+                     var deletedData=[];
+                     var newRec=new this.deleteRec({
+                                productid:record.data.productid,
+                                productname:record.data.productname,    
+                                productquantity:record.data.dquantity,
+                                productbaseuomrate:record.data.baseuomrate,                                
+                                productbaseuomquantity:record.data.baseuomquantity,
+                                productuomid:record.data.uomid,
+                                productinvstore:record.data.invstore,
+                                productinvlocation:record.data.invlocation,
+                                productrate:record.data.rate                                
+                            });                            
+                            deletedData.push(newRec);
+                            this.deleteStore.add(deletedData);                            
+                }
+                store.remove(store.getAt(rowindex));                
+                if(rowindex==total-1){
+                    this.addBlankRow();
+                }
+                this.fireEvent('productdeleted',this);
+                this.fireEvent('datachanged',this);
+            }, this);
+        } else if((this.isFixedAsset || this.isLeaseFixedAsset) && e.getTarget(".view-gridrow")){
+            var store=grid.getStore(); 
+            var total=store.getCount();
+            if(rowindex==total-1){
+                return;
+            }
+            var record = store.getAt(rowindex);
+            if(this.isFixedAsset || this.isLeaseFixedAsset){
+                var productid = record.get('productid');
+                var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, productid, 'productid');
+                //when creating asset GR  with multiple Asset Group then productid found both 'productComboStore' and 'store' in type ahead 
+                if(productComboRecIndex==-1){
+                    productComboRecIndex=WtfGlobal.searchRecordIndex(store, productid, 'productid');
+                    var proRecord = store.getAt(productComboRecIndex);
+                } else if(productComboRecIndex >=0){
+                    var proRecord = this.productComboStore.getAt(productComboRecIndex);
+                }
+                if (proRecord.get('isAsset') && record.get("quantity") != 0){
+                    this.callFixedAssetDetailsWindow(record, proRecord, this.readOnly);
+                }
+                
+            }
+
+        } else if(e.getTarget(".serialNo-gridrow")){
+             var store=grid.getStore();
+            var record = store.getAt(rowindex);
+            if(this.isFixedAsset || this.isLeaseFixedAsset){
+                var productid = record.get('productid');
+                var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, productid, 'productid');
+                if (productComboRecIndex == -1) {
+                    productComboRecIndex = WtfGlobal.searchRecordIndex(store, productid, 'productid');
+                }
+                if (productComboRecIndex >= 0) {
+                    var proRecord = this.productComboStore.getAt(productComboRecIndex);
+                    var recIndex = WtfGlobal.searchRecordIndex(this.productComboStore, productid, 'productid');
+                    if (recIndex == -1) {
+                        proRecord = this.getStore().getAt(productComboRecIndex);
+                    }
+                    if(proRecord.get('isAsset')==false && record.get("quantity") != 0)
+                       if(Wtf.account.companyAccountPref.isBatchCompulsory || Wtf.account.companyAccountPref.isSerialCompulsory || Wtf.account.companyAccountPref.isLocationCompulsory || Wtf.account.companyAccountPref.isWarehouseCompulsory || Wtf.account.companyAccountPref.isRowCompulsory || Wtf.account.companyAccountPref.isRackCompulsory || Wtf.account.companyAccountPref.isBinCompulsory){ //if company level option is on then only check batch and serial details
+                        if(proRecord.data.isLocationForProduct || proRecord.data.isWarehouseForProduct || proRecord.data.isBatchForProduct || proRecord.data.isSerialForProduct || proRecord.data.isRowForProduct || proRecord.data.isRackForProduct  || proRecord.data.isBinForProduct) {
+                                if (this.isCustomer) {
+                                    var batchdetails = record.data.batchdetails;
+                                    Wtf.Ajax.requestEx({
+                                        url: "ACCInvoice/getBatchRemainingQuantity.do",
+                                        params: {
+                                            batchdetails: batchdetails,
+                                            transType: this.moduleid,
+                                            isEdit: this.isEdit,
+                                            linkflag: this.blockQtyFlag
+                                        }
+                                    }, this, function(res, req) {
+                                        this.AvailableQuantity = res.quantity;
+                                        this.callSerialNoWindow(record);
+                                        return;
+                                    }, function(res, req) {
+                                        return false;
+                                    });
+                                }
+
+//                                this.callSerialNoWindow(record);
+                            }else{
+                                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),this.isFixedAsset?WtfGlobal.getLocaleText("acc.batchserial.FunctinalityAsset"):WtfGlobal.getLocaleText("acc.batchserial.Functinality")],2);   //Batch and serial no details are not valid.
+                                return;
+                            }
+                        }
+                }
+                
+            }
+              
+
+        }
+    },   
+     addRenderer: function(v, m, rec) {
+        var hideUnitPriceAmount = this.isCustomer ? !Wtf.dispalyUnitPriceAmountInSales : !Wtf.dispalyUnitPriceAmountInPurchase;
+        if (this.isModuleForAvalara) {
+            return getToolTipOfAvalaraTerms(v, m, rec, hideUnitPriceAmount);
+        } else {
+            return getToolTipOfTermsfun(v, m, rec, hideUnitPriceAmount);
+        }
+    },
+    conversionFactorRenderer:function(store, valueField, displayField) {
+        return function(value, meta, record) {
+            var idx = Wtf.uomStore.find("uomid", record.data["uomid"]);            
+            if(idx == -1)
+                return value;
+            var uomname = Wtf.uomStore.getAt(idx).data["uomname"];
+            if (uomname == "N/A") {
+                return value;
+            }
+            idx = store.find(valueField, record.data[valueField]);
+            if(idx == -1)
+                return value;
+            var rec = store.getAt(idx);
+            return "1 "+ uomname +" = "+ +value+" "+rec.data[displayField];
+        }
+    },
+    storeRenderer:function(store, valueField, displayField) {
+        return function(value, meta, record) {
+            var idx = store.find(valueField, record.data[valueField]);
+            if(idx == -1)
+                return value;
+            var rec = store.getAt(idx);
+            return value+" "+rec.data[displayField];
+        }
+    },
+    descriptionRenderer :function(val, meta, rec, row, col, store) {  //ERP-13792 [SJ]
+        var regex = /(<([^>]+)>)/ig;
+//        val = val.replace(/(<([^>]+)>)/ig,"");
+        var tip = val.replace(/"/g,'&rdquo;');
+        meta.attr = 'wtf:qtip="'+tip+'"'+'" wtf:qtitle="'+WtfGlobal.getLocaleText("acc.gridproduct.discription")+'"';
+        return val;
+    },
+    RitchTextBoxSetting:function(grid, rowIndex, columnIndex, e){
+        var v=WtfGlobal.RitchTextBoxSetting(grid, rowIndex, columnIndex, e, this.readOnly);
+        return v;
+    },
+    
+    updateRow:function(obj){
+        if(obj!=null){            
+            this.productComboStore.clearFilter(); // Issue 22189
+            var rec=obj.record;
+            if(obj.field=="baseuomrate"){
+                if(this.isCustomer)
+                    rec.set("changedQuantity",(rec.data.copybaseuomrate-obj.value)*((rec.data.copyquantity==="")?1:rec.data.copyquantity));
+                  else
+                    rec.set("changedQuantity",(obj.value-rec.data.copybaseuomrate)*((rec.data.copyquantity==="")?1:rec.data.copyquantity));
+                
+                  var productComboIndex = WtfGlobal.searchRecordIndex(this.priceStore, obj.record.get('productid'), 'productid');
+                  var productuomid = "";
+                  if(productComboIndex >=0){
+                      prorec = this.priceStore.getAt(productComboIndex);
+                      productuomid = prorec.data.uomid;
+                      if(obj.record.get("uomid")!=undefined && productuomid != obj.record.get("uomid")){
+                            obj.record.set("baseuomquantity", obj.record.get("quantity")*obj.value);
+                      } else {
+                          obj.record.set("baseuomrate", 1);
+                      }
+                  }
+//                  this.fireEvent('datachanged',this);
+            }
+            if(obj.field=="uomid"){
+                  var prorec = null;
+                  var productComboIndex = WtfGlobal.searchRecordIndex(this.priceStore, obj.record.get('productid'), 'productid');
+                  var productuomid = "";
+                  if(productComboIndex >=0){
+                      prorec = this.priceStore.getAt(productComboIndex);
+                      productuomid = prorec.data.uomid;
+                      if(productuomid != obj.value){
+                          //To do - Need to take rate from new window
+//                      this.showPriceWindow.createDelegate(this,[rec, obj],true);
+                            obj.record.set("baseuomquantity", obj.record.get("quantity")*obj.record.get("baseuomrate"));
+                      } else {
+                          obj.record.set("baseuomrate", 1);
+                          obj.record.set("baseuomquantity", obj.record.get("quantity")*obj.record.get("baseuomrate"));
+                      }
+                  }
+//                  this.fireEvent('datachanged',this);
+            }
+            if(obj.field=="productid" || obj.field=="pid" ){
+                rec=obj.record;
+                var index=this.priceStore.find('productid',obj.value);
+               if(this.isCustomer)
+                    rec.set("changedQuantity",(rec.data.quantity*(-1))*rec.data.baseuomrate);
+                else
+                    rec.set("changedQuantity",(rec.data.quantity)*rec.data.baseuomrate);
+                if(index>=0){
+                    rec=this.priceStore.getAt(index);
+                    obj.record.set("description",rec.data["desc"]);
+                    obj.record.set("isAsset",rec.data["isAsset"]);
+                    obj.record.set("supplierpartnumber",rec.data["supplierpartnumber"]);
+                    obj.record.set("shelfLocation",rec.data["shelfLocation"]);
+                    obj.record.set("prtaxid", "");
+                    obj.record.set("taxamount","");      
+                  obj.record.set("productname",rec.data['productname']);
+//                    if(this.isFixedAsset){
+//                        obj.record.set("quantity",0);
+//                    }else{
+                        obj.record.set("quantity",1);
+//                    }
+                    obj.record.set("baseuomquantity",1);
+                    obj.record.set("baseuomrate",1);
+                    obj.record.set("uomid", rec.data["uomid"]);
+                    if(this.isCustomer)
+                        obj.record.set("rate",rec.data["salespricedatewise"]);
+                    else
+                        obj.record.set("rate",rec.data["purchasepricedatewise"]);
+                    }
+                var productid = "";
+                if(this.productOptimizedFlag==Wtf.Products_on_Submit){
+                    productComboIndex = WtfGlobal.searchRecordIndex(this.productComboStore, obj.value.trim(), 'pid');
+                    if (productComboIndex >= 0) {
+                        prorec = this.productComboStore.getAt(productComboIndex);
+                        productid = prorec.data.productid;
+                        rec.set("productid", productid);
+                        obj.record.set("isAsset", prorec.data.isAsset);
+                    }
+                }     
+                    
+                    
+                Wtf.Ajax.requestEx({
+                    url:"ACCProduct/getIndividualProductPrice.do",
+                    params:{
+                        productid:this.productOptimizedFlag==Wtf.Products_on_Submit?productid:obj.value,
+                        affecteduser: this.affecteduser,
+                        currency: this.parentObj.Currency.getValue(),
+                        quantity: obj.record.data.dquantity,
+                        transactiondate : WtfGlobal.convertToGenericDate(this.billDate),
+                        carryin : (this.isCustomer)? false : true
+                    }
+                }, this,function(response){
+                    var datewiseprice =response.data[0].price;
+                    this.isPriceListBand = response.data[0].isPriceListBand;
+                    this.isVolumeDisocunt = response.data[0].isVolumeDisocunt;
+                    this.priceSource = response.data[0].priceSource;
+                    this.pricingbandmasterid=response.data[0].pricingbandmasterid;
+                    this.isPriceFromUseDiscount = response.data[0].isPriceFromUseDiscount;
+                    this.priceSourceUseDiscount = response.data[0].priceSourceUseDiscount;
+                    this.defaultPrice = datewiseprice;
+                         /*
+                         * set band of customer on product selection
+                         */
+                    obj.record.set("pricingbandmasterid", this.pricingbandmasterid);
+                    obj.record.set("oldcurrencyrate",1);
+                    for(var i=1;i<response.data.length;i++){
+                        var dataObj=response.data[i];
+                        var key=dataObj.key;
+                      for(var k=0;k<obj.grid.colModel.config.length;k++){
+                            if(obj.grid.colModel.config[k].dataIndex==key){
+                                var store=obj.grid.colModel.config[k].editor.field.store;
+                                if(store)
+                                    store.clearFilter();
+                                 obj.record.set(key,dataObj[key]);
+                            }
+                        }     
+                    }
+                    
+                    var productComboIndex = WtfGlobal.searchRecordIndex(this.productComboStore, obj.value, 'productid');
+                    var productname = "";
+                    //if 'Asset Group' set warehouse/location
+                    var isAsset = "";
+                    var isWarehouseForProduct = "";
+                    var isRowForProduct = "";
+                    var isRackForProduct = "";
+                    var isLocationForProduct = "";
+                    var isBinForProduct = "";
+                    var isBatchForProduct = "";
+                    var isSerialForProduct = "";
+                    var proddescription = "";
+                    var productuomid = undefined;
+                    var productsuppliernumber = "";
+                    var shelfLocation = "";
+                    var prorec = null;
+                    var acctaxcode = (this.isCustomer)?"salesacctaxcode":"purchaseacctaxcode";
+                    var protaxcode = "";
+                    var ComboIndex=0;
+                    if(this.productOptimizedFlag!= undefined && this.productOptimizedFlag==Wtf.Products_on_type_ahead && productComboIndex==-1){
+                        productComboIndex=1;
+                        ComboIndex=-1;
+                    }else if(this.productOptimizedFlag==Wtf.Products_on_Submit){
+                        productComboIndex = WtfGlobal.searchRecordIndex(this.productComboStore, obj.value.trim(), 'pid');
+                    }
+                    if(productComboIndex >=0){
+                        prorec = this.productComboStore.getAt(productComboIndex);
+                        if(ComboIndex==-1){
+                            prorec=rec;
+                        }
+                        productname = prorec.data.productname;
+                        proddescription = prorec.data.desc;
+                        productuomid = prorec.data.uomid;
+                        //if 'Asset Group' set warehouse/location
+                        isAsset = prorec.data.isAsset;
+                        isLocationForProduct = prorec.data.isLocationForProduct;
+                        isWarehouseForProduct= prorec.data.isWarehouseForProduct;
+                        isRowForProduct= prorec.data.isRowForProduct;
+                        isRackForProduct= prorec.data.isRackForProduct;
+                        isBinForProduct= prorec.data.isBinForProduct;
+                        isBatchForProduct= prorec.data.isBatchForProduct;
+                        isSerialForProduct= prorec.data.isSerialForProduct;
+                        productsuppliernumber= prorec.data.supplierpartnumber;
+                        shelfLocation = prorec.data.shelfLocation;
+                        protaxcode = prorec.data[acctaxcode];
+                    }
+                    obj.record.set("desc",proddescription);
+                    obj.record.set("description",proddescription);
+                    obj.record.set("uomid", productuomid);
+                    obj.record.set("supplierpartnumber",productsuppliernumber);
+                    obj.record.set("shelfLocation",shelfLocation);
+                    obj.record.set("productname", productname);
+                    //if 'Asset Group' set warehouse/location
+                    obj.record.set("isAsset", isAsset);
+                    obj.record.set("isLocationForProduct", isLocationForProduct);
+                    obj.record.set("isWarehouseForProduct", isWarehouseForProduct);
+                    obj.record.set("isRowForProduct", isRowForProduct);
+                    obj.record.set("isRackForProduct", isRackForProduct);
+                    obj.record.set("isBinForProduct", isBinForProduct);
+                    obj.record.set("isBatchForProduct", isBatchForProduct);
+                    obj.record.set("isSerialForProduct", isSerialForProduct);
+                obj.record.set("pid", prorec.data['pid']);
+                    if (this.isVolumeDisocunt) {
+                        if (obj.record.data.dquantity != "") {
+                            obj.record.set("rate", this.defaultPrice);
+                            obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.priceListVolumeDiscount") + " - " + this.priceSource);
+                        } else {
+                            obj.record.set("rate", "");
+                            obj.record.set("priceSource", "");
+                        }
+                    } else if (this.isPriceListBand) {
+                        if (this.isPriceFromUseDiscount) {
+                            if (obj.record.data.dquantity != "") {
+                                obj.record.set("rate", this.defaultPrice);
+                                obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.priceListVolumeDiscount") + " - " + this.priceSourceUseDiscount + ": " + WtfGlobal.getLocaleText("acc.field.pricingBands") + " - " + this.priceSource);
+                            } else {
+                                obj.record.set("rate", "");
+                                obj.record.set("priceSource", "");
+                            }
+                        } else {
+                            obj.record.set("rate", this.defaultPrice);
+                            obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.pricingBands") + " - " + this.priceSource);
+                        }
+                    } else {
+                        if(datewiseprice==0){
+                            if(!WtfGlobal.EnableDisable(Wtf.UPerm.product, Wtf.Perm.product.addprice) && !this.isRequisition){//permissions
+                                rec.set("productname",productname);
+                                obj.record.set("rate", 0);
+                            }else{
+                                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.field.Pricefortheproduct")+"<b>"+productname+"</b>"+' '+WtfGlobal.getLocaleText("acc.field.isnotset")], 2);
+                            }
+                        } else {
+                            // setting datewise price according to currency exchange rate - 
+                        
+                            var rate=((obj.record==undefined||obj.record.data['currencyrate']==undefined||obj.record.data['currencyrate']=="")?1:obj.record.data['currencyrate']);
+                            var oldcurrencyrate=((obj.record==undefined||obj.record.data['oldcurrencyrate']==undefined||obj.record.data['oldcurrencyrate']=="")?1:obj.record.data['oldcurrencyrate']);
+                            var modifiedRate;
+                            if(rate!=0.0)
+                                modifiedRate=(parseFloat(datewiseprice)*parseFloat(rate))/parseFloat(oldcurrencyrate);
+                            else
+                                modifiedRate=(parseFloat(datewiseprice)/parseFloat(oldcurrencyrate));
+                            
+                            if (this.isPriceFromUseDiscount) {
+                                if (obj.record.data.dquantity != "") {
+                                    obj.record.set("rate", this.defaultPrice);
+                                    obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.priceListVolumeDiscount") + " - " + this.priceSourceUseDiscount);
+                                } else {
+                                    obj.record.set("rate", "");
+                                    obj.record.set("priceSource", "");
+                                }
+                            } else {
+                                obj.record.set("rate", modifiedRate);
+                            }
+                        }
+                    }
+                    this.fireEvent('datachanged',this);
+            }, function(){
+                
+            });   
+//            if(this.isFixedAsset || this.isLeaseFixedAsset){
+//                var productid = rec.get('productid');
+//                var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, productid, 'productid');
+//                if(productComboRecIndex >=0){
+//                    var proRecord = this.productComboStore.getAt(productComboRecIndex);
+//                    if(proRecord.get('isAsset') && obj.record.get("dquantity") != 0)
+//                        this.callFixedAssetDetailsWindow(obj.record,proRecord);
+//                }
+//
+//            }
+            }else if(obj.field=="quantity"){
+                rec=obj.record;               
+                  if(((rec.data.isNewRecord=="" || rec.data.isNewRecord==undefined) && this.fromOrder&&!(this.editTransaction||this.copyInv))||(this.isEdit && rec.data.linkid !="")) {  
+                   if(((obj.value > rec.data.remainingquantity && rec.data.remainingquantity!="")||(obj.value > rec.data.copyquantity && rec.data.copyquantity !="")) ||(obj.value > rec.data.copyquantity && this.isEdit)){  
+                        var msg=this.isCustomer?WtfGlobal.getLocaleText("acc.field.ProductQuantityenteredinDOisexceedsfromoriginal"):WtfGlobal.getLocaleText("acc.field.ProductQuantityenteredinGRisexceedsfromoriginal");
+                        obj.record.set(obj.field, obj.originalValue);
+                         Wtf.MessageBox.alert(WtfGlobal.getLocaleText("acc.common.alert"),msg,{
+                                
+                        },this)
+                   }else if(((obj.value != rec.data.remainingquantity && rec.data.remainingquantity!="")||(obj.value != rec.data.copyquantity && rec.data.copyquantity !="")) ||(obj.value != rec.data.copyquantity && this.isEdit)) {
+                        Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.alert"),this.isCustomer?WtfGlobal.getLocaleText("acc.field.ProductQuantityenteredinDOisdifferentfromoriginal"):WtfGlobal.getLocaleText("acc.field.ProductQuantityenteredinGRisdifferentfromoriginal"),function(btn){
+                            if(btn!="yes") {
+                                obj.record.set(obj.field, obj.originalValue);
+                                obj.record.set("baseuomquantity",obj.originalValue*obj.record.get("baseuomrate"));
+                                 }else{
+                                    obj.record.set("baseuomquantity", obj.value);
+                                    obj.record.set("dquantity", obj.value);
+                                }
+                                var taxamount = this.setTaxAmountAfterSelection(obj.record);
+                                obj.record.set("taxamount",taxamount);
+                                this.fireEvent('datachanged',this);
+                        },this)
+                    }
+                }
+                if((obj.record.data["quantity"])==0){
+                    this.store.remove(obj.record);
+                }
+                var productComboIndex = WtfGlobal.searchRecordIndex(this.priceStore, obj.record.get('productid'), 'productid');
+                  var productuomid = "";
+                  if(productComboIndex >=0){
+                      prorec = this.priceStore.getAt(productComboIndex);
+                      productuomid = prorec.data.uomid;
+                      if(obj.record.get("uomid")!=undefined && productuomid != obj.record.get("uomid")){
+                            obj.record.set("baseuomquantity", obj.record.get("quantity")*obj.record.get("baseuomrate"));
+                      } else {
+                          obj.record.set("baseuomrate", 1);
+                          obj.record.set("baseuomquantity", obj.record.get("quantity")*obj.record.get("baseuomrate"));
+                      }
+                  }
+                      var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, obj.record.get('productid'), 'productid');
+                if (productComboRecIndex >= 0) {
+                    var proRecord = this.productComboStore.getAt(productComboRecIndex);
+                    if (proRecord.data.type != 'Service' && proRecord.data.type != 'Non-Inventory Part') { // serial no for only inventory type of product
+                        if(proRecord.data.isSerialForProduct) {
+                            var v = obj.record.data.quantity;
+                            v = String(v);
+                            var ps = v.split('.');
+                            var sub = ps[1];
+                            if (sub!=undefined && sub.length > 0) {
+                                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.msg.exceptionMsgForDecimalQty")], 2);
+                                obj.record.set("quantity", obj.originalValue);
+                                obj.record.set("baseuomquantity", obj.originalValue*obj.record.get("baseuomrate"));
+                            }
+                        }
+                    }
+                }
+            } else if(obj.field=="dquantity" || obj.field=="pricingbandmasterid"){
+                rec=obj.record;
+                
+                if ((!this.isCustomer && Wtf.account.companyAccountPref.productPricingOnBands) || (this.isCustomer && Wtf.account.companyAccountPref.productPricingOnBandsForSales)) {
+                    Wtf.Ajax.requestEx({
+                        url:"ACCProduct/getIndividualProductPrice.do",
+                        params: {
+                            productid: obj.record.data.productid,
+                            affecteduser: this.affecteduser,
+                            forCurrency: Wtf.account.companyAccountPref.productPriceinMultipleCurrency ? this.forCurrency : "",
+                            currency: this.parentObj.Currency.getValue(),
+                            quantity: obj.record.data.dquantity,
+                            transactiondate : WtfGlobal.convertToGenericDate(this.billDate),
+                            carryin : (this.isCustomer)? false : true,
+                            pricingbandmaster:obj.record.data.pricingbandmasterid
+                        }
+                    }, this,function(response) {
+                        var datewiseprice =response.data[0].price;
+                        this.isPriceListBand = response.data[0].isPriceListBand;
+                        this.isVolumeDisocunt = response.data[0].isVolumeDisocunt;
+                        this.priceSource = response.data[0].priceSource;
+                        this.pricingbandmasterid=response.data[0].pricingbandmasterid;
+                        this.isPriceFromUseDiscount = response.data[0].isPriceFromUseDiscount;
+                        this.priceSourceUseDiscount = response.data[0].priceSourceUseDiscount;
+                        this.defaultPrice = datewiseprice;
+                        this.isVolumeDisocuntExist = response.data[0].isVolumeDisocuntExist;
+                        
+                        /*
+                         * set band of customer on product selection
+                         */
+                        obj.record.set("pricingbandmasterid", this.pricingbandmasterid);
+                        if (this.isVolumeDisocunt) {
+                            obj.record.set("rate", this.defaultPrice);
+                            obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.priceListVolumeDiscount") + " - " + this.priceSource);
+                        } else if (this.isPriceListBand) {
+                            obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.pricingBands") + " - " + this.priceSource);
+                            obj.record.set("rate", this.defaultPrice);
+                            if (this.isPriceFromUseDiscount) {
+                                if (obj.record.data.dquantity != "") {
+                                    obj.record.set("rate", this.defaultPrice);
+                                    obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.priceListVolumeDiscount") + " - " + this.priceSourceUseDiscount + ": " + WtfGlobal.getLocaleText("acc.field.pricingBands") + " - " + this.priceSource);
+                                } else {
+                                    obj.record.set("rate", "");
+                                    obj.record.set("priceSource", "");
+                                }
+                            } else {
+                                if (this.isVolumeDisocuntExist) {
+                                    obj.record.set("rate", this.defaultPrice);
+                                    obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.pricingBands") + " - " + this.priceSource);
+                                }
+                            }
+                        } else {
+                            if (this.isPriceFromUseDiscount) {
+                                if (obj.record.data.dquantity != "") {
+                                    obj.record.set("rate", this.defaultPrice);
+                                    obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.priceListVolumeDiscount") + " - " + this.priceSourceUseDiscount);
+                                } else {
+                                    obj.record.set("rate", "");
+                                    obj.record.set("priceSource", "");
+                                }
+                            } else {
+                                if (this.isVolumeDisocuntExist) {
+                                    obj.record.set("rate", this.defaultPrice);
+                                    obj.record.set("priceSource", "");
+                                }
+                                if (this.isPriceListBand) {
+                                    obj.record.set("priceSource", WtfGlobal.getLocaleText("acc.field.pricingBands") + " - " + this.priceSource);
+                                } else {
+                                    obj.record.set("priceSource", "");
+                                    obj.record.set("rate", this.defaultPrice);
+                                }
+                            }
+                        }
+                        this.fireEvent('datachanged',this);
+                    }, function(response) {
+                        
+                    });
+                }
+                
+                if(this.isCustomer)
+                    rec.set("changedQuantity",(rec.data.copyquantity-obj.value)*((rec.data.copybaseuomrate==="")?1:rec.data.copybaseuomrate));
+                else
+                    rec.set("changedQuantity",(obj.value-rec.data.copyquantity)*((rec.data.copybaseuomrate==="")?1:rec.data.copybaseuomrate));                
+                if(obj.record.data.dquantity > obj.record.data.quantity){
+                    var msg = this.isCustomer ? WtfGlobal.getLocaleText("acc.field.Deliveredquantityshouldnotbegreaterthanactualquantity") : WtfGlobal.getLocaleText("acc.field.Receiptquantityshouldnotbegreaterthanactualquantity");
+                    WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),msg], 2);
+                    obj.record.set("dquantity", obj.record.data.quantity);
+                } else if(obj.record.data.dquantity <= 0){
+                    var msg = this.isCustomer ? WtfGlobal.getLocaleText("acc.field.Deliveredquantityshouldnotbeequalorlessthanzero") : WtfGlobal.getLocaleText("acc.field.Receiptquantityshouldnotbeequalorlessthanzero");
+                    WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),msg], 2);
+                    obj.record.set("dquantity", obj.record.data.quantity);
+                }
+                var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, obj.record.get('productid'), 'productid');
+                var isnotdecimalvalue=true;
+                if (productComboRecIndex >= 0) {
+                    var proRecord = this.productComboStore.getAt(productComboRecIndex);
+                    if (proRecord.data.type != 'Service' && proRecord.data.type != 'Non-Inventory Part') { // serial no for only inventory type of product
+                        if(proRecord.data.isSerialForProduct) {
+                            var v = obj.record.data.dquantity;
+                            v = String(v);
+                            var ps = v.split('.');
+                            var sub = ps[1];
+                            if (sub!=undefined && sub.length > 0) {
+                                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.msg.exceptionMsgForDecimalQty")], 2);
+                                isnotdecimalvalue=false;
+                                obj.record.set("dquantity", obj.originalValue);
+                            }
+                        }
+                    }
+                }
+                if((this.isFixedAsset || this.isLeaseFixedAsset) && isnotdecimalvalue){
+                    var productid = rec.get('productid');
+                    var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, productid, 'productid');
+                    // when creating 'Asset GR' then productid found both 'productComboStore' and 'this.store'
+                    if (productComboRecIndex == -1) {
+                        var productComboRecIndex = WtfGlobal.searchRecordIndex(this.getStore(), productid, 'productid');
+                        var proRecord = this.getStore().getAt(productComboRecIndex);
+                    } else if (productComboRecIndex >= 0) {
+                        var proRecord = this.productComboStore.getAt(productComboRecIndex);
+                    }
+                    if (proRecord.get('isAsset') && obj.record.get("quantity") != 0) {
+                            this.callFixedAssetDetailsWindow(obj.record, proRecord);
+                    }
+                }
+            }
+            /*
+             * Code for calculate Tax amount (GST) for India country - ERP-42048
+             */
+            if (obj.field=="rate" && this.isLeaseFixedAsset && WtfGlobal.isIndiaCountryAndGSTApplied()) {
+                var prodid = rec.get('productid');
+                var productComboRecIndex = WtfGlobal.searchRecordIndex(this.productComboStore, prodid, 'productid');
+                /*
+                 * In Case of "Show Products on type ahead" , In Edit/Link case "productComboStore" returns -1.
+                 * Hence fetching product data from Grid's Store. ERP-42048
+                 */ 
+                if (productComboRecIndex == -1) {
+                    var productComboRecIndex = WtfGlobal.searchRecordIndex(this.getStore(), productid, 'productid');
+                    var prorec = this.getStore().getAt(productComboRecIndex);
+                }
+                else if (productComboRecIndex >= 0) {
+                    var prorec = this.productComboStore.getAt(productComboRecIndex);
+                }
+                    /*
+                     * Set producttype for GST calculation in lease
+                     */
+                    if (prorec != undefined) {
+                        obj.record.set("producttype", prorec.data.producttype);
+                    }
+                    /*
+                     * Re-calculate GST if terms are already present
+                     */
+                    if (rec.data.LineTermdetails != '') {
+                        calculateUpdatedTaxes(this.parentObj, this, rec);
+                        this.updateTermDetails();
+                    } else {
+                        processGSTRequest(this.parentObj, this, prorec.data.productid);
+                    }
+                }
+            
+            if(obj.field=="prtaxid" || obj.field=="rate" || obj.field=="quantity" || obj.field=="dquantity" || obj.field=="discountispercent" || obj.field=="prdiscount"){
+                var taxamount = this.setTaxAmountAfterSelection(obj.record);
+                obj.record.set("taxamount",taxamount);
+                this.fireEvent('datachanged',this);
+            }
+        }    
+        this.fireEvent('datachanged',this);
+        if(this.store.getCount()>0&&this.store.getAt(this.store.getCount()-1).data['productid'].length<=0)
+            return;
+        if(!this.isNote)
+            this.addBlankRow();
+    },
+    setTaxAmountAfterSelection:function(rec) {
+        
+        var quantity = rec.data.dquantity;
+        quantity = (quantity == "NaN" || quantity == undefined || quantity == null)?0:quantity;
+//        var rec=obj.record;
+        var discount = 0;
+        var rate=getRoundofValueWithValues(rec.data.rate,Wtf.UNITPRICE_DIGIT_AFTER_DECIMAL);
+        quantity=getRoundofValue(rec.data.dquantity);
+        var origionalAmount = getRoundedAmountValue(rate*quantity) ;
+//        if(rec.data.partamount != 0){
+//            var partamount=getRoundedAmountValue(rec.data.partamount);
+//            origionalAmount = getRoundedAmountValue(origionalAmount * (partamount/100));
+//        }
+        
+//        origionalAmount = this.calAmountWithExchangeRate(origionalAmount, rec);
+        if(rec.data.prdiscount > 0) {
+            var prdiscount=getRoundedAmountValue(rec.data.prdiscount);
+            if(rec.data.discountispercent == 1){
+                discount = getRoundedAmountValue(origionalAmount * prdiscount/ 100);
+            } else {
+                discount = prdiscount;
+            }
+        }
+//        var discount=rec.data.rate*rec.data.quantity*rec.data.prdiscount/100
+        var val=origionalAmount-discount;
+        var taxpercent=0;
+        var index=this.taxStore.find('prtaxid',rec.data.prtaxid);
+        if(index>=0){
+            var taxrec=this.taxStore.getAt(index);
+            taxpercent=getRoundedAmountValue(taxrec.data.percent);
+        }
+        var taxamount= getRoundedAmountValue(val*taxpercent/100);
+        return taxamount;
+        
+    },
+    setTaxAmountWithotExchangeRate:function(v,m,rec){
+        var taxamount= 0;
+        if(v)
+            taxamount= parseFloat(getRoundedAmountValue(v)).toFixed(Wtf.AMOUNT_DIGIT_AFTER_DECIMAL)*1;
+        if(rec.data.prtaxid==null || rec.data.prtaxid == undefined || rec.data.prtaxid == ""){
+            taxamount = 0;
+        }
+        rec.set("taxamount",taxamount);
+        return WtfGlobal.withoutRateCurrencySymbol(taxamount,m,rec);
+    },
+    
+    calAmountWithoutExchangeRate:function(v,m,rec){
+        
+        
+        var rate=getRoundofValueWithValues(rec.data.rate,Wtf.UNITPRICE_DIGIT_AFTER_DECIMAL);
+        var quantity=getRoundofValue(rec.data.dquantity);
+        quantity = (quantity == "NaN" || quantity == undefined || quantity == null)?0:quantity;
+        
+
+        var origionalAmount = getRoundedAmountValue(rate*quantity) ;
+//        if(rec.data.partamount != 0){
+//            origionalAmount = origionalAmount * (rec.data.partamount/100);
+//        }
+        
+        var discount = 0;//origionalAmount*rec.data.prdiscount/100   
+        if(rec.data.prdiscount > 0) {
+            var prdiscount=getRoundedAmountValue(rec.data.prdiscount);
+            if(rec.data.discountispercent == 1){
+                discount = getRoundedAmountValue((origionalAmount * prdiscount) / 100);
+            } else {
+                discount = prdiscount;
+            }
+        }
+        
+        var val=(origionalAmount)-discount;///rec.data.oldcurrencyrate  
+//        rec.set("amountwithouttax",val);
+        var taxamount = 0;
+        if(rec.data.taxamount){
+            taxamount= getRoundedAmountValue(rec.data.taxamount);
+        }
+        if (!WtfGlobal.isIndiaCountryAndGSTApplied()) {
+            val = parseFloat(val) + parseFloat(taxamount);
+        }
+        rec.set("amount",(parseFloat(getRoundedAmountValue(val)).toFixed(Wtf.AMOUNT_DIGIT_AFTER_DECIMAL)*1));
+//        if(this.isQuotationFromPR && val!==0 && (rec.data.orignalamount==undefined || rec.data.orignalamount==""))
+//        rec.set("orignalamount",val);
+        return WtfGlobal.withoutRateCurrencySymbol(val,m,rec);
+    },
+    callFixedAssetDetailsWindow:function(record,productRec){
+        
+        var quantity = record.get('dquantity');
+          var islinkedFromLeaseSo=false;
+        if(Wtf.getCmp(this.parentCmpID) != undefined  && Wtf.getCmp(this.parentCmpID).fromLinkCombo != undefined ){
+            if(this.isCustomer && this.isLeaseFixedAsset){
+                if(Wtf.getCmp(this.parentCmpID).fromLinkCombo.getValue() ==0){
+                    islinkedFromLeaseSo=true;
+                }
+            }
+        }
+        
+        this.FADetailsGrid=new Wtf.account.FADetails({
+            title:'Asset Details',
+            quantity:quantity,
+            billDate:this.billDate,
+            modal:true,
+            isCustomer:this.isCustomer,
+            isLeaseFixedAsset:this.isLeaseFixedAsset,
+            layout:'border',
+            assetRec:productRec,
+            lineRec:record,
+            assetDetailsArray:record.get('assetDetails'),
+            iconCls :getButtonIconCls(Wtf.etype.deskera),
+            fromPO:this.fromPO,
+            isGRCreatedByLinkingWithPI:this.isGRCreatedByLinkingWithPI,
+            isEdit:this.isEdit,
+            isFixedAsset:this.isFixedAsset,
+            isFromOrder:false,
+            isPILinkedInGR: this.parentObj.isPILinkedInGR,
+            moduleid:this.moduleid,
+            readOnly:this.readOnly,
+            islinkedFromLeaseSo:islinkedFromLeaseSo,
+            width:950,
+            height:500,
+            resizable : false,
+            parentGrid:this,
+            isFixedAssetGR:this.isCustomer?false:true,
+            tagsFieldset:this.parentObj.tagsFieldset,
+            isbilldateChanged : this.parentObj.isbilldateChanged,
+            parentObj : this.parentObj
+        });
+        
+        this.FADetailsGrid.show();
+        
+        this.FADetailsGrid.on('beforeclose',function(panel){
+            if(panel.isFromSaveButton){
+                record.set("assetDetails", panel.assetDetails);
+            }
+        }, this);
+    },
+    
+    calAmount:function(v,m,rec){
+        var quantity = rec.data.dquantity;
+        quantity = (quantity == "NaN" || quantity == undefined || quantity == null)?0:quantity;
+        
+        var origionalAmount = rec.data.rate * quantity;
+        rec.set("amount",origionalAmount);
+        return WtfGlobal.withoutRateCurrencySymbol(origionalAmount,m,rec);
+    },
+    callSerialNoWindow:function(obj){
+        var index=this.productComboStore.findBy(function(rec){
+            if(rec.data.productid==obj.data.productid)
+                return true;
+            else
+                return false;
+        })
+        var firstRow = index;
+        if (index == -1) {
+            index = this.store.findBy(function (rec) {
+                if (rec.data.productid == obj.data.productid)
+                    return true;
+                else
+                    return false;
+            })
+        }
+        if(index!=-1){
+         var deliveredprodquantity = obj.data.dquantity;
+        deliveredprodquantity = (deliveredprodquantity == "NaN" || deliveredprodquantity == undefined || deliveredprodquantity == null)?0:deliveredprodquantity;
+         if(deliveredprodquantity<1){
+              WtfComMsgBox(["Info","Quantity should be greater than zero. "], 2);
+              return false; 
+         }   
+     
+        var prorec=this.productComboStore.getAt(index); 
+            if (firstRow == -1) {
+                prorec = this.store.getAt(index);
+            }
+            if (prorec == undefined) {
+                prorec = obj;
+            }
+          this.batchDetailswin=new Wtf.account.SerialNoWindow({
+              renderTo: document.body,
+            title:WtfGlobal.getLocaleText("acc.field.SelectWarehouseBatchSerialNumber"),
+            productName:prorec.data.productname,
+            quantity:(obj.data.baseuomrate)*deliveredprodquantity,
+            uomName:obj.data.uomname,
+            billid:obj.data.billid,
+            defaultLocation:prorec.data.location,
+            productid:prorec.data.productid,
+            isSales:this.isCustomer,
+            moduleid:this.moduleid,
+            transactionid:(this.isCustomer)?4:5,
+            isDO:this.isCustomer?true:false,
+            defaultWarehouse:prorec.data.warehouse,
+            batchDetails:obj.data.batchdetails,
+            warrantyperiod:prorec.data.warrantyperiod,
+            warrantyperiodsal:prorec.data.warrantyperiodsal,  
+            isLocationForProduct:prorec.data.isLocationForProduct,
+            isWarehouseForProduct:prorec.data.isWarehouseForProduct,
+            defaultAvailbaleQty:this.AvailableQuantity,
+          isRowForProduct:prorec.data.isRowForProduct,
+            isRackForProduct:prorec.data.isRackForProduct,
+            isBinForProduct:prorec.data.isBinForProduct,
+            isBatchForProduct:prorec.data.isBatchForProduct,
+            isSerialForProduct:prorec.data.isSerialForProduct,
+            linkflag:obj.data.linkflag,
+            isEdit:this.isEdit,
+            readOnly:this.readOnly,
+            copyTrans:this.copyTrans,
+            width:950,
+            height:400,
+            resizable : false,
+            modal : true,
+            lineRec:obj,
+            parentGrid:this
+        });
+        this.batchDetailswin.on("beforeclose",function(){
+            this.batchDetails=this.batchDetailswin.getBatchDetails();
+           var isfromSubmit=this.batchDetailswin.isfromSubmit;
+                if(isfromSubmit){  //as while clicking on the cancel icon it was adding the reocrd in batchdetail json 
+                    obj.set("batchdetails",this.batchDetails);
+                }
+             },this);
+        this.batchDetailswin.show();
+        }
+    },
+    checkRow:function(obj){
+        var rec=obj.record;
+        if(obj.field=="uomid"){
+            var prorec = null;
+            var productComboIndex = WtfGlobal.searchRecordIndex(this.productComboStore, obj.record.get('productid'), 'productid');
+            if(productComboIndex >=0){
+                prorec = this.productComboStore.getAt(productComboIndex);
+                if(prorec.data.type=='Service'){
+//                          WtfComMsgBox(["Warning","UOM can not be set for Service and Non-Inventory products. "], 2);
+                    return false;
+                } else if(!prorec.data.multiuom){
+//                          WtfComMsgBox(["Warning","Multi UOM not allowed for the selected product. "], 2);
+                    return false;
+                }
+            }
+        }
+        if(obj.field=="productid"){
+            
+//            var isProductAlreadySelected = false;
+//            
+//            this.getStore().each(function(recr){
+//                var prodId = recr.get('productid');
+//                if(prodId == obj.value){
+//                    isProductAlreadySelected = true;
+//                    return false;
+//                }
+//            },this);
+//            
+//            var productText = "Product";
+//            if(this.isFixedAsset){
+//                productText = "Asset Group";
+//            }
+            if(this.isLeaseFixedAsset && this.fromPO!= undefined && this.fromPO!= null && this.fromPO){  //while linking lease do 
+                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.information"),WtfGlobal.getLocaleText("acc.changeofproduct.here") ], 4);
+                obj.cancel=true;   
+                return false;
+            }
+//            if(isProductAlreadySelected){
+//                WtfComMsgBox(['Infornation',productText+' Already Selected'],0);
+//                obj.record.set('productid','');
+//                return false;
+//            }
+            
+            var index=this.productComboStore.findBy(function(rec){
+                if(rec.data.productid==obj.value)
+                    return true;
+                else
+                    return false;
+            })
+            var prorec=this.productComboStore.getAt(index);
+            index=this.priceStore.find('productid',obj.value)
+            rec=this.priceStore.getAt(index);
+            if(this.editTransaction){  //In Edit Case Check product quantity is greater than available quantity when selecting product
+                var availableQuantity = prorec.data.quantity;    //This is in base UOM
+                var lockQuantity = prorec.data.lockquantity; 
+                var copyquantity = 0;
+                this.store.each(function(rec){
+                    if(rec.data.productid == prorec.data.productid){
+                        if(rec.data.copyquantity!=undefined) {
+                            copyquantity = copyquantity + (rec.data.copyquantity*rec.data.baseuomrate); 
+                        }
+                    }
+                },this);                
+                availableQuantity = availableQuantity + copyquantity;                
+                if(this.isCustomer&&this.store.find("productid",obj.value)>-1 && rec.data.type!='Service' && rec.data.type!='Non-Inventory Part' &&!this.isQuotation){
+                    var quantity = 0;
+                    this.store.each(function(rec){
+                        if(rec.data.productid == obj.value){
+                            var ind=this.store.indexOf(rec);
+                            if(ind!=-1){
+                                if(ind!=obj.row){                            
+                                    quantity = quantity + (rec.data.dquantity*rec.data.baseuomrate);                                    
+                                }
+                            }     
+                        }
+                    },this);
+                    quantity = quantity + (obj.record.data['dquantity']*obj.record.data['baseuomrate']);
+                if((availableQuantity-lockQuantity)<quantity){
+//                        WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.nee.54")+' '+rec.data['productname']+' is '+availableQuantity], 2);
+//                        obj.cancel=true;
+                        if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                          WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+WtfGlobal.getLocaleText("acc.field.is")+(availableQuantity-lockQuantity)+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);
+                          rec.set("quantity",obj.originalValue);
+                          rec.set("dquantity",obj.originalValue);
+                          rec.set("baseuomquantity",obj.originalValue*obj.record.data['baseuomrate']);
+                          obj.cancel=true;   
+                        }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                           Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                               if(btn=="yes"){
+                                   obj.cancel=false;
+                               }else{
+                                  rec.set("quantity",obj.originalValue);
+                                  rec.set("dquantity",obj.originalValue);
+                                  rec.set("baseuomquantity",obj.originalValue*obj.record.data['baseuomrate']);
+                                  obj.cancel=true;
+                                  return false;
+                               }
+                            },this); 
+                        }
+                    }
+                //WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.rem.76")+" "+rec.data['productname']], 2);
+                //obj.cancel=true;
+                }else if(this.isCustomer&&availableQuantity<(obj.record.data['dquantity']*obj.record.data['baseuomrate'])&& prorec.data.type!='Service' && prorec.data.type!='Non-Inventory Part' &&!this.isQuotation){
+                    this.isValidEdit = false;
+                    WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.nee.54")+' '+rec.data['productname']+' is '+availableQuantity], 2);
+                    obj.cancel=true;
+                } 
+            }else{ //In normal Case Check product quantity is greater than available quantity when selecting product
+                if(this.isCustomer&&this.store.find("productid",obj.value)>-1 && rec.data.type!='Service' && rec.data.type!='Non-Inventory Part' &&!this.isQuotation){
+                    var quantity = 0;                 
+                    this.store.each(function(rec){
+                        if(rec.data.productid == obj.value){
+                            var ind=this.store.indexOf(rec);
+                            if(ind!=-1){
+                                if(ind!=obj.row){          
+                                    //To do - Need to check this
+//                                    quantity = quantity + (rec.data.dquantity*rec.data.baseuomrate);
+                                    quantity = quantity + rec.data.dquantity;
+                                }
+                            }     
+                        }
+                    },this);
+                    //To do - Need to check this
+//                    quantity = quantity + (obj.record.data['dquantity']*obj.record.data['baseuomrate']);
+                    quantity = quantity + obj.record.data['dquantity'];
+                    if(rec.data['quantity']<quantity){
+//                        WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.nee.54")+' '+rec.data['productname']+' is '+rec.data['quantity']], 2);
+//                        obj.cancel=true;
+                        if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                          WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+rec.data['productname']+WtfGlobal.getLocaleText("acc.field.is")+rec.data['quantity']+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);
+                          obj.cancel=true;   
+                        }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                           Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                               if(btn=="yes"){
+                                   obj.cancel=false;
+                               }else{
+                                  rec.set("quantity",obj.originalValue);
+                                  rec.set("dquantity",obj.originalValue);
+                                  rec.set("baseuomquantity",obj.originalValue*obj.record.data['baseuomrate']);
+                                  obj.cancel=true;
+                                  return false;
+                               }
+                            },this); 
+                        }
+                    }
+                //WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.rem.76")+" "+rec.data['productname']], 2);
+                //obj.cancel=true;
+              }else if(this.isCustomer&&((rec.data['quantity'])-(rec.data['lockquantity']))<obj.record.data['dquantity']&& prorec.data.type!="Service" && prorec.data.type!='Non-Inventory Part' &&!this.isQuotation){
+                    this.isValidEdit = false;
+//                    WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.nee.54")+' '+rec.data['productname']+' is '+rec.data['quantity']], 2);
+//                    obj.cancel=true;
+                        if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                          WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+rec.data['productname']+WtfGlobal.getLocaleText("acc.field.is")+((rec.data['quantity'])-(rec.data['lockquantity']))+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);
+                          rec.set("quantity",obj.originalValue);
+                          obj.cancel=true;   
+                        }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                           Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                               if(btn=="yes"){
+                                   obj.cancel=false;
+                               }else{
+                                  rec.set("quantity",obj.originalValue);
+                                  rec.set("dquantity",obj.originalValue);
+                                  rec.set("baseuomquantity",obj.originalValue*obj.record.data['baseuomrate']);
+                                  obj.cancel=true;
+                                  return false;
+                               }
+                            },this); 
+                        }  
+                }
+            } 
+        }else if(this.isCustomer&&(obj.field=="dquantity"||obj.field=="baseuomrate")&&obj.record.data['productid'].length>0&&!this.isQuotation){  
+            if(obj.field=="dquantity") {
+                var originalDquantity = obj.originalValue;
+                var newDquantity = obj.value;
+                var originalBaseuomrate = obj.record.data['baseuomrate'];
+                var newBaseuomrate = obj.record.data['baseuomrate'];
+            } else if(obj.field=="baseuomrate") {
+                var originalDquantity = obj.record.data['dquantity'];
+                var newDquantity = obj.record.data['dquantity'];
+                var originalBaseuomrate = obj.originalValue;
+                var newBaseuomrate = obj.value;
+            }
+            prorec=this.productComboStore.getAt(this.productComboStore.find('productid',obj.record.data.productid));
+            if(prorec.data.type!='Service' && prorec.data.type!='Non-Inventory Part') {
+                var availableQuantity = prorec.data.quantity;
+                  var lockQuantity = prorec.data.lockquantity; 
+                 var islockQuantityflag=this.store.getAt(obj.row).data['islockQuantityflag'];; //in linked case whether salesorder is locked or not
+	         var soLockQuantity=this.store.getAt(obj.row).data['lockquantity'];
+	
+                var quantity = 0;
+                if(this.editTransaction){  //In Edit Case Check product quantity is greater than available quantity when selecting quantity                  
+                    var copyquantity = 0;                    
+                    this.store.each(function(rec){
+                        if(rec.data.productid == prorec.data.productid){
+                            copyquantity = copyquantity + (rec.data.copyquantity*rec.data.baseuomrate);
+                            var ind=this.store.indexOf(rec);
+                            if(ind!=-1){
+                                if(ind!=obj.row){                            
+                                    quantity = quantity + (rec.data.dquantity*rec.data.baseuomrate);
+                                }   
+                            }                            
+                        }
+                    },this);
+                    quantity = quantity + (newDquantity*newBaseuomrate);
+                    if(islockQuantityflag)   //if DO is lonked with SO then we will consider quantity (available quantity-lock quantity excluding its own quantity
+                    {
+                        if((availableQuantity-(lockQuantity-soLockQuantity)) < quantity) {
+                            if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+' '+WtfGlobal.getLocaleText("acc.field.is")+(availableQuantity-(lockQuantity-soLockQuantity))+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);                      
+                                rec.set("quantity",originalDquantity);
+                                rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                                rec.set("baseuomrate",originalBaseuomrate);
+                                obj.cancel=true;   
+                            }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                                Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                                    if(btn=="yes"){
+                                        obj.cancel=false;
+                                    }else{
+                                        rec.set("quantity",originalDquantity);
+                                        rec.set("dquantity",originalDquantity);
+                                        rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                                        rec.set("baseuomrate",originalBaseuomrate);
+                                        obj.cancel=true;
+                                        return false;
+                                    }
+                                },this); //for Ignore Case no any Restriction on user 
+                            }
+                        }
+
+                    }else if((availableQuantity-lockQuantity) < quantity) {  //for normal check for all products available quantity
+                    availableQuantity = availableQuantity + copyquantity;
+                    if((availableQuantity-lockQuantity) < quantity) {
+                 //                    if(availableQuantity < quantity) {
+//                        WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+' is '+availableQuantity], 2);
+//                        obj.cancel=true;                        
+                        if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                          WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+WtfGlobal.getLocaleText("acc.field.is")+(availableQuantity-lockQuantity)+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);
+                          rec.set("quantity",originalDquantity);
+                          rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                          rec.set("baseuomrate",originalBaseuomrate);
+                          obj.cancel=true;   
+                        }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                           Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                               if(btn=="yes"){
+                                   obj.cancel=false;
+                               }else{
+                                  rec.set("quantity",originalDquantity);
+                                  rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                                  rec.set("baseuomrate",originalBaseuomrate);
+                                  rec.set("dquantity",originalDquantity);
+                                  obj.cancel=true;
+                                  return false;
+                               }
+                            },this); //for Ignore Case no any Restriction on user 
+                        }
+                    }
+                   }
+                } else {   //In normal Case Check product quantity is greater than available quantity when selecting quantity                  
+                    this.store.each(function(rec){
+                        if(rec.data.productid == prorec.data.productid){
+                            var ind=this.store.indexOf(rec);
+                            if(ind!=-1){
+                                if(ind!=obj.row){
+                                    quantity = quantity + (rec.data.dquantity*rec.data.baseuomrate);
+                                }
+                            }                               
+                        }
+                    },this);
+                    quantity = quantity + (newDquantity*newBaseuomrate);
+                      if(islockQuantityflag)   //if DO is lonked with SO then we will consider quantity (available quantity-lock quantity excluding its own quantity
+                    {
+                        if((availableQuantity-(lockQuantity-soLockQuantity)) < quantity) {
+                            if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                                WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+' '+WtfGlobal.getLocaleText("acc.field.is")+(availableQuantity-(lockQuantity-soLockQuantity))+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);                      
+                                rec.set("quantity",originalDquantity);
+                                rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                                rec.set("baseuomrate",originalBaseuomrate);
+                                obj.cancel=true;   
+                            }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                                Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                                    if(btn=="yes"){
+                                        obj.cancel=false;
+                                    }else{
+                                        rec.set("quantity",originalDquantity);
+                                        rec.set("dquantity",originalDquantity);
+                                        rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                                        rec.set("baseuomrate",originalBaseuomrate);
+                                        obj.cancel=true;
+                                        return false;
+                                    }
+                                },this); //for Ignore Case no any Restriction on user 
+                            }
+                        }
+
+                    }else   if((availableQuantity-lockQuantity) < quantity) {  //for normal check for all products available quantity
+//                    if(availableQuantity < quantity) {
+//                        WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+' is '+availableQuantity], 2);
+//                        obj.cancel=true;
+                        if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                            WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.nee.54")+' '+prorec.data.productname+WtfGlobal.getLocaleText("acc.field.is")+(availableQuantity-lockQuantity)+'<br><br><center>'+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+'</center>'], 2);                      
+                          rec.set("quantity",originalDquantity);
+                          rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                          rec.set("baseuomrate",originalBaseuomrate);
+                          obj.cancel=true;   
+                        }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                          Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),WtfGlobal.getLocaleText("acc.field.QuantitygiveninDoareexceedingthequantityavailable")+'<br>'+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+'</center>' , function(btn){
+                               if(btn=="yes"){
+                                   obj.cancel=false;
+                               }else{
+                                  rec.set("quantity",originalDquantity);
+                                  rec.set("dquantity",originalDquantity);
+                                  rec.set("baseuomquantity",originalDquantity*originalBaseuomrate);
+                                  rec.set("baseuomrate",originalBaseuomrate);
+                                  obj.cancel=true;
+                                  return false;
+                               }
+                            },this); //for Ignore Case no any Restriction on user 
+                        }
+                    }
+                  
+                }
+            }                    
+        }                
+    },
+    addBlankRow:function(){
+         var Record = this.store.reader.recordType,f = Record.prototype.fields, fi = f.items, fl = f.length;
+        var values = {},blankObj={};
+        for(var j = 0; j < fl; j++){
+            f = fi[j];
+        if(f.name!='rowid') {
+                blankObj[f.name]='';
+                if(!Wtf.isEmpty(f.defValue))
+                    blankObj[f.name]=f.convert((typeof f.defValue == "function"?f.defValue.call():f.defValue));
+            }
+        }
+        var newrec = new Record(blankObj);
+        if(this.symbol!=undefined)
+        newrec.data.currencysymbol=this.symbol;
+        this.store.add(newrec);
+    },
+     
+    addBlank:function(){       
+        this.addBlankRow();
+    },            
+    loadPOProduct:function(){
+                          
+      if(this.isCustomer && this.fromOrder && !this.isNote && !this.readOnly && !this.isOrder && !this.editTransaction)
+      {
+    	  this.checkSOLinkedProducts();
+      }
+        if (WtfGlobal.isIndiaCountryAndGSTApplied() && !this.isFixedAsset) {
+            if (this.store.data.length) {
+                var storeData = [];
+                storeData = this.store.data.items;
+                for (var count = 0; count < storeData.length; count++) {
+                    var record = storeData[count];
+                    record.data.producttype = record.data.prodtype;
+                }
+
+            }        
+       } 
+    },
+
+    checkSOLinkedProducts:function(){      
+    	var msgBox = 0,msg="";
+         var recordSet=[];
+          this.isNegativeStock=false;
+        if(this.store.data.length){ //Check Qty mentioned in SO/CI is greater than available quantity
+            //To do - Need to check quantity checks for multi UOM change
+            var storeData = []; 
+            storeData =this.store.data.items;
+            this.store.removeAll();
+            for(var count=0;count<storeData.length;count++){
+                var record=storeData[count];
+                  recordSet[count]=record;
+                var quantity = 0;
+                this.store.each(function(rec){
+                  if(rec.data.productid == record.data.productid){
+                        quantity = quantity + (rec.data.dquantity*rec.data.baseuomrate);                                                     
+                  }
+                },this);
+                quantity = quantity + (record.data.dquantity*record.data.baseuomrate);
+                var result = this.productComboStore.find('productid',record.data.productid);
+                if(result >= 0){
+                    var prorec=this.productComboStore.getAt(result);////if product type is of Inventory then check otherwise no need to check 
+                    if(!this.editTransaction && prorec.data.type!='Service' && prorec.data.type!='Non-Inventory Part'  && quantity > prorec.data.quantity){
+                        if(msg==""){
+                            msg=record.data.productname+" in "+record.data.billno+" is "+prorec.data.quantity+".";
+                        }else{
+                            msg=msg+","+record.data.productname+" in "+record.data.billno+" is "+prorec.data.quantity+".";
+                        };
+                        msgBox = 1;
+                    }
+                    else{
+                        this.store.add(record);
+                    }
+                }
+        }
+        }
+        
+//    	this.productComboStore.each(function(rec){
+//    		var result = this.store.find('productid',rec.data.productid);
+//                
+//    		if(!this.editTransaction && result >= 0){
+//    			var prorec=this.store.getAt(result);
+//    			if(rec.data.type!='Service' && rec.data.quantity < prorec.data.quantity){
+//                            var productid=rec.data.productid;
+//                            this.store.each(function(record){
+//                                if(productid==record.data.productid){
+//                                    this.store.remove(record);                                    
+//                                }
+//                            },this);
+//                            msgBox = 1;
+//                      }
+//    		}
+//    	},this);
+
+    	if(msgBox==1){
+  //  		WtfComMsgBox(["Alert",'Available Qty for '+msg+' is below than the Qty mentioned in SO/CI, so Please Edit the Qty given in SO/CI first and then proceed.'], 2);
+//    		Wtf.getCmp('orderNumber2Invoice').setValue('');
+//    		Wtf.getCmp('linkToOrder2Invoice').setValue(false);
+                 var info=WtfGlobal.getLocaleText("acc.field.QuantitygiveninDOareexceedingquantity")+msg;
+                 if(Wtf.account.companyAccountPref.negativestock==1){ // Block case
+                         info+=" "+WtfGlobal.getLocaleText("acc.field.Soyoucannotproceed")+"</center>"
+                          WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.block"),info], 2);
+                        this.isNegativeStock=true;
+                        this.store.removeAll();                        
+                         return false;
+                        }else if(Wtf.account.companyAccountPref.negativestock==2){     // Warn Case
+                            info+=" "+WtfGlobal.getLocaleText("acc.field.Doyouwishtoproceed")+"</center>"
+                           Wtf.MessageBox.confirm(WtfGlobal.getLocaleText("acc.common.warning"),info ,function(btn){
+                               if(btn=="yes"){
+                                   this.store.removeAll();
+                                   this.store.add(recordSet);
+                                   this.addBlankRow();
+                               }else{
+                                 //Wtf.getCmp(this.parentCmpID).loadStore();
+                                 this.isNegativeStock=true;
+                                 this.store.removeAll();
+                                  this.addBlankRow();
+                                  return false;
+                               }
+                            },this); 
+                        }
+    	}
+    },
+    loadPOGridStore:function(recids,linkingFlag,isForDOGROLinking){                
+        this.store.load({
+            params:{
+                bills:recids,
+                mode:43,
+                closeflag:true,
+                doflag:true,
+                linkingFlag:linkingFlag,
+                isForDOGROLinking:isForDOGROLinking,
+                moduleid:this.moduleid,
+                isLeaseFixedAsset:this.isLeaseFixedAsset,
+                isEdit:this.isEdit
+            }
+        });
+        this.store.on('load',function(store1, recArr){     
+            var tempStore=this.productComboStore;
+            if(this.store.data.length > 0){
+               this.store.removeAll();
+            }
+            var arrayOfRecords = [];
+            if(!this.isNegativeStock){
+                for(var count=0;count<recArr.length;count++){
+                    var record = recArr[count];
+                    var recordData=recArr[count].data;
+                    if(recordData.dquantity==""){
+                        recordData.dquantity=recordData.quantity;
+                    }
+                    if(recordData.description==""){
+                        var proID=recordData.productid;
+                        var prorec=WtfGlobal.searchRecord(tempStore,proID,'productid');  
+                        if(prorec!=null && prorec!=undefined){
+                            record.set('description',prorec.data.desc); 
+                        } else {
+                            record.set('description',recordData.description); 
+                        }  
+                        if(recordData!=null && recordData!=undefined && isForDOGROLinking){                      
+                            record.data.producttype=recordData.prodtype;
+                        }
+                    }
+//                    this.store.add(record);       //commented because after adding a single record renderer is applying - refer ticket ERP-13973
+
+                /**
+                 * Recalculate GST Term taxes on Grid store Load
+                 */
+                if ((WtfGlobal.isIndiaCountryAndGSTApplied() || WtfGlobal.isUSCountryAndGSTApplied())) {
+                    var rowAmountIndex = this.getColumnModel().findColumnIndex("amount");
+                    if (record.get('LineTermdetails') != undefined && record.get('LineTermdetails') != '') {
+                        var termStore = this.getTaxJsonOfIndia(record);
+                        if (this.parentObj.includingGST && this.parentObj.includingGST.getValue() == true) {
+                            this.getColumnModel().setRenderer(rowAmountIndex, WtfGlobal.withoutRateCurrencySymbol);
+                            termStore = this.calculateTermLevelTaxesInclusive(termStore, record);
+                        } else {
+                            this.getColumnModel().setRenderer(rowAmountIndex, this.calAmountWithoutExchangeRate.createDelegate(this));
+                            termStore = this.calculateTermLevelTaxes(termStore, record);
+                        }                        
+                    
+                        record.data.LineTermdetails = JSON.stringify(termStore);                      
+                        this.updateTermDetails();
+                    }
+
+                }                            
+                    arrayOfRecords.push(record);
+          }      
+            this.store.add(arrayOfRecords);   
+            } 
+            this.addBlankRow();   
+        },this);
+    }, 
+    getTaxJsonOfIndia: function (prorec) {
+        var obj_CST = eval(prorec.data['LineTermdetails']);
+        var termStore = new Array();
+        for (var i_CST = 0; i_CST < obj_CST.length; i_CST++) {
+            termStore.push(obj_CST[i_CST]);
+        }
+        return termStore;
+    },
+     updateTermDetails: function(){
+        var  LineTermdetails;
+        var  LineTermTypeJson = {};
+        if(Wtf.isEmpty(this.symbol)){
+            this.parentObj.applyCurrencySymbol();
+        }
+        var lineLevelArray = [];
+        var TotalTaxAmt = 0;
+        for(var m=0 ; m < (this.store.data.length) ; m++){
+            LineTermdetails = eval(this.store.data.itemAt(m).data.LineTermdetails);
+            if(LineTermdetails != undefined && LineTermdetails != ""){
+                //Already Defined. [[1,'VAT'],[2,'Excise Duty'],[3,'CST'],[4,'Service Tax'],[5,'Swachh Bharat Cess'],[6,'Krishi Kalyan Cess']]
+                for(var n = 0 ; n < LineTermdetails.length ; n++){
+                    var prevAmt = 0;
+                    if(LineTermdetails[n].termtype ==Wtf.term.Others && (LineTermdetails[n].IsOtherTermTaxable!=undefined && !LineTermdetails[n].IsOtherTermTaxable)){
+                        continue;
+                    }
+                    if(LineTermTypeJson.hasOwnProperty(LineTermdetails[n].termtype)){
+                        prevAmt = LineTermTypeJson[LineTermdetails[n].termtype];
+                    }
+                    LineTermTypeJson[LineTermdetails[n].termtype] = prevAmt + LineTermdetails[n].termamount;
+                    /**
+                     * Add GST master details 
+                     * ERP-32829
+                     */
+                    if (LineTermdetails[n].termtype == Wtf.term.GST) {
+                        var isAlreadyexist=false;
+                        for(var arr=0;arr<lineLevelArray.length;arr++){
+                            var arrrec=lineLevelArray[arr];
+                            if(arrrec.name==LineTermdetails[n].term){
+                                var tempamt=arrrec.preamount;
+                                arrrec.taxAmount=WtfGlobal.addCurrencySymbolOnly(tempamt+LineTermdetails[n].termamount, this.symbol);
+                                arrrec.preamount=tempamt+LineTermdetails[n].termamount;
+                                TotalTaxAmt += LineTermdetails[n].termamount;
+                                isAlreadyexist=true;
+                            }
+                        }
+                        if (!isAlreadyexist) {
+                            var temp = {};
+                            temp.name = LineTermdetails[n].term;
+                            temp.preamount=LineTermdetails[n].termamount;
+                            TotalTaxAmt += LineTermdetails[n].termamount;
+                            temp.taxAmount = WtfGlobal.addCurrencySymbolOnly(LineTermdetails[n].termamount, this.symbol);
+                            lineLevelArray.push(temp);
+                        }
+                    }
+                }
+            }
+        }       
+//        this.parentObj.LineLevelTermTplSummary.overwrite(this.parentObj.LineLevelTermTpl.body,{
+//            lineLevelArray : lineLevelArray,
+//            TotalTaxAmt : WtfGlobal.addCurrencySymbolOnly(TotalTaxAmt,this.symbol)
+//        });
+    },
+calculateTermLevelTaxes : function(termStore, rec, index,isNewProduct){
+    var quantity = rec.data.dquantity;
+    quantity = (quantity == "NaN" || quantity == undefined || quantity == null) ? 0 : quantity;
+    quantity = getRoundofValue(quantity);
+
+    var amount = isNaN(rec.data.amount) ? 0.0 : rec.data.amount;
+    var finaltaxamount = 0;
+    var FinalAmountNonTaxableTerm = 0;
+    if(index == undefined){
+        index = 0;
+    }
+    var finaltermStore = new Array();
+    var totalVatTax=0;
+    var vatFound=false;
+    var termSearchTerm="";
+    var prorec="";
+    var productComboIndex = WtfGlobal.searchRecordIndex(this.productComboStore, rec.data.productid, 'productid');
+    if(productComboIndex >=0){
+        var prorec = this.productComboStore.getAt(productComboIndex);
+        termSearchTerm =eval(prorec.data['LineTermdetails']);
+        if(termSearchTerm!=undefined){
+        for(var i=0; i<termSearchTerm.length; i++){
+            var termJsonCal = termSearchTerm[i];
+            if(termJsonCal.termtype==1 && !termJsonCal.isIsAdditionalTax){
+                vatFound = true
+                totalVatTax+=termJsonCal.taxvalue;
+            }
+        }
+    }
+    }
+    // Iterate List of Terms
+    for(var i=index; i<termStore.length; i++){ // Do not change a single character from this line 
+        var termJson = termStore[i];
+        var taxamount = 0;
+        var assessablevalue = amount;
+            
+        var formula = termJson.formulaids.split(",");
+        // Loop for Formula of Term
+        for(var cnt=0; cnt<formula.length; cnt++){
+            if(formula[cnt]!='Basic') {
+                var result = finaltermStore.filter(function (termJ) {
+                    return termJ.termid == formula[cnt];
+                })[0];
+                if(result == undefined){
+                    var tempJson = this.calculateTermLevelTaxes(termStore, rec, i+1);
+                        
+                    result = tempJson.filter(function (chain) {
+                        return chain.termid == formula[cnt];
+                    })[0];
+                }
+                if(result != undefined && result.termamount != undefined){
+                    assessablevalue = assessablevalue + result.termamount;
+                }
+            }
+        }
+        if(rec.data.valuationType==Wtf.excise.MRP ||rec.data.valuationTypeVAT==Wtf.excise.MRP){
+            var calculateabatementonMRP = this.isCalculateAbatementIfMRP(termJson,rec);
+            if(calculateabatementonMRP){
+                assessablevalue= rec.data.productMRP*rec.data.baseuomquantity; // if valueation type is MRP than assessablevalue value is MRP*QUANTITY
+            }
+        }
+            // Abatement calculation on Assessable Value
+            if(termJson.deductionorabatementpercent){
+                if(termJson.termtype == Wtf.term.Service_Tax && termJson.taxtype == 1){ //1 for percentage
+                    var termpercentage = termJson.originalTermPercentage - ((termJson.originalTermPercentage * termJson.deductionorabatementpercent)/100);
+                    termJson.taxvalue =  termpercentage;
+                }else{
+                    assessablevalue = (100 - termJson.deductionorabatementpercent) * assessablevalue / 100; //As tax will apply on amount excluding abatement.
+                }
+            }else{ //  for term tax value if abatement reset to 0(zero)
+                if(termJson.termtype == Wtf.term.Service_Tax && termJson.taxtype == 1){ // For service tax  && 1 for percentage
+                      termJson.taxvalue =  termJson.originalTermPercentage ;
+                }
+            }
+        // Apply Tax on Asessable Value
+        if(termJson.taxtype == 0){ // If Flat
+                taxamount= this.TaxCalculation(termJson,rec,termJson.taxvalue,assessablevalue);              
+            }else if(termJson.taxtype == 1){ // If percentage
+                var taxamountfun = assessablevalue * termJson.taxvalue / 100;
+                taxamount= this.TaxCalculation(termJson,rec,taxamountfun,assessablevalue);   
+            }
+
+        /**
+         * Calculate CESS on Type for INDIA GST
+         */
+        var isCESSApplicable = true;
+        if (WtfGlobal.isIndiaCountryAndGSTApplied() && termJson[Wtf.DEFAULT_TERMID] != undefined && termJson[Wtf.DEFAULT_TERMID] != ''
+                && (termJson[Wtf.DEFAULT_TERMID] == Wtf.GSTTerm.OutputCESS || termJson[Wtf.DEFAULT_TERMID] == Wtf.GSTTerm.InputCESS)) {
+            var params = {};
+            var returnArray = calculateCESSONTypeAndValuationAmount(params, quantity, assessablevalue, termJson, taxamount);
+            if (returnArray[0] != undefined) {
+                taxamount = returnArray[0];
+            }
+            if (returnArray[1] != undefined && !returnArray[1]) {
+                isCESSApplicable = returnArray[1];
+            }
+        } 
+        termJson.termamount = getRoundedAmountValue(taxamount);
+        termJson.assessablevalue = getRoundedAmountValue(assessablevalue);
+            
+        if (termJson.termtype == Wtf.term.Others && (termJson.IsOtherTermTaxable != undefined && !termJson.IsOtherTermTaxable)) {
+            if (Wtf.account.companyAccountPref.isLineLevelTermFlag) {
+                //we are first rounding taxamount & then sum it , because it causes 0.1 difference in Total Amount.
+                FinalAmountNonTaxableTerm += getRoundedAmountValue(taxamount);
+            } else {
+                FinalAmountNonTaxableTerm += taxamount;
+            } 
+        }
+            if (isCESSApplicable) {
+                 finaltermStore.push(termJson);
+            }
+            /*
+             * Adding all Tax amount (CGST,SGST,CESS etc.for India country only ERP-42048
+             */
+                finaltaxamount += getRoundedAmountValue(taxamount);
+        }        
+        if (this.store && this.store.data && this.store.data.length > 0) {
+            if (finaltaxamount) {
+                rec.set('amount', getRoundedAmountValue(amount));
+                rec.set('recTermAmount', getRoundedAmountValue(finaltaxamount));
+                rec.set('taxamount', getRoundedAmountValue(finaltaxamount));
+            } else if (termStore.length < 1) {
+                rec.set('amount', getRoundedAmountValue(amount));
+                rec.set('recTermAmount', getRoundedAmountValue(0));
+                rec.set('taxamount', getRoundedAmountValue(0));
+            }
+        }
+    if(FinalAmountNonTaxableTerm){
+        rec.set('OtherTermNonTaxableAmount', getRoundedAmountValue(FinalAmountNonTaxableTerm));
+    }
+                
+    return finaltermStore;
+},
+    TaxCalculation : function (termJson,rec,taxamount,assessablevalue){
+        if(Wtf.isExciseApplicable && termJson.termtype == Wtf.term.Excise){ // for special case excise duty | termtype=2 for Excise
+            if(rec.data.valuationType==Wtf.excise.QUANTITY && termJson.taxtype==0){ // if valuation type is quentity than calculation on flat_rate*quentity
+                if(!Wtf.isEmpty(rec.data.quantityInReportingUOM)){
+                    taxamount = termJson.taxvalue*rec.data.quantityInReportingUOM;
+                }else{
+                    taxamount = 0;
+                }
+            }else if(rec.data.valuationType==Wtf.excise.MRP && termJson.taxtype==1){ //taxtype=1 for percentage | if valuation type is MRP than calculation on (Assessable Amount* TAX)/100
+                taxamount = (assessablevalue*termJson.taxvalue)/100
+            } 
+        }
+        if(Wtf.account.companyAccountPref.enablevatcst && termJson.termtype == Wtf.term.VAT){ // for special case VAT | termtype=1 for VAT
+            if(rec.data.valuationTypeVAT==Wtf.excise.QUANTITY && termJson.taxtype==0){ // if valuation type is quentity than calculation on flat_rate*quentity
+                if(!Wtf.isEmpty(rec.data.quantityInReportingUOMVAT)) {
+                    taxamount = termJson.taxvalue*rec.data.quantityInReportingUOMVAT;
+                }else{
+                    taxamount = 0;
+                }
+            }else if(rec.data.valuationTypeVAT==Wtf.excise.MRP && termJson.taxtype==1){ //taxtype=1 for percentage | if valuation type is MRP than calculation on (Assessable Amount* TAX)/100
+                taxamount = (assessablevalue*termJson.taxvalue)/100
+            } 
+        }   
+        if(Wtf.account.companyAccountPref.enablevatcst && termJson.termtype == Wtf.term.CST){ // If VAT is on MRP than CST also on MRP
+            if(rec.data.valuationTypeVAT==Wtf.excise.MRP && termJson.taxtype==1){ //taxtype=1 for percentage | if valuation type is MRP than calculation on (Assessable Amount* TAX)/100
+                taxamount = (assessablevalue*termJson.taxvalue)/100
+            } 
+        }   
+        
+        var opmod = termJson.sign==0 ? -1 : 1;
+        taxamount = opmod * taxamount;
+        return taxamount;
+    },         
+    getProductDetails:function(){
+//        if(this.editTransaction && !this.isOrder){
+//            this.store.each(function(rec){//converting in home currency
+//                if(rec.data.rowid!=null){
+//                    var amount,rate;
+//                    if(this.record.data.externalcurrencyrate!=undefined&&this.record.data.externalcurrencyrate!=0){
+//                        amount=rec.get('amount')/this.record.data.externalcurrencyrate;
+//                        rate=rec.get('rate')/this.record.data.externalcurrencyrate;
+//                    }else{
+//                        amount=rec.get('amount')/rec.get('oldcurrencyrate');
+//                        rate=rec.get('rate')/rec.get('oldcurrencyrate');
+//                    }
+//                    rec.set('amount',amount);
+//                    rec.set('rate',rate);
+//                    rec.set('permit',(rec.get('permit') != undefined && rec.get('permit') != null)?(rec.get('permit')):"");
+//                }
+//            },this);
+//        }
+        var arr=[];
+        this.store.each(function(rec){
+            if(rec.data.productid!=""){
+                rec.data[CUSTOM_FIELD_KEY]=Wtf.decode(WtfGlobal.getCustomColumnData(rec.data, this.moduleid).substring(13));
+                rec.data[CUSTOM_FIELD_KEY_PRODUCT]=Wtf.decode(WtfGlobal.getCustomColumnDataForProduct(rec.data, this.moduleid).substring(20));
+                arr.push(this.store.indexOf(rec));
+            }
+        },this)
+        var jarray=WtfGlobal.getJSONArray(this,false,arr);
+        //converting back in person currency
+//        this.store.each(function(rec){
+//            if(rec.data.rowid!=null && this.fromPO == false){
+//                var amount,rate;
+//                if(this.record.data.externalcurrencyrate!=undefined&&this.record.data.externalcurrencyrate!=0){
+//                    amount=rec.get('amount')*this.record.data.externalcurrencyrate;
+//                    rate=rec.get('rate')*this.record.data.externalcurrencyrate;
+//                }else{
+//                    amount=rec.get('amount')*rec.get('oldcurrencyrate');
+//                    rate=rec.get('rate')*rec.get('oldcurrencyrate');
+//                }
+//                rec.set('amount',amount);
+//                rec.set('rate',rate);
+//                rec.set('permit',(rec.get('permit') != undefined && rec.get('permit') != null)?(rec.get('permit')):"");
+//            }
+//        },this);
+        return jarray;
+    },
+    checkDetails: function (grid) {
+        var v = WtfGlobal.checkValidItems(this.moduleid, grid);
+        return v;
+    },
+    setCurrencyid:function(currencyid,rate,symbol,rec,store) {
+        this.symbol=symbol;
+        this.currencyid=currencyid;
+        this.rate=rate;
+        for(var i=0;i<this.store.getCount();i++){
+            this.store.getAt(i).set('currencysymbol',this.symbol);
+            this.store.getAt(i).set('currencyrate',this.rate);
+        }
+        this.getView().refresh();
+     },
+        showPriceWindow:function(btn,text,rec, obj){
+        if(btn!="yes")return;
+        callPricelistWindow(rec,"pricewindow",!this.isCustomer,this.billDate);
+        this.priceStore.on('load',this.setPrevProduct.createDelegate(this,[rec,obj]), this);
+        Wtf.getCmp("pricewindow").on('update',function(){this.loadPriceStore()},this);
+    },
+        setPrevProduct:function(rec,obj){
+        obj.cancel=false;
+        obj.ckeckProduct=false
+        if(this.fireEvent("validateedit", obj) !== false && !obj.cancel){
+            obj.record.set(obj.field, obj.value);
+            delete obj.cancel;
+            this.fireEvent("afteredit", obj);
+        }
+    },
+     loadPriceStore:function(val){
+        this.billDate=(val==undefined?this.billDate:val);
+        //if(this.editTransaction)
+//         this.priceStore.on('load',this.setGridProductValues.createDelegate(this),this)
+        this.priceStore.load({params:{transactiondate:WtfGlobal.convertToGenericDate(this.billDate)}});
+    },
+        loadPriceAfterProduct : function(){
+        if(Wtf.getCmp(this.id)){ //Load price store if component exists
+            this.loadPriceStore();
+        } else {
+            this.productComboStore.un("load",this.loadPriceAfterProduct,this);//Remove event handler if Not exists
+        }
+    },
+     loadPriceStoreOnly:function(val,pricestore){  //scope related issue
+        this.dateChange=true;
+        this.billDate=(val==undefined?this.billDate:val);        //if(this.editTransaction)
+        pricestore.load({params:{transactiondate:WtfGlobal.convertToGenericDate(this.billDate)}});
+    },
+    callupdateRowonProductLoad: function(obj) {
+    if (obj != undefined || obj != null) {
+        this.obj=obj;
+        if(this.obj.field=='pid'){
+            this.productComboStore.load();
+            this.productComboStore.on('load',function(){
+                if(this.productComboStore.getCount()<=1){
+                    if(this.store.getCount()> this.obj.row && this.obj.originalValue !="" && this.obj.originalValue != this.obj.value && this.obj.record.data.productid!=""){
+                        WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.common.productWithSpecifiedId")+" "+this.obj.value+" "+WtfGlobal.getLocaleText("acc.common.productDoesNotExistsOrInDormantState")], 2);              
+                        this.obj.record.set(this.obj.field, this.obj.originalValue);
+                        obj.cancel=true;   
+                        return;
+                    }else{
+                        WtfComMsgBox([WtfGlobal.getLocaleText("acc.common.alert"),WtfGlobal.getLocaleText("acc.common.productWithSpecifiedId")+" "+this.obj.value+" "+WtfGlobal.getLocaleText("acc.common.productDoesNotExistsOrInDormantState")], 2);              
+                        obj.cancel=true;   
+                        return;
+                    }
+                }else{
+                    this.updateRow(this.obj);
+                }
+            },this);
+        }else{
+            this.updateRow(this.obj);
+        }
+    }
+    },
+    getComboNameRenderer : function(combo){
+    return function(value,metadata,record,row,col,store) {
+        var idx = WtfGlobal.searchRecordIndex(combo.store,value,combo.valueField);
+        var fieldIndex = "pid";
+        if(idx == -1) {
+            if(record.data["pid"] && record.data[fieldIndex].length>0) {
+                return record.data[fieldIndex];
+            }else{
+                return "";
+            }
+        }
+        var rec = combo.store.getAt(idx);
+        var displayField = rec.get(combo.displayField);
+        record.set("productid", value);
+        record.set("pid", displayField);
+//        record.set("rate", 1000);
+        return displayField;
+    }
+}
+});

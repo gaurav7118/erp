@@ -1,0 +1,286 @@
+.wtf-el-mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20000;
+	width: 100%;
+	height: 100%;
+	background-color: #ccc;
+	opacity: .50;
+	filter: alpha(opacity=50);
+	zoom: 1;
+
+	-moz-opacity: 0.5;
+}
+.wtf-el-mask-msg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20001;
+	padding: 2px;
+	border: 1px solid #6593cf;
+	background: #c3daf9 url(../images/default/box/tb-blue.gif) repeat-x 0 -16px;
+}
+.wtf-el-mask-msg div {
+	padding: 5px 10px 5px 10px;
+	border: 1px solid #a3bad9;
+	background: #eee;
+	color: #222;
+	font: normal 11px tahoma, arial, helvetica, sans-serif;
+	cursor: wait;
+}
+.wtf-shim {
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	overflow: hidden;
+}
+.wtf-ie .wtf-shim {
+	filter: alpha(opacity=0);
+}
+.wtf-ie6 .wtf-shim {
+	margin-top: 3px;
+	margin-left: 5px;
+}
+.x-mask-loading div {
+	padding: 5px 10px 5px 25px;
+	background: #fbfbfb url('../images/default/grid/loading.gif') no-repeat 5px 5px;
+	line-height: 16px;
+}
+/* class for hiding elements without using display:none */
+
+.x-hidden,
+.x-hide-offsets {
+	position: absolute;
+	top: -10000px;
+	left: -10000px;
+	visibility: hidden;
+}
+.x-hide-display {
+	display: none !important;
+}
+.x-hide-visibility {
+	visibility: hidden !important;
+}
+.x-masked {
+	overflow: hidden !important;
+}
+.x-masked select,
+.x-masked object,
+.x-masked embed {
+	visibility: hidden;
+}
+.x-layer {
+	visibility: hidden;
+}
+.x-unselectable,
+.x-unselectable * {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+}
+.x-repaint {
+	background-color: transparent;
+	zoom: 1;
+
+	-moz-outline: none;
+}
+.x-item-disabled {
+	color: gray;
+	opacity: .6;
+	filter: alpha(opacity=60);
+	cursor: default;
+
+	-moz-opacity: .6;
+}
+.x-item-disabled * {
+	color: gray !important;
+	cursor: default !important;
+}
+.x-splitbar-proxy {
+	position: absolute;
+	z-index: 20001;
+	visibility: hidden;
+	overflow: hidden;
+	background: #aaa;
+	font-size: 1px;
+	line-height: 1px;
+	zoom: 1;
+}
+.x-splitbar-h,
+.x-splitbar-proxy-h {
+	cursor: e-resize;
+	cursor: col-resize;
+}
+.x-splitbar-v,
+.x-splitbar-proxy-v {
+	cursor: s-resize;
+	cursor: row-resize;
+}
+.x-color-palette {
+	width: 150px;
+	height: 92px;
+	cursor: pointer;
+}
+.x-color-palette a {
+	float: left;
+	padding: 2px;
+	outline: 0 none;
+	border: 1px solid #fff;
+	text-decoration: none;
+	cursor: pointer;
+
+	-moz-outline: 0 none;
+}
+.x-color-palette a:hover,
+.x-color-palette a.x-color-palette-sel {
+	border: 1px solid #8bb8f3;
+	background: #deecfd;
+}
+.x-color-palette em {
+	display: block;
+	border: 1px solid #aca899;
+}
+.x-color-palette em span {
+	display: block;
+	width: 10px;
+	height: 10px;
+	line-height: 10px;
+	cursor: pointer;
+}
+.x-ie-shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	overflow: hidden;
+	background: #777;
+	zoom: 1;
+}
+.x-shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	overflow: hidden;
+}
+.x-shadow * {
+	overflow: hidden;
+}
+.x-shadow * {
+	clear: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	zoom: 1;
+}
+/* top  bottom */
+
+.x-shadow .xstc,
+.x-shadow .xsbc {
+	float: left;
+	height: 6px;
+}
+/* corners */
+
+.x-shadow .xstl,
+.x-shadow .xstr,
+.x-shadow .xsbl,
+.x-shadow .xsbr {
+	float: left;
+	width: 6px;
+	height: 6px;
+}
+/* sides */
+
+.x-shadow .xsc {
+	width: 100%;
+}
+.x-shadow .xsml,
+.x-shadow .xsmr {
+	float: left;
+	width: 6px;
+	height: 100%;
+}
+.x-shadow .xsmc {
+	float: left;
+	height: 100%;
+	background: transparent url(../images/default/shadow-c.png );
+}
+.x-shadow .xst,
+.x-shadow .xsb {
+	overflow: hidden;
+	width: 100%;
+	height: 6px;
+}
+.x-shadow .xsml {
+	background: transparent url(../images/default/shadow-lr.png ) repeat-y 0 0;
+}
+.x-shadow .xsmr {
+	background: transparent url(../images/default/shadow-lr.png ) repeat-y -6px 0;
+}
+.x-shadow .xstl {
+	background: transparent url(../images/default/shadow.png ) no-repeat 0 0;
+}
+.x-shadow .xstc {
+	background: transparent url(../images/default/shadow.png ) repeat-x 0 -30px;
+}
+.x-shadow .xstr {
+	background: transparent url(../images/default/shadow.png ) repeat-x 0 -18px;
+}
+.x-shadow .xsbl {
+	background: transparent url(../images/default/shadow.png ) no-repeat 0 -12px;
+}
+.x-shadow .xsbc {
+	background: transparent url(../images/default/shadow.png ) repeat-x 0 -36px;
+}
+.x-shadow .xsbr {
+	background: transparent url(../images/default/shadow.png ) repeat-x 0 -6px;
+}
+.loading-indicator {
+	margin: 3px;
+	padding-left: 20px;
+	background-image: url(../images/default/grid/loading.gif);
+	background-position: left;
+	background-repeat: no-repeat;
+	font-size: 11px;
+	line-height: 16px;
+}
+.x-text-resize {
+	position: absolute;
+	top: -1000px;
+	left: -1000px;
+	visibility: hidden;
+	zoom: 1;
+}
+.x-drag-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 20000;
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/default/s.gif);
+}
+.x-clear {
+	clear: both;
+	overflow: hidden;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}
+.x-spotlight {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 8999;
+	width: 0;
+	height: 0;
+	background-color: #ccc;
+	opacity: .50;
+	filter: alpha(opacity=50);
+	zoom: 1;
+
+	-moz-opacity: 0.5;
+}

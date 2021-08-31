@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.stockout.StockAdjustmentDetail" table="in_sa_detail" >
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="batchName" type="string">
+            <column length="50" name="batchname"/>
+        </property>
+        <property name="serialNames" type="string">
+            <column sql-type="text" name="serialnames"/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="finalSerialNames" type="string">
+            <column sql-type="text" name="finalserialnames"/>
+        </property>
+        <property name="finalQuantity" type="double">
+            <column name="finalquantity"/>
+        </property>
+        <many-to-one class="com.krawler.inventory.model.location.Location" column="location" name="location" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" column="row" name="row"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" column="rack" name="rack"/>
+        <many-to-one class="com.krawler.common.admin.StoreMaster" column="bin" name="bin"/>
+        <many-to-one class="com.krawler.inventory.model.stockout.StockAdjustment" column="stockadjustment" name="stockAdjustment" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.SalesOrder" column="jobworkorder" name="jobworkorder" />
+        <many-to-one class="com.krawler.inventory.model.inspection.InspectionForm" column="inspectionformid" name="inspectionForm"/>
+
+    </class>
+</hibernate-mapping>

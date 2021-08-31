@@ -1,0 +1,1222 @@
+#//Anup - 25rd Dec, 2013 
+
+After Line
+<value>/com/krawler/hql/accounting/QuotationDetailCustomData.hbm.xml</value> 
+
+Add Lines 
+<value>/com/krawler/hql/accounting/DebitNoteTermsMap.hbm.xml</value>                                 
+ <value>/com/krawler/hql/accounting/CreditNoteTermsMap.hbm.xml</value>         
+
+#//Sagar - 15th Jan, 2014
+
+After Line
+<value>/com/krawler/hql/accounting/CompanyAccountPreferences.hbm.xml</value>
+
+Add Lines
+<value>/com/krawler/hql/accounting/SequenceFormat.hbm.xml</value>
+
+#//Sagar - 27th Jan, 2014
+
+After Line
+<value>/com/krawler/common/admin/CustomizeReportMapping.hbm.xml</value>
+Add Lines
+<value>/com/krawler/common/admin/PdfTemplateConfig.hbm.xml</value>
+
+#//Hitesh - 03th Feb, 2014
+
+After Line
+<value>/com/krawler/common/admin/Role.hbm.xml</value>
+
+Add Lines
+ <value>/com/krawler/common/admin/ReportMaster.hbm.xml</value>
+ <value>/com/krawler/common/admin/ReportRoleMap.hbm.xml</value>
+
+#Pandurang
+After Line
+ <value>/com/krawler/hql/accounting/RevaluationHistory.hbm.xml</value>
+Add Line
+  <value>/com/krawler/hql/accounting/RevaluationTime.hbm.xml</value>
+
+# Prathamesh Sheth 19th Feb 2014
+
+<value>/com/krawler/hql/accounting/ProductCustomFieldHistory.hbm.xml</value>
+<value>/com/krawler/hql/accounting/ShelfLocation.hbm.xml</value>
+<value>/com/krawler/hql/accounting/PurchaseOrderDetailProductCustomData.hbm.xml</value>    
+
+#Atul sachan 19 Feb 2014
+
+
+After Line -
+
+<value>/com/krawler/common/admin/ModuleTemplate.hbm.xml</value>
+
+Add Line -
+
+<value>/com/krawler/common/admin/ExtraCompanyPreferences.hbm.xml</value>
+
+#11 March 2014
+Changes for Remove Vendor/Customer Accounts dependency
+Add Line after AccountCustomData.hbm.xml
+<value>/com/krawler/hql/accounting/VendorCustomData.hbm.xml</value>
+<value>/com/krawler/hql/accounting/CustomerCustomData.hbm.xml</value>
+
+#Hitesh Suryawanshi 19 March 2014
+
+After Line -
+
+<value>/com/krawler/hql/accounting/QuotationTermMap.hbm.xml</value>
+
+Add Line -
+
+ <value>/com/krawler/hql/accounting/RepeatedSalesOrder.hbm.xml</value>
+
+
+
+#Anand Nimbalkar 24 March 2014
+
+After Line -
+
+<value>/com/krawler/hql/accounting/Product.hbm.xml</value>
+
+Add Line -
+
+<value>/com/krawler/hql/accounting/ProductCategoryMapping.hbm.xml</value>
+
+# Atulsachan 23 April 2014
+
+Added -
+
+<value>/com/krawler/hql/accounting/CreditNoteTaxEntry.hbm.xml</value>
+
+after -
+
+<value>/com/krawler/hql/accounting/CreditNoteDetail.hbm.xml</value>
+
+Added -
+
+<value>/com/krawler/hql/accounting/DebitNoteTaxEntry.hbm.xml</value>
+
+After -
+
+<value>/com/krawler/hql/accounting/DebitNoteDetail.hbm.xml</value>
+
+#Raveesh Pathak 23rd April 2014
+After Line-
+<value>/com/krawler/common/admin/PdfTemplateConfig.hbm.xml</value>
+
+Add Lines-
+<value>/com/krawler/common/admin/BillingShippingAddresses.hbm.xml</value>
+<value>/com/krawler/common/admin/CustomerAddresses.hbm.xml</value>
+<value>/com/krawler/common/admin/VendorAddresses.hbm.xml</value>
+
+
+#Hitesh Suryawanshi 24rd April 2014
+After Line-
+ <value>/com/krawler/common/admin/ReportRoleMap.hbm.xml</value>
+
+Add Lines-
+ <value>/com/krawler/common/admin/AmendingPrice.hbm.xml</value>
+
+# Neeraj D - 5th May 2014
+Add at the end - 
+
+<value>/com/krawler/hql/accounting/VendorProductMapping.hbm.xml</value>
+
+# Neeraj D - 6th May 2014
+Add at the end - 
+
+<value>/com/krawler/hql/accounting/CustomerProductMapping.hbm.xml</value>
+
+
+#Anup Kale 10 May 2014
+After Line-
+<value>/com/krawler/common/admin/VendorAddresses.hbm.xml</value>
+
+Add Lines-
+<value>/com/krawler/hql/accounting/PurchaseRequisitionCustomData.hbm.xml</value> 
+
+#Hitesh Suryawanshi 15 May 2014
+After Line-
+<value>/com/krawler/hql/accounting/JournalEntry.hbm.xml</value>
+
+Add Lines-
+<value>/com/krawler/hql/accounting/RepeatedJE.hbm.xml</value>
+ 
+     
+#Malhari Pawar 20 May 2014                           
+After Line - 
+<value>/com/krawler/common/admin/FieldParams.hbm.xml</value>
+
+Add Lines -
+<value>/com/krawler/common/admin/InventoryLocation.hbm.xml</value>
+<value>/com/krawler/common/admin/InventoryWarehouse.hbm.xml</value>
+<value>/com/krawler/common/admin/ProductBatch.hbm.xml</value>
+<value>/com/krawler/common/admin/BatchSerialMapping.hbm.xml</value>
+<value>/com/krawler/common/admin/BatchSerial.hbm.xml</value>
+<value>/com/krawler/common/admin/SalesPurchaseBatchMapping.hbm.xml</value>
+
+#Hitesh Suryawanshi 24 May 2014
+After Line-
+<value>/com/krawler/hql/accounting/RepeatedJE.hbm.xml</value>
+
+Add Lines-
+<value>/com/krawler/hql/accounting/RepeatedJEMemo.hbm.xml</value>
+ 
+#Malhari Pawar 27 May 2014                           
+After Line - 
+ <value>/com/krawler/common/admin/BatchSerialMapping.hbm.xml</value>
+
+Add Line -
+<value>/com/krawler/common/admin/AssemblySubProductBatchSerialMapping.hbm.xml</value>
+
+#Malhari Pawar 10 June 2014   Added Serial no functionality for Sales Return And Purchase Return Module                        
+After Line - 
+ <value>/com/krawler/common/admin/SalesPurchaseBatchMapping.hbm.xml</value>
+                               
+Add Line -
+<value>/com/krawler/common/admin/ReturnBatchMapping.hbm.xml</value>
+<value>/com/krawler/common/admin/ReturnSerialMapping.hbm.xml</value>
+
+#Hitesh Suryawanshi 12th June 2014
+After Line-
+<value>/com/krawler/common/admin/FieldComboData.hbm.xml</value>
+  
+Add Lines-
+<value>/com/krawler/common/admin/FieldComboDataMapping.hbm.xml</value>
+
+#Atul sachan 16 June 2014 - Fixed Asset Changes
+
+After Line - 
+
+    <value>/com/krawler/hql/accounting/CustomerProductMapping.hbm.xml</value>
+
+Added Lines - 
+
+    <value>/com/krawler/hql/accounting/FixedAssetOpening.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetDetails.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/FixedAssetOpeningMappingWithAssetDetail.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetDepreciationDetail.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetInvoiceDetailMapping.hbm.xml</value>
+
+After Line - 
+    <value>/com/krawler/common/admin/InventoryLocation.hbm.xml</value>
+
+Added Line - 
+
+    <value>/com/krawler/common/admin/Department.hbm.xml</value>
+
+
+#Hitesh Suryawanshi 20th june 2014
+After Line-
+<value>/com/krawler/hql/accounting/Invoice.hbm.xml</value>
+
+Add Lines-
+<value>/com/krawler/hql/accounting/ExcludedOutstandingOrders.hbm.xml</value>
+
+# Anand Nimbalkar 4th July 2014
+After Line
+<value>/com/krawler/hql/accounting/AccountBudget.hbm.xml</value>
+
+Add Line
+<value>/com/krawler/hql/accounting/AccountForecast.hbm.xml</value>
+
+#Hitesh Suryawanshi 6th Aug 2014
+After Line
+<value>/com/krawler/hql/accounting/Product.hbm.xml</value>
+
+Add Line
+<value>/com/krawler/hql/accounting/ProductPriceRule.hbm.xml</value>         
+               
+# Atul sachan 7th August
+
+After Line
+
+  <value>/com/krawler/hql/accounting/SequenceFormat.hbm.xml</value>
+
+Add Line
+
+  <value>/com/krawler/hql/accounting/ChequeSequenceFormat.hbm.xml</value>
+
+# Vivek Pakmode 22nd August
+
+After Line
+
+  <value>/com/krawler/hql/accounting/ExtraCompanyPreferences.hbm.xml</value>
+
+Add Line
+
+  <value>/com/krawler/common/admin/widgetManagement.hbm.xml</value>
+        
+# Mayur Bhokase 23rd August
+
+After Line
+
+    <value>/com/krawler/hql/accounting/Cheque.hbm.xml</value>
+
+Add Line
+
+    <value>/com/krawler/hql/accounting/ChequeLayout.hbm.xml</value>
+
+
+#Anup Kale 27 Aug
+After Line
+<value>/com/krawler/hql/accounting/PurchaseRequisitionCustomData.hbm.xml</value>
+Actual Line
+<value>/com/krawler/hql/accounting/ClosingAccountBalance.hbm.xml</value>  
+       
+ #Hitesh Suraywanshi 5th Sept 2014
+ After Line
+          <value>/com/krawler/hql/accounting/CompanyAccountPreferences.hbm.xml</value>
+ Actual Line
+          <value>/com/krawler/hql/accounting/ExportCompanypref.hbm.xml</value>	
+
+
+# Atul sachan 11 sept 2014
+
+After Line 
+
+<value>/com/krawler/hql/accounting/Vendor.hbm.xml</value>
+
+Add Line
+
+<value>/com/krawler/hql/accounting/IBGReceivingBankDetails.hbm.xml</value>
+
+# Malhari Pawar 12 sept 2014 Merged sats specific changes
+
+After Line - 
+<value>/com/krawler/hql/accounting/PriceList.hbm.xml</value>
+
+Add Line - 
+<value>/com/krawler/common/admin/PriceType.hbm.xml</value> 
+<value>/com/krawler/common/admin/MasterItemPrice.hbm.xml</value> 
+<value>/com/krawler/common/admin/MasterItemPriceFormula.hbm.xml</value> 
+
+#Mayur Pawar 22June 2014
+After Line-
+<value>/com/krawler/hql/accounting/AssemblySubProductMapping.hbm.xml</value>
+
+
+# Anand Nimbalkar 4th July 2014
+After Line
+<value>/com/krawler/hql/accounting/AccountBudget.hbm.xml</value>
+
+Add Line
+<value>/com/krawler/hql/accounting/AccountForecast.hbm.xml</value>
+
+#Malhari Pawar 16 july 2014
+After Line -
+<value>/com/krawler/hql/accounting/Contract.hbm.xml</value>
+Add Line
+<value>/com/krawler/hql/accounting/ContractDates.hbm.xml</value>
+
+#Hitesh Suryawanshi 16th July 2014
+After Line-
+<value>/com/krawler/hql/accounting/Product.hbm.xml</value>
+ 
+Add Lines-
+<value>/com/krawler/hql/accounting/ProductPriceRule.hbm.xml</value>
+
+#Hitesh Suryawanshi 16th July 2014
+After Line-
+<value>/com/krawler/hql/accounting/SalesOrderDetailsCustomData.hbm.xml</value>
+ 
+Add Lines-
+<value>/com/krawler/hql/accounting/ContractCustomData.hbm.xml</value>
+
+# Anand Nimbalkar 12th Sept 2014
+After Line - 
+<value>/com/krawler/hql/accounting/Account.hbm.xml</value>
+
+Add Line - 
+<value>/com/krawler/hql/accounting/IBGBankDetails.hbm.xml</value>
+
+
+# Malhari Pawar 16 sept 2014
+
+After Line - 
+<value>/com/krawler/hql/accounting/PaymentDetail.hbm.xml</value>
+
+Add Line - 
+<value>/com/krawler/hql/accounting/GIROFileInfo.hbm.xml</value>
+
+#*******************************************F1 Code Merge Changes  23 Sep 2014 ************************
+After Line 
+<value>/com/krawler/hql/accounting/Invoice.hbm.xml</value>
+
+Add Line
+
+<value>/com/krawler/hql/accounting/InvoiceContractMapping.hbm.xml</value>
+<value>/com/krawler/hql/accounting/DOContractMapping.hbm.xml</value>
+
+
+After Line
+
+<value>/com/krawler/hql/accounting/SalesOrderDetail.hbm.xml</value>
+Add Line
+<value>/com/krawler/hql/accounting/ProductReplacement.hbm.xml</value>
+<value>/com/krawler/hql/accounting/AssemblySubProductMapping.hbm.xml</value>
+<value>/com/krawler/hql/accounting/ProductReplacementDetail.hbm.xml</value>
+<value>/com/krawler/hql/accounting/ReplacementProductBatchDetailsMapping.hbm.xml</value>
+<value>/com/krawler/hql/accounting/Maintenance.hbm.xml</value>
+<value>/com/krawler/hql/accounting/Contract.hbm.xml</value>
+<value>/com/krawler/hql/accounting/ContractDates.hbm.xml</value>
+<value>/com/krawler/hql/accounting/ContractDetail.hbm.xml</value>
+<value>/com/krawler/hql/accounting/ServiceDetail.hbm.xml</value>
+
+After Line
+
+<value>/com/krawler/hql/accounting/SalesOrderDetailsCustomData.hbm.xml</value>
+Add Line
+<value>/com/krawler/hql/accounting/ContractCustomData.hbm.xml</value>
+
+After Line
+
+<value>/com/krawler/common/admin/EmailTemplateFiles.hbm.xml</value>
+Add Line
+<value>/com/krawler/common/admin/ContractFiles.hbm.xml</value>
+
+After Line
+<value>/com/krawler/common/admin/SalesCommission.hbm.xml</value>
+Add Line
+<value>/com/krawler/common/admin/SalesComissionScehma.hbm.xml</value>
+
+#**********************************************************************************#
+# Anup Kale 16 Sep 2014
+After Line-
+<value>/com/krawler/hql/accounting/ClosingAccountBalance.hbm.xml</value>
+ 
+Add Lines-
+<value>com/krawler/common/admin/DataFilteringModule.hbm.xml</value>
+            
+#Hitesh Suryawanshi 10 Oct 2014
+After Line-
+      <value>/com/krawler/hql/accounting/PurchaseRequisitionCustomData.hbm.xml</value> 
+
+ Add Lines-
+    <value>/com/krawler/hql/accounting/PurchaseRequisitionDetailCustomData.hbm.xml</value> 
+    <value>/com/krawler/hql/accounting/RFQCustomData.hbm.xml</value> 
+    <value>/com/krawler/hql/accounting/RequestForQuotationDetailCustomData.hbm.xml</value> 
+
+#Hitesh Suryawanshi 28 Oct 2014
+After Line-
+   <value>/com/krawler/hql/accounting/Invoice.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/OpeningBalanceInvoiceCustomData.hbm.xml</value>
+
+After Line-
+    <value>/com/krawler/hql/accounting/CreditNote.hbm.xml</value>
+Add Lines-
+ <value>/com/krawler/hql/accounting/OpeningBalanceCreditNoteCustomData.hbm.xml</value>
+
+After Line-
+   <value>/com/krawler/hql/accounting/Receipt.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/OpeningBalanceReceiptCustomData.hbm.xml</value>
+
+After Line-
+   <value>/com/krawler/hql/accounting/GoodsReceipt.hbm.xml</value>
+Add Lines-
+   <value>/com/krawler/hql/accounting/OpeningBalanceVendorInvoiceCustomData.hbm.xml</value>
+
+After Line-
+   <value>/com/krawler/hql/accounting/DebitNote.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/OpeningBalanceDebitNoteCustomData.hbm.xml</value>
+
+After Line-
+    <value>/com/krawler/hql/accounting/Payment.hbm.xml</value>	
+Add Lines-
+    <value>/com/krawler/hql/accounting/OpeningBalanceMakePaymentCustomData.hbm.xml</value>
+
+# Anand Nimbalkar 11th Nov 2014
+After Line-
+    <value>/com/krawler/hql/accounting/ClosingAccountBalance.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/common/admin/UserActiveDaysDetails.hbm.xml</value>
+
+# Atul sachan 14th Nov 2014
+After Line-
+    <value>/com/krawler/hql/accounting/ClosingAccountBalance.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/AssetMaintenanceScheduler.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetMaintenanceWorkOrder.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetMaintenanceWorkOrderDetail.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetMaintenanceSchedulerObject.hbm.xml</value>
+
+
+# Malhari 19th Nov 2014
+After Line
+ <value>/com/krawler/common/admin/ReturnSerialMapping.hbm.xml</value>
+Add Lines-
+
+<value>/com/krawler/common/admin/NewProductBatch.hbm.xml</value>
+<value>/com/krawler/common/admin/NewBatchSerial.hbm.xml</value>
+<value>/com/krawler/common/admin/LocationBatchDocumentMapping.hbm.xml</value>
+<value>/com/krawler/common/admin/SerialDocumentMapping.hbm.xml</value>
+
+#Mayur Bhokase 24th Nov 2014
+After Line
+ <value>/com/krawler/hql/accounting/BankReconciliationDetail.hbm.xml</value>
+Add Lines-
+
+<value>/com/krawler/hql/accounting/BankUnreconciliationDetail.hbm.xml</value>
+<value>/com/krawler/hql/accounting/BankReconcilationDocuments.hbm.xml</value>
+<value>/com/krawler/hql/accounting/BankReconcilationDocumentCompMap.hbm.xml</value>
+
+#Raveesh Pathak 25th Nov 2014
+After line
+<value>/com/krawler/common/admin/DefaultHeader.hbm.xml</value>
+Add Line
+<value>/com/krawler/common/admin/DefaultHeaderModuleJoinReference.hbm.xml</value>
+
+# Anand Nimbalkar 2nd Dec 2014
+After Line-
+    <value>/com/krawler/hql/accounting/Invoice.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/DeliveryPlanner.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/DeliveryPlannerAnnouncement.hbm.xml</value>
+
+# Anup Kale 11nd Dec 2014
+After Line-
+    <value>/com/krawler/hql/accounting/PaymentDetail.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/AdvanceDetail.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/LinkDetailPayment.hbm.xml</value>
+# Anup Kale 25nd Dec 2014
+After Line-
+    <value>/com/krawler/hql/accounting/LinkDetailPayment.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/hql/accounting/ReceiptAdvanceDetail.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/LinkDetailReceipt.hbm.xml</value>
+
+# Vivek Pakmode 26th Dec 2014
+After Line-
+             <value>/com/krawler/hql/accounting/Product.hbm.xml</value>
+Add Line-
+            <value>/com/krawler/hql/accounting/ProductComposition.hbm.xml</value>
+
+# Anand Nimbalkar 30th Dec 2014
+After Line-
+    <value>/com/krawler/common/admin/InventoryLocation.hbm.xml</value>
+Add Lines-
+    <value>/com/krawler/common/admin/PricingBandMaster.hbm.xml</value>
+    <value>/com/krawler/common/admin/PricingBandMasterDetail.hbm.xml</value>
+
+# Atul sachan 08nd Jan 2015
+After Line-
+    <value>/com/krawler/hql/accounting/Invoice.hbm.xml</value>
+Add Line-
+    <value>/com/krawler/hql/accounting/BadDebtInvoiceMapping.hbm.xml</value>
+
+After Line-
+    <value>/com/krawler/hql/accounting/GoodsReceipt.hbm.xml</value>
+Add Line-
+    <value>/com/krawler/hql/accounting/BadDebtPurchaseInvoiceMapping.hbm.xml</value>
+
+# Vivek Pakmode 12th Jan 2015
+After Lines-
+ <value>/com/krawler/hql/accounting/QuotationDetail.hbm.xml</value>
+
+Add Lines-
+ <value>/com/krawler/hql/accounting/QuotationVersion.hbm.xml</value>
+ <value>/com/krawler/hql/accounting/QuotationVersionDetail.hbm.xml</value>
+
+After Lines-
+           <value>/com/krawler/hql/accounting/QuotationCustomData.hbm.xml</value>  
+Add Lines-    
+           <value>/com/krawler/hql/accounting/QuotationVersionCustomData.hbm.xml</value> 
+
+After Lines-
+           <value>/com/krawler/hql/accounting/QuotationDetailCustomData.hbm.xml</value>    
+Add Lines- 
+           <value>/com/krawler/hql/accounting/QuotationVersionDetailCustomData.hbm.xml</value>  
+
+# Suhas Chaware 23rd Jan 2015
+After Lines-
+        <value>/com/krawler/common/admin/UserActiveDaysDetails.hbm.xml</value>
+Add Lines-
+        <value>/com/krawler/common/admin/SerialCustomData.hbm.xml</value>
+
+# Atul sachan 30 Jan 2015
+
+Add Line 
+    <value>/com/krawler/hql/accounting/TaxAdjustment.hbm.xml</value>
+
+After Line
+
+    <value>/com/krawler/hql/accounting/BadDebtInvoiceMapping.hbm.xml</value>
+
+# Anand Nimbalkar 5th Feb 2015
+
+Add Line 
+    <value>/com/krawler/hql/accounting/PurchaseRequisitionDetail.hbm.xml</value>
+
+After Line
+    <value>/com/krawler/hql/accounting/Budgeting.hbm.xml</value>
+
+
+# Nitin Narkhede 6th Feb 2015
+add Lines:
+                    <value>/com/krawler/common/admin/LocationLevel.hbm.xml</value>
+                    <value>/com/krawler/common/admin/LocationLevelMapping.hbm.xml</value>
+                    <value>/com/krawler/common/admin/StoreMaster.hbm.xml</value>
+After Line: 
+                <value>/com/krawler/common/admin/ReturnSerialMapping.hbm.xml</value>
+
+# Amol Dhokale 12th Feb 2015
+Add Line
+    <value>/com/krawler/common/admin/GridConfig.hbm.xml</value>
+
+After Line 
+    <value>/com/krawler/common/admin/widgetManagement.hbm.xml</value>
+
+# Vaibhav Patil 26th Feb.2015
+
+ADD LINE :
+    <value>/com/krawler/common/admin/ProductExportDetail.hbm.xml</value>
+AFTER LINE :
+    <value>/com/krawler/common/admin/StoreMaster.hbm.xml</value>
+
+# Suhas Chaware 3rd March 2015
+Add Line
+    <value>/com/krawler/hql/accounting/TaxTermsMapping.hbm.xml</value>
+
+After Line 
+    <value>/com/krawler/hql/accounting/CustomerVendorMapping.hbm.xml</value>
+
+
+# Raj Shah 24th March 2015
+
+Add Lines  :
+
+    <value>com/krawler/hql/inventory/InventoryDocuments.hbm.xml</value>
+    <value>com/krawler/hql/inventory/InventoryDocumentCompMap.hbm.xml</value>
+
+After Line :
+    <value>/com/krawler/hql/inventory/ConsignmentApprovalDetails.hbm.xml</value>
+
+# Atul sachan 1 April 2015
+ADD LINE :
+    <value>/com/krawler/common/admin/CroneSchedule.hbm.xml</value>
+AFTER LINE :
+    <value>/com/krawler/common/admin/Country.hbm.xml</value>
+
+# Nitin Narkhede 4 April 2015
+
+Update Line:
+    <value>/com/krawler/common/admin/RepeatedInvoices.hbm.xml</value>
+
+After Line:
+    <value>/com/krawler/hql/accounting/BillingDebitNoteDiscount.hbm.xml</value>
+
+# Amol Dhokale 9th April 2015
+Add Lines : 
+    <value>/com/krawler/hql/accounting/SODetailsVendorMapping.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/QuotationDetailsVendorMapping.hbm.xml</value>
+
+After Line :
+    <value>/com/krawler/hql/accounting/AssetMaintenanceSchedulerObject.hbm.xml</value>
+
+
+# Vipin Gupta 9 April 2015
+Add Line:
+    <value>com/krawler/hql/inventory/InspectionTemplate.hbm.xml</value>
+    <value>com/krawler/hql/inventory/InspectionArea.hbm.xml</value>
+
+After Line:
+    <value>com/krawler/hql/inventory/InventoryDocumentCompMap.hbm.xml</value>
+
+# Anand Nimbalkar 10th April 2015
+ADD LINES
+    <value>/com/krawler/hql/accounting/PurchaseRequisitionAssetDetails.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/AssetPurchaseRequisitionDetailMapping.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/AssetInvoiceDetailMapping.hbm.xml</value>
+
+# Ajit Ankalle 23rd April 2015
+ADD LINES
+    <value>/com/krawler/hql/accounting/SalesPersonMapping.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/CustomerCategoryMapping.hbm.xml</value>
+
+# Mohammed Uzair Momin 6th May 2015
+ADD LINES
+    <value>/com/krawler/common/admin/ConsignmentRequestApprovalRule.hbm.xml</value>
+    <value>/com/krawler/common/admin/ConsignmentRequestLocationMapping.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/common/admin/CostCenter.hbm.xml</value>
+
+# Basaprabhu Ajur 7th May 2015
+ADD LINES
+    <mapping resource="/com/krawler/hql/accounting/CustomerWarehouseMap.hbm.xml" />
+
+AFTER LINE
+    <mapping resource="com/krawler/hql/accounting/CustomizedAgedDuration.hbm.xml" />
+
+#Pandurang 1st June 2015
+ADD LINE
+<value>/com/krawler/common/admin/ConsignmentRequestApproverMapping.hbm.xml</value>
+
+AFTER LINE
+<value>/com/krawler/common/admin/ConsignmentRequestLocationMapping.hbm.xml</value>
+
+#Raveesh Pathak 19th June 
+ADD LINE
+   <value>/com/krawler/common/admin/CustomerAddressDetails.hbm.xml</value>
+   <value>/com/krawler/common/admin/VendorAddressDetails.hbm.xml</value>
+AFTER LINE
+   <value>/com/krawler/common/admin/VendorAddresses.hbm.xml</value>               				
+
+#Rushikesh Mandage 9th July 2015
+
+Add line
+    <value>/com/krawler/hql/accounting/RepeatedPayment.hbm.xml</value>            
+After Line
+     <value>/com/krawler/common/admin/SerialCustomData.hbm.xml</value>
+
+# Amol Dhokale 20th July 2015
+Add Line
+    <value>/com/krawler/hql/accounting/CreditNotePaymentDetails.hbm.xml</value>
+    <value>/com/krawler/hql/accounting/DebitNotePaymentDetails.hbm.xml</value>           
+After Line
+    <value>/com/krawler/hql/accounting/QuotationDetailsVendorMapping.hbm.xml</value>
+
+# Nikhil 20th July
+ADD LINE
+    <value>com/krawler/hql/inventory/StockCustomData.hbm.xml</value>
+AFTER LINE 
+    <value>com/krawler/hql/inventory/InspectionArea.hbm.xml</value>
+
+# Pandurang 3 August 2015
+ADD LINE
+   <value>/com/krawler/common/admin/LocationBatchRejectorMapping.hbm.xml</value>
+AFTER LINE 
+   <value>/com/krawler/common/admin/LocationBatchDocumentMapping.hbm.xml</value>
+
+# Santosh Belote 5th August 2015
+ADD LINE
+   <value>/com/krawler/hql/accounting/SalesOrderDetailProductCustomData.hbm.xml</value>
+AFTER LINE 
+   <value>/com/krawler/hql/accounting/SalesOrderDetailsCustomData.hbm.xml</value>
+
+
+ADD LINE
+  <value>/com/krawler/hql/accounting/DeliveryOrderDetailProductCustomData.hbm.xml</value>
+AFTER LINE 
+   <value>/com/krawler/hql/accounting/DeliveryOrderDetailCustomData.hbm.xml</value>
+
+# Rushikesh Mandage 21st August 2015
+
+ADD LINE
+  <value>/com/krawler/hql/accounting/RepeatedPaymentChequeDetail.hbm.xml</value>  
+AFTER LINE 
+   <value>/com/krawler/hql/accounting/RepeatedPayment.hbm.xml</value>   
+
+# Rushikesh Mandage 25th August 2015
+
+ADD LINE
+  <value>/com/krawler/hql/accounting/RepeatedJEChequeDetail.hbm.xml</value>
+AFTER LINE 
+   <value>/com/krawler/hql/accounting/RepeatedJEMemo.hbm.xml</value> 
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint38 created on 16th Sept 2015 7:25PM ---------------------------------------------- 
+
+# Suhas Chaware 23Sept 2015
+ADD LINE
+ <value>/com/krawler/hql/accounting/RevenueJEInvoiceMapping.hbm.xml</value>
+AFTER LINE 
+   <value>/com/krawler/hql/accounting/RepeatedJEChequeDetail.hbm.xml</value>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint39 created on 24th Sept 2015 10:30AM ---------------------------------------------- 
+#Raveesh Pathak 29th Sept 2015
+ADD LINE
+   <value>/com/krawler/common/admin/CompanyAddressDetails.hbm.xml</value>
+AFTER LINE 
+   <value>/com/krawler/common/admin/ExtraCompanyPreferences.hbm.xml</value>
+
+#Rushikesh Mandage 1st Oct 2015
+
+ADD LINE
+    <value>/com/krawler/hql/accounting/InvoiceWriteOff.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/Invoice.hbm.xml</value>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint40 created on 7th Oct 2015 02:30PM ---------------------------------------------- 
+
+#Sharad Pawar 8th Oct 2015
+
+ADD LINE
+   <value>/com/krawler/hql/accounting/VendorAgentMapping.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/IBGReceivingBankDetails.hbm.xml</value>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint41 created on 15th Oct 2015 11:15AM ---------------------------------------------- 
+
+#Dipak Dorkar - 20th Oct., 2015
+
+ADD LINE
+   <value>/com/krawler/common/admin/DocumentEmailSettings.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/common/admin/ExtraCompanyPreferences.hbm.xml</value>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint44 created on 28th Oct 2015 11:30AM ---------------------------------------------- 
+
+#Mohammed Uzair Momin 30th October 2015
+After Line - 
+<value>/com/krawler/hql/accounting/Account.hbm.xml</value>
+
+Add Line - 
+<value>/com/krawler/hql/accounting/DistributeBalance.hbm.xml</value>
+
+#Rushikesh Mandage 3rd November 2015
+ADD LINE 
+    <value>/com/krawler/hql/accounting/LinkDetailReceiptToDebitNote.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/LinkDetailReceipt.hbm.xml</value>
+
+#Rushikesh Mandage 6th November 2015
+ADD LINE
+    <value>/com/krawler/hql/accounting/ReceiptWriteOff.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/InvoiceWriteOff.hbm.xml</value>
+                
+#Mohammed Uzair Momin 9th November 2015
+After Line - 
+    <value>/com/krawler/hql/accounting/DeliveryOrderDetail.hbm.xml</value>	
+Add Line - 
+    <value>/com/krawler/hql/accounting/DeliveryOrderTermMap.hbm.xml</value>
+
+
+After Line - 
+    <value>/com/krawler/hql/accounting/GoodsReceiptOrderDetails.hbm.xml</value>
+Add Line - 
+    <value>/com/krawler/hql/accounting/GoodsReceiptOrderTermMap.hbm.xml</value>
+
+#Raveesh Pathak 16th Nov 2015
+After Line - 
+        <value>/com/krawler/common/admin/NotificationRules.hbm.xml</value>
+Add Line - 
+        <value>/com/krawler/common/admin/NotifictionRulesRecurringDetail.hbm.xml</value>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint47 created on 19th Nov 2015 10:30AM ---------------------------------------------- 
+#Rushikesh Mandage 27th Nov 2015
+ADD LINE
+    <value>/com/krawler/hql/accounting/LinkDetailPaymentToCreditNote.hbm.xml</value>
+AFTER LINE
+    <value>/com/krawler/hql/accounting/LinkDetailPayment.hbm.xml</value>
+
+#Deepak  Singh 4th Dec 2015
+
+
+AFTER LINE
+     <value>/com/krawler/hql/accounting/AssetPurchaseRequisitionDetailMapping.hbm.xml</value>
+
+ADD LINE
+       <value>/com/krawler/hql/accounting/VendorQuotationLinking.hbm.xml</value>
+       <value>/com/krawler/hql/accounting/PurchaseOrderLinking.hbm.xml</value>
+       <value>/com/krawler/hql/accounting/GoodsReceiptLinking.hbm.xml</value>
+       <value>/com/krawler/hql/accounting/GoodsReceiptOrderLinking.hbm.xml</value>
+       <value>/com/krawler/hql/accounting/PurchaseReturnLinking.hbm.xml</value>
+
+# Suhas Chaware 7 Dec 2015
+Add Lines :
+		<value>/com/krawler/hql/accounting/VendorQuotationVersion.hbm.xml</value>
+                <value>/com/krawler/hql/accounting/VendorQuotationVersionDetail.hbm.xml</value>
+                <value>/com/krawler/hql/accounting/VendorQuotationVersionCustomData.hbm.xml</value>
+                <value>/com/krawler/hql/accounting/VendorQuotationVersionDetailCustomData.hbm.xml</value>
+
+After Lines :
+<value>/com/krawler/hql/accounting/VendorQuotationDetail.hbm.xml</value>
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprint49 created on 08th Dec 2015 11:30AM ---------------------------------------------- 
+#Deepak  Singh 8th Dec 2015
+
+
+AFTER LINE:
+         <value>/com/krawler/hql/accounting/PurchaseReturnLinking.hbm.xml</value>
+
+ADD LINE:
+            <value>/com/krawler/hql/accounting/DebitNoteLinking.hbm.xml</value>
+            <value>/com/krawler/hql/accounting/QuotationLinking.hbm.xml</value>
+            <value>/com/krawler/hql/accounting/SalesOrderLinking.hbm.xml</value>
+            <value>/com/krawler/hql/accounting/InvoiceLinking.hbm.xml</value>
+            <value>/com/krawler/hql/accounting/DeliveryOrderLinking.hbm.xml</value>
+
+#Santosh Belote 8th Dec 2015
+
+ADD LINE :
+
+  <value>/com/krawler/hql/accounting/VendorQuotationDetailsProductCustomData.hbm.xml</value> 
+  <value>/com/krawler/hql/accounting/QuotationDetailsProductCustomData.hbm.xml</value>  
+
+AFTER LINE :
+   <value>/com/krawler/hql/accounting/QuotationDetailCustomData.hbm.xml</value> 
+
+#Deepak Singh 9th Dec 2015
+
+ADD LINE :
+      <value>/com/krawler/hql/accounting/SalesReturnLinking.hbm.xml</value>
+      <value>/com/krawler/hql/accounting/CreditNoteLinking.hbm.xml</value> 
+AFTER LINE :
+    <value>/com/krawler/hql/accounting/DeliveryOrderLinking.hbm.xml</value>
+
+#Shashi Nandan kumar 10th Dec 2015
+AFTER LINE :
+<value>com/krawler/hql/inventory/StockCustomData.hbm.xml</value>
+
+ADD LINE :
+<value>/com/krawler/common/admin/RolePermission.hbm.xml</value>
+
+#Pandurang 4th Jan 2016
+ADD LINE:
+    <value>/com/krawler/common/admin/LoanRules.hbm.xml</value>
+AFTER LINE:
+    <value>/com/krawler/common/admin/CostCenter.hbm.xml</value>
+
+
+ADD LINE:
+        <value>/com/krawler/hql/accounting/Disbursement.hbm.xml</value>
+        <value>/com/krawler/hql/accounting/RepaymentDetails.hbm.xml</value>
+AFETR LINE:
+        <value>/com/krawler/hql/accounting/InvoiceDetail.hbm.xml</value>
+
+
+
+# Suhas Chaware 8 Jan 2016
+ADD LINE:
+        <value>/com/krawler/hql/accounting/AssetDetailsCustomData.hbm.xml</value>
+
+AFETR LINE:
+        <value>/com/krawler/hql/accounting/AssetDetails.hbm.xml</value>
+
+
+
+# Sharad Pawar 15 Jan 2016
+ADD LINE:
+        <value>/com/krawler/common/admin/ProductFieldsAndModulesMapping.hbm.xml</value>  
+
+AFETR LINE:
+         <value>/com/krawler/common/admin/CustomizeReportMapping.hbm.xml</value> 
+
+
+# Deepak Singh 20th Jan 2016
+ADD LINE:
+         <value>/com/krawler/hql/accounting/PurchaseRequisitionLinking.hbm.xml</value>
+
+AFETR LINE:
+         <value>/com/krawler/hql/accounting/AccountMapping.hbm.xml</value>
+
+#Rushikesh Mandage 22nd Jan 2016
+Add Line 
+    <value>/com/krawler/hql/accounting/ReceiptDetailLoan.hbm.xml</value>
+After Line 
+    <value>/com/krawler/hql/accounting/ReceiptDetail.hbm.xml</value>
+
+
+# Anand Nimbalkar 2nd Feb 2016
+AFTER LINE :
+<value>/com/krawler/hql/accounting/TaxAdjustment.hbm.xml</value>
+
+ADD LINE :
+<value>/com/krawler/hql/accounting/WastageDetails.hbm.xml</value>
+
+
+#Santosh Belote 10th Feb 2016
+
+Add Line 
+    <value>/com/krawler/hql/accounting/SalesReturnDetailProductCustomData.hbm.xml</value> 
+After Line 
+    <value>/com/krawler/hql/accounting/SalesReturnDetailCustomData.hbm.xml</value> 
+
+
+
+Add Line 
+    <value>/com/krawler/hql/accounting/PurchaseReturnDetailProductCustomData.hbm.xml</value> 
+After Line 
+    <value>/com/krawler/hql/accounting/PurchaseReturnDetailCustomDate.hbm.xml</value>
+
+#Rushikesh Mandage 15th Feb 2016
+ADD LINES
+    <value>com/krawler/hql/accounting/CIMBReceivingDetails.hbm.xml</value>
+    <value>com/krawler/hql/accounting/CIMBBankDetails.hbm.xml</value>
+AFTER LINE
+    <value>com/krawler/hql/accounting/IBGBankDetails.hbm.xml</value>
+
+#Suhas Chaware 19th Feb 2016
+ADD LINES
+    <value>com/krawler/hql/accounting/RequestForQuotationLinking.hbm.xml</value>
+
+AFTER LINE
+    <value>com/krawler/hql/accounting/PurchaseRequisitionLinking.hbm.xml</value>
+
+
+# Ajit Gogawale 19th Feb 2016
+ADD LINES 
+    <value>com/krawler/hql/inventory/StockAdjustmentCustomData.hbm.xml</value>
+    <value>com/krawler/hql/inventory/InterStoreTransferCustomData.hbm.xml</value>
+AFTER LINE 
+    <value>com/krawler/hql/inventory/StockCustomData.hbm.xml</value>
+
+
+#Santosh Belote 2nd March 2016
+ADD LINE
+    <value>com/krawler/hql/accounting/GoodsReceiptOrderProductCustomData.hbm.xml</value>
+AFTER LINE 
+    <value>com/krawler/hql/accounting/GoodsReceiptOrderDetailsCustomDate.hbm.xml</value>
+
+
+# Ajit Ankalle 15 March 2016
+ADD LINE :
+    <value>/com/krawler/common/admin/State.hbm.xml</value>
+AFTER LINE :
+    <value>/com/krawler/common/admin/Country.hbm.xml</value>
+
+
+#Swapnil D. Khandre 15th March, 2016
+AFTER LINE :
+        <value>com/krawler/hql/inventory/InterStoreTransferCustomData.hbm.xml</value>
+ADD LINE :
+        <value>com/krawler/hql/accounting/GstFormGenerationHistory.hbm.xml</value>
+
+#Mohammed Uzair Momin 21st March 2016
+ADD LINE :
+        <value>com/krawler/hql/accounting/DefaultTemplatePnL.hbm.xml</value>
+        <value>com/krawler/hql/accounting/DefaultLayoutGroup.hbm.xml</value>
+        <value>com/krawler/hql/accounting/DefaultGroupAccMap.hbm.xml</value>
+        <value>com/krawler/hql/accounting/DefaultGroupMapForTotal.hbm.xml</value>
+AFTER LINE :
+        <value>com/krawler/hql/accounting/GstFormGenerationHistory.hbm.xml</value>
+
+
+#SHarad Pawar 4 April 2016
+ADD LINE :
+     
+        <value>com/krawler/common/admin/AccountingPeriod.hbm.xml</value>
+AFTER LINE :
+       <value>com/krawler/common/admin/ProductExportDetail.hbm.xml</value>
+
+#Aman Shah 8th April 2016
+
+ADD LINE :  <value>com/krawler/common/admin/TDSRate.hbm.xml</value>
+
+AFTER LINE : <value>com/krawler/common/admin/TaxPeriod.hbm.xml</value>
+
+# Anand Nimbalkar 13 April, 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/LinkDetailReceiptToAdvancePayment.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/LinkDetailReceipt.hbm.xml</value>
+
+ADD LINE :
+    <value>com/krawler/hql/accounting/LinkDetailPaymentToAdvancePayment.hbm.xml</value>
+AFTER LINE :
+   <value>com/krawler/hql/accounting/Payment.hbm.xml</value>
+
+# Yogesh Jadhav 13 April, 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/DefaultChequeLayout.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/ChequeLayout.hbm.xml</value>
+
+#Santohs Belote 20th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/ContractDetailCustomData.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/ContractDetail.hbm.xml</value>
+
+#Suhas Chaware 21th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/Labour.hbm.xml</value>
+    <value>com/krawler/hql/accounting/LabourCustomData.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/TdsDetails.hbm.xml</value>
+
+#Mohammed Uzair Momin 22nd April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/MRPContract.hbm.xml</value>
+    <value>com/krawler/hql/accounting/MRPAddressDetails.hbm.xml</value>
+    <value>com/krawler/hql/accounting/MRPContractDetails.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/CustomerProductMapping.hbm.xml</value>
+#Rahul Bhawar 22 April 2016
+ADD LINE :  
+        <value>com/krawler/hql/accounting/Defaultterms.hbm.xml</value>
+AFTER LINE  : 
+        <value>com/krawler/hql/accounting/InvoiceTermsSales.hbm.xml<value>
+#Vivekanand Swami 23 April 2016
+ADD LINE :  
+        <value>com/krawler/hql/accounting/LabourCustomData.hbm.xml</value>
+AFTER LINE  : 
+        <value>com/krawler/hql/accounting/ProductTermsMap.hbm.xml</value>
+
+#Ajit Ankalle 23th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/ReceiptDetailTermsMap.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/ReceiptTermsMap.hbm.xml</value>
+
+
+#Pandurang 25th April 2016
+ADD LINE :
+   <value>com/krawler/common/admin/MRPCompanyPreferences.hbm.xml</value>
+AFTER LINE :
+   <value>com/krawler/common/admin/ExtraCompanyPreferences.hbm.xml</value>
+
+#Dipak Dorkar 25th April 2016
+
+ADD LINE :
+    <value>com/krawler/hql/accounting/Machine.hbm.xml</value>
+    <value>com/krawler/hql/accounting/MachineProcessMapping.hbm.xml</value>
+    <value>com/krawler/hql/accounting/SubstituteMachineMapping.hbm.xml</value>
+    <value>com/krawler/hql/accounting/MachineWorkCenterMapping.hbm.xml</value>
+
+AFTER LINE :
+<value>com/krawler/hql/accounting/LabourCustomData.hbm.xml</value>
+
+
+#Sumit Jain 26th April 2016
+ADD LINE :
+   <value>com/krawler/hql/accounting/ReceiptOrderDetailTermMap.hbm.xml</value>
+AFTER LINE :
+   <value>com/krawler/hql/accounting/GoodsReceiptOrderTermMap.hbm.xml</value>
+
+ADD LINE :
+   <value>com/krawler/hql/accounting/DeliveryOrderDetailTermMap.hbm.xml</value>
+AFTER LINE :
+   <value>com/krawler/hql/accounting/DeliveryOrderDetail.hbm.xml</value>
+
+#Sumit Jain 26th April 2016
+
+ADD LINE :
+    <value>com/krawler/common/admin/TDSRate.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/common/admin/TaxPeriod.hbm.xml</value>
+
+ADD LINE :
+ <value>com/krawler/hql/accounting/TdsDetails.hbm.xml</value>   
+AFTER LINE :
+    <value>com/krawler/common/admin/TDSRate.hbm.xml</value>
+
+#Swapnil D. Khandre 26th April, 2016
+Add Line:
+   <value>com/krawler/hql/accounting/BOMDetail.hbm.xml</value>
+After Line: 
+   <value>com/krawler/hql/accounting/Product.hbm.xml</value>
+
+#Rahul A. Bhawar 26th April 2016
+
+AFTER LINE :   
+    <value>com/krawler/hql/accounting/VendorQuotationTermMap.hbm.xml</value>
+ADD LINE   :     
+    <value>com/krawler/hql/accounting/VendorQuotationDetailsTermMap.hbm.xml</value>
+
+#Vivekanand Swami 27 April 2016
+ADD LINE :  
+        <value>com/krawler/hql/accounting/PurchaseReturnDetailsTermMap.hbm.xml</value>
+AFTER LINE  : 
+        <value>com/krawler/hql/accounting/ProductTermsMap.hbm.xml</value>
+
+ADD LINE :  
+        <value>com/krawler/hql/accounting/SalesReturnDetailsTermMap.hbm.xml</value>
+AFTER LINE  : 
+        <value>com/krawler/hql/accounting/PurchaseReturnDetailsTermMap.hbm.xml</value>
+
+#Akshay Gujar 27th April 2016
+AFTER LINE :   
+    <value>com/krawler/hql/accounting/JobWork.hbm.xml</value>
+ADD LINE   :     
+    <value>com/krawler/hql/accounting/QuotationDetailTermMap.hbm.xml</value>
+    <value>com/krawler/hql/accounting/SalesOrderDetailTermMap.hbm.xml</value>
+
+#Ajit Ankalle 27th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/InvoiceDetailTermsMap.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/InvoiceTermsMap.hbm.xml</value>
+#Rahul A. Bhawar 27th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/PurchaseOrderDetailsTermMap.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/PurchaseOrderTermMap.hbm.xml</value>
+
+#Pandharinath Vaghole 27th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/MRPContractDocuments.hbm.xml</value>
+    <value>com/krawler/hql/accounting/MRPContractDocumentsMapping.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/SalesOrderDetailTermMap.hbm.xml</value>
+
+
+# Pandurang 29 April 2016
+ADD LINE :
+      <value>com/krawler/hql/accounting/MachineManRatio.hbm.xml</value>
+AFTER LINE :
+      <value>com/krawler/hql/accounting/Machine.hbm.xml</value>
+
+#Aman SHah 29th April 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/ExciseDetailsInvoice.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/ReceiptTermsMap.hbm.xml</value>
+
+#Mohammed Uzair Momin 2nd May 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/MRPContractMapping.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/MRPContract.hbm.xml</value>
+
+#Vivekanand Swami 3rd May 2016
+ADD LINE :
+    <value>com/krawler/common/admin/ExciseDetailsTemplateMap.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/MRPContractDocumentsMapping.hbm.xml</value>
+
+#Sharad Pawar 5 May 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/JobWork.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/MachineAssetMapping.hbm.xml</value>
+
+#Vivekanand Swami 6 May 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/SalesInvoiceExciseDetailsMap.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/common/admin/ExciseDetailsTemplateMap.hbm.xml</value>
+
+#Anand Nimbalkar 6 May, 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/ProductBrandDiscountDetails.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/Customer.hbm.xml</value>
+
+
+#Sayed Kausar Ali 9 May, 2016
+ADD LINE :
+    <value>com/krawler/hql/accounting/WorkCentre.hbm.xml</value>
+    <value>com/krawler/hql/accounting/WorkOrder.hbm.xml</value>
+    <value>com/krawler/hql/accounting/ProductWorkCentreMapping.hbm.xml</value>
+    <value>com/krawler/hql/accounting/MaterialWorkCentreMapping.hbm.xml</value>
+    <value>com/krawler/hql/accounting/WorkOrderLabourMapping.hbm.xml</value>
+    <value>com/krawler/hql/accounting/WorkOrderMachineMapping.hbm.xml</value>
+    <value>com/krawler/hql/accounting/WorkOrderWorkCenterMapping.hbm.xml</value>
+AFTER LINE :
+    <value>com/krawler/hql/accounting/MachineWorkCenterMapping.hbm.xml</value>
+
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt24 created on 06th June 2016 07:30PM ----------------------------------------------=======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt30 created on 20th July 2016 09:45AM ----------------------------------------------=======
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintt38 created on 22nd Sept 2016 10:00AM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu27 created on 4th July 2017 12:15PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu43 created on 25th Oct 2017 8:00PM ----------------------------------------------
+
+#------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintu49 created on 18th Dec 2017 7:10PM ----------------------------------------------
+
+#---------------------------------------------- SVN Tag - deskera/tags/Financials/sprintv21 created on 24rd May 2018 4:55PM ----------------------------------------------

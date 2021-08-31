@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ChequeLayout" table="chequelayout">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="coordinateinfo" type="string">
+      <column length="1024" name="coordinateinfo"/>
+    </property>
+    <property name="appendcharacter" type="string">
+        <column name="appendcharacter" default=""/>
+    </property>
+    <property name="isnewlayout" type="true_false">
+        <column name="isnewlayout" not-null="true"/>
+    </property>
+    <property name="activateExtraFields" type="boolean">
+            <column name="activateextrafields" default="false"/>
+    </property>
+    <property name="addCharacterInCheckDate" type="boolean">
+            <column name="addcharacterincheckdate" default="false"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.PaymentMethod" name="paymentmethod" column="paymentmethod"/>
+    <many-to-one class="com.krawler.common.admin.KWLDateFormat" name="dateFormat"/>
+  </class>
+</hibernate-mapping>

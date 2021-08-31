@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ContractDetail" table="contractdetails">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="srno" type="integer">
+      <column name="srno" default="0"/>
+    </property>
+    <property name="remark" type="string">
+      <column length="255" name="remark"/>
+    </property>
+    <property name="quantity" type="double">
+      <column name="quantity" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" name="uom"/>
+    <property name="baseuomquantity" type="double">
+      <column name="baseuomquantity" default="0" />
+    </property>
+    <property name="baseuomrate" type="double">
+      <column name="baseuomrate" default="1" />
+    </property>
+    <property name="rate" type="double">
+      <column name="rate" not-null="true"/>
+    </property>
+    <property name="unitPricePerInvoice" type="double">
+      <column name="unitpriceperinvoice"/>
+    </property>
+    <property name="discountispercent" type="integer">
+      <column name="discountispercent" not-null="true"/>
+    </property>
+    <property name="discount" type="double">
+      <column name="discount" not-null="false"/>
+    </property>
+    <property name="rowTaxAmount" type="double">
+        <column name="rowtaxamount" not-null="false"/>
+    </property>
+     <property name="rowTermAmount" type="double">
+        <column name="rowtermamount" not-null="false"/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+<!--    <many-to-one column="salesorderdetailcustomdataref" class="com.krawler.hql.accounting.SalesOrderDetailsCustomData"  name="soDetailCustomData" />-->
+    <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Contract" column="contract" name="contract" not-null="true"/>
+    <many-to-one column="contractdetailcustomdataref" class="com.krawler.hql.accounting.ContractDetailCustomData"  name="contractdetailcustomdata" />
+    
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+  </class>
+</hibernate-mapping>

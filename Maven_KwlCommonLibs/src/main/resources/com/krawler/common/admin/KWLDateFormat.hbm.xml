@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.KWLDateFormat" table="dateformat">
+    <id column="formatid" name="formatID">
+      <generator class="uuid"/>
+    </id>
+    <property name="name" type="string">
+      <column length="50" name="name"/>
+    </property>
+    <property name="javaForm" type="string">
+      <column length="50" name="javaform"/>
+    </property>
+    <property name="scriptForm" type="string">
+      <column length="50" name="scriptform"/>
+    </property>
+    <property name="javaSeperatorPosition" type="integer">
+      <column name="jseppos" not-null="true"/>
+    </property>
+    <property name="scriptSeperatorPosition" type="integer">
+      <column name="sseppos" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

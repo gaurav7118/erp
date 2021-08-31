@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.IndiaComplianceCompanyPreferences" table="indiacompliancecompanypreferences">
+        <id column="id" name="id">
+            <generator class="foreign">
+                <param name="property">company</param>
+            </generator>
+        </id>
+        <one-to-one class="com.krawler.common.admin.Company" constrained="true" name="company"/>
+        <property name="resposiblePersonPAN" type="string">
+            <column name="resposiblepersonpan" default=""/>
+        </property>
+        <property name="resposiblePersonPostal" type="string">
+            <column name="resposiblepersonpostal" default=""/>
+        </property>
+        <property name="resposiblePersonEmail" type="string">
+            <column name="resposiblepersonemail" default=""/>
+        </property>
+        <property name="resposiblePersonMobNumber" type="string">
+            <column name="resposiblepersonmobnumber" default=""/>
+        </property>
+        <property name="resposiblePersonTeleNumber" type="string">
+            <column name="resposiblepersontelenumber" default=""/>
+        </property>
+        <property name="resposiblePersonAddress" type="string">
+            <column name="resposiblepersonaddress" default=""/>
+        </property>
+        <property name="resposiblePersonstate" type="string">
+            <column name="resposiblepersonstate" default=""/>
+        </property>
+        <property name="AssessmentYear" type="string">
+            <column name="assessmentyear" default=""/>
+        </property>
+        <property name="CINnumber" type="string">
+            <column name="cinnumber" default=""/>
+        </property>
+        <property name="resposiblePersonAddChanged" type="true_false">
+            <column name="personaddresschanged" default="false"/>
+        </property>
+        <property name="rcmApplicable" type="true_false">
+            <column name="rcmapplicable" default="false"/>
+        </property>
+        <property name="isaddresschanged" type="true_false">
+            <column name="isaddresschanged" default="false"/>
+        </property>
+        <property name="GTAKKCPaybleAccount" type="string">
+            <column name="gtakkcpaybleaccount" default=""/>
+        </property>
+        <property name="GTASBCPaybleAccount" type="string">
+            <column name="gtasbcpaybleaccount" default=""/>
+        </property>
+        <property name="isGSTApplicable" type="true_false">
+            <column name="isgstapplicable" default="false"/>
+        </property>
+        <property name="showIndiaCompanyPreferencesTab" type="true_false">
+            <column name="showindiacompanypreferencestab" default="false"/>
+        </property>
+        <property name="gstin" type="string">
+            <column name="gstin" default=""/>
+        </property>
+        <property name="tdsInterestRate" type="double">
+            <column name="tdsInterestRate" default="0"/>
+        </property>
+        <property name="istaxonadvancereceipt" type="true_false">
+            <column name="istaxonadvancereceipt" default="false"/>
+        </property>
+        <property name="istcsapplicable" type="true_false">
+            <column name="istcsapplicable" default="false"/>
+        </property>
+        <property name="isitcapplicable" type="true_false">
+            <column name="isitcapplicable" default="false"/>
+        </property>
+        <property name="istdsapplicable" type="true_false">
+            <column name="istdsapplicable" default="false"/>
+        </property>
+        <property name="IGSTAccount" type="string">
+            <column name="igstaccount"/>
+        </property>
+        <property name="customDutyAccount" type="string">
+            <column name="customdutyaccount"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.ist.ISTDetail" table="in_ist_detail">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="batchName" type="string">
+      <column length="50" name="batchname" />
+    </property>
+    <property name="issuedSerialNames" type="text">
+      <column name="issued_serialnames"/>
+    </property>
+    <property name="deliveredSerialNames" type="text">
+      <column name="delivered_serialnames"/>
+    </property>
+    <property name="issuedQuantity" type="double">
+      <column name="issuedqty"/>
+    </property>
+    <property name="deliveredQuantity" type="double">
+      <column name="deliveredqty"/>
+    </property>
+    <property name="expdate" type="text">
+    <column name="expdate"/>
+    </property>
+    <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="istrequest" name="istRequest"/>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="issued_location" name="issuedLocation"/>
+    <many-to-one class="com.krawler.inventory.model.location.Location" column="delivered_location" name="deliveredLocation"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="issued_row" name="issuedRow"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="issued_rack" name="issuedRack"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="issued_bin" name="issuedBin"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="delivered_row" name="deliveredRow"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="delivered_rack" name="deliveredRack"/>
+    <many-to-one class="com.krawler.common.admin.StoreMaster" column="delivered_bin" name="deliveredBin"/>
+    <many-to-one class="com.krawler.inventory.model.inspection.InspectionForm" column="inspectionformid" name="inspectionForm"/>
+    <property name="qaApproved" type="double">
+        <column name="qaapproved"/>
+    </property>
+    <property name="qaRejected" type="double">
+        <column name="qarejected"/>
+    </property>
+    <property name="approvedQtyFromRepairStore" type="double">
+        <column name="approvedqtyfromrepairstore"/>
+    </property>
+    <property name="rejectedQtyFromRepairStore" type="double">
+        <column name="rejectedqtyfromrepairstore"/>
+    </property>
+  </class>
+</hibernate-mapping>

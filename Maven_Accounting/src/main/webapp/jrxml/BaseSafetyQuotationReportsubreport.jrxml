@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BaseSafetyQuotationReport_subreport" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="srNo" class="java.lang.String"/>
+	<field name="desc" class="java.lang.String"/>
+	<field name="qty" class="java.lang.String"/>
+	<field name="rate" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="amountCurrency" class="java.lang.String"/>
+	<detail>
+		<band height="58" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="56" y="12" width="328" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement positionType="Float" x="111" y="32" width="444" height="20"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="62" y="0" width="58" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{qty}+" "+$F{uom}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="120" y="0" width="102" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA["@ "+$F{rate}+"/"+$F{uom}+" ="]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="225" y="0" width="96" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="62" height="20"/>
+					<textElement/>
+					<text><![CDATA[Approx.Qty:]]></text>
+				</staticText>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="11" y="12" width="45" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{srNo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

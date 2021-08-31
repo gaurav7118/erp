@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.inventory.model.batchserial.AttachedBatch" table="in_attachedbatch">
+    <id column="id" name="id">
+      <generator class="uuid"/>
+    </id>
+    <property name="quantity" type="double">
+      <column name="quantity"/>
+    </property>
+    <set cascade="all,delete-orphan" inverse="true" lazy="true" name="attachedSerials">
+      <key column="attachedbatch"/>
+      <one-to-many class="com.krawler.inventory.model.batchserial.AttachedSerial"/>
+    </set>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.NewProductBatch" name="batch" not-null="true"/>
+    <joined-subclass extends="com.krawler.inventory.model.batchserial.AttachedBatch" name="com.krawler.inventory.model.batchserial.SRAttachedBatch" table="in_sr_attachedbatch">
+      <key column="id"/>
+      <many-to-one class="com.krawler.inventory.model.stockrequest.StockRequest" column="stockrequest" name="stockRequest" not-null="true"/>
+    </joined-subclass>
+    <joined-subclass extends="com.krawler.inventory.model.batchserial.AttachedBatch" name="com.krawler.inventory.model.batchserial.ISTAttachedBatch" table="in_ist_attachedbatch">
+      <key column="id"/>
+      <many-to-one class="com.krawler.inventory.model.ist.InterStoreTransferRequest" column="istrequest" name="interStoreTransferRequest" not-null="true"/>
+    </joined-subclass>
+    <joined-subclass extends="com.krawler.inventory.model.batchserial.AttachedBatch" name="com.krawler.inventory.model.batchserial.SAAttachedBatch" table="in_sa_attachedbatch">
+      <key column="id"/>
+      <many-to-one class="com.krawler.inventory.model.stockout.StockAdjustment" column="stockadjustment" name="stockAdjustment" not-null="true"/>
+    </joined-subclass>
+    <joined-subclass extends="com.krawler.inventory.model.batchserial.AttachedBatch" name="com.krawler.inventory.model.batchserial.SMAttachedBatch" table="in_sm_attachedbatch">
+      <key column="id"/>
+      <many-to-one class="com.krawler.inventory.model.stockmovement.StockMovement" column="stockmovement" name="stockMovement" not-null="true"/>
+    </joined-subclass>
+    <joined-subclass extends="com.krawler.inventory.model.batchserial.AttachedBatch" name="com.krawler.inventory.model.batchserial.CCAttachedBatch" table="in_cc_attachedbatch">
+      <key column="id"/>
+      <many-to-one class="com.krawler.inventory.model.cyclecount.CycleCount" column="cyclecount" name="cycleCount" not-null="true"/>
+    </joined-subclass>
+  </class>
+</hibernate-mapping>

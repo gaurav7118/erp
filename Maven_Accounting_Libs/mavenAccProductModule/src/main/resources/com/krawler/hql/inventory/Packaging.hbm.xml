@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.packaging.Packaging" table="in_packaging">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="casingUomValue" type="double">
+            <column name="casinguom_value" default="1"/>
+        </property>
+        <property name="innerUomValue" type="double">
+            <column name="inneruom_value" default="1"/>
+        </property>
+        <property name="stockUomValue" type="double">
+            <column name="stockuom_value" default="1"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="casinguom" name="casingUoM"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="inneruom" name="innerUoM"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="stockuom" name="stockUoM"/>
+    </class>
+</hibernate-mapping>

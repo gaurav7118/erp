@@ -1,0 +1,1 @@
+Ext.define("Ext.grid.Panel",{extend:"Ext.panel.Table",requires:["Ext.view.Table"],alias:["widget.gridpanel","widget.grid"],alternateClassName:["Ext.list.ListView","Ext.ListView","Ext.grid.GridPanel"],viewType:"tableview",lockable:false,rowLines:true})

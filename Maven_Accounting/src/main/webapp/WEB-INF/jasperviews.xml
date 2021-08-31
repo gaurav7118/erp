@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:util="http://www.springframework.org/schema/util"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+classpath:org/springframework/beans/factory/xml/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util 
+classpath:org/springframework/beans/factory/xml/spring-util-2.5.xsd">
+
+<bean id="satsPaymentVoucher"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/SATSPaymentVoucher.jrxml"
+		p:reportDataKey="datasource">  
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=PaymentVoucher.html</prop>
+                <prop key="pdf">attachment; filename=PaymentVoucher.pdf</prop>
+                <prop key="xls">attachment; filename=PaymentVoucher.xls</prop>
+                <prop key="csv">attachment; filename=PaymentVoucher.csv</prop>
+            </props>
+        </property>            
+</bean>
+
+<bean id="trailBalance"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/TrailBalance.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="trailBalanceUrls"
+		p:subReportDataKeys-ref="trailBalanceDataSource">  
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=TrailBalance.html</prop>
+                <prop key="pdf">attachment; filename=TrailBalance.pdf</prop>
+                <prop key="xls">attachment; filename=TrailBalance.xls</prop>
+                <prop key="csv">attachment; filename=TrailBalance.csv</prop>
+            </props>
+        </property>
+                
+</bean>
+
+		
+<util:map id="trailBalanceUrls">
+    <entry key="TrailBalanceSubReport" value="jrxml/TrailBalanceSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="trailBalanceDataSource">
+    <value>TrailBalanceSubReportData</value>
+</util:list>
+
+<bean id="financeDetails"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/FinanceDetails.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="financeDetailsUrls"
+		p:subReportDataKeys-ref="financeDetailsDataSource">
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=FinanceDetails.html</prop>
+                <prop key="pdf">attachment; filename=FinanceDetails_v1.pdf</prop>
+                <prop key="xls">attachment; filename=FinanceDetails_v1.xls</prop>
+                <prop key="csv">attachment; filename=FinanceDetails_v1.csv</prop>
+            </props>
+        </property>
+                
+</bean>
+<util:map id="financeDetailsUrls">
+    <entry key="FinanceDetailsSubReport" value="jrxml/FinanceDetailsSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="financeDetailsDataSource">
+    <value>FinanceDetailsSubReportData</value>
+</util:list>
+
+<bean id="MonthlyTradingProfitLoss"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/MonthlyTradingProfitLoss.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="monthlyTradingProfitLossUrl"
+		p:subReportDataKeys-ref="MonthlyTradingProfitLossSub">
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=FinanceDetails.html</prop>
+                <prop key="pdf">attachment; filename=FinanceDetails.pdf</prop>
+                <prop key="xls">attachment; filename=FinanceDetails.xls</prop>
+                <prop key="csv">attachment; filename=FinanceDetails.csv</prop>
+            </props>
+        </property>                
+</bean>
+<util:map id="monthlyTradingProfitLossUrl">
+    <entry key="MonthlyTradingProfitLossSubReport" value="jrxml/MonthlyTradingProfitLossSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="MonthlyTradingProfitLossSub">
+    <value>MonthlyTradingProfitLossSubReportData</value>
+</util:list>
+
+<bean id="MonthlyBalanceSheet"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/MonthlyBalanceSheet.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="MonthlyBalanceSheetUrl"
+		p:subReportDataKeys-ref="MonthlyBalanceSheetSub">
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=FinanceDetails.html</prop>
+                <prop key="pdf">attachment; filename=FinanceDetails.pdf</prop>
+                <prop key="xls">attachment; filename=FinanceDetails.xls</prop>
+                <prop key="csv">attachment; filename=FinanceDetails.csv</prop>
+            </props>
+        </property>                
+</bean>
+<util:map id="MonthlyBalanceSheetUrl">
+    <entry key="MonthlyBalanceSheetSubReport" value="jrxml/MonthlyBalanceSheetSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="MonthlyBalanceSheetSub">
+    <value>MonthlyBalanceSheetSubReportData</value>
+</util:list>
+
+<bean id="PackingListLc"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/PackingListLc.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="PackingListLcUrl"
+		p:subReportDataKeys-ref="PackingListLcSub">
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=FinanceDetails.html</prop>
+                <prop key="pdf">attachment; filename=FinanceDetails.pdf</prop>
+                <prop key="xls">attachment; filename=FinanceDetails.xls</prop>
+                <prop key="csv">attachment; filename=FinanceDetails.csv</prop>
+            </props>
+        </property>                
+</bean>
+<util:map id="PackingListLcUrl">
+    <entry key="PackingListLcSubReport" value="jrxml/PackingListLcSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="PackingListLcSub">
+    <value>PackingListLcSubReportData</value>
+</util:list>
+
+<bean id="PackingListNonLc"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/PackingListNonLc.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="PackingListNonLcUrl"
+		p:subReportDataKeys-ref="PackingListNonLcSub">
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=FinanceDetails.html</prop>
+                <prop key="pdf">attachment; filename=FinanceDetails.pdf</prop>
+                <prop key="xls">attachment; filename=FinanceDetails.xls</prop>
+                <prop key="csv">attachment; filename=FinanceDetails.csv</prop>
+            </props>
+        </property>                
+</bean>
+<util:map id="PackingListNonLcUrl">
+    <entry key="PackingListNonLcSubReport" value="jrxml/PackingListNonLcSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="PackingListNonLcSub">
+    <value>PackingListNonLcSubReportData</value>
+</util:list>
+
+<bean id="stockLedger"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/StockLedger.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="stockLedgerUrls"
+		p:subReportDataKeys-ref="stockLedgerDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=StockLedger.html</prop>
+                <prop key="pdf">attachment; filename=StockLedger.pdf</prop>
+                <prop key="xls">attachment; filename=StockLedger.xls</prop>
+                <prop key="csv">attachment; filename=StockLedger.csv</prop>
+            </props>
+        </property>              
+</bean>
+<util:map id="stockLedgerUrls">
+    <entry key="StockLedgerSubReport" value="jrxml/StockLedgerSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="stockLedgerDataSource">
+    <value>StockLedgerSubReportData</value>
+</util:list>
+
+<bean id="sustenirStockLedger"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/StockLedger.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="sustenirStockLedgerUrls"
+		p:subReportDataKeys-ref="stockLedgerDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=StockLedger.html</prop>
+                <prop key="pdf">attachment; filename=StockLedger.pdf</prop>
+                <prop key="xls">attachment; filename=StockLedger.xls</prop>
+                <prop key="csv">attachment; filename=StockLedger.csv</prop>
+            </props>
+        </property>              
+</bean>
+
+<util:map id="sustenirStockLedgerUrls">
+    <entry key="StockLedgerSubReport" value="jrxml/SustenirStockLedgerSubReport.jrxml"/>
+</util:map>
+<bean id="stockAgeing"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/StockAgeing.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="stockAgeingUrls"
+		p:subReportDataKeys-ref="stockAgeingDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=StockAgeing.html</prop>
+                <prop key="pdf">attachment; filename=StockAgeing.pdf</prop>
+                <prop key="xls">attachment; filename=StockAgeing.xls</prop>
+                <prop key="csv">attachment; filename=StockAgeing.csv</prop>
+            </props>
+        </property>              
+</bean>
+
+<util:map id="stockAgeingUrls">
+    <entry key="StockAgeingSubReport" value="jrxml/StockAgeingSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="stockAgeingDataSource">
+    <value>StockAgeingSubReportData</value>
+</util:list>
+
+<bean id="satsFinanceDetails"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/SatsFinanceDetails.jrxml"
+		p:reportDataKey="datasource">
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=FinanceDetails.html</prop>
+                <prop key="pdf">attachment; filename=FinanceDetails.pdf</prop>
+                <prop key="xls">attachment; filename=FinanceDetails.xls</prop>
+                <prop key="csv">attachment; filename=FinanceDetails.csv</prop>
+            </props>
+        </property>
+                
+</bean>
+
+<bean id="satsTaxInvoice"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/SATSTaxInvoice.jrxml"
+		p:reportDataKey="datasource">  
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=TaxInvoice.html</prop>
+                <prop key="pdf">attachment; filename=TaxInvoice.pdf</prop>
+                <prop key="xls">attachment; filename=TaxInvoice.xls</prop>
+                <prop key="csv">attachment; filename=TaxInvoice.csv</prop>
+            </props>
+        </property>            
+</bean>
+
+<bean id="agedReceivable"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/AgedReceivable.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="agedReceivableUrls"
+		p:subReportDataKeys-ref="agedReceivableDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=NetBalance.html</prop>
+                <prop key="pdf">attachment; filename=NetBalance.pdf</prop>
+                <prop key="xls">attachment; filename=NetBalance.xls</prop>
+                <prop key="csv">attachment; filename=NetBalance.csv</prop>
+            </props>
+        </property>             
+</bean>		
+<util:map id="agedReceivableUrls">
+    <entry key="AgedReceivableSubReport" value="jrxml/AgedReceivableSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="agedReceivableDataSource">
+    <value>AgedReceivableSubReportData</value>
+</util:list>
+
+<bean id="agedReceivableSummarised"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/AgedReceivableSummarised.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="agedReceivableSummarisedUrls"
+		p:subReportDataKeys-ref="agedReceivableSummarisedDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=NetBalance.html</prop>
+                <prop key="pdf">attachment; filename=NetBalance.pdf</prop>
+                <prop key="xls">attachment; filename=NetBalance.xls</prop>
+                <prop key="csv">attachment; filename=NetBalance.csv</prop>
+            </props>
+        </property>             
+</bean>
+<util:map id="agedReceivableSummarisedUrls">
+    <entry key="AgedReceivableSubReport" value="jrxml/AgedReceivableSummarisedSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="agedReceivableSummarisedDataSource">
+    <value>AgedReceivableSubReportData</value>
+</util:list>
+
+<bean id="agedReceivableSummarisedWithoutAging"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/AgedReceivableWithoutAging.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="agedReceivableSummarisedWithoutAgingUrls"
+		p:subReportDataKeys-ref="agedReceivableSummarisedWithoutAgingDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=NetBalance.html</prop>
+                <prop key="pdf">attachment; filename=NetBalance.pdf</prop>
+                <prop key="xls">attachment; filename=NetBalance.xls</prop>
+                <prop key="csv">attachment; filename=NetBalance.csv</prop>
+            </props>
+        </property>             
+</bean>
+<util:map id="agedReceivableSummarisedWithoutAgingUrls">
+    <entry key="AgedReceivableSubReport" value="jrxml/AgedReceivableWithoutAgingSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="agedReceivableSummarisedWithoutAgingDataSource">
+    <value>AgedReceivableSubReportData</value>
+</util:list>
+
+<bean id="generalLedger"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/GeneralLedgerCSV.jrxml"
+		p:reportDataKey="datasource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=GeneralLedger.html</prop>
+                <prop key="pdf">attachment; filename=GeneralLedger.pdf</prop>
+                <prop key="xls">attachment; filename=GeneralLedger.xls</prop>
+                <prop key="csv">attachment; filename=GeneralLedger.csv</prop>
+            </props>
+        </property>             
+</bean>
+
+<bean id="satsAgedReceivableSummarised"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/AgedReceivableSummarised.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="satsAgedReceivableSummarisedUrls"
+		p:subReportDataKeys-ref="satsAgedReceivableSummarisedDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=NetBalance.html</prop>
+                <prop key="pdf">attachment; filename=NetBalance.pdf</prop>
+                <prop key="xls">attachment; filename=NetBalance.xls</prop>
+                <prop key="csv">attachment; filename=NetBalance.csv</prop>
+            </props>
+        </property>             
+</bean>
+<util:map id="satsAgedReceivableSummarisedUrls">
+    <entry key="AgedReceivableSubReport" value="jrxml/SATSAgedReceivableSummarisedSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="satsAgedReceivableSummarisedDataSource">
+    <value>AgedReceivableSubReportData</value>
+</util:list>
+
+<bean id="satsAgedReceivable"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/AgedReceivable.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="satsAgedReceivableUrls"
+		p:subReportDataKeys-ref="satsAgedReceivableDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=NetBalance.html</prop>
+                <prop key="pdf">attachment; filename=NetBalance.pdf</prop>
+                <prop key="xls">attachment; filename=NetBalance.xls</prop>
+                <prop key="csv">attachment; filename=NetBalance.csv</prop>
+            </props>
+        </property>             
+</bean>		
+<util:map id="satsAgedReceivableUrls">
+    <entry key="AgedReceivableSubReport" value="jrxml/SATSAgedReceivableSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="satsAgedReceivableDataSource">
+    <value>AgedReceivableSubReportData</value>
+</util:list>
+
+
+<bean id="satsAgedReceivableSummarisedWithoutAging"
+	   class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+		p:url="jrxml/AgedReceivableWithoutAging.jrxml"
+		p:reportDataKey="datasource"
+                p:subReportUrls-ref="satsAgedReceivableSummarisedWithoutAgingUrls"
+		p:subReportDataKeys-ref="agedReceivableSummarisedWithoutAgingDataSource">  
+                
+	<property name="contentDispositionMappings">
+            <props>
+                <prop key="html">attachment; filename=NetBalance.html</prop>
+                <prop key="pdf">attachment; filename=NetBalance.pdf</prop>
+                <prop key="xls">attachment; filename=NetBalance.xls</prop>
+                <prop key="csv">attachment; filename=NetBalance.csv</prop>
+            </props>
+        </property>             
+</bean>
+<util:map id="satsAgedReceivableSummarisedWithoutAgingUrls">
+    <entry key="AgedReceivableSubReport" value="jrxml/SATSAgedReceivableWithoutAgingSubReport.jrxml"/>
+</util:map>
+	
+<util:list id="satsAgedReceivableSummarisedWithoutAgingDataSource">
+    <value>AgedReceivableSubReportData</value>
+</util:list>
+
+</beans>
+

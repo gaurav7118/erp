@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.AssetDetails" table="assetdetail">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="assetId" type="string">
+            <column name="assetid"/>
+        </property>
+        <property name="cost" type="double">
+            <column name="cost"/>
+        </property>
+        <property name="costInForeignCurrency" type="double">
+            <column name="costinforeigncurrency"/>
+        </property>
+        <property name="salvageRate" type="double">
+            <column name="salvagerate"/>
+        </property>
+        <property name="salvageValue" type="double">
+            <column name="salvagevalue"/>
+        </property>
+        <property name="salvageValueInForeignCurrency" type="double">
+            <column name="salvagevalueinforeigncurrency"/>
+        </property>
+        <property name="accumulatedDepreciation" type="double">
+            <column name="accumulateddepreciation"/>
+        </property>
+        <property name="openingDepreciation" type="double">
+            <column name="openingdepreciation"/>
+        </property> 
+<!--        <property name="wdv" type="double">
+            <column name="wdv"/>
+        </property>-->
+        <property name="assetLife" type="double">
+            <column name="assetlife"/>
+        </property>
+        <property name="elapsedLife" type="double">
+            <column name="elapsedlife"/>
+        </property>
+        <property name="nominalValue" type="double">
+            <column name="nominalvalue"/>
+        </property>
+        <property name="sellAmount" type="double">
+            <column name="sellamount"/>
+        </property>
+        <property name="installationDate" type="date">
+            <column name="installationdate"/>
+        </property>
+        <property name="invrecord" type="boolean">
+            <column name="invrecord"/>
+        </property>
+	<property name="createdFromOpeningForm" type="boolean">
+            <column name="iscreatedfromopeningform"/>
+        </property>
+        <property name="isUsed" type="boolean">
+            <column name="isused"/>
+        </property>
+        <property name="linkedToLeaseSO" type="boolean">
+            <column name="islinkedtoleaseso"/>
+        </property>
+        <property name="leaseDOCreated" type="boolean">
+            <column name="isleasedocreated"/>
+        </property>
+        <property name="leaseCICreated" type="boolean">
+            <column name="isleasecicreated"/>
+        </property>
+        <property name="assetSoldFlag" type="integer">
+            <column name="assetsoldflag"/>
+        </property>
+        <property name="assetDescription" type="string">
+            <column name="assetdescription"/>
+        </property>
+        <property name="purchaseReturn" type="boolean">
+            <column name="ispurchasereturn" default="false"/>
+        </property>
+        <property name="salesReturn" type="boolean">
+            <column name="issalesreturn" default="false"/>
+        </property>
+        <property name="purchaseDate" type="date">
+            <column name="purchasedate"/>
+        </property>
+        <property name="postOption" type="integer">
+            <column name="postoption"/>
+        </property>
+        <property name="disposalProfitLoss" type="double">
+            <column name="disposalprofitloss"/>
+        </property>
+        <property name="remainingLife" type="double">
+            <column name="remaininglife"/>
+        </property>
+        <property name="disposalDate" type="date">
+            <column name="disposaldate"/>
+        </property>
+        <property name="isDisposed" type="boolean">
+            <column name="isdisposed" default="false"/>
+        </property>        
+        <property name="transferDate" type="date">
+            <column name="transferdate"/>
+        </property>
+        <property name="isTransferHistory" type="boolean">
+            <column name="istransferhistory" default="false"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column="company"/>
+        <many-to-one class="com.krawler.common.admin.User" name="assetUser" column="assetuser"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="product" column="product"/>
+        <many-to-one class="com.krawler.common.admin.InventoryLocation" name="location" column="location"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="sellingje" name="sellingJE"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="disposalje" name="disposalJE"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="reverseje" name="reverseJE"/>
+        <many-to-one class="com.krawler.common.admin.ProductBatch" name="batch"/>
+        <many-to-one class="com.krawler.common.admin.Department" name="department" column="department"/>
+        <many-to-one column="accassetdetailscustomdata" class="com.krawler.hql.accounting.AssetDetailsCustomData"  name="assetDetailsCustomData" />
+<!--        <many-to-one class="com.krawler.hql.accounting.FixedAssetOpening" name="assetOpening" column="assetopening"/>-->
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.Dashboard" table="dashboard">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="name" type="string">
+            <column name="name"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="json" type="string">
+            <column name="json"/>
+        </property>
+        
+        <property name="createdon" type="long">
+            <column name="createdon" not-null="true"/>
+        </property>
+        <property name="updatedon" type="long">
+            <column name="updatedon" not-null="true"/>
+        </property>
+        
+        <property name="deleted" type="true_false">
+            <column name="deleteflag" not-null="true"/>
+        </property>
+        
+        <property name="active" type="true_false">
+            <column name="isactive" not-null="true"/>
+        </property>
+        <property name="productView" type="true_false">
+            <column name="isproductview"/>
+        </property>
+        
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdby"/>    
+        
+    </class>
+</hibernate-mapping>

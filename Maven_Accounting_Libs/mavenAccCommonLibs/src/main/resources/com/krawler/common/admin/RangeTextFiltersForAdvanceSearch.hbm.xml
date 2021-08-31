@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.RangeTextFiltersForAdvanceSearch" table="rangetextfiltersforadvancesearch">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="defaultheaderid" type="string">
+            <column name="defaultheaderid"/>
+        </property>
+        <property name="fieldtype" type="int">
+            <column name="xtype"/>
+        </property>
+        <property name="fieldname" type="string">
+            <column name="fieldname"/>
+        </property>
+        <property name="fieldlabel" type="string">
+            <column name="fieldlabel"/>
+        </property>
+        <property name="reportOrModule" type="string">
+            <column name="reportormodule"/>
+        </property>
+        <property name="moduleid" type="string">
+            <column name="moduleid"/>
+        </property>
+        <property name="modulename" type="string">
+            <column name="modulename"/>
+        </property>
+    </class>
+</hibernate-mapping>

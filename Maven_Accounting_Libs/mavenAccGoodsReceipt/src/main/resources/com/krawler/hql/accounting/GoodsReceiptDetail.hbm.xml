@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.GoodsReceiptDetail" table="grdetails">
+        <id column="id" name="ID">
+            <generator class="foreign">
+                <param name="property">inventory</param>
+            </generator>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="rate" type="double">
+            <column name="rate" not-null="true"/>
+        </property>
+        <property name="rateincludegst" type="double">
+            <column name="rateincludegst"  default="0"/>
+        </property>
+        <property name="permit" type="string">
+            <column name="permit"/>
+        </property>
+        <property name="rowTaxAmount" type="double">
+            <column name="rowtaxamount" not-null="false"/>
+        </property>
+        <property name="rowTaxAmountInBase" type="double">
+            <column name="rowtaxamountinbase"/>
+        </property>
+        <property name="rowTermTaxAmount" type="double">
+            <column name="rowtermtaxamount" not-null="false"/>
+        </property>
+        <property name="rowTermTaxAmountInBase" type="double">
+            <column name="rowtermtaxamountinbase"/>
+        </property>
+        <property name="rowExcludingGstAmount" type="double">
+            <column  name="rowexcludinggstamount"/>
+        </property>
+        <property name="rowExcludingGstAmountInBase" type="double">
+            <column  name="rowexcludinggstamountinbase"/>
+        </property>
+        <property name="rowTermAmount" type="double">
+            <column name="rowtermamount" default="0"/>
+        </property>
+        <property name="OtherTermNonTaxableAmount" type="double">
+            <column name="otherrowtermamount" default="0"/>
+        </property>
+        <property name="wasRowTaxFieldEditable" type="boolean">
+            <column name="wasrowtaxfieldeditable" not-null="false"/>
+        </property>
+        <property name="description" type="string">
+            <column  name="description"/>
+        </property>
+        <property name="invstoreid" type="string">
+            <column  name="invstoreid" default="" length="255"/>
+        </property>
+        <property name="invlocid" type="string">
+            <column  name="invlocid" default="" length="255"/>
+        </property>
+        <property name="dependentType" type="string">
+            <column length="1024" name="dependenttype"/>
+        </property>
+        <property name="inouttime" type="string">
+            <column length="1024" name="inouttime"/>
+        </property>
+        <property name="showquantity" type="string">
+            <column length="1024" name="showquantity"/>
+        </property>
+        <property name="supplierpartnumber" type="string">
+            <column length="50" name="supplierpartnumber" default=""/>
+        </property>
+        <property name="priceSource" type="string">
+            <column  name="pricesource" default="" length="255"/>
+        </property>
+        <property name="gstCurrencyRate" type="double">
+            <column  name="gstcurrencyrate" default="0"/>
+        </property>
+        <property name="lineLevelTermAmount" type="double">
+            <column name="lineleveltermamount" default="0"/>
+        </property>
+        <property name="tdsAssessableAmount" type="double">
+            <column  name="tdsassessableamount" default="0"/>
+        </property>
+        <property name="tdsRuleId" type="integer">
+            <column  name="tdsruleid" default="0"/>
+        </property>
+        <property name="tdsRate" type="double">
+            <column  name="tdsrate" default="0"/>
+        </property>
+        <property name="tdsLineAmount" type="double">
+            <column  name="tdslineamount" default="0"/>
+        </property>
+        <property name="tdsPaidFlag" type="integer">
+            <column name="tdspaidflag" default="0"/>
+        </property>
+        <property name="tdsPayment" type="string">
+            <column name="tdspayment"/>
+        </property>
+        <property name="tdsInterestPaidFlag" type="integer">
+            <column name="tdsinterestpaidflag" default="0"/>
+        </property>
+        <property name="tdsInterestPayment" type="string">
+            <column name="tdsinterestpayment"/>
+        </property>
+        <property name="tdsInterestRateAtPaymentTime" type="double">
+            <column name="tdsInterestRateAtPaymentTime" default="0"/>
+        </property>
+          <property name="pricingBandMasterid" type="string">
+            <column  name="pricingbandmasterid" length="255"/>
+        </property>
+        <property name="isUserModifiedTaxAmount" type="boolean">
+            <column name="isusermodifiedtaxamount" not-null="false"/>
+        </property>
+        <set cascade="all" inverse="true" name="goodsReceiptDetailPaymentMapping">
+            <key column="grdetails"/>
+            <one-to-many class="com.krawler.hql.accounting.GoodsReceiptDetailPaymentMapping"/>
+        </set>
+        <many-to-one class="com.krawler.hql.accounting.TdsJEMapping" name="tdsJEMapping" column="tdsjemapping"/>
+        <many-to-one class="com.krawler.hql.accounting.Account" name="tdsPayableAccount" column="tdspayableaccount"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="natureOfPayment" column="natureofpayment"/>
+        <many-to-one class="com.krawler.hql.accounting.Tax" column="tax" name="tax"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Discount" name="discount" unique="true"/>
+        <one-to-one class="com.krawler.hql.accounting.Inventory" constrained="true" name="inventory"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" column="goodsreceipt" name="goodsReceipt" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.PurchaseOrderDetail" column="purchaseorderdetail" name="purchaseorderdetail"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptOrderDetails" column="grorderdetails" name="goodsReceiptOrderDetails"/>
+        <many-to-one class="com.krawler.hql.accounting.VendorQuotationDetail" column="vendorquotationdetail" name="vendorQuotationDetail"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="purchasejedid" name="purchaseJED"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="gstjedid" name="gstJED"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="reportinguomexcise" name="reportingUOMExcise"/>
+        <many-to-one class="com.krawler.hql.accounting.UnitOfMeasure" column="reportinguomvat" name="reportingUOMVAT"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" column="reportingschematypeexcise" name="reportingSchemaTypeExcise"/>
+        <many-to-one class="com.krawler.hql.accounting.UOMschemaType" column="reportingschemavat" name="reportingSchemaVAT"/>
+        <property name="mrpIndia" type="double">
+            <column  name="mrpindia" default="0"/>
+        </property>
+        <property name="exciseValuationType" type="string">
+            <column  name="excisevaluationtype" default=""/>
+        </property>
+        <property name="vatValuationType" type="string">
+            <column  name="vatvaluationtype" default=""/>
+        </property>
+        <property name="itcType" type="integer">
+            <column name="itctype" default="1"/>
+        </property>
+        
+        
+    </class>
+</hibernate-mapping>

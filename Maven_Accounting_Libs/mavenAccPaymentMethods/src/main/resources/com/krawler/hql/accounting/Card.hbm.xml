@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.Card" table="card">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="cardNo" type="string">
+      <column length="50" name="cardno" not-null="true"/>
+    </property>
+    <property name="cardHolder" type="string">
+      <column length="50" name="cardholder" not-null="false"/>
+    </property>
+    <property name="cardType" type="string">
+      <column length="50" name="cardtype" not-null="false"/>
+    </property>
+    <property name="expiryDate" type="date">
+<!--        <property name="expiryDate" type="timestamp">    -->
+      <column  name="expirydate" not-null="true"/>
+    </property>
+    <property name="refNo" type="string">
+      <column length="50" name="refno" not-null="false"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccountsSubReport" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.210000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FEFEFE">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.75" lineColor="#000000"/>
+			<topPen lineWidth="0.75"/>
+			<leftPen lineWidth="0.75"/>
+			<bottomPen lineWidth="0.75"/>
+			<rightPen lineWidth="0.75"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<field name="balance" class="java.lang.String"/>
+		<field name="baseCurrency" class="java.lang.String"/>
+	</subDataset>
+	<field name="customer" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<field name="jeId" class="java.lang.String"/>
+	<field name="debit" class="java.lang.String"/>
+	<field name="credit" class="java.lang.String"/>
+	<field name="balance" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="amountDueCurrent" class="java.lang.String"/>
+	<field name="amountDue1" class="java.lang.String"/>
+	<field name="amountDue2" class="java.lang.String"/>
+	<field name="amountDue3" class="java.lang.String"/>
+	<field name="amountDue4" class="java.lang.String"/>
+	<field name="amountDue5" class="java.lang.String"/>
+	<field name="amount1Header" class="java.lang.String"/>
+	<field name="amount2Header" class="java.lang.String"/>
+	<field name="amount3Header" class="java.lang.String"/>
+	<field name="amount4Header" class="java.lang.String"/>
+	<field name="ageingCurrency" class="java.lang.String"/>
+	<field name="baseCurrency" class="java.lang.String"/>
+	<field name="customerAddress" class="java.lang.String"/>
+	<field name="outstandingBalance" class="java.lang.String"/>
+	<field name="pageBreak" class="java.lang.Boolean"/>
+	<field name="sOABalanceOutstandingPojos" class="java.util.List"/>
+	<field name="outstandingFlag" class="java.lang.Boolean"/>
+	<field name="basecurrencysymbol" class="java.lang.String"/>
+	<field name="uem" class="java.lang.String"/>
+	<field name="gstRegNo" class="java.lang.String"/>
+	<field name="headerdate" class="java.lang.String"/>
+	<field name="imagepath" class="java.lang.String"/>
+	<field name="customercode" class="java.lang.String"/>
+	<field name="attn" class="java.lang.String"/>
+	<field name="tutiondeposite" class="java.lang.String"/>
+	<field name="boardingdeposite" class="java.lang.String"/>
+	<field name="companyPhone" class="java.lang.String"/>
+	<field name="companyFax" class="java.lang.String"/>
+	<field name="companyEmail" class="java.lang.String"/>
+	<variable name="outstandingBalance" class="java.lang.String"/>
+	<group name="Customer" isStartNewPage="true" isReprintHeaderOnEachPage="true" footerPosition="CollateAtBottom">
+		<groupExpression><![CDATA[$F{customer}]]></groupExpression>
+		<groupHeader>
+			<band height="135">
+				<rectangle>
+					<reportElement stretchType="RelativeToTallestObject" x="0" y="-1" width="763" height="94" forecolor="#FEFEFE"/>
+				</rectangle>
+				<frame>
+					<reportElement positionType="Float" x="-2" y="111" width="765" height="22" isPrintWhenDetailOverflows="true"/>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="550" y="2" width="110" height="20"/>
+						<box rightPadding="4">
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Balance]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="435" y="2" width="115" height="20"/>
+						<box rightPadding="4">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Amount]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="96" y="2" width="339" height="20"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Description]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="9" y="2" width="87" height="20"/>
+						<box>
+							<leftPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Date]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="660" y="2" width="88" height="20"/>
+						<box rightPadding="4">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Right" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Currency]]></text>
+					</staticText>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" x="6" y="73" width="757" height="42"/>
+					<staticText>
+						<reportElement positionType="Float" x="1" y="0" width="87" height="20"/>
+						<box leftPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Phone #]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="427" y="20" width="313" height="20"/>
+						<box rightPadding="5">
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+						<textFieldExpression><![CDATA[$F{amountDue5}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement positionType="Float" x="185" y="0" width="242" height="20"/>
+						<box leftPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[E-mail]]></text>
+					</staticText>
+					<staticText>
+						<reportElement positionType="Float" x="88" y="0" width="97" height="20"/>
+						<box leftPadding="2" rightPadding="2">
+							<topPen lineWidth="0.75"/>
+							<leftPen lineWidth="0.75"/>
+							<bottomPen lineWidth="0.75"/>
+							<rightPen lineWidth="0.0"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[Fax #]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="table_TD" positionType="Float" x="427" y="0" width="313" height="20"/>
+						<box rightPadding="5"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font isBold="true"/>
+						</textElement>
+						<text><![CDATA[ Amount Due]]></text>
+					</staticText>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="185" y="20" width="242" height="20"/>
+						<box rightPadding="5">
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{companyEmail}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="87" y="20" width="98" height="20"/>
+						<box rightPadding="5">
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{companyFax}]]></textFieldExpression>
+					</textField>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="1" y="20" width="87" height="20"/>
+						<box rightPadding="5">
+							<bottomPen lineWidth="0.75"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle"/>
+						<textFieldExpression><![CDATA[$F{companyPhone}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement mode="Opaque" x="7" y="8" width="347" height="18"/>
+					<box leftPadding="5">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tax Invoice To]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement mode="Opaque" x="7" y="28" width="347" height="43"/>
+					<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement markup="html">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{customer}+"<br>"+$F{customerAddress}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="56">
+				<rectangle>
+					<reportElement x="-2" y="4" width="765" height="52" forecolor="#FEFEFE"/>
+				</rectangle>
+				<staticText>
+					<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="7" y="3" width="87" height="31"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Current]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="548" y="3" width="198" height="31"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Amount Due]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_TD" positionType="Float" x="94" y="34" width="113" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+					<textFieldExpression><![CDATA[$F{amountDue1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_TD" positionType="Float" x="207" y="34" width="113" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+					<textFieldExpression><![CDATA[$F{amountDue2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_TD" positionType="Float" x="320" y="34" width="113" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+					<textFieldExpression><![CDATA[$F{amountDue3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_TD" positionType="Float" x="433" y="34" width="115" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+					<textFieldExpression><![CDATA[$F{amountDue4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_TD" positionType="Float" x="548" y="34" width="198" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html"/>
+					<textFieldExpression><![CDATA[$F{amountDue5}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="94" y="3" width="113" height="31"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amount1Header}+" Past Due"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="207" y="3" width="113" height="31"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amount2Header}+" Past Due"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="320" y="3" width="113" height="31"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amount3Header}+" Past Due"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="table_TD" positionType="Float" stretchType="RelativeToTallestObject" x="433" y="3" width="115" height="31"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amount4Header}+" Past Due"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="table_TD" positionType="Float" x="7" y="34" width="87" height="20"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amountDueCurrent}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="9" y="0" width="83" height="14"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="96" y="0" width="326" height="14"/>
+				<box leftPadding="2" rightPadding="2">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{transactionId}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="436" y="1" width="100" height="14"/>
+				<box leftPadding="2" rightPadding="4">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="551" y="1" width="105" height="13"/>
+				<box rightPadding="4">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="table_TD" x="661" y="1" width="81" height="14"/>
+				<box leftPadding="2" rightPadding="4">
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html"/>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

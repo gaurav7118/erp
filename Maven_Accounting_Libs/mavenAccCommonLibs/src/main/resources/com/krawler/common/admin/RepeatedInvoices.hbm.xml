@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.RepeatedInvoices" table="repeatedinvoices">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="intervalUnit" type="integer">
+            <column name="intervalunit" default="0"/>
+        </property>
+        <property name="intervalType" type="string">
+            <column name="intervaltype" length="32"/>
+        </property>
+        <property name="NoOfInvoicespost" type="integer">
+            <column name="noofinvoicespost" default="0"/>
+        </property>
+        <property name="NoOfRemainInvoicespost" type="integer">
+            <column name="noofremaininvoicespost" default="0"/>
+        </property>
+        <property name="startDate" type="date">
+            <column name="startdate" not-null="true"/>
+        </property>
+        <property name="nextDate" type="date">
+            <column name="nextdate" not-null="true"/>
+        </property>
+        <property name="expireDate" type="date">
+            <column name="expiredate"/>
+        </property>
+        <property name="isActivate" type="true_false">
+            <column name="isactivate" not-null="true"/>
+        </property>
+        <property name="ispendingapproval" type="true_false">
+            <column name="ispendingapproval" not-null="false"/>
+        </property>
+        <property name="approver" type="string">
+            <column length="50" name="approver" not-null="true"/>
+        </property>
+        <property name="prevDate" type="date">
+            <column name="prevDate" not-null="false"/>
+        </property>
+        <property name="allowToEditRecurredDocument" type="true_false">
+            <column name="isallowtoeditrecurreddoc" not-null="false"/>
+        </property>
+        <property name="invoiceAdvanceCreationDate" type="date">
+            <column name="invoiceadvancecreationdate"/>
+        </property>
+        <property name="advanceNoofdays" type="integer">
+            <column name="advancenoofdays" default="0"/>
+        </property>
+          <many-to-one class="com.krawler.common.admin.User" name="approverOfEditedrecurredInvoice" column="approverofeditedrecurring" />
+       
+    </class>
+</hibernate-mapping>

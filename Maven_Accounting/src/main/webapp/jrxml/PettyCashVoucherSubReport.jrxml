@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StatementOfAccountsSubReport" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PettyCashVoucherSubSubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="PettyCashVoucherSubSubReportData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="accountName" class="java.lang.String"/>
+	<field name="colon" class="java.lang.String"/>
+	<field name="accountCode" class="java.lang.String"/>
+	<field name="amount" class="java.lang.String"/>
+	<field name="gstTaxable" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="dimensionValue" class="java.lang.String"/>
+	<field name="totalAmount" class="java.lang.String"/>
+	<field name="dimensionName" class="java.lang.String"/>
+	<field name="tax" class="java.lang.String"/>
+	<field name="paymentId" class="java.lang.String"/>
+	<field name="classDimension" class="java.lang.String"/>
+	<field name="amountInWords" class="java.lang.String"/>
+	<group name="Payment">
+		<groupExpression><![CDATA[$F{paymentId}]]></groupExpression>
+		<groupFooter>
+			<band height="39">
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="6" width="555" height="30"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="423" y="12" width="35" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="458" y="12" width="77" height="20"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalAmount}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="15" y="12" width="397" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{amountInWords}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="34">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="-6" width="555" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="412" y="2" width="57" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECEIPT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="2" width="75" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PAYMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="1" width="320" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODE          PARTICULARS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="198" y="34" width="254" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{gstTaxable}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="34" width="119" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GST Taxable]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="9" width="75" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="9" width="382" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{accountName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="9" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{accountCode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="189" y="34" width="4" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="34" width="75" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tax}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="56" width="254" height="17"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{classDimension}+"<br><br>"+$F{description}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="70" y="56" width="119" height="17"/>
+				<textElement markup="html">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dimensionName}+"<br><br>Narration"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="189" y="56" width="4" height="17"/>
+				<textElement markup="html">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{colon}+"<br><br>:"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

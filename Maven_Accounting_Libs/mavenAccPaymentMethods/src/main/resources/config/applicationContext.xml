@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accPaymentDao" class="com.krawler.spring.accounting.payment.accPaymentImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+    <bean id="accPaymentController" class="com.krawler.spring.accounting.payment.accPaymentController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accPaymentDAO">
+            <ref bean="accPaymentDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+    <bean id="accPaymentService" class="com.krawler.spring.accounting.payment.accPaymentService">
+        <property name="accPaymentDAO">
+            <ref bean="accPaymentDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property>
+    </bean>
+</beans>

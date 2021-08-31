@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testRpt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CURRENCY_NAME" class="java.lang.String"/>
+	<parameter name="COMPANY_LOGO_IMAGE_PATH" class="java.lang.String"/>
+	<parameter name="COMPANY_ADDRESS" class="java.lang.String"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<field name="entryNumber" class="java.lang.String"/>
+	<field name="entryDate" class="java.lang.String"/>
+	<field name="memo" class="java.lang.String"/>
+	<field name="accountName" class="java.lang.String"/>
+	<field name="debitAmount" class="java.lang.Double"/>
+	<field name="creditAmount" class="java.lang.Double"/>
+	<field name="transactionID" class="java.lang.String"/>
+	<field name="transactionDetails" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="accountCode" class="java.lang.String"/>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="jeapprover" class="java.lang.String"/>
+	<variable name="debitSum" class="java.lang.Double" resetType="Group" resetGroup="entryno" calculation="Sum">
+		<variableExpression><![CDATA[$F{debitAmount}]]></variableExpression>
+	</variable>
+	<variable name="creditSum" class="java.lang.Double" resetType="Group" resetGroup="entryno" calculation="Sum">
+		<variableExpression><![CDATA[$F{creditAmount}]]></variableExpression>
+	</variable>
+	<variable name="gtDebit" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{debitAmount}]]></variableExpression>
+	</variable>
+	<variable name="gtCredit" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{creditAmount}]]></variableExpression>
+	</variable>
+	<group name="entryno">
+		<groupExpression><![CDATA[$F{entryNumber}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="2" y="1" width="78" height="15" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{entryNumber}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="89" y="1" width="90" height="15" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{entryDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="408" y="1" width="141" height="15" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{memo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="177" y="1" width="70" height="15" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="249" y="1" width="155" height="15" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionDetails}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="49">
+				<line>
+					<reportElement x="14" y="1" width="506" height="1" />
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="134" y="3" width="41" height="15" />
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+                    <text><![CDATA[Total : ]]>
+                    </text>
+				</staticText>
+				<line>
+					<reportElement x="2" y="46" width="548" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="180" y="3" width="33" height="15" />
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{CURRENCY_NAME}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="288" y="3" width="31" height="15" />
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$P{CURRENCY_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#0.00">
+					<reportElement x="214" y="3" width="90" height="15"/>
+					<textElement/>
+                    <textFieldExpression class="java.lang.Double"><![CDATA[$V{debitSum}]]>
+                    </textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#0.00">
+					<reportElement x="320" y="3" width="84" height="15" />
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{creditSum}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="413" y="3" width="76" height="18" />
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Prepared By :
+                    ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="489" y="3" width="61" height="18" />
+					<textFieldExpression><![CDATA[$F{createdby}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="413" y="25" width="76" height="18"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Approved By :
+                    ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="489" y="25" width="61" height="18"/>
+					<textFieldExpression><![CDATA[$F{jeapprover}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="78" splitType="Stretch">
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="0" y="5" width="555" height="68" isRemoveLineWhenBlank="true"/>
+				<imageExpression><![CDATA[$P{COMPANY_LOGO_IMAGE_PATH}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="175" y="1" width="189" height="19"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+                <text><![CDATA[Journal Entry Report]]>
+                </text>
+			</staticText>
+			<textField>
+				<reportElement x="429" y="1" width="80" height="19"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="1" width="40" height="19"/>
+				<textElement/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]>
+                </textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="89" y="1" width="107" height="15" forecolor="#1453F1" />
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+                <text><![CDATA[Account Name]]>
+                </text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="1" width="71" height="15" forecolor="#1453F1"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+                <text><![CDATA[Debit]]>
+                </text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="1" width="71" height="15" forecolor="#1453F1"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+                <text><![CDATA[Credit]]>
+                </text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="17" width="548" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="408" y="1" width="71" height="15" forecolor="#1453F1"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+                <text><![CDATA[Description]]>
+                </text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="1" width="78" height="15" forecolor="#1453F1" />
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Account Code
+         ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="89" y="0" width="93" height="29" />
+				<textFieldExpression><![CDATA[$F{accountName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#0.00" isBlankWhenNull="true">
+				<reportElement x="214" y="0" width="71" height="15"/>
+				<textElement/>
+                <textFieldExpression class="java.lang.Double"><![CDATA[$F{debitAmount} == 0.0 ? null : $F{debitAmount}]]>
+                </textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#0.00" isBlankWhenNull="true">
+				<reportElement x="320" y="0" width="72" height="15"/>
+				<textElement/>
+                <textFieldExpression class="java.lang.Double"><![CDATA[$F{creditAmount} == 0.0 ? null : $F{creditAmount}]]>
+                </textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="182" y="0" width="31" height="15"/>
+				<textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$F{debitAmount} == 0.0 ? null : $P{CURRENCY_NAME}]]>
+                </textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="288" y="0" width="31" height="15"/>
+				<textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$F{creditAmount} == 0.0 ? null : $P{CURRENCY_NAME}]]>
+                </textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="407" y="0" width="142" height="15"/>
+				<textElement/>
+                <textFieldExpression><![CDATA[$F{description}]]>
+                </textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="0" width="78" height="14" />
+				<textFieldExpression><![CDATA[$F{accountCode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="32">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="180" y="13" width="33" height="15"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+                <textFieldExpression><![CDATA[$P{CURRENCY_NAME}]]>
+                </textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="102" y="13" width="73" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+                <text><![CDATA[Grand Total : ]]>
+                </text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#0.00">
+				<reportElement x="214" y="13" width="90" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+                <textFieldExpression class="java.lang.Double"><![CDATA[$V{gtDebit}]]>
+                </textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="13" width="31" height="15"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+                <textFieldExpression><![CDATA[$P{CURRENCY_NAME}]]>
+                </textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#0.00">
+				<reportElement x="320" y="13" width="134" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+                <textFieldExpression class="java.lang.Double"><![CDATA[$V{gtCredit}]]>
+                </textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

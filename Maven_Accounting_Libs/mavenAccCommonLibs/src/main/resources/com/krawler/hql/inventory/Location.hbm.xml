@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.location.Location" table="in_location" >
+        <id column="id" name="id">
+            <generator class="assigned"/>
+        </id>
+        <property name="name" type="string">
+            <column name="name"/>
+        </property>
+        <property name="active" type="boolean">
+            <column name="isactive"/>
+        </property>
+        <property name="defaultLocation" type="boolean">
+            <column name="isdefault"/>
+        </property>
+        <property name="createdOn" type="timestamp">
+            <column name="createdon"/>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        <property name="parentId" type="string">
+            <column name="parentid"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="createdby" name="createdBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="modifiedby" name="modifiedBy"/>
+    
+        <set name="stores" cascade="save-update" table="in_store_location">
+            <key column="locationid"/>
+            <many-to-many column="storeid" class="com.krawler.inventory.model.store.Store"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="aged_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.143588810000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<field name="basecurr" class="java.lang.String"/>
+	<field name="code" class="java.lang.String"/>
+	<field name="person" class="java.lang.String"/>
+        <field name="propaddr" class="java.lang.String"/>
+        <field name="sp_agent" class="java.lang.String"/>
+	<field name="currency" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<field name="entryNumber" class="java.lang.String"/>
+	<field name="entryType" class="java.lang.String"/>
+	<field name="debit" class="java.lang.Double"/>
+	<field name="credit" class="java.lang.Double"/>
+	<field name="closing" class="java.lang.Double"/>
+	<variable name="currentDebitSum" class="java.lang.Double" resetType="Group" resetGroup="type" calculation="Sum">
+		<variableExpression><![CDATA[$F{debit}]]></variableExpression>
+	</variable>
+        <variable name="currentCreditSum" class="java.lang.Double" resetType="Group" resetGroup="type" calculation="Sum">
+		<variableExpression><![CDATA[$F{credit}]]></variableExpression>
+	</variable>
+	<variable name="customerdebittotal" class="java.lang.Double" resetType="Group" resetGroup="customer" calculation="Sum">
+		<variableExpression><![CDATA[$F{debit}]]></variableExpression>
+	</variable>
+	<variable name="customercredittotal" class="java.lang.Double" resetType="Group" resetGroup="customer" calculation="Sum">
+		<variableExpression><![CDATA[$F{credit}]]></variableExpression>
+	</variable>
+	<group name="customer" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{person}]]></groupExpression>
+		<groupHeader>
+			<band height="26">
+				<textField>
+					<reportElement x="69" y="4" width="282" height="20"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{person}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="6" y="4" width="61" height="20"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="28">
+				<line>
+					<reportElement x="0" y="0" width="565" height="2"/>
+				</line>
+				<textField isStretchWithOverflow="true" evaluationTime="Group" evaluationGroup="customer" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="283" y="2" width="68" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{customerdebittotal}-$V{customercredittotal}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00">
+					<reportElement x="209" y="2" width="70" height="18"/>
+					<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{basecurr}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="109" y="2" width="100" height="18"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Closing : ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="type">
+		<groupExpression><![CDATA[$F{entryType}]]></groupExpression>
+		<groupFooter>
+	<band height="18">
+				<textField pattern="#,##0.00">
+					<reportElement x="209" y="2" width="71" height="15"/>
+					<textElement textAlignment="Right" markup="html">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{basecurr}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="type" pattern="#,##0.00" isBlankWhenNull="true">
+					<reportElement x="283" y="2" width="68" height="15"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{currentDebitSum}+$V{currentCreditSum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="109" y="2" width="100" height="15"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{entryType}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="155" y="0" width="67" height="16"/>
+				<textElement textAlignment="Left" markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currency}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="6" y="0" width="61" height="16"/>
+				<textElement markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+                        <textField pattern="#,##0.00">
+                            <reportElement x="283" y="0" width="65" height="16"/>
+                            <textElement textAlignment="Left" markup="none">
+                                <font size="8" isBold="false"/>
+                            </textElement>
+                            <textFieldExpression><![CDATA[$F{sp_agent}]]>
+                            </textFieldExpression>
+                        </textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="486" y="0" width="68" height="17"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{closing}]]></textFieldExpression>
+			</textField>
+			<textField  isStretchWithOverflow="true">
+				<reportElement x="224" y="0" width="59" height="16"/>
+				<textElement textAlignment="Left" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entryType}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="69" y="0" width="109" height="16"/>
+				<textElement markup="html">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entryNumber}+""]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="418" y="-1" width="68" height="17"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="351" y="-1" width="68" height="17"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{debit}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12">
+			<printWhenExpression><![CDATA[$F{propaddr}.equals("")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+			<textField>
+				<reportElement x="69" y="-2" width="341" height="11"/>
+				<textElement markup="html">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{propaddr}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

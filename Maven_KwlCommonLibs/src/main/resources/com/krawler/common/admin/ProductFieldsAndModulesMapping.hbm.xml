@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class  name="com.krawler.common.admin.ProductFieldsAndModulesMapping" table="productfieldsandmodulesmapping">
+        <id name="id" column="id" type="string">
+            <generator class="uuid" />
+        </id>    
+        <property name="moduleid" column="moduleid" type="int"> </property>  
+         <many-to-one class="com.krawler.common.admin.CustomizeReportMapping" column="fieldid" name="fieldid" />
+    </class>     
+</hibernate-mapping>

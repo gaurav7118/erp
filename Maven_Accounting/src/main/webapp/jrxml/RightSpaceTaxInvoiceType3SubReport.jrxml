@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.3310000000000202"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="srNo" class="java.lang.String"/>
+	<field name="desc" class="java.lang.String"/>
+	<field name="custom1" class="java.lang.String"/>
+	<field name="custom2" class="java.lang.String"/>
+	<field name="qty" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="rate" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="custom3" class="java.lang.String"/>
+	<field name="code" class="java.lang.String"/>
+	<field name="totalinDouble" class="java.lang.Double"/>
+	<variable name="cntUser" class="java.lang.Integer" incrementType="Group" incrementGroup="Parent">
+		<variableExpression><![CDATA[($V{Parent_COUNT} == 1) ? $V{cntUser} + 1 : $V{cntUser}]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<variable name="GroupTotal" class="java.lang.Double" resetType="Group" resetGroup="Parent" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalinDouble}]]></variableExpression>
+	</variable>
+	<group name="Parent">
+		<groupExpression><![CDATA[$F{custom1}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement x="0" y="0" width="26" height="15"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{cntUser}+""]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="28" y="0" width="274" height="15"/>
+					<box leftPadding="3">
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{custom1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="303" y="0" width="66" height="15"/>
+					<box>
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{custom3}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="17">
+				<textField>
+					<reportElement x="369" y="0" width="71" height="15"/>
+					<box rightPadding="3">
+						<topPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Sub-Total "+($V{cntUser}-1)+")"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="440" y="0" width="87" height="15"/>
+					<box rightPadding="3">
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$V{GroupTotal}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="441" y="0" width="86" height="1"/>
+				</line>
+				<line>
+					<reportElement x="441" y="15" width="86" height="1"/>
+					<graphicElement>
+						<pen lineWidth="2.0" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="28" y="0" width="274" height="15"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Parent_COUNT}+") "+$F{desc} +" - "+$F{qty}+" "+$F{uom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="0" width="71" height="15"/>
+				<box rightPadding="3">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="87" height="15"/>
+				<box rightPadding="3">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,485 @@
+/* 
+    Document   : custom-report-builder
+    Created on : Apr 2, 2016, 12:05:58 PM
+    Author     : krawler
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+.grand-summary-table-view{
+     overflow-x: hidden !important;
+}
+
+.grand-summary-locked{
+    overflow-x: scroll !important;
+    overflow-y: auto !important;
+}
+
+.grand-summary-normal{
+    overflow: auto !important;
+}
+
+.app-header {
+    color:#FFFFFF;
+    background-color:#214674;
+    font-family: tahoma,arial,verdana,sans-serif;
+    padding: 15px 0 10px 20px;
+    background: transparent url(../../images/CustomReportBuilder/report-builder-logo1.png) no-repeat scroll 0 0 !important;
+    /*background-image: linear-gradient(center top , #275287, #1b3a60);*/
+    border-bottom: 1px solid #102238;
+}
+
+.app-header-data{
+    font-size:20px;
+    text-align:left;
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.search-trigger {
+    background: rgba(0, 0, 0, 0) url("../../lib/ext-6.0.1/images/form/search-trigger.gif") repeat scroll 100px -2px;
+}
+
+.pwnd {
+    background: transparent url(../../images/tbar.gif) no-repeat scroll 0 0 !important;
+}
+
+.save {
+    background-position: 0 -723px !important;
+}
+
+.update {
+    background-position: 0 -1396px !important
+}
+
+.favwinIcon {
+    background-position: 0px -340px !important
+}
+
+.reset {
+    background-position: 0 -1010px !important;
+}
+
+.accountingbase {
+    background: transparent url(../../images/accounting-tbar.gif) no-repeat scroll 0 0 !important;
+    background-position: 0 -5px !important; 
+}
+.editbtn{
+    background-position: 0px -128px !important; 
+}
+.copybtn{
+    background-position: 0px -607px !important; 
+}
+.fetch {
+    background-position: 0 -151px !important;
+}
+
+.create-new {
+    background-position: 0 -195px !important;
+}
+
+.delete {
+    background-position: 0 -535px !important;
+}
+
+.delete-gridrow {
+	width: 16px;
+	height: 16px;
+	background-position: 0 -387px !important;
+}
+
+.report {
+    background-position: 0 -1058px !important;
+}
+
+.new-report{
+    background-position: 0 -175px !important;
+}
+.create-report{
+    background-position: 0 -703px !important;
+}
+
+.x-grid-row-summary .x-grid-cell-inner {
+    font-weight: bold;
+}
+
+.remove-filter{
+     background-position: 0 -2812px !important;
+}
+
+
+.gridHeader {
+    display: block;
+    margin: 5px 0px 10px 0px;
+    width: 50%;
+    height: 15px;
+    border-bottom: 1px solid #D8DFFF;
+    color: #15428b;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.gridLine {
+	display: block;
+	margin: 5px 0px 10px 0px;
+	width: 97%;
+	height: 1px;
+	border-top: 1px solid Black;
+	color: #15428b;
+	font-weight: bold;
+	font-size: 11px;
+}
+
+.expanderContainer {
+	margin-left: 50px;
+/*        width: 95%;*/
+        height:100%; 
+        overflow-x: auto;
+        overflow-y: auto;
+}
+
+.gridRow{
+/*    width: 10%;*/
+    float: left;
+    word-wrap:break-word !important;
+    padding-right: 12px;
+    margin-bottom: 5px;
+}
+
+.gridNo {
+	display: block;
+	float: left;
+	padding-right: 5px;
+	width: 30px;
+	text-align: right;
+        margin-right:15px !important;
+}
+
+.headerRow {
+	float: left;
+/*	width: 10%;*/
+	font-weight: bold;
+        word-wrap:break-word !important;
+        padding-right: 12px;
+}
+
+.note-panel{
+    background:transparent;
+    color: #FF0000;
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 15px;
+    padding: 5px 0 0 2px;
+}
+
+.export {
+	background-position: 0 -1249px !important;
+        height:23px !important;
+}
+.exportItem {
+	background-position: 0 -1252px !important;
+}
+.exportChrome {
+	background-position: 0 -1251px !important;
+}
+.exportcsv {
+	height: 17px;
+	background-position: 0 -2740px !important;
+}
+.exportpdf {
+	background-position: 0 -2716px !important;
+}
+.export-menubutton {
+	background-position: 0 -1252px !important;
+}
+.printButtonIcon {
+	background-position: 0 -1081px !important;
+}
+
+.printMenuHeight {
+    overflow-y: scroll !important;
+    max-height:100px; 
+}
+
+grid-checkheader-editor {
+    text-align:left !important;
+}
+
+.deskeraImage {
+	background-position: 0 -340px !important;
+}
+
+.exportFormat1 {
+	width: 105%;
+	border-bottom: 1px solid #bfbfbf;
+	background: white;
+/*        margin-top: 9px !important;*/
+/*        height:400px*/
+}
+
+.custcheckbox {
+	top: 0px !important;
+	margin-top: 4px !important;
+        width: 100%;
+}
+
+.adminWinImg {
+	/*    width:40px;
+	height:52px;*/
+	margin: 5px 5px 5px 5px;
+}
+
+.medatory-msg {
+    float: right;
+    margin-top: -10px;
+    font: 11px tahoma,arial,helvetica,sans-serif;
+}
+
+.advanceSearchButton {
+    background: transparent  url("../../images/advance_search.png") no-repeat scroll 3px 50% !important;
+}
+
+.widthforCmb {
+    width: 400px !important;
+}
+
+.disabled-record {
+    color: gray;
+}
+
+.addfilter {
+	background-position: 0 -2789px !important;
+}
+
+.x-grid-cell-row-checker {
+    vertical-align: top;
+}
+
+.nodata {
+    background: transparent url(../../images/CustomReportBuilder/no-data-to-display.png) no-repeat scroll 0 0 !important;
+}
+
+.toggleButtonIcon {
+	background-position: 0 -2835px !important;
+}
+
+.cc-grid-title{
+    font: bold 12px tahoma,arial,helvetica,sans-serif;
+    width:100% !important;
+    background:none !important;
+    padding-left: 0 !important;
+    padding-bottom:10px !important;
+    border-bottom:1px solid #FFFFFF !important;
+}
+
+.buttons-spacing > div> div > a {
+    margin:7px !important;
+    
+}
+.textAreaOpacitycss {
+	opacity: 1;
+}
+
+.x-pivot-grid-group-header {
+    background: #fafafa none repeat scroll 0 0;
+    border-color: #ededed #d0d0d0;
+    border-style: solid;
+    border-width: 0 1px;
+    white-space: nowrap;
+}
+.x-pivot-grid-group-header-collapsible {
+    cursor: pointer;
+}
+.x-pivot-grid-group-header-collapsible .x-pivot-grid-group-title {
+    background-color: transparent;
+    background-image: url("../../lib/ext-6.0.1/images/grid/group-collapse.gif");
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding: 0 0 0 14px;
+}
+.x-rtl.x-grid-view .x-pivot-grid-group-header-collapsible .x-pivot-grid-group-title {
+    background-position: right center;
+    padding: 0 14px 0 0;
+}
+.x-pivot-grid-group-title {
+    color: #3764a0;
+    font: bold 12px/13px tahoma,arial,verdana,sans-serif;
+}
+.x-pivot-grid-group-header-collapsed .x-pivot-grid-group-title {
+    background-image: url("../../lib/ext-6.0.1/images/grid/group-expand.gif");
+}
+.x-pivot-grid-group-total .x-grid-cell-inner, .x-pivot-grid-group-total .x-column-header-inner {
+    color: #3764a0;
+    font: bold 12px/13px tahoma,arial,verdana,sans-serif;
+}
+.x-pivot-grid-group-total .x-grid-cell {
+    border-color: #ededed #d0d0d0;
+    border-style: solid;
+    font: bold 12px/13px tahoma,arial,verdana,sans-serif;
+}
+.x-pivot-grid-grand-total .x-grid-cell-inner, .x-pivot-grid-grand-total .x-column-header-inner {
+    color: #3764a0;
+    font: bold 12px/13px tahoma,arial,verdana,sans-serif;
+}
+.x-pivot-grid-grand-total .x-grid-cell {
+    font: bold 12px/13px tahoma,arial,verdana,sans-serif;
+}
+.x-pivot-grid-group-header-compact {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: transparent none repeat scroll 0 0;
+    border-color: -moz-use-text-color;
+    border-image: none;
+    border-style: none;
+    border-width: 0 !important;
+}
+.x-pivot-grid-group-header-compact .x-grid-cell-inner {
+    border-color: #ededed #d0d0d0;
+    border-style: solid;
+    border-width: 0 1px;
+}
+.x-pivot-grid-config-column {
+    cursor: pointer;
+}
+.x-pivot-grid-config-column .x-pivot-grid-config-column-btn {
+    float: left;
+    height: 16px;
+}
+.x-pivot-grid-config-column .x-column-header-sort-ASC, .x-pivot-grid-config-column .x-column-header-sort-DESC {
+    background-color: transparent !important;
+}
+.x-pivot-grid-config-column-inner {
+    background-color: #c5c5c5;
+    background-image: -moz-linear-gradient(center top , #f9f9f9, #e6e3e3);
+    border: 1px solid #c5c5c5;
+    font: 11px/13px tahoma,arial,verdana,sans-serif;
+    margin: 1px;
+    padding: 3px;
+}
+.x-pivot-grid-config-column-btn-image {
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding: 0 13px 0 0;
+}
+.x-pivot-grid-config-column-btn-customize {
+    background-image: url("../../images/gear-small.gif");
+}
+.x-pivot-grid-config-column-btn-sort-asc {
+    background-image: url("../../lib/ext-6.0.1/images/grid/sort_asc.gif");
+}
+.x-pivot-grid-config-column-btn-sort-desc {
+    background-image: url("../../lib/ext-6.0.1/images/grid/sort_desc.gif");
+}
+.x-pivot-grid-config-column-btn-sort-clear {
+    background-image: url("../../lib/ext-6.0.1/images/grid/sort-clear.gif");
+}
+.x-pivot-grid-config-column-btn-filter-set {
+    background-image: url("../../lib/ext-6.0.1/images/grid/filtered.gif");
+}
+.x-pivot-grid-config-column-btn-filter-clear {
+    background-image: url("../../lib/ext-6.0.1/images/grid/filter-clear.gif");
+}
+.x-pivot-grid-config-container-header {
+    padding: 2px;
+}
+.x-pivot-grid-config-container-header .x-panel-header-title {
+    font: 11px/13px tahoma,arial,verdana,sans-serif;
+}
+.x-pivot-grid-config-container-header.x-header-noborder {
+    padding: 2px;
+}
+.x-pivot-grid-config-container-body {
+    background-color: white;
+    border: 0 solid #ededed;
+}
+.x-pivot-grid-config-container-body-tr {
+    border-width: 1px 1px 0 0;
+}
+.x-pivot-grid-config-container-body-bl {
+    border-width: 0 0 1px 1px;
+}
+.x-pivot-grid-config-container-hint {
+    color: darkgray;
+    padding: 5px;
+}
+
+.x-column-header-inner .x-grid-row-expander {
+    background-position: 0 2px;
+    background-repeat: no-repeat;
+    float: none !important;
+    font-size: 12px;
+    line-height: 13px;
+    padding-right: 9px;
+}
+.x-column-header-last {
+    border-right: 1px solid #c5c5c5;
+}
+.x-rtl.x-column-header-last {
+    border-left: 1px solid #c5c5c5;
+}
+
+.chart {
+	background-position: 0 -101px !important;
+}
+.x-chart-barchartwizard {
+    padding-right: 3px;
+    background: url(../../images/crm-tbar.gif) no-repeat 0 -1253px !important;
+}
+.x-chart-linechartwizard {
+    padding-right: 3px;
+    background: url(../../images/accounting-tbar.gif) no-repeat 0 -2166px !important;
+}
+.x-chart-piechartwizard {
+    margin-left: 3px;
+    padding-right: 3px;
+    background: url(../../images/crm-tbar.gif) no-repeat 0pt -1301px !important;
+}
+.eWayRevertStatus{
+        background: transparent url(../../images/CustomReportBuilder/revert-eway-export-status-icon.png) no-repeat scroll 0 0 !important; 
+}
+.eWayValidateJSON{
+        background: transparent url(../../images/CustomReportBuilder/validate-json-icon.png) no-repeat scroll 0 0 !important; 
+}
+
+.multiselect-list-wrapper-max-height {
+    max-height: 21px;
+}
+
+.multiselect-flip-expand-list-trigger {
+    transform: rotate(180deg) scaleX(-1);
+}
+
+.x-form-clear-trigger-custom {
+    background-image: url(../../lib/ext-6.0.1/images/form/clear-trigger.gif), url(../../lib/ext-6.0.1/images/form/trigger.gif);
+    background-position: left top, left top;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.x-form-default-trigger-custom {
+    background-image: url(../../lib/ext-6.0.1/images/form/trigger-square.gif), url(../../lib/ext-6.0.1/images/form/trigger.gif);
+    background-position: left top, left top;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.x-form-trigger-flip-vertically {
+    transform: rotate(180deg) scaleX(-1);
+}
+
+.multiselect-list-wrapper-height {
+    height: 70px !important;
+    max-height: 70px !important;
+}
+
+.advance-search-tbar-items-align > div > div > div, 
+.advance-search-tbar-items-align > div > div > a {
+    top: 1px !important;
+}
+
+.advance-search-tbar-items-align > div > div > div.x-toolbar-separator {
+    top: 5px !important;
+}

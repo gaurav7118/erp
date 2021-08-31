@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.BOMDetail" table="bomdetail">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="bomCode" type="string">
+            <column length="150" name="bomcode" not-null="true"/>
+        </property>
+        <property name="bomName" type="string">
+            <column length="50" name="bomname" />
+        </property>
+        <property name="isDefaultBOM" type="true_false">
+            <column name="isdefaultbom" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Product" name="product" not-null="true"/>
+    </class>
+</hibernate-mapping>

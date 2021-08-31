@@ -1,0 +1,1019 @@
+#Anand Thakur 3rd April 2017 (Sales Order)
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('01222fea-cc37-4bf6-b542-30e16a82d204','Shipping Address Recipient Name','billingshippingaddresses','billingshippingaddresses','id','shippingrecipientname','Shipping Address Recipient Name','1','20','T');
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowindocumentdesigner)
+VALUES ('6e9c70b7-315d-4b0e-b63d-9052b0e3f620','Billing Address Recipient Name','billingshippingaddresses','billingshippingaddresses','id','billingrecipientname','Billing Address Recipient Name','1','20','T');
+
+#Raveesh Pathak 3rd April 2017
+alter table extracompanypreferences add column  pickaddressfrommaster char(1) default 'T';
+update extracompanypreferences set pickaddressfrommaster='F';
+
+#Vaibhav Patil 03rd April 2017
+DROP TABLE brdetailhistory;
+
+CREATE TABLE `brdetailhistory` (
+  `id` varchar(255),
+  `bankreconciliation` varchar(255),
+  `company` varchar(255) DEFAULT NULL,
+  `reconciledate` date DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `accountname` varchar(255) DEFAULT NULL,
+  `paidto` varchar(255) DEFAULT NULL,
+  `chequeno` varchar(255) DEFAULT NULL,
+  `chequedate` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `entryno` varchar(255) DEFAULT NULL,
+  `jeid` varchar(255) DEFAULT NULL,
+  `transactionid` varchar(255) DEFAULT NULL,
+  `billid` varchar(255) DEFAULT NULL,
+  `transcurrsymbol` varchar(255) DEFAULT NULL,
+  `amountintransactioncurrency` double DEFAULT 0,
+  `accountcurrencysymbol` varchar(255) DEFAULT NULL,
+  `amountinacc` double DEFAULT 0,
+  `amount` double DEFAULT 0,
+  `debit` char(1),
+  `isopeningtransaction` char(1) DEFAULT 'F',
+  `moduleid` int(11) DEFAULT '24',
+  `clearedstatus` int(1) DEFAULT '0',
+  `reportname` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`bankreconciliation`) REFERENCES `bankreconciliation` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Akshay Gujar 4th April 2017
+ALTER TABLE mailnotification ADD COLUMN templateid VARCHAR(255) DEFAULT NULL;
+
+#Amol Edewar 04th April 2017
+alter table assetmaintenancescheduler add column`isscheduleedit`  int(1) NULL DEFAULT 0 ;
+
+
+#Amol Edewar 4th march 2017
+
+alter table extracompanypreferences add column  securitygateentryflag char(1) default 'F';
+
+CREATE TABLE `securitygateentry` (
+  `id` varchar(255) NOT NULL,
+  `securitynumber` varchar(50) NOT NULL,
+  `autogen` char(1) NOT NULL DEFAULT '0',
+  `securitydate` date DEFAULT NULL,
+  `duedate` date DEFAULT NULL,
+  `memo` varchar(2048) DEFAULT NULL,
+  `deleteflag` char(1) NOT NULL,
+  `vendor` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `tax` varchar(255) DEFAULT NULL,
+  `costcenter` varchar(255) DEFAULT NULL,
+  `currency` varchar(255) DEFAULT NULL,
+  `pendingapproval` int(1) NOT NULL DEFAULT '0',
+  `templateid` varchar(255) DEFAULT 'ff80808140538c54014053c5f6380006',
+  `shipvia` varchar(255) DEFAULT NULL,
+  `fob` varchar(255) DEFAULT NULL,
+  `shipdate` date DEFAULT NULL,
+  `favouriteflag` int(1) DEFAULT '0',
+  `approvallevel` int(2) NOT NULL DEFAULT '0',
+  `approver` varchar(255) DEFAULT NULL,
+  `istemplate` int(1) DEFAULT '0',
+  `posttext` longtext,
+  `linkflag` int(2) DEFAULT '0',
+  `securitygateentrycustomdataref` varchar(255) DEFAULT NULL,
+  `discount` double DEFAULT '0',
+  `perdiscount` char(1) DEFAULT 'F',
+  `shipto` varchar(255) DEFAULT NULL,
+  `billto` varchar(255) DEFAULT NULL,
+  `term` varchar(255) DEFAULT NULL,
+  `createdby` varchar(40) DEFAULT NULL,
+  `modifiedby` varchar(40) DEFAULT NULL,
+  `createdon` bigint(20) DEFAULT NULL,
+  `updatedon` bigint(20) DEFAULT NULL,
+  `seqnumber` int(11) DEFAULT '0',
+  `seqformat` varchar(40) DEFAULT NULL,
+  `billingshippingaddresses` varchar(255) DEFAULT NULL,
+  `masteragent` varchar(255) DEFAULT NULL,
+  `shiplength` double DEFAULT '1',
+  `gstincluded` char(1) DEFAULT 'F',
+  `externalcurrencyrate` double DEFAULT '0',
+  `termsincludegst` char(1) DEFAULT NULL,
+  `approvestatuslevel` int(11) DEFAULT '11',
+  `isopen` char(1) DEFAULT 'T',
+  `totalamount` double DEFAULT '0',
+  `totalamountinbase` double DEFAULT '0',
+  `discountinbase` double DEFAULT '0',
+  `totallineleveldiscount` double DEFAULT '0',
+  `disabledpoforso` char(1) DEFAULT 'F',
+  `datesuffixvalue` varchar(50) DEFAULT '',
+  `datepreffixvalue` varchar(50) DEFAULT '',
+  `ispoclosed` char(1) DEFAULT 'F',
+  `dateofdelivery` date DEFAULT NULL,
+  `dateofshipment` date DEFAULT NULL,
+  `product` varchar(255) DEFAULT NULL,
+  `productquantity` double DEFAULT '0',
+  `dateafterpreffixvalue` varchar(50) DEFAULT '',
+  `supplierinvoiceno` varchar(50) DEFAULT '',
+  `emailsentflag` int(1) DEFAULT '0',
+   PRIMARY KEY (`id`),
+  
+  CONSTRAINT  FOREIGN KEY (`approver`) REFERENCES `users` (`userid`),
+  CONSTRAINT  FOREIGN KEY (`costcenter`) REFERENCES `costcenter` (`id`),
+  CONSTRAINT  FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),
+  CONSTRAINT  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  CONSTRAINT  FOREIGN KEY (`vendor`) REFERENCES `vendor` (`id`),
+  CONSTRAINT  FOREIGN KEY (`term`) REFERENCES `creditterm` (`termid`),
+  CONSTRAINT  FOREIGN KEY (`billingshippingaddresses`) REFERENCES `billingshippingaddresses` (`id`),
+  CONSTRAINT  FOREIGN KEY (`seqformat`) REFERENCES `sequenceformat` (`id`),
+  CONSTRAINT  FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`),
+  CONSTRAINT  FOREIGN KEY (`createdby`) REFERENCES `users` (`userid`),
+  CONSTRAINT  FOREIGN KEY (`modifiedby`) REFERENCES `users` (`userid`),
+  CONSTRAINT  FOREIGN KEY (`masteragent`) REFERENCES `masteritem` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT  FOREIGN KEY (`product`) REFERENCES `product` (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `securitygatedetails` (
+  `id` varchar(255) NOT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `quantity` double NOT NULL,
+  `uom` varchar(255) DEFAULT NULL,
+  `baseuomquantity` double DEFAULT '0',
+  `baseuomrate` double DEFAULT '1',
+  `rate` double NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `securitygateentry` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `srno` int(11) DEFAULT '0',
+  `tax` varchar(255) DEFAULT NULL,
+  `description` text,
+  `discount` double DEFAULT '0',
+  `discountispercent` int(1) DEFAULT '1',
+  `rowtaxamount` double DEFAULT '0',
+  `supplierpartnumber` varchar(50) DEFAULT '',
+  `showquantity` varchar(255) DEFAULT '',
+  `invstoreid` varchar(255) DEFAULT '',
+  `pricesource` varchar(255) DEFAULT NULL,
+  `rateincludegst` double DEFAULT '0',
+  `balanceqty` double DEFAULT '0',
+  `permit` varchar(255) DEFAULT NULL,
+  `rowtermamount` double DEFAULT '0',
+  `islineitemclosed` char(1) DEFAULT 'F',
+  `reportinguomexcise` varchar(255) DEFAULT NULL,
+  `reportingschematypeexcise` varchar(255) DEFAULT NULL,
+  `reportinguomvat` varchar(255) DEFAULT NULL,
+  `podetail` varchar(255) DEFAULT NULL,
+  `vatvaluationtype` varchar(100) DEFAULT NULL,
+  `reportingschemavat` varchar(255) DEFAULT NULL,
+  `mrpindia` double DEFAULT '0',
+  `lineleveltermamount` double DEFAULT '0',
+  `otherrowtermamount` double DEFAULT '0',
+  PRIMARY KEY (`id`),
+   CONSTRAINT  FOREIGN KEY (`securitygateentry`) REFERENCES `securitygateentry` (`id`),
+  CONSTRAINT  FOREIGN KEY (`tax`) REFERENCES `tax` (`id`),
+  CONSTRAINT  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  CONSTRAINT  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  CONSTRAINT  FOREIGN KEY (`uom`) REFERENCES `uom` (`id`),
+  CONSTRAINT  FOREIGN KEY (`reportinguomexcise`) REFERENCES `uom` (`id`),
+  CONSTRAINT  FOREIGN KEY (`reportingschematypeexcise`) REFERENCES `uomschematype` (`id`),
+  CONSTRAINT  FOREIGN KEY (`reportingschemavat`) REFERENCES `uomschematype` (`id`),
+  CONSTRAINT  FOREIGN KEY (`reportinguomvat`) REFERENCES `uom` (`id`),
+CONSTRAINT  FOREIGN KEY (`podetail`) REFERENCES `podetails` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `grodetails`
+ADD COLUMN `securitydetails`  varchar(40) DEFAULT NULL;
+ALTER TABLE grodetails add FOREIGN KEY (securitydetails)  REFERENCES securitygatedetails(id);
+
+alter table `purchaseorder` add column `ispoused` char(1) default 'F';
+
+#Pawan Kale 04th April 2017
+#Receive Payment
+update customizereportheader set dataIndex='customer' where id='bbc5c91a-dede-11e6-914b-14dda97927d6';
+
+#Swapnil D. Khandre 5th April, 2017
+alter table in_ist_detail add column qaapproved double default 0;
+alter table in_ist_detail add column qarejected double default 0;
+
+#Dipak Dorkar 6th April, 2017
+ALTER TABLE `documentemailsettings` ADD COLUMN `iscustomershippaddressinpurchaseddoc` char(1) DEFAULT 'F';
+
+#Mohammed Uzair Momin 7th April 2017
+insert into reportmaster(id,name,description,method_name) values("SOA_Customer_Account_Statement","SOA - Customer Account Statement","View Customer Account Statement","callCustomerVendorLedgerReport(undefined,undefined,true,true)");
+
+#Dipak Dorkar 10th April 2017
+#Modify the Existing column size
+
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingpostal VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingfax VARCHAR(250);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingstate VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingcountry VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingcity VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingrecipientname VARCHAR(200);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingcontactperson VARCHAR(200);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN billingwebsite VARCHAR(100);
+
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingpostal VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingfax VARCHAR(250);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingstate VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingCountry VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingcity VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingrecipientname VARCHAR(200);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingcontactperson VARCHAR(200);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN shippingwebsite VARCHAR(100);
+
+
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingpostal VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingfax VARCHAR(250);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingstate VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingcountry VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingcity VARCHAR(100);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingrecipientname VARCHAR(200);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingcontactperson VARCHAR(200);
+ALTER TABLE billingshippingaddresses MODIFY COLUMN vendcustshippingwebsite VARCHAR(100);
+
+#Add New column in table
+
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingaddress VARCHAR(2048) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingcountry VARCHAR(100) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingstate VARCHAR(100) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingcity VARCHAR(100) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingpostal VARCHAR(100) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingemail VARCHAR(255) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingfax VARCHAR(250) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingmobile VARCHAR(255) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingphone VARCHAR(255) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingcontactpersonnumber VARCHAR(255) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingcontactperson VARCHAR(200) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingrecipientname VARCHAR(100) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingaddresstype VARCHAR(255) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingcontactpersondesignation VARCHAR(255) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingwebsite VARCHAR(100) DEFAULT "";
+ALTER TABLE billingshippingaddresses ADD COLUMN customershippingroute VARCHAR(100) DEFAULT "";
+
+
+#Pandurang 10th April 2017
+update samplefiledata set header_json='[{"title":"Product ID,As Of Date,Warehouse,Location,Row,Rack,Bin,Batch,Initial Quantity,Serial"},{"header":"Product ID,As Of Date,Warehouse,Location,Row,Rack,Bin,Batch,Initial Quantity,Serial"},{"align":"none,date,none,none,none,none,none,none,none,none"}]' ,
+filedata_json='[{"Product ID":"WL","As Of Date":"2016-06-14","Warehouse":"DS","Location":"Default Location","Row":"","Rack":"","Bin":"","Batch":"","Initial Quantity":10,"Serial":""},{"Product ID":"WLB","As Of Date":"2016-06-14","Warehouse":"DS","Location":"Default Location","Row":"Row","Rack":"Rack","Bin":"Bin","Batch":"Batch","Initial Quantity":10,"Serial":""},{"Product ID":"WLBS","As Of Date":"2016-06-14","Warehouse":"DS","Location":"Default Location","Row":"Row","Rack":"Rack","Bin":"Bin","Batch":"Batch 1","Initial Quantity":2,"Serial":"S1"},{"Product ID":"WLBS","As Of Date":"2016-06-14","Warehouse":"DS","Location":"Default Location","Row":"Row","Rack":"Rack","Bin":"Bin","Batch":"Batch 1","Initial Quantity":"","Serial":"S2"},
+{"Product ID":"","As Of Date":"","Warehouse":"","Location":"","Row":"","Rack":"","Bin":"","Batch":"","Initial Quantity":"","Serial":""},{"Product ID":"","As Of Date":"","Warehouse":"","Location":"","Row":"","Rack":"","Bin":"","Batch":"","Initial Quantity":"","Serial":""},{"Product ID":"Note:","As Of Date":"","Warehouse":"","Location":"","Row":"","Rack":"","Bin":"","Batch":"","Initial Quantity":"","Serial":""},{"Product ID":"1. The quantity will be added if it has same warehouse location for same Product in given file.","As Of Date":"","Warehouse":"","Location":"","Row":"","Rack":"","Bin":"","Batch":"","Initial Quantity":"","Serial":""}]' where id="46bc9ab6-dfe4-11e5-adab-c03fd5632e9b";
+
+#Raveesh Pathak 11th April 2017
+update receipt set approvestatuslevel=11 where isopeningbalencereceipt=1;
+
+#Rahul Sawale 12th April 2017
+ALTER TABLE paymentmethod ADD COLUMN srno INT(11) DEFAULT 0;
+
+#Ganesh Karale 12th April 2017
+ALTER TABLE compaccpreferences ADD COLUMN isshowmarginbutton CHAR(1) DEFAULT 'F';
+UPDATE compaccpreferences SET isshowmarginbutton = 'T';
+
+#Pawan Kale 12th April 2017
+alter table customizereportheader add column parentid varchar(255) default null;
+#PO
+update customizereportheader set parentid='8fa8357d-d972-11e6-9b79-14dda97926e5' where id='88659c0d-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='8fa8357d-d972-11e6-9b79-14dda97926e5' where id='4ea4f5a6-d97a-11e6-9b79-14dda97926e5';
+
+#SI
+update customizereportheader set parentid='53a1fa38-be12-11e6-acd0-14dda97925bc' where id='602806ea-d977-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='53a1fa38-be12-11e6-acd0-14dda97925bc' where id='f630d723-d979-11e6-9b79-14dda97926e5';
+
+#PI
+update customizereportheader set parentid='b07e08a1-bc49-11e6-b202-14dda97927d6' where id='263c073d-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='b07e08a1-bc49-11e6-b202-14dda97927d6' where id='fb48a7ce-d979-11e6-9b79-14dda97926e5';
+
+#cash sales
+update customizereportheader set parentid='b48a6318-be12-11e6-9839-14dda97925bc' where id='627739bf-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='b48a6318-be12-11e6-9839-14dda97925bc' where id='1cf29c5a-d97a-11e6-9b79-14dda97926e5';
+
+#cash purchase
+update customizereportheader set parentid='9d07d90f-be12-11e6-9839-14dda97925bc' where id='7d80453d-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='9d07d90f-be12-11e6-9839-14dda97925bc' where id='21d49fcf-d97a-11e6-9b79-14dda97926e5';
+
+#sales order
+update customizereportheader set parentid='a0dfa3b1-d974-11e6-9b79-14dda97926e5' where id='3f93e17e-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='a0dfa3b1-d974-11e6-9b79-14dda97926e5' where id='02401404-d97a-11e6-9b79-14dda97926e5';
+
+#Vendor Quotation
+update customizereportheader set dataheader='Discount' where id='87605edd-d97d-11e6-93ac-4ccc6a2d6a4d';
+update customizereportheader set parentid='784308bb-d974-11e6-9b79-14dda97926e5' where id='75aeb007-d97d-11e6-93ac-4ccc6a2d6a4d';
+update customizereportheader set parentid='784308bb-d974-11e6-9b79-14dda97926e5' where id='87605edd-d97d-11e6-93ac-4ccc6a2d6a4d';
+
+#Customer Quotation
+update customizereportheader set parentid='b8445e1d-d974-11e6-9b79-14dda97926e5' where id='4b5852af-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='b8445e1d-d974-11e6-9b79-14dda97926e5' where id='15669650-d97a-11e6-9b79-14dda97926e5';
+
+#Purchase Return
+update customizereportheader set parentid='ceac602e-d974-11e6-9b79-14dda97926e5' where id='914a78fc-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='ceac602e-d974-11e6-9b79-14dda97926e5' where id='580a30f8-d97a-11e6-9b79-14dda97926e5';
+
+#sales return
+update customizereportheader set parentid='e5ca1e42-d974-11e6-9b79-14dda97926e5' where id='6479989e-d97d-11e6-93ac-4ccc6a2d6a4d';
+update customizereportheader set parentid='e5ca1e42-d974-11e6-9b79-14dda97926e5' where id='71f4a132-d97a-11e6-9b79-14dda97926e5';
+
+#Goods Receipt
+update customizereportheader set parentid='fa8f17e9-d974-11e6-9b79-14dda97926e5' where id='cb3b34eb-d978-11e6-9b79-14dda97926e5';
+update customizereportheader set parentid='fa8f17e9-d974-11e6-9b79-14dda97926e5' where id='77359507-d97a-11e6-9b79-14dda97926e5';
+
+#Dipak Dorkar 13th April 2017
+ALTER TABLE chequelayout ADD COLUMN addcharacterincheckdate char(1) DEFAULT 'F';
+
+#Vaibhav Patil 14th April 2017
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,renderertype,dataindex)  VALUES ("30c8f324-20df-11e7-be36-c03fd5ab06a3","91","UOM Schema","UomSchemaType",0,0,'F','F',"UOMschemaType","name","ID","ref",null,null,"uomSchemaTypeName");
+
+#Ashish Mohite 10th April 2017
+CREATE TABLE in_inspection_form (
+  id  varchar(255) NOT NULL ,
+  inspectiondate  datetime NOT NULL,
+  modelname varchar(255)  NULL DEFAULT NULL,
+  customername  varchar(255) NULL DEFAULT NULL,
+  department  varchar(255) NULL DEFAULT NULL,
+  consignmentreturnno  varchar(255) NULL DEFAULT NULL,
+  PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE in_inspection_form_details (
+  id varchar(255) NOT NULL,
+  inspectionformid varchar(255),
+  inspectionareaid varchar(255) DEFAULT NULL,
+  inspectionareavalue varchar(255) DEFAULT NULL,
+  inspectionstatus varchar(255) DEFAULT NULL,
+  faults text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`inspectionformid`) REFERENCES `in_inspection_form` (`id`),
+  FOREIGN KEY (`inspectionareaid`) REFERENCES `in_inspection_area` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE in_sa_detail ADD inspectionformid varchar(255) DEFAULT NULL;
+ALTER TABLE in_sa_detail ADD FOREIGN KEY (inspectionformid)  REFERENCES in_inspection_form (id);
+
+ALTER TABLE in_ist_detail ADD inspectionformid varchar(255) DEFAULT NULL;
+ALTER TABLE in_ist_detail ADD FOREIGN KEY (inspectionformid)  REFERENCES in_inspection_form (id);
+
+
+#Arshad 17th April 2017
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport,allowcrossmodule)
+VALUES ('9fa54b53-2fd4-4e545876d-2e0fc210d8f3','Unit Price Including GST','id','purchaseorder','podetails','purchaseorder','if(rateincludegst=0,rate,rateincludegst)','Unit Price Including GST','2','18','T','F','T','T');
+
+#PO-Amount
+
+update default_header set reftabledatacolumn='if(purchaseorder.gstincluded="T",((podetails.quantity*podetails.rateincludegst)-(if(podetails.discount IS NOT NULL,(select (if(podetails.discountispercent=1,(podetails.discount/100)*(rateincludegst*quantity),podetails.discount))  ),0.0) )) ,((podetails.baseuomquantity*podetails.rate)-(if(podetails.discount IS NOT NULL,(select (if(podetails.discountispercent=1,(podetails.discount/100)*(rate*quantity),podetails.discount))  ),0.0) )+podetails.rowtaxamount) ) '  where id='9fuub53-2fd4-4e56-a91d-2e0fc210d8f2';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport,allowcrossmodule)
+VALUES ('db0435e8-1e6f-11e6-a70e-eca86bfcd771','Unit Price Including GST','id','deliveryorder','dodetails','deliveryorder','if(rateincludegst=0,rate,rateincludegst) ','Unit Price Including GST','2','27','T','F','T','T');
+
+#DO-Amount
+
+update default_header set reftabledatacolumn='if(deliveryorder.gstincluded="T",((dodetails.deliveredquantity*dodetails.rateincludegst)-(if(dodetails.discount IS NOT NULL,(select (if(dodetails.discountispercent=1,(dodetails.discount/100)*(rateincludegst*deliveredquantity),dodetails.discount))  ),0.0) )) ,((dodetails.baseuomquantity*dodetails.rate)-(if(dodetails.discount IS NOT NULL,(select (if(dodetails.discountispercent=1,(dodetails.discount/100)*(rate*deliveredquantity),dodetails.discount))  ),0.0) )+dodetails.rowtaxamount) ) ' where  id ='04960bd8-5d37-11e6-9be6-c03fd5aad962';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport,allowcrossmodule)
+VALUES ('2ba3c857-9fe4-432c-9fc7-ca4188d784bd','Unit Price Including GST','id','invoice','invoicedetails','invoice','if(invoicedetails.rateincludegst=0,invoicedetails.rate,invoicedetails.rateincludegst) ','Unit Price Including GST','2','2','T','F','T','T');
+
+#CI-Amount
+
+update default_header set reftabledatacolumn='if(invoice.gstincluded="T",((inventory.quantity*invoicedetails.rateincludegst)-(if(invoicedetails.discount IS NOT NULL,(select (if(discount.inpercent="T",(discount.discount/100)*(inventory.quantity*invoicedetails.rateincludegst),discount))  From discount where id=invoicedetails.discount),0.0)))*(if(invoicedetails.partamount!=0,invoicedetails.partamount/100,1) ),((inventory.quantity*invoicedetails.rate)-(if(invoicedetails.discount IS NOT NULL,(select (if(discount.inpercent="T",(discount.discount/100)*(inventory.quantity*invoicedetails.rate),discount))  From discount where id=invoicedetails.discount),0.0))+invoicedetails.rowtaxamount)*(if(invoicedetails.partamount!=0,invoicedetails.partamount/100,1) ))' where  id ='d7356ce0-346d-4c1f-a737-3352386789d4';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('f8a4d6f3-9125-426e-8e91-75fe478f892b','Invoicedetails and InventoryMapping','id','invoicedetails','inventory','id','id','Invoicedetails and InventoryMapping','4','2','F','F','F');
+
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('96657ad4-29ae-4ac1-8c91-dd4751ce31d2','d7356ce0-346d-4c1f-a737-3352386789d4','d7356ce0-346d-4c1f-a737-3352386789d4',0);
+
+update default_header set isdefaultfieldmappings = 1 where id ='d7356ce0-346d-4c1f-a737-3352386789d4';
+
+#GR-Amount
+
+update default_header set reftabledatacolumn='if(grorder.gstincluded="T",((grodetails.deliveredquantity*grodetails.rateincludegst)-(if(grodetails.discount IS NOT NULL,(select (if(grodetails.discountispercent=1,(grodetails.discount/100)*(rateincludegst*deliveredquantity),grodetails.discount))  ),0.0) )) ,((grodetails.baseuomquantity*grodetails.rate)-(if(grodetails.discount IS NOT NULL,(select (if(grodetails.discountispercent=1,(grodetails.discount/100)*(rate*deliveredquantity),grodetails.discount))  ),0.0) )+grodetails.rowtaxamount) ) ' where  id ='8d030d90-57dd-11e6-856d-c03fd5aad962';
+
+#Vendor Invoice Base Quantity Uodate
+
+update default_header set reftabledatacolumn ='(inventory.baseuomrate*inventory.quantity)' where id = 'f6cd2f01-0f92-4589-beed-92a35c8091ec';
+
+#VI-Amount
+
+update default_header set reftabledatacolumn='if(goodsreceipt.gstincluded="T",((inventory.quantity*grdetails.rateincludegst)-(if(grdetails.discount IS NOT NULL,(select (if(discount.inpercent="T",(discount.discount/100)*(inventory.quantity*grdetails.rateincludegst),discount))  From discount where id=grdetails.discount),0.0))),((inventory.quantity*grdetails.rate)-(if(grdetails.discount IS NOT NULL,(select (if(discount.inpercent="T",(discount.discount/100)*(inventory.quantity*grdetails.rate),discount))  From discount where id=grdetails.discount),0.0))+grdetails.rowtaxamount))' where  id ='60bf8c54-de77-47b9-b89f-83d04d5dda02';
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport,allowcrossmodule)
+VALUES ('04d15dd8-0e18-11e7-bc44-14dda9792912','Unit Price Including GST','id','salesorder','sodetails','salesorder','if(rateincludegst=0,rate,rateincludegst)','Unit Price Including GST','2','20','T','F','T','T');
+
+#SO-Amount
+
+update default_header set reftabledatacolumn='if(salesorder.gstincluded="T",((sodetails.quantity*sodetails.rateincludegst)-(if(sodetails.discount IS NOT NULL,(select (if(sodetails.discountispercent=1,(sodetails.discount/100)*(rateincludegst*quantity),sodetails.discount))  ),0.0) )) ,((sodetails.baseuomquantity*sodetails.rate)-(if(sodetails.discount IS NOT NULL,(select (if(sodetails.discountispercent=1,(sodetails.discount/100)*(rate*quantity),sodetails.discount))  ),0.0) )+sodetails.rowtaxamount) ) '  where id='9fuub53-2fd4-4e56-a76d-2e0fc210d8f1';
+
+#CQ-Amount
+
+update default_header set reftabledatacolumn='if(quotation.gstincluded="T",((quotationdetails.quantity*quotationdetails.rateincludegst)-(if(quotationdetails.discount IS NOT NULL,(select (if(quotationdetails.discountispercent=1,(quotationdetails.discount/100)*(rateincludegst*quantity),quotationdetails.discount))  ),0.0) )) ,((quotationdetails.baseuomquantity*quotationdetails.rate)-(if(quotationdetails.discount IS NOT NULL,(select (if(quotationdetails.discountispercent=1,(quotationdetails.discount/100)*(rate*quantity),quotationdetails.discount))  ),0.0) )+quotationdetails.rowtaxamount) ) '  where id='fe186112-dd4f-11e6-930b-eca86bfcd415';
+
+update default_header set reftabledatacolumn='if(rateincludegst=0,rate,rateincludegst)' where id='eb9790d8-f500-11e6-950b-eca86bfcd415';
+
+#Neeraj Dwivedi 17th April 2017
+insert into rest_client_details values('21f10678-105c-11e7-93ae-9244-671','716a32ce-0953-493d-bcd1-c5961f27a33a','25',"{'accountid':'ff808081510f64e401510ff24ff5054d'}");
+
+#Vinod Gharge 17th April 2017
+ALTER TABLE securitygatedetails ADD securitygateentrycustomdataref varchar(255) DEFAULT NULL;
+CREATE TABLE `securitygateentrycustomdata` (
+  `sgeid` varchar(40) NOT NULL,
+  `col1` varchar(255) DEFAULT NULL,
+  `col2` varchar(255) DEFAULT NULL,
+  `col3` varchar(255) DEFAULT NULL,
+  `col4` varchar(255) DEFAULT NULL,
+  `col5` varchar(255) DEFAULT NULL,
+  `col6` varchar(255) DEFAULT NULL,
+  `col7` varchar(255) DEFAULT NULL,
+  `col8` varchar(255) DEFAULT NULL,
+  `col9` varchar(255) DEFAULT NULL,
+  `col10` varchar(255) DEFAULT NULL,
+  `col101` varchar(255) DEFAULT NULL,
+  `col102` varchar(255) DEFAULT NULL,
+  `col103` varchar(255) DEFAULT NULL,
+  `col104` varchar(255) DEFAULT NULL,
+  `col105` varchar(255) DEFAULT NULL,
+  `col106` varchar(255) DEFAULT NULL,
+  `col107` varchar(255) DEFAULT NULL,
+  `col108` varchar(255) DEFAULT NULL,
+  `col109` varchar(255) DEFAULT NULL,
+  `col110` varchar(255) DEFAULT NULL,
+  `col1001` longtext,
+  `col1002` longtext,
+  `col1003` longtext,
+  `col1004` longtext,
+  `col1005` longtext,
+  `col1006` longtext,
+  `col1007` longtext,
+  `col1008` longtext,
+  `col1009` longtext,
+  `col1010` longtext,
+  `col1011` longtext,
+  `col1012` longtext,
+  `col1013` longtext,
+  `col1014` longtext,
+  `col1015` longtext,
+  `col1016` longtext,
+  `col1017` longtext,
+  `col1018` longtext,
+  `col1019` longtext,
+  `col1020` longtext,
+  `col1021` longtext,
+  `col1022` longtext,
+  `col1023` longtext,
+  `col1024` longtext,
+  `col1025` longtext,
+  `col1026` longtext,
+  `col1027` longtext,
+  `col1028` longtext,
+  `col1029` longtext,
+  `col1030` longtext,
+  `col1031` longtext,
+  `col1032` longtext,
+  `col1033` longtext,
+  `col1034` longtext,
+  `col1035` longtext,
+  `col1036` longtext,
+  `col1037` longtext,
+  `col1038` longtext,
+  `col1039` longtext,
+  `col1040` longtext,
+  `col1041` longtext,
+  `col1042` longtext,
+  `col1043` longtext,
+  `col1044` longtext,
+  `col1045` longtext,
+  `company` varchar(255) DEFAULT NULL,
+  `moduleId` int(11) DEFAULT '1',
+  `deleted` char(1) DEFAULT 'F',
+  `col111` varchar(255) DEFAULT NULL,
+  `col112` varchar(255) DEFAULT NULL,
+  `col113` varchar(255) DEFAULT NULL,
+  `col114` varchar(255) DEFAULT NULL,
+  `col115` varchar(255) DEFAULT NULL,
+  `col11` varchar(255) DEFAULT NULL,
+  `col12` varchar(255) DEFAULT NULL,
+  `col13` varchar(255) DEFAULT NULL,
+  `col14` varchar(255) DEFAULT NULL,
+  `col15` varchar(255) DEFAULT NULL,
+  `col1046` longtext,
+  `col1047` longtext,
+  `col1048` longtext,
+  `col1049` longtext,
+  `col1050` longtext,
+  `col1051` longtext,
+  `col1052` longtext,
+  `col1053` longtext,
+  `col1054` longtext,
+  `col1055` longtext,
+  `col1056` longtext,
+  `col1057` longtext,
+  `col1058` longtext,
+  `col1059` longtext,
+  `col1060` longtext,
+  `col2001` varchar(255) DEFAULT 'false',
+  `col2002` varchar(255) DEFAULT 'false',
+  `col2003` varchar(255) DEFAULT 'false',
+  `col2004` varchar(255) DEFAULT 'false',
+  `col2005` varchar(255) DEFAULT 'false',
+  `col2006` varchar(255) DEFAULT 'false',
+  `col2007` varchar(255) DEFAULT 'false',
+  `col2008` varchar(255) DEFAULT 'false',
+  `col2009` varchar(255) DEFAULT 'false',
+  `col2010` varchar(255) DEFAULT 'false',
+  `col16` varchar(255) DEFAULT NULL,
+  `col17` varchar(255) DEFAULT NULL,
+  `col18` varchar(255) DEFAULT NULL,
+  `col19` varchar(255) DEFAULT NULL,
+  `col20` varchar(255) DEFAULT NULL,
+  `col21` varchar(255) DEFAULT NULL,
+  `col22` varchar(255) DEFAULT NULL,
+  `col23` varchar(255) DEFAULT NULL,
+  `col24` varchar(255) DEFAULT NULL,
+  `col25` varchar(255) DEFAULT NULL,
+  `col26` varchar(255) DEFAULT NULL,
+  `col27` varchar(255) DEFAULT NULL,
+  `col28` varchar(255) DEFAULT NULL,
+  `col29` varchar(255) DEFAULT NULL,
+  `col30` varchar(255) DEFAULT NULL,
+  `col31` varchar(255) DEFAULT NULL,
+  `col32` varchar(255) DEFAULT NULL,
+  `col33` varchar(255) DEFAULT NULL,
+  `col34` varchar(255) DEFAULT NULL,
+  `col35` varchar(255) DEFAULT NULL,
+  `col36` varchar(255) DEFAULT NULL,
+  `col37` varchar(255) DEFAULT NULL,
+  `col38` varchar(255) DEFAULT NULL,
+  `col39` varchar(255) DEFAULT NULL,
+  `col40` varchar(255) DEFAULT NULL,
+  `col41` varchar(255) DEFAULT NULL,
+  `col42` varchar(255) DEFAULT NULL,
+  `col43` varchar(255) DEFAULT NULL,
+  `col44` varchar(255) DEFAULT NULL,
+  `col45` varchar(255) DEFAULT NULL,
+  `col46` varchar(255) DEFAULT NULL,
+  `col47` varchar(255) DEFAULT NULL,
+  `col48` varchar(255) DEFAULT NULL,
+  `col49` varchar(255) DEFAULT NULL,
+  `col50` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`sgeid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Table for Line level Data
+CREATE TABLE `securitygateentrydetailcustomdata` (
+
+  `sgeDetailID` varchar(40) NOT NULL,
+
+  `col1` varchar(255) DEFAULT NULL,
+
+  `col2` varchar(255) DEFAULT NULL,
+
+  `col3` varchar(255) DEFAULT NULL,
+
+  `col4` varchar(255) DEFAULT NULL,
+
+  `col5` varchar(255) DEFAULT NULL,
+
+  `col6` varchar(255) DEFAULT NULL,
+
+  `col7` varchar(255) DEFAULT NULL,
+
+  `col8` varchar(255) DEFAULT NULL,
+
+  `col9` varchar(255) DEFAULT NULL,
+
+  `col10` varchar(255) DEFAULT NULL,
+
+  `col101` varchar(255) DEFAULT NULL,
+
+  `col102` varchar(255) DEFAULT NULL,
+
+  `col103` varchar(255) DEFAULT NULL,
+
+  `col104` varchar(255) DEFAULT NULL,
+
+  `col105` varchar(255) DEFAULT NULL,
+
+  `col106` varchar(255) DEFAULT NULL,
+
+  `col107` varchar(255) DEFAULT NULL,
+
+  `col108` varchar(255) DEFAULT NULL,
+
+  `col109` varchar(255) DEFAULT NULL,
+
+  `col110` varchar(255) DEFAULT NULL,
+
+  `col1001` longtext,
+
+  `col1002` longtext,
+
+  `col1003` longtext,
+
+  `col1004` longtext,
+
+  `col1005` longtext,
+
+  `col1006` longtext,
+
+  `col1007` longtext,
+
+  `col1008` longtext,
+
+  `col1009` longtext,
+
+  `col1010` longtext,
+
+  `col1011` longtext,
+
+  `col1012` longtext,
+
+  `col1013` longtext,
+
+  `col1014` longtext,
+
+  `col1015` longtext,
+
+  `col1016` longtext,
+
+  `col1017` longtext,
+
+  `col1018` longtext,
+
+  `col1019` longtext,
+
+  `col1020` longtext,
+
+  `col1021` longtext,
+
+  `col1022` longtext,
+
+  `col1023` longtext,
+
+  `col1024` longtext,
+
+  `col1025` longtext,
+
+  `col1026` longtext,
+
+  `col1027` longtext,
+
+  `col1028` longtext,
+
+  `col1029` longtext,
+
+  `col1030` longtext,
+
+  `col1031` longtext,
+
+  `col1032` longtext,
+
+  `col1033` longtext,
+
+  `col1034` longtext,
+
+  `col1035` longtext,
+
+  `col1036` longtext,
+
+  `col1037` longtext,
+
+  `col1038` longtext,
+
+  `col1039` longtext,
+
+  `col1040` longtext,
+
+  `col1041` longtext,
+
+  `col1042` longtext,
+
+  `col1043` longtext,
+
+  `col1044` longtext,
+
+  `col1045` longtext,
+
+  `company` varchar(255) DEFAULT NULL,
+
+  `moduleId` int(11) DEFAULT '1',
+
+  `deleted` char(1) DEFAULT 'F',
+
+  `col111` varchar(255) DEFAULT NULL,
+
+  `col112` varchar(255) DEFAULT NULL,
+
+  `col113` varchar(255) DEFAULT NULL,
+
+  `col114` varchar(255) DEFAULT NULL,
+
+  `col115` varchar(255) DEFAULT NULL,
+
+  `col11` varchar(255) DEFAULT NULL,
+
+  `col12` varchar(255) DEFAULT NULL,
+
+  `col13` varchar(255) DEFAULT NULL,
+
+  `col14` varchar(255) DEFAULT NULL,
+
+  `col15` varchar(255) DEFAULT NULL,
+
+  `col1046` longtext,
+
+  `col1047` longtext,
+
+  `col1048` longtext,
+
+  `col1049` longtext,
+
+  `col1050` longtext,
+
+  `col1051` longtext,
+
+  `col1052` longtext,
+
+  `col1053` longtext,
+
+  `col1054` longtext,
+
+  `col1055` longtext,
+
+  `col1056` longtext,
+
+  `col1057` longtext,
+
+  `col1058` longtext,
+
+  `col1059` longtext,
+
+  `col1060` longtext,
+
+  `col2001` varchar(255) DEFAULT 'false',
+
+  `col2002` varchar(255) DEFAULT 'false',
+
+  `col2003` varchar(255) DEFAULT 'false',
+
+  `col2004` varchar(255) DEFAULT 'false',
+
+  `col2005` varchar(255) DEFAULT 'false',
+
+  `col2006` varchar(255) DEFAULT 'false',
+
+  `col2007` varchar(255) DEFAULT 'false',
+
+  `col2008` varchar(255) DEFAULT 'false',
+
+  `col2009` varchar(255) DEFAULT 'false',
+
+  `col2010` varchar(255) DEFAULT 'false',
+
+  `col16` varchar(255) DEFAULT NULL,
+
+  `col17` varchar(255) DEFAULT NULL,
+
+  `col18` varchar(255) DEFAULT NULL,
+
+  `col19` varchar(255) DEFAULT NULL,
+
+  `col20` varchar(255) DEFAULT NULL,
+
+  `col21` varchar(255) DEFAULT NULL,
+
+  `col22` varchar(255) DEFAULT NULL,
+
+  `col23` varchar(255) DEFAULT NULL,
+
+  `col24` varchar(255) DEFAULT NULL,
+
+  `col25` varchar(255) DEFAULT NULL,
+
+  `col26` varchar(255) DEFAULT NULL,
+
+  `col27` varchar(255) DEFAULT NULL,
+
+  `col28` varchar(255) DEFAULT NULL,
+
+  `col29` varchar(255) DEFAULT NULL,
+
+  `col30` varchar(255) DEFAULT NULL,
+
+  `col31` varchar(255) DEFAULT NULL,
+
+  `col32` varchar(255) DEFAULT NULL,
+
+  `col33` varchar(255) DEFAULT NULL,
+
+  `col34` varchar(255) DEFAULT NULL,
+
+  `col35` varchar(255) DEFAULT NULL,
+
+  `col36` varchar(255) DEFAULT NULL,
+
+  `col37` varchar(255) DEFAULT NULL,
+
+  `col38` varchar(255) DEFAULT NULL,
+
+  `col39` varchar(255) DEFAULT NULL,
+
+  `col40` varchar(255) DEFAULT NULL,
+
+  `col41` varchar(255) DEFAULT NULL,
+
+  `col42` varchar(255) DEFAULT NULL,
+
+  `col43` varchar(255) DEFAULT NULL,
+
+  `col44` varchar(255) DEFAULT NULL,
+
+  `col45` varchar(255) DEFAULT NULL,
+
+  `col46` varchar(255) DEFAULT NULL,
+
+  `col47` varchar(255) DEFAULT NULL,
+
+  `col48` varchar(255) DEFAULT NULL,
+
+  `col49` varchar(255) DEFAULT NULL,
+
+  `col50` varchar(255) DEFAULT NULL,
+
+  PRIMARY KEY (`sgeDetailID`),
+
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Bhushan Chitte 17th April 2017
+#updating cntype for existing credit note which are created backendly while creating salesreturn.  
+UPDATE creditnote cn  inner join jedetail jed on cn.centry=jed.id set cn.cntype=2,cn.autogen='F',cn.account=jed.account where cn.salesreturn is not null  and cn.account is null;
+
+#Vinod Gharge 18th April 2017
+INSERT INTO helpedit (id,modulename,compname,modeid,title,descp,compid)
+VALUES(1116,  'Security Gate Entry' , 'Expandable Icon (Plus Sign) on each row' , 1116, 'Expandable Icon (Plus Sign) on each row','Click on icon to get the product information related to its name, rate, quantity, discount, and amount.','gridmsg17securityGateListEntry') ,
+    (1117 , 'Security Gate Entry' , 'Quick Search' , 1116, 'Quick Search', 'Search through Security Gate Entries easily from Quick search, which allows you to filter results as soon as you type them.','quickSearch17securityGateListEntry'),
+    (1118, 'Security Gate Entry' , 'Export Reports' , 1116, 'Export Reports', 'Export reports in convenient formats. You can easily customize the export format by defining templates. Furthermore, only selected single invoice/sales receipt can also be exported.' , 'exportReports17PurchaseOrderListEntry');
+
+#Nitesh Kumar 18th April 2017
+# Cost Center  Field in Customer Invoice module
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,isdefaultfieldmappings,isdataindex,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('1c906f5f-04c2-461c-ac71-87c3ebcc2102','Cost Center','journalentry','invoice','journalentry','id','id','Cost Center','4','2',1,0,'F','F','T');
+# Mapping for Cost Center and JE For Cost Center Field in Customer  Invoice Module
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk,reftabledatacolumn,dummyvalue,xtype,module,islineitem,isdocumentimport,iscustomreport) 
+VALUES ('1c906f5f-04c2-461c-ac71-87c3ebcc2103','Cost Center and JEMapping','costcenter','journalentry','costcenter','id','name','Cost Center and JEMapping','4','2','F','F','F');
+insert into customreportsdefaultfieldsmapping (id,defaultfieldid,defaultheaderid,isselectdataindex) VALUES('96ba5d5e-ebe4-487d-90b7-36cb687af3ec','1c906f5f-04c2-461c-ac71-87c3ebcc2102','1c906f5f-04c2-461c-ac71-87c3ebcc2103',1);
+
+#Vaibhav Patil 18th April 2017
+ALTER TABLE brdetailhistory MODIFY COLUMN accountname VARCHAR(1000);
+
+#Deepak Singh 19th April 2017
+delete from reportmaster where id in('Outstanding_SO' , 'Outstanding_PO');
+insert into reportmaster(id,name,description,method_name) values("Outstanding_SO","Outstanding Sales Order","View Outstanding Sales Order","callSalesOrderList(undefined,true,true,undefined,undefined,undefined, undefined,undefined,undefined,true)");
+insert into reportmaster(id,name,description,method_name) values("Outstanding_PO","Outstanding Purchase Order","View Outstanding Purchase Order","callPurchaseOrderList(undefined,true,true,undefined,'Outstanding Purchase Order',undefined, undefined,undefined,true)");
+
+#Ajay Motwani 19th April 2017
+update  default_header set  submoduleflag='0' where id='a9f69dcc-8760-11e3-b0c3-080027580062';
+
+#Ajit Gogawale 19th April,2017
+alter table mailnotification add column mailtocontactperson char(1) default 0;
+
+#Pandurang 19th April 2017
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("c71bbf57-24cb-11e7-b087-14dda97926e5","91","Activate Batch","Activate Batch",0,0,'F','F',null,null,null,"boolean",'F',"Activate Batch",null);
+INSERT INTO default_header(id,module,defaultHeader,pojomethodname,flag,maxlength,ismandatory,hbmnotnull,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,validatetype,defaultvalue,dataindex,renderertype) VALUES ("c7eeb121-24cb-11e7-b087-14dda97926e5","91","Activate Serial No","Activate Serial No",0,0,'F','F',null,null,null,"boolean",'F',"Activate Serial No",null);
+
+delete from samplefiledata where id = '4707c542-dfe2-11e5-8ada-c03fd5632e9b';
+
+INSERT INTO `samplefiledata` (`id`, `header_json`, `filedata_json`, `modulename`, `samplefilename`, `version`, `issamplefile`) VALUES ('4707c542-dfe2-11e5-8ada-c03fd5632e9b', '[{\"title\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Initial Quantity,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),BOM Product ID*,BOM Quantity*,BOM Percentage (%),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse\"},{\"header\":\"Product ID*,Product Name*,Product Type*,Product Description,Product Weight,Initial Quantity,Purchase Account*,Purchase Return Account*,Sales Account*,Sales Return Account*,Stock UOM*,Sales Price,Lead Time(in days),Warranty(Days),BOM Product ID*,BOM Quantity*,BOM Percentage (%),Activate Warehouse,Activate Location,Activate Batch,Activate Serial,Default Location,Default Warehouse\"},{\"align\":\"none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none,none\"}]', '[{\"Product ID*\":\"PID000A1\",\"Product Name*\":\"ABC\",\"Product Type*\":\"Inventory Assembly\",\"Product Description\":\"Sample Product\",\"Product Weight\":60,\"Initial Quantity\":0,\"Purchase Account*\":\"AAA11\",\"Purchase Return Account*\":\"AAA11\",\"Sales Account*\":\"Demo\",\"Sales Return Account*\":\"Demo\",\"Stock UOM*\":\"Pcs\",\"Sales Price\":250,\"Lead Time(in days)\":0,\"Warranty(Days)\":0,\"BOM Product ID*\":\"PROID76\",\"BOM Quantity*\":0.2,\"BOM Percentage (%)\":50,\"Activate Warehouse\":\"T\",\"Activate Location\":\"T\",\"Activate Batch\":\"T\",\"Activate Serial\":\"T\",\"Default Location\":\"Default Location\",\"Default Warehouse\":\"DS\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"},{\"Product ID*\":\"\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"},{\"Product ID*\":\"Note:\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Activate Batch\":\"\",\"Activate Serial\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"},{\"Product ID*\":\"1. Currency of imported Assembly Product is Company Base Currency.\",\"Product Name*\":\"\",\"Product Type*\":\"\",\"Product Description\":\"\",\"Product Weight\":\"\",\"Initial Quantity\":\"\",\"Purchase Account*\":\"\",\"Purchase Return Account*\":\"\",\"Sales Account*\":\"\",\"Sales Return Account*\":\"\",\"Stock UOM*\":\"\",\"Sales Price\":\"\",\"Lead Time(in days)\":\"\",\"Warranty(Days)\":\"\",\"BOM Product ID*\":\"\",\"BOM Quantity*\":\"\",\"BOM Percentage (%)\":\"\",\"Activate Warehouse\":\"\",\"Activate Location\":\"\",\"Default Location\":\"\",\"Default Warehouse\":\"\"}]', 'Assembly Product', 'sample_assembly_product', '_v4', 'T');
+
+#Nitesh Kumar 20th April 2017
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname,dbtabletame, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module,allowimport,islineitem,isdocumentimport,iscustomreport,isdefaultfieldmappings)
+VALUES ('bd265ea3-eb86-471f-a6ee-3544db1471b25','Amount Excluding GST','id','jedetail','jedetail','journalEntry','amount','Amount Excluding GST','2','12',0,'T','F','T','1');
+
+INSERT INTO `customreportsdefaultfieldsmapping`(`id`,`defaultfieldid`,`defaultheaderid`,`isSelectDataIndex`)
+VALUES
+('28c17c68-242f-11e7-82a7-14dda9792912','bd265ea3-eb86-471f-a6ee-3544db1471b25','3406a4eb-9ce3-4cac-8751-23624e0e815c','0');
+
+INSERT INTO `customreportsdefaultfieldsmapping`(`id`,`defaultfieldid`,`defaultheaderid`,`isSelectDataIndex`)
+VALUES
+('28c17c68-242f-11e7-82a7-14dda9792913','bd265ea3-eb86-471f-a6ee-3544db1471b25','3406a4eb-9ce3-4cac-8751-23624e0e815f','0');
+
+INSERT INTO `customreportsdefaultfieldsmapping`(`id`,`defaultfieldid`,`defaultheaderid`,`isSelectDataIndex`)
+VALUES
+('28c17c68-242f-11e7-82a7-14dda9792914','bd265ea3-eb86-471f-a6ee-3544db1471b25','3406a4eb-9ce3-4cac-8751-23624e0e815d','0');
+
+INSERT INTO `customreportsdefaultfieldsmapping`(`id`,`defaultfieldid`,`defaultheaderid`,`isSelectDataIndex`)
+VALUES
+('28c17c68-242f-11e7-82a7-14dda9792915','bd265ea3-eb86-471f-a6ee-3544db1471b25','3406a4eb-9ce3-4cac-8751-23624e0e815g','0');
+#Basaprabhu Ajur 2017-04-20
+ALTER TABLE `mailnotification` ADD COLUMN `senderid`  varchar(150) NULL DEFAULT NULL ;
+
+#Ajay Motwani 20th April 2017
+INSERT INTO default_header (id,defaultHeader,pojomethodname,validatetype,refmodule_pojoclassname,refdatacolumn_hbmname,reffetchcolumn_hbmname,module,dataindex,
+isdocumentimport,ismandatory,submoduleflag)VALUES('fa7acf7b-f8ee-11e6-858e-14dda97928d6','Vendor Code','Acccode','ref','Vendor','acccode','ID','14','acccode','T','T',2);
+
+#Ganesh Karale 21st April 2017
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('3eba4bc8-2337-11e7-96f7-14dda9792823', 'Build Reference Number', 'refno', 'productbuild', '', '', '', '1', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('6af8e0fe-2338-11e7-96f7-14dda9792823', 'Build Date', 'entrydate', 'productbuild', '', '', '', '3', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('0cd8c434-2339-11e7-96f7-14dda9792823', 'Memo', 'memo', 'productbuild', '', '', '', '13', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('5704e236-2339-11e7-96f7-14dda9792823', 'Description', 'description', 'productbuild','', '', '', '13', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('df72c5d0-2338-11e7-96f7-14dda9792823', 'Quantity Build', 'quantity', 'productbuild', '', '', '', '2', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('c488c00c-2334-11e7-96f7-14dda9792823', 'Assembly Product', 'product', 'product', 'id', 'productid', '', '1', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('bb6a3696-233d-11e7-96f7-14dda9792823', 'BOM Code', 'bomdetail', 'bomdetail', 'id', 'bomcode', '', '1', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('03ff9bbe-235a-11e7-9aaf-14dda9792823', 'BOM Name', 'bomdetail', 'bomdetail', 'id', 'bomname', '', '1', '133', 'T');
+
+INSERT INTO default_header (id, defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue, xtype, module, allowindocumentdesigner)
+VALUES('314c419c-24e7-11e7-bf9c-14dda9792823', 'Cost To build', 'productcost', 'productbuild', '', '', '', '2', '133', 'T');
+
+#Kapil Bhusari 21st April 2017
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('a1a87e78-e844-4cee-84e3-695351767180','supplierinvoiceno','Supplier Invoice No',28,1,0,1,0,0,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,isreportfield,ismanadatoryfield,isusermanadatoryfield) 
+VALUES ('900f9ee6-d046-4b30-856a-d6d0147c2356','supplierinvoiceno','Supplier Invoice No',6,1,0,1,0,0,0);
+
+#Santosh Belote 25th April 2017
+ALTER TABLE cndetailsgst ADD COLUMN jedid VARCHAR(40);
+ALTER TABLE dndetailsgst ADD COLUMN jedid VARCHAR(40);
+
+#Ajay Motwani 26th April 2017
+ALTER TABLE repeatedinvoices ADD advancenoofdays int(3) DEFAULT 0;
+ALTER TABLE repeatedinvoices ADD invoiceadvancecreationdate date DEFAULT NULL;
+update repeatedinvoices set invoiceadvancecreationdate=nextdate;
+
+#Ajay Motwani 26th April 2017
+ALTER TABLE `debitnote` ADD COLUMN `salesperson` varchar(40) DEFAULT NULL;
+ALTER TABLE debitnote add FOREIGN KEY (salesperson) REFERENCES masteritem(id);
+
+#Neeraj Dwivedi 27th April 2017
+CREATE TABLE `cashdenomination` (
+  `id` varchar(36) NOT NULL,
+  `locationid` varchar(36) NOT NULL,
+  `currencydenomination` int(10),
+  `currency` varchar(36) DEFAULT NULL,
+  `company` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `companyregister` (
+  `id` varchar(255) NOT NULL,
+  `isopen` tinyint(1) DEFAULT 0,
+  `company` varchar(255) NOT NULL,
+  `userid` varchar(255) NOT NULL,
+  `locationid` varchar(255) NOT NULL,
+  `currencydenominationsjson`  LONGTEXT NULL DEFAULT NULL ,
+  `transactiondate` DATE NOT NULL,
+  `openingamount` double NOT NULL DEFAULT 0.0,
+  `previousclosedbalance` double NOT NULL DEFAULT 0.0 ,
+  `finalopeningamount` double NOT NULL DEFAULT 0.0,
+  `addedamount` double NOT NULL DEFAULT 0.0,
+  `bycash` double NOT NULL DEFAULT 0.0,
+  `bycheque` double NOT NULL DEFAULT 0.0,
+  `bycard` double NOT NULL DEFAULT 0.0,
+  `bygiftcard` double NOT NULL DEFAULT 0.0,
+  `variance` double NOT NULL DEFAULT 0.0, 
+  `closingamount` double NOT NULL DEFAULT 0.0,
+  `depositedamount` double NOT NULL DEFAULT 0.0,
+  `finalamount` double NOT NULL DEFAULT 0.0,
+  `cashoutamount` double NOT NULL DEFAULT 0.0,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+FOREIGN KEY (`userid`) REFERENCES `users` (`userid`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#Vaibhav Patil 26th April 2017
+ALTER TABLE brdetailhistory CHANGE COLUMN `billid` `transactionnumber` VARCHAR(255);
+ALTER TABLE brdetailhistory ADD COLUMN transactionnumberdummy VARCHAR(255);
+UPDATE brdetailhistory SET transactionnumberdummy=transactionid;
+UPDATE brdetailhistory SET transactionid=transactionnumber;
+UPDATE brdetailhistory SET transactionnumber=transactionnumberdummy;
+ALTER TABLE brdetailhistory DROP COLUMN transactionnumberdummy;
+
+#Ganesh Karale 28th April 2017
+CREATE TABLE customreportcharts (
+    id varchar(50),
+    reportid varchar(50),
+    name varchar (255) NOT NULL,
+    type varchar(255) ,
+    titlefield text  DEFAULT NULL,
+    valuefield text  DEFAULT NULL,
+    groupby varchar(255) ,
+    properties text  DEFAULT NULL,
+    createdby varchar(50),
+    createdon BIGINT,
+    modifiedby varchar(50),
+    modifiedon BIGINT,
+    companyid varchar(50) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (`reportid`) REFERENCES reportmaster (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (`companyid`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

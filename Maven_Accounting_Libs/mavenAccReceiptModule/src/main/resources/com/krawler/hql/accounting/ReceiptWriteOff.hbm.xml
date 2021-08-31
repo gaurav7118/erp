@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ReceiptWriteOff" table="receiptwriteoff">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="writtenOffAmountInReceiptCurrency" type="double">
+            <column  name="writtenoffamountinreceiptcurrency"/>
+        </property>
+        <property name="writtenOffAmountInBaseCurrency" type="double">
+            <column  name="writtenoffamountinbasecurrency"/>
+        </property>
+        <property name="writeOffDate" type="date">
+            <column name="writeoffdate" not-null="true"/>
+        </property>
+        <property name="memo" type="string">
+            <column length="2048" name="memo"/>
+        </property>
+        <property name="isRecovered" type="boolean">
+            <column name="isrecovered"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.Receipt" name="receipt" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="journalentry" name="journalEntry" unique="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntry" column="reversejournalentry" name="reversejournalEntry" unique="true"/>
+    </class>
+</hibernate-mapping>

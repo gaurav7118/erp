@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.UOBReceivingDetails" table="uobreceivingdetails">
+      
+      <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="receivingBankAccountNumber" type="string">
+            <column length="255" name="receivingbankaccountnumber"/>
+        </property>
+        <property name="receivingAccountName" type="string">
+            <column length="255" name="receivingaccountname"/>
+        </property>
+        <property name="receivingBICCode" type="string">
+            <column length="255" name="receivingbiccode"/>
+        </property>
+        <property name="endToEndId" type="string">
+            <column length="255" name="endtoendid"/>
+        </property>
+        <property name="mandateId" type="string">
+            <column length="255" name="mandateid"/>
+        </property>
+        <property name="purposeCode" type="string">
+            <column length="255" name="purposecode"/>
+        </property>
+        <property name="ultimatePayerOrBeneficiaryName" type="string">
+            <column length="255" name="ultimatepayerorbeneficiaryname"/>
+        </property>
+        <property name="customerReference" type="string">
+            <column length="255" name="customerreference"/>
+        </property>
+        <property name="currencyCode" type="string">
+            <column length="255" name="currencycode"/>
+        </property>
+        <property name="receivingBranchCode" type="string">
+            <column length="255" name="receivingbranchcode"/>
+        </property>
+        <property name="receivingBankCode" type="string">
+            <column length="255" name="receivingbankcode"/>
+        </property>
+        <property name="activated" type="true_false">
+            <column name="activated" not-null="true"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="customerBankAccountType" column="customerbankaccounttype"/>
+        <many-to-one class="com.krawler.hql.accounting.Customer" name="customer" column="customer"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" column = "company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" name="bankName" column="bankname"/>
+  </class>
+</hibernate-mapping>

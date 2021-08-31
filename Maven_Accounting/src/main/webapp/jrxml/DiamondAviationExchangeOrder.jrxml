@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SenwanGroupCustomerQuotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000012"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table"/>
+	<style name="table_CH">
+		<pen lineWidth="0.75" lineColor="#B9B9B9"/>
+		<box>
+			<topPen lineWidth="0.75" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.75" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" forecolor="#010101" backcolor="#FEFEFE"/>
+	<style name="table_TH"/>
+	<subDataset name="Table Dataset 1">
+		<field name="code" class="java.lang.String"/>
+		<field name="desc" class="java.lang.String"/>
+		<field name="custom1" class="java.lang.String"/>
+		<field name="custom2" class="java.lang.String"/>
+		<field name="custom6" class="java.lang.String"/>
+		<field name="qty" class="java.lang.String"/>
+		<field name="rate" class="java.lang.String"/>
+		<field name="total" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="TableData" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="IMAGEPATH" class="java.lang.String"/>
+	<parameter name="TITLE" class="java.lang.String"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="COMPANY_GST_REG_NO" class="java.lang.String"/>
+	<parameter name="VENDOR_NAME" class="java.lang.String"/>
+	<parameter name="VENDOR_CODE" class="java.lang.String"/>
+	<parameter name="VENDOR_ADDRESS" class="java.lang.String"/>
+	<parameter name="PAYMENT_TERMS" class="java.lang.String"/>
+	<parameter name="SUBTOTAL" class="java.lang.String"/>
+	<parameter name="GST_AMOUNT" class="java.lang.String"/>
+	<parameter name="GST_PERCENT" class="java.lang.String"/>
+	<parameter name="TOTAL_AMOUNT" class="java.lang.String"/>
+	<parameter name="SHIPVIA" class="java.lang.String"/>
+	<parameter name="VENDOR_BILLING_ADDRESS" class="java.lang.String"/>
+	<parameter name="PERSON_ADDRESS" class="java.lang.String"/>
+	<parameter name="COMPANY_BILLTO_ADDRESS" class="java.lang.String"/>
+	<parameter name="VENDOR_ADDRESS_SHIPTO" class="java.lang.String"/>
+	<field name="date" class="java.lang.String"/>
+	<pageHeader>
+		<band height="102">
+			<image onErrorType="Blank">
+				<reportElement x="12" y="31" width="261" height="68"/>
+				<imageExpression><![CDATA[$P{IMAGEPATH}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="304" y="19" width="242" height="19"/>
+				<textElement textAlignment="Right">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TITLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="82" width="86" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Date
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="82" width="4" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="441" y="82" width="105" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="82">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="29" y="5" width="226" height="77" forecolor="#010101"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{COMPANY_BILLTO_ADDRESS} ]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="0" width="86" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[GST Reg No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="0" width="4" height="14"/>
+				<textElement>
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="441" y="0" width="105" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_GST_REG_NO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="19" width="105" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SHIPVIA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="348" y="19" width="86" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Shipping
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="19" width="4" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="57" width="86" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Terms]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="441" y="57" width="105" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PAYMENT_TERMS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="436" y="57" width="4" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="38" width="86" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Vendor Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="38" width="4" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="441" y="38" width="105" height="14"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VENDOR_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="87">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="29" y="16" width="226" height="71" forecolor="#010101"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VENDOR_NAME}+"\n"+$P{VENDOR_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="0" width="186" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[INVOICE TO :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="318" y="16" width="230" height="71" forecolor="#010101"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{VENDOR_ADDRESS_SHIPTO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="318" y="0" width="186" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[SHIP TO :]]></text>
+			</staticText>
+		</band>
+		<band height="50">
+			<componentElement>
+				<reportElement key="table" x="8" y="6" width="540" height="19"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TableData}.getData())]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="84">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<topPen lineColor="#BCBABA"/>
+								<leftPen lineColor="#BCBABA"/>
+								<bottomPen lineColor="#BCBABA"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="84" height="23"/>
+								<box leftPadding="3" bottomPadding="1">
+									<topPen lineWidth="0.75" lineColor="#B9B9B9"/>
+									<leftPen lineWidth="0.75" lineColor="#B9B9B9"/>
+									<bottomPen lineWidth="0.75" lineColor="#B9B9B9"/>
+								</box>
+								<textElement verticalAlignment="Bottom">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Part Number]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="84" height="20"/>
+								<box leftPadding="3"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{code}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="175">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="175" height="23"/>
+								<box bottomPadding="1">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+								</box>
+								<textElement verticalAlignment="Bottom" markup="html">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Description]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="175" height="20"/>
+								<textElement>
+									<font fontName="Arial Unicode MS" size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{desc}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="41" height="23"/>
+								<box bottomPadding="1">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+								</box>
+								<textElement verticalAlignment="Bottom">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[TAT]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="41" height="20"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{custom6}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="42">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="42" height="23"/>
+								<box bottomPadding="1">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+								</box>
+								<textElement verticalAlignment="Bottom">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Serial
+Number
+]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="42" height="20"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{custom1}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="34">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="34" height="23"/>
+								<box bottomPadding="1">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+								</box>
+								<textElement verticalAlignment="Bottom" markup="html">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Aft-Cond]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="34" height="20"/>
+								<textElement>
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{custom2}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="39">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="39" height="23"/>
+								<box rightPadding="5">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Bottom">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Qty]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="39" height="20"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{qty}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="57">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="57" height="23"/>
+								<box bottomPadding="1" rightPadding="5">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Bottom">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Unit Price]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="57" height="20"/>
+								<box rightPadding="5"/>
+								<textElement textAlignment="Right">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{rate}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69">
+						<jr:columnHeader height="31" rowSpan="1">
+							<box>
+								<leftPen lineWidth="0.0"/>
+							</box>
+							<staticText>
+								<reportElement style="table_CH" x="0" y="0" width="69" height="23"/>
+								<box bottomPadding="1" rightPadding="10">
+									<topPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+									<rightPen lineWidth="0.75" lineColor="#B9B9B9"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Bottom">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Extension]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="69" height="20"/>
+								<box rightPadding="10"/>
+								<textElement textAlignment="Right">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{total}+""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="252">
+			<rectangle>
+				<reportElement x="8" y="0" width="541" height="239"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#B9B9B9"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="382" y="0" width="167" height="91"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#B9B9B9"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="377" y="30" width="68" height="16" isPrintWhenDetailOverflows="true"/>
+				<box rightPadding="0"/>
+				<textElement textAlignment="Right" verticalAlignment="Top" markup="html">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["GST"+$P{GST_PERCENT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="447" y="30" width="5" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="14" width="68" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Subtotal
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="447" y="14" width="5" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="447" y="14" width="102" height="16"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="30" width="102" height="16"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GST_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="447" y="57" width="5" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="57" width="68" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Total Owed
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="447" y="57" width="102" height="16"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TOTAL_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="5" width="554" height="235"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="6"/>
+				</textElement>
+				<text><![CDATA[1) Buyer agrees to pay the FIXED PRICE”, plus all transportation (including customs fees and charges) whether or not
+customer used Exchange Unit. Fixed Exchange pricing shall include OEM CMM/OHM repairs. Out-of-scope repairs
+and Major Components shall be considered over-and-above and payable at Time and Materials (T&M). Out-of-Scope
+repairs shall be defined as those repairs and/or parts not called out in the OEM OHM/CMM.
+
+2) Buyer must deliver a Core-Unit to DA’s place of business within seven (7) calendar days of shipment of Exchange
+Unit. Units not returned within seven (7) calendar days are subject to an additional leasing charge of 0.5% of the
+outright sale price per day. Units not returned within thirty (30) calendar days shall be invoiced at the full outright
+purchase price specified in this agreement. Please retain proof of shipment information in order to validate shipping
+dates should this be required. Returned units must be repairable and must be the same part number, dash number,
+and modification status as the Exchanged Unit. Improperly returned units will be returned to the customer at
+customer’s expense.
+
+3) Return Units must be accompanied by the following certification documents:
+a) “Unserviceable” tags, containing “Reason for Removal” information, serial and registration number from the aircraft this component was removed from. The documentation
+required is to establish viable trace.
+b) Valid hours and cycles information and Notice of Incident Statement.
+c) Life LImited Parts are to be declared and full trace and Back to Birth Information will be required.
+
+4) Unless otherwise agreed, missing parts, mishandled or broken parts, Part Number upgrades as well as Service Bulletins and Airworthiness Directives are not included in this
+contract. DA charges actual costs plus 15% (fifteen percent) handling fees for the above mentioned situations.
+
+5) If Buyer's Exchange Unit is determined to be un-repairable or use-restricted per the OEM/OHM or is not the same part number or higher equivalent as the Exchange Unit
+supplied per this agreement, or a suitable alternate authorized by DA in advance and in writing, the buyer will have the choice of:
+a) Supplying additional exchange core unit within seven (7) calendar days of Buyer’s notification of requirement
+c) Purchasing the Advance Exchange unit supplied by DA at the outright purchase price listed above.
+
+6) Should Buyer's core unit be deemed un-repairable, DA shall provide Buyer with offer to purchase the unit as "Unserviceable" or produce Scrap Documents to the Buyer.
+
+7) Customer shall pay all evaluation charges incurred to their un-repairable or wrong part number unit. If DA’s unit is purchased outright, these evaluation charges will be voided.
+
+8) Seller does not provide any Express or Implied warranty on parts and will not be responsible for consequential damages of any form related to and from use of Part on Engine
+or Aircraft.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

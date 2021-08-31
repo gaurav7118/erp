@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.LandingCostDetailMapping" table="landingcostdetailmapping">
+    <id column="id" name="ID">
+      <generator class="uuid"/>
+    </id>
+    <property name="amount" type="double">
+      <column name="amount" not-null="true"/>
+    </property>
+    <many-to-one class="com.krawler.hql.accounting.GoodsReceiptDetail" column="grdetailid" name="goodsReceiptDetail" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" column="expenseinvoiceid" name="expenseInvoice" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="inventoryjedid" name="inventoryJED"/>
+    <many-to-one class="com.krawler.common.admin.LandingCostCategory" column="landingcostcategory" name="landingCostCategory"/>
+  </class>
+</hibernate-mapping>

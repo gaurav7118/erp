@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.ExciseDetailsInvoice" table="exciseInvoicedetails">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="supplier" type="string">
+            <column name="supplier" default=""/>
+        </property>
+        <property name="supplierTINSalesTaxNo" type="string">
+            <column name="suppliertinsalestaxno" default=""/>
+        </property>
+        <property name="supplierExciseRegnNo" type="string">
+            <column name="supplierexciseregnno" default=""/>
+        </property>
+        <property name="cstnumber" type="string">
+            <column name="cstnumber" default=""/>
+        </property>
+        <property name="supplierRange" type="string">
+            <column name="supplierrange" default=""/>
+        </property>
+        <property name="supplierCommissioneRate" type="string">
+            <column name="suppliercommissionerate" default=""/>
+        </property>
+        <property name="supplierAddress" type="string">
+            <column name="supplieraddress" default=""/>
+        </property>
+            <property name="supplierImporterExporterCode" type="string">
+            <column name="supplierimporterexportercode" default=""/>
+        </property>
+        <property name="supplierDivision" type="string">
+            <column name="supplierdivision" default=""/>
+        </property>
+        <property name="manufacturerName" type="string">
+            <column name="manufacturername" default=""/>
+        </property>
+        <property name="manufacturerExciseregnNo" type="string">
+            <column name="manufacturerexciseregnno" default=""/>
+        </property>
+        <property name="manufacturerRange" type="string">
+            <column name="manufacturerrange" default=""/>
+        </property>
+        <property name="manufacturerCommissionerate" type="string">
+            <column name="manufacturercommissionerate" default=""/>
+        </property>
+        <property name="manufacturerDivision" type="string">
+            <column name="manufacturerdivision" default=""/>
+        </property>
+        <property name="manufacturerAddress" type="string">
+            <column name="manufactureraddress" default=""/>
+        </property>    
+        <property name="manufacturerImporterexporterCode" type="string">
+            <column name="manufacturerimporterexportercode" default=""/>
+        </property>
+        <property name="registrationType" type="string">
+            <column name="registrationtype" default=""/>
+        </property>       
+        <property name="unitname" type="string">
+            <column name="unitname" default=""/>
+        </property>       
+        <property name="ECCNo" type="string">
+            <column name="eccnumber" default=""/>
+        </property>    
+        <property name="supplierstate" type="string">
+            <column name="supplierstate" default=""/>
+        </property>    
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" column="goodsreceipt" name="goodsreceipt"/>
+    </class>
+</hibernate-mapping>

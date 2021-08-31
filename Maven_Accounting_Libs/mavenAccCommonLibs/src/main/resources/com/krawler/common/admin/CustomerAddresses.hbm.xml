@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.CustomerAddresses" table="customeraddresses">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="billingAddress1" type="string">
+            <column length="1024" name="billingAddress1"/>
+        </property> 
+        <property name="billingAddress2" type="string">
+            <column length="1024" name="billingAddress2"/>
+        </property> 
+        <property name="billingAddress3" type="string">
+            <column length="1024" name="billingAddress3"/>
+        </property> 
+        <property name="billingCity1" type="string">
+            <column length="255" name="billingCity1"/>
+        </property> 
+        <property name="billingCity2" type="string">
+            <column length="255" name="billingCity2"/>
+        </property> 
+        <property name="billingCity3" type="string">
+            <column length="255" name="billingCity3"/>
+        </property> 
+        <property name="billingContactNumber1" type="string">
+            <column length="255" name="billingContactNumber1"/>
+        </property> 
+        <property name="billingContactNumber2" type="string">
+            <column length="255" name="billingContactNumber2"/>
+        </property> 
+        <property name="billingContactNumber3" type="string">
+            <column length="255" name="billingContactNumber3"/>
+        </property> 
+        <property name="billingContactDesignation1" type="string">
+            <column length="255" name="billingContactDesignation1"/>
+        </property> 
+        <property name="billingContactDesignation2" type="string">
+            <column length="255" name="billingContactDesignation2"/>
+        </property> 
+        <property name="billingContactDesignation3" type="string">
+            <column length="255" name="billingContactDesignation3"/>
+        </property> 
+        <property name="billingContactPerson1" type="string">
+            <column length="255" name="billingContactPerson1"/>
+        </property> 
+        <property name="billingContactPerson2" type="string">
+            <column length="255" name="billingContactPerson2"/>
+        </property> 
+        <property name="billingContactPerson3" type="string">
+            <column length="255" name="billingContactPerson3"/>
+        </property> 
+        <property name="billingCountry1" type="string">
+            <column length="255" name="billingCountry1"/>
+        </property> 
+        <property name="billingCountry2" type="string">
+            <column length="255" name="billingCountry2"/>
+        </property> 
+        <property name="billingCountry3" type="string">
+            <column length="255" name="billingCountry3"/>
+        </property> 
+        <property name="billingEmail1" type="string">
+            <column length="255" name="billingEmail1"/>
+        </property> 
+        <property name="billingEmail2" type="string">
+            <column length="255" name="billingEmail2"/>
+        </property> 
+        <property name="billingEmail3" type="string">
+            <column length="255" name="billingEmail3"/>
+        </property> 
+        <property name="billingFax1" type="string">
+            <column length="255" name="billingFax1"/>
+        </property> 
+        <property name="billingFax2" type="string">
+            <column length="255" name="billingFax2"/>
+        </property>
+        <property name="billingFax3" type="string">
+            <column length="255" name="billingFax3"/>
+        </property> 
+        <property name="billingMobile1" type="string">
+            <column length="255" name="billingMobile1"/>
+        </property> 
+        <property name="billingMobile2" type="string">
+            <column length="255" name="billingMobile2"/>
+        </property> 
+        <property name="billingMobile3" type="string">
+            <column length="255" name="billingMobile3"/>
+        </property> 
+        <property name="billingPhone1" type="string">
+            <column length="255" name="billingPhone1"/>
+        </property> 
+        <property name="billingPhone2" type="string">
+            <column length="255" name="billingPhone2"/>
+        </property> 
+        <property name="billingPhone3" type="string">
+            <column length="255" name="billingPhone3"/>
+        </property> 
+        <property name="billingPostal1" type="string">
+            <column length="255" name="billingPostal1"/>
+        </property> 
+        <property name="billingPostal2" type="string">
+            <column length="255" name="billingPostal2"/>
+        </property> 
+        <property name="billingPostal3" type="string">
+            <column length="255" name="billingPostal3"/>
+        </property> 
+        <property name="billingState1" type="string">
+            <column length="255" name="billingState1"/>
+        </property> 
+        <property name="billingState2" type="string">
+            <column length="255" name="billingState2"/>
+        </property> 
+        <property name="billingState3" type="string">
+            <column length="255" name="billingState3"/>
+        </property>
+        <property name="shippingAddress1" type="string">
+            <column length="1024" name="shippingAddress1"/>
+        </property>
+        <property name="shippingAddress2" type="string">
+            <column length="1024" name="shippingAddress2"/>
+        </property>
+        <property name="shippingAddress3" type="string">
+            <column length="1024" name="shippingAddress3"/>
+        </property>
+        <property name="shippingCity1" type="string">
+            <column length="255" name="shippingCity1"/>
+        </property>
+        <property name="shippingCity2" type="string">
+            <column length="255" name="shippingCity2"/>
+        </property>
+        <property name="shippingCity3" type="string">
+            <column length="255" name="shippingCity3"/>
+        </property>
+        <property name="shippingContactNumber1" type="string">
+            <column length="255" name="shippingContactNumber1"/>
+        </property>
+        <property name="shippingContactNumber2" type="string">
+            <column length="255" name="shippingContactNumber2"/>
+        </property>
+        <property name="shippingContactNumber3" type="string">
+            <column length="255" name="shippingContactNumber3"/>
+        </property>
+        <property name="shippingContactDesignation1" type="string">
+            <column length="255" name="shippingContactDesignation1"/>
+        </property>
+        <property name="shippingContactDesignation2" type="string">
+            <column length="255" name="shippingContactDesignation2"/>
+        </property>
+        <property name="shippingContactDesignation3" type="string">
+            <column length="255" name="shippingContactDesignation3"/>
+        </property>
+        <property name="shippingContactPerson1" type="string">
+            <column length="255" name="shippingContactPerson1"/>
+        </property>
+        <property name="shippingContactPerson2" type="string">
+            <column length="255" name="shippingContactPerson2"/>
+        </property>
+        <property name="shippingContactPerson3" type="string">
+            <column length="255" name="shippingContactPerson3"/>
+        </property>
+        <property name="shippingCountry1" type="string">
+            <column length="255" name="shippingCountry1"/>
+        </property>
+        <property name="shippingCountry2" type="string">
+            <column length="255" name="shippingCountry2"/>
+        </property>
+        <property name="shippingCountry3" type="string">
+            <column length="255" name="shippingCountry3"/>
+        </property>
+        <property name="shippingEmail1" type="string">
+            <column length="255" name="shippingEmail1"/>
+        </property>
+        <property name="shippingEmail2" type="string">
+            <column length="255" name="shippingEmail2"/>
+        </property>
+        <property name="shippingEmail3" type="string">
+            <column length="255" name="shippingEmail3"/>
+        </property>
+        <property name="shippingFax1" type="string">
+            <column length="255" name="shippingFax1"/>
+        </property>
+        <property name="shippingFax2" type="string">
+            <column length="255" name="shippingFax2"/>
+        </property>
+        <property name="shippingFax3" type="string">
+            <column length="255" name="shippingFax3"/>
+        </property>
+        <property name="shippingMobile1" type="string">
+            <column length="255" name="shippingMobile1"/>
+        </property>
+        <property name="shippingMobile2" type="string">
+            <column length="255" name="shippingMobile2"/>
+        </property>
+        <property name="shippingMobile3" type="string">
+            <column length="255" name="shippingMobile3"/>
+        </property>
+        <property name="shippingPhone1" type="string">
+            <column length="255" name="shippingPhone1"/>
+        </property>
+        <property name="shippingPhone2" type="string">
+            <column length="255" name="shippingPhone2"/>
+        </property>
+        <property name="shippingPhone3" type="string">
+            <column length="255" name="shippingPhone3"/>
+        </property>
+        <property name="shippingPostal1" type="string">
+            <column length="255" name="shippingPostal1"/>
+        </property>
+        <property name="shippingPostal2" type="string">
+            <column length="255" name="shippingPostal2"/>
+        </property>
+        <property name="shippingPostal3" type="string">
+            <column length="255" name="shippingPostal3"/>
+        </property>
+        <property name="shippingState1" type="string">
+            <column length="255" name="shippingState1"/>
+        </property>
+        <property name="shippingState2" type="string">
+            <column length="255" name="shippingState2"/>
+        </property>
+        <property name="shippingState3" type="string">
+            <column length="255" name="shippingState3"/>
+        </property>
+        <property name="shippingRoute1" type="string">
+            <column length="255" name="shippingRoute1"/>
+        </property>
+        <property name="shippingRoute2" type="string">
+            <column length="255" name="shippingRoute2"/>
+        </property>
+        <property name="shippingRoute3" type="string">
+            <column length="255" name="shippingRoute3"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.overrides.app.domain.Component",{override:"Ext.app.domain.Component",requires:["Ext.Component"]},function(A){A.monitor(Ext.Component)})

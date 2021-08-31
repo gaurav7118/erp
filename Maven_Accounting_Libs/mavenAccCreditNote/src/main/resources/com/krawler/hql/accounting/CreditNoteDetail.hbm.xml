@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.CreditNoteDetail" table="cndetails">
+        <id column="id" name="ID">
+            <generator class="assigned"/>
+        </id>
+        <property name="srno" type="integer">
+            <column name="srno" default="0"/>
+        </property>
+        <property name="memo" type="string">
+            <column length="2048" name="memo"/>
+        </property>
+        <property name="taxAmount" type="double">
+            <column name="taxamount" default='0'/>
+        </property>
+        <property name="totalDiscount" type="double">
+            <column name="totaldiscount" default='0'/>
+        </property>
+         <property name="amountToAdjust" type="double">
+            <column name="amounttoadjust" default='0'/>
+        </property>
+         <property name="taxAmountToAdjust" type="double">
+            <column name="taxamounttoadjust" default='0'/>
+        </property>
+         <property name="adjustedAmount" type="double">
+            <column name="adjustedamount" default='0'/>
+        </property>
+        <property name="quantity" type="double">
+            <column name="quantity" not-null="true"/>
+        </property>
+        <property name="paidinvflag" type="integer">
+            <column name="paidinvflag" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" />
+        </property>
+        <property name="invstoreid" type="string">
+            <column  name="invstoreid" default="" length="255"/>
+        </property>
+        <property name="invlocid" type="string">
+            <column  name="invlocid" default="" length="255"/>
+        </property>
+        <property name="linkedGainLossJE" type="string">
+            <column name="linkedgainlossje"/>
+        </property>
+        <property name="exchangeRateForTransaction" type="double">
+            <column name="exchangeratefortransaction" default="1"/>
+        </property>
+        <property name="invoiceLinkDate" type="date">
+            <column name="invoicelinkdate" default="1970-01-01"/>
+        </property>
+        <property name="revalJeId" type="string">
+            <column name="revaljeid"/> 
+        </property>
+        <property name="revalJeIdInvoice" type="string">
+            <column name="revaljeidinvoice"/>
+        </property>
+        <property name="debitNoteId" type="string">
+            <column name="debitnoteid"/>
+        </property>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Discount" name="discount" unique="true"/>
+        <many-to-one cascade="all" class="com.krawler.hql.accounting.Inventory" name="inventory" unique="true"/>
+        <many-to-one class="com.krawler.hql.accounting.InvoiceDetail" name="invoiceRow" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.Invoice" name="invoice" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceiptDetail" name="goodsReceiptRow" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.GoodsReceipt" column="goodsreceipt" name="goodsReceipt" not-null="false"/>
+        <many-to-one class="com.krawler.hql.accounting.CreditNote" name="creditNote" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="totaljedid" name="totalJED"/>
+        <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="gstjedid" name="gstJED"/>
+    </class>
+</hibernate-mapping>

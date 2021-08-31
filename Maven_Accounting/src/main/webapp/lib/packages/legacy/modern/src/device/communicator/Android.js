@@ -1,0 +1,1 @@
+Ext.define("Ext.device.communicator.Android",{extend:"Ext.device.communicator.Default",doSend:function(A){return window.Sencha.action(JSON.stringify(A))}})

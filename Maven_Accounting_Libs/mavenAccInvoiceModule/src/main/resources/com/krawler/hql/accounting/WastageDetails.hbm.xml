@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.WastageDetails" table="wastagedetails">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+        <property name="quantity" type="double">
+            <column name="quantity" not-null="true"/>
+        </property>
+        <property name="percentage" type="double">
+            <column name="percentage" />
+        </property>
+        <property name="actualQuantity" type="double">
+            <column name="actualquantity" />
+        </property>
+        <property name="wastageQuantityType" type="integer">
+            <column name="wastagequantitytype" default="0"/>
+        </property>
+        <property name="wastageQuantity" type="double">
+            <column name="wastagequantity" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product" not-null="true"/>
+        <many-to-one class="com.krawler.hql.accounting.DeliveryOrderDetail" column="deliveryorderdetail" name="deliveryOrderDetail" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.chart.axis.Numeric",{extend:"Ext.chart.axis.Axis",type:"numeric",alias:["axis.numeric","axis.radial"],requires:["Ext.chart.axis.layout.Continuous","Ext.chart.axis.segmenter.Numeric"],config:{layout:"continuous",segmenter:"numeric",aggregator:"double"}})

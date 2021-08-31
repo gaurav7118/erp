@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SupplierPriceList_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.464100000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CustomLabel1" class="java.lang.String"/>
+	<parameter name="CustomLabel2" class="java.lang.String"/>
+	<parameter name="CustomLabel3" class="java.lang.String"/>
+	<parameter name="CustVenCodeLabel" class="java.lang.String"/>
+	<field name="ITEMNO" class="java.lang.String"/>
+	<field name="SRNO" class="java.lang.Integer"/>
+	<field name="DESC" class="java.lang.String"/>
+	<field name="CURRENCY" class="java.lang.String"/>
+	<field name="PRICEINSTOCUOM" class="java.lang.String"/>
+	<field name="CUSTOM1" class="java.lang.String"/>
+	<field name="CUSTOM2" class="java.lang.String"/>
+	<field name="SUPPLIERNAME" class="java.lang.String"/>
+        <field name="custvendcode" class="java.lang.String"/>
+	<field name="productName" class="java.lang.String"/>
+	<field name="PriceType" class="java.lang.String"/>
+	<field name="PRICE" class="java.lang.String"/>
+	<field name="DATEMODIFIED" class="java.lang.String"/>
+	<columnHeader>
+		<band height="25">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="25" backcolor="#C0C0C0"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="56" y="5" width="52" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="109" y="5" width="64" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="5" width="57" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="5" width="44" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Currency]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="5" width="54" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price in Stock UOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="5" width="35" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Price]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="499" y="5" width="46" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date Modified]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="5" width="46" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product  ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="372" y="5" width="58" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CustomLabel3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="5" width="58" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CustVenCodeLabel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="5" y="0" width="49" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ITEMNO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="54" y="0" width="53" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="108" y="1" width="64" height="13"/>
+				<textElement>
+					<font fontName="Arial Unicode MS" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="173" y="1" width="47" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PriceType}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="220" y="1" width="44" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CURRENCY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="264" y="0" width="54" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRICEINSTOCUOM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="323" y="1" width="49" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="499" y="0" width="54" height="13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATEMODIFIED}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="371" y="1" width="65" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUPPLIERNAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="438" y="1" width="61" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{custvendcode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

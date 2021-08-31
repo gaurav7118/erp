@@ -1,0 +1,401 @@
+/*
+	Document   : ImportWizard
+	Created on : Sep 9, 2010, 3:59:37 PM
+	Author     : krawler
+	Description:
+		Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/*
+root {
+	display: block;
+}*/
+
+@charset "utf-8";
+
+/***** Global Settings *****/
+
+/*{
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+html,
+body {
+	margin: 0px;
+	padding: 0px;
+	border: 0;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+table,
+th,
+td,
+embed,
+object {
+	padding: 0;
+}
+body {
+	margin: 0;
+	margin-top: 50px;
+	margin-left: 50px;
+	padding: 0;
+	color: #4d4d4d;
+	font: 12px/1.25 Arial, Helvetica, sans-serif;
+	line-height: 18px;
+}*/
+
+.importIcon {
+	background: transparent url(../images/importWizard/import-tbar.gif) no-repeat scroll 0px -170px !important;
+}
+.x-progress-bar-default .x-progress-bar {
+	background: #9cbfee url(../lib/resources/images/default/progress/progress-bg.gif) repeat-x scroll left center !important;
+}
+.popup-info a {
+	color: #083772;
+	text-decoration: none;
+}
+.popup-info a:hover {
+	color: #445566;
+	text-decoration: underline;
+}
+/*.wapper {
+	float: left;
+	padding: 5px;
+	width: 786px;
+	border: 1px solid #99bbe8;
+}
+.top-nav-wapper {
+	float: left;
+	width: 100%;
+	font: 12px/1.25 Arial, Helvetica, sans-serif;
+}
+.nav-welcome {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e31a15 url(../images/importWizard/sprite_tag.jpg) no-repeat top right;
+}
+.nav-welcome p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #ffffff;
+	font-weight:bold;
+	font-size: 13px;
+	line-height: 15px;
+}
+.nav-welcome p span {
+	font-weight: normal;
+	font-size: 13px;
+}
+.nav-step1 {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #0071b9 url(../images/importWizard/sprite_tag.jpg) no-repeat right -40px;
+}
+.nav-step1 p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step1 p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step2 {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -80px;
+}
+.nav-step2 p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step2 p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step3 {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -80px;
+}
+.nav-step3 p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step3 p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step4 {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -80px;
+}
+.nav-step4 p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step4 p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step5 {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -80px;
+}
+.nav-step5 p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step5 p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step1-red {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e31a15 url(../images/importWizard/sprite_tag.jpg) no-repeat right 0px;
+}
+.nav-step1-red p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step1-red p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-welcome-default {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -120px;
+}
+.nav-welcome-default p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 15px;
+}
+.nav-welcome-default p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-welcome-def-gray {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -80px;
+}
+.nav-welcome-def-gray p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-welcome-def-gray p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step1-red-def {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -120px;
+}
+.nav-step1-red-def p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step1-red-def p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step1-def-gray {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e6e7eb url(../images/importWizard/sprite_tag.jpg) no-repeat right -80px;
+}
+.nav-step1-def-gray p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #979697;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step1-def-gray p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step2-blue {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #0071b9 url(../images/importWizard/sprite_tag.jpg) no-repeat right -40px;
+}
+.nav-step2-blue p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step2-blue p span {
+	font-weight: normal;
+	font-size: 12px;
+}
+.nav-step5-red {
+	float: left;
+	width: 12.5%;
+	height: 39px;
+	background: #e41a16 url(../images/importWizard/sprite_tag.jpg) no-repeat right -200px;
+}
+.nav-step5-red p {
+	margin: 5px 0 0 7px;
+	padding: 0;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 15px;
+	line-height: 15px;
+}
+.nav-step5-red p span {
+	font-weight: normal;
+	font-size: 12px;
+}*/
+
+.popup-info p {
+	padding: 0px;
+}
+.popup-info {
+	float: left;
+	padding-left: 5px;
+	width: 100%;
+	font: 12px/1.25 Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+.popup-info-padding-none {
+	float: left;
+	width: 100%;
+	font-size: 14px;
+}
+.blue-h2 {
+	margin-top: 22px;
+	color: #002d76;
+	font-weight: normal;
+	font-size: 20px;
+}
+.right-bullets {
+	float: left;
+	padding-top: 3px;
+	padding-bottom: 4px;
+	width: 100%;
+}
+.right-bullets span {
+	float: left;
+	padding: 0 0 0 6px;
+	width: 20px;
+	background: url(../images/importWizard/bullet.jpg) left top no-repeat;
+	color: #ffffff;
+	font-weight: bold;
+	line-height: 20px;
+}
+/*.alert-bullets {
+	padding: 12px 0 0 25px !important;
+	background: url(../images/importWizard/alert-bullet.jpg) left 13px no-repeat;
+}
+.blue-heading {
+	float: left;
+	margin-top: 10px;
+	width: 100%;
+	height: 30px;
+	background-color: #0071b9;
+}
+.right-blue-bullets {
+	float: left;
+	padding-top: 3px;
+	padding-bottom: 4px;
+	width: 100%;
+}
+.right-blue-bullets span {
+	float: left;
+	padding: 0 0 0 10px;
+	width: 21px;
+	background: url("../images/importWizard/white-bullate.jpg") no-repeat scroll 4px 2px transparent;
+	color: #0071B9;
+	font-weight: bold;
+	line-height: 24px;
+}
+.right-blue-bullets p {
+	float: left;
+	margin-top: 3px;
+	width: 96%;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 15px;
+}
+*/

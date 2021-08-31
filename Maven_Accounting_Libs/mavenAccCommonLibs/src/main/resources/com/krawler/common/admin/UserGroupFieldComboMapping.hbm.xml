@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.UserGroupFieldComboMapping" table="usergroupfieldcombomapping">
+        <id name="ID" type="string">
+            <column name="id"/>
+            <generator class="uuid"/>
+        </id>
+        <property name="colnum" type="int">
+            <column default="0" name="colnum"/>
+        </property>
+        <property name="moduleid" type="int">
+            <column default="0" name="moduleid"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.FieldComboData" column="fieldcombodata"  name="fieldComboData" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.UsersGroup" column="usersgroup" name="usersGroup" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company" not-null="true"/>
+    </class>
+</hibernate-mapping>

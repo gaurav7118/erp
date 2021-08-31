@@ -1,0 +1,153 @@
+.x-btn {
+	white-space: nowrap;
+	font: normal 11px tahoma, verdana, helvetica;
+	cursor: pointer;
+}
+.x-btn button {
+	overflow: visible;
+	margin: 0;
+	padding-right: 3px;
+	padding-left: 3px;
+	width: auto;
+	outline: 0 none;
+	border: 0 none;
+	background: transparent;
+	font: normal 11px tahoma, verdana, helvetica;
+	cursor: pointer;
+
+	-moz-outline: 0 none;
+}
+* html .wtf-ie .x-btn button {
+	width: 1px;
+}
+.wtf-gecko .x-btn button {
+	padding-right: 0;
+	padding-left: 0;
+}
+.wtf-ie .x-btn button {
+	padding-top: 2px;
+}
+/*
+ Predefined css class for buttons with only icon. Add this class (x-btn-icon) and a class with a background-image
+ to your button for a button with just an icon.
+ e.g.
+ .my-class .x-btn-text { background-image: url(foo.gif); }
+ */
+
+.x-btn-icon .x-btn-center .x-btn-text {
+	padding: 0;
+	width: 16px;
+	height: 16px;
+	background-position: center;
+	background-repeat: no-repeat;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.x-btn-icon .x-btn-center {
+	padding: 1px;
+}
+.x-btn em {
+	font-weight: normal;
+	font-style: normal;
+}
+/*
+ Button class for icon and text. Add this class (x-btn-text-icon) and a class with a background-image
+ to your button for both text and icon.
+*/
+
+.x-btn-text-icon .x-btn-center .x-btn-text {
+	padding-top: 3px;
+	padding-right: 0;
+	padding-bottom: 2px;
+	padding-left: 18px;
+	background-position: 0 2px;
+	background-repeat: no-repeat;
+}
+.x-btn-left,
+.x-btn-right {
+	font-size: 1px;
+	line-height: 1px;
+}
+.x-btn-left {
+	width: 3px;
+	height: 21px;
+	background: url(../images/default/button/btn-sprite.gif) no-repeat 0 0;
+}
+.x-btn-right {
+	width: 3px;
+	height: 21px;
+	background: url(../images/default/button/btn-sprite.gif) no-repeat 0 -21px;
+}
+.x-btn-left i,
+.x-btn-right i {
+	display: block;
+	overflow: hidden;
+	width: 3px;
+	font-size: 1px;
+	line-height: 1px;
+}
+.x-btn-center {
+	padding: 0 5px;
+	background: url(../images/default/button/btn-sprite.gif) repeat-x 0 -42px;
+	vertical-align: middle;
+	text-align: center;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.x-btn-over .x-btn-left {
+	background-position: 0 -63px;
+}
+.x-btn-over .x-btn-right {
+	background-position: 0 -84px;
+}
+.x-btn-over .x-btn-center {
+	background-position: 0 -105px;
+}
+.x-btn-click .x-btn-center,
+.x-btn-menu-active .x-btn-center {
+	background-position: 0 -126px;
+}
+.x-btn-disabled * {
+	color: gray !important;
+	cursor: default !important;
+}
+.x-btn-menu-text-wrap .x-btn-center {
+	padding: 0 3px;
+}
+.wtf-gecko .x-btn-menu-text-wrap .x-btn-center {
+	padding: 0 1px;
+}
+.x-btn-menu-arrow-wrap .x-btn-center {
+	padding: 0;
+}
+.x-btn-menu-arrow-wrap .x-btn-center button {
+	display: block;
+	padding: 0 !important;
+	width: 12px !important;
+	height: 21px;
+	background: transparent url(../images/default/button/btn-arrow.gif) no-repeat left 3px;
+}
+.x-btn-with-menu .x-btn-center {
+	padding-right: 2px !important;
+}
+.x-btn-with-menu .x-btn-center em {
+	display: block;
+	padding-right: 10px;
+	background: transparent url(../images/default/toolbar/btn-arrow.gif) no-repeat right 0;
+}
+.x-btn-text-icon .x-btn-with-menu .x-btn-center em {
+	display: block;
+	padding-right: 10px;
+	background: transparent url(../images/default/toolbar/btn-arrow.gif) no-repeat right 3px;
+}
+/* Toggle button styles */
+
+.x-btn-pressed .x-btn-left {
+	background: url(../images/default/button/btn-sprite.gif) no-repeat 0 -63px;
+}
+.x-btn-pressed .x-btn-right {
+	background: url(../images/default/button/btn-sprite.gif) no-repeat 0 -84px;
+}
+.x-btn-pressed .x-btn-center {
+	background: url(../images/default/button/btn-sprite.gif) repeat-x 0 -126px;
+}

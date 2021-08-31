@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BankReconscilation" pageWidth="595" pageHeight="842" columnWidth="455" leftMargin="70" rightMargin="70" topMargin="40" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="191"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FEFEFE">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<parameter name="SubReport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="SubReport2" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="TableDataWithTAX" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="TableDataWithoutTax" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="COMPANY_NAME" class="java.lang.String"/>
+	<parameter name="CUSTOMER_NAME" class="java.lang.String"/>
+	<parameter name="CUSTOMER_BILLTO_ADDRESS" class="java.lang.String"/>
+	<parameter name="ATTN" class="java.lang.String"/>
+	<parameter name="GST_REG_NUMBER" class="java.lang.String"/>
+	<parameter name="CUSTOMER_CODE" class="java.lang.String"/>
+	<parameter name="INVOICE_NUMBER" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/krawler/Desktop/FastenPO-SDP-138/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="IMAGEPATH" class="java.lang.String"/>
+	<parameter name="IMAGEPATH1" class="java.lang.String"/>
+	<parameter name="GST_AMOUNT_WITOUT_CURRENCY" class="java.lang.String"/>
+	<parameter name="GST_NAME" class="java.lang.String"/>
+	<parameter name="LINE_GST_NAME" class="java.lang.String"/>
+	<parameter name="LINE_TOTAl" class="java.lang.String"/>
+	<parameter name="TOTAL_AMOUNT_WITOUT_CURRENCY" class="java.lang.String"/>
+	<parameter name="parameter2" class="java.lang.String"/>
+	<parameter name="CURRENCY_CODE" class="java.lang.String"/>
+	<parameter name="SUBTOTAL_WITOUT_CURRENCY" class="java.lang.String"/>
+	<parameter name="HAS_GLOBAL_GST" class="java.lang.Boolean"/>
+	<parameter name="IS_NO_TOTAl" class="java.lang.Boolean"/>
+	<parameter name="isWithHeaderFooter" class="java.lang.Boolean"/>
+	<field name="date" class="java.lang.String"/>
+	<pageHeader>
+		<band height="251">
+			<staticText>
+				<reportElement x="0" y="98" width="324" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TAX INVOICE]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="2" y="167" width="208" height="44"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_NAME}+"\n"+$P{CUSTOMER_BILLTO_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="147" width="116" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{GST_REG_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="176" width="115" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{CUSTOMER_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="191" width="115" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{INVOICE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="216" width="115" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="294" y="-4" width="160" height="136">
+					<printWhenExpression><![CDATA[($P{isWithHeaderFooter})?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{IMAGEPATH}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="250" width="457" height="1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="252" y="147" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[GST Reg No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="176" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[File Ref.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="191" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[Invoice No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="216" width="75" height="15"/>
+				<textElement/>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="147" width="7" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="176" width="7" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="191" width="7" height="14"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="216" width="7" height="15"/>
+				<textElement/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="147" width="178" height="19"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRIVATE & CONFIDENTIAL]]></text>
+			</staticText>
+			<frame>
+				<reportElement positionType="FixRelativeToBottom" x="-1" y="231" width="452" height="17"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="74" y="1" width="378" height="15">
+						<printWhenExpression><![CDATA[!$P{ATTN}.equals("")]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="html"/>
+					<textFieldExpression><![CDATA[$P{ATTN}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="1" width="74" height="15">
+						<printWhenExpression><![CDATA[!$P{ATTN}.equals("")]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ATTENTION :]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="21">
+			<textField>
+				<reportElement x="259" y="1" width="182" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom" markup="html">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CURRENCY_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="28">
+			<subreport>
+				<reportElement x="0" y="0" width="455" height="28"/>
+				<subreportParameter name="GST_NAME">
+					<subreportParameterExpression><![CDATA[$P{LINE_GST_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LINE_TOTAl">
+					<subreportParameterExpression><![CDATA[$P{LINE_TOTAl}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TableDataWithTAX}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport2}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="30">
+			<subreport>
+				<reportElement x="-1" y="1" width="455" height="28"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{TableDataWithoutTax}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{SubReport}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<printWhenExpression><![CDATA[($P{HAS_GLOBAL_GST})?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="358" y="0" width="96" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{SUBTOTAL_WITOUT_CURRENCY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="244" y="0" width="97" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub-Total]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="358" y="20" width="96" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{GST_AMOUNT_WITOUT_CURRENCY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="19" width="101" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GST_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="21">
+			<printWhenExpression><![CDATA[(!$P{IS_NO_TOTAl})?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="359" y="1" width="96" height="20"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{TOTAL_AMOUNT_WITOUT_CURRENCY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="242" y="1" width="97" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="26">
+			<image onErrorType="Blank">
+				<reportElement x="-43" y="0" width="337" height="26">
+					<printWhenExpression><![CDATA[($P{isWithHeaderFooter})?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{IMAGEPATH1}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="224">
+			<textField>
+				<reportElement x="2" y="31" width="480" height="20"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["for <b>"+$P{COMPANY_NAME}.toUpperCase()+"</b>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="179" width="452" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E & O E]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="-43" y="198" width="337" height="26">
+					<printWhenExpression><![CDATA[($P{isWithHeaderFooter})?Boolean.TRUE:Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA[$P{IMAGEPATH1}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-1" y="31" width="242" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="93" width="313" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TERMS: UPON PRESENTATION OF INVOICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="117" width="100" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Account Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="126" width="100" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Account Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="135" width="100" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Bank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="144" width="100" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Swift/BIC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="126" width="109" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[9113452338]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="135" width="303" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[United Overseas Bank Limited Singapore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="144" width="109" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[UOVBSGSG]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="117" width="321" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{COMPANY_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="108" width="519" height="10"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Payment can be made via a local cheque in SGD currency or direct transfer to]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="117" width="11" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="126" width="11" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="135" width="11" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="144" width="11" height="10"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

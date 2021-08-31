@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.hql.accounting.SupplierExciseDetails" table="supplierexcisedetails">
+        <id name="id" column="id" type="string">
+            <generator class="uuid"/>
+        </id>
+        <property name="goodsReceiptDetailsId" type="string">
+            <column name="goodsreceiptdetailsId" default=""/>
+        </property>
+        <property name="utilizedQuantity" type="integer">
+            <column name="utilizedQuantity" default="0"/>
+        </property>
+        <property name="actualQuantity" type="integer">
+            <column name="actualQuantity" default="0"/>
+        </property>
+        <many-to-one class="com.krawler.hql.accounting.Vendor" column="vendor" name="vendor"/>
+        <many-to-one class="com.krawler.hql.accounting.InvoiceDetail" column="invoicedetails" name="invoicedetails"/>
+        <many-to-one class="com.krawler.hql.accounting.MasterItem" column="natureofpurchase" name="natureOfPurchase"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+    </class>
+</hibernate-mapping>

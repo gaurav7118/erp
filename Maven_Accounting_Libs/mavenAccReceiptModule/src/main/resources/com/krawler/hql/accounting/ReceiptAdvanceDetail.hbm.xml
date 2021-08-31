@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.ReceiptAdvanceDetail" table="receiptadvancedetail">
+    <id column="id" name="id">
+      <generator class="assigned"/>
+    </id>
+    <property name="amount" type="double">
+      <column name="amount" not-null="true"/>
+    </property> 
+    <property name="amountDue" type="double">
+      <column name="amountdue" not-null="true"/>
+    </property>
+    <property name="advanceType" type="integer">
+      <column name="advancetype" default='1'/>
+    </property>
+    <property name="description" type="string">
+      <column name="description"/>
+    </property>
+    <property name="exchangeratefortransaction" type="double">
+      <column name="exchangeratefortransaction" not-null="true"/>
+    </property>
+    <property name="revalJeId" type="string">
+        <column name="revaljeid"/>
+    </property>
+    <property name="advancedetailid" type="string">
+      <column length="40" name="advancedetailid"/>
+    </property>
+    <property name="srNoForRow" type="integer">
+        <column name="srnoforrow" default='0'/>
+    </property>
+    <property name="taxamount" type="double" >
+        <column name="taxamount" default ='0'/>
+    </property>
+    <many-to-one cascade="all" class="com.krawler.hql.accounting.Receipt" column="receipt" name="receipt" not-null="true"/>
+    <many-to-one class="com.krawler.common.admin.Company" name="company" not-null="true"/>
+    <many-to-one class="com.krawler.hql.accounting.Tax"   name="GST" column="gst"/>
+    <many-to-one class="com.krawler.hql.accounting.JournalEntryDetail" column="totaljedid" name="totalJED"/>
+    <many-to-one class="com.krawler.hql.accounting.Tax"   name="tax" column="tax"/>
+    <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product"/>
+  </class>
+</hibernate-mapping>

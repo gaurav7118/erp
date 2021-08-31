@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="creditnoteid" class="java.lang.String"/>
+	<field name="transactionDate" class="java.lang.String"/>
+	<field name="transactionNumber" class="java.lang.String"/>
+	<field name="transactionId" class="java.lang.String"/>
+	<field name="transactionAccCode" class="java.lang.String"/>
+	<field name="transactionAccName" class="java.lang.String"/>
+	<field name="transactionDebitAmount" class="java.lang.String"/>
+	<field name="transactionCreditAmount" class="java.lang.String"/>
+	<field name="transactionNarration" class="java.lang.String"/>
+	<field name="printFlag" class="java.lang.Boolean"/>
+	<field name="transactionCurrencyCode" class="java.lang.String"/>
+	<field name="transactionTotal" class="java.lang.String"/>
+	<group name="CreditNote">
+		<groupExpression><![CDATA[$F{transactionId}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<textField>
+					<reportElement x="181" y="5" width="68" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="75" y="5" width="73" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionNumber}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="150" y="5" width="32" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="5" width="68" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Document #]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<textField>
+					<reportElement x="48" y="16" width="505" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionNarration}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="306" y="3" width="106" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Voucher Amount]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="415" y="2" width="63" height="11"/>
+					<textElement textAlignment="Center">
+						<font fontName="DejaVu Sans" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionCurrencyCode}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="14" width="555" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="480" y="2" width="73" height="11"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{transactionTotal}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="16" width="44" height="11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" size="8" isBold="false" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Remarks :]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="28" width="555" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="72" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionAccCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="0" width="71" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionCreditAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="0" width="71" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionDebitAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="188" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionAccName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="148" y="0" width="188" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionAccName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="72" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionAccCode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="409" y="0" width="71" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionDebitAmount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="0" width="71" height="12">
+					<printWhenExpression><![CDATA[$F{printFlag}==false]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transactionCreditAmount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

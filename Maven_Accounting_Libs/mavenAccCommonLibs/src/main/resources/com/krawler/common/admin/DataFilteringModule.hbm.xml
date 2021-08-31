@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.DataFilteringModule" table="datafilteringmodules">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="customerInvoice" type="true_false">
+            <column  name="customerinvoice"/>
+        </property>
+        <property name="salesOrder" type="true_false">
+            <column  name="salesorder"/>
+        </property>
+        <property name="customerQuotation" type="true_false">
+            <column  name="customerquotation"/>
+        </property>
+        <property name="deliveryOrder" type="true_false">
+            <column  name="deliveryorder"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.Company" column="companyid"  name="company" not-null="true"/>
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="user" not-null="true"/>
+    
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,1 @@
+Ext.define("Ext.device.Geolocation",{singleton:true,requires:["Ext.device.Communicator","Ext.device.geolocation.Cordova","Ext.device.geolocation.Simulator"],constructor:function(){var A=Ext.browser.is;if(A.WebView){if(A.Cordova){return Ext.create("Ext.device.geolocation.Cordova")}}return Ext.create("Ext.device.geolocation.Simulator")}})

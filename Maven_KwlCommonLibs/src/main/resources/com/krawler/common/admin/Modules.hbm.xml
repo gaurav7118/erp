@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.common.admin.Modules" table="modules">
+    <id name="id" type="string">
+      <column name="id"/>
+      <generator class="uuid"/>
+    </id>
+    <property name="moduleName" type="string">
+      <column name="modulename"/>
+    </property>
+    <property name="pojoClassPathFull" type="string">
+      <column name="pojoclasspathfull"/>
+    </property>
+    <property name="primaryKey_MethodName" type="string">
+      <column name="primarykey_methodname"/>
+    </property>
+    <property name="uniqueKey_MethodName" type="string">
+      <column name="uniquekey_methodname"/>
+    </property>
+    <property name="uniqueKey_HbmName" type="string">
+      <column name="uniquekey_hbmname"/>
+    </property>
+    <property name="moduleCategory" type="string">
+      <column name="modulecategory"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="accMasterItemsService" class="com.krawler.hql.accounting.masteritems.service.AccMasterItemsServiceImpl">
+        <property name="messageSource">
+            <ref bean="messageSource"/>
+        </property> 
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name = "kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+         <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+         <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+         </property>
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property> 
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="fieldDataManagercntrl">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property>
+        <property name= "templateService"> 
+            <ref bean="templateService" />
+        </property>
+        
+    </bean> 
+    <bean id="accMasterItemsDao" class="com.krawler.spring.accounting.masteritems.accMasterItemsImpl" parent="baseDAO" />
+    
+    <bean id="accMasterItemsController" class="com.krawler.spring.accounting.masteritems.accMasterItemsController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accMasterItemsDAO">
+            <ref bean="accMasterItemsDao"/>
+        </property>
+        <property name = "kwlCommonTablesDAO">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="importDAO">
+            <ref bean="importDao"/>
+        </property> 
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accCommonTablesDAO">
+            <ref bean="accCommonTablesDAO"/>
+        </property>
+        <property name = "apiCallHandlerService">
+            <ref bean="apiCallHandlerService"/>
+        </property>
+        <property name="companyDetailsDAO">
+            <ref bean="companyDetailsdao"/>
+        </property>
+        <property name="accMasterItemsService">
+            <ref bean="accMasterItemsService"/>
+        </property>  
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property> 
+        <property name="successView">
+            <value>jsonView</value>
+        </property>     
+        <property name ="storeDAO" ref = "storeDAO"/>
+    </bean>
+</beans>

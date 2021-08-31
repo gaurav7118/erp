@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.booking.StockBooking" table="in_stockbooking" >
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="bookingQuantity" type="double">
+            <column name="booking_qty"/>
+        </property>
+        <property name="requestedQuantity" type="double">
+            <column name="requested_qty"/>
+        </property>
+        <property name="bookingFor" type="string">
+            <column name="bookingfor"/>
+        </property>
+        <property name="referenceNo" type="string">
+            <column name="referenceno"/>
+        </property>
+        <property name="fromDate" type="timestamp">
+            <column name="fromdate"/>
+        </property>
+        <property name="toDate" type="timestamp">
+            <column name="todate"/>
+        </property>
+        <property name="requestedOn" type="timestamp">
+            <column name="requestedon"/>
+        </property>
+        <property name="updatedOn" type="timestamp">
+            <column name="updatedon"/>
+        </property>
+        <property column="booking_status" name="bookingStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.booking.BookingStatus</param>
+            </type>
+        </property>
+        <set name="stockBookingDetails" inverse="true" cascade="all,delete-orphan" lazy="true">
+            <key column="stockbooking"  />
+            <one-to-many class="com.krawler.inventory.model.booking.StockBookingDetail" />
+        </set>
+        <many-to-one class="com.krawler.common.admin.User" column="requestedby" name="requestedBy"/>
+        <many-to-one class="com.krawler.common.admin.User" column="updatedby" name="updatedBy"/>
+        <many-to-one class="com.krawler.hql.accounting.Product" column="product" name="product"/>
+        <many-to-one class="com.krawler.common.admin.Company" column="company" name="company"/>
+    </class>
+</hibernate-mapping>

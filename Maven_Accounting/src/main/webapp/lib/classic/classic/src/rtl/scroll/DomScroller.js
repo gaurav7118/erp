@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.scroll.DomScroller",{override:"Ext.scroll.DomScroller",privates:{convertX:function(A){var B;if(this.getRtl()){B=this.getElement();if(B){A=B.rtlNormalizeScrollLeft(A)}}return A},getElementScroll:function(A){return this.getRtl()?A.rtlGetScroll():A.getScroll()}}})

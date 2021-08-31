@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.scroll.Scroller",{override:"Ext.scroll.Scroller",config:{rtl:null},updateRtl:Ext.emptyFn,privates:{updateSpacerXY:function(B){var A=this.getSpacer();if(this.getRtl()){A.rtlSetLocalXY(B.x,B.y)}else{A.setLocalXY(B.x,B.y)}}}})

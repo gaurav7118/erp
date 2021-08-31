@@ -1,0 +1,1382 @@
+#Mayur Pawar 3 Nov 2014
+ALTER TABLE podetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE podetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+
+ALTER TABLE sodetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE sodetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+
+ALTER TABLE vendorquotationdetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE vendorquotationdetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+
+ALTER TABLE quotationdetails ADD COLUMN invstoreid  varchar(255)  DEFAULT '';
+ALTER TABLE quotationdetails ADD COLUMN invlocid  varchar(255)  DEFAULT '';
+
+#Pandurang 5 Nov 2014 quries for Philippines Peso (PHP).
+insert into currency (currencyid,name,htmlcode,
+symbol,afterdecimalname,currencycode) values ('16','Philippines Peso (PHP)','PHP','&#8369;','centavo','PHP');
+
+insert into defaultexchangerate values ('197','1','16');
+insert into defaultexchangerate values ('198','2','16');
+insert into defaultexchangerate values ('199','3','16');
+insert into defaultexchangerate values ('200','5','16');
+insert into defaultexchangerate values ('201','6','16');
+insert into defaultexchangerate values ('202','7','16');
+insert into defaultexchangerate values ('203','8','16');
+insert into defaultexchangerate values ('204','9','16');
+insert into defaultexchangerate values ('205','10','16');
+insert into defaultexchangerate values ('206','11','16');
+insert into defaultexchangerate values ('207','12','16');
+insert into defaultexchangerate values ('208','13','16');
+insert into defaultexchangerate values ('209','14','16');
+insert into defaultexchangerate values ('210','15','16');
+
+insert into defaultexchangerate values ('211','16','16');
+insert into defaultexchangerate values ('212','16','15');
+insert into defaultexchangerate values ('213','16','14');
+insert into defaultexchangerate values ('214','16','13');
+insert into defaultexchangerate values ('215','16','1');
+insert into defaultexchangerate values ('216','16','2');
+insert into defaultexchangerate values ('217','16','3');
+insert into defaultexchangerate values ('218','16','5');
+insert into defaultexchangerate values ('219','16','6');
+insert into defaultexchangerate values ('220','16','7');
+insert into defaultexchangerate values ('221','16','8');
+insert into defaultexchangerate values ('222','16','9');
+insert into defaultexchangerate values ('223','16','10');
+insert into defaultexchangerate values ('224','16','11');
+insert into defaultexchangerate values ('225','16','12');
+
+insert into exchangerate values ('197','1','16');
+insert into exchangerate values ('198','2','16');
+insert into exchangerate values ('199','3','16');
+insert into exchangerate values ('200','5','16');
+insert into exchangerate values ('201','6','16');
+insert into exchangerate values ('202','7','16');
+insert into exchangerate values ('203','8','16');
+insert into exchangerate values ('204','9','16');
+insert into exchangerate values ('205','10','16');
+insert into exchangerate values ('206','11','16');
+insert into exchangerate values ('207','12','16');
+insert into exchangerate values ('208','13','16');
+insert into exchangerate values ('209','14','16');
+insert into exchangerate values ('210','15','16');
+
+insert into exchangerate values ('211','16','16');
+insert into exchangerate values ('212','16','15');
+insert into exchangerate values ('213','16','14');
+insert into exchangerate values ('214','16','13');
+insert into exchangerate values ('215','16','1');
+insert into exchangerate values ('216','16','2');
+insert into exchangerate values ('217','16','3');
+insert into exchangerate values ('218','16','5');
+insert into exchangerate values ('219','16','6');
+insert into exchangerate values ('220','16','7');
+insert into exchangerate values ('221','16','8');
+insert into exchangerate values ('222','16','9');
+insert into exchangerate values ('223','16','10');
+insert into exchangerate values ('224','16','11');
+insert into exchangerate values ('225','16','12');
+
+
+
+
+insert into defaultexchangeratedetails values ('197','2014-01-01 00:00:00','0.022190','197');
+insert into defaultexchangeratedetails values ('198','2014-01-01 00:00:00','0.013970','198');
+insert into defaultexchangeratedetails values ('199','2014-01-01 00:00:00','1.3636','199');
+insert into defaultexchangeratedetails values ('200','2014-01-01 00:00:00','0.550152 ','200');
+insert into defaultexchangeratedetails values ('201','2014-01-01 00:00:00','0.028730','201');
+insert into defaultexchangeratedetails values ('202','2014-01-01 00:00:00','0.074310','202');
+insert into defaultexchangeratedetails values ('203','2014-01-01 00:00:00','11.9836','203');
+insert into defaultexchangeratedetails values ('204','2014-01-01 00:00:00','59.951','204');
+insert into defaultexchangeratedetails values ('205','2014-01-01 00:00:00','0.025390','205');
+insert into defaultexchangeratedetails values ('206','2014-01-01 00:00:00','0.025700','206');
+insert into defaultexchangeratedetails values ('207','2014-01-01 00:00:00','0.13571','207');
+insert into defaultexchangeratedetails values ('208','2014-01-01 00:00:00','270.12','208');
+insert into defaultexchangeratedetails values ('209','2014-01-01 00:00:00','0.67890','209');
+insert into defaultexchangeratedetails values ('210','2014-01-01 00:00:00','0.72881','210');
+
+
+insert into defaultexchangeratedetails values ('211','2014-01-01 00:00:00','1.00000','211');
+insert into defaultexchangeratedetails values ('212','2014-01-01 00:00:00','1.37','212');
+insert into defaultexchangeratedetails values ('213','2014-01-01 00:00:00','1.47','213');
+insert into defaultexchangeratedetails values ('214','2014-01-01 00:00:00','0.0037','214');
+insert into defaultexchangeratedetails values ('215','2014-01-01 00:00:00','45.09','215');
+insert into defaultexchangeratedetails values ('216','2014-01-01 00:00:00','71.63','216');
+insert into defaultexchangeratedetails values ('217','2014-01-01 00:00:00','56.32','217');
+insert into defaultexchangeratedetails values ('218','2014-01-01 00:00:00','0.73','218');
+insert into defaultexchangeratedetails values ('219','2014-01-01 00:00:00','34.79','219');
+insert into defaultexchangeratedetails values ('220','2014-01-01 00:00:00','13.48','220');
+insert into defaultexchangeratedetails values ('221','2014-01-01 00:00:00','0.084','221');
+insert into defaultexchangeratedetails values ('222','2014-01-01 00:00:00','0.017','222');
+insert into defaultexchangeratedetails values ('223','2014-01-01 00:00:00','39.40','223');
+insert into defaultexchangeratedetails values ('224','2014-01-01 00:00:00','38.83','224');
+insert into defaultexchangeratedetails values ('225','2014-01-01 00:00:00','7.37','225');
+
+#Rushikesh Mandage 5th Nov 2014
+ALTER TABLE `vendorquotationdetails` ADD COLUMN `purchaserequisitiondetailsid`  varchar(255) NULL DEFAULT NULL;
+
+#Pandurang 5 Nov 2014 product Build Details unbuild
+alter table pbdetails add column
+isunbuild char(1) NOT NULL DEFAULT '0';
+
+# Anand Nimbalkar 6th Nov 2014
+alter table product add column `autoassembly` char(1) DEFAULT 'F';
+#shashi nandan kumar 7th nov 2014
+
+insert into audit_action values('20','BANK NAME ADDED','20'); 
+insert into audit_group values('20','BANK '); 
+insert into audit_group values('21','Note Type'); 
+update audit_action set actionname='Note Type Created',auditGroup=21 where id=70;
+update audit_action set actionname='Note Type Updated',auditGroup=21 where id=71;
+insert into  audit_action values('72','Note Type Deleted','21');
+update audit_action set actionname='Debit Note'where id=80 and auditgroup=19;
+update audit_action set actionname='Account Type Created' and auditgroup='4' where id=84;
+update audit_action set actionname='Account Type Created' ,auditgroup='4' where id=84;
+update audit_action set auditgroup='11' where id=50;
+update audit_action set auditgroup='11' where id=51;
+update audit_action set auditgroup='11' where id=52;
+update audit_action set auditgroup='7' where id=75;
+update audit_action set auditgroup='7' where id=44;
+update audit_action set auditgroup='7' where id=45;
+update audit_action set auditgroup='7' where id=46;
+insert into audit_group values('22','Price'); 
+update audit_action set auditgroup='22' where id=19;
+insert into audit_group values('23','Purchase'); 
+update audit_action set auditgroup='23' where id=62;
+update audit_action set auditgroup='23' where id=63;
+update audit_action set auditgroup='23' where id=64;
+update audit_action set auditgroup='23' where id=65;
+update audit_action set auditgroup='23' where id=66;
+insert into audit_group values('24','Profile'); 
+update audit_action set auditgroup='24' where id=43;
+insert into audit_group values('25','RFQ'); 
+insert into audit_group values('26','Return'); 
+insert into audit_group values('27','Unit of Measure');
+update audit_action set auditgroup='25' where id=67;
+update audit_action set auditgroup='25' where id=68;
+update audit_action set auditgroup='25' where id=69;
+update audit_action set auditgroup='26' where id=79;
+update audit_action set auditgroup='27' where id=16;
+update audit_action set auditgroup='27' where id=17;
+update audit_action set auditgroup='27' where id=18;
+insert into  audit_action values('85','Account Type Deleted','4');
+insert into  audit_action values('86','Purchase Order','18');
+insert into  audit_action values('87','Purchase Return','26');
+insert into  audit_action values('88','Customer Category Changed ','8'); 
+insert into  audit_action values('89','Vendor Category Changed ','9');
+insert into  audit_action values('90','Debit Note Created','19');
+insert into  audit_action values('91','Debit Note Modified','19');
+insert into audit_group values('28','Opening Balance'); 
+insert into  audit_action values('92','Opening Balance Created','28');
+insert into  audit_action values('93','Opening Balance Updated','28');
+insert into  audit_action values('94','Opening Balance Deleted','28');
+insert into  audit_action values('95','Vendor Invoice Approved','9');
+insert into  audit_action values('96','Customer Invoice Approved','8');
+insert into  audit_action values('97','Purchase Order Approved','18');
+insert into  audit_action values('118','Vendor Quotation Deleted','9');
+insert into  audit_action values('117','Account Revaluation Updateed','4');
+insert into  audit_action values('100','Linked Payment','7');
+insert into  audit_action values('101','Linked Receipt','12');
+insert into audit_group values('29','Monthly');
+insert into  audit_action values('98','Monthly Budget','29');
+insert into  audit_action values('99','Monthly For Cast','29');
+insert into  audit_action values('103','User Profile','14');
+insert into  audit_action values('107','Invoice Exclude','10');
+insert into  audit_action values('108','Product Price Created','6');
+insert into audit_group values('30','Email');
+insert into  audit_action values('102','Sent Email','30');
+insert into audit_group values('31','Group');
+insert into  audit_action values('105','Master Group','31');
+insert into  audit_action values('112','Group Updated','31');
+insert into  audit_action values('115','Bank Reconciliation Added','20');
+insert into audit_group values('32','Template');
+insert into  audit_action values('111','Custom Template Deleted','32');
+insert into  audit_action values('113','Template Deleted','32');
+insert into audit_group values('33','Currency');
+insert into  audit_action values('116','Currency Exchange Added','33');
+insert into audit_group values('34','Rule');
+insert into  audit_action values('104','Approval Rule','34');
+insert into audit_group values('35','Location');
+insert into audit_group values('36','Warehouse');
+insert into audit_group values('37','Range');
+insert into  audit_action values('109','Location Changed','35');
+insert into  audit_action values('110','Warehouse Changed','36');
+insert into  audit_action values('114','Active Date Range','37');
+insert into audit_action values('119','Group Created','31'); 
+insert into audit_action values('120','Customer Quotation Updated','8');
+insert into audit_action values('121','Customer Quotation Added','8'); 
+insert into audit_group values('38','Sales'); 
+insert into audit_group values('39','Cost');
+insert into audit_action values('122','Cost Center Added','39');  
+insert into audit_action values('123','Cost Center Deleted','39');
+insert into audit_action values('124','Sales Commission Added','38');
+insert into audit_action values('126','Purchase Term Deleted','23'); 
+insert into audit_action values('125','Purchase Term Added','23'); 
+insert into audit_action values('127','Sales Term Deleted','38'); 
+insert into audit_action values('106','Sales Term Added','38'); 
+update audit_action set auditgroup=4 where id=7;
+insert into audit_group values('40','Sequence Format'); 
+insert into audit_action values('129','Sequence Format Deleted','40'); 
+insert into audit_action values('128','Sequence Format Added','40');
+update audit_action set auditgroup=32 where id=83;
+insert into audit_action values('130','Cash Sales Created','38'); 
+insert into audit_action values('131','Cash Sales Deleted','38'); 
+insert into audit_action values('132','Cash Sales Updated','38'); 
+insert into audit_action values('133','Cash Purchase Created','23'); 
+insert into audit_action values('134','Cash Purchase Deleted','23');
+insert into audit_action values('135','Cash Purchase Updated','23'); 
+insert into audit_action values('137','Customize Aged Updated','41'); 
+insert into audit_action values('136','Customize Aged Added','41'); 
+ insert into audit_action values('138','Customize Aged Deleted','41'); 
+ insert into audit_group values('41','Customize Aged'); 
+insert into audit_action values('139','Email Notification Added','30');
+ insert into audit_action values('140','Email Notification Updated','30');
+insert into audit_action values('141','Email Notification Deleted','30');
+insert into audit_action values('142','Debit Note Deleted','19'); 
+insert into audit_action values('143','Group Deleted','31'); 
+insert into audit_action values('144','Cash Purchase Approved','23'); 
+insert into audit_action values('145','Cash Sales Approved','38');
+insert into audit_action values('146','Amend Price Removed','22');
+insert into audit_action values('147','Template Upload','32'); 
+insert into audit_action values('148','Template Customize','32');
+insert into audit_group values('42','Custom Fields/Columns');
+insert into audit_group values('43','Dimension'); 
+insert into audit_action values('149','Dimension Added','43'); 
+insert into audit_action values('150','Dimension Updated','43');
+insert into audit_action values('151','Custom Field Added','42'); 
+insert into audit_action values('152','Custom Field Updated','42'); 
+insert into audit_action values('154','Custom Column Updated','42'); 
+insert into audit_action values('153','Custom Column Added','42'); 
+insert into audit_group values('44','Department'); 
+insert into audit_action values('155','Department Added','44'); 
+insert into audit_action values('156','Department Updated','44'); 
+
+#Raveesh Pathak 7th Nov 2014
+alter table extracompanypreferences 
+add column `viupdationmail` char(1) default 'F';
+
+alter table extracompanypreferences 
+add column `ciupdationmail` char(1) default 'F'; 
+
+#Mayur Bhokase 7th Nov 2014
+alter TABLE `product`  MODIFY COLUMN `depreciationrate` DOUBLE  DEFAULT 0; 
+
+#Pandurang 8 Nov 2014 quries for New Zealand Dollar (NZD) and SWISS FRANCE (CHF)
+#For New Zealand Dollar (NZD)
+insert into currency (currencyid,name,htmlcode,symbol,afterdecimalname,currencycode) 
+values ('17','New Zealand Dollar (NZD)','$','&#36;','cent','NZD');
+
+insert into defaultexchangerate values ('226','1','17');
+insert into defaultexchangerate values ('227','2','17');
+insert into defaultexchangerate values ('228','3','17');
+insert into defaultexchangerate values ('229','5','17');
+insert into defaultexchangerate values ('230','6','17');
+insert into defaultexchangerate values ('231','7','17');
+insert into defaultexchangerate values ('232','8','17');
+insert into defaultexchangerate values ('233','9','17');
+insert into defaultexchangerate values ('234','10','17');
+insert into defaultexchangerate values ('235','11','17');
+insert into defaultexchangerate values ('236','12','17');
+insert into defaultexchangerate values ('237','13','17');
+insert into defaultexchangerate values ('238','14','17');
+insert into defaultexchangerate values ('239','15','17');
+insert into defaultexchangerate values ('240','16','17');
+
+insert into defaultexchangerate values ('241','17','17');
+insert into defaultexchangerate values ('242','17','16');
+insert into defaultexchangerate values ('243','17','15');
+insert into defaultexchangerate values ('244','17','14');
+insert into defaultexchangerate values ('245','17','13');
+insert into defaultexchangerate values ('246','17','1');
+insert into defaultexchangerate values ('247','17','2');
+insert into defaultexchangerate values ('248','17','3');
+insert into defaultexchangerate values ('249','17','5');
+insert into defaultexchangerate values ('250','17','6');
+insert into defaultexchangerate values ('251','17','7');
+insert into defaultexchangerate values ('252','17','8');
+insert into defaultexchangerate values ('253','17','9');
+insert into defaultexchangerate values ('254','17','10');
+insert into defaultexchangerate values ('255','17','11');
+insert into defaultexchangerate values ('256','17','12');
+
+
+insert into exchangerate values ('226','1','17');
+insert into exchangerate values ('227','2','17');
+insert into exchangerate values ('228','3','17');
+insert into exchangerate values ('229','5','17');
+insert into exchangerate values ('230','6','17');
+insert into exchangerate values ('231','7','17');
+insert into exchangerate values ('232','8','17');
+insert into exchangerate values ('233','9','17');
+insert into exchangerate values ('234','10','17');
+insert into exchangerate values ('235','11','17');
+insert into exchangerate values ('236','12','17');
+insert into exchangerate values ('237','13','17');
+insert into exchangerate values ('238','14','17');
+insert into exchangerate values ('239','15','17');
+insert into exchangerate values ('240','16','17');
+
+insert into exchangerate values ('241','17','17');
+insert into exchangerate values ('242','17','16');
+insert into exchangerate values ('243','17','15');
+insert into exchangerate values ('244','17','14');
+insert into exchangerate values ('245','17','13');
+insert into exchangerate values ('246','17','1');
+insert into exchangerate values ('247','17','2');
+insert into exchangerate values ('248','17','3');
+insert into exchangerate values ('249','17','5');
+insert into exchangerate values ('250','17','6');
+insert into exchangerate values ('251','17','7');
+insert into exchangerate values ('252','17','8');
+insert into exchangerate values ('253','17','9');
+insert into exchangerate values ('254','17','10');
+insert into exchangerate values ('255','17','11');
+insert into exchangerate values ('256','17','12');
+
+
+
+
+insert into defaultexchangeratedetails values ('226','2014-01-01 00:00:00','0.078','226');
+insert into defaultexchangeratedetails values ('227','2014-01-01 00:00:00','0.49','227');
+insert into defaultexchangeratedetails values ('228','2014-01-01 00:00:00','0.62','228');
+insert into defaultexchangeratedetails values ('229','2014-01-01 00:00:00','47.60','229');
+insert into defaultexchangeratedetails values ('230','2014-01-01 00:00:00','1.00','230');
+insert into defaultexchangeratedetails values ('231','2014-01-01 00:00:00','2.59','231');
+insert into defaultexchangeratedetails values ('232','2014-01-01 00:00:00','418.52','232');
+insert into defaultexchangeratedetails values ('233','2014-01-01 00:00:00','2100.70','233');
+insert into defaultexchangeratedetails values ('234','2014-01-01 00:00:00','0.88','234');
+insert into defaultexchangeratedetails values ('235','2014-01-01 00:00:00','0.90','235');
+insert into defaultexchangeratedetails values ('236','2014-01-01 00:00:00','4.75','236');
+insert into defaultexchangeratedetails values ('237','2014-01-01 00:00:00','9409.13','237');
+insert into defaultexchangeratedetails values ('238','2014-01-01 00:00:00','23.72','238');
+insert into defaultexchangeratedetails values ('239','2014-01-01 00:00:00','25.41','239');
+insert into defaultexchangeratedetails values ('240','2014-01-01 00:00:00','34.81','240');
+
+
+insert into defaultexchangeratedetails values ('241','2014-01-01 00:00:00','1.000','241');
+insert into defaultexchangeratedetails values ('242','2014-01-01 00:00:00','0.029','242');
+insert into defaultexchangeratedetails values ('243','2014-01-01 00:00:00','0.039','243');
+insert into defaultexchangeratedetails values ('244','2014-01-01 00:00:00','0.042','244');
+insert into defaultexchangeratedetails values ('245','2014-01-01 00:00:00','0.00011','245');
+insert into defaultexchangeratedetails values ('246','2014-01-01 00:00:00','1.29','246');
+insert into defaultexchangeratedetails values ('247','2014-01-01 00:00:00','2.05','247');
+insert into defaultexchangeratedetails values ('248','2014-01-01 00:00:00','1.61','248');
+insert into defaultexchangeratedetails values ('249','2014-01-01 00:00:00','0.021','249');
+insert into defaultexchangeratedetails values ('250','2014-01-01 00:00:00','1.00','250');
+insert into defaultexchangeratedetails values ('251','2014-01-01 00:00:00','0.39','251');
+insert into defaultexchangeratedetails values ('252','2014-01-01 00:00:00','0.0024','252');
+insert into defaultexchangeratedetails values ('253','2014-01-01 00:00:00','0.00048','253');
+insert into defaultexchangeratedetails values ('254','2014-01-01 00:00:00','1.14','254');
+insert into defaultexchangeratedetails values ('255','2014-01-01 00:00:00','1.11','255');
+insert into defaultexchangeratedetails values ('256','2014-01-01 00:00:00','0.21','256');
+
+
+#For SWISS FRANCE (CHF)
+insert into currency (currencyid,name,htmlcode,symbol,afterdecimalname,currencycode)
+values ('18','SWISS FRANCE (CHF)','CHF','&#8355;','rappen','CHF');
+
+insert into defaultexchangerate values ('257','1','18');
+insert into defaultexchangerate values ('258','2','18');
+insert into defaultexchangerate values ('259','3','18');
+insert into defaultexchangerate values ('260','5','18');
+insert into defaultexchangerate values ('261','6','18');
+insert into defaultexchangerate values ('262','7','18');
+insert into defaultexchangerate values ('263','8','18');
+insert into defaultexchangerate values ('264','9','18');
+insert into defaultexchangerate values ('265','10','18');
+insert into defaultexchangerate values ('266','11','18');
+insert into defaultexchangerate values ('267','12','18');
+insert into defaultexchangerate values ('268','13','18');
+insert into defaultexchangerate values ('269','14','18');
+insert into defaultexchangerate values ('270','15','18');
+insert into defaultexchangerate values ('271','16','18');
+insert into defaultexchangerate values ('272','17','18');
+
+insert into defaultexchangerate values ('273','18','18');
+insert into defaultexchangerate values ('274','18','17');
+insert into defaultexchangerate values ('275','18','16');
+insert into defaultexchangerate values ('276','18','15');
+insert into defaultexchangerate values ('277','18','14');
+insert into defaultexchangerate values ('278','18','13');
+insert into defaultexchangerate values ('279','18','1');
+insert into defaultexchangerate values ('280','18','2');
+insert into defaultexchangerate values ('281','18','3');
+insert into defaultexchangerate values ('282','18','5');
+insert into defaultexchangerate values ('283','18','6');
+insert into defaultexchangerate values ('284','18','7');
+insert into defaultexchangerate values ('285','18','8');
+insert into defaultexchangerate values ('286','18','9');
+insert into defaultexchangerate values ('287','18','10');
+insert into defaultexchangerate values ('288','18','11');
+insert into defaultexchangerate values ('289','18','12');
+
+
+
+insert into exchangerate values ('257','1','18');
+insert into exchangerate values ('258','2','18');
+insert into exchangerate values ('259','3','18');
+insert into exchangerate values ('260','5','18');
+insert into exchangerate values ('261','6','18');
+insert into exchangerate values ('262','7','18');
+insert into exchangerate values ('263','8','18');
+insert into exchangerate values ('264','9','18');
+insert into exchangerate values ('265','10','18');
+insert into exchangerate values ('266','11','18');
+insert into exchangerate values ('267','12','18');
+insert into exchangerate values ('268','13','18');
+insert into exchangerate values ('269','14','18');
+insert into exchangerate values ('270','15','18');
+insert into exchangerate values ('271','16','18');
+insert into exchangerate values ('272','17','18');
+
+insert into exchangerate values ('273','18','18');
+insert into exchangerate values ('274','18','17');
+insert into exchangerate values ('275','18','16');
+insert into exchangerate values ('276','18','15');
+insert into exchangerate values ('277','18','14');
+insert into exchangerate values ('278','18','13');
+insert into exchangerate values ('279','18','1');
+insert into exchangerate values ('280','18','2');
+insert into exchangerate values ('281','18','3');
+insert into exchangerate values ('282','18','5');
+insert into exchangerate values ('283','18','6');
+insert into exchangerate values ('284','18','7');
+insert into exchangerate values ('285','18','8');
+insert into exchangerate values ('286','18','9');
+insert into exchangerate values ('287','18','10');
+insert into exchangerate values ('288','18','11');
+insert into exchangerate values ('289','18','12');
+
+
+
+insert into defaultexchangeratedetails values ('257','2014-01-01 00:00:00','1.04','257');
+insert into defaultexchangeratedetails values ('258','2014-01-01 00:00:00','0.65','258');
+insert into defaultexchangeratedetails values ('259','2014-01-01 00:00:00','0.83','259');
+insert into defaultexchangeratedetails values ('260','2014-01-01 00:00:00','63.56','260');
+insert into defaultexchangeratedetails values ('261','2014-01-01 00:00:00','1.33','261');
+insert into defaultexchangeratedetails values ('262','2014-01-01 00:00:00','3.46','262');
+insert into defaultexchangeratedetails values ('263','2014-01-01 00:00:00','558.82','263');
+insert into defaultexchangeratedetails values ('264','2014-01-01 00:00:00','2804.95','264');
+insert into defaultexchangeratedetails values ('265','2014-01-01 00:00:00','1.17','265');
+insert into defaultexchangeratedetails values ('266','2014-01-01 00:00:00','1.20','266');
+insert into defaultexchangeratedetails values ('267','2014-01-01 00:00:00','6.34','267');
+insert into defaultexchangeratedetails values ('268','2014-01-01 00:00:00','12563.27','268');
+insert into defaultexchangeratedetails values ('269','2014-01-01 00:00:00','31.67','269');
+insert into defaultexchangeratedetails values ('270','2014-01-01 00:00:00','33.92','270');
+insert into defaultexchangeratedetails values ('271','2014-01-01 00:00:00','46.67','271');
+insert into defaultexchangeratedetails values ('272','2014-01-01 00:00:00','31.67','272');
+
+
+insert into defaultexchangeratedetails values ('273','2014-01-01 00:00:00','1.00000','273');
+insert into defaultexchangeratedetails values ('274','2014-01-01 00:00:00','0.75','274');
+insert into defaultexchangeratedetails values ('275','2014-01-01 00:00:00','0.022','275');
+insert into defaultexchangeratedetails values ('276','2014-01-01 00:00:00','0.029','276');
+insert into defaultexchangeratedetails values ('277','2014-01-01 00:00:00','0.032','277');
+insert into defaultexchangeratedetails values ('278','2014-01-01 00:00:00','0.000080','278');
+insert into defaultexchangeratedetails values ('279','2014-01-01 00:00:00','0.97','279');
+insert into defaultexchangeratedetails values ('280','2014-01-01 00:00:00','1.53','280');
+insert into defaultexchangeratedetails values ('281','2014-01-01 00:00:00','1.20','281');
+insert into defaultexchangeratedetails values ('282','2014-01-01 00:00:00','0.016','282');
+insert into defaultexchangeratedetails values ('283','2014-01-01 00:00:00','0.75','283');
+insert into defaultexchangeratedetails values ('284','2014-01-01 00:00:00','0.29','284');
+insert into defaultexchangeratedetails values ('285','2014-01-01 00:00:00','0.0018','285');
+insert into defaultexchangeratedetails values ('286','2014-01-01 00:00:00','0.00036','286');
+insert into defaultexchangeratedetails values ('287','2014-01-01 00:00:00','0.85','287');
+insert into defaultexchangeratedetails values ('288','2014-01-01 00:00:00','0.83','288');
+insert into defaultexchangeratedetails values ('289','2014-01-01 00:00:00','0.16','289');
+
+#Sagar M 10th Nov 2014 - Stored originalopeningbalancebaseamount and openingbalancebaseamountdue at record level
+
+ALTER TABLE goodsreceipt  ADD COLUMN `originalopeningbalancebaseamount`  double NULL DEFAULT 0.0;
+ALTER TABLE `invoice` ADD COLUMN `originalopeningbalancebaseamount`  double NULL DEFAULT 0.0;
+ALTER TABLE `receipt` ADD COLUMN `originalopeningbalancebaseamount`  double NULL DEFAULT 0.0;
+ALTER TABLE `payment` ADD COLUMN `originalopeningbalancebaseamount`  double NULL DEFAULT 0.0;
+ALTER TABLE `creditnote` ADD COLUMN `originalopeningbalancebaseamount`  double NULL DEFAULT 0.0;
+ALTER TABLE `debitnote` ADD COLUMN `originalopeningbalancebaseamount`  double NULL DEFAULT 0.0;
+
+ALTER TABLE goodsreceipt  ADD COLUMN `openingbalancebaseamountdue`  double NULL DEFAULT 0.0;
+ALTER TABLE `invoice` ADD COLUMN `openingbalancebaseamountdue`  double NULL DEFAULT 0.0;
+ALTER TABLE `receipt` ADD COLUMN `openingbalancebaseamountdue`  double NULL DEFAULT 0.0;
+ALTER TABLE `payment` ADD COLUMN `openingbalancebaseamountdue`  double NULL DEFAULT 0.0;
+ALTER TABLE `creditnote` ADD COLUMN `openingbalancebaseamountdue`  double NULL DEFAULT 0.0;
+ALTER TABLE `debitnote` ADD COLUMN `openingbalancebaseamountdue`  double NULL DEFAULT 0.0;
+
+#Neeraj Dwivedi 10thNov 2014
+
+INSERT INTO  default_header (id ,defaultHeader, dbcolumnname, reftablename, reftablefk, reftabledatacolumn, dummyvalue,xtype,module)
+VALUES ('d2309ad4-7bb3-4319-9f19-9631e0285cf5','Currency','currency','currency','currencyid','name','Currency','1','28');
+
+# Anup Kale 10thNov 2014
+ALTER TABLE `receipt`  ADD COLUMN `iscndnandinvoicepayment` char(1) DEFAULT 'F';
+ALTER TABLE `receipt`  ADD COLUMN `cndnandinvoiceid` varchar(255) DEFAULT NULL;
+ALTER TABLE `receipt`  ADD COLUMN `invoiceadvcndntype` int(11) DEFAULT '0';
+
+ALTER TABLE `payment`  ADD COLUMN `iscndnandinvoicepayment` char(1) DEFAULT 'F';
+ALTER TABLE `payment`  ADD COLUMN `cndnandinvoiceid` varchar(255) DEFAULT NULL;
+ALTER TABLE `payment`  ADD COLUMN `invoiceadvcndntype` int(11) DEFAULT '0';
+#Neeraj Dwivedi 11th Nov 2014
+update company  set templateflag=2 WHERE subdomain="swt";
+
+# Anand Nimbalkar 11th Nov 2014
+
+CREATE TABLE `useractivedaysdetails` (
+  `id` varchar(255) NOT NULL,
+  `userid` varchar(255) NULL DEFAULT NULL,
+  `company` varchar(255) NULL DEFAULT NULL,
+  `activedays` int(11) NULL DEFAULT NULL,
+  `moduleid` int(11) NULL DEFAULT NULL,
+  `isalluser` char(1) DEFAULT 'F',
+  PRIMARY KEY  (`id`),
+  FOREIGN KEY (`userid`) REFERENCES `users` (`userid`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# Amol Dhokale 11th Nov 2014
+ALTER TABLE masteritem ADD COLUMN custvendcategorytype INT(2) DEFAULT -1;
+
+#shashi nandan kumar 11th nov 2014
+insert into audit_action values('157','Template Created','32'); 
+
+#Neeraj Dwivedi 11th Nov 2014
+ALTER TABLE `accountcustomdata`
+ ADD COLUMN `col1036` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1037` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1038` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1039` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1040` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1041` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1042` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1043` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1044` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1045` varchar(255) DEFAULT 'false';
+
+
+ALTER TABLE `vendorcustomdata`
+ ADD COLUMN `col1036` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1037` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1038` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1039` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1040` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1041` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1042` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1043` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1044` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1045` varchar(255) DEFAULT 'false';
+
+ALTER TABLE `customercustomdata`
+ ADD COLUMN `col1036` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1037` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1038` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1039` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1040` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1041` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1042` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1043` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1044` varchar(255) DEFAULT 'false',
+ ADD COLUMN `col1045` varchar(255) DEFAULT 'false';
+
+# ANand Nimbalkar 13th Nov 2014
+ALTER TABLE `customer`  ADD COLUMN `paymentcriteria` int(11) DEFAULT 1;
+ALTER TABLE `vendor`  ADD COLUMN `paymentcriteria` int(11) DEFAULT 1;
+
+#Rushikesh Mandage 13th NOV 2014 
+
+update deliveryorder set approvestatuslevel=11 where approvestatuslevel=0;
+update grorder set approvestatuslevel=11 where approvestatuslevel=0;
+
+#Anup Kale 12th Nov
+ALTER TABLE `paymentmethod` ADD COLUMN `autopopulate` char(1) DEFAULT 'F';
+
+
+
+# Atul sachan 14th Nov
+
+insert into mastergroup (id, groupname) values (23, "Assigned To");
+insert into mastergroup (id, groupname) values (24, "Status");
+
+CREATE TABLE `assetmaintenancescheduler` (
+`id`  varchar(255) NOT NULL ,
+`startdate`  datetime NULL ,
+`enddate`  datetime NULL ,
+`actualstartdate`  datetime NULL ,
+`actualenddate`  datetime NULL ,
+`isadhoc`  int(1) NULL DEFAULT 0 ,
+`frequency`  int NULL DEFAULT 0 ,
+`frequencytype`  varchar(255) NULL ,
+`totalevents`  int NULL DEFAULT 0 ,
+`scheduleduration`  int NULL DEFAULT 0 ,
+`company`  varchar(255) NULL ,
+`assetdetails`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`assetdetails`) REFERENCES `assetdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `assetmaintenanceworkorder` (
+`id`  varchar(255) NOT NULL ,
+`remark`  varchar(2048) NULL ,
+`workordernumber`  varchar(255) NULL ,
+`assignedto`  varchar(255) NULL ,
+`currency`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`assignedto`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`currency`) REFERENCES `currency` (`currencyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+CREATE TABLE `assetmaintenanceworkorderdetail` (
+`id`  varchar(255) NOT NULL ,
+`srno`  int NULL ,
+`rate`  double NULL DEFAULT 0 ,
+`remark`  varchar(255) NULL ,
+`actualquantity`  double NULL DEFAULT 0 ,
+`deliveredquantity`  double NULL DEFAULT 0 ,
+`baseuomquantity`  double NULL DEFAULT 0 ,
+`baseuomdeliveredquantity`  double NULL DEFAULT 0 ,
+`baseuomrate`  double NULL DEFAULT 1 ,
+`description`  text NULL ,
+`product`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+`batch`  varchar(255) NULL ,
+`uom`  varchar(255) NULL ,
+`assetmaintenanceworkorder`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`product`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`batch`) REFERENCES `productbatch` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`uom`) REFERENCES `uom` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`assetmaintenanceworkorder`) REFERENCES `assetmaintenanceworkorder` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`id`) REFERENCES `inventory` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE `assetmaintenanceworkorder`
+ADD COLUMN `workorderdate`  datetime NULL;
+
+ALTER TABLE `assetmaintenanceworkorder`
+ADD COLUMN `startdate`  datetime NULL;
+
+ALTER TABLE `assetmaintenanceworkorder`
+ADD COLUMN `enddate`  datetime NULL;
+
+
+ALTER TABLE `assetmaintenancescheduler`
+ADD COLUMN `assignedto`  varchar(255) NULL;
+
+ALTER TABLE `assetmaintenancescheduler` ADD FOREIGN KEY (`assignedto`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `assetmaintenancescheduler`
+ADD COLUMN `status`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `assetmaintenancescheduler` ADD FOREIGN KEY (`status`) REFERENCES `masteritem` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+CREATE TABLE `assetmaintenanceschedulerobject` (
+`id`  varchar(255) NOT NULL ,
+`startdate`  datetime NULL ,
+`enddate`  datetime NULL ,
+`isadhoc`  int(1) NULL DEFAULT 0 ,
+`frequency`  int NULL DEFAULT 0 ,
+`frequencytype`  varchar(255) NULL DEFAULT NULL ,
+`totalevents`  int NULL DEFAULT 0 ,
+`scheduleduration`  int NULL DEFAULT 0 ,
+`company`  varchar(255) NULL ,
+`assetdetails`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+FOREIGN KEY (`assetdetails`) REFERENCES `assetdetail` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8;
+
+
+ALTER TABLE `assetmaintenancescheduler`
+ADD COLUMN `assetmaintenanceschedulerobject`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `assetmaintenancescheduler` ADD FOREIGN KEY (`assetmaintenanceschedulerobject`) REFERENCES `assetmaintenanceschedulerobject` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `assetmaintenanceschedulerobject`
+ADD COLUMN `schedulename`  varchar(255) NULL;
+
+ALTER TABLE `assetmaintenanceschedulerobject`
+ADD COLUMN `schedulestopcondition`  int NULL;
+
+ALTER TABLE `assetmaintenanceworkorder`
+ADD COLUMN `assetmaintenancescheduler`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `assetmaintenanceworkorder` ADD FOREIGN KEY (`assetmaintenancescheduler`) REFERENCES `assetmaintenancescheduler` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+# Amol Dhokale 15th Nov 2014
+ALTER TABLE  customizereportmapping ADD COLUMN isreadonlyfield INT(1) DEFAULT 0; 
+ALTER TABLE  customizereportmapping ADD COLUMN fieldlabeltext VARCHAR(255); 
+
+ALTER TABLE  customizereportmapping ADD COLUMN islinefield INT(1) DEFAULT 0; 
+ALTER TABLE  customizereportheader ADD COLUMN islinefield INT(1) DEFAULT 0; 
+
+# Inserted Line Level Fields for following Modules
+# Sales Invoice 
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',2,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',2,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',2,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',2,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',2,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',2,1,1,1,1);
+
+# Purchase Invoice
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',6,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',6,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',6,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',6,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',6,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',6,1,1,1,1);
+
+# Sales Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',20,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',20,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',20,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',20,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',20,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',20,1,1,1,1);
+
+# Purchase Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',18,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',18,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',18,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',18,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',18,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',18,1,1,1,1);
+
+# Customer Quotation
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',22,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',22,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',22,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',22,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',22,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',22,1,1,1,1);
+
+# Vendor Quotation
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',23,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',23,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',23,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',23,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',23,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',23,1,1,1,1);
+
+# Cash Sales
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',4,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',4,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',4,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',4,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',4,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',4,1,1,1,1);
+
+# Cash Purchase
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'desc','Description',8,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',8,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',8,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Quantity',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',8,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'discountispercent','Discount Type',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'prdiscount','Discount',8,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',8,1,1,1,1);
+
+# Delivery Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'partno','Serial Number',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'description','Description',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Actual Quantity',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'dquantity','Delivered Quantity',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',27,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',27,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'remark','Remark',27,1,1,1,1);
+
+# Goods Receipt
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'partno','Serial Number',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'description','Description',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Actual Quantity',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'dquantity','Received Quantity',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',28,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',28,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'remark','Remark',28,1,1,1,1);
+
+# Sales Return
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'partno','Serial Number',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'description','Description',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Actual Quantity',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'dquantity','Return Quantity',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',29,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',29,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'remark','Remark',29,1,1,1,1);
+
+# Purchase Return
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'productid','Product',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'partno','Serial Number',31,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'description','Description',31,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invlocation','Location',31,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'invstore','Warehouse',31,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'quantity','Actual Quantity',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'dquantity','Return Quantity',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'uomid','UOM',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomrate','Conversion Factor',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'baseuomquantity','Base Quantity',31,1,1,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'rate','Unit Price',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'amount','Amount',31,1,1,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'remark','Remark',31,1,1,1,1);
+
+# Added 'User Mandatory' Field and assign it to System Mandatory Field
+ALTER TABLE  customizereportheader ADD COLUMN isusermanadatoryfield INT(1) DEFAULT 0; 
+ALTER TABLE  customizereportmapping ADD COLUMN isusermanadatoryfield INT(1) DEFAULT 0; 
+
+UPDATE customizereportheader SET isusermanadatoryfield=ismanadatoryfield;
+UPDATE customizereportmapping SET isusermanadatoryfield=ismanadatoryfield;
+
+# Deleted and Added 'Is Maintenance' and 'One Time Customers' form field
+DELETE FROM customizereportheader WHERE dataIndex='isMaintenanceOrder' ;
+DELETE FROM customizereportmapping WHERE dataIndex='isMaintenanceOrder';
+
+DELETE FROM customizereportheader WHERE dataIndex='ShowOnlyOneTime' ;
+DELETE FROM customizereportmapping WHERE dataIndex='ShowOnlyOneTime';
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'isMaintenanceOrder','Is Maintenance',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'isMaintenanceOrder','Is Maintenance',18,1,1);
+
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',2,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',4,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',22,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',27,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'ShowOnlyOneTime','One Time Customers',29,1,1);
+
+# Inserted form fields in SO and PO
+# Sales Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'includingGST','Including GST',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'lockQuantitySO','Block Quantity',20,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'includeprotax','Include Product Tax',20,1,1);
+
+# Purchase Order
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'includingGST','Including GST',18,1,1);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,isformfield) VALUES (UUID(),'includeprotax','Include Product Tax',18,1,1);
+
+# Updated ismanadatoryfield for Credit/Debit Term 
+UPDATE `customizereportheader` SET `ismanadatoryfield`='0' WHERE dataIndex='creditTerm' ;
+UPDATE `customizereportheader` SET `ismanadatoryfield`='0' WHERE dataIndex='baseuomrate' ;
+UPDATE `customizereportheader` SET `ismanadatoryfield`='0' WHERE dataIndex='discountispercent' ;
+UPDATE `customizereportheader` SET `ismanadatoryfield`='0' WHERE dataIndex='prdiscount' ;
+UPDATE `customizereportheader` SET `ismanadatoryfield`='0' WHERE dataIndex='sequenceFormatCombobox' ;
+
+# Vivek Pakmode 15th November 2014
+
+CREATE TABLE `packingdolist` (
+  `id` varchar(255) NOT NULL,
+  `packnumber` varchar(50) NOT NULL,
+  `packingdate` datetime NOT NULL,  
+  `memo` varchar(255) default NULL,
+  `deleteflag` char(1) NOT NULL,
+  `customer` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,  
+  `status` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FK_COMPANY` (`company`), 
+  KEY `FK_STATUS` (`status`),
+  FOREIGN KEY (`status`) REFERENCES `masteritem` (`id`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `packingdolistdetails` (
+  `id` varchar(255) NOT NULL,
+  `remark` varchar(255) default NULL,
+  `actualquantity` int(11) NOT NULL,
+  `deliveredquantity` int(11) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `packingdolist` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `srno` int(11) default '0',
+  `deliveryorder` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FKCOMPANY` (`company`),
+  KEY `FKID` (`id`),
+  KEY `FKPRODUCT` (`product`),
+  KEY `FKPACKINGDOLIST` (`packingdolist`),
+  KEY `FKDELIVERYORDER` (`deliveryorder`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  FOREIGN KEY (`packingdolist`) REFERENCES `packingdolist` (`id`),
+  FOREIGN KEY (`deliveryorder`) REFERENCES `deliveryorder` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `shipingdodetails` (
+  `id` varchar(255) NOT NULL,
+  `actualquantity` int(11) NOT NULL,
+  `shipquantity` int(11) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `packingdolist` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `deliveryorder` varchar(255) NOT NULL,
+  `packingdolistdetails` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FKCOMPANY` (`company`),
+  KEY `FKID` (`id`),
+  KEY `FKPRODUCT` (`product`),
+  KEY `FKDELIVERYORDER` (`deliveryorder`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  FOREIGN KEY (`deliveryorder`) REFERENCES `deliveryorder` (`id`),
+  FOREIGN KEY (`packingdolistdetails`) REFERENCES `packingdolistdetails` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `itempackingdetails` (
+  `id` varchar(255) NOT NULL,
+  `packingdolistdetails` varchar(255) NOT NULL,
+  `product` varchar(255) NOT NULL,
+  `packingdolist` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `srno` int(11) default '0',
+  `description` varchar(255) default NULL,
+  `packagequantity` int(11) NOT NULL,
+  `itemperpackage` int(11) NOT NULL,
+  `totalitems`  int(11) DEFAULT 0,
+  `grossweight`  DOUBLE NULL DEFAULT 0,
+  PRIMARY KEY  (`id`),
+  KEY `FKCOMPANY` (`company`),
+  KEY `FKID` (`id`),
+  KEY `FKPRODUCT` (`product`),
+  KEY `FKPACKINGDOLIST` (`packingdolist`),
+  KEY `FKPACKINGDOLISTDETAILS` (`packingdolistdetails`),
+  FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+  FOREIGN KEY (`product`) REFERENCES `product` (`id`),
+  FOREIGN KEY (`packingdolist`) REFERENCES `packingdolist` (`id`),
+  FOREIGN KEY (`packingdolistdetails`) REFERENCES `packingdolistdetails` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `packages` (
+`packageid`  varchar(255) NOT NULL ,
+`packagename`  varchar(255) NULL ,
+`measurement`  varchar(255) NULL ,
+`packageweight`  DOUBLE NULL DEFAULT 0,
+`company`  varchar(255) NOT NULL ,
+PRIMARY KEY (`packageid`),
+FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
+
+Alter table product add column productweight double DEFAULT 0;
+
+alter table extracompanypreferences 
+add column `packingdolist` char(1) default 'F';
+
+Alter table shipingdodetails add column shipedquantity double DEFAULT 0;
+
+ALTER TABLE itempackingdetails
+  ADD COLUMN packages varchar(255),
+  ADD FOREIGN KEY (`packages`) REFERENCES `packages` (`packageid`);
+
+#Hitesh Suryawanshi 17th Nov 2014
+#Please execute this script missingsql.jsp before executing following db changes.
+#missingsql.jsp: This script is for inserting term NET -1 in creditterm table for different companies.
+#Also Please change serverip, dbname, username and password in script
+
+#Set termid to NET -1 for cash type invoices
+update invoice b set  b.termid=(select max(a.termid)  from creditterm a where a.termdays=-1 and a.company=b.company) where b.cashtransaction=1 and b.termid is NULL;
+update goodsreceipt b set  b.termid=(select max(a.termid)  from creditterm a where a.termdays=-1 and a.company=b.company) where b.cashtransaction=1 and b.termid is NULL;
+
+insert into defaultcreditterm values(UUID(),'NET -1',-1);
+
+alter table extracompanypreferences add `companylogoflag` char(1) DEFAULT 'F';
+
+# Atul sachan 17 Nov 2014
+ALTER TABLE `mailnotification`
+ADD COLUMN `mailtoassignedto`  char(1) NULL DEFAULT 'F';
+
+#Raveesh Pathak 18th Nov 2014
+update users set dateFormat='2' where dateFormat is null;
+
+#Neeraj Dwivedi 18th Nov 2014
+update compaccpreferences set quantitydigitafterdecimal=2 where id in (select companyid from company where subdomain="accredesign");
+
+#Hitesh Suryawanshi 19th Nov 2014
+
+alter table fieldParams add COLUMN `mapwithtype` tinyint(3) unsigned DEFAULT 1;
+
+#Sagar M 19th Nov 2014. Convert character set from latin to utf8
+ALTER TABLE masteritempriceformula CONVERT TO CHARACTER SET utf8;
+
+
+#Malhari 19th Nov 2014 Redesign Serial No functionality
+CREATE TABLE `newproductbatch` (
+`id`  varchar(255) NOT NULL ,
+`batchname`  varchar(255) NULL DEFAULT NULL ,
+`location`  varchar(255) NULL DEFAULT NULL ,
+`warehouse`  varchar(255) NULL DEFAULT NULL ,
+`mfgdate`  date NULL DEFAULT NULL ,
+`expdate`  date NULL DEFAULT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`quantitydue`  double NULL DEFAULT 0 ,
+`isopening`  char(1) NULL DEFAULT 'F' ,
+`ispurchase`  char(1) NULL DEFAULT 'F' ,
+`transactiontype`  int(11) NULL DEFAULT 1 ,
+`product`  varchar(255) NULL ,
+`company`  varchar(255) NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `newproductbatch_location` FOREIGN KEY (`location`) REFERENCES `inventorylocation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `newproductbatch_warehouse` FOREIGN KEY (`warehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT `newproductbatch_company` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `newbatchserial` (
+`id`  varchar(255) NOT NULL ,
+`serialname`  varchar(255) NULL DEFAULT NULL ,
+`expfromdate`  date NULL DEFAULT NULL ,
+`exptodate`  date NULL DEFAULT NULL ,
+`quantity`  double NULL DEFAULT 0 ,
+`quantitydue`  double NULL DEFAULT 0 ,
+`isopening`  char(1) NULL DEFAULT 'F' ,
+`ispurchase`  char(1) NULL DEFAULT 'F' ,
+`transactiontype`  int(11) NULL DEFAULT 1 ,
+`product`  varchar(255) NULL DEFAULT NULL ,
+`batch`  varchar(255) NULL DEFAULT NULL ,
+`company`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `batchSerialMapping_batch` FOREIGN KEY (`batch`) REFERENCES `newproductbatch` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+CONSTRAINT `batchserialmapping_company` FOREIGN KEY (`company`) REFERENCES `company` (`companyid`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `locationbatchdocumentmapping` (
+`id`  varchar(255) NOT NULL ,
+`batchmapid`  varchar(255) NULL DEFAULT NULL ,
+`transactiontype`  int(11) NULL DEFAULT 1 ,
+`documentid`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `locationbatchmapping_batchmapid` FOREIGN KEY (`batchmapid`) REFERENCES `newproductbatch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `serialdocumentmapping` (
+`id`  varchar(255) NOT NULL ,
+`serialid`  varchar(255) NULL DEFAULT NULL ,
+`transactiontype`  int(11) NULL DEFAULT 1 ,
+`documentid`  varchar(255) NULL DEFAULT NULL ,
+PRIMARY KEY (`id`),
+CONSTRAINT `serialdocumentmapping_serialmappid` FOREIGN KEY (`serialid`) REFERENCES `newbatchserial` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `compaccpreferences` ADD COLUMN `islocationcompulsory` char(1) default 'F';
+ALTER TABLE `compaccpreferences` ADD COLUMN `iswarehousecompulsory` char(1) default 'F';
+
+alter table product add column islocationforproduct char(1) default 'F' ;
+alter table product add column iswarehouseforproduct char(1) default 'F' ;
+
+ALTER TABLE `newbatchserial`
+ADD COLUMN `ispurchasereturn`  char(1) NULL DEFAULT 'F';
+
+ALTER TABLE `locationbatchdocumentmapping`
+ADD COLUMN `ispurchasereturn`  char(1) NULL DEFAULT 'F';
+
+ALTER TABLE `serialdocumentmapping`
+ADD COLUMN `ispurchasereturn`  char(1) NULL DEFAULT 'F';
+
+ALTER TABLE `serialdocumentmapping`
+ADD COLUMN `expfromdate`  date NULL DEFAULT NULL AFTER `documentid`,
+ADD COLUMN `exptodate`  date NULL DEFAULT NULL AFTER `expfromdate`;
+
+ALTER TABLE `locationbatchdocumentmapping`
+ADD COLUMN `mfgdate`  date NULL DEFAULT NULL AFTER `documentid`,
+ADD COLUMN `expdate`  date NULL DEFAULT NULL ;
+
+ALTER TABLE `locationbatchdocumentmapping`
+ADD COLUMN `quantity`  double NULL DEFAULT 0 AFTER `expdate`;
+
+# Amol Dhokale 19th November 2014
+ALTER TABLE extracompanypreferences ADD COLUMN salesordercreatedforcustomerflag CHAR(1) DEFAULT 'F';
+
+#Shashi nandan kumar 19th Nov 2014
+insert into audit_group values('45','Maintenance Schedule'); 
+insert into audit_group values('46','Maintenance Work Order');
+insert into audit_action values('159','Asset Maintenance Schedule Created','45');
+insert into audit_action values('160','Asset Maintenance Schedule Updated','45'); 
+insert into audit_action values('161','Asset Maintenance Schedule Deleted','45'); 
+insert into audit_action values('164','Asset Maintenance Work Order Deleted','46'); 
+insert into audit_action values('163','Asset Maintenance Work Order Updated','46'); 
+insert into audit_action values('162','Asset Maintenance Work Order Added','46'); 
+
+# Atul sachan 20 Nov 2014
+
+
+ALTER TABLE `assetmaintenanceschedulerobject`
+ADD COLUMN `scheduletype`  int NULL DEFAULT 0,
+ADD COLUMN `contractid`  varchar(255) NULL DEFAULT NULL;
+
+ALTER TABLE `assetmaintenanceschedulerobject` ADD FOREIGN KEY (`contractid`) REFERENCES `contract` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `assetmaintenancescheduler`
+ADD COLUMN `scheduletype`  int NULL DEFAULT 0;
+
+#Pandurang Mukhekar 24th November 2014
+alter table extracompanypreferences 
+add column uomschematype int(3) DEFAULT '0';
+
+#Mayur Bhokase 24th November 2014
+ALTER table bankreconciliation add checkcount int(11) DEFAULT '0';
+ALTER table bankreconciliation add depositecount int(11) DEFAULT '0';
+alter table bankreconciliation add createdby varchar(40) DEFAULT NULL;
+Alter TABLE bankreconciliation add FOREIGN KEY (createdby) REFERENCES users (userid);
+
+alter table bankreconciliationdetail add reconciledate datetime DEFAULT NULL;
+alter table bankreconciliation drop column endingamount;
+
+
+CREATE TABLE `bankunreconciliationdetail` (
+  `id` varchar(255) NOT NULL,
+  `debit` char(1) NOT NULL,
+  `amount` double NOT NULL,
+  `name` text NOT NULL,
+  `journalEntry` varchar(255) NOT NULL,
+  `bankReconciliation` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `unreconciledate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+FOREIGN KEY (`bankReconciliation`) REFERENCES `bankreconciliation` (`id`),
+FOREIGN KEY (`journalEntry`) REFERENCES `journalentry` (`id`),
+ FOREIGN KEY (`company`) REFERENCES `company` (`companyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE  bankreconciliationdocuments (
+  `id` varchar(255) NOT NULL,
+  `docid` varchar(255) NOT NULL,
+  `docname` varchar(255) NOT NULL,
+  `doctypeid` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE bankreconciliationdoccompmap (
+  `id` varchar(255) NOT NULL,
+  `documentid` varchar(255) NOT NULL,
+  `reconcileid` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+ FOREIGN KEY (`company`) REFERENCES `company` (`companyid`),
+FOREIGN KEY (`documentid`) REFERENCES `bankreconciliationdocuments` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+#Raveesh Pathak 25th Nov 2014
+
+ALTER TABLE billingshippingaddresses ADD COLUMN shippingroute VARCHAR(255) DEFAULT NULL;
+ALTER TABLE customeraddresses ADD COLUMN shippingRoute1 VARCHAR(255) DEFAULT NULL;
+ALTER TABLE customeraddresses ADD COLUMN shippingRoute2 VARCHAR(255) DEFAULT NULL;
+ALTER TABLE customeraddresses ADD COLUMN shippingRoute3 VARCHAR(255) DEFAULT NULL;
+ALTER TABLE default_header ADD COLUMN allowadvancesearch char(1) DEFAULT 'F';
+ALTER TABLE default_header ADD COLUMN dbtabletame varchar(255) DEFAULT NULL after dbcolumnname;
+
+CREATE TABLE default_header_modulejoinref (
+  id varchar(255) NOT NULL,
+  module varchar(255) NOT NULL,
+  refmodule varchar(255) DEFAULT NULL,
+  refmoduletablename varchar(255) DEFAULT NULL,
+  query varchar(255) DEFAULT NULL,
+  parentrefmodule varchar(255) DEFAULT NULL,
+  parentrefmoduletablename varchar(255) DEFAULT NULL,
+  PRIMARY KEY  (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ 
+#Modules table insert Query
+
+insert into modules(id,modulename,pojoclasspathfull,primarykey_methodname)values('44','Customer Addresses' , 'com.krawler.common.admin.CustomerAddresses', 'ID');
+insert into modules(id,modulename,pojoclasspathfull,primarykey_methodname)values('45','vendor Addresses' , 'com.krawler.common.admin.VendorAddresses', 'ID');
+insert into modules(id,modulename,pojoclasspathfull,primarykey_methodname)values('46','Transaction Addresses',  'com.krawler.common.admin.BillingShippingAddresses', 'ID');
+insert into modules(id,modulename,pojoclasspathfull,primarykey_methodname)values('47','Delivery Order Details',  'com.krawler.hql.accounting.DeliveryOrderDetail', 'ID');
+insert into modules(id,modulename,pojoclasspathfull,primarykey_methodname)values('48','Invoice Details',  'com.krawler.hql.accounting.InvoiceDetail', 'ID');
+
+#default_header_modulejoinref table insert Query
+
+insert into default_header_modulejoinref(id,module,refmodule,refmoduletablename,query,parentrefmodule,parentrefmoduletablename)
+values('2dc9dbfc-7160-11e4-974a-c03fd5633215','27','46','billingshippingaddresses','LEFT JOIN billingshippingaddresses ON billingshippingaddresses.id=invoice.billingshippingaddresses','2','invoice');
+
+insert into default_header_modulejoinref(id,module,refmodule,refmoduletablename,query,parentrefmodule,parentrefmoduletablename)
+values('bfce38b8-7160-11e4-974a-c03fd5633215','27','2','invoice','LEFT JOIN invoice ON invoice.id=invoicedetails.invoice','48','invoicedetails');
+
+insert into default_header_modulejoinref(id,module,refmodule,refmoduletablename,query,parentrefmodule,parentrefmoduletablename)
+values('f7c1ef9e-7160-11e4-974a-c03fd5633215','27','48','invoicedetails','LEFT JOIN invoicedetails ON invoicedetails.id=dodetails.cidetails','47','dodetails');
+
+insert into default_header_modulejoinref(id,module,refmodule,refmoduletablename,query,parentrefmodule,parentrefmoduletablename)
+values('9449aab4-7161-11e4-974a-c03fd5633215','27','47','dodetails','LEFT JOIN  dodetails ON dodetails.deliveryorder=deliveryorder.id',null,null);
+
+#default_header table insert Query
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('f5d179a6-7161-11e4-974a-c03fd5633215','Billing Address','1','BillingAddress','F' ,'F','F','billingaddress','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('eb4d3bc2-7162-11e4-974a-c03fd5633215','Billing City','1','BillingCity','F' ,'F','F','billingcity','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('92188d8a-7163-11e4-974a-c03fd5633215','Billing Contact Person','1','BillingContactPerson','F' ,'F','F','billingcontactperson','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('826eecfe-7162-11e4-974a-c03fd5633215','Billing Country','1','BillingCountry','F' ,'F','F','billingcountry','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('a3873952-7165-11e4-974a-c03fd5633215','Billing State','1','BillingState','F' ,'F','F','billingstate','billingshippingaddresses','46','T');
+
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('df635f48-7163-11e4-974a-c03fd5633215','Shipping Address','1','ShippingAddress','F' ,'F','F','shippingaddress','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('5c626c6e-7164-11e4-974a-c03fd5633215','Shipping City','1','ShippingCity','F' ,'F','F','shippingcity','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('6a4990a0-7164-11e4-974a-c03fd5633215','Shipping Contact Person','1','ShippingContactPersonNumber','F' ,'F','F','shippingcontactpersonnumber','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('4a55bbf2-7164-11e4-974a-c03fd5633215','Shipping Country','1','ShippingCountry','F' ,'F','F','shippingCountry','billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('4a882c76-7174-11e4-974a-c03fd5633215','Shipping Route','1', 'ShippingRoute', 'F' ,'F','F','shippingroute', 'billingshippingaddresses','46','T');
+
+insert into default_header(id,defaultHeader,xtype,pojomethodname,ismandatory,required,allowimport,dbcolumnname,dbtabletame,module,allowadvancesearch) values('50e3f484-7164-11e4-974a-c03fd5633215','Shipping State','1','ShippingState','F' ,'F','F','shippingstate','billingshippingaddresses','46','T');
+
+insert into mastergroup (id, groupname) values (28, "Shipping Route");
+update default_header set dbtabletame='deliveryorder',allowadvancesearch='T' where module='27' and defaultHeader='Delivery Order Number';
+update default_header set dbtabletame='deliveryorder',allowadvancesearch='T' where module='27' and defaultHeader='FOB';
+update default_header set dbtabletame='deliveryorder',allowadvancesearch='T' where module='27' and defaultHeader='Ship via';
+update default_header set dbtabletame='deliveryorder',allowadvancesearch='T' where module='27' and defaultHeader='Memo';
+
+# Vivek Pakmode 25th Nov 2014
+
+insert into reportmaster(id,name,description,method_name) values ('Dimension_Based_ProfitLoss','Dimension Based Profit Loss','View Dimension Based Profit And Loss comparison','callDimensionBasedProfitLoss()');
+
+# Amol Dhokale 25th November 2014
+# Insert Include Product Tax in CS,PS,SI,PI,CQ,VQ
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includeprotax','Include Product Tax',4,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includeprotax','Include Product Tax',8,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includeprotax','Include Product Tax',2,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includeprotax','Include Product Tax',6,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includeprotax','Include Product Tax',22,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includeprotax','Include Product Tax',23,1,0,1,0);
+
+# Insert Including GST field in CS,PS,SI,PI,CQ,VQ
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includingGST','Including GST',4,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includingGST','Including GST',8,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includingGST','Including GST',2,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includingGST','Including GST',6,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includingGST','Including GST',22,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'includingGST','Including GST',23,1,0,1,0);
+
+# Insert Generate DO/GR field in CS,PS,SI,PI
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'autogenerateDO','Generate Delivery Order',4,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'autogenerateDO','Generate Delivery Order',2,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'autogenerateDO','Generate Goods Receipt',8,1,0,1,0);
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'autogenerateDO','Generate Goods Receipt',6,1,0,1,0);
+
+# Insert Generate Receipt in CS
+INSERT INTO customizereportheader (id,dataIndex,dataheader,moduleid,reportid,islinefield,isformfield,ismanadatoryfield) VALUES (UUID(),'generateReceipt','Generate Receipt',4,1,0,1,0);
+
+# Atul sachan 26 Nov 2014
+
+ALTER TABLE `extracompanypreferences`
+ADD COLUMN `assetsetingactivation`  char(1) NULL DEFAULT 'T',
+ADD COLUMN `depreciationcalculationtype`  int NULL DEFAULT 2;
+
+#Raveesh Pathak 26th Nov 2014
+update modules set uniquekey_methodname='Acccode',uniquekey_hbmname='acccode' where id='e1e72896-bf85-102d-b644-001e58a64cb6';
+update default_header set hbmnotnull='T' where module='e1e72896-bf85-102d-b644-001e58a64cb6' and defaultHeader='Account Code';
+
+# Mayur Pawar 27th Nov 2014
+
+
+alter table salesorder add column isconsignment char(1) DEFAULT 'F';
+alter table salesorder add column custWarehouse varchar(255) DEFAULT NULL;
+
+alter table deliveryorder add column custWarehouse varchar(255) DEFAULT NULL;
+alter table deliveryorder add column isconsignment char(1) DEFAULT 'F';
+
+alter table invoice add column custWarehouse varchar(255) DEFAULT NULL;
+alter table invoice add column isconsignment char(1) DEFAULT 'F';
+
+alter table salesreturn add column custWarehouse varchar(255) DEFAULT NULL;
+alter table salesreturn add column isconsignment char(1) DEFAULT 'F';
+
+ALTER TABLE `newbatchserial`
+ADD COLUMN `lockquantity`  double NULL DEFAULT 0 AFTER `ispurchasereturn`;
+
+ALTER TABLE `newproductbatch`
+ADD COLUMN `lockquantity`  double NULL DEFAULT 0 ;
+
+ALTER TABLE `inventorywarehouse` ADD COLUMN `customer`  varchar(255)  DEFAULT NULL;
+alter table inventorywarehouse add column isForCustomer char(1) DEFAULT 'F';
+
+ALTER TABLE `salesorder` ADD CONSTRAINT `salesorder_custWarehouse` FOREIGN KEY (`custWarehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `deliveryorder` ADD CONSTRAINT `deliveryorder_custWarehouse` FOREIGN KEY (`custWarehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `invoice` ADD CONSTRAINT `invoice_custWarehouse` FOREIGN KEY (`custWarehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `salesreturn` ADD CONSTRAINT `salesreturn_custWarehouse` FOREIGN KEY (`custWarehouse`) REFERENCES `inventorywarehouse` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+alter table inventory add consignuomquantity double NULL DEFAULT 0;
+alter table inventory add  isconsignment char(1) DEFAULT 'F';
+
+ALTER TABLE extracompanypreferences ADD COLUMN consignmentmanagementflag INT(1) DEFAULT 0;
+
+alter table newproductbatch add consignquantity double NULL DEFAULT 0;
+alter table newbatchserial add consignquantity double NULL DEFAULT 0;

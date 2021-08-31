@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.inventory.model.approval.stocktransfer.StockTransferDetailApproval" table="in_stocktransfer_detail_approval">
+        <id column="id" name="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="quantity" type="double">
+            <column name="quantity"/>
+        </property>
+        <property name="stockTransferDetailId" type="string">
+            <column name="stocktransfer_detail_id"/>
+        </property>
+        <property name="serialName" type="string">
+            <column name="serialname"/>
+        </property>
+        <property name="remark" type="string">
+            <column name="remark"/>
+        </property>
+        <property name="movementStatus" type="boolean">
+            <column name="movementStatus"/>
+        </property>
+        <property name="retQty" type="double">
+            <column name="returnqty"/>
+        </property>
+        <property name="reason" type="string">
+            <column name="reason"/>
+        </property>
+        <property column="approval_status" name="approvalStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.approval.ApprovalStatus</param>
+            </type>
+        </property>
+        <property column="repair_status" name="repairStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.krawler.inventory.model.approval.ApprovalStatus</param>
+            </type>
+        </property>
+        <property name="modifiedOn" type="timestamp">
+            <column name="modifiedon"/>
+        </property>
+        <property name="repairedOn" type="timestamp">
+            <column name="repairedon"/>
+        </property>
+        <many-to-one class="com.krawler.inventory.model.approval.stocktransfer.StockTransferApproval" column="stocktransfer_approval" name="stockTransferApproval"/>
+        <many-to-one class="com.krawler.common.admin.User" column="inspector" name="inspector"/>
+        <many-to-one class="com.krawler.inventory.model.approval.InspectionDetail" column="inspection_detail" name="inspectionDetail"/>
+        <many-to-one class="com.krawler.inventory.model.inspection.InspectionForm" column="inspectionformid" name="inspectionForm"/>
+    </class>
+</hibernate-mapping>

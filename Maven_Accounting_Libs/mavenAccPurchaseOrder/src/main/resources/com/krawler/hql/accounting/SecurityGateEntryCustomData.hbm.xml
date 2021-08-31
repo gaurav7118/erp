@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.krawler.hql.accounting.SecurityGateEntryCustomData" table="securitygateentrycustomdata">
+      
+   <id name="sgeID" type="string">
+      <generator class="foreign">
+        <param name="property">securityGateEntry</param>
+      </generator>
+    </id>
+
+  <property name="moduleId" not-null="false" type="string">
+        <column name="moduleId"   ></column>
+    </property>
+  <property name="col1" not-null="false" type="string">
+        <column name="col1"   ></column>
+    </property>
+    <property name="col2" not-null="false" type="string">
+        <column name="col2"   ></column>
+        </property>
+    <property name="col3" not-null="false" type="string">
+        <column name="col3"   ></column>
+        </property>
+    <property name="col4" not-null="false" type="string">
+        <column name="col4"   ></column>
+        </property>
+
+    <property name="col5" not-null="false" type="string">
+        <column name="col5"   ></column>
+        </property>
+    <property name="col6" not-null="false" type="string">
+        <column name="col6"   ></column>
+        </property>
+    <property name="col7" not-null="false" type="string">
+        <column name="col7"   ></column>
+        </property>
+    <property name="col8" not-null="false" type="string">
+        <column name="col8"   ></column>
+        </property>
+    <property name="col9" not-null="false" type="string">
+        <column name="col9"   ></column>
+        </property>
+    <property name="col10" not-null="false" type="string">
+        <column name="col10"   ></column>
+    </property>
+    <property name="col11" not-null="false" type="string">
+        <column name="col11"   ></column>
+    </property>
+    <property name="col12" not-null="false" type="string">
+        <column name="col12"   ></column>
+    </property>
+    <property name="col13" not-null="false" type="string">
+        <column name="col13"   ></column>
+    </property>
+    <property name="col14" not-null="false" type="string">
+        <column name="col14"   ></column>
+    </property>
+    <property name="col15" not-null="false" type="string">
+        <column name="col15"   ></column>
+    </property>
+    <property name="col16" not-null="false" type="string">
+        <column name="col16"/>
+    </property>
+    <property name="col17" not-null="false" type="string">
+        <column name="col17"/>
+    </property>
+    <property name="col18" not-null="false" type="string">
+        <column name="col18"/>
+    </property>
+    <property name="col19" not-null="false" type="string">
+        <column name="col19"/>
+    </property>
+    <property name="col20" not-null="false" type="string">
+        <column name="col20"/>
+    </property>
+    <property name="col21" not-null="false" type="string">
+        <column name="col21"/>
+    </property>
+    <property name="col22" not-null="false" type="string">
+        <column name="col22"/>
+    </property>
+    <property name="col23" not-null="false" type="string">
+        <column name="col23"/>
+    </property>
+    <property name="col24" not-null="false" type="string">
+        <column name="col24"/>
+    </property>
+    <property name="col25" not-null="false" type="string">
+        <column name="col25"/>
+    </property>
+    <property name="col26" not-null="false" type="string">
+        <column name="col26"/>
+    </property>
+    <property name="col27" not-null="false" type="string">
+        <column name="col27"/>
+    </property>
+    <property name="col28" not-null="false" type="string">
+        <column name="col28"/>
+    </property>
+    <property name="col29" not-null="false" type="string">
+        <column name="col29"/>
+    </property>
+    <property name="col30" not-null="false" type="string">
+        <column name="col30"/>
+    </property>
+    <property name="col31" not-null="false" type="string">
+        <column name="col31"/>
+    </property>
+    <property name="col32" not-null="false" type="string">
+        <column name="col32"/>
+    </property>
+    <property name="col33" not-null="false" type="string">
+        <column name="col33"/>
+    </property>
+    <property name="col34" not-null="false" type="string">
+        <column name="col34"/>
+    </property>
+    <property name="col35" not-null="false" type="string">
+        <column name="col35"/>
+    </property>
+    <property name="col36" not-null="false" type="string">
+        <column name="col36"/>
+    </property>
+    <property name="col37" not-null="false" type="string">
+        <column name="col37"/>
+    </property>
+    <property name="col38" not-null="false" type="string">
+        <column name="col38"/>
+    </property>
+    <property name="col39" not-null="false" type="string">
+        <column name="col39"/>
+    </property>
+    <property name="col40" not-null="false" type="string">
+        <column name="col40"/>
+    </property>
+    <property name="col41" not-null="false" type="string">
+        <column name="col41"/>
+    </property>
+    <property name="col42" not-null="false" type="string">
+        <column name="col42"/>
+    </property>
+    <property name="col43" not-null="false" type="string">
+        <column name="col43"/>
+    </property>
+    <property name="col44" not-null="false" type="string">
+        <column name="col44"/>
+    </property>
+    <property name="col45" not-null="false" type="string">
+        <column name="col45"/>
+    </property>
+    <property name="col46" not-null="false" type="string">
+        <column name="col46"/>
+    </property>
+    <property name="col47" not-null="false" type="string">
+        <column name="col47"/>
+    </property>
+    <property name="col48" not-null="false" type="string">
+        <column name="col48"/>
+    </property>
+    <property name="col49" not-null="false" type="string">
+        <column name="col49"/>
+    </property>
+    <property name="col50" not-null="false" type="string">
+        <column name="col50"/>
+    </property>
+
+    <!-- DefaultMasterItem References columns -->
+
+    <property name="col101" not-null="false" type="string">
+        <column name="col101"   ></column>
+        </property>
+    <property name="col102" not-null="false" type="string">
+        <column name="col102"   ></column>
+        </property>
+    <property name="col103" not-null="false" type="string">
+        <column name="col103"   ></column>
+        </property>
+    <property name="col104" not-null="false" type="string">
+        <column name="col104"   ></column>
+        </property>
+    <property name="col105" not-null="false" type="string">
+        <column name="col105"   ></column>
+        </property>
+    <property name="col106" not-null="false" type="string">
+        <column name="col106"   ></column>
+        </property>
+    <property name="col107" not-null="false" type="string">
+        <column name="col107"   ></column>
+        </property>
+    <property name="col108" not-null="false" type="string">
+        <column name="col108"   ></column>
+        </property>
+    <property name="col109" not-null="false" type="string">
+        <column name="col109"   ></column>
+        </property>
+    <property name="col110" not-null="false" type="string">
+        <column name="col110"   ></column>
+        </property>
+
+   <!--Users Reference Columns-->
+    <property name="col111" not-null="false" type="string">
+        <column name="col111"   ></column>
+    </property>
+    <property name="col112" not-null="false" type="string">
+        <column name="col112"   ></column>
+        </property>
+    <property name="col113" not-null="false" type="string">
+        <column name="col113"   ></column>
+        </property>
+    <property name="col114" not-null="false" type="string">
+        <column name="col114"   ></column>
+        </property>
+    <property name="col115" not-null="false" type="string">
+        <column name="col115"   ></column>
+    </property>
+ <!-- Normal Field columns such as Text,Time,Date,Number -->
+ 
+    <property name="col1001" not-null="false" type="string">
+        <column length="1000" name="col1001" ></column>
+        </property>
+    <property name="col1002" not-null="false" type="string">
+        <column   length="1000"  name="col1002" ></column>
+        </property>
+    <property name="col1003" not-null="false" type="string">
+        <column  length="1000"  name="col1003" ></column>
+        </property>
+    <property name="col1004" not-null="false" type="string">
+        <column  length="1000"  name="col1004" ></column>
+        </property>
+    <property name="col1005" not-null="false" type="string">
+        <column  length="1000"  name="col1005" ></column>
+        </property>
+    <property name="col1006" not-null="false" type="string">
+        <column  length="1000"  name="col1006" ></column>
+        </property>
+    <property name="col1007" not-null="false" type="string">
+        <column  length="1000"  name="col1007" ></column>
+        </property>
+    <property name="col1008" not-null="false" type="string">
+        <column  length="1000"  name="col1008" ></column>
+        </property>
+    <property name="col1009" not-null="false" type="string">
+        <column  length="1000"  name="col1009" ></column>
+        </property>
+    <property name="col1010" not-null="false" type="string">
+        <column  length="1000"  name="col1010" ></column>
+        </property>
+
+    <property name="col1011" not-null="false" type="string">
+        <column  length="1000"  name="col1011" ></column>
+        </property>
+    <property name="col1012" not-null="false" type="string">
+        <column  length="1000"  name="col1012" ></column>
+        </property>
+    <property name="col1013" not-null="false" type="string">
+        <column  length="1000"  name="col1013" ></column>
+        </property>
+    <property name="col1014" not-null="false" type="string">
+        <column  length="1000"  name="col1014" ></column>
+        </property>
+    <property name="col1015" not-null="false" type="string">
+        <column  length="1000"  name="col1015" ></column>
+        </property>
+    <property name="col1016" not-null="false" type="string">
+        <column  length="1000"  name="col1016" ></column>
+        </property>
+    <property name="col1017" not-null="false" type="string">
+        <column  length="1000"  name="col1017" ></column>
+        </property>
+    <property name="col1018" not-null="false" type="string">
+        <column  length="1000"  name="col1018" ></column>
+        </property>
+    <property name="col1019" not-null="false" type="string">
+        <column  length="1000"  name="col1019" ></column>
+        </property>
+    <property name="col1020" not-null="false" type="string">
+        <column  length="1000"  name="col1020" ></column>
+        </property>
+        
+    <property name="col1021" not-null="false" type="string">
+        <column  length="1000"  name="col1021" ></column>
+        </property>
+    <property name="col1022" not-null="false" type="string">
+        <column  length="1000"  name="col1022" ></column>
+        </property>
+    <property name="col1023" not-null="false" type="string">
+        <column  length="1000"  name="col1023" ></column>
+        </property>
+    <property name="col1024" not-null="false" type="string">
+        <column  length="1000"  name="col1024" ></column>
+        </property>
+    <property name="col1025" not-null="false" type="string">
+        <column  length="1000"  name="col1025" ></column>
+        </property>
+    <property name="col1026" not-null="false" type="string">
+        <column  length="1000"  name="col1026" ></column>
+        </property>
+    <property name="col1027" not-null="false" type="string">
+        <column  length="1000"  name="col1027" ></column>
+        </property>
+    <property name="col1028" not-null="false" type="string">
+        <column  length="1000"  name="col1028" ></column>
+        </property>
+    <property name="col1029" not-null="false" type="string">
+        <column  length="1000"  name="col1029" ></column>
+        </property>
+    <property name="col1030" not-null="false" type="string">
+        <column  length="1000" name="col1030" ></column>
+    </property>
+    <property name="col1031" not-null="false" type="string">
+        <column  length="1000" name="col1031" ></column>
+    </property>
+    <property name="col1032" not-null="false" type="string">
+        <column  length="1000" name="col1032" ></column>
+    </property>
+    <property name="col1033" not-null="false" type="string">
+        <column  length="1000" name="col1033" ></column>
+    </property>
+    <property name="col1034" not-null="false" type="string">
+        <column  length="1000" name="col1034" ></column>
+    </property>
+    <property name="col1035" not-null="false" type="string">
+        <column  length="1000" name="col1035" ></column>
+    </property>
+    
+        <property name="col1036" not-null="false" type="string">
+        <column  length="1000"   default="0" name="col1036" ></column>
+    </property>
+    <property name="col1037" not-null="false" type="string">
+        <column  length="1000"  name="col1037" ></column>
+    </property>
+    <property name="col1038" not-null="false" type="string">
+        <column  length="1000" name="col1038" ></column>
+    </property>
+    <property name="col1039" not-null="false" type="string">
+        <column  length="1000" name="col1039" ></column>
+    </property>
+    <property name="col1040" not-null="false" type="string">
+        <column  length="1000"  name="col1040" ></column>
+    </property>
+    <property name="col1041" not-null="false" type="string">
+        <column  length="1000" name="col1041" ></column>
+    </property>
+    <property name="col1042" not-null="false" type="string">
+        <column  length="1000"  name="col1042" ></column>
+    </property>
+    <property name="col1043" not-null="false" type="string">
+        <column  length="1000"  name="col1043" ></column>
+    </property>
+    <property name="col1044" not-null="false" type="string">
+        <column  length="1000"  name="col1044" ></column>
+    </property>
+    <property name="col1045" not-null="false" type="string">
+        <column  length="1000"  name="col1045" ></column>
+    </property>
+    <property name="col1046" not-null="false" type="string">
+        <column  length="1000"  name="col1046" ></column>
+    </property>
+    <property name="col1047" not-null="false" type="string">
+        <column  length="1000"  name="col1047" ></column>
+    </property>
+    <property name="col1048" not-null="false" type="string">
+        <column  length="1000"  name="col1048" ></column>
+    </property>
+    <property name="col1049" not-null="false" type="string">
+        <column  length="1000"  name="col1049" ></column>
+    </property>
+    <property name="col1050" not-null="false" type="string">
+        <column  length="1000"  name="col1050" ></column>
+    </property>
+    <property name="col1051" not-null="false" type="string">
+        <column  length="1000"  name="col1051" ></column>
+    </property>
+    <property name="col1052" not-null="false" type="string">
+        <column  length="1000"  name="col1052" ></column>
+    </property>
+    <property name="col1053" not-null="false" type="string">
+        <column  length="1000"  name="col1053" ></column>
+    </property>
+    <property name="col1054" not-null="false" type="string">
+        <column  length="1000"  name="col1054" ></column>
+    </property>
+    <property name="col1055" not-null="false" type="string">
+        <column  length="1000"  name="col1055" ></column>
+    </property>
+    <property name="col1056" not-null="false" type="string">
+        <column  length="1000"  name="col1056" ></column>
+    </property>
+    <property name="col1057" not-null="false" type="string">
+        <column  length="1000"  name="col1057" ></column>
+    </property>
+    <property name="col1058" not-null="false" type="string">
+        <column  length="1000"  name="col1058" ></column>
+    </property>
+    <property name="col1059" not-null="false" type="string">
+        <column  length="1000"  name="col1059" ></column>
+    </property>
+    <property name="col1060" not-null="false" type="string">
+        <column  length="1000"  name="col1060" ></column>
+    </property>
+        
+    <!-- Custom column of type Check Box type=11 -->
+        
+       <property name="col2001" not-null="false" type="string">
+            <column  length="1000"  name="col2001" ></column>
+        </property>
+        <property name="col2002" not-null="false" type="string">
+            <column  length="1000"  name="col2002" ></column>
+        </property>
+        <property name="col2003" not-null="false" type="string">
+            <column  length="1000"  name="col2003" ></column>
+        </property>
+        <property name="col2004" not-null="false" type="string">
+            <column  length="1000"  name="col2004" ></column>
+        </property>
+        <property name="col2005" not-null="false" type="string">
+            <column  length="1000"  name="col2005" ></column>
+        </property>
+        <property name="col2006" not-null="false" type="string">
+            <column  length="1000"  name="col2006" ></column>
+        </property>
+        <property name="col2007" not-null="false" type="string">
+            <column  length="1000"  name="col2007" ></column>
+        </property>
+        <property name="col2008" not-null="false" type="string">
+            <column  length="1000"  name="col2008" ></column>
+        </property>
+        <property name="col2009" not-null="false" type="string">
+            <column  length="1000"  name="col2009" ></column>
+        </property>
+        <property name="col2010" not-null="false" type="string">
+            <column  length="1000"  name="col2010" ></column>
+        </property>
+            <!-- Custom column of type Date type=3 -->
+        
+        <property name="col3001" not-null="false" type="date">
+            <column name="col3001" ></column>
+        </property>
+        <property name="col3002" not-null="false" type="date">
+            <column name="col3002" ></column>
+        </property>
+        <property name="col3003" not-null="false" type="date">
+            <column name="col3003" ></column>
+        </property>
+        <property name="col3004" not-null="false" type="date">
+            <column name="col3004" ></column>
+        </property>
+        <property name="col3005" not-null="false" type="date">
+            <column name="col3005" ></column>
+        </property>
+        <property name="col3006" not-null="false" type="date">
+            <column name="col3006" ></column>
+        </property>
+        <property name="col3007" not-null="false" type="date">
+            <column name="col3007" ></column>
+        </property>
+        <property name="col3008" not-null="false" type="date">
+            <column name="col3008" ></column>
+        </property>
+        <property name="col3009" not-null="false" type="date">
+            <column name="col3009" ></column>
+        </property>
+        <property name="col3010" not-null="false" type="date">
+            <column name="col3010" ></column>
+        </property>
+
+    
+    <property name="companyid" type="string" insert="false" update="false">
+           <column name="company"  ></column>
+    </property>
+    <many-to-one class="com.krawler.common.admin.Company" name="company"/>
+
+   
+    <one-to-one class="com.krawler.hql.accounting.SecurityGateEntry" name="securityGateEntry"/>
+    <property name="deleted" type="true_false">
+      <column name="deleted" default="'F'" />
+    </property>
+    
+  </class>
+</hibernate-mapping>

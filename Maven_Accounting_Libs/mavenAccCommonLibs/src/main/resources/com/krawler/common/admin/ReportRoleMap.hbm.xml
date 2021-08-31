@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.krawler.common.admin.ReportRoleMap" table="reportrolemap">
+        <id column="id" name="ID">
+            <generator class="uuid"/>
+        </id>
+    
+<!--    <property name="roleid" type="string">
+      <column length="100" name="roleid" />
+    </property>-->
+        <many-to-one class="com.krawler.common.admin.ReportMaster" column="reportid" name="reportid"/>
+        <many-to-one class="com.krawler.common.admin.Rolelist" column="roleid" name="roleid"/>   
+        <many-to-one class="com.krawler.common.admin.User" column="userid" name="userid"/>
+    </class>
+
+</hibernate-mapping>

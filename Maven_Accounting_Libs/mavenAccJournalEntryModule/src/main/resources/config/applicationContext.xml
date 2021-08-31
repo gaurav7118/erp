@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+        <bean id="accJournalEntryModuleService" class="com.krawler.hql.accounting.journalentry.service.AccJournalEntryModuleServiceImpl"> 
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="fieldDataManager">
+            <ref bean="fieldDatamanager"/>
+        </property>
+        <property name="accCustomerDAO">
+            <ref bean="accCustomerDao"/>
+        </property>
+        <property name="accPaymentDAOobj">
+            <ref bean="accPaymentDao"/>
+        </property>
+        <property name="accPaymentService">
+            <ref bean="accPaymentService"/>
+        </property>
+        <property name="accMultiLevelApprovalDAOObj">
+            <ref bean="accMultiLevelApprovalDAO"/>    
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="fieldDataManagercntrl1">
+            <ref bean="fieldDatamanagernew"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+        <property name="kwlCommonTablesDAOObj">
+            <ref bean="kwlCommonTablesdao"/>
+        </property>  
+    </bean> 
+    <bean id="accJournalEntryDao" class="com.krawler.spring.accounting.journalentry.accJournalEntryImpl">
+        <property name="sessionFactory">
+            <ref bean="mySessionFactory"/>
+        </property>
+        <property name="accountingHandlerDAOobj">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="fieldManagerDAO">
+            <ref bean="fieldManagerDaonew"/>
+        </property>
+    </bean>
+    <bean id="accJEController" class="com.krawler.spring.accounting.journalentry.accJournalEntryController">
+        <property name="txnManager">
+            <ref bean="txManager"/>
+        </property>
+        <property name="accJournalEntryDAO">
+            <ref bean="accJournalEntryDao"/>
+        </property>
+        <property name = "commonFnControllerService">
+            <ref bean="commonFnControllerService"/>
+        </property>
+        <property name="accCurrencyDAO">
+            <ref bean="accCurrencyDao"/>
+        </property>
+        <property name="accCompanyPreferencesDAO">
+            <ref bean="accCompanyPreferencesDao"/>
+        </property>
+        <property name="accountingHandlerDAO">
+            <ref bean="accountHandlerDao"/>
+        </property>
+        <property name="auditTrailDAO">
+            <ref bean="auditTraildao"/>
+        </property>
+        <property name="exportMPXDAOImpl">
+            <ref bean="exportMPXdao"/>
+        </property>
+        <property name="accAccountDAO">
+            <ref bean="accAccountDao"/>
+        </property>
+        <property name="accPaymentDAO">
+            <ref bean="accPaymentDao"/>
+        </property>
+        <property name="authHandlerDAO">
+            <ref bean="authHandlerdao"/>
+        </property>
+        <property name="importHandler">
+            <ref bean="importHandler"/>
+        </property>
+        <property name="journalEntryModuleServiceobj">
+            <ref bean="accJournalEntryModuleService"/>
+        </property>
+        <property name="permissionHandlerDAO">
+            <ref bean="permissionHandlerdao"/>
+        </property>
+        <property name="successView">
+            <value>jsonView</value>
+        </property>
+    </bean>
+</beans>

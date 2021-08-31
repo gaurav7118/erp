@@ -1,0 +1,701 @@
+@charset "utf-8";
+
+/***** Global Settings *****/
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+html,
+body {
+	margin: 0px;
+	padding: 0px;
+	border: 0;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+input,
+p,
+blockquote,
+table,
+th,
+td,
+embed,
+object {
+	margin: 0;
+	padding: 0;
+}
+body {
+	margin: 0;
+	padding: 0;
+	background: #ffffff url(../images/body-bg.jpg);
+	background-position: top left;
+	background-repeat: repeat-x;
+	font: 12px/1.25"Lucida Sans", Tahoma, Verdana, sans-serif;
+	line-height: 18px;
+}
+.body-inner {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF url(../images/signup-top-bg.jpg) repeat-x scroll left top;
+}
+/***** Headings *****/
+
+.container-main {
+	margin: auto;
+	padding: 0px;
+	width: 100%;
+}
+.container1 {
+	margin: auto;
+	padding: 0px;
+	width: 960px;
+}
+.wrapper {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 960px;
+}
+.top-wrapper {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 960px;
+	height: 82px;
+}
+.logo-left {
+	float: left;
+	margin-top: 22px;
+	width: 175px;
+	height: 42px;
+	/*background-image:url(../images/deskera-logofinal.jpg);*/
+	background-repeat: no-repeat;
+}
+.logo-right {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 785px;
+	height: 82px;
+}
+#main_nav {
+	float: right;
+	width: 785px;
+	height: 82px;
+}
+.lavaLampWithImage {
+	position: relative;
+	float: right;
+	margin-top: 19px;
+	height: 63px;
+}
+.lavaLampWithImage li {
+	float: left;
+	list-style: none;
+}
+.lavaLampWithImage li.back {
+	position: absolute;
+	z-index: 8;
+	width: 9px;
+	height: 76px;
+}
+.lavaLampWithImage li.back .left {
+	margin-right: 9px;
+	height: 55px;
+}
+.lavaLampWithImage li a {
+	position: relative;
+	z-index: 10;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin-left: 1em;
+	padding-right: 1em;
+	padding-left: 0em;
+	height: 40px;
+	outline: none;
+	border: none;
+	color: #af0b0a;
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: 0;
+	font-size: 14px;
+	font-family: 'Verdana';
+	line-height: 50px;
+}
+.lavaLampWithImage li a:hover,
+.lavaLampWithImage li a:active {
+	border: none;
+	color: #000;
+}
+.apply-discount {
+	margin: 10px 0 2px 25px;
+	width: 61px;
+	height: 28px;
+	border: none;
+	background-image: url(../images/apply-btn.jpg);
+	background-repeat: no-repeat;
+}
+.order-sign-up {
+	margin: 10px 0 5px 5px;
+	padding-bottom: 3px;
+	width: 145px;
+	height: 38px;
+	border: none;
+	background-image: url(../images/update-btn.gif);
+	background-position: left top;
+	background-repeat: repeat-x;
+	color: #fff;
+	font-size: 13px;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+}
+.order-sign-up a {
+	color: #fff;
+	text-decoration: none;
+}
+.current a {
+	color: #000;
+}
+#banner-signup {
+	float: left;
+	width: 960px;
+	height: 69px;
+	background: transparent url(../images/input-tax-details-banner.jpg) no-repeat scroll left top;
+}
+.sign-up-wapper-home {
+	float: left;
+	margin: 0;
+	padding: 218px 0 0 0;
+	width: 334px;
+	border: medium none;
+}
+.sign-up-btn-home {
+	float: left;
+	margin-top: 68px;
+	width: 152px;
+	border: medium none;
+}
+.sing-up-for-btn {
+	float: right;
+	margin-top: 10px;
+	width: 219px;
+	height: 51px;
+}
+.viewdemo-btn-home {
+	float: left;
+	margin-top: 68px;
+	width: 170px;
+	border: medium none;
+}
+.banner-home-text {
+	float: left;
+	color: #fff;
+	font-size: 19px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	line-height: 25px;
+}
+.middle-wrapper {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 960px;
+}
+.desera-apps {
+	float: left;
+	margin-top: 5px;
+	padding: 0px;
+	width: 960px;
+	border-top: 1px dotted #909090;
+}
+.apps-left-box {
+	float: left;
+	margin: 10px 0 0;
+	padding: 0px;
+	width: 480px;
+	border-right: 1px dotted #909090;
+}
+.apps-left-box h1 {
+	float: left;
+	margin-left: 14px;
+	width: 100%;
+	color: #af0b0a;
+	font-weight: bold;
+	font-size: 20px;
+	font-family: "Lucida Grande";
+}
+.home-project-img {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 475px;
+	height: 343px;
+}
+.apps-left-box p {
+	float: left;
+	margin-bottom: 18px;
+	margin-left: 14px;
+}
+.footer {
+	float: left;
+	margin: 10px auto auto;
+	padding: 0px;
+	width: 100%;
+	height: 64px;
+	background-image: url(../images/footer-bg.jpg);
+	background-repeat: repeat-x;
+}
+.footer-text {
+	margin: auto;
+	margin-top: 16px;
+	padding: 0px;
+	width: 960px;
+	height: 44px;
+	color: #c79b99;
+	text-align: center;
+}
+.footer-text a {
+	outline-width: medium;
+	outline-style: none;
+	outline-color: -moz-use-text-color;
+	color: #c79b99;
+	text-decoration: none;
+}
+.footer-text a:hover {
+	color: #c79b99;
+	text-decoration: underline;
+}
+.two-col-right {
+	float: left;
+	margin-top: 30px;
+	margin-bottom: 36px;
+	width: 693px;
+}
+#fieldset {
+	float: left;
+	margin-bottom: 15px;
+	width: 693px;
+	border: none;
+	background: transparent url(../images/bg_fieldset-wide.jpg) repeat-y scroll 0 0;
+}
+#fieldset a {
+	color: #666;
+	text-decoration: none;
+	font-weight: bold;
+}
+.top {
+	float: left;
+	width: 693px;
+	height: 11px;
+	background: transparent url(../images/bg_fieldset-wide-top.jpg) no-repeat scroll 0 0;
+}
+.btm {
+	float: left;
+	width: 693px;
+	height: 11px;
+	background: transparent url(../images/bg_fieldset-wide-arrow-btm.jpg) no-repeat scroll left bottom;
+}
+#fieldset .one {
+	margin-top: 27px;
+	margin-left: 25px;
+	width: 400px;
+	height: 39px;
+	background-image: url(../images/1.jpg);
+	background-repeat: no-repeat;
+}
+.form-one-info {
+	float: left;
+	padding-right: 20px;
+	padding-left: 80px;
+}
+#fieldset .two {
+	margin-top: 27px;
+	margin-left: 25px;
+	width: 400px;
+	height: 39px;
+	background-image: url(../images/2.jpg);
+	background-repeat: no-repeat;
+}
+#fieldset .three {
+	margin-top: 27px;
+	margin-left: 25px;
+	width: 400px;
+	height: 39px;
+	background-image: url(../images/3.jpg);
+	background-repeat: no-repeat;
+}
+.form-three-info {
+	float: left;
+	padding-right: 20px;
+	padding-left: 80px;
+	width: 593px;
+	height: 100px;
+}
+.form-five-info {
+	float: left;
+	padding-right: 20px;
+	padding-left: 80px;
+	width: 593px;
+}
+#fieldset .four {
+	margin-top: 27px;
+	margin-left: 25px;
+	width: 400px;
+	height: 39px;
+	background-image: url(../images/4.jpg);
+	background-repeat: no-repeat;
+}
+#fieldset .five {
+	margin-top: 27px;
+	margin-left: 25px;
+	width: 400px;
+	height: 39px;
+	background-image: url(../images/5.jpg);
+	background-repeat: no-repeat;
+}
+.form-four-info {
+	float: left;
+	padding-right: 20px;
+	padding-left: 80px;
+	width: 593px;
+	height: 195px;
+}
+.fbox-shell {
+	float: right;
+	margin-top: 30px;
+	width: 248px;
+	border: 1px solid #E8E8E8;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-moz-border-radius-bottomleft: 6px;
+}
+.fbox {
+	padding: 15px;
+	width: 217px;
+	border-top: 1px solid #FFFFFF;
+	border-left: 1px solid #FFFFFF;
+	-moz-border-radius-topleft: 6px;
+	-moz-border-radius-topright: 6px;
+	-moz-border-radius-bottomright: 6px;
+	-moz-border-radius-bottomleft: 6px;
+	background: #fcfcfc none repeat scroll 0 0;
+	-moz-background-clip: border;
+	-moz-background-inline-policy: continuous;
+	-moz-background-origin: padding;
+}
+.fbox h2 {
+	float: left;
+	width: 100%;
+	border: none;
+	color: #af0b0a;
+	font-weight: normal;
+	font-size: 18px;
+}
+.fbox a {
+	color: #666;
+	text-decoration: none;
+	font-weight: bold;
+}
+.howto-adj {
+	float: left;
+	width: 100%;
+	text-align: left;
+}
+.howto-adj p {
+	text-align: left;
+	font-size: 12px;
+}
+.howto-adj ul {
+	float: left;
+	list-style: none;
+	list-style-type: none;
+}
+.howto-adj li {
+	margin: 0;
+	color: #636B75;
+}
+.howto-adj li {
+	margin: 0;
+	padding: 7px 0 0 25px;
+	background: url(../images/green-bullet.jpg) left 10px no-repeat;
+}
+.howto-adj li a {
+	display: block;
+	margin: 0;
+	padding: 0 0 0 105px;
+	background: url(../images/green-bullet.jpg) left center no-repeat;
+	color: #606060;
+	text-align: left;
+	text-decoration: none;
+	font-size: 12px;
+}
+.howto-adj li a:hover {
+	color: #17447e;
+	text-decoration: underline;
+}
+.hline {
+	margin: 20px 0;
+	padding: 0;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #FFFFFF;
+}
+#desk {
+	float: left;
+	width: 100%;
+}
+#desk ul {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	list-style-type: none;
+}
+#desk li {
+	position: relative;
+	clear: both;
+	margin: 0;
+}
+#desk li:after,
+.buttons:after {
+	display: block;
+	visibility: hidden;
+	clear: both;
+	height: 0;
+	content: ".";
+}
+.buttons {
+	display: inline;
+}
+* html form li,
+* html .buttons {
+	height: 1%;
+}
+form li,
+.buttons {
+	display: block;
+}
+* html form li div {
+	display: inline-block;
+}
+form li div {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	/*background:url(../images/textfield-bg.jpg) top left no-repeat;*/
+	height: 24px;
+	color: #666;
+}
+form li div span {
+	margin: 0;
+	padding: 5px 0 0 0;
+}
+form li div.left {
+	float: left;
+	width: 100%;
+	height: 50px;
+}
+form li.section {
+	margin-top: 9px;
+	padding-top: 13px;
+	padding-bottom: 0px;
+	padding-left: 9px;
+	width: 97% !important;
+	border-top: 1px dotted #ccc;
+}
+form ul li.first {
+	margin-top: 0px !important;
+	padding-top: 0px !important;
+	border-top: none !important;
+}
+form .section h3 {
+	margin: 0 0 2px 0;
+	font-weight: normal;
+	font-size: 110%;
+	line-height: 135%;
+}
+form .section p {
+	margin: 0 0 10px 0;
+	font-size: 85%;
+}
+form li div label,
+form li span label {
+	float: left;
+	margin: 0;
+	padding: 14px 5px 3px 0;
+	width: 25%;
+	text-align: right;
+	font-weight: bold;
+}
+.firefox select.select {
+	float: left;
+	float: left;
+	margin: 0;
+	padding: 8px 0 0 8px;
+	width: 228px;
+	height: 27px;
+	border-width: 0px;
+	background-image: url(../images/smalldrop-menu.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+}
+*:first-child + html select.select[class] {
+	margin: 1px 0 0 4px !important;
+}
+.safari select.select {
+	margin-bottom: 1px;
+	font-size: 120% !important;
+}
+form li.focused {
+	background-color: #fff7c0;
+}
+form li.focused .instruct,
+form li:hover .instruct {
+	visibility: visible;
+}
+select.select[class] {
+	float: left;
+	margin: 0px;
+	padding: 7px 2px 3px 6px;
+	width: auto;
+	height: 27px;
+	border-width: 0px;
+	background-color: transparent;
+	color: #999999;
+	font-size: 11px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.validation {
+	float: left;
+	margin-top: 9px;
+	margin-left: 22px;
+	padding-top: 10px;
+	width: 16px;
+	height: 16px;
+}
+.valid {
+	background: transparent url(../images/check16.gif) no-repeat scroll 0pt;
+}
+.errorimg {
+	background: transparent url(../images/stop12.gif) no-repeat scroll 0pt;
+}
+.loadingFB {
+	margin-bottom: 10px;
+	padding: 2px 4px 3px 4px;
+	border: 1px solid #FFCCDF;
+	background: #FFDFDF url(../images/loading.gif) no-repeat 66px 3px;
+	color: #8A1F11;
+}
+.errorFB {
+	margin-bottom: 10px;
+	padding: 2px 4px 3px 4px;
+	border: 1px solid #FFCCDF;
+	background-color: #FFDFDF;
+	color: #8A1F11;
+}
+#ajaxResult {
+	font-size: 13px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.text-field {
+	float: left;
+	width: 335px;
+	height: 25px;
+}
+.field1 {
+	padding: 8px;
+	width: 335px;
+	border: 1px solid #ddc2b9;
+	font-size: 16px;
+}
+.field-lebal {
+	float: left;
+	margin-top: 9px;
+	margin-left: 22px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	color: #8896AE;
+	font-size: 11px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.cancel-sign-up {
+	background-image: url(../images/cancel-sign-up.png);
+}
+form li div.two-field {
+	float: left;
+	width: 100%;
+	height: 70px;
+}
+.two-text-field {
+	float: left;
+	margin: 0;
+	padding: 14px 5px 3px 0;
+	width: 32%;
+	text-align: right;
+	font-weight: bold;
+}
+.two-field-label {
+	padding: 8px;
+	width: 335px;
+	height: 18px;
+	border: 1px solid #ddc2b9;
+}
+.not-more-text {
+	float: left;
+	margin: 0;
+	width: 25%;
+	text-align: left;
+	font-weight: normal;
+}
+.steps-to-signup {
+	margin-left: 50px;
+	padding-top: 11px;
+	color: #000000;
+	font-weight: normal;
+	font-size: 22px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.companylogo {
+	float: left;
+	margin-top: 5px;
+	border: none;
+}
+.resText {
+	float: left;
+	margin: 0;
+	padding: 7px 5px 3px 15px;
+	width: 25%;
+	color: black;
+	font: medium/18px"Lucida Sans", Tahoma, Verdana, sans-serif;
+}
+.resleft {
+	float: left;
+	width: 100%;
+	height: 35px;
+}
+.reslabel {
+	float: left;
+	margin: 0;
+	padding: 7px 5px 3px 0;
+	width: 25%;
+	text-align: right;
+	font-weight: bold;
+}

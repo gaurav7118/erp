@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 19, 2009 11:17:55 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.krawler.spring.accounting.handler.widgetManagement" table="widgetmanagement">
+        <id name="id" type="string">
+            <column name="id"/>
+            <generator class="uuid"/>
+        </id>
+        <property name="widgetstate" type="string">
+            <column length="2048" name="widgetstate"/> 
+        </property>
+    <!--property name="modifiedon" type="timestamp">
+      <column name="modifiedon"/>
+    </property-->
+        <property name="modifiedOn" type="long">
+            <column name="modifiedon"/>
+        </property>
+        <many-to-one class="com.krawler.common.admin.User" name="user" not-null="true"/>
+    </class>
+</hibernate-mapping> 

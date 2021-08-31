@@ -1,0 +1,1 @@
+Ext.define("Ext.rtl.tab.Bar",{override:"Ext.tab.Bar",privates:{_getTabAdjustProp:function(){return this.getInherited().rtl?"right":"left"},getCloseXY:function(C,J,H,F,K,I,D,G){var E,B,A,L;if(this.isOppositeRootDirection()){E=C.getXY();if(G==="right"){B=J+E[1]-H;A=H+K-(E[0]-(J+F-K))-I}else{B=J+F-(E[1]-H)-D;A=H+(E[0]-(J+F-K))}L=[B,A]}else{L=this.callParent(arguments)}return L}}})
